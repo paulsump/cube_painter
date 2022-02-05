@@ -1,6 +1,7 @@
 import 'package:cube_painter/shared/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/screen.dart';
+import 'package:cube_painter/widgets/animated_cube.dart';
 import 'package:cube_painter/widgets/cube.dart';
 import 'package:cube_painter/widgets/grid.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class PainterPage extends StatelessWidget {
   const PainterPage({
     Key? key,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,10 @@ class PainterPage extends StatelessWidget {
               child: const Cube(),
             ),
             const Cube(),
+            Transform.translate(
+              offset: offset*3,
+              child: const AnimatedCube(),
+            ),
           ],
         ),
       ),
