@@ -3,7 +3,7 @@ import 'package:cube_painter/shared/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:flutter/cupertino.dart';
 
-class BoxCorners {
+class CubeCorners {
   static const _corners = <GridPoint>[
     GridPoint(0, 0), // c center
     // anti clockwise from top right

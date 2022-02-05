@@ -1,6 +1,7 @@
 import 'package:cube_painter/shared/colors.dart';
 import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/widgets/background.dart';
+import 'package:cube_painter/widgets/cube.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(createApp());
@@ -14,7 +15,7 @@ class CubePainterApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Cube Painter',
       home: Background(
-        child: SizedBox(width: 22, height: 22),
+        child: Cube(),
       ),
     );
   }

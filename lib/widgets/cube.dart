@@ -1,12 +1,12 @@
-import 'package:cube_painter/shared/box_corners.dart';
+import 'package:cube_painter/shared/cube_corners.dart';
 import 'package:cube_painter/shared/colors.dart';
 import 'package:cube_painter/shared/enums.dart';
 import 'package:flutter/material.dart';
 
-class Box extends StatelessWidget {
+class Cube extends StatelessWidget {
   // final Crop crop;
 
-  const Box({
+  const Cube({
     Key? key,
     // required this.crop,
   }) : super(key: key);
@@ -14,7 +14,7 @@ class Box extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _BoxPainter(
+      painter: _CubePainter(
         context: context,
         colorsAndPaths: getColorsAndPaths(),
       ),
@@ -25,7 +25,7 @@ class Box extends StatelessWidget {
 List<List<dynamic>> getColorsAndPaths() {
   List<List<dynamic>> lists = [];
 
-  for (final vertAndSide in BoxCorners.getVertsAndSides(Crop.c,Offset.zero)) {
+  for (final vertAndSide in CubeCorners.getVertsAndSides(Crop.c,Offset.zero)) {
     lists.add(
       [
         getColor(vertAndSide[0]),
@@ -36,14 +36,14 @@ List<List<dynamic>> getColorsAndPaths() {
   return lists;
 }
 
-class _BoxPainter extends CustomPainter {
+class _CubePainter extends CustomPainter {
   /// list of [Color,Path]
   final List<List> colorsAndPaths;
 
   static const styles = [PaintingStyle.stroke, PaintingStyle.fill];
   final BuildContext context;
 
-  const _BoxPainter({required this.colorsAndPaths, required this.context});
+  const _CubePainter({required this.colorsAndPaths, required this.context});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -61,5 +61,5 @@ class _BoxPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_BoxPainter oldDelegate) => false;
+  bool shouldRepaint(_CubePainter oldDelegate) => false;
 }

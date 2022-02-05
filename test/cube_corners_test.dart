@@ -1,4 +1,4 @@
-import 'package:cube_painter/shared/box_corners.dart';
+import 'package:cube_painter/shared/cube_corners.dart';
 import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
@@ -12,7 +12,7 @@ void main() {
 
   group('Crop', () {
     test('c', () {
-      final vertsAndSides = BoxCorners.getVertsAndSides(Crop.c, center);
+      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.c, center);
 
       expect(Vert.bl == vertsAndSides[0][0], true);
       expect(
@@ -46,7 +46,7 @@ void main() {
     });
 
     test('r', () {
-      final vertsAndSides = BoxCorners.getVertsAndSides(Crop.r, center);
+      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.r, center);
 
       expect(Vert.t == vertsAndSides[0][0], true);
       expect(
@@ -69,7 +69,7 @@ void main() {
     });
 
     test('ur', () {
-      final vertsAndSides = BoxCorners.getVertsAndSides(Crop.ur, center);
+      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.ur, center);
 
       expect(Vert.bl == vertsAndSides[0][0], true);
 
@@ -93,7 +93,7 @@ void main() {
     });
 
     test('ul', () {
-      final vertsAndSides = BoxCorners.getVertsAndSides(Crop.ul, center);
+      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.ul, center);
 
       expect(Vert.bl == vertsAndSides[0][0], true);
 
@@ -118,7 +118,7 @@ void main() {
     });
 
     test('l', () {
-      final vertsAndSides = BoxCorners.getVertsAndSides(Crop.l, center);
+      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.l, center);
 
       expect(Vert.br == vertsAndSides[0][0], true);
 
@@ -143,7 +143,7 @@ void main() {
     });
 
     test('dl', () {
-      final vertsAndSides = BoxCorners.getVertsAndSides(Crop.dl, center);
+      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.dl, center);
 
       expect(Vert.br == vertsAndSides[0][0], true);
 
@@ -168,7 +168,7 @@ void main() {
     });
 
     test('dr', () {
-      final vertsAndSides = BoxCorners.getVertsAndSides(Crop.dr, center);
+      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.dr, center);
 
       // out(vertsAndSides[0][1]);
       // out(vertsAndSides[1][1]);

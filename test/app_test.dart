@@ -1,5 +1,6 @@
 import 'package:cube_painter/main.dart';
 import 'package:cube_painter/widgets/background.dart';
+import 'package:cube_painter/widgets/cube.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -8,6 +9,7 @@ void main() {
 
     expect(find.byType(CubePainterApp), findsOneWidget);
     expect(find.byType(Background), findsOneWidget);
+    expect(find.byType(Cube), findsOneWidget);
 
     // await tester.tap(find.byType(Checkbox));
     // await tester.pump();
