@@ -2,10 +2,10 @@ import 'package:cube_painter/widgets/background.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(createApp());
-Widget createApp() => const MyApp();
+Widget createApp() => const CubePainterApp();
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class CubePainterApp extends StatelessWidget {
+  const CubePainterApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Background(title: 'Home Page'),
+      home: const Background(),
     );
   }
 }
