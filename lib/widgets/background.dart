@@ -1,12 +1,15 @@
-
 import 'package:cube_painter/shared/colors.dart';
 import 'package:cube_painter/shared/screen.dart';
 import 'package:flutter/material.dart';
 
-
 /// animated background
 class Background extends StatefulWidget {
-  const Background({Key? key}) : super(key: key);
+  final Widget child;
+
+  const Background({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => BackgroundState();
@@ -20,7 +23,8 @@ class BackgroundState extends State<Background>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 80),
+      duration: const Duration(seconds: 1),
+      // duration: const Duration(seconds: 80),
       vsync: this,
     )..repeat();
   }
@@ -46,7 +50,7 @@ class BackgroundState extends State<Background>
                   color: colorSequence
                       .evaluate(AlwaysStoppedAnimation(_controller.value)),
                 ),
-                // const ExtruderWidget(),
+                widget.child,
               ],
             );
           },

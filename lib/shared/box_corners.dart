@@ -17,6 +17,7 @@ class BoxCorners {
     GridPoint(1, 0), // br
   ];
 
+  //TODO remove center param (translate in parent)
   /// returns screen coordinates based on grid coords
   static List<List<dynamic>> getVertsAndSides(Crop crop, Offset center) {
     ///  corner indices

@@ -11,5 +11,10 @@ void main() {
 
     // await tester.tap(find.byType(Checkbox));
     // await tester.pump();
+
+//    find.descendant(of: find.text('Tab 1'), matching: find.byType(RichText));
+
+//    tester.element(find.byType(MyChildWidget))
+  //      .ancestorWidgetOfExactType(MyParentWidget);
   });
 }
