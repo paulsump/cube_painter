@@ -1,4 +1,4 @@
-import 'package:cube_painter/background.dart';
+import 'package:cube_painter/widgets/background.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(createApp());
