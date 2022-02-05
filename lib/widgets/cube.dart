@@ -25,7 +25,7 @@ class Cube extends StatelessWidget {
 List<List<dynamic>> getColorsAndPaths() {
   List<List<dynamic>> lists = [];
 
-  for (final vertAndSide in CubeCorners.getVertsAndSides(Crop.c,Offset.zero)) {
+  for (final vertAndSide in CubeCorners.getVertsAndSides(Crop.c)) {
     lists.add(
       [
         getColor(vertAndSide[0]),

@@ -17,13 +17,12 @@ class CubeCorners {
     GridPoint(1, 0), // br
   ];
 
-  //TODO remove center param (translate in parent)
-  /// returns screen coordinates based on grid coords
-  static List<List<dynamic>> getVertsAndSides(Crop crop, Offset center) {
+  /// returns polygon points in unit coords
+  static List<List<dynamic>> getVertsAndSides(Crop crop) {
     ///  corner indices
     /// anti clockwise
     /// center, top right, top, top left, bottom left, bottom, bottom right.
-     const int c = 0, tr = 1, t = 2, tl = 3, bl = 4, b = 5, br = 6;
+    const int c = 0, tr = 1, t = 2, tl = 3, bl = 4, b = 5, br = 6;
 
     switch (crop) {
       case Crop.c:
@@ -31,40 +30,40 @@ class CubeCorners {
           [
             Vert.bl,
             // |_|
-            _offsets([c, b, bl, tl], center)
+            _offsets([c, b, bl, tl])
           ],
           [
             Vert.t,
             // /_/
-            _offsets([c, tl, t, tr], center)
+            _offsets([c, tl, t, tr])
           ],
           [
             Vert.br,
             // /|
             // |/
-            _offsets([c, tr, br, b], center)
+            _offsets([c, tr, br, b])
           ],
         ];
       case Crop.r:
         return [
           [
             Vert.t,
-            _offsets([c, tl, t], center)
+            _offsets([c, tl, t])
           ],
           [
             Vert.bl,
-            _offsets([c, b, bl, tl], center)
+            _offsets([c, b, bl, tl])
           ],
         ];
       case Crop.ur:
         return [
           [
             Vert.bl,
-            _offsets([c, b, bl, tl], center)
+            _offsets([c, b, bl, tl])
           ],
           [
             Vert.br,
-            _offsets([c, br, b], center)
+            _offsets([c, br, b])
           ],
         ];
       case Crop.ul:
@@ -72,24 +71,24 @@ class CubeCorners {
           [
             Vert.bl,
             // _|
-            _offsets([c, b, bl], center)
+            _offsets([c, b, bl])
           ],
           [
             Vert.br,
             // /|
             // |/
-            _offsets([c, tr, br, b], center)
+            _offsets([c, tr, br, b])
           ],
         ];
       case Crop.l:
         return [
           [
             Vert.br,
-            _offsets([c, tr, br, b], center)
+            _offsets([c, tr, br, b])
           ],
           [
             Vert.t,
-            _offsets([c, t, tr], center)
+            _offsets([c, t, tr])
           ],
         ];
       case Crop.dl:
@@ -98,12 +97,12 @@ class CubeCorners {
             Vert.br,
             // /|
             // |/
-            _offsets([c, tr, br], center)
+            _offsets([c, tr, br])
           ],
           [
             Vert.t,
             // /_/
-            _offsets([c, tl, t, tr], center)
+            _offsets([c, tl, t, tr])
           ],
         ];
       case Crop.dr:
@@ -111,20 +110,17 @@ class CubeCorners {
           [
             Vert.bl,
             // |-
-            _offsets([c, bl, tl], center)
+            _offsets([c, bl, tl])
           ],
           [
             Vert.t,
             // /_/
-            _offsets([c, tl, t, tr], center)
+            _offsets([c, tl, t, tr])
           ],
         ];
     }
   }
 
-  static List<Offset> _offsets(List<int> indices, Offset center) =>
-      List<Offset>.generate(
-        indices.length,
-        (i) => toOffset(_corners[indices[i]] )+ center,
-      );
+  static List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
+      indices.length, (i) => toOffset(_corners[indices[i]]));
 }
