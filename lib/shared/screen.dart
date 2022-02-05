@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class Screen {
   static Size? _size;
 
-  // static double get width => size.width;
-  // static double get height => size.height;
+  static double get width => size.width;
+  static double get height => size.height;
 
   static Size get size => _size!;
   static Rect get rect => Offset.zero & size;
