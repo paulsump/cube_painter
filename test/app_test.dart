@@ -8,5 +8,8 @@ void main() {
 
     expect(find.byType(CubePainterApp), findsOneWidget);
     expect(find.byType(Background), findsOneWidget);
+
+    // await tester.tap(find.byType(Checkbox));
+    // await tester.pump();
   });
 }
