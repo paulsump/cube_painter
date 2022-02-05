@@ -19,3 +19,5 @@ Offset toOffset(GridPoint point) => Offset(
       W * point.x,
       H * point.x - point.y,
     );
+
+const Offset gridStep = Offset(W, H - 1);

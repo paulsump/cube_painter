@@ -14,7 +14,7 @@ class PainterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Offset offset = toOffset(const GridPoint(1, 1));
+
     return Transform.translate(
       offset: Offset(Screen.width/2, Screen.height/2 ),
       child: Transform.scale(
@@ -24,12 +24,12 @@ class PainterPage extends StatelessWidget {
           children: [
             const Grid(),
             Transform.translate(
-              offset: offset,
+              offset: gridStep,
               child: const Cube(),
             ),
             const Cube(),
             Transform.translate(
-              offset: offset*3,
+              offset: gridStep*3,
               child: const AnimatedCube(),
             ),
           ],

@@ -27,26 +27,44 @@ class GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // clip(canvas);
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..shader = LinearGradient(
+        colors: [getColor(Vert.t), getColor(Vert.bl)],
+      ).createShader(
+        Screen.rect,
+        // Rect.fromPoints(topLeft, to),
+      );
 
-    final Offset gridStep = toOffset(const GridPoint(1, 1));
-    // out(gridStep);
-
-    // final int n = Screen.width ~/ gridStep.dx;
-    // out(n);
     const int n = 10;
     for (int i = 0; i < n; ++i) {
       canvas.drawLine(
         Offset(gridStep.dx * i, 0),
-        Offset(gridStep.dx * i, gridStep.dy*n),
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..shader = LinearGradient(
-            colors: [getColor(Vert.t), getColor(Vert.bl)],
-          ).createShader(
-            Screen.rect,
-            // Rect.fromPoints(topLeft, to),
-          ),
+        Offset(gridStep.dx * i, gridStep.dy * n),
+        paint,
       );
+      if (i % 2 == 0) {
+        canvas.drawLine(
+          Offset(gridStep.dx * i, 0),
+          Offset(gridStep.dx * i + gridStep.dx * (n - i), gridStep.dy * (n - i)),
+          paint,
+        );
+        canvas.drawLine(
+          Offset(0, gridStep.dy * i),
+          Offset(gridStep.dx * (n - i), gridStep.dy * n),
+          paint,
+        );
+        canvas.drawLine(
+          Offset(gridStep.dx * i, 0),
+          Offset(0, gridStep.dy *  i),
+          paint,
+        );
+        canvas.drawLine(
+          Offset(gridStep.dx*n, gridStep.dy * i),
+          Offset(gridStep.dx * i, gridStep.dy * n),
+          paint,
+        );
+      }
     }
   }
 
