@@ -43,11 +43,14 @@ class _CubePainter extends CustomPainter {
   static const styles = [PaintingStyle.stroke, PaintingStyle.fill];
   final BuildContext context;
 
-  const _CubePainter({required this.colorsAndPaths, required this.context});
+  const _CubePainter({
+    required this.colorsAndPaths,
+    required this.context,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    // clipAndZoom(canvas, context);
+//canvas.clipRect(Offset.zero & Screen.size);
 
     for (final style in styles) {
       for (final colorAndPath in colorsAndPaths) {

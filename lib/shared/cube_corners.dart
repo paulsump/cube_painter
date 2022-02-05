@@ -19,7 +19,7 @@ class CubeCorners {
 
   /// returns polygon points in unit coords
   static List<List<dynamic>> getVertsAndSides(Crop crop) {
-    ///  corner indices
+    /// corner indices
     /// anti clockwise
     /// center, top right, top, top left, bottom left, bottom, bottom right.
     const int c = 0, tr = 1, t = 2, tl = 3, bl = 4, b = 5, br = 6;
