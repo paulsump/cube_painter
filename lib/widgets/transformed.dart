@@ -11,9 +11,11 @@ class Transformed extends StatelessWidget {
   Widget build(BuildContext context) {
     //TODO DO screen.init() here and remove screen class
     return Transform.translate(
-      offset: Screen.origin / 2,
+      // offset: Offset(Screen.width/4,3*Screen.height/4) ,
+      offset: Screen.origin,
       child: Transform.scale(
-        scale: getZoomScale(context) / 2,
+        // scale: getZoomScale(context) / 2,
+        scale: getZoomScale(context),
         child: child,
       ),
     );

@@ -2,16 +2,15 @@ import 'package:cube_painter/shared/brush_maths.dart';
 import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/cube.dart';
-import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 
 class Brush extends StatefulWidget {
   final _cubes = <Cube>[];
 
   final void Function() onStartPan;
-  final void Function(List<Cube> takenBoxes) onEndPan;
+  final void Function(List<Cube> takenCubes) onEndPan;
 
-  final void Function(List<Cube> takenBoxes) onTapUp;
+  final void Function(List<Cube> takenCubes) onTapUp;
   final Crop crop;
 
   final bool erase;
@@ -25,7 +24,7 @@ class Brush extends StatefulWidget {
       required this.erase})
       : super(key: key);
 
-  List<Cube> _takeBoxes() {
+  List<Cube> _takeCubes() {
     final listCopy = _cubes.toList();
 
     _cubes.clear();
@@ -43,7 +42,13 @@ class BrushState extends State<Brush> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: Transformed(child: Stack(children: widget._cubes)),
+      child: Transform.scale(
+        // scale: getZoomScale(context) / 2,
+        scale: getZoomScale(context),
+        child: Stack(children: widget._cubes),
+      ),
+      // TODO USe this
+      // child: Transformed(child: Stack(children: widget._cubes)),
       onPanStart: (details) {
         widget.onStartPan();
         brushMaths.startFrom(details.localPosition / getZoomScale(context));
@@ -56,7 +61,7 @@ class BrushState extends State<Brush> {
         setState(() {});
       },
       onPanEnd: (details) {
-        widget.onEndPan(widget._takeBoxes());
+        widget.onEndPan(widget._takeCubes());
       },
       onTapUp: (details) {
         brushMaths.setCroppedCube(
@@ -66,7 +71,7 @@ class BrushState extends State<Brush> {
         );
 
         setState(() {});
-        widget.onTapUp(widget._takeBoxes());
+        widget.onTapUp(widget._takeCubes());
       },
     );
   }
