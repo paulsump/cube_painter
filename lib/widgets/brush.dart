@@ -47,7 +47,6 @@ class BrushState extends State<Brush> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       child: Stack(
-        // fit: StackFit.expand,
         children: [
           // HACK without this container,
           // onPanStart etc doesn't get called after cubes are added.

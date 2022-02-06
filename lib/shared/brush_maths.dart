@@ -7,9 +7,6 @@ import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/widgets/cube.dart';
 import 'package:flutter/material.dart';
 
-// TODO before _cubes.clear(), remember cube.scale for each and copy to the new ones
-// might need to just copy over the old ones in that position, so might need to store position
-
 /// the maths for extruding blocks
 class BrushMaths {
   /// dragged from point in grid space
