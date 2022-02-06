@@ -4,18 +4,20 @@ import 'package:cube_painter/shared/enums.dart';
 import 'package:flutter/material.dart';
 
 class UnitCube extends StatelessWidget {
+  final bool wire;
+
   const UnitCube({
     Key? key,
+    this.wire = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _CubePainter(
-        context: context,
-        colorsAndPaths: _getColorsAndPaths(Crop.c),
-      ),
-    );
+        painter: _CubePainter(
+            context: context,
+            colorsAndPaths: _getColorsAndPaths(Crop.c),
+            wire: wire));
   }
 }
 
@@ -42,12 +44,10 @@ List<List<dynamic>> _getColorsAndPaths(Crop crop) {
   List<List<dynamic>> lists = [];
 
   for (final vertAndSide in CubeCorners.getVertsAndSides(crop)) {
-    lists.add(
-      [
-        getColor(vertAndSide[0]),
-        Path()..addPolygon(vertAndSide[1], true),
-      ],
-    );
+    lists.add([
+      getColor(vertAndSide[0]),
+      Path()..addPolygon(vertAndSide[1], true),
+    ]);
   }
   return lists;
 }
@@ -56,29 +56,34 @@ class _CubePainter extends CustomPainter {
   /// list of [Color,Path]
   final List<List> colorsAndPaths;
 
-  static const styles = [PaintingStyle.stroke, PaintingStyle.fill];
   final BuildContext context;
+  final bool wire;
 
   const _CubePainter({
     required this.colorsAndPaths,
     required this.context,
+    this.wire = false,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-//     canvas.clipRect(Offset.zero & Screen.size);
+    _draw(canvas, PaintingStyle.stroke);
 
-    for (final style in styles) {
-      for (final colorAndPath in colorsAndPaths) {
-        canvas.drawPath(
-            colorAndPath[1],
-            Paint()
-              ..color = colorAndPath[0]
-              ..style = style);
-      }
+    if (!wire) {
+      _draw(canvas, PaintingStyle.fill);
     }
   }
 
   @override
   bool shouldRepaint(_CubePainter oldDelegate) => false;
+
+  void _draw(Canvas canvas, PaintingStyle style) {
+    for (final colorAndPath in colorsAndPaths) {
+      canvas.drawPath(
+          colorAndPath[1],
+          Paint()
+            ..color = colorAndPath[0]
+            ..style = style);
+    }
+  }
 }

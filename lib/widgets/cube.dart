@@ -40,7 +40,7 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 800),
       vsync: this,
     );
 
@@ -68,12 +68,20 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        return Transform.translate(
-          offset: offset,
-          child: Transform.scale(
-            scale: _scale(),
-            child: cube,
-          ),
+        return Stack(
+          children: [
+            Transform.translate(
+              offset: offset,
+              child: Transform.scale(
+                scale: _scale(),
+                child: cube,
+              ),
+            ),
+            Transform.translate(
+              offset: offset,
+              child: const UnitCube(wire: true),
+            ),
+          ],
         );
       },
     );
