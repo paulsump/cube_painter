@@ -25,6 +25,7 @@ class PainterPage extends StatelessWidget {
       children: [
         Transform.translate(
           // offset: Offset(Screen.width/2, Screen.height/2 ),
+          // offset: Offset(Screen.width/2, 3*Screen.height/2 ),
           offset: Screen.origin,
           child: Transform.scale(
             scale: getZoomScale(context),

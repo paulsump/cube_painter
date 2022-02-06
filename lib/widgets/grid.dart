@@ -1,8 +1,11 @@
 import 'package:cube_painter/shared/colors.dart';
 import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
+import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 class Grid extends StatelessWidget {
   const Grid({Key? key}) : super(key: key);
@@ -41,11 +44,26 @@ class GridPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..color = Colors.black;
 
-    const y = -0.5;
-    final double N = 2 * Screen.height / getZoomScale(context);
+    const y = -H;
+    int n = _getN(Screen.height / H);
 
-    int n = N.round();
-    n += n % 2;
+    // left
+    for (int i = 2; i < n; i += 2) {
+      // lower
+      canvas.drawLine(
+        Offset(W * i, 0),
+        Offset(0, y * i),
+        paint,
+      );
+      // upper
+      canvas.drawLine(
+        Offset(0, y * i),
+        Offset(W * (n - i), y * n),
+        evenPaint,
+      );
+    }
+
+    // n = _getN(Screen.width / W);
 
     for (int i = 0; i < n; ++i) {
       // vertical
@@ -55,12 +73,13 @@ class GridPainter extends CustomPainter {
         paint,
       );
     }
+
     // right
     for (int i = 0; i < n; i += 2) {
       // lower
       canvas.drawLine(
         Offset(W * i, 0),
-        Offset(W * i + W * (n - i), y * (n - i)),
+        Offset(W * n, y * (n - i)),
         paint,
       );
 
@@ -71,21 +90,14 @@ class GridPainter extends CustomPainter {
         evenPaint,
       );
     }
-    // left
-    for (int i = 2; i < n; i += 2) {
-      // upper
-      canvas.drawLine(
-        Offset(0, y * i),
-        Offset(W * (n - i), y * n),
-        evenPaint,
-      );
-      // lower
-      canvas.drawLine(
-        Offset(W * i, 0),
-        Offset(0, y * i),
-        paint,
-      );
-    }
+  }
+
+  int _getN(double factor) {
+    double N = factor / getZoomScale(context);
+
+    int n = N.round();
+    n += n % 2;
+    return n;
   }
 
   @override
