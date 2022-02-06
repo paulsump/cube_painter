@@ -4,11 +4,8 @@ import 'package:cube_painter/shared/enums.dart';
 import 'package:flutter/material.dart';
 
 class UnitCube extends StatelessWidget {
-  // final Crop crop;
-
   const UnitCube({
     Key? key,
-    // required this.crop,
   }) : super(key: key);
 
   @override
@@ -16,13 +13,32 @@ class UnitCube extends StatelessWidget {
     return CustomPaint(
       painter: _CubePainter(
         context: context,
-        colorsAndPaths: getColorsAndPaths(),
+        colorsAndPaths: _getColorsAndPaths(Crop.c),
       ),
     );
   }
 }
 
-List<List<dynamic>> getColorsAndPaths() {
+class CroppedUnitCube extends StatelessWidget {
+  final Crop crop;
+
+  const CroppedUnitCube({
+    Key? key,
+    required this.crop,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: _CubePainter(
+        context: context,
+        colorsAndPaths: _getColorsAndPaths(crop),
+      ),
+    );
+  }
+}
+
+List<List<dynamic>> _getColorsAndPaths(Crop crop) {
   List<List<dynamic>> lists = [];
 
   for (final vertAndSide in CubeCorners.getVertsAndSides(Crop.c)) {

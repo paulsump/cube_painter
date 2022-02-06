@@ -32,7 +32,7 @@ class PainterPage extends StatelessWidget {
                 const UnitCube(),
                 Transform.translate(
                   offset: gridStep * 7,
-                  child: const Cube(),
+                  child: const Cube(crop: Crop.dl),
                 ),
               ],
             ),
