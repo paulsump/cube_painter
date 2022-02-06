@@ -48,6 +48,7 @@ class BrushMaths {
       final int d = _reverseOrder ? i - _distance : i;
 
       final center = _roundedFrom + _vector! * d;
+      // out(center);
       _addCube(cubes, center, Crop.c);
     }
   }

@@ -2,6 +2,7 @@ import 'package:cube_painter/shared/brush_maths.dart';
 import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/cube.dart';
+import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 
 class Brush extends StatefulWidget {
@@ -42,13 +43,7 @@ class BrushState extends State<Brush> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: Transform.translate(
-        offset: Offset(Screen.width / 2, Screen.height / 2),
-        // offset: Screen.origin,
-        child: Transform.scale(
-            scale: getZoomScale(context),
-            child: Stack(children: widget._cubes)),
-      ),
+      child: Transformed(child: Stack(children: widget._cubes)),
       onPanStart: (details) {
         widget.onStartPan();
         brushMaths.startFrom(details.localPosition / getZoomScale(context));
