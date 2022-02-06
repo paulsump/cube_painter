@@ -41,7 +41,7 @@ class CroppedUnitCube extends StatelessWidget {
 List<List<dynamic>> _getColorsAndPaths(Crop crop) {
   List<List<dynamic>> lists = [];
 
-  for (final vertAndSide in CubeCorners.getVertsAndSides(Crop.c)) {
+  for (final vertAndSide in CubeCorners.getVertsAndSides(crop)) {
     lists.add(
       [
         getColor(vertAndSide[0]),
