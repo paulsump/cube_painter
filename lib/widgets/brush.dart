@@ -13,7 +13,6 @@ class Brush extends StatefulWidget {
   final void Function() onStartPan;
   final void Function(List<Cube> takenCubes) onEndPan;
 
-  // final void Function(List<Cube> takenCubes) onUpdatePan;
   final void Function(List<Cube> takenCubes) onTapUp;
   final Crop crop;
 
@@ -22,7 +21,6 @@ class Brush extends StatefulWidget {
   Brush(
       {Key? key,
       required this.onStartPan,
-        // required this.onUpdatePan,
       required this.onEndPan,
       required this.onTapUp,
       required this.crop,
@@ -50,7 +48,8 @@ class BrushState extends State<Brush> {
       child: Stack(
         // fit: StackFit.expand,
         children: [
-          // HACK without this container onPanStart etc doesn't get called after cubes are added.
+          // HACK without this container,
+          // onPanStart etc doesn't get called after cubes are added.
           Container(),
           Transform.scale(
             scale: getZoomScale(context),
@@ -68,7 +67,6 @@ class BrushState extends State<Brush> {
           details.localPosition / getZoomScale(context),
         );
         setState(() {});
-        // widget.onUpdatePan(widget._takeCubes());
       },
       onPanEnd: (details) {
         widget.onEndPan(widget._takeCubes());

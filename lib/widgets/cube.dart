@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 const noWarn = out;
 
 class Cube extends StatefulWidget {
-  final GridPoint? center;
+  final GridPoint center;
   final Crop crop;
 
   const Cube({
     Key? key,
-    this.center,
+    required this.center,
     required this.crop,
   }) : super(key: key);
 
@@ -25,13 +25,21 @@ class Cube extends StatefulWidget {
 
 class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late Offset offset;
+  late Widget cube;
 
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 100),
       vsync: this,
     )..forward();
+
+    offset = toOffset(widget.center);
+    cube = widget.crop == Crop.c
+        ? const UnitCube()
+        : CroppedUnitCube(crop: widget.crop);
+
     super.initState();
   }
 
@@ -43,7 +51,6 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final Offset offset = toOffset(widget.center!);
     // out(offset);
     return AnimatedBuilder(
       animation: _controller,
@@ -52,14 +59,12 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
           offset: offset,
           child: Transform.scale(
             scale: _scale(),
-            child: widget.crop == Crop.c
-                ? const UnitCube()
-                : CroppedUnitCube(crop: widget.crop),
+            child: cube,
           ),
         );
       },
     );
   }
 
-  double _scale() => lerpDouble(0.1, 1, _controller.value)!;
+  double _scale() => lerpDouble(0.5, 1, _controller.value)!;
 }
