@@ -4,7 +4,7 @@ import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/brush.dart';
 import 'package:cube_painter/widgets/cube.dart';
-import 'package:cube_painter/widgets/grid.dart';
+import 'package:cube_painter/widgets/transformed.dart';
 import 'package:cube_painter/widgets/unit_cube.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +23,13 @@ class PainterPage extends StatelessWidget {
 
     return Stack(
       children: [
+        Transformed(),
         Transform.translate(
           offset: Screen.origin,
           child: Transform.scale(
             scale: getZoomScale(context),
             child: Stack(
               children: [
-                const Grid(),
                 Transform.translate(
                   offset: offset,
                   child: const UnitCube(),
@@ -39,7 +39,6 @@ class PainterPage extends StatelessWidget {
                   offset: offset * 7,
                   child: const Cube(crop: Crop.c),
                 ),
-                const Grid(),
                 Transform.translate(
                   offset: gridStep,
                   child: const UnitCube(),

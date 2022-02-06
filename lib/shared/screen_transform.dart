@@ -9,6 +9,7 @@ double getZoomScale(BuildContext context) {
   return zoom.scale;
 }
 
+// TODO Rename or remove
 class Screen {
   static Size? _size;
 
