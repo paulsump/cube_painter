@@ -21,7 +21,6 @@ class Screen {
     _size = Size(size.width, size.height - safeAreaHeight);
   }
 }
-
 /// TODO set by gestures
 class ZoomPan extends ChangeNotifier {
   static const _scaleStep = 0.1;
