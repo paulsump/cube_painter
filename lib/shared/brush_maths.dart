@@ -29,7 +29,6 @@ class BrushMaths {
 
     _from = from;
     _fromGrid = toGrid(from);
-
     _roundedFrom = GridPoint(_fromGrid.dx.round(), _fromGrid.dy.round());
   }
 

@@ -1,8 +1,11 @@
 import 'package:cube_painter/shared/brush_maths.dart';
 import 'package:cube_painter/shared/enums.dart';
+import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/cube.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 class Brush extends StatefulWidget {
   final _cubes = <Cube>[];
@@ -42,11 +45,19 @@ class BrushState extends State<Brush> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: Transform.scale(
-        // scale: getZoomScale(context) / 2,
-        scale: getZoomScale(context),
-        child: Stack(children: widget._cubes),
+      child: Stack(
+        // fit: StackFit.expand,
+        children: [
+          // HACK without this container onPanStart etc doesn't get called after cubes are added.
+          Container(),
+          Transform.scale(
+            // scale: getZoomScale(context) / 2,
+            scale: getZoomScale(context),
+            child: Stack(children: widget._cubes),
+          ),
+        ],
       ),
+
       // TODO USe this
       // child: Transformed(child: Stack(children: widget._cubes)),
       onPanStart: (details) {
