@@ -1,5 +1,3 @@
-import 'package:cube_painter/shared/colors.dart';
-import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
@@ -27,20 +25,7 @@ class GridPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // clip(canvas);
     final paint = Paint()
-      ..style = PaintingStyle.stroke
-      // TODO Fix
-      ..shader = LinearGradient(
-        colors: [getColor(Vert.br), getColor(Vert.bl)],
-        // begin: Alignment.topCenter,
-        // end: Alignment.bottomCenter,
-      ).createShader(
-        Screen.rect,
-        // Rect.fromPoints(topLeft, to),
-      );
-
-    final evenPaint = Paint()
       ..style = PaintingStyle.stroke
       ..color = Colors.black;
 
@@ -59,7 +44,7 @@ class GridPainter extends CustomPainter {
       canvas.drawLine(
         Offset(0, y * i),
         Offset(W * (n - i), y * n),
-        evenPaint,
+        paint,
       );
     }
 
@@ -87,7 +72,7 @@ class GridPainter extends CustomPainter {
       canvas.drawLine(
         Offset(W * n, y * i),
         Offset(W * i, y * n),
-        evenPaint,
+        paint,
       );
     }
   }
@@ -96,8 +81,7 @@ class GridPainter extends CustomPainter {
     double N = factor / getZoomScale(context);
 
     int n = N.round();
-    n += n % 2;
-    return n;
+    return n + n % 2;
   }
 
   @override
