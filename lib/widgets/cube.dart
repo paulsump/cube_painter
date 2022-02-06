@@ -15,6 +15,9 @@ class Cube extends StatefulWidget {
   final Crop crop;
   final bool start;
 
+  //TODO reverse for delete
+  // final bool direction;
+
   const Cube({
     Key? key,
     required this.center,

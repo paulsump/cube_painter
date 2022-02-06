@@ -23,9 +23,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-//TODO don't draw widgets outside screen
-//     const point = GridPoint(1, 1);
-//     final Offset offset = toOffset(point);
+    // TODO instead of clip, use maths to not draw widgets outside screen
     return Stack(
       children: [
         const Transformed(child: Grid()),
@@ -37,23 +35,8 @@ class _PainterPageState extends State<PainterPage> {
             ],
           ),
         ),
-        // Transformed(
-        //   child: Stack(
-        //     children: [
-        //       Transform.translate(
-        //         offset: offset,
-        //         child: const UnitCube(),
-        //       ),
-        //       // Transform.translate(
-        //       //   offset: offset * 7,
-        //       //   child: const Cube(crop: Crop.c),
-        //       // ),
-        //     ],
-        //   ),
-        // ),
         Brush(
           onStartPan: () {},
-          // onUpdatePan: _takeCubes,
           onEndPan: _takeCubes,
           onTapUp: _takeCubes,
           erase: false,
@@ -66,18 +49,14 @@ class _PainterPageState extends State<PainterPage> {
   void _takeCubes(List<Cube> takenCubes) {
     if (takenCubes.isNotEmpty) {
       // _takeEditBlock();
-      final int n = takenCubes.length;
-
-      for (int i = 0; i < n; ++i) {
-        //TODO maybe set anim speed or ammount so far value
+      for (final cube in takenCubes) {
         _editBlock.add(Cube(
           key: UniqueKey(),
-          center: takenCubes[i].center,
-          crop: takenCubes[i].crop,
+          center: cube.center,
+          crop: cube.crop,
           start: true,
         ));
       }
-      // _editBlock.addAll(takenCubes);
       setState(() {});
     }
   }
