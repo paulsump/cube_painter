@@ -1,6 +1,7 @@
 
 
 // anti clockwise from top right
+// TODO Rename to side
 enum Vert {
   // 0 top
   t,
@@ -11,6 +12,7 @@ enum Vert {
 }
 
 // anti clockwise from right
+// crop direction
 enum Crop {
   // 0 center
   c,

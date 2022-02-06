@@ -41,34 +41,39 @@ class GridPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..color = Colors.black;
 
-    final double N = Screen.width / getZoomScale(context);
-    final int n = N.ceil();
-
     const y = -0.5;
+    final double N = 2 * Screen.height / getZoomScale(context);
+
+    int n = N.round();
+    n += n % 2;
 
     for (int i = 0; i < n; ++i) {
+      // vertical
       canvas.drawLine(
         Offset(W * i, 0),
         Offset(W * i, y * n),
         paint,
       );
       if (i % 2 == 0) {
+        // lower right
         canvas.drawLine(
           Offset(W * i, 0),
           Offset(W * i + W * (n - i), y * (n - i)),
           paint,
         );
+        // upper left
         canvas.drawLine(
           Offset(0, y * i),
           Offset(W * (n - i), y * n),
           evenPaint,
         );
+        // lower left
         canvas.drawLine(
           Offset(W * i, 0),
           Offset(0, y * i),
           paint,
         );
-        // }else{
+        // upper right
         canvas.drawLine(
           Offset(W * n, y * i),
           Offset(W * i, y * n),
