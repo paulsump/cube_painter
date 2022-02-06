@@ -1,6 +1,6 @@
-import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/background.dart';
+import 'package:cube_painter/widgets/painter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

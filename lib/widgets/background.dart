@@ -1,4 +1,5 @@
 import 'package:cube_painter/shared/colors.dart';
+import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,7 @@ class BackgroundState extends State<Background>
             return Stack(
               children: [
                 Container(
-                  color: colorSequence.evaluate(
+                  color: _colorSequence.evaluate(
                     AlwaysStoppedAnimation(_controller.value),
                   ),
                 ),
@@ -60,3 +61,36 @@ class BackgroundState extends State<Background>
     );
   }
 }
+
+Animatable<Color?> _colorSequence = TweenSequence<Color?>(
+  [
+    TweenSequenceItem(
+      weight: 10.0,
+      tween: ColorTween(
+        begin: getColor(Vert.bl),
+        end: getColor(Vert.t),
+      ),
+    ),
+    TweenSequenceItem(
+      weight: 5.0,
+      tween: ColorTween(
+        begin: getColor(Vert.t),
+        end: getColor(Vert.br),
+      ),
+    ),
+    TweenSequenceItem(
+      weight: 4.0,
+      tween: ColorTween(
+        begin: getColor(Vert.br),
+        end: getColor(Vert.t),
+      ),
+    ),
+    TweenSequenceItem(
+      weight: 10.0,
+      tween: ColorTween(
+        begin: getColor(Vert.t),
+        end: getColor(Vert.bl),
+      ),
+    ),
+  ],
+);
