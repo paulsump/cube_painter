@@ -37,37 +37,42 @@ class GridPainter extends CustomPainter {
         // Rect.fromPoints(topLeft, to),
       );
 
-    final double N = Screen.width/getZoomScale(context);
+    final evenPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..color = Colors.black;
+
+    final double N = Screen.width / getZoomScale(context);
     final int n = N.ceil();
+
+    const y = -0.5;
 
     for (int i = 0; i < n; ++i) {
       canvas.drawLine(
-        Offset(gridStep.dx * i, 0),
-        Offset(gridStep.dx * i, gridStep.dy * n),
+        Offset(W * i, 0),
+        Offset(W * i, y * n),
         paint,
       );
       if (i % 2 == 0) {
         canvas.drawLine(
-          Offset(gridStep.dx * i, 0),
-          Offset(
-              gridStep.dx * i + gridStep.dx * (n - i), gridStep.dy * (n - i)),
+          Offset(W * i, 0),
+          Offset(W * i + W * (n - i), y * (n - i)),
           paint,
         );
         canvas.drawLine(
-          Offset(0, gridStep.dy * i),
-          Offset(gridStep.dx * (n - i), gridStep.dy * n),
-          paint,
+          Offset(0, y * i),
+          Offset(W * (n - i), y * n),
+          evenPaint,
         );
         canvas.drawLine(
-          Offset(gridStep.dx * i, 0),
-          Offset(0, gridStep.dy * i),
+          Offset(W * i, 0),
+          Offset(0, y * i),
           paint,
         );
-      }else{
+        // }else{
         canvas.drawLine(
-          Offset(gridStep.dx*n, gridStep.dy * i),
-          Offset(gridStep.dx * i, gridStep.dy * n),
-          paint,
+          Offset(W * n, y * i),
+          Offset(W * i, y * n),
+          evenPaint,
         );
       }
     }

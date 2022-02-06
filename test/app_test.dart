@@ -2,7 +2,6 @@ import 'package:cube_painter/main.dart';
 import 'package:cube_painter/widgets/background.dart';
 import 'package:cube_painter/widgets/brush.dart';
 import 'package:cube_painter/widgets/grid.dart';
-import 'package:cube_painter/widgets/unit_cube.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -13,8 +12,8 @@ void main() {
     expect(find.byType(Background), findsOneWidget);
     expect(find.byType(Grid), findsOneWidget);
     expect(find.byType(Brush), findsOneWidget);
-    expect(find.byType(UnitCube), findsNWidgets(2));
-    expect(find.byType(CroppedUnitCube), findsNWidgets(1));
+    // expect(find.byType(UnitCube), findsNWidgets(2));
+    // expect(find.byType(CroppedUnitCube), findsNWidgets(1));
 
     // await tester.tap(find.byType(Checkbox));
     // await tester.pump();
@@ -22,6 +21,6 @@ void main() {
 //    find.descendant(of: find.text('Tab 1'), matching: find.byType(RichText));
 
 //    tester.element(find.byType(MyChildWidget))
-  //      .ancestorWidgetOfExactType(MyParentWidget);
+    //      .ancestorWidgetOfExactType(MyParentWidget);
   });
 }

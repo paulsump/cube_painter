@@ -4,6 +4,11 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
+double getZoomScale(BuildContext context) {
+  final zoom = Provider.of<ZoomPan>(context, listen: false);
+  return zoom.scale;
+}
+
 class Screen {
   static Size? _size;
 
@@ -14,6 +19,8 @@ class Screen {
   static Size get size => _size!;
 
   static Rect get rect => Offset.zero & size;
+
+  static Offset get origin => Offset(0, height);
 
   static void init(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -31,16 +38,11 @@ class ZoomPan extends ChangeNotifier {
   static const _scaleStep = 0.1;
 
   /// equates to the length of the side of each triangle in pixels
-  double scale = 30;
+  double scale = 100;
 
   ///TODO rename and use
   void increment(int increment) {
     scale *= 1 + _scaleStep * increment;
     notifyListeners();
   }
-}
-
-double getZoomScale(BuildContext context) {
-  final zoom = Provider.of<ZoomPan>(context, listen: false);
-  return zoom.scale;
 }
