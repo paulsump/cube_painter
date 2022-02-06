@@ -1,5 +1,5 @@
 import 'package:cube_painter/shared/colors.dart';
-import 'package:cube_painter/shared/screen.dart';
+import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:flutter/material.dart';
 
 /// animated background

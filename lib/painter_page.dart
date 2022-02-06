@@ -1,6 +1,6 @@
 import 'package:cube_painter/shared/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
-import 'package:cube_painter/shared/screen.dart';
+import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/animated_cube.dart';
 import 'package:cube_painter/widgets/cube.dart';
 import 'package:cube_painter/widgets/grid.dart';
@@ -11,15 +11,16 @@ class PainterPage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
+    // TODO zoom
+    final double scale = Screen.width/10;
 
     return Transform.translate(
-      offset: Offset(Screen.width/2, Screen.height/2 ),
+      // offset: Offset(Screen.width/2, Screen.height/2 ),
+      offset: Offset(0, Screen.height),
       child: Transform.scale(
-        // TODO zoom
-        scale: 33,
+        scale: scale,
         child: Stack(
           children: [
             const Grid(),
@@ -29,7 +30,7 @@ class PainterPage extends StatelessWidget {
             ),
             const Cube(),
             Transform.translate(
-              offset: gridStep*3,
+              offset: gridStep * 3,
               child: const AnimatedCube(),
             ),
           ],

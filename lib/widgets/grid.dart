@@ -3,7 +3,7 @@ import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
-import 'package:cube_painter/shared/screen.dart';
+import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:flutter/material.dart';
 
 class Grid extends StatelessWidget {
