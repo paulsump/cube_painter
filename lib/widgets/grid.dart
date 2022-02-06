@@ -54,19 +54,20 @@ class GridPainter extends CustomPainter {
         Offset(W * i, y * n),
         paint,
       );
-      if (i % 2 == 0) {
-        // lower right
-        canvas.drawLine(
-          Offset(W * i, 0),
-          Offset(W * i + W * (n - i), y * (n - i)),
-          paint,
-        );
-        // upper left
-        canvas.drawLine(
-          Offset(0, y * i),
-          Offset(W * (n - i), y * n),
-          evenPaint,
-        );
+    }
+    for (int i = 0; i < n; i += 2) {
+      // lower right
+      canvas.drawLine(
+        Offset(W * i, 0),
+        Offset(W * i + W * (n - i), y * (n - i)),
+        paint,
+      );
+      // upper left
+      canvas.drawLine(
+        Offset(0, y * i),
+        Offset(W * (n - i), y * n),
+        evenPaint,
+      );
         // lower left
         canvas.drawLine(
           Offset(W * i, 0),
@@ -79,7 +80,6 @@ class GridPainter extends CustomPainter {
           Offset(W * i, y * n),
           evenPaint,
         );
-      }
     }
   }
 
