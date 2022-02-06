@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:cube_painter/shared/enums.dart';
@@ -15,6 +16,7 @@ class Cube extends StatefulWidget {
   final Crop crop;
   final double start;
   final double end;
+  final bool pingPong;
 
   //TODO reverse for delete
   // final bool direction;
@@ -25,6 +27,7 @@ class Cube extends StatefulWidget {
     required this.crop,
     required this.start,
     required this.end,
+    this.pingPong = false,
   }) : super(key: key);
 
   @override
@@ -45,7 +48,11 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
     );
 
     if (widget.start != widget.end) {
-      _controller.forward();
+      if (widget.pingPong) {
+        _controller.repeat();
+      } else {
+        _controller.forward();
+      }
     }
 
     offset = toOffset(widget.center);
@@ -87,5 +94,11 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
     );
   }
 
-  double _scale() => lerpDouble(widget.start, widget.end, _controller.value)!;
+  double _scale() => lerpDouble(
+        widget.start,
+        widget.end,
+        widget.pingPong
+            ? (1 + sin(2 * pi * _controller.value) / 2)
+            : _controller.value,
+      )!;
 }

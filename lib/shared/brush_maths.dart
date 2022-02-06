@@ -63,8 +63,9 @@ class BrushMaths {
       key: UniqueKey(),
       center: center,
       crop: crop,
-      start: t,
-      end: t,
+      start: t - 0.1,
+      end: t + 0.1,
+      pingPong: true,
     ));
   }
 }
