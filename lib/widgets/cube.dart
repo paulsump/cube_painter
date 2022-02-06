@@ -1,68 +1,41 @@
-import 'package:cube_painter/shared/colors.dart';
-import 'package:cube_painter/shared/cube_corners.dart';
-import 'package:cube_painter/shared/enums.dart';
+import 'package:cube_painter/widgets/unit_cube.dart';
 import 'package:flutter/material.dart';
 
-class Cube extends StatelessWidget {
-  // final Crop crop;
+class Cube extends StatefulWidget {
+  const Cube({Key? key}) : super(key: key);
 
-  const Cube({
-    Key? key,
-    // required this.crop,
-  }) : super(key: key);
+  @override
+  _CubeState createState() => _CubeState();
+}
+
+class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    )..forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _CubePainter(
-        context: context,
-        colorsAndPaths: getColorsAndPaths(),
-      ),
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _controller.value,
+          child: const UnitCube(),
+        );
+      },
     );
   }
-}
-
-List<List<dynamic>> getColorsAndPaths() {
-  List<List<dynamic>> lists = [];
-
-  for (final vertAndSide in CubeCorners.getVertsAndSides(Crop.c)) {
-    lists.add(
-      [
-        getColor(vertAndSide[0]),
-        Path()..addPolygon(vertAndSide[1], true),
-      ],
-    );
-  }
-  return lists;
-}
-
-class _CubePainter extends CustomPainter {
-  /// list of [Color,Path]
-  final List<List> colorsAndPaths;
-
-  static const styles = [PaintingStyle.stroke, PaintingStyle.fill];
-  final BuildContext context;
-
-  const _CubePainter({
-    required this.colorsAndPaths,
-    required this.context,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-//     canvas.clipRect(Offset.zero & Screen.size);
-
-    for (final style in styles) {
-      for (final colorAndPath in colorsAndPaths) {
-        canvas.drawPath(
-            colorAndPath[1],
-            Paint()
-              ..color = colorAndPath[0]
-              ..style = style);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(_CubePainter oldDelegate) => false;
 }

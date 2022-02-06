@@ -1,6 +1,8 @@
 import 'package:cube_painter/main.dart';
 import 'package:cube_painter/widgets/background.dart';
-import 'package:cube_painter/widgets/cube.dart';
+import 'package:cube_painter/widgets/brush.dart';
+import 'package:cube_painter/widgets/grid.dart';
+import 'package:cube_painter/widgets/unit_cube.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -9,7 +11,9 @@ void main() {
 
     expect(find.byType(CubePainterApp), findsOneWidget);
     expect(find.byType(Background), findsOneWidget);
-    expect(find.byType(Cube), findsNWidgets(3));
+    expect(find.byType(Grid), findsOneWidget);
+    expect(find.byType(Brush), findsOneWidget);
+    expect(find.byType(UnitCube), findsNWidgets(3));
 
     // await tester.tap(find.byType(Checkbox));
     // await tester.pump();
