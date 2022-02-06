@@ -3,6 +3,7 @@ import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/cube.dart';
+import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -51,20 +52,21 @@ class BrushState extends State<Brush> {
           // HACK without this container,
           // onPanStart etc doesn't get called after cubes are added.
           Container(),
-          Transform.scale(
-            scale: getZoomScale(context),
+          Transformed(
             child: Stack(children: widget._cubes),
           ),
         ],
       ),
       onPanStart: (details) {
         widget.onStartPan();
-        brushMaths.startFrom(details.localPosition / getZoomScale(context));
+        brushMaths.startFrom(
+          screenToBrush(details.localPosition, context),
+        );
       },
       onPanUpdate: (details) {
         brushMaths.extrudeTo(
           widget._cubes,
-          details.localPosition / getZoomScale(context),
+          screenToBrush(details.localPosition, context),
         );
         setState(() {});
       },
@@ -74,7 +76,7 @@ class BrushState extends State<Brush> {
       onTapUp: (details) {
         brushMaths.setCroppedCube(
           widget._cubes,
-          details.localPosition / getZoomScale(context),
+          screenToBrush(details.localPosition, context),
           widget.crop,
         );
 

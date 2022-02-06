@@ -7,7 +7,7 @@ import 'package:cube_painter/widgets/grid.dart';
 import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 
-const noWarn = out;
+const noWarn = [out, Screen];
 
 class PainterPage extends StatefulWidget {
   const PainterPage({
@@ -26,11 +26,10 @@ class _PainterPageState extends State<PainterPage> {
     // TODO instead of clip, use maths to not draw widgets outside screen
     return Stack(
       children: [
-        const Transformed(child: Grid()),
-        Transform.scale(
-          scale: getZoomScale(context),
+        Transformed(
           child: Stack(
             children: [
+              const Grid(),
               ..._editBlock,
             ],
           ),

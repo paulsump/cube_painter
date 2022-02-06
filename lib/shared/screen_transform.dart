@@ -9,6 +9,11 @@ double getZoomScale(BuildContext context) {
   return zoom.scale;
 }
 
+//TODO REname
+Offset screenToBrush(Offset offset, BuildContext context) {
+  return Offset(offset.dx, offset.dy - Screen.height) / getZoomScale(context);
+}
+
 // TODO Rename or remove
 class Screen {
   static Size? _size;
