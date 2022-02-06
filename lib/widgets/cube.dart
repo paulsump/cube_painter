@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cube_painter/shared/enums.dart';
 import 'package:cube_painter/shared/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
@@ -42,7 +44,7 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final Offset offset = toOffset(widget.center!);
-    out(offset);
+    // out(offset);
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -59,5 +61,5 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
     );
   }
 
-  double _scale() => _controller.value;
+  double _scale() => lerpDouble(0.1, 1, _controller.value)!;
 }
