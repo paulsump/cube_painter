@@ -29,6 +29,7 @@ class BrushMaths {
 
     _from = from;
     _fromGrid = toGrid(from);
+
     _roundedFrom = GridPoint(_fromGrid.dx.round(), _fromGrid.dy.round());
   }
 
@@ -41,7 +42,7 @@ class BrushMaths {
     final Offset gridVector = toGrid(to) - _fromGrid;
     _distance = gridVector.distance.round();
 
-    // cubes.clear();
+    cubes.clear();
 
     for (int i = 0; i < _distance; ++i) {
       final int d = _reverseOrder ? i - _distance : i;
@@ -59,12 +60,6 @@ class BrushMaths {
   }
 
   void _addCube(List<Cube> cubes, GridPoint center, Crop crop) {
-    for (final cube in cubes) {
-      if (cube.center == center) {
-        return;
-      }
-    }
-    //TODO REmove others
     cubes.add(Cube(key: UniqueKey(), center: center, crop: crop));
   }
 }
