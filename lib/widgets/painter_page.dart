@@ -49,14 +49,21 @@ class _PainterPageState extends State<PainterPage> {
   void _takeCubes(List<Cube> takenCubes) {
     if (takenCubes.isNotEmpty) {
       // _takeEditBlock();
-      for (final cube in takenCubes) {
+
+      final int n = takenCubes.length;
+      const double t = 0.5;
+
+      for (int i = 0; i < n; ++i) {
+        //TODO maybe set anim speed
         _editBlock.add(Cube(
           key: UniqueKey(),
-          center: cube.center,
-          crop: cube.crop,
-          start: true,
+          center: takenCubes[i].center,
+          crop: takenCubes[i].crop,
+          start: (n - i) * t / n,
+          end: 1.0,
         ));
       }
+
       setState(() {});
     }
   }

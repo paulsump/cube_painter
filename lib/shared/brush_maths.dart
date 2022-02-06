@@ -60,11 +60,14 @@ class BrushMaths {
   }
 
   void _addCube(List<Cube> cubes, GridPoint center, Crop crop) {
+    const double t = 0.3;
+
     cubes.add(Cube(
       key: UniqueKey(),
       center: center,
       crop: crop,
-      start: false,
+      start: t,
+      end: t,
     ));
   }
 }
