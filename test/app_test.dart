@@ -9,7 +9,7 @@ void main() {
 
     expect(find.byType(CubePainterApp), findsOneWidget);
     expect(find.byType(Background), findsOneWidget);
-    expect(find.byType(Cube), findsOneWidget);
+    expect(find.byType(Cube), findsNWidgets(3));
 
     // await tester.tap(find.byType(Checkbox));
     // await tester.pump();

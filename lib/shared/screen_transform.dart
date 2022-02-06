@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Screen {
   static Size? _size;
@@ -18,14 +19,21 @@ class Screen {
   }
 }
 
-// class ZoomPan extends ChangeNotifier {
-//   static const _scaleStep = 0.1;
-//
-//   /// equates to the length of the side of each triangle in pixels
-//   double scale = 30;
-//
-//   void increment(int increment) {
-//     scale *= 1 + _scaleStep * increment;
-//     notifyListeners();
-//   }
-// }
+/// TODO set by gestures
+class ZoomPan extends ChangeNotifier {
+  static const _scaleStep = 0.1;
+
+  /// equates to the length of the side of each triangle in pixels
+  double scale = 30;
+
+  void increment(int increment) {
+    scale *= 1 + _scaleStep * increment;
+    notifyListeners();
+  }
+}
+
+
+double getZoomScale(BuildContext context) {
+  final zoom = Provider.of<ZoomPan>(context, listen: false);
+  return zoom.scale;
+}

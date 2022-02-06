@@ -36,7 +36,9 @@ class GridPainter extends CustomPainter {
         // Rect.fromPoints(topLeft, to),
       );
 
-    const int n = 10;
+    final double N = Screen.width/getZoomScale(context);
+    final int n = N.ceil();
+
     for (int i = 0; i < n; ++i) {
       canvas.drawLine(
         Offset(gridStep.dx * i, 0),

@@ -13,14 +13,12 @@ class PainterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO zoom
-    final double scale = Screen.width/10;
 
     return Transform.translate(
       // offset: Offset(Screen.width/2, Screen.height/2 ),
       offset: Offset(0, Screen.height),
       child: Transform.scale(
-        scale: scale,
+        scale: getZoomScale(context),
         child: Stack(
           children: [
             const Grid(),
