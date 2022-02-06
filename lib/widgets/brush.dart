@@ -50,6 +50,7 @@ class BrushState extends State<Brush> {
         children: [
           // HACK without this container onPanStart etc doesn't get called after cubes are added.
           Container(),
+          // TODO USe Transformed instead
           Transform.scale(
             // scale: getZoomScale(context) / 2,
             scale: getZoomScale(context),
@@ -57,8 +58,7 @@ class BrushState extends State<Brush> {
           ),
         ],
       ),
-
-      // TODO USe this
+      // TODO USe Transformed instead
       // child: Transformed(child: Stack(children: widget._cubes)),
       onPanStart: (details) {
         widget.onStartPan();

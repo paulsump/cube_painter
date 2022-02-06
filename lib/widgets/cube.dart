@@ -29,7 +29,7 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     )..forward();
     super.initState();
