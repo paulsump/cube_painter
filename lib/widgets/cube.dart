@@ -1,6 +1,7 @@
 import 'package:cube_painter/shared/cube_corners.dart';
 import 'package:cube_painter/shared/colors.dart';
 import 'package:cube_painter/shared/enums.dart';
+import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:flutter/material.dart';
 
 class Cube extends StatelessWidget {
@@ -50,7 +51,7 @@ class _CubePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-//canvas.clipRect(Offset.zero & Screen.size);
+//     canvas.clipRect(Offset.zero & Screen.size);
 
     for (final style in styles) {
       for (final colorAndPath in colorsAndPaths) {

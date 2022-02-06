@@ -1,3 +1,4 @@
+import 'package:cube_painter/shared/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +13,10 @@ class Screen {
 
   static void init(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final double safeAreaHeight = mediaQuery.padding.top;
+    final double safeAreaHeight =
+        mediaQuery.padding.top + mediaQuery.padding.bottom;
 
+    out(mediaQuery.padding);
     final size = mediaQuery.size;
     _size = Size(size.width, size.height - safeAreaHeight);
   }
@@ -26,12 +29,12 @@ class ZoomPan extends ChangeNotifier {
   /// equates to the length of the side of each triangle in pixels
   double scale = 30;
 
+  ///TODO rename and use
   void increment(int increment) {
     scale *= 1 + _scaleStep * increment;
     notifyListeners();
   }
 }
-
 
 double getZoomScale(BuildContext context) {
   final zoom = Provider.of<ZoomPan>(context, listen: false);

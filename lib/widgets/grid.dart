@@ -29,8 +29,11 @@ class GridPainter extends CustomPainter {
     // clip(canvas);
     final paint = Paint()
       ..style = PaintingStyle.stroke
+      // TODO Fix
       ..shader = LinearGradient(
-        colors: [getColor(Vert.t), getColor(Vert.bl)],
+        colors: [getColor(Vert.br), getColor(Vert.bl)],
+        // begin: Alignment.topCenter,
+        // end: Alignment.bottomCenter,
       ).createShader(
         Screen.rect,
         // Rect.fromPoints(topLeft, to),
@@ -48,7 +51,8 @@ class GridPainter extends CustomPainter {
       if (i % 2 == 0) {
         canvas.drawLine(
           Offset(gridStep.dx * i, 0),
-          Offset(gridStep.dx * i + gridStep.dx * (n - i), gridStep.dy * (n - i)),
+          Offset(
+              gridStep.dx * i + gridStep.dx * (n - i), gridStep.dy * (n - i)),
           paint,
         );
         canvas.drawLine(
@@ -58,9 +62,10 @@ class GridPainter extends CustomPainter {
         );
         canvas.drawLine(
           Offset(gridStep.dx * i, 0),
-          Offset(0, gridStep.dy *  i),
+          Offset(0, gridStep.dy * i),
           paint,
         );
+      }else{
         canvas.drawLine(
           Offset(gridStep.dx*n, gridStep.dy * i),
           Offset(gridStep.dx * i, gridStep.dy * n),

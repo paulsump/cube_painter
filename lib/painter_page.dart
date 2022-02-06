@@ -14,6 +14,7 @@ class PainterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+//TODO don't draw widgets outside screen
     return Transform.translate(
       // offset: Offset(Screen.width/2, Screen.height/2 ),
       offset: Offset(0, Screen.height),
@@ -28,7 +29,7 @@ class PainterPage extends StatelessWidget {
             ),
             const Cube(),
             Transform.translate(
-              offset: gridStep * 3,
+              offset: gridStep * 7,
               child: const AnimatedCube(),
             ),
           ],
