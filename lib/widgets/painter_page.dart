@@ -30,10 +30,10 @@ class _PainterPageState extends State<PainterPage> {
     const point = GridPoint(1, 1);
 //     //TODO RENAME
     final Offset gridStep = toOffset(point);
-    for (var cube in _editBlock) {
-      out(cube.center!);
-    }
-    out(gridStep);
+    // for (var cube in _editBlock) {
+    //   out(cube.center!);
+    // }
+    // out(gridStep);
     return Stack(
       children: [
         const Transformed(child: Grid()),
@@ -63,6 +63,7 @@ class _PainterPageState extends State<PainterPage> {
         ),
         Brush(
           onStartPan: () {},
+          onUpdatePan: _takeCubes,
           onEndPan: _takeCubes,
           onTapUp: _takeCubes,
           erase: false,
@@ -75,8 +76,21 @@ class _PainterPageState extends State<PainterPage> {
   void _takeCubes(List<Cube> takenCubes) {
     if (takenCubes.isNotEmpty) {
       // _takeEditBlock();
-      _editBlock.addAll(takenCubes);
+      for (final cube in takenCubes) {
+        if (!_contains(cube)) {
+          _editBlock.add(cube);
+        }
+      }
       setState(() {});
     }
+  }
+
+  bool _contains(Cube newCube) {
+    for (final cube in _editBlock) {
+      if (cube.center == newCube.center) {
+        return true;
+      }
+    }
+    return false;
   }
 }

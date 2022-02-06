@@ -13,6 +13,7 @@ class Brush extends StatefulWidget {
   final void Function() onStartPan;
   final void Function(List<Cube> takenCubes) onEndPan;
 
+  final void Function(List<Cube> takenCubes) onUpdatePan;
   final void Function(List<Cube> takenCubes) onTapUp;
   final Crop crop;
 
@@ -21,6 +22,7 @@ class Brush extends StatefulWidget {
   Brush(
       {Key? key,
       required this.onStartPan,
+      required this.onUpdatePan,
       required this.onEndPan,
       required this.onTapUp,
       required this.crop,
@@ -69,7 +71,8 @@ class BrushState extends State<Brush> {
           widget._cubes,
           details.localPosition / getZoomScale(context),
         );
-        setState(() {});
+        // setState(() {});
+        widget.onUpdatePan(widget._takeCubes());
       },
       onPanEnd: (details) {
         widget.onEndPan(widget._takeCubes());
