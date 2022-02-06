@@ -11,12 +11,15 @@ const noWarn = out;
 
 class Cube extends StatefulWidget {
   final GridPoint center;
+
   final Crop crop;
+  final bool start;
 
   const Cube({
     Key? key,
     required this.center,
     required this.crop,
+    required this.start,
   }) : super(key: key);
 
   @override
@@ -25,6 +28,7 @@ class Cube extends StatefulWidget {
 
 class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+
   late Offset offset;
   late Widget cube;
 
@@ -33,7 +37,11 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
     _controller = AnimationController(
       duration: const Duration(milliseconds: 100),
       vsync: this,
-    )..forward();
+    );
+
+    if (widget.start) {
+      _controller.forward();
+    }
 
     offset = toOffset(widget.center);
     cube = widget.crop == Crop.c
@@ -66,5 +74,5 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
     );
   }
 
-  double _scale() => lerpDouble(0.5, 1, _controller.value)!;
+  double _scale() => lerpDouble(0.7, 1, _controller.value)!;
 }

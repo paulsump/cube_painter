@@ -66,8 +66,18 @@ class _PainterPageState extends State<PainterPage> {
   void _takeCubes(List<Cube> takenCubes) {
     if (takenCubes.isNotEmpty) {
       // _takeEditBlock();
-      _editBlock.addAll(takenCubes);
+      final int n = takenCubes.length;
 
+      for (int i = 0; i < n; ++i) {
+        //TODO maybe set anim speed or ammount so far value
+        _editBlock.add(Cube(
+          key: UniqueKey(),
+          center: takenCubes[i].center,
+          crop: takenCubes[i].crop,
+          start: true,
+        ));
+      }
+      // _editBlock.addAll(takenCubes);
       setState(() {});
     }
   }

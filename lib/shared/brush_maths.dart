@@ -60,7 +60,12 @@ class BrushMaths {
   }
 
   void _addCube(List<Cube> cubes, GridPoint center, Crop crop) {
-    cubes.add(Cube(key: UniqueKey(), center: center, crop: crop));
+    cubes.add(Cube(
+      key: UniqueKey(),
+      center: center,
+      crop: crop,
+      start: false,
+    ));
   }
 }
 
