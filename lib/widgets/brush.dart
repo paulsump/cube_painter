@@ -1,12 +1,13 @@
 import 'package:cube_painter/shared/brush_maths.dart';
 import 'package:cube_painter/shared/enums.dart';
+import 'package:cube_painter/shared/grid_point.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/cube.dart';
 import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 
-const noWarn = out;
+const noWarn = [out, GridPoint];
 
 class Brush extends StatefulWidget {
   final _cubes = <Cube>[];
@@ -42,6 +43,8 @@ class Brush extends StatefulWidget {
 class BrushState extends State<Brush> {
   final brushMaths = BrushMaths();
 
+  // var last = GridPoint.zero;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,7 +70,20 @@ class BrushState extends State<Brush> {
           widget._cubes,
           screenToBrush(details.localPosition, context),
         );
+
         setState(() {});
+        //TODO list<cube>.opertotor==
+        //todo check list before after drag
+        // var newLast = GridPoint.zero;
+        //
+        // if (widget._cubes.isNotEmpty) {
+        //   newLast = widget._cubes.last.center;
+        // }
+        // out(newLast);
+        // if (last != newLast) {
+        //   setState(() {});
+        //   last = newLast;
+        // }
       },
       onPanEnd: (details) {
         widget.onEndPan(widget._takeCubes());
