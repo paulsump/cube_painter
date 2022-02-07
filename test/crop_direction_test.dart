@@ -9,16 +9,17 @@ const testCrop = Crop.dl;
 
 void main() {
   group('json', () {
-    // test('load', () {
-    //   Map<String, dynamic> map = jsonDecode('{"x":1,"y":2}');
-    //   final newCrop = Crop.fromJson(map);
-    //   out(newCrop);
-    //   expect(testCrop == newCrop, true);
-    // });
+    test('load', () {
+      int index = jsonDecode('5');
+      out(index);
+      final newCrop = Crop.values[index];
+      out(newCrop);
+      expect(testCrop == newCrop, true);
+    });
     test('save', () {
-      String json = jsonEncode(testCrop);
+      String json = jsonEncode(testCrop.index);
       out(json);
-      expect('{"x":1,"y":2}' == json, true);
+      expect('5' == json, true);
     });
   });
 }
