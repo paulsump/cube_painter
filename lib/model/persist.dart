@@ -1,17 +1,8 @@
-// import 'package:path_provider/path_provider.dart';
 // import 'dart:io';
 //
 // class Persist {
-//   static const String _fileName = "blocks.csv";
 //
 //   Future<String> load() async {
-//     File file = File(await _getFilePath());
-//     // file.delete();
-//
-//     if (!file.existsSync()) {
-//       return '';
-//     }
-//
 //     return await file.readAsString();
 //   }
 //

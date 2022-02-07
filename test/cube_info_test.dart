@@ -40,12 +40,11 @@ void main() {
 
   group('json of list', () {
     test('load', () {
-      List newCubes = jsonDecode(
+      Iterable newCubes = CubeInfo.listFromJson(
           '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]');
 
       int i = 0;
-      for (final cubeInfoObject in newCubes) {
-        final newCube = CubeInfo.fromJson(cubeInfoObject);
+      for (final newCube in newCubes) {
         expect(testCubes[i++] == newCube, true);
       }
     });

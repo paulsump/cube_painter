@@ -1,4 +1,5 @@
 import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/persist.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/brush.dart';
@@ -22,6 +23,8 @@ class PainterPage extends StatefulWidget {
 class _PainterPageState extends State<PainterPage> {
   final List<Cube> _cubes = [];
   final List<SimpleCube> _simpleCubes = [];
+
+  // final persist = Persist();
 
   @override
   void initState() {
@@ -84,5 +87,22 @@ class _PainterPageState extends State<PainterPage> {
     //no need for setstate 'cause they look the same
     // setState(() {    });
     return () => 'whatever';
+  }
+
+  Future<void> _load() async {
+    const examples = [
+      '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]',
+    ];
+    String json = '';
+    try {
+      // json = await persist.load();
+    } catch (e) {
+      // fails on windows and mac
+    }
+    if (json.isEmpty) {
+      json = examples.last;
+    }
+    // createBlocks(_blocks, json);
+    setState(() {});
   }
 }

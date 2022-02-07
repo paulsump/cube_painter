@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:flutter/material.dart';
@@ -24,5 +26,10 @@ class CubeInfo {
         crop = Crop.values[json['cropIndex']];
 
   Map<String, dynamic> toJson() => {'center': center, 'cropIndex': crop.index};
-}
 
+  static Iterable<CubeInfo> listFromJson(String json) sync* {
+    for (final cubeInfoObject in jsonDecode(json)) {
+      yield CubeInfo.fromJson(cubeInfoObject);
+    }
+  }
+}
