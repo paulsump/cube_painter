@@ -72,9 +72,12 @@ class _PainterPageState extends State<PainterPage> {
     }
   }
 
-  void _convertToSimpleCube(Cube old) {
+  dynamic _convertToSimpleCube(Cube old) {
     _simpleCubes.add(SimpleCube(old.center, old.crop));
     _cubes.remove(old);
     //no need for setstate 'cause they look the same
+    // setState(() {    });
+    out(_cubes.length);
+    return () => 'whatever';
   }
 }

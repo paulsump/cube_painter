@@ -21,7 +21,7 @@ class Cube extends StatefulWidget {
   //TODO reverse for delete
   // final bool direction;
 
-  final void Function(Cube old)? whenComplete;
+  final dynamic Function(Cube old)? whenComplete;
 
   const Cube({
     Key? key,
@@ -54,7 +54,7 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
       if (widget.pingPong) {
         _controller.repeat();
       } else {
-        _controller.forward();
+        _controller.forward().whenComplete(widget.whenComplete?.call(widget));
       }
     }
 

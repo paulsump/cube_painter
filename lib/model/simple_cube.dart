@@ -1,5 +1,7 @@
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/grid_point.dart';
+import 'package:cube_painter/shared/grid_transform.dart';
+import 'package:cube_painter/widgets/unit_cube.dart';
 import 'package:flutter/material.dart';
 
 class SimpleCube extends StatelessWidget {
@@ -11,7 +13,15 @@ class SimpleCube extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final Offset offset = gridToUnit(center);
+
+    return Transform.translate(
+      offset: offset,
+      child: crop == Crop.c
+          //TODO SimpleCube - opacity means not using const UnitCube
+          ? const UnitCube()
+          : CroppedUnitCube(crop: crop),
+    );
   }
 
   SimpleCube.fromJson(Map<String, dynamic> json, {Key? key})
