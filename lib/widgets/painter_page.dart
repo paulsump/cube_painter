@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/simple_cube.dart';
 import 'package:cube_painter/shared/out.dart';
@@ -22,6 +24,12 @@ class PainterPage extends StatefulWidget {
 class _PainterPageState extends State<PainterPage> {
   final List<Cube> _cubes = [];
   final List<SimpleCube> _simpleCubes = [];
+
+  @override
+  void initState() {
+    // _load();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +85,8 @@ class _PainterPageState extends State<PainterPage> {
     _cubes.remove(old);
     //no need for setstate 'cause they look the same
     // setState(() {    });
-    out(_cubes.length);
+    String json = jsonEncode(_simpleCubes);
+    out(json);
     return () => 'whatever';
   }
 }
