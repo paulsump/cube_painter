@@ -9,12 +9,13 @@ double getZoomScale(BuildContext context) {
   return zoom.scale;
 }
 
-//TODO REname
-Offset screenToBrush(Offset offset, BuildContext context) {
+//TODO test?
+Offset screenToUnit(Offset offset, BuildContext context) {
   return Offset(offset.dx, offset.dy - Screen.height) / getZoomScale(context);
 }
 
-// TODO Rename or remove
+// TODO Rename.
+// Can't remove by putting in Transformed due to screenToUnit() needing it
 class Screen {
   static Size? _size;
 

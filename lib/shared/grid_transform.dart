@@ -7,14 +7,21 @@ const double H = 0.5;
 // const double W = 1;
 // const double H = 0;
 
-/// convert from unit grid where y is up (Coord)
-/// to unit screen space (Offset)
+/// Convert from unit grid (GridPoint)
+/// to unit screen coordinate space (Offset).
+/// Y is upwards in both coordinate spaces.
+/// We need unit space because
+/// it makes more sense than grid space because
+/// it isn't skewed, so
+/// standard vector maths works.
 double _gridx(double x) => x / W;
+
 double _gridy(Offset offset) => H * offset.dx / W - offset.dy;
 
+//TODO coord space - rename to unitToGrid
 Offset toGrid(Offset offset) => Offset(_gridx(offset.dx), _gridy(offset));
 
-// TODO RENAME toScreen?
+//TODO coord space - rename to gridToUnit
 Offset toOffset(GridPoint point) => Offset(
       W * point.x,
       H * point.x - point.y,

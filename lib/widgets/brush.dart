@@ -62,13 +62,13 @@ class BrushState extends State<Brush> {
       onPanStart: (details) {
         widget.onStartPan();
         brushMaths.startFrom(
-          screenToBrush(details.localPosition, context),
+          screenToUnit(details.localPosition, context),
         );
       },
       onPanUpdate: (details) {
         brushMaths.extrudeTo(
           widget._cubes,
-          screenToBrush(details.localPosition, context),
+          screenToUnit(details.localPosition, context),
         );
 
         setState(() {});
@@ -91,7 +91,7 @@ class BrushState extends State<Brush> {
       onTapUp: (details) {
         brushMaths.setCroppedCube(
           widget._cubes,
-          screenToBrush(details.localPosition, context),
+          screenToUnit(details.localPosition, context),
           widget.crop,
         );
 
