@@ -1,5 +1,5 @@
 import 'package:cube_painter/main.dart';
-import 'package:cube_painter/widgets/brush.dart';
+import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/scafolding/background.dart';
 import 'package:cube_painter/widgets/scafolding/grid.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,10 +1,11 @@
 import 'package:cube_painter/model/crop_direction.dart';
-import 'package:cube_painter/shared/colors.dart';
-import 'package:cube_painter/shared/cube_corners.dart';
+import 'package:cube_painter/rendering/colors.dart';
+import 'package:cube_painter/rendering/cube_corners.dart';
 import 'package:flutter/material.dart';
 
 class UnitCube extends StatelessWidget {
   final bool wire;
+
   final double opacity;
   final Crop crop;
 

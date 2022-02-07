@@ -1,8 +1,8 @@
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/shared/grid_transform.dart';
+import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'equals5.dart';
+import '../equals5.dart';
 
 void main() {
   group('Testing toOffset()', () {

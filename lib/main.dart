@@ -1,10 +1,11 @@
-import 'package:cube_painter/shared/screen_transform.dart';
-import 'package:cube_painter/widgets/painter_page.dart';
+import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/widgets/brush/painter_page.dart';
 import 'package:cube_painter/widgets/scafolding/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(createApp());
+
 Widget createApp() => const CubePainterApp();
 
 class CubePainterApp extends StatelessWidget {

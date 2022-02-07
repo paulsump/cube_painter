@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/shared/out.dart';
+import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const noWarn = out;

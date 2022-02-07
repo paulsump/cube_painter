@@ -1,7 +1,7 @@
 import 'package:cube_painter/model/crop_direction.dart';
-import 'package:cube_painter/shared/out.dart';
-import 'package:cube_painter/shared/screen_transform.dart';
-import 'package:cube_painter/widgets/brush.dart';
+import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:cube_painter/widgets/cubes/simple_cube.dart';
 import 'package:cube_painter/widgets/scafolding/grid.dart';

@@ -1,8 +1,8 @@
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/shared/brush_maths.dart';
-import 'package:cube_painter/shared/out.dart';
-import 'package:cube_painter/shared/screen_transform.dart';
+import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/widgets/brush/brush_maths.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:cube_painter/widgets/scafolding/transformed.dart';
 import 'package:flutter/material.dart';
