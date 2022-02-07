@@ -50,7 +50,7 @@ void main() {
     });
 
     test('save', () {
-      String json = jsonEncode(testCubes);
+      String json = CubeInfo.jsonFromList(testCubes);
       // out(json);
       expect(
           '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]' ==
