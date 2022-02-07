@@ -1,5 +1,6 @@
+import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/shared/cube_corners.dart';
-import 'package:cube_painter/shared/enums.dart';
+import 'package:cube_painter/shared/side.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'equals5.dart';

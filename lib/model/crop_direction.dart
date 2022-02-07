@@ -1,16 +1,3 @@
-/// The vertex / corner of the cube
-/// Used to represent the side of the cube
-/// anti clockwise from top right
-// TODO Rename to side
-enum Side {
-  // 0 top
-  t,
-  // 1 bottom left
-  bl,
-  // 2 bottom right
-  br
-}
-
 /// The direction to crop a cube in is like the
 /// normal vector to the slice line.
 /// So it's sliced perpendicular to the cropping direction

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:cube_painter/shared/enums.dart';
+import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
