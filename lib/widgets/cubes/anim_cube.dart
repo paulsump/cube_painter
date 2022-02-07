@@ -19,9 +19,13 @@ class AnimCube extends StatefulWidget {
   //TODO reverse for delete
   // final bool direction;
 
+  /// This is bad because it's set by the state,
+  /// and also  mean this class can't be const
+  double scale = 1;
+
   final dynamic Function(AnimCube old)? whenComplete;
 
-  const AnimCube({
+  AnimCube({
     Key? key,
     required this.info,
     required this.start,
@@ -72,14 +76,15 @@ class _AnimCubeState extends State<AnimCube>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
+        widget.scale = _scale();
         return Stack(
           children: [
             Transform.translate(
               offset: offset,
               child: Transform.scale(
-                scale: _scale(),
+                scale: widget.scale,
                 child: UnitCube(
-                  opacity: _scale(),
+                  opacity: widget.scale,
                   crop: widget.info.crop,
                 ),
               ),

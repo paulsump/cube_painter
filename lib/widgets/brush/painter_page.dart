@@ -70,7 +70,8 @@ class _PainterPageState extends State<PainterPage> {
         _animCubes.add(AnimCube(
           key: UniqueKey(),
           info: takenCubes[i].info,
-          start: (n - i) * t / n,
+          start: takenCubes[i].scale,
+          // start: (n - i) * t / n,
           end: 1.0,
           whenComplete: _convertToSimpleCube,
         ));
