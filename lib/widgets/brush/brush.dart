@@ -73,12 +73,21 @@ class BrushState extends State<Brush> {
         );
 
         if (previousPositions != positions) {
-          ///TODO COPy over the anim values for the the
-          /// ones that are the same
+          // using order provided by extruder
+          // only add new cubes, deleting any old ones
+
+          // TODO test that unused ones are destroyed
+          var copy = widget._cubes.toList();
           widget._cubes.clear();
 
           for (GridPoint position in positions.list) {
-            _addCube(widget._cubes, position, Crop.c);
+            AnimCube? cube = _findAt(position, copy);
+
+            if (cube != null) {
+              widget._cubes.add(cube);
+            } else {
+              _addCube(widget._cubes, position, Crop.c);
+            }
           }
           setState(() {});
           previousPositions = positions;
@@ -100,6 +109,15 @@ class BrushState extends State<Brush> {
       },
     );
   }
+}
+
+AnimCube? _findAt(GridPoint position, List<AnimCube> list) {
+  for (final cube in list) {
+    if (position == cube.info.center) {
+      return cube;
+    }
+  }
+  return null;
 }
 
 void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {

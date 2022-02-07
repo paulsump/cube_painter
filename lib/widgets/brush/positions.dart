@@ -14,8 +14,7 @@ class Positions {
     if (other is! Positions) {
       return false;
     }
-    out('hi');
-    // return list == other.list;
+
     final int n = list.length;
 
     if (n != other.list.length) {
