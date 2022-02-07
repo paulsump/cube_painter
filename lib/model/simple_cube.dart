@@ -24,10 +24,21 @@ class SimpleCube extends StatelessWidget {
     );
   }
 
+  //
+  // @override
+  // bool operator ==(Object other) =>
+  //     other is SimpleCube ? center == other.center && crop == other.crop : false;
+  //
+  // @override
+  // int get hashCode => hashValues(center, crop);
+  //
+  // @override
+  // String toString() => '$center,$crop';
+
   SimpleCube.fromJson(Map<String, dynamic> json, {Key? key})
       : center = json['center'],
-        crop = json['crop'],
+        crop = Crop.values[json['cropIndex']],
         super(key: key);
 
-  Map<String, dynamic> toJson() => {'center': center, 'crop': crop};
+  Map<String, dynamic> toJson() => {'center': center, 'cropIndex': crop.index};
 }
