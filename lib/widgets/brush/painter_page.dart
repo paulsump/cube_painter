@@ -23,6 +23,9 @@ class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
+  // TODO allow change
+  final crop = Crop.dl;
+
   @override
   void initState() {
     // _load();
@@ -49,7 +52,7 @@ class _PainterPageState extends State<PainterPage> {
           onEndPan: _takeCubes,
           onTapUp: _takeCubes,
           erase: false,
-          crop: Crop.c,
+          crop: crop,
         ),
       ],
     );

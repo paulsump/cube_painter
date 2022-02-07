@@ -30,32 +30,4 @@ void main() {
       expect('{"center":{"x":1,"y":2},"cropIndex":5}' == json, true);
     });
   });
-
-  const testPoint2 = GridPoint(3, 4);
-  const testCrop2 = Crop.ul;
-
-  const testCube2 = CubeInfo(center: testPoint2, crop: testCrop2);
-
-  const testCubes = <CubeInfo>[testCube, testCube2];
-
-  group('json of list', () {
-    test('load', () {
-      Iterable newCubes = CubeInfo.listFromJson(
-          '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]');
-
-      int i = 0;
-      for (final newCube in newCubes) {
-        expect(testCubes[i++] == newCube, true);
-      }
-    });
-
-    test('save', () {
-      String json = CubeInfo.jsonFromList(testCubes);
-      // out(json);
-      expect(
-          '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]' ==
-              json,
-          true);
-    });
-  });
 }
