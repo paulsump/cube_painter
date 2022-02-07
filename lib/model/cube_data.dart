@@ -1,7 +1,5 @@
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/shared/grid_transform.dart';
-import 'package:cube_painter/widgets/unit_cube.dart';
 import 'package:flutter/material.dart';
 
 class CubeInfo {
@@ -20,9 +18,9 @@ class CubeInfo {
 
   @override
   String toString() => '$center,$crop';
-
+// TODO wed16 2pm jiona
   CubeInfo.fromJson(Map<String, dynamic> json)
-      : center = json['center'],
+      : center = GridPoint.fromJson(json['center']),
         crop = Crop.values[json['cropIndex']];
 
   Map<String, dynamic> toJson() => {'center': center, 'cropIndex': crop.index};
