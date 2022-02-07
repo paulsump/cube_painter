@@ -70,7 +70,6 @@ class _PainterPageState extends State<PainterPage> {
           key: UniqueKey(),
           info: takenCubes[i].info,
           start: takenCubes[i].scale,
-          // start: (n - i) * t / n,
           end: 1.0,
           whenComplete: _convertToSimpleCube,
         ));
@@ -84,8 +83,6 @@ class _PainterPageState extends State<PainterPage> {
   dynamic _convertToSimpleCube(AnimCube old) {
     _simpleCubes.add(SimpleCube(info: old.info));
     _animCubes.remove(old);
-    //no need for setstate 'cause they look the same
-    // setState(() {    });
     return () => 'whatever';
   }
 }

@@ -30,83 +30,59 @@ class GridPainter extends CustomPainter {
     int n = _getN(Screen.height / H);
     const y = -H;
 
-    final paintT = Paint()
-      ..style = PaintingStyle.stroke
-      ..shader = LinearGradient(
-        colors: [getColor(Side.t), getColor(Side.bl)],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomLeft,
-      ).createShader(Rect.fromPoints(
-        Offset.zero,
-        Offset(n * W, y * n),
-      ));
+    final rect = Rect.fromPoints(
+      Offset.zero,
+      Offset(n * W, y * n),
+    );
+
     final paintBR = Paint()
       ..style = PaintingStyle.stroke
       ..shader = LinearGradient(
         colors: [getColor(Side.t), getColor(Side.br)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-      ).createShader(Rect.fromPoints(
-        Offset.zero,
-        Offset(n * W, y * n),
-      ));
+      ).createShader(rect);
+
     final paintBL = Paint()
       ..style = PaintingStyle.stroke
       ..shader = LinearGradient(
         colors: [getColor(Side.bl), getColor(Side.t)],
         begin: Alignment.bottomLeft,
         end: Alignment.topRight,
-      ).createShader(Rect.fromPoints(
-        Offset.zero,
-        Offset(n * W, y * n),
-      ));
+      ).createShader(rect);
 
     // left
-    if (true) {
-      for (int i = 2; i < n; i += 2) {
-        // lower
-        canvas.drawLine(
-          Offset(W * i, 0),
-          Offset(0, y * i),
-          paintBL,
-        );
-        // upper
-        canvas.drawLine(
-          Offset(0, y * i),
-          Offset(W * (n - i), y * n),
-          paintBR,
-        );
-      }
+    for (int i = 2; i < n; i += 2) {
+      // lower
+      canvas.drawLine(
+        Offset(W * i, 0),
+        Offset(0, y * i),
+        paintBL,
+      );
+      // upper
+      canvas.drawLine(
+        Offset(0, y * i),
+        Offset(W * (n - i), y * n),
+        paintBR,
+      );
     }
     // n = _getN(Screen.width / W);
 
-    if (false) {
-      for (int i = 0; i < n; ++i) {
-        // vertical
-        canvas.drawLine(
-          Offset(W * i, 0),
-          Offset(W * i, y * n),
-          paintT,
-        );
-      }
-    }
     // right
-    if (true) {
-      for (int i = 0; i < n; i += 2) {
-        // lower
-        canvas.drawLine(
-          Offset(W * i, 0),
-          Offset(W * n, y * (n - i)),
-          paintBR,
-        );
+    for (int i = 0; i < n; i += 2) {
+      // lower
+      canvas.drawLine(
+        Offset(W * i, 0),
+        Offset(W * n, y * (n - i)),
+        paintBR,
+      );
 
-        // upper
-        canvas.drawLine(
-          Offset(W * n, y * i),
-          Offset(W * i, y * n),
-          paintBL,
-        );
-      }
+      // upper
+      canvas.drawLine(
+        Offset(W * n, y * i),
+        Offset(W * i, y * n),
+        paintBL,
+      );
     }
   }
 
