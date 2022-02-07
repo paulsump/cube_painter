@@ -77,14 +77,11 @@ class _AnimCubeState extends State<AnimCube> with SingleTickerProviderStateMixin
               offset: offset,
               child: Transform.scale(
                 scale: _scale(),
-                //TODO SimpleCube - opacity means can't pick crop in initState
                 child: widget.info.crop == Crop.c
-                    //TODO SimpleCube - opacity means not using const UnitCube
                     ? UnitCube(opacity: _scale())
                     : CroppedUnitCube(crop: widget.info.crop),
               ),
             ),
-            //TODO SimpleCube - don't need this if no wire field
             Transform.translate(
               offset: offset,
               child: const UnitCube(wire: true),

@@ -72,10 +72,9 @@ class _CubePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (wire) {
-      //TODO SimpleCube will still want this for solid blocks
-      _draw(canvas, PaintingStyle.stroke);
-    } else {
+    _draw(canvas, PaintingStyle.stroke);
+
+    if (!wire) {
       _draw(canvas, PaintingStyle.fill);
     }
   }

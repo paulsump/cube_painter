@@ -16,7 +16,6 @@ class SimpleCube extends StatelessWidget {
     return Transform.translate(
       offset: offset,
       child: info.crop == Crop.c
-          //TODO SimpleCube - opacity means not using const UnitCube
           ? const UnitCube()
           : CroppedUnitCube(crop: info.crop),
     );
