@@ -1,13 +1,14 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
-import 'package:cube_painter/widgets/unit_cube.dart';
+import 'package:cube_painter/widgets/cubes/unit_cube.dart';
 import 'package:flutter/material.dart';
 
-const noWarn = out;
+const noWarn = [out, Crop];
 
 class AnimCube extends StatefulWidget {
   final CubeInfo info;

@@ -5,7 +5,7 @@ import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
-import 'package:cube_painter/widgets/anim_cube.dart';
+import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:flutter/material.dart';
 
 /// the maths for extruding blocks
