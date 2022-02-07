@@ -1,10 +1,11 @@
 import 'package:cube_painter/model/crop_direction.dart';
-import 'package:cube_painter/model/simple_cube.dart';
+import 'package:cube_painter/model/cube_data.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/brush.dart';
 import 'package:cube_painter/widgets/cube.dart';
 import 'package:cube_painter/widgets/grid.dart';
+import 'package:cube_painter/widgets/simple_cube.dart';
 import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 

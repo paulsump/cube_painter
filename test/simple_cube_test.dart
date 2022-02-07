@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/model/simple_cube.dart';
+import 'package:cube_painter/model/cube_data.dart';
 import 'package:cube_painter/shared/cube_corners.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/side.dart';
+import 'package:cube_painter/widgets/simple_cube.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'equals5.dart';
