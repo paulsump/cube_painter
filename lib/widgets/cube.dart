@@ -2,7 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:cube_painter/model/crop_direction.dart';
-import 'package:cube_painter/model/grid_point.dart';
+import 'package:cube_painter/model/cube_data.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/widgets/unit_cube.dart';
@@ -11,9 +11,7 @@ import 'package:flutter/material.dart';
 const noWarn = out;
 
 class Cube extends StatefulWidget {
-  final GridPoint center;
-
-  final Crop crop;
+  final CubeInfo info;
   final double start;
   final double end;
   final bool pingPong;
@@ -25,8 +23,7 @@ class Cube extends StatefulWidget {
 
   const Cube({
     Key? key,
-    required this.center,
-    required this.crop,
+    required this.info,
     required this.start,
     required this.end,
     this.pingPong = false,
@@ -58,7 +55,7 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
       }
     }
 
-    offset = gridToUnit(widget.center);
+    offset = gridToUnit(widget.info.center);
     super.initState();
   }
 
@@ -81,10 +78,10 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
               child: Transform.scale(
                 scale: _scale(),
                 //TODO SimpleCube - opacity means can't pick crop in initState
-                child: widget.crop == Crop.c
-                //TODO SimpleCube - opacity means not using const UnitCube
+                child: widget.info.crop == Crop.c
+                    //TODO SimpleCube - opacity means not using const UnitCube
                     ? UnitCube(opacity: _scale())
-                    : CroppedUnitCube(crop: widget.crop),
+                    : CroppedUnitCube(crop: widget.info.crop),
               ),
             ),
             //TODO SimpleCube - don't need this if no wire field

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/cube_data.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
@@ -62,8 +63,7 @@ class BrushMaths {
 
     cubes.add(Cube(
       key: UniqueKey(),
-      center: center,
-      crop: crop,
+      info: CubeInfo(center: center, crop: crop),
       start: t - dt,
       // TODO FIX
       end: t + 0.15,

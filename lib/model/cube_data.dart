@@ -18,7 +18,7 @@ class CubeInfo {
 
   @override
   String toString() => '$center,$crop';
-// TODO wed16 2pm jiona
+
   CubeInfo.fromJson(Map<String, dynamic> json)
       : center = GridPoint.fromJson(json['center']),
         crop = Crop.values[json['cropIndex']];

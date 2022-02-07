@@ -1,5 +1,4 @@
 import 'package:cube_painter/model/crop_direction.dart';
-import 'package:cube_painter/model/cube_data.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/brush.dart';
@@ -67,8 +66,7 @@ class _PainterPageState extends State<PainterPage> {
         //TODO maybe set anim speed
         _cubes.add(Cube(
           key: UniqueKey(),
-          center: takenCubes[i].center,
-          crop: takenCubes[i].crop,
+          info: takenCubes[i].info,
           start: (n - i) * t / n,
           end: 1.0,
           whenComplete: _convertToSimpleCube,
@@ -80,7 +78,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   dynamic _convertToSimpleCube(Cube old) {
-    _simpleCubes.add(SimpleCube(old.center, old.crop));
+    _simpleCubes.add(SimpleCube(info: old.info));
     _cubes.remove(old);
     //no need for setstate 'cause they look the same
     // setState(() {    });
