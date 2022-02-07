@@ -29,4 +29,10 @@ class GridPoint {
 
   @override
   String toString() => '$x,$y';
+
+  GridPoint.fromJson(Map<String, dynamic> json)
+      : x = json['x'],
+        y = json['y'];
+
+  Map<String, dynamic> toJson() => {'x': x, 'y': y};
 }

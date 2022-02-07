@@ -11,8 +11,10 @@ enum Vert {
   br
 }
 
-// anti clockwise from right
-// crop direction
+/// The direction to crop a cube in is like the
+/// normal vector to the slice line.
+/// So it's sliced perpendicular to the cropping direction
+/// anti clockwise from right
 enum Crop {
   // 0 center
   c,

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:cube_painter/shared/enums.dart';
-import 'package:cube_painter/shared/grid_point.dart';
+import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/widgets/cube.dart';
@@ -59,6 +59,7 @@ class BrushMaths {
   void _addCube(List<Cube> cubes, GridPoint center, Crop crop) {
     const double t = 0.5;
     const double dt = 0.5;
+
     cubes.add(Cube(
       key: UniqueKey(),
       center: center,
