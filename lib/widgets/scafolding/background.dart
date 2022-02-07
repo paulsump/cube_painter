@@ -47,8 +47,10 @@ class BackgroundState extends State<Background>
             return Stack(
               children: [
                 Container(
-                  // color: _colorSequence.evaluate(                    AlwaysStoppedAnimation(_controller.value),),
-                  color: Colors.black,
+                  color: _colorSequence.evaluate(
+                    AlwaysStoppedAnimation(_controller.value),
+                  ),
+                  // color: Colors.black,
                 ),
                 widget.child,
               ],

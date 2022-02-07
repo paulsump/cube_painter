@@ -30,39 +30,36 @@ class GridPainter extends CustomPainter {
     int n = _getN(Screen.height / H);
     const y = -H;
 
-    final paintBL = Paint()
-      ..style = PaintingStyle.stroke
-      ..shader = LinearGradient(
-        // colors: [getColor(Side.bl), getColor(Side.t)],
-        colors: [Colors.red, Colors.green],
-      ).createShader(Rect.fromPoints(
-        Offset.zero,
-        Offset(n * W, y * n),
-      ));
     final paintT = Paint()
       ..style = PaintingStyle.stroke
       ..shader = LinearGradient(
-        // colors: [getColor(Side.bl), getColor(Side.t)],
-        colors: [Colors.red, Colors.green],
+        colors: [getColor(Side.t), getColor(Side.bl)],
         begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
+        end: Alignment.bottomLeft,
       ).createShader(Rect.fromPoints(
         Offset.zero,
         Offset(n * W, y * n),
       ));
-    final paint = Paint()
+    final paintBR = Paint()
       ..style = PaintingStyle.stroke
       ..shader = LinearGradient(
-        colors: [getColor(Side.t), getColor(Side.bl)],
+        colors: [getColor(Side.t), getColor(Side.br)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
       ).createShader(Rect.fromPoints(
         Offset.zero,
-        Offset(n * W / 2, y * n),
+        Offset(n * W, y * n),
       ));
-    //   ..shader = ui.Gradient.linear(
-    //       Offset.zero, Offset(n*W/2,y*n), [
-    //     getColor(Side.br),
-    //     getColor(Side.bl),
-    //   ]);
+    final paintBL = Paint()
+      ..style = PaintingStyle.stroke
+      ..shader = LinearGradient(
+        colors: [getColor(Side.bl), getColor(Side.t)],
+        begin: Alignment.bottomLeft,
+        end: Alignment.topRight,
+      ).createShader(Rect.fromPoints(
+        Offset.zero,
+        Offset(n * W, y * n),
+      ));
 
     // left
     if (true) {
@@ -71,13 +68,13 @@ class GridPainter extends CustomPainter {
         canvas.drawLine(
           Offset(W * i, 0),
           Offset(0, y * i),
-          paintT,
+          paintBL,
         );
         // upper
         canvas.drawLine(
           Offset(0, y * i),
           Offset(W * (n - i), y * n),
-          paintT,
+          paintBR,
         );
       }
     }
@@ -100,14 +97,14 @@ class GridPainter extends CustomPainter {
         canvas.drawLine(
           Offset(W * i, 0),
           Offset(W * n, y * (n - i)),
-          paintT,
+          paintBR,
         );
 
         // upper
         canvas.drawLine(
           Offset(W * n, y * i),
           Offset(W * i, y * n),
-          paintT,
+          paintBL,
         );
       }
     }
