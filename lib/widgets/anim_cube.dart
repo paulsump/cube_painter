@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
@@ -34,7 +33,8 @@ class AnimCube extends StatefulWidget {
   _AnimCubeState createState() => _AnimCubeState();
 }
 
-class _AnimCubeState extends State<AnimCube> with SingleTickerProviderStateMixin {
+class _AnimCubeState extends State<AnimCube>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   late Offset offset;
@@ -77,9 +77,10 @@ class _AnimCubeState extends State<AnimCube> with SingleTickerProviderStateMixin
               offset: offset,
               child: Transform.scale(
                 scale: _scale(),
-                child: widget.info.crop == Crop.c
-                    ? UnitCube(opacity: _scale())
-                    : CroppedUnitCube(crop: widget.info.crop),
+                child: UnitCube(
+                  opacity: _scale(),
+                  crop: widget.info.crop,
+                ),
               ),
             ),
             Transform.translate(

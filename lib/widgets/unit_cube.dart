@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 class UnitCube extends StatelessWidget {
   final bool wire;
   final double opacity;
+  final Crop crop;
 
   const UnitCube({
     Key? key,
     this.wire = false,
     this.opacity = 1,
+    this.crop = Crop.c,
   }) : super(key: key);
 
   @override
@@ -18,28 +20,9 @@ class UnitCube extends StatelessWidget {
     return CustomPaint(
         painter: _CubePainter(
             context: context,
-            colorsAndPaths: _getColorsAndPaths(Crop.c),
+            colorsAndPaths: _getColorsAndPaths(crop),
             wire: wire,
             opacity: opacity));
-  }
-}
-
-class CroppedUnitCube extends StatelessWidget {
-  final Crop crop;
-
-  const CroppedUnitCube({
-    Key? key,
-    required this.crop,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _CubePainter(
-        context: context,
-        colorsAndPaths: _getColorsAndPaths(crop),
-      ),
-    );
   }
 }
 
