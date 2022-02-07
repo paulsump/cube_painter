@@ -2,7 +2,7 @@ import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/brush.dart';
-import 'package:cube_painter/widgets/cube.dart';
+import 'package:cube_painter/widgets/anim_cube.dart';
 import 'package:cube_painter/widgets/grid.dart';
 import 'package:cube_painter/widgets/simple_cube.dart';
 import 'package:cube_painter/widgets/transformed.dart';
@@ -20,7 +20,7 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final List<Cube> _cubes = [];
+  final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
   @override
@@ -40,7 +40,7 @@ class _PainterPageState extends State<PainterPage> {
             children: [
               const Grid(),
               ..._simpleCubes,
-              ..._cubes,
+              ..._animCubes,
             ],
           ),
         ),
@@ -55,7 +55,7 @@ class _PainterPageState extends State<PainterPage> {
     );
   }
 
-  void _takeCubes(List<Cube> takenCubes) {
+  void _takeCubes(List<AnimCube> takenCubes) {
     if (takenCubes.isNotEmpty) {
       // _takeEditBlock();
 
@@ -64,7 +64,7 @@ class _PainterPageState extends State<PainterPage> {
 
       for (int i = 0; i < n; ++i) {
         //TODO maybe set anim speed
-        _cubes.add(Cube(
+        _animCubes.add(AnimCube(
           key: UniqueKey(),
           info: takenCubes[i].info,
           start: (n - i) * t / n,
@@ -78,9 +78,9 @@ class _PainterPageState extends State<PainterPage> {
     }
   }
 
-  dynamic _convertToSimpleCube(Cube old) {
+  dynamic _convertToSimpleCube(AnimCube old) {
     _simpleCubes.add(SimpleCube(info: old.info));
-    _cubes.remove(old);
+    _animCubes.remove(old);
     //no need for setstate 'cause they look the same
     // setState(() {    });
     return () => 'whatever';

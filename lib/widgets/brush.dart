@@ -3,19 +3,19 @@ import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/shared/brush_maths.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
-import 'package:cube_painter/widgets/cube.dart';
+import 'package:cube_painter/widgets/anim_cube.dart';
 import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, GridPoint];
 
 class Brush extends StatefulWidget {
-  final _cubes = <Cube>[];
+  final _cubes = <AnimCube>[];
 
   final void Function() onStartPan;
-  final void Function(List<Cube> takenCubes) onEndPan;
+  final void Function(List<AnimCube> takenCubes) onEndPan;
 
-  final void Function(List<Cube> takenCubes) onTapUp;
+  final void Function(List<AnimCube> takenCubes) onTapUp;
   final Crop crop;
 
   final bool erase;
@@ -29,7 +29,7 @@ class Brush extends StatefulWidget {
       required this.erase})
       : super(key: key);
 
-  List<Cube> _takeCubes() {
+  List<AnimCube> _takeCubes() {
     final listCopy = _cubes.toList();
 
     _cubes.clear();

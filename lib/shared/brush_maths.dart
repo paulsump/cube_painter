@@ -5,7 +5,7 @@ import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/shared/grid_transform.dart';
 import 'package:cube_painter/shared/out.dart';
-import 'package:cube_painter/widgets/cube.dart';
+import 'package:cube_painter/widgets/anim_cube.dart';
 import 'package:flutter/material.dart';
 
 /// the maths for extruding blocks
@@ -31,7 +31,7 @@ class BrushMaths {
     _roundedFromGrid = GridPoint(_fromGrid.dx.round(), _fromGrid.dy.round());
   }
 
-  void extrudeTo(List<Cube> cubes, Offset toUnit) {
+  void extrudeTo(List<AnimCube> cubes, Offset toUnit) {
     final vecAndReverse = _calculateVectorAndReverseOrder(toUnit - _fromUnit);
 
     _vector = vecAndReverse[0];
@@ -50,18 +50,18 @@ class BrushMaths {
     }
   }
 
-  void setCroppedCube(List<Cube> cubes, Offset point, Crop crop) {
+  void setCroppedCube(List<AnimCube> cubes, Offset point, Crop crop) {
     startFrom(point);
 
     cubes.clear();
     _addCube(cubes, _roundedFromGrid, crop);
   }
 
-  void _addCube(List<Cube> cubes, GridPoint center, Crop crop) {
+  void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
     const double t = 0.5;
     const double dt = 0.5;
 
-    cubes.add(Cube(
+    cubes.add(AnimCube(
       key: UniqueKey(),
       info: CubeInfo(center: center, crop: crop),
       start: t - dt,

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-class Cube extends StatefulWidget {
+class AnimCube extends StatefulWidget {
   final CubeInfo info;
   final double start;
   final double end;
@@ -19,9 +19,9 @@ class Cube extends StatefulWidget {
   //TODO reverse for delete
   // final bool direction;
 
-  final dynamic Function(Cube old)? whenComplete;
+  final dynamic Function(AnimCube old)? whenComplete;
 
-  const Cube({
+  const AnimCube({
     Key? key,
     required this.info,
     required this.start,
@@ -31,10 +31,10 @@ class Cube extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CubeState createState() => _CubeState();
+  _AnimCubeState createState() => _AnimCubeState();
 }
 
-class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
+class _AnimCubeState extends State<AnimCube> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   late Offset offset;
