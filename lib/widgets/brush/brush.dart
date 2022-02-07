@@ -44,8 +44,7 @@ class Brush extends StatefulWidget {
 
 class BrushState extends State<Brush> {
   final brushMaths = BrushMaths();
-
-  // var last = GridPoint.zero;
+  var previousPositions = Positions();
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +62,7 @@ class BrushState extends State<Brush> {
       ),
       onPanStart: (details) {
         widget.onStartPan();
+
         brushMaths.startFrom(
           screenToUnit(details.localPosition, context),
         );
@@ -71,23 +71,18 @@ class BrushState extends State<Brush> {
         final Positions positions = brushMaths.extrudeTo(
           screenToUnit(details.localPosition, context),
         );
-        widget._cubes.clear();
-        for (GridPoint position in positions.list) {
-          _addCube(widget._cubes, position, Crop.c);
+
+        if (previousPositions != positions) {
+          ///TODO COPy over the anim values for the the
+          /// ones that are the same
+          widget._cubes.clear();
+
+          for (GridPoint position in positions.list) {
+            _addCube(widget._cubes, position, Crop.c);
+          }
+          setState(() {});
+          previousPositions = positions;
         }
-        setState(() {});
-        //TODO list<cube>.opertotor==
-        //todo check list before after drag
-        // var newLast = GridPoint.zero;
-        //
-        // if (widget._cubes.isNotEmpty) {
-        //   newLast = widget._cubes.last.center;
-        // }
-        // out(newLast);
-        // if (last != newLast) {
-        //   setState(() {});
-        //   last = newLast;
-        // }
       },
       onPanEnd: (details) {
         widget.onEndPan(widget._takeCubes());
@@ -96,9 +91,11 @@ class BrushState extends State<Brush> {
         final GridPoint position = brushMaths.getPosition(
           screenToUnit(details.localPosition, context),
         );
-        _addCube(widget._cubes, position, widget.crop);
 
-        setState(() {});
+        // TODO When this is a brush mode ,
+        //  only add if/when user is happy with position
+        // so need to wire frame like the pan
+        _addCube(widget._cubes, position, widget.crop);
         widget.onTapUp(widget._takeCubes());
       },
     );

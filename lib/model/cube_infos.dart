@@ -1,20 +1,15 @@
 import 'dart:convert';
 
 import 'package:cube_painter/model/cube_info.dart';
-import 'package:flutter/material.dart';
 
-/// for passing around cube positions and their info
+/// TODO USE As the main model?
+/// it might end up being the place for storing the positions
+/// either way it with be used
+/// for loading and saving all the cube positions and their info
 class CubeInfos {
   final List<CubeInfo> list;
 
   const CubeInfos(this.list);
-
-  @override
-  bool operator ==(Object other) =>
-      other is CubeInfos ? list == other.list : false;
-
-  @override
-  int get hashCode => hashValues(list, 1);
 
   @override
   String toString() => '$list';
