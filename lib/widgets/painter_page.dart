@@ -24,11 +24,12 @@ class _PainterPageState extends State<PainterPage> {
   final List<Cube> _cubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
-  // final persist = Persist();
+  final persist = Persist();
 
   @override
   void initState() {
-    // _load();
+    _save('St');
+    _load();
     super.initState();
   }
 
@@ -95,14 +96,19 @@ class _PainterPageState extends State<PainterPage> {
     ];
     String json = '';
     try {
-      // json = await persist.load();
+      json = await persist.loadJson();
     } catch (e) {
-      // fails on windows and mac
+      out(e);
     }
     if (json.isEmpty) {
       json = examples.last;
     }
+    out(json);
     // createBlocks(_blocks, json);
-    setState(() {});
+    // setState(() {});
+  }
+
+  void _save(String json) async {
+    await persist.saveJson(json);
   }
 }

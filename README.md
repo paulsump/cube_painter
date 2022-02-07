@@ -4,5 +4,5 @@ A painting app, but the 'paint' is cubes. The cube is made of equilateral triang
 
 ## Getting Started
 
-Draw on the canvas, see cubes.
+Allows you to draw 'cubes' on an isometric grid.
 TODO
