@@ -1,8 +1,8 @@
-
-
-// anti clockwise from top right
+/// The vertex / corner of the cube
+/// Used to represent the side of the cube
+/// anti clockwise from top right
 // TODO Rename to side
-enum Vert {
+enum Side {
   // 0 top
   t,
   // 1 bottom left

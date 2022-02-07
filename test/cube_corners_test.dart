@@ -9,7 +9,7 @@ void main() {
     test('c', () {
       final vertsAndSides = CubeCorners.getVertsAndSides(Crop.c);
 
-      expect(Vert.bl == vertsAndSides[0][0], true);
+      expect(Side.bl == vertsAndSides[0][0], true);
       expect(
           equals5(vertsAndSides[0][1], const [
             Offset(0, 0.0),
@@ -19,7 +19,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.t == vertsAndSides[1][0], true);
+      expect(Side.t == vertsAndSides[1][0], true);
       expect(
           equals5(vertsAndSides[1][1], const [
             Offset(0, 0.0),
@@ -29,7 +29,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.br == vertsAndSides[2][0], true);
+      expect(Side.br == vertsAndSides[2][0], true);
       expect(
           equals5(vertsAndSides[2][1], const [
             Offset(0, 0.0),
@@ -43,7 +43,7 @@ void main() {
     test('r', () {
       final vertsAndSides = CubeCorners.getVertsAndSides(Crop.r);
 
-      expect(Vert.t == vertsAndSides[0][0], true);
+      expect(Side.t == vertsAndSides[0][0], true);
       expect(
           equals5(vertsAndSides[0][1], const [
             Offset(0, 0.0),
@@ -52,7 +52,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.bl == vertsAndSides[1][0], true);
+      expect(Side.bl == vertsAndSides[1][0], true);
       expect(
           equals5(vertsAndSides[1][1], const [
             Offset(0, 0.0),
@@ -66,7 +66,7 @@ void main() {
     test('ur', () {
       final vertsAndSides = CubeCorners.getVertsAndSides(Crop.ur);
 
-      expect(Vert.bl == vertsAndSides[0][0], true);
+      expect(Side.bl == vertsAndSides[0][0], true);
 
       expect(
           equals5(vertsAndSides[0][1], const [
@@ -77,7 +77,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.br == vertsAndSides[1][0], true);
+      expect(Side.br == vertsAndSides[1][0], true);
       expect(
           equals5(vertsAndSides[1][1], const [
             Offset(0, 0.0),
@@ -90,7 +90,7 @@ void main() {
     test('ul', () {
       final vertsAndSides = CubeCorners.getVertsAndSides(Crop.ul);
 
-      expect(Vert.bl == vertsAndSides[0][0], true);
+      expect(Side.bl == vertsAndSides[0][0], true);
 
       expect(
           equals5(vertsAndSides[0][1], const [
@@ -100,7 +100,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.br == vertsAndSides[1][0], true);
+      expect(Side.br == vertsAndSides[1][0], true);
 
       expect(
           equals5(vertsAndSides[1][1], const [
@@ -115,7 +115,7 @@ void main() {
     test('l', () {
       final vertsAndSides = CubeCorners.getVertsAndSides(Crop.l);
 
-      expect(Vert.br == vertsAndSides[0][0], true);
+      expect(Side.br == vertsAndSides[0][0], true);
 
       expect(
           equals5(vertsAndSides[0][1], const [
@@ -126,7 +126,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.t == vertsAndSides[1][0], true);
+      expect(Side.t == vertsAndSides[1][0], true);
 
       expect(
           equals5(vertsAndSides[1][1], const [
@@ -140,7 +140,7 @@ void main() {
     test('dl', () {
       final vertsAndSides = CubeCorners.getVertsAndSides(Crop.dl);
 
-      expect(Vert.br == vertsAndSides[0][0], true);
+      expect(Side.br == vertsAndSides[0][0], true);
 
       expect(
           equals5(vertsAndSides[0][1], const [
@@ -150,7 +150,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.t == vertsAndSides[1][0], true);
+      expect(Side.t == vertsAndSides[1][0], true);
 
       expect(
           equals5(vertsAndSides[1][1], const [
@@ -168,7 +168,7 @@ void main() {
       // out(vertsAndSides[0][1]);
       // out(vertsAndSides[1][1]);
 
-      expect(Vert.bl == vertsAndSides[0][0], true);
+      expect(Side.bl == vertsAndSides[0][0], true);
       expect(
           equals5(vertsAndSides[0][1], const [
             Offset(0, 0.0),
@@ -177,7 +177,7 @@ void main() {
           ]),
           true);
 
-      expect(Vert.t == vertsAndSides[1][0], true);
+      expect(Side.t == vertsAndSides[1][0], true);
       expect(
           equals5(vertsAndSides[1][1], const [
             Offset(0, 0.0),

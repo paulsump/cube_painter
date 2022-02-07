@@ -28,17 +28,17 @@ class CubeCorners {
       case Crop.c:
         return [
           [
-            Vert.bl,
+            Side.bl,
             // |_|
             _offsets([c, b, bl, tl])
           ],
           [
-            Vert.t,
+            Side.t,
             // /_/
             _offsets([c, tl, t, tr])
           ],
           [
-            Vert.br,
+            Side.br,
             // /|
             // |/
             _offsets([c, tr, br, b])
@@ -47,34 +47,34 @@ class CubeCorners {
       case Crop.r:
         return [
           [
-            Vert.t,
+            Side.t,
             _offsets([c, tl, t])
           ],
           [
-            Vert.bl,
+            Side.bl,
             _offsets([c, b, bl, tl])
           ],
         ];
       case Crop.ur:
         return [
           [
-            Vert.bl,
+            Side.bl,
             _offsets([c, b, bl, tl])
           ],
           [
-            Vert.br,
+            Side.br,
             _offsets([c, br, b])
           ],
         ];
       case Crop.ul:
         return [
           [
-            Vert.bl,
+            Side.bl,
             // _|
             _offsets([c, b, bl])
           ],
           [
-            Vert.br,
+            Side.br,
             // /|
             // |/
             _offsets([c, tr, br, b])
@@ -83,24 +83,24 @@ class CubeCorners {
       case Crop.l:
         return [
           [
-            Vert.br,
+            Side.br,
             _offsets([c, tr, br, b])
           ],
           [
-            Vert.t,
+            Side.t,
             _offsets([c, t, tr])
           ],
         ];
       case Crop.dl:
         return [
           [
-            Vert.br,
+            Side.br,
             // /|
             // |/
             _offsets([c, tr, br])
           ],
           [
-            Vert.t,
+            Side.t,
             // /_/
             _offsets([c, tl, t, tr])
           ],
@@ -108,12 +108,12 @@ class CubeCorners {
       case Crop.dr:
         return [
           [
-            Vert.bl,
+            Side.bl,
             // |-
             _offsets([c, bl, tl])
           ],
           [
-            Vert.t,
+            Side.t,
             // /_/
             _offsets([c, tl, t, tr])
           ],

@@ -67,29 +67,29 @@ Animatable<Color?> _colorSequence = TweenSequence<Color?>(
     TweenSequenceItem(
       weight: 10.0,
       tween: ColorTween(
-        begin: getColor(Vert.bl),
-        end: getColor(Vert.t),
+        begin: getColor(Side.bl),
+        end: getColor(Side.t),
       ),
     ),
     TweenSequenceItem(
       weight: 5.0,
       tween: ColorTween(
-        begin: getColor(Vert.t),
-        end: getColor(Vert.br),
+        begin: getColor(Side.t),
+        end: getColor(Side.br),
       ),
     ),
     TweenSequenceItem(
       weight: 4.0,
       tween: ColorTween(
-        begin: getColor(Vert.br),
-        end: getColor(Vert.t),
+        begin: getColor(Side.br),
+        end: getColor(Side.t),
       ),
     ),
     TweenSequenceItem(
       weight: 10.0,
       tween: ColorTween(
-        begin: getColor(Vert.t),
-        end: getColor(Vert.bl),
+        begin: getColor(Side.t),
+        end: getColor(Side.bl),
       ),
     ),
   ],
