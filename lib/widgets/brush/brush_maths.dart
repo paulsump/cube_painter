@@ -1,13 +1,12 @@
 import 'dart:math';
 
-import 'package:cube_painter/model/crop_direction.dart';
-import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/widgets/cubes/anim_cube.dart';
+import 'package:cube_painter/widgets/brush/positions.dart';
 import 'package:flutter/material.dart';
 
+// TODO test
 /// the maths for extruding blocks
 class BrushMaths {
   /// dragged from point in grid space
@@ -31,7 +30,7 @@ class BrushMaths {
     _roundedFromGrid = GridPoint(_fromGrid.dx.round(), _fromGrid.dy.round());
   }
 
-  void extrudeTo(List<AnimCube> cubes, Offset toUnit) {
+  Positions extrudeTo(Offset toUnit) {
     final vecAndReverse = _calculateVectorAndReverseOrder(toUnit - _fromUnit);
 
     _vector = vecAndReverse[0];
@@ -40,35 +39,20 @@ class BrushMaths {
     final Offset gridVector = unitToGrid(toUnit) - _fromGrid;
     _distance = gridVector.distance.round();
 
-    cubes.clear();
+    var positions = Positions();
 
     for (int i = 0; i < _distance; ++i) {
       final int d = _reverseOrder ? i - _distance : i;
 
-      final center = _roundedFromGrid + _vector! * d;
-      _addCube(cubes, center, Crop.c);
+      positions.list.add(_roundedFromGrid + _vector! * d);
     }
+    return positions;
   }
 
-  void setCroppedCube(List<AnimCube> cubes, Offset point, Crop crop) {
+  GridPoint getPosition(Offset point) {
     startFrom(point);
 
-    cubes.clear();
-    _addCube(cubes, _roundedFromGrid, crop);
-  }
-
-  void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
-    const double t = 0.5;
-    const double dt = 0.5;
-
-    cubes.add(AnimCube(
-      key: UniqueKey(),
-      info: CubeInfo(center: center, crop: crop),
-      start: t - dt,
-      // TODO FIX
-      end: t + 0.15,
-      pingPong: true,
-    ));
+    return _roundedFromGrid;
   }
 }
 

@@ -1,8 +1,10 @@
 import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush_maths.dart';
+import 'package:cube_painter/widgets/brush/positions.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:cube_painter/widgets/scafolding/transformed.dart';
 import 'package:flutter/material.dart';
@@ -66,11 +68,13 @@ class BrushState extends State<Brush> {
         );
       },
       onPanUpdate: (details) {
-        brushMaths.extrudeTo(
-          widget._cubes,
+        final Positions positions = brushMaths.extrudeTo(
           screenToUnit(details.localPosition, context),
         );
-
+        widget._cubes.clear();
+        for (GridPoint position in positions.list) {
+          _addCube(widget._cubes, position, Crop.c);
+        }
         setState(() {});
         //TODO list<cube>.opertotor==
         //todo check list before after drag
@@ -89,15 +93,28 @@ class BrushState extends State<Brush> {
         widget.onEndPan(widget._takeCubes());
       },
       onTapUp: (details) {
-        brushMaths.setCroppedCube(
-          widget._cubes,
+        final GridPoint position = brushMaths.getPosition(
           screenToUnit(details.localPosition, context),
-          widget.crop,
         );
+        _addCube(widget._cubes, position, widget.crop);
 
         setState(() {});
         widget.onTapUp(widget._takeCubes());
       },
     );
   }
+}
+
+void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
+  const double t = 0.5;
+  const double dt = 0.5;
+
+  cubes.add(AnimCube(
+    key: UniqueKey(),
+    info: CubeInfo(center: center, crop: crop),
+    start: t - dt,
+    // TODO FIX
+    end: t + 0.15,
+    pingPong: true,
+  ));
 }
