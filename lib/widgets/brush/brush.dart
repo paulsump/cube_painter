@@ -121,15 +121,14 @@ AnimCube? _findAt(GridPoint position, List<AnimCube> list) {
 }
 
 void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
-  const double t = 0.5;
-  const double dt = 0.5;
+  const double t = 0.6;
 
   cubes.add(AnimCube(
     key: UniqueKey(),
     info: CubeInfo(center: center, crop: crop),
-    start: t - dt,
+    start: t,
     // TODO FIX
-    end: t + 0.15,
+    end: t + 0.2,
     pingPong: true,
   ));
 }

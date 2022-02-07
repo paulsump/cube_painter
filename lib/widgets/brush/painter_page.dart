@@ -63,7 +63,6 @@ class _PainterPageState extends State<PainterPage> {
       // _takeEditBlock();
 
       final int n = takenCubes.length;
-      const double t = 0.5;
 
       for (int i = 0; i < n; ++i) {
         //TODO maybe set anim speed

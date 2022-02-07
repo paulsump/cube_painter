@@ -21,6 +21,8 @@ class AnimCube extends StatefulWidget {
 
   /// This is bad because it's set by the state,
   /// and also  mean this class can't be const
+  /// and also causes the warning about
+  /// non finals on an @immutable
   double scale = 1;
 
   final dynamic Function(AnimCube old)? whenComplete;
