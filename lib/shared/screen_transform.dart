@@ -32,8 +32,8 @@ class Screen {
   static void init(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
 
-    final double safeAreaHeight =
-        mediaQuery.padding.top + mediaQuery.padding.bottom;
+    final pad = mediaQuery.padding;
+    final double safeAreaHeight = pad.top + pad.bottom;
 
     final size = mediaQuery.size;
     _size = Size(size.width, size.height - safeAreaHeight);

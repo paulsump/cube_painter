@@ -122,5 +122,5 @@ class CubeCorners {
   }
 
   static List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
-      indices.length, (i) => toOffset(_corners[indices[i]]));
+      indices.length, (i) => gridToUnit(_corners[indices[i]]));
 }

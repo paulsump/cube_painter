@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 /// the maths for extruding blocks
 class BrushMaths {
   /// dragged from point in grid space
-  late Offset _from;
+  late Offset _fromUnit;
   late Offset _fromGrid;
-  late GridPoint _roundedFrom;
+  late GridPoint _roundedFromGrid;
 
   /// scale the drag vector to get the correct length
   int _distance = 0;
@@ -21,22 +21,22 @@ class BrushMaths {
   late GridPoint? _vector;
   late bool _reverseOrder;
 
-  void startFrom(Offset from) {
+  void startFrom(Offset fromUnit) {
     _vector = null;
 
-    _from = from;
-    _fromGrid = toGrid(from);
+    _fromUnit = fromUnit;
+    _fromGrid = unitToGrid(fromUnit);
 
-    _roundedFrom = GridPoint(_fromGrid.dx.round(), _fromGrid.dy.round());
+    _roundedFromGrid = GridPoint(_fromGrid.dx.round(), _fromGrid.dy.round());
   }
 
-  void extrudeTo(List<Cube> cubes, Offset to) {
-    final vecAndReverse = _calculateVectorAndReverseOrder(to - _from);
+  void extrudeTo(List<Cube> cubes, Offset toUnit) {
+    final vecAndReverse = _calculateVectorAndReverseOrder(toUnit - _fromUnit);
 
     _vector = vecAndReverse[0];
     _reverseOrder = vecAndReverse[1];
 
-    final Offset gridVector = toGrid(to) - _fromGrid;
+    final Offset gridVector = unitToGrid(toUnit) - _fromGrid;
     _distance = gridVector.distance.round();
 
     cubes.clear();
@@ -44,7 +44,7 @@ class BrushMaths {
     for (int i = 0; i < _distance; ++i) {
       final int d = _reverseOrder ? i - _distance : i;
 
-      final center = _roundedFrom + _vector! * d;
+      final center = _roundedFromGrid + _vector! * d;
       _addCube(cubes, center, Crop.c);
     }
   }
@@ -53,7 +53,7 @@ class BrushMaths {
     startFrom(point);
 
     cubes.clear();
-    _addCube(cubes, _roundedFrom, crop);
+    _addCube(cubes, _roundedFromGrid, crop);
   }
 
   void _addCube(List<Cube> cubes, GridPoint center, Crop crop) {

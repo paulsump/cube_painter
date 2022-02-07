@@ -55,7 +55,7 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
       }
     }
 
-    offset = toOffset(widget.center);
+    offset = gridToUnit(widget.center);
     super.initState();
   }
 

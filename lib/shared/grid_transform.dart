@@ -14,16 +14,7 @@ const double H = 0.5;
 /// it makes more sense than grid space because
 /// it isn't skewed, so
 /// standard vector maths works.
-double _gridx(double x) => x / W;
 
-double _gridy(Offset offset) => H * offset.dx / W - offset.dy;
+Offset unitToGrid(Offset u) => Offset(u.dx / W, H * u.dx / W - u.dy);
 
-//TODO coord space - rename to unitToGrid
-Offset toGrid(Offset offset) => Offset(_gridx(offset.dx), _gridy(offset));
-
-//TODO coord space - rename to gridToUnit
-Offset toOffset(GridPoint point) => Offset(
-      W * point.x,
-      H * point.x - point.y,
-    );
-
+Offset gridToUnit(GridPoint g) => Offset(W * g.x, H * g.x - g.y);

@@ -10,8 +10,10 @@ void main() {
 
     expect(find.byType(CubePainterApp), findsOneWidget);
     expect(find.byType(Background), findsOneWidget);
+
     expect(find.byType(Grid), findsOneWidget);
     expect(find.byType(Brush), findsOneWidget);
+
     // expect(find.byType(UnitCube), findsNWidgets(2));
     // expect(find.byType(CroppedUnitCube), findsNWidgets(1));
 
