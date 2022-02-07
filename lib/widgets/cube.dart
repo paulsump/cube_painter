@@ -56,10 +56,6 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
     }
 
     offset = toOffset(widget.center);
-    cube = widget.crop == Crop.c
-        ? const UnitCube()
-        : CroppedUnitCube(crop: widget.crop);
-
     super.initState();
   }
 
@@ -81,7 +77,10 @@ class _CubeState extends State<Cube> with SingleTickerProviderStateMixin {
               offset: offset,
               child: Transform.scale(
                 scale: _scale(),
-                child: cube,
+                child: widget.crop == Crop.c
+                    //TODO opacity means not using const UnitCube
+                    ? UnitCube(opacity: _scale())
+                    : CroppedUnitCube(crop: widget.crop),
               ),
             ),
             Transform.translate(

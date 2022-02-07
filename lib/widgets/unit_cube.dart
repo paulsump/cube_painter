@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 
 class UnitCube extends StatelessWidget {
   final bool wire;
+  final double opacity;
 
   const UnitCube({
     Key? key,
     this.wire = false,
+    this.opacity = 1,
   }) : super(key: key);
 
   @override
@@ -17,7 +19,8 @@ class UnitCube extends StatelessWidget {
         painter: _CubePainter(
             context: context,
             colorsAndPaths: _getColorsAndPaths(Crop.c),
-            wire: wire));
+            wire: wire,
+            opacity: opacity));
   }
 }
 
@@ -58,11 +61,13 @@ class _CubePainter extends CustomPainter {
 
   final BuildContext context;
   final bool wire;
+  final double opacity;
 
   const _CubePainter({
     required this.colorsAndPaths,
     required this.context,
     this.wire = false,
+    this.opacity = 1,
   });
 
   @override
@@ -82,7 +87,7 @@ class _CubePainter extends CustomPainter {
       canvas.drawPath(
           colorAndPath[1],
           Paint()
-            ..color = colorAndPath[0]
+            ..color = colorAndPath[0].withOpacity(opacity)
             ..style = style);
     }
   }
