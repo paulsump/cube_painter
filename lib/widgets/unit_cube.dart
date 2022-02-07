@@ -29,7 +29,7 @@ class CroppedUnitCube extends StatelessWidget {
 
   const CroppedUnitCube({
     Key? key,
-    this.crop = Crop.c,
+    required this.crop,
   }) : super(key: key);
 
   @override

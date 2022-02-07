@@ -17,7 +17,7 @@ class SimpleCube extends StatelessWidget {
       offset: offset,
       child: info.crop == Crop.c
           ? const UnitCube()
-          : const CroppedUnitCube(),
+          : CroppedUnitCube(crop: info.crop),
     );
   }
 }
