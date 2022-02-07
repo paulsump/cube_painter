@@ -7,6 +7,18 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
+final _gradientBR = LinearGradient(
+  colors: [getColor(Side.t), getColor(Side.br)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+final _gradientBL = LinearGradient(
+  colors: [getColor(Side.bl), getColor(Side.t)],
+  begin: Alignment.bottomLeft,
+  end: Alignment.topRight,
+);
+
 class Grid extends StatelessWidget {
   const Grid({Key? key}) : super(key: key);
 
@@ -37,19 +49,11 @@ class GridPainter extends CustomPainter {
 
     final paintBR = Paint()
       ..style = PaintingStyle.stroke
-      ..shader = LinearGradient(
-        colors: [getColor(Side.t), getColor(Side.br)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ).createShader(rect);
+      ..shader = _gradientBR.createShader(rect);
 
     final paintBL = Paint()
       ..style = PaintingStyle.stroke
-      ..shader = LinearGradient(
-        colors: [getColor(Side.bl), getColor(Side.t)],
-        begin: Alignment.bottomLeft,
-        end: Alignment.topRight,
-      ).createShader(rect);
+      ..shader = _gradientBL.createShader(rect);
 
     // left
     for (int i = 2; i < n; i += 2) {
