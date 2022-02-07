@@ -74,6 +74,7 @@ class _PainterPageState extends State<PainterPage> {
       }
 
       setState(() {});
+      // _save();
     }
   }
 

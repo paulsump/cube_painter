@@ -25,3 +25,4 @@ class CubeInfo {
 
   Map<String, dynamic> toJson() => {'center': center, 'cropIndex': crop.index};
 }
+
