@@ -1,4 +1,5 @@
 import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/simple_cube.dart';
 import 'package:cube_painter/shared/out.dart';
 import 'package:cube_painter/shared/screen_transform.dart';
 import 'package:cube_painter/widgets/brush.dart';
@@ -19,7 +20,8 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final List<Cube> _editBlock = [];
+  final List<Cube> _cubes = [];
+  final List<SimpleCube> _simpleCubes = [];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,8 @@ class _PainterPageState extends State<PainterPage> {
           child: Stack(
             children: [
               const Grid(),
-              ..._editBlock,
+              ..._simpleCubes,
+              ..._cubes,
             ],
           ),
         ),
@@ -55,16 +58,23 @@ class _PainterPageState extends State<PainterPage> {
 
       for (int i = 0; i < n; ++i) {
         //TODO maybe set anim speed
-        _editBlock.add(Cube(
+        _cubes.add(Cube(
           key: UniqueKey(),
           center: takenCubes[i].center,
           crop: takenCubes[i].crop,
           start: (n - i) * t / n,
           end: 1.0,
+          whenComplete: _convertToSimpleCube,
         ));
       }
 
       setState(() {});
     }
+  }
+
+  void _convertToSimpleCube(Cube old) {
+    _simpleCubes.add(SimpleCube(old.center, old.crop));
+    _cubes.remove(old);
+    //no need for setstate 'cause they look the same
   }
 }

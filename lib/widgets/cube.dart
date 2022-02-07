@@ -21,6 +21,8 @@ class Cube extends StatefulWidget {
   //TODO reverse for delete
   // final bool direction;
 
+  final void Function(Cube old)? whenComplete;
+
   const Cube({
     Key? key,
     required this.center,
@@ -28,6 +30,7 @@ class Cube extends StatefulWidget {
     required this.start,
     required this.end,
     this.pingPong = false,
+    this.whenComplete,
   }) : super(key: key);
 
   @override
