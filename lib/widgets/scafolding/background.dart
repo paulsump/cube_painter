@@ -24,7 +24,6 @@ class BackgroundState extends State<Background>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      // duration: const Duration(seconds: 1),
       duration: const Duration(seconds: 80),
       vsync: this,
     )..repeat();
@@ -48,9 +47,8 @@ class BackgroundState extends State<Background>
             return Stack(
               children: [
                 Container(
-                  color: _colorSequence.evaluate(
-                    AlwaysStoppedAnimation(_controller.value),
-                  ),
+                  // color: _colorSequence.evaluate(                    AlwaysStoppedAnimation(_controller.value),),
+                  color: Colors.black,
                 ),
                 widget.child,
               ],
