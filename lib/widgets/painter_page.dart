@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/simple_cube.dart';
 import 'package:cube_painter/shared/out.dart';
@@ -85,8 +83,6 @@ class _PainterPageState extends State<PainterPage> {
     _cubes.remove(old);
     //no need for setstate 'cause they look the same
     // setState(() {    });
-    String json = jsonEncode(_simpleCubes);
-    out(json);
     return () => 'whatever';
   }
 }
