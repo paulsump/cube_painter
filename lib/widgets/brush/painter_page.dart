@@ -142,8 +142,9 @@ class _PainterPageState extends State<PainterPage> {
 
     final cubeGroup = CubeGroup(list);
     String json = jsonEncode(cubeGroup);
-
+    // out('');
     // out(json);
+    // out('');
     return json;
   }
 }
