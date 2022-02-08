@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const noWarn = out;
 
 class CubeStore extends ChangeNotifier {
-  final _cubeGroups = <CubeGroup>[CubeGroup([])];
+  final _cubeGroups = <CubeGroup>[const CubeGroup([])];
 
   bool isFirstTime = true;
   int _currentIndex = 0;

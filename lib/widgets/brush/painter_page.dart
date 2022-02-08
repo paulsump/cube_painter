@@ -185,14 +185,14 @@ class _PainterPageState extends State<PainterPage> {
     return json;
   }
 
-  _createCubesFromGroup(cubeStore) {
-    CubeGroup cubeGroup = cubeStore.getCurrentCubeGroup();
-    for (CubeInfo cubeInfo in cubeGroup.list) {
-      _simpleCubes.add(SimpleCube(
-        info: cubeInfo,
-      ));
-    }
-  }
+  // _createCubesFromGroup(cubeStore) {
+  //   CubeGroup cubeGroup = cubeStore.getCurrentCubeGroup();
+  //   for (CubeInfo cubeInfo in cubeGroup.list) {
+  //     _simpleCubes.add(SimpleCube(
+  //       info: cubeInfo,
+  //     ));
+  //   }
+  // }
 
   void _updateCurrentCubeGroup() {
     final cubeStore = Provider.of<CubeStore>(context, listen: false);
@@ -206,14 +206,14 @@ class _PainterPageState extends State<PainterPage> {
   }
 }
 
-List<SimpleCube> _createCubesFromGroup2(BuildContext context) {
-  final cubeStore = Provider.of<CubeStore>(context, listen: true);
-  CubeGroup cubeGroup = cubeStore.getCurrentCubeGroup();
-  final cubes = <SimpleCube>[];
-  for (CubeInfo cubeInfo in cubeGroup.list) {
-    cubes.add(SimpleCube(
-      info: cubeInfo,
-    ));
-  }
-  return cubes;
-}
+// List<SimpleCube> _createCubesFromGroup2(BuildContext context) {
+//   final cubeStore = Provider.of<CubeStore>(context, listen: true);
+//   CubeGroup cubeGroup = cubeStore.getCurrentCubeGroup();
+//   final cubes = <SimpleCube>[];
+//   for (CubeInfo cubeInfo in cubeGroup.list) {
+//     cubes.add(SimpleCube(
+//       info: cubeInfo,
+//     ));
+//   }
+//   return cubes;
+// }
