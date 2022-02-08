@@ -5,6 +5,7 @@ import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
+import 'package:cube_painter/model/cube_store.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
@@ -14,6 +15,7 @@ import 'package:cube_painter/widgets/cubes/simple_cube.dart';
 import 'package:cube_painter/widgets/scafolding/transformed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 const noWarn = [out, Screen];
 
@@ -28,13 +30,12 @@ class PainterPage extends StatefulWidget {
 
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
+
+  //TODO delete
   final List<SimpleCube> _simpleCubes = [];
 
   // TODO allow change
   final crop = Crop.dl;
-
-  //TODO PROvider
-  final _cubeGroups = <CubeGroup>[];
 
   @override
   void initState() {
@@ -112,17 +113,23 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _loadAllCubeGroups() async {
+    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+
     await for (final json in Assets.loadAll()) {
-      _cubeGroups.add(CubeGroup.fromJson(await json));
-      if (_cubeGroups.length == 1) {
-        _loadCubeGroup(0);
+      cubeStore.add(CubeGroup.fromJson(await json));
+      if (cubeStore.isFirstTime) {
+        cubeStore.isFirstTime = false;
+        _loadCubeGroup();
+        //TODO maybe remove if listing true somewhere?
         setState(() {});
       }
     }
   }
 
-  void _loadCubeGroup(int i) {
-    for (CubeInfo cubeInfo in _cubeGroups[i].list) {
+  void _loadCubeGroup() {
+    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+    return;
+    for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
         info: cubeInfo,
