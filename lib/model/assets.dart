@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 const noWarn = out;
 
 class Assets {
-  static const String folderPath = 'models';
+  static const String folderPath = 'cube_groups';
 
   static loadAll() async {
     final filePaths = await getFilePaths();
