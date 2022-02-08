@@ -1,5 +1,7 @@
 import 'package:cube_painter/buttons/calc_hexagon_points.dart';
 import 'package:cube_painter/buttons/hexagon_painter.dart';
+import 'package:cube_painter/transform/grid_transform.dart';
+import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:flutter/material.dart';
 
 class HexagonButton extends StatefulWidget {
@@ -65,8 +67,8 @@ class _HexagonState extends State<HexagonButton>
                 child: widget.enabled ? Icon(widget.icon) : null,
               ),
             Transform.translate(
-              offset: Offset.zero,
-              //HACK widget.center - toScreen(const Offset(W, H * 2), context),
+              offset: widget.center -
+                  const Offset(W, H * 2) * getZoomScale(context),
               // TODO FIx limit where it won't offset zoom either way when zoomed out too far
               // it's due to gesture clip
               child: GestureDetector(
