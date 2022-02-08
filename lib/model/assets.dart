@@ -8,10 +8,10 @@ const noWarn = out;
 class Assets {
   static const String folderPath = 'cube_groups';
 
-  static loadAll() async {
+  static Stream<Future<Map<String, dynamic>>> loadAll() async* {
     final filePaths = await getFilePaths();
     for (String filePath in filePaths) {
-      await loadSong(filePath);
+      yield loadJson(filePath);
     }
   }
 
@@ -26,12 +26,11 @@ class Assets {
     return fileNames;
   }
 
-  static Future<Map<String, dynamic>> loadSong(String filePath) async {
+  static Future<Map<String, dynamic>> loadJson(String filePath) async {
     final String json = await rootBundle.loadString(filePath);
-    out(json);
     Map<String, dynamic> map = jsonDecode(json);
 
-    out(map);
+    // out(map);
     return map;
   }
 }

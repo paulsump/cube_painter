@@ -1,5 +1,6 @@
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush.dart';
@@ -27,10 +28,11 @@ class _PainterPageState extends State<PainterPage> {
   // TODO allow change
   final crop = Crop.dl;
 
+  final _cubeGroups = <CubeGroup>[];
+
   @override
   void initState() {
-    Assets.loadAll();
-    // _load();
+    _loadAllCubeGroups();
     super.initState();
   }
 
@@ -86,5 +88,11 @@ class _PainterPageState extends State<PainterPage> {
     _simpleCubes.add(SimpleCube(info: old.info));
     _animCubes.remove(old);
     return () => 'whatever';
+  }
+
+  void _loadAllCubeGroups() async {
+    await for (final json in Assets.loadAll()) {
+      _cubeGroups.add(CubeGroup.fromJson(await json));
+    }
   }
 }
