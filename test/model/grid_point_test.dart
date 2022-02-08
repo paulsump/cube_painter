@@ -9,16 +9,19 @@ const testPoint = GridPoint(1, 2);
 
 void main() {
   group('json', () {
+    const testJson = '{"x":1,"y":2}';
+
     test('load', () {
-      Map<String, dynamic> map = jsonDecode('{"x":1,"y":2}');
+      Map<String, dynamic> map = jsonDecode(testJson);
       final newPoint = GridPoint.fromJson(map);
       // out(newPoint);
       expect(testPoint == newPoint, true);
     });
+
     test('save', () {
-      String json = jsonEncode(testPoint);
-      // out(json);
-      expect('{"x":1,"y":2}' == json, true);
+      String newJson = jsonEncode(testPoint);
+      // out(newJson);
+      expect(testJson == newJson, true);
     });
   });
 }

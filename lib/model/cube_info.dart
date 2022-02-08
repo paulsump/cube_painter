@@ -24,5 +24,4 @@ class CubeInfo {
         crop = Crop.values[json['cropIndex']];
 
   Map<String, dynamic> toJson() => {'center': center, 'cropIndex': crop.index};
-
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
@@ -20,24 +22,24 @@ void main() {
   const testCubes = <CubeInfo>[testCube, testCube2];
 
   group('json', () {
+    const testJson =
+        '{"list":[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]}';
+
     test('load', () {
-      CubeGroup newCubeInfos = CubeGroup.fromJson(
-          '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]');
+      Map<String, dynamic> map = jsonDecode(testJson);
+      CubeGroup newCubeGroup = CubeGroup.fromJson(map);
 
       int i = 0;
-      for (final newCube in newCubeInfos.list) {
+      for (final newCube in newCubeGroup.list) {
         expect(testCubes[i++] == newCube, true);
       }
     });
 
     test('save', () {
-      const cubeInfos = CubeGroup(testCubes);
-      String json = cubeInfos.toJson();
-      // out(json);
-      expect(
-          '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]' ==
-              json,
-          true);
+      const cubeGroup = CubeGroup(testCubes);
+      String newJson = jsonEncode(cubeGroup);
+      expect(testJson, equals(newJson));
+      // expect(testJson== newJson,true);
     });
   });
 }

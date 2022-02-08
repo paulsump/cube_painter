@@ -13,17 +13,28 @@ class CubeGroup {
   String toString() => '$list';
 
   /// for load
-  CubeGroup.fromJson(String json) : list = _listFromJson(json).toList();
+  CubeGroup.fromJson(Map<String, dynamic> json)
+      // : list = List.generate(
+      //     json['list'].length,
+      //     (i) => CubeInfo.fromJson(json['list'][i]),
+      //   );
+      : list = _listFromJson(json).toList();
 
   /// for load
-  static Iterable<CubeInfo> _listFromJson(String json) sync* {
-    for (final cubeInfoObject in jsonDecode(json)) {
+  static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
+    for (final cubeInfoObject in json['list']) {
       yield CubeInfo.fromJson(cubeInfoObject);
     }
   }
 
+  // static Iterable<CubeInfo> _listFromJson(String json) sync* {
+  //   for (final cubeInfoObject in jsonDecode(json)) {
+  //     yield CubeInfo.fromJson(cubeInfoObject);
+  //   }
+  // }
+
   /// for save
-  String toJson() => _jsonFromList(list);
+  Map<String, dynamic> toJson() => {'list': list};
 
   /// for save
   static String _jsonFromList(List<CubeInfo> cubes) {

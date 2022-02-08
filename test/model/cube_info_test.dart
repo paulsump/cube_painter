@@ -15,9 +15,9 @@ void main() {
   const testCube = CubeInfo(center: testPoint, crop: testCrop);
 
   group('json', () {
+    const testJson = '{"center":{"x":1,"y":2},"cropIndex":5}';
     test('load', () {
-      Map<String, dynamic> map =
-          jsonDecode('{"center":{"x":1,"y":2},"cropIndex":5}');
+      Map<String, dynamic> map = jsonDecode(testJson);
 
       final newCube = CubeInfo.fromJson(map);
       // out(newCube);
@@ -25,9 +25,9 @@ void main() {
     });
 
     test('save', () {
-      String json = jsonEncode(testCube);
-      // out(json);
-      expect('{"center":{"x":1,"y":2},"cropIndex":5}' == json, true);
+      String newJson = jsonEncode(testCube);
+      // out(newJson);
+      expect(testJson == newJson, true);
     });
   });
 }
