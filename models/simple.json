@@ -1,0 +1,16 @@
+[
+  {
+    "center": {
+      "x": 1,
+      "y": 2
+    },
+    "cropIndex": 5
+  },
+  {
+    "center": {
+      "x": 3,
+      "y": 4
+    },
+    "cropIndex": 3
+  }
+]
