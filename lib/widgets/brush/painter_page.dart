@@ -96,6 +96,7 @@ class _PainterPageState extends State<PainterPage> {
       _cubeGroups.add(CubeGroup.fromJson(await json));
       if (_cubeGroups.length == 1) {
         _loadCubeGroup(0);
+        setState(() {});
       }
     }
   }
