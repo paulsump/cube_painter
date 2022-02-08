@@ -101,8 +101,8 @@ class _PainterPageState extends State<PainterPage> {
         HexagonButton(
           icon: Icons.save_alt_rounded,
           onPressed: () {
+            _updateCurrentCubeGroup();
             Clipboard.setData(ClipboardData(text: _getJson()));
-            out(_simpleCubes.length);
           },
           center: Offset(2 * x * 3, Y - 2 * y),
           radius: radius,
@@ -192,6 +192,17 @@ class _PainterPageState extends State<PainterPage> {
       _simpleCubes.add(SimpleCube(
         info: cubeInfo,
       ));
+    }
+  }
+
+  void _updateCurrentCubeGroup() {
+    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+
+    final list = cubeStore.getCurrentCubeGroup().list;
+    list.clear();
+
+    for (final cube in _simpleCubes) {
+      list.add(cube.info);
     }
   }
 }
