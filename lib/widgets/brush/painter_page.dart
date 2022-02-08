@@ -43,7 +43,6 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-    out('tin');
     // TODO instead of clip, use maths to not draw widgets outside screen
 
     const double radius = 40;
@@ -126,7 +125,7 @@ class _PainterPageState extends State<PainterPage> {
 
   void _loadCubeGroup() {
     final cubeStore = Provider.of<CubeStore>(context, listen: false);
-    return;
+
     for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
