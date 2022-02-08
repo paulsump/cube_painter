@@ -70,9 +70,39 @@ class _PainterPageState extends State<PainterPage> {
           crop: crop,
         ),
         HexagonButton(
+          icon: Icons.arrow_back,
+          onPressed: () {
+            // final zoom = Provider.of<Zoom>(context, listen: false);
+            // zoom.increment(1);
+            final cubeStore = Provider.of<CubeStore>(context, listen: false);
+            cubeStore.increment(-1);
+            _simpleCubes.clear();
+            _loadCubeGroup();
+          },
+          center: Offset(2 * x * 1, Y - 2 * y),
+          radius: radius,
+        ),
+        HexagonButton(
+          icon: Icons.forward,
+          onPressed: () {
+            setState(() {
+              // final zoom = Provider.of<Zoom>(context, listen: false);
+              // zoom.increment(-1);
+              final cubeStore = Provider.of<CubeStore>(context, listen: false);
+              cubeStore.increment(1);
+              _simpleCubes.clear();
+              _loadCubeGroup();
+              // setState(() {});
+            });
+          },
+          center: Offset(2 * x * 2, Y - 2 * y),
+          radius: radius,
+        ),
+        HexagonButton(
           icon: Icons.save_alt_rounded,
           onPressed: () {
             Clipboard.setData(ClipboardData(text: _getJson()));
+            out(_simpleCubes.length);
           },
           center: Offset(2 * x * 3, Y - 2 * y),
           radius: radius,
@@ -120,14 +150,14 @@ class _PainterPageState extends State<PainterPage> {
         setState(() {});
       }
     }
-    cubeStore.notifyListeners();
+    // cubeStore.notifyListeners();
   }
 
   void _loadCubeGroup() {
     final cubeStore = Provider.of<CubeStore>(context, listen: false);
 
     // _createCubesFromGroup(cubeStore);
-
+    out('kj');
     for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
