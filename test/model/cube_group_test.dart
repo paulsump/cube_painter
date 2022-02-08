@@ -1,6 +1,6 @@
 import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
-import 'package:cube_painter/model/cube_infos.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,7 +21,7 @@ void main() {
 
   group('json', () {
     test('load', () {
-      CubeInfos newCubeInfos = CubeInfos.fromJson(
+      CubeGroup newCubeInfos = CubeGroup.fromJson(
           '[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]');
 
       int i = 0;
@@ -31,7 +31,7 @@ void main() {
     });
 
     test('save', () {
-      const cubeInfos = CubeInfos(testCubes);
+      const cubeInfos = CubeGroup(testCubes);
       String json = cubeInfos.toJson();
       // out(json);
       expect(

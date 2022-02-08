@@ -2,20 +2,18 @@ import 'dart:convert';
 
 import 'package:cube_painter/model/cube_info.dart';
 
-/// TODO USE As the main model?
-/// it might end up being the place for storing the positions
-/// either way it with be used
-/// for loading and saving all the cube positions and their info
-class CubeInfos {
+/// For loading and saving all the cube positions and their info
+/// Loaded from a json file.
+class CubeGroup {
   final List<CubeInfo> list;
 
-  const CubeInfos(this.list);
+  const CubeGroup(this.list);
 
   @override
   String toString() => '$list';
 
   /// for load
-  CubeInfos.fromJson(String json) : list = _listFromJson(json).toList();
+  CubeGroup.fromJson(String json) : list = _listFromJson(json).toList();
 
   /// for load
   static Iterable<CubeInfo> _listFromJson(String json) sync* {
