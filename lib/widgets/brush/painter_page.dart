@@ -11,6 +11,7 @@ import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
+import 'package:cube_painter/widgets/cubes/simple_cube.dart';
 import 'package:cube_painter/widgets/scafolding/transformed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +30,7 @@ class PainterPage extends StatefulWidget {
 
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
+  final List<SimpleCube> _simpleCubes = [];
 
   // TODO allow change
   final crop = Crop.dl;
@@ -56,6 +58,7 @@ class _PainterPageState extends State<PainterPage> {
         Transformed(
           child: Stack(
             children: [
+              ..._simpleCubes,
               ..._animCubes,
             ],
           ),
@@ -102,12 +105,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   dynamic _convertToSimpleCube(AnimCube old) {
-    final cubeStore = Provider.of<CubeStore>(context, listen: false);
-//TODO REplace (addning old)
-    final list = cubeStore.getCurrentCubeGroup().list;
-    list.add(old.info);
-    cubeStore.replace(cubeStore.getCurrentCubeGroup());
-// cubeStore.notifyListeners();
+    _simpleCubes.add(SimpleCube(info: old.info));
     _animCubes.remove(old);
     return () => 'whatever';
   }

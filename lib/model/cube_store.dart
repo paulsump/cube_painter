@@ -16,9 +16,9 @@ class CubeStore extends ChangeNotifier {
     }
     _cubeGroups.add(cubeGroup);
   }
-
-  void replace(CubeGroup cubeGroup) {
-    _cubeGroups.clear();
-    _cubeGroups.add(cubeGroup);
-  }
+//
+// void replace(CubeGroup cubeGroup) {
+//   _cubeGroups.clear();
+//   _cubeGroups.add(cubeGroup);
+// }
 }
