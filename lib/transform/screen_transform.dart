@@ -14,6 +14,8 @@ Offset screenToUnit(Offset offset, BuildContext context) {
   return Offset(offset.dx, offset.dy - Screen.height) / getZoomScale(context);
 }
 
+void clip(Canvas canvas) => canvas.clipRect(Screen.rect);
+
 // TODO Rename.
 // Can't remove by putting in Transformed due to screenToUnit() needing it
 class Screen {

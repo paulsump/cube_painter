@@ -1,8 +1,10 @@
+import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
@@ -41,6 +43,13 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     // TODO instead of clip, use maths to not draw widgets outside screen
 
+    const double radius = 40;
+
+    const double x = radius * W;
+    const double y = radius * H;
+
+    final Y = Screen.height;
+
     return Stack(
       children: [
         Transformed(
@@ -58,6 +67,14 @@ class _PainterPageState extends State<PainterPage> {
           onTapUp: _takeCubes,
           erase: false,
           crop: crop,
+        ),
+        HexagonButton(
+          icon: Icons.save_alt_rounded,
+          onPressed: () {
+//TODO            Clipboard.setData(ClipboardData(text: csv));
+          },
+          center: Offset(2 * x * 3, Y - 2 * y),
+          radius: radius,
         ),
       ],
     );
