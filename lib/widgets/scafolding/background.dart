@@ -42,10 +42,10 @@ class BackgroundState extends State<Background>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        return Scaffold(
-          backgroundColor: _colorSequence
+        return Container(
+          color: _colorSequence
               .evaluate(AlwaysStoppedAnimation(_controller.value)),
-          body: SafeArea(
+          child: SafeArea(
             child: Stack(
               children: [
                 // Container(
