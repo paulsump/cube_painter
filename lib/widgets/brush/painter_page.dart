@@ -28,12 +28,20 @@ class PainterPage extends StatefulWidget {
   State<PainterPage> createState() => _PainterPageState();
 }
 
+enum Mode { add, erase, crop, zoomPan }
+
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
   // TODO allow change
   final crop = Crop.dl;
+
+  void _setMode(Mode mode) {
+    _mode = mode;
+  }
+
+  var _mode = Mode.add;
 
   @override
   void initState() {
@@ -51,6 +59,17 @@ class _PainterPageState extends State<PainterPage> {
     const double y = radius * H;
 
     final Y = Screen.height;
+    final modeIcons = [
+      Icons.add,
+      Icons.remove,
+      Icons.zoom_in_rounded,
+      Icons.content_cut,
+    ];
+    // [Icons.pinch_rounded,pan_tool_alt_rounded zoom_in_map_rounded, () => _forward(context)],
+    final pressedIconFunks = [
+      [Icons.forward, () => _forward(context)],
+      [Icons.save_alt_rounded, _saveToClipboard],
+    ];
 
     return Stack(
       children: [
@@ -69,46 +88,40 @@ class _PainterPageState extends State<PainterPage> {
           erase: false,
           crop: crop,
         ),
-        HexagonButton(
-          icon: Icons.arrow_back,
-          onPressed: () {
-            // final zoom = Provider.of<Zoom>(context, listen: false);
-            // zoom.increment(1);
-            final cubeStore = Provider.of<CubeStore>(context, listen: false);
-            cubeStore.increment(-1);
-            _simpleCubes.clear();
-            _loadCubeGroup();
-          },
-          center: Offset(2 * x * 1, Y - 2 * y),
-          radius: radius,
-        ),
-        HexagonButton(
-          icon: Icons.forward,
-          onPressed: () {
-            setState(() {
-              // final zoom = Provider.of<Zoom>(context, listen: false);
-              // zoom.increment(-1);
-              final cubeStore = Provider.of<CubeStore>(context, listen: false);
-              cubeStore.increment(1);
-              _simpleCubes.clear();
-              _loadCubeGroup();
-              // setState(() {});
-            });
-          },
-          center: Offset(2 * x * 2, Y - 2 * y),
-          radius: radius,
-        ),
-        HexagonButton(
-          icon: Icons.save_alt_rounded,
-          onPressed: () {
-            _updateCurrentCubeGroup();
-            Clipboard.setData(ClipboardData(text: _getJson()));
-          },
-          center: Offset(2 * x * 3, Y - 2 * y),
-          radius: radius,
-        ),
+        for (int i = 0; i < 4; ++i)
+          HexagonButton(
+            icon: modeIcons[i],
+            onRadioPressed: () => _setMode(Mode.values[i]),
+            center: Offset(2 * x * i + x / 2, Y - 2 * y),
+            radius: radius,
+          ),
+        for (int i = 0; i < 2; ++i)
+          HexagonButton(
+            icon: pressedIconFunks[i][0] as IconData,
+            onPressed: pressedIconFunks[i][1] as VoidCallback,
+            center: Offset(2 * x * (4 + i) + x / 2, Y - 2 * y),
+            radius: radius,
+          ),
       ],
     );
+  }
+
+  void _saveToClipboard() {
+    _updateCurrentCubeGroup();
+    Clipboard.setData(ClipboardData(text: _getJson()));
+  }
+
+  void _forward(BuildContext context) {
+    // final zoom = Provider.of<Zoom>(context, listen: false);
+    // zoom.increment(-1);
+
+    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+    cubeStore.increment(1);
+
+    _simpleCubes.clear();
+    _loadCubeGroup();
+
+    setState(() {});
   }
 
   void _takeCubes(List<AnimCube> takenCubes) {

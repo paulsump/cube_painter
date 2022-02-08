@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class HexagonButton extends StatefulWidget {
   final IconData? icon;
-  final void Function()? onPressed;
+  final VoidCallback? onPressed;
+  final VoidCallback? onRadioPressed;
 
   final Offset center;
   final double radius;
@@ -17,6 +18,7 @@ class HexagonButton extends StatefulWidget {
     Key? key,
     this.icon,
     this.onPressed,
+    this.onRadioPressed,
     required this.center,
     required this.radius,
     this.enabled = true,
