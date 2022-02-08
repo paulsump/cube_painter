@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 /// animated background
 class Background extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
 
   const Background({
     Key? key,
-    required this.child,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class BackgroundState extends State<Background>
                   ),
                   // color: Colors.black,
                 ),
-                widget.child,
+                // widget.child,
               ],
             );
           },
