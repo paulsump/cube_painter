@@ -19,6 +19,14 @@ final _gradientBL = LinearGradient(
   end: Alignment.topRight,
 );
 
+final paintBR = Paint()
+  ..style = PaintingStyle.stroke
+  ..color = getColor(Side.br);
+
+final paintBL = Paint()
+  ..style = PaintingStyle.stroke
+  ..color = getColor(Side.bl);
+
 class Grid extends StatelessWidget {
   const Grid({Key? key}) : super(key: key);
 
@@ -42,18 +50,18 @@ class GridPainter extends CustomPainter {
     int n = _getN(Screen.height / H);
     const y = -H;
 
-    final rect = Rect.fromPoints(
-      Offset.zero,
-      Offset(n * W, y * n),
-    );
+    // final rect = Rect.fromPoints(
+    //   Offset.zero,
+    //   Offset(n * W, y * n),
+    // );
 
-    final paintBR = Paint()
-      ..style = PaintingStyle.stroke
-      ..shader = _gradientBR.createShader(rect);
-
-    final paintBL = Paint()
-      ..style = PaintingStyle.stroke
-      ..shader = _gradientBL.createShader(rect);
+    // final paintBR = Paint()
+    //   ..style = PaintingStyle.stroke
+    //   ..shader = _gradientBR.createShader(rect);
+    //
+    // final paintBL = Paint()
+    //   ..style = PaintingStyle.stroke
+    //   ..shader = _gradientBL.createShader(rect);
 
     const int step = 2;
     // left
