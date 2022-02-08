@@ -39,6 +39,9 @@ class _PainterPageState extends State<PainterPage> {
 
   void _setMode(Mode mode) {
     _mode = mode;
+
+    out(_mode);
+    setState(() {});
   }
 
   var _mode = Mode.add;
@@ -91,6 +94,7 @@ class _PainterPageState extends State<PainterPage> {
         for (int i = 0; i < 4; ++i)
           HexagonButton(
             icon: modeIcons[i],
+            isRadioDown: i == _mode.index,
             onRadioPressed: () => _setMode(Mode.values[i]),
             center: Offset(2 * x * i + x / 2, Y - 2 * y),
             radius: radius,
@@ -154,6 +158,7 @@ class _PainterPageState extends State<PainterPage> {
 
   void _loadAllCubeGroups() async {
     final cubeStore = Provider.of<CubeStore>(context, listen: false);
+
     await for (final json in Assets.loadAll()) {
       cubeStore.add(CubeGroup.fromJson(await json));
       if (cubeStore.isFirstTime) {

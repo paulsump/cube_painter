@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 class HexagonButton extends StatefulWidget {
   final IconData? icon;
   final VoidCallback? onPressed;
+
   final VoidCallback? onRadioPressed;
+  final bool? isRadioDown;
 
   final Offset center;
   final double radius;
@@ -18,6 +20,7 @@ class HexagonButton extends StatefulWidget {
     Key? key,
     this.icon,
     this.onPressed,
+    this.isRadioDown,
     this.onRadioPressed,
     required this.center,
     required this.radius,
@@ -40,7 +43,13 @@ class _HexagonState extends State<HexagonButton>
       vsync: this,
     );
     _controller.value = 1;
+
+    if (_isRadio && widget.isRadioDown!) {
+      _controller.value = 0;
+    }
   }
+
+  bool get _isRadio => widget.onRadioPressed != null;
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +80,19 @@ class _HexagonState extends State<HexagonButton>
             Transform.translate(
               offset: widget.center -
                   const Offset(W, H * 2) * getZoomScale(context),
-              // TODO FIx limit where it won't offset zoom either way when zoomed out too far
-              // it's due to gesture clip
+              // TODO fix inaccuracy with gesture clip
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                   if (widget.enabled) {
-                    _controller.reset();
-                    _controller.forward();
+                    if (_isRadio) {
+                      _controller.reverse();
+                    } else {
+                      _controller.reset();
+                      _controller.forward();
+                    }
                     widget.onPressed?.call();
+                    widget.onRadioPressed?.call();
                   }
                 },
               ),
