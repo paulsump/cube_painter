@@ -13,8 +13,10 @@ class CubePainterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ZoomPan(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ZoomPan()),
+      ],
       child: const MaterialApp(
         title: 'Cube Painter',
         home: Background(
