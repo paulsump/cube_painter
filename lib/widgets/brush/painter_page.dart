@@ -126,6 +126,8 @@ class _PainterPageState extends State<PainterPage> {
   void _loadCubeGroup() {
     final cubeStore = Provider.of<CubeStore>(context, listen: false);
 
+    // _createCubesFromGroup(cubeStore);
+
     for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
@@ -153,4 +155,25 @@ class _PainterPageState extends State<PainterPage> {
     // out('');
     return json;
   }
+
+  _createCubesFromGroup(cubeStore) {
+    CubeGroup cubeGroup = cubeStore.getCurrentCubeGroup();
+    for (CubeInfo cubeInfo in cubeGroup.list) {
+      _simpleCubes.add(SimpleCube(
+        info: cubeInfo,
+      ));
+    }
+  }
+}
+
+List<SimpleCube> _createCubesFromGroup2(BuildContext context) {
+  final cubeStore = Provider.of<CubeStore>(context, listen: true);
+  CubeGroup cubeGroup = cubeStore.getCurrentCubeGroup();
+  final cubes = <SimpleCube>[];
+  for (CubeInfo cubeInfo in cubeGroup.list) {
+    cubes.add(SimpleCube(
+      info: cubeInfo,
+    ));
+  }
+  return cubes;
 }

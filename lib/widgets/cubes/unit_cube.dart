@@ -56,7 +56,7 @@ class _CubePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    _draw(canvas, PaintingStyle.stroke);
+    // _draw(canvas, PaintingStyle.stroke);
 
     if (!wire) {
       _draw(canvas, PaintingStyle.fill);
@@ -71,7 +71,7 @@ class _CubePainter extends CustomPainter {
       canvas.drawPath(
           colorAndPath[1],
           Paint()
-            ..color = colorAndPath[0].withOpacity(opacity)
+            ..color = colorAndPath[0] //.withOpacity(opacity)
             ..style = style);
     }
   }

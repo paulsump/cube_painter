@@ -21,6 +21,11 @@ class CubePainterApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         title: 'Cube Painter',
+        // home: Scaffold(
+        //   body: SafeArea(
+        //     child: HomePage(),
+        //   ),
+        // ),
         home: Background(
           child: HomePage(),
         ),
@@ -28,4 +33,3 @@ class CubePainterApp extends StatelessWidget {
     );
   }
 }
-
