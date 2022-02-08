@@ -21,13 +21,13 @@ void main() {
 
       final newCube = CubeInfo.fromJson(map);
       // out(newCube);
-      expect(testCube == newCube, true);
+      expect(testCube, equals(newCube));
     });
 
     test('save', () {
       String newJson = jsonEncode(testCube);
       // out(newJson);
-      expect(testJson == newJson, true);
+      expect(testJson, equals(newJson));
     });
   });
 }

@@ -14,12 +14,12 @@ void main() {
       out(index);
       final newCrop = Crop.values[index];
       out(newCrop);
-      expect(testCrop == newCrop, true);
+      expect(testCrop, equals(newCrop));
     });
     test('save', () {
       String json = jsonEncode(testCrop.index);
       out(json);
-      expect('5' == json, true);
+      expect('5', equals(json));
     });
   });
 }

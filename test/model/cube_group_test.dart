@@ -31,7 +31,7 @@ void main() {
 
       int i = 0;
       for (final newCube in newCubeGroup.list) {
-        expect(testCubes[i++] == newCube, true);
+        expect(testCubes[i++], equals(newCube));
       }
     });
 
@@ -39,7 +39,6 @@ void main() {
       const cubeGroup = CubeGroup(testCubes);
       String newJson = jsonEncode(cubeGroup);
       expect(testJson, equals(newJson));
-      // expect(testJson== newJson,true);
     });
   });
 }

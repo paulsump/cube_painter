@@ -15,13 +15,13 @@ void main() {
       Map<String, dynamic> map = jsonDecode(testJson);
       final newPoint = GridPoint.fromJson(map);
       // out(newPoint);
-      expect(testPoint == newPoint, true);
+      expect(testPoint, equals(newPoint));
     });
 
     test('save', () {
       String newJson = jsonEncode(testPoint);
       // out(newJson);
-      expect(testJson == newJson, true);
+      expect(testJson, equals(newJson));
     });
   });
 }
