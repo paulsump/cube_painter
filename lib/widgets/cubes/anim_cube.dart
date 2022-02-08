@@ -74,11 +74,11 @@ class _AnimCubeState extends State<AnimCube>
 
   @override
   Widget build(BuildContext context) {
-    // out(offset);
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
         widget.scale = _scale();
+
         return Stack(
           children: [
             Transform.translate(
@@ -91,10 +91,10 @@ class _AnimCubeState extends State<AnimCube>
                 ),
               ),
             ),
-            Transform.translate(
-              offset: offset,
-              child: const UnitCube(wire: true),
-            ),
+            // Transform.translate(
+            //   offset: offset,
+            //   child: const UnitCube(wire: true),
+            // ),
           ],
         );
       },
