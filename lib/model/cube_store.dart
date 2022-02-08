@@ -1,5 +1,8 @@
 import 'package:cube_painter/model/cube_group.dart';
+import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 class CubeStore extends ChangeNotifier {
   final _cubeGroups = <CubeGroup>[CubeGroup([])];

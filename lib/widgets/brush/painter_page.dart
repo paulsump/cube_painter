@@ -157,7 +157,6 @@ class _PainterPageState extends State<PainterPage> {
     final cubeStore = Provider.of<CubeStore>(context, listen: false);
 
     // _createCubesFromGroup(cubeStore);
-    out('kj');
     for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
