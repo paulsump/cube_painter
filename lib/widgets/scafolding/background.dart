@@ -39,14 +39,14 @@ class BackgroundState extends State<Background>
   Widget build(BuildContext context) {
     Screen.init(context);
 
-    return Scaffold(
-      backgroundColor:
-          _colorSequence.evaluate(AlwaysStoppedAnimation(_controller.value)),
-      body: SafeArea(
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            return Stack(
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Scaffold(
+          backgroundColor: _colorSequence
+              .evaluate(AlwaysStoppedAnimation(_controller.value)),
+          body: SafeArea(
+            child: Stack(
               children: [
                 // Container(
                 //   color: _colorSequence.evaluate(
@@ -56,10 +56,10 @@ class BackgroundState extends State<Background>
                 // ),
                 widget.child,
               ],
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
