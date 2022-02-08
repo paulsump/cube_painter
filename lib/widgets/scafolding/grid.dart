@@ -63,9 +63,8 @@ class GridPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..shader = _gradientBL.createShader(rect);
 
-    const int step = 2;
     // left
-    for (int i = 2; i < n; i += 2 * step) {
+    for (int i = 2; i < n; i += 2) {
       // lower
       canvas.drawLine(
         Offset(W * i, 0),
@@ -82,7 +81,7 @@ class GridPainter extends CustomPainter {
     // n = _getN(Screen.width / W);
 
     // right
-    for (int i = 0; i < n; i += 2 * step) {
+    for (int i = 0; i < n; i += 2) {
       // lower
       canvas.drawLine(
         Offset(W * i, 0),
