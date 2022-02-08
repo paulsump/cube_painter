@@ -11,7 +11,6 @@ import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:cube_painter/widgets/cubes/simple_cube.dart';
-import 'package:cube_painter/widgets/scafolding/grid.dart';
 import 'package:cube_painter/widgets/scafolding/transformed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,6 +33,7 @@ class _PainterPageState extends State<PainterPage> {
   // TODO allow change
   final crop = Crop.dl;
 
+  //TODO PROvider
   final _cubeGroups = <CubeGroup>[];
 
   @override
@@ -58,7 +58,7 @@ class _PainterPageState extends State<PainterPage> {
         Transformed(
           child: Stack(
             children: [
-              const Grid(),
+              // const Grid(),
               ..._simpleCubes,
               ..._animCubes,
             ],

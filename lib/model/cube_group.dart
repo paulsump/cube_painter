@@ -21,3 +21,4 @@ class CubeGroup {
 
   Map<String, dynamic> toJson() => {'list': list};
 }
+
