@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
@@ -12,6 +14,7 @@ import 'package:cube_painter/widgets/cubes/simple_cube.dart';
 import 'package:cube_painter/widgets/scafolding/grid.dart';
 import 'package:cube_painter/widgets/scafolding/transformed.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 const noWarn = [out, Screen];
 
@@ -71,7 +74,7 @@ class _PainterPageState extends State<PainterPage> {
         HexagonButton(
           icon: Icons.save_alt_rounded,
           onPressed: () {
-//TODO            Clipboard.setData(ClipboardData(text: csv));
+            Clipboard.setData(ClipboardData(text: _getJson()));
           },
           center: Offset(2 * x * 3, Y - 2 * y),
           radius: radius,
@@ -128,5 +131,19 @@ class _PainterPageState extends State<PainterPage> {
         whenComplete: _convertToSimpleCube,
       ));
     }
+  }
+
+  String _getJson() {
+    final list = <CubeInfo>[];
+
+    for (final cube in _simpleCubes) {
+      list.add(cube.info);
+    }
+
+    final cubeGroup = CubeGroup(list);
+    String json = jsonEncode(cubeGroup);
+
+    // out(json);
+    return json;
   }
 }

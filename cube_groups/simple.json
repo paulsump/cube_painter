@@ -2,17 +2,157 @@
   "list": [
     {
       "center": {
-        "x": 1,
-        "y": 2
+        "x": 6,
+        "y": 13
       },
-      "cropIndex": 5
+      "cropIndex": 0
     },
     {
       "center": {
-        "x": 3,
-        "y": 4
+        "x": 6,
+        "y": 14
       },
-      "cropIndex": 3
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 6,
+        "y": 15
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 6,
+        "y": 16
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 6,
+        "y": 17
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 6,
+        "y": 18
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 6,
+        "y": 19
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 6,
+        "y": 20
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 6,
+        "y": 21
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 15,
+        "y": 21
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 14,
+        "y": 20
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 13,
+        "y": 19
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 12,
+        "y": 18
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 11,
+        "y": 17
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 10,
+        "y": 16
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 9,
+        "y": 15
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 8,
+        "y": 14
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 8,
+        "y": 21
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 9,
+        "y": 21
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 10,
+        "y": 21
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 11,
+        "y": 21
+      },
+      "cropIndex": 0
+    },
+    {
+      "center": {
+        "x": 12,
+        "y": 21
+      },
+      "cropIndex": 0
     }
   ]
 }
