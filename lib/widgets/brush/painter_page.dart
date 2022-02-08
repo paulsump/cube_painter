@@ -1,3 +1,4 @@
+import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
@@ -28,7 +29,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   void initState() {
-    // Assets.loadAll();
+    Assets.loadAll();
     // _load();
     super.initState();
   }

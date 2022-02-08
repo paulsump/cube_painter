@@ -15,20 +15,21 @@ class Assets {
     }
   }
 
-  static Future<List<String>> getFilePaths() async {
+  static Future<Iterable<String>> getFilePaths() async {
     final manifestJson = await rootBundle.loadString('AssetManifest.json');
 
-    final fileNames = json.decode(manifestJson).keys.where(
-          (String key) => key.startsWith(folderPath),
-        );
+    final fileNames = jsonDecode(manifestJson)
+        .keys
+        .where((String key) => key.startsWith(folderPath));
 
-    out(fileNames);
+    // out(fileNames);
     return fileNames;
   }
 
   static Future<Map<String, dynamic>> loadSong(String filePath) async {
-    final String response = await rootBundle.loadString(filePath);
-    final map = await json.decode(response);
+    final String json = await rootBundle.loadString(filePath);
+    out(json);
+    Map<String, dynamic> map = jsonDecode(json);
 
     out(map);
     return map;
