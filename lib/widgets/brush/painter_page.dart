@@ -1,6 +1,7 @@
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_group.dart';
+import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush.dart';
@@ -93,6 +94,21 @@ class _PainterPageState extends State<PainterPage> {
   void _loadAllCubeGroups() async {
     await for (final json in Assets.loadAll()) {
       _cubeGroups.add(CubeGroup.fromJson(await json));
+      if (_cubeGroups.length == 1) {
+        _loadCubeGroup(0);
+      }
+    }
+  }
+
+  void _loadCubeGroup(int i) {
+    for (CubeInfo cubeInfo in _cubeGroups[i].list) {
+      _animCubes.add(AnimCube(
+        key: UniqueKey(),
+        info: cubeInfo,
+        start: 0,
+        end: 1.0,
+        whenComplete: _convertToSimpleCube,
+      ));
     }
   }
 }
