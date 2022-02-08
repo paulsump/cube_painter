@@ -1,30 +1,29 @@
 import 'package:cube_painter/buttons/calc_hexagon_points.dart';
 import 'package:cube_painter/buttons/hexagon_painter.dart';
+import 'package:cube_painter/buttons/mode_holder.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HexagonButton extends StatefulWidget {
   final IconData? icon;
   final VoidCallback? onPressed;
 
-  final VoidCallback? onRadioPressed;
-  final bool? isRadioDown;
-
   final Offset center;
   final double radius;
 
   final bool enabled;
+  final Mode? mode;
 
   const HexagonButton({
     Key? key,
     this.icon,
     this.onPressed,
-    this.isRadioDown,
-    this.onRadioPressed,
     required this.center,
     required this.radius,
     this.enabled = true,
+    this.mode,
   }) : super(key: key);
 
   @override
@@ -44,12 +43,12 @@ class _HexagonState extends State<HexagonButton>
     );
     _controller.value = 1;
 
-    if (_isRadio && widget.isRadioDown!) {
+    final modeHolder = Provider.of<ModeHolder>(context, listen: false);
+
+    if (widget.mode == modeHolder.mode) {
       _controller.value = 0;
     }
   }
-
-  bool get _isRadio => widget.onRadioPressed != null;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +67,7 @@ class _HexagonState extends State<HexagonButton>
               painter: HexagonPainter(
                 context: context,
                 path: path,
-                alpha: _controller.value,
+                alpha: _getAlpha(context),
               ),
             ),
             // Line(widget.center - o * 2, widget.center + o * 2),
@@ -85,14 +84,17 @@ class _HexagonState extends State<HexagonButton>
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                   if (widget.enabled) {
-                    if (_isRadio) {
+                    if (widget.mode != null) {
+                      final modeHolder =
+                          Provider.of<ModeHolder>(context, listen: false);
+
+                      modeHolder.mode = widget.mode!;
                       _controller.reverse();
                     } else {
                       _controller.reset();
                       _controller.forward();
                     }
                     widget.onPressed?.call();
-                    widget.onRadioPressed?.call();
                   }
                 },
               ),
@@ -101,5 +103,17 @@ class _HexagonState extends State<HexagonButton>
         );
       },
     );
+  }
+
+  double _getAlpha(BuildContext context) {
+    double alpha = _controller.value;
+    if (widget.mode != null) {
+      final modeHolder = Provider.of<ModeHolder>(context, listen: true);
+      if (modeHolder.mode != widget.mode!) {
+        alpha = 1;
+        // setState(() {});
+      }
+    }
+    return alpha;
   }
 }

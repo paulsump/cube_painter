@@ -1,3 +1,4 @@
+import 'package:cube_painter/buttons/mode_holder.dart';
 import 'package:cube_painter/home_page.dart';
 import 'package:cube_painter/model/cube_store.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
@@ -18,6 +19,7 @@ class CubePainterApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ZoomPan()),
         ChangeNotifierProvider(create: (_) => CubeStore()),
+        ChangeNotifierProvider(create: (_) => ModeHolder()),
       ],
       child: const MaterialApp(
         title: 'Cube Painter',

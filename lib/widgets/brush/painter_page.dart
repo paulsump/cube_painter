@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/mode_holder.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_group.dart';
@@ -28,23 +29,12 @@ class PainterPage extends StatefulWidget {
   State<PainterPage> createState() => _PainterPageState();
 }
 
-enum Mode { add, erase, crop, zoomPan }
-
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
   // TODO allow change
   final crop = Crop.dl;
-
-  void _setMode(Mode mode) {
-    _mode = mode;
-
-    out(_mode);
-    setState(() {});
-  }
-
-  var _mode = Mode.add;
 
   @override
   void initState() {
@@ -94,8 +84,7 @@ class _PainterPageState extends State<PainterPage> {
         for (int i = 0; i < 4; ++i)
           HexagonButton(
             icon: modeIcons[i],
-            isRadioDown: i == _mode.index,
-            onRadioPressed: () => _setMode(Mode.values[i]),
+            mode: Mode.values[i],
             center: Offset(2 * x * i + x / 2, Y - 2 * y),
             radius: radius,
           ),
