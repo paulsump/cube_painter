@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 /// animated background
 class Background extends StatefulWidget {
-  final Widget? child;
+  final Widget child;
 
   const Background({
     Key? key,
-    this.child,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -40,19 +40,21 @@ class BackgroundState extends State<Background>
     Screen.init(context);
 
     return Scaffold(
+      backgroundColor:
+          _colorSequence.evaluate(AlwaysStoppedAnimation(_controller.value)),
       body: SafeArea(
         child: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
             return Stack(
               children: [
-                Container(
-                  color: _colorSequence.evaluate(
-                    AlwaysStoppedAnimation(_controller.value),
-                  ),
-                  // color: Colors.black,
-                ),
-                // widget.child,
+                // Container(
+                //   color: _colorSequence.evaluate(
+                //     AlwaysStoppedAnimation(_controller.value),
+                //   ),
+                //   // color: Colors.black,
+                // ),
+                widget.child,
               ],
             );
           },
