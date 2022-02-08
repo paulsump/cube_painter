@@ -22,11 +22,12 @@ class BackgroundState extends State<Background>
 
   @override
   void initState() {
-    super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 80),
+      duration: const Duration(seconds: 70),
       vsync: this,
     )..repeat();
+
+    super.initState();
   }
 
   @override
@@ -45,26 +46,14 @@ class BackgroundState extends State<Background>
         return Container(
           color: _colorSequence
               .evaluate(AlwaysStoppedAnimation(_controller.value)),
-          child: SafeArea(
-            child: Stack(
-              children: [
-                // Container(
-                //   color: _colorSequence.evaluate(
-                //     AlwaysStoppedAnimation(_controller.value),
-                //   ),
-                //   // color: Colors.black,
-                // ),
-                widget.child,
-              ],
-            ),
-          ),
+          child: SafeArea(child: widget.child),
         );
       },
     );
   }
 }
 
-Animatable<Color?> _colorSequence = TweenSequence<Color?>(
+final Animatable<Color?> _colorSequence = TweenSequence<Color?>(
   [
     TweenSequenceItem(
       weight: 10.0,
