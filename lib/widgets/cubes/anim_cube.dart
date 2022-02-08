@@ -26,6 +26,8 @@ class AnimCube extends StatefulWidget {
   double scale = 1;
 
   final dynamic Function(AnimCube old)? whenComplete;
+  final Widget cube;
+  final Offset offset;
 
   AnimCube({
     Key? key,
@@ -34,7 +36,9 @@ class AnimCube extends StatefulWidget {
     required this.end,
     this.pingPong = false,
     this.whenComplete,
-  }) : super(key: key);
+  })  : cube = UnitCube(crop: info.crop),
+        offset = gridToUnit(info.center),
+        super(key: key);
 
   @override
   _AnimCubeState createState() => _AnimCubeState();
@@ -43,9 +47,6 @@ class AnimCube extends StatefulWidget {
 class _AnimCubeState extends State<AnimCube>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-
-  late Offset offset;
-  late Widget cube;
 
   @override
   void initState() {
@@ -61,8 +62,6 @@ class _AnimCubeState extends State<AnimCube>
         _controller.forward().whenComplete(widget.whenComplete?.call(widget));
       }
     }
-
-    offset = gridToUnit(widget.info.center);
     super.initState();
   }
 
@@ -82,19 +81,12 @@ class _AnimCubeState extends State<AnimCube>
         return Stack(
           children: [
             Transform.translate(
-              offset: offset,
+              offset: widget.offset,
               child: Transform.scale(
                 scale: widget.scale,
-                child: UnitCube(
-                  opacity: widget.scale,
-                  crop: widget.info.crop,
-                ),
+                child: widget.cube,
               ),
             ),
-            // Transform.translate(
-            //   offset: offset,
-            //   child: const UnitCube(wire: true),
-            // ),
           ],
         );
       },
