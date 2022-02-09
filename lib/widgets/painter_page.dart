@@ -16,6 +16,7 @@ import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:cube_painter/widgets/cubes/simple_cube.dart';
+import 'package:cube_painter/widgets/cubes/unit_cube.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -52,14 +53,14 @@ class _PainterPageState extends State<PainterPage> {
 
     final Crop crop = Provider.of<CropNotifier>(context, listen: false).crop;
 
-    final simpleCubeForModes = [
+    final unitCubesForModes = [
       null,
-      const SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: Crop.c)),
-      const SimpleCube(
-        info: CubeInfo(center: GridPoint.zero, crop: Crop.c),
-        // style: PaintingStyle.stroke,
+      const UnitCube(crop: Crop.c),
+      const UnitCube(
+        crop: Crop.c,
+        style: PaintingStyle.stroke,
       ),
-      SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: crop)),
+      UnitCube(crop: crop),
     ];
 
     final pressedIconFunks = [
@@ -86,7 +87,7 @@ class _PainterPageState extends State<PainterPage> {
         ),
         for (int i = 1; i < 4; ++i)
           HexagonButton(
-            unitChild: simpleCubeForModes[i],
+            unitChild: unitCubesForModes[i],
             mode: Mode.values[i],
             center: Offset(x * (i + 1), y),
             radius: radius,
