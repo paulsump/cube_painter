@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 

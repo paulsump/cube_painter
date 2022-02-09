@@ -1,4 +1,4 @@
-import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/crop.dart';
 import 'package:flutter/cupertino.dart';
 
 //TODO PUT enum here

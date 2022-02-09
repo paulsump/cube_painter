@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';

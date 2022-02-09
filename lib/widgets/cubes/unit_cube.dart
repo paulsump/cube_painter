@@ -1,4 +1,4 @@
-import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/cube_corners.dart';
 import 'package:flutter/material.dart';

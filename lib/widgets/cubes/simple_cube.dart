@@ -1,4 +1,4 @@
-import 'package:cube_painter/model/crop_direction.dart';
+import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/widgets/cubes/unit_cube.dart';
