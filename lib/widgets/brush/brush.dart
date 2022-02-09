@@ -1,3 +1,4 @@
+import 'package:cube_painter/buttons/mode_holder.dart';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
@@ -8,6 +9,7 @@ import 'package:cube_painter/widgets/brush/positions.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 const noWarn = [out, GridPoint];
 
@@ -56,46 +58,69 @@ class BrushState extends State<Brush> {
         );
       },
       onPanUpdate: (details) {
-        final Positions positions = brushMaths.extrudeTo(
-          screenToUnit(details.localPosition, context),
-        );
+        final Mode mode = Provider.of<ModeHolder>(context, listen: false).mode;
 
-        if (previousPositions != positions) {
-          // using order provided by extruder
-          // only add new cubes, deleting any old ones
-
-          // TODO test that unused ones are destroyed
-          var copy = widget._cubes.toList();
-          widget._cubes.clear();
-
-          for (GridPoint position in positions.list) {
-            AnimCube? cube = _findAt(position, copy);
-
-            if (cube != null) {
-              widget._cubes.add(cube);
-            } else {
-              _addCube(widget._cubes, position, Crop.c);
-            }
-          }
-          setState(() {});
-          previousPositions = positions;
+        switch (mode) {
+          case Mode.zoomPan:
+            break;
+          case Mode.add:
+            _updateExtrude(details, context);
+            break;
+          case Mode.erase:
+            break;
+          case Mode.crop:
+            _replaceCube(details.localPosition, context);
+            setState(() {});
+            break;
         }
       },
       onPanEnd: (details) {
         widget.takeCubes(widget._handoverCubes());
       },
       onTapUp: (details) {
-        final GridPoint position = brushMaths.getPosition(
-          screenToUnit(details.localPosition, context),
-        );
-
-        // TODO When this is a brush mode ,
-        //  only add if/when user is happy with position
-        // so need to wire frame like the pan
-        _addCube(widget._cubes, position, Crop.dl);
+        _replaceCube(details.localPosition, context);
         widget.takeCubes(widget._handoverCubes());
       },
     );
+  }
+
+  void _replaceCube(Offset offset, BuildContext context) {
+    final GridPoint position = brushMaths.getPosition(
+      screenToUnit(offset, context),
+    );
+    widget._cubes.clear();
+
+    // TODO When this is a brush mode ,
+    //  only add if/when user is happy with position
+    // so need to wire frame like the pan
+    _addCube(widget._cubes, position, Crop.dl);
+  }
+
+  void _updateExtrude(DragUpdateDetails details, BuildContext context) {
+    final Positions positions = brushMaths.extrudeTo(
+      screenToUnit(details.localPosition, context),
+    );
+
+    if (previousPositions != positions) {
+      // using order provided by extruder
+      // only add new cubes, deleting any old ones
+
+      // TODO test that unused ones are destroyed
+      var copy = widget._cubes.toList();
+      widget._cubes.clear();
+
+      for (GridPoint position in positions.list) {
+        AnimCube? cube = _findAt(position, copy);
+
+        if (cube != null) {
+          widget._cubes.add(cube);
+        } else {
+          _addCube(widget._cubes, position, Crop.c);
+        }
+      }
+      setState(() {});
+      previousPositions = positions;
+    }
   }
 }
 
@@ -109,11 +134,11 @@ AnimCube? _findAt(GridPoint position, List<AnimCube> list) {
 }
 
 void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
-
   cubes.add(AnimCube(
     key: UniqueKey(),
     info: CubeInfo(center: center, crop: crop),
-    start: 0.5,
+    start: 0.0,
+    // start: 0.5,
     end: 1.0,
     pingPong: true,
   ));

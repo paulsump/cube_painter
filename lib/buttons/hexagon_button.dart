@@ -128,8 +128,4 @@ class _HexagonState extends State<HexagonButton>
     }
     return null;
   }
-
-  Color? _getBorderColor() {
-    return null;
-  }
 }

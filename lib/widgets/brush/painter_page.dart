@@ -56,7 +56,7 @@ class _PainterPageState extends State<PainterPage> {
     ];
     // [Icons.pinch_rounded,pan_tool_alt_rounded zoom_in_map_rounded, () => _forward(context)],
     final pressedIconFunks = [
-      [Icons.forward, () => _forward(context)],
+      [Icons.forward, () => _loadNextGroup(context)],
       [Icons.save_alt_rounded, _saveToClipboard],
     ];
 
@@ -89,12 +89,7 @@ class _PainterPageState extends State<PainterPage> {
     );
   }
 
-  void _saveToClipboard() {
-    _updateCurrentCubeGroup();
-    Clipboard.setData(ClipboardData(text: _getJson()));
-  }
-
-  void _forward(BuildContext context) {
+  void _loadNextGroup(BuildContext context) {
     // final zoom = Provider.of<Zoom>(context, listen: false);
     // zoom.increment(-1);
 
@@ -109,16 +104,12 @@ class _PainterPageState extends State<PainterPage> {
 
   void _adoptCubes(List<AnimCube> takenCubes) {
     if (takenCubes.isNotEmpty) {
-      // _takeEditBlock();
-
-      final int n = takenCubes.length;
-
-      for (int i = 0; i < n; ++i) {
-        //TODO maybe set anim speed
+      for (final cube in takenCubes) {
+        //TODO maybe set anim duration
         _animCubes.add(AnimCube(
           key: UniqueKey(),
-          info: takenCubes[i].info,
-          start: takenCubes[i].scale,
+          info: cube.info,
+          start: cube.scale,
           end: 1.0,
           whenComplete: _convertToSimpleCube,
         ));
@@ -181,14 +172,10 @@ class _PainterPageState extends State<PainterPage> {
     return json;
   }
 
-  // _createCubesFromGroup(cubeStore) {
-  //   CubeGroup cubeGroup = cubeStore.getCurrentCubeGroup();
-  //   for (CubeInfo cubeInfo in cubeGroup.list) {
-  //     _simpleCubes.add(SimpleCube(
-  //       info: cubeInfo,
-  //     ));
-  //   }
-  // }
+  void _saveToClipboard() {
+    _updateCurrentCubeGroup();
+    Clipboard.setData(ClipboardData(text: _getJson()));
+  }
 
   void _updateCurrentCubeGroup() {
     final cubeStore = Provider.of<CubeStore>(context, listen: false);
