@@ -11,6 +11,7 @@ import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
+import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
@@ -66,7 +67,6 @@ class _PainterPageState extends State<PainterPage> {
       [Icons.forward, () => _loadNextGroup(context)],
       [Icons.save_alt_rounded, _saveToClipboard],
     ];
-
     return Stack(
       children: [
         UnitToScreen(
@@ -78,6 +78,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ),
         Brush(adoptCubes: _adoptCubes),
+        const PanZoomer(),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,

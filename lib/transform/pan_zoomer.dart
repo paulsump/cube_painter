@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class PanZoomer extends StatefulWidget {
+  const PanZoomer({Key? key}) : super(key: key);
+
   @override
   _PanZoomerState createState() => _PanZoomerState();
 }
 
 class _PanZoomerState extends State<PanZoomer> {
   Offset _offset = Offset.zero;
+
   Offset _initialFocalPoint = Offset.zero;
   Offset _sessionOffset = Offset.zero;
 
@@ -16,6 +19,7 @@ class _PanZoomerState extends State<PanZoomer> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onScaleStart: (details) {
         _initialFocalPoint = details.focalPoint;
         _initialScale = _scale;
@@ -32,12 +36,19 @@ class _PanZoomerState extends State<PanZoomer> {
           _sessionOffset = Offset.zero;
         });
       },
-      child: Transform.translate(
-        offset: _offset + _sessionOffset,
-        child: Transform.scale(
-          scale: _scale,
-          child: FlutterLogo(),
-        ),
+      child: Stack(
+        children: [
+          // HACK without this container,
+          // onScaleUpdate etc doesn't get called. 'opaque' is also required.
+          Container(),
+          Transform.translate(
+            offset: _offset + _sessionOffset,
+            child: Transform.scale(
+              scale: _scale,
+              child: const FlutterLogo(),
+            ),
+          ),
+        ],
       ),
     );
   }
