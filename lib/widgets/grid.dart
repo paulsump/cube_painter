@@ -1,9 +1,9 @@
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/transform/zoom_pan.dart';
-import 'package:cube_painter/widgets/cubes/side.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;

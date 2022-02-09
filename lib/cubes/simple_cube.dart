@@ -1,7 +1,7 @@
+import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/widgets/cubes/unit_cube.dart';
 import 'package:flutter/material.dart';
 
 class SimpleCube extends StatelessWidget {
@@ -21,8 +21,8 @@ class SimpleCube extends StatelessWidget {
       child: info.crop == Crop.c
           ? const UnitCube()
           : UnitCube(
-              crop: info.crop,
-            ),
+        crop: info.crop,
+      ),
     );
   }
 }

@@ -1,13 +1,13 @@
 import 'dart:ui';
 
+import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/widgets/cubes/unit_cube.dart';
 import 'package:flutter/material.dart';
 
-import '../../transform/unit_ping_pong.dart';
+import '../transform/unit_ping_pong.dart';
 
 const noWarn = [out, Crop];
 

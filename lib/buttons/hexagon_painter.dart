@@ -1,6 +1,6 @@
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
-import 'package:cube_painter/widgets/cubes/side.dart';
 import 'package:flutter/material.dart';
 
 class HexagonPainter extends CustomPainter {
