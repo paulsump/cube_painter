@@ -5,6 +5,7 @@ import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/side.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/widgets/cubes/simple_cube.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,9 +19,12 @@ class HexagonButton extends StatefulWidget {
   final bool enabled;
   final Mode? mode;
 
+  final SimpleCube? simpleCube;
+
   const HexagonButton({
     Key? key,
     this.icon,
+    this.simpleCube,
     this.onPressed,
     required this.center,
     required this.radius,
@@ -60,9 +64,6 @@ class _HexagonState extends State<HexagonButton>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        final double w = IconTheme.of(context).size! / 2;
-        final o = Offset(-w, -w);
-
         return Stack(
           children: [
             CustomPaint(
@@ -73,9 +74,18 @@ class _HexagonState extends State<HexagonButton>
                 color: color,
               ),
             ),
+            if (widget.simpleCube != null)
+              Transform.translate(
+                offset: widget.center,
+                child: Transform.scale(
+                  scale: getZoomScale(context),
+                  child: widget.simpleCube,
+                ),
+              ),
             if (widget.icon != null)
               Transform.translate(
-                offset: o + widget.center,
+                offset: widget.center +
+                    const Offset(1, 1) * -IconTheme.of(context).size! / 2,
                 child: widget.enabled ? Icon(widget.icon) : null,
               ),
             Transform.translate(
