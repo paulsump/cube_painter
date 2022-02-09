@@ -69,6 +69,8 @@ class BrushState extends State<Brush> {
             _updateExtrude(details, context);
             break;
           case Mode.erase:
+            _replaceCube(details.localPosition, context);
+            setState(() {});
             break;
           case Mode.crop:
             _replaceCube(details.localPosition, context);
@@ -87,15 +89,12 @@ class BrushState extends State<Brush> {
   }
 
   void _replaceCube(Offset offset, BuildContext context) {
-    final GridPoint position = brushMaths.getPosition(
-      screenToUnit(offset, context),
-    );
-    widget._cubes.clear();
+    final GridPoint position =
+        brushMaths.getPosition(screenToUnit(offset, context));
 
-    // TODO When this is a brush mode ,
-    //  only add if/when user is happy with position
-    // so need to wire frame like the pan
+    widget._cubes.clear();
     Crop crop = Crop.c;
+
     final Mode mode = Provider.of<ModeNotifier>(context, listen: false).mode;
     if (mode == Mode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;

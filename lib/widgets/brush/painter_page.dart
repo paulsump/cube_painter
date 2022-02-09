@@ -4,6 +4,7 @@ import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
+import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/notifiers/cube_group_notifier.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
@@ -104,6 +105,19 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _adoptCubes(List<AnimCube> takenCubes) {
+    final bool erase =
+        Mode.erase == Provider.of<ModeNotifier>(context, listen: false).mode;
+
+    if (erase) {
+      for (final AnimCube cube in takenCubes) {
+        final SimpleCube? simpleCube = _findAt(cube.info.center, _simpleCubes);
+
+        if (simpleCube != null) {
+          _simpleCubes.remove(simpleCube);
+        }
+      }
+    }
+
     if (takenCubes.isNotEmpty) {
       for (final cube in takenCubes) {
         //TODO maybe set anim duration
@@ -111,8 +125,9 @@ class _PainterPageState extends State<PainterPage> {
           key: UniqueKey(),
           info: cube.info,
           start: cube.scale,
-          end: 1.0,
-          whenComplete: _convertToSimpleCube,
+          end: erase ? 0.0 : 1.0,
+          whenComplete: erase ? _doNothing : _convertToSimpleCube,
+          // whenComplete: _convertToSimpleCube,
         ));
       }
 
@@ -120,10 +135,23 @@ class _PainterPageState extends State<PainterPage> {
     }
   }
 
+  dynamic _doNothing(AnimCube old) {
+    return () {};
+  }
+
   dynamic _convertToSimpleCube(AnimCube old) {
     _simpleCubes.add(SimpleCube(info: old.info));
     _animCubes.remove(old);
-    return () => 'whatever';
+    return () {};
+  }
+
+  SimpleCube? _findAt(GridPoint position, List<SimpleCube> list) {
+    for (final cube in list) {
+      if (position == cube.info.center) {
+        return cube;
+      }
+    }
+    return null;
   }
 
   void _loadAllCubeGroups() async {
