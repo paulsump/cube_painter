@@ -1,9 +1,9 @@
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
+import 'package:cube_painter/notifiers/crop_notifier.dart';
+import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/providers/crop_notifier.dart';
-import 'package:cube_painter/providers/mode_holder.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush_maths.dart';
 import 'package:cube_painter/widgets/brush/positions.dart';
