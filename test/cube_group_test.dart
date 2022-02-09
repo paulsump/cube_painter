@@ -23,7 +23,6 @@ void main() {
     test('save', () {
       const cubeGroup = CubeGroup(<CubeInfo>[]);
       String newJson = jsonEncode(cubeGroup);
-      out(newJson);
       expect(testJson, equals(newJson));
     });
   });

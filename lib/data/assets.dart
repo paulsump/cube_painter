@@ -6,16 +6,15 @@ import 'package:flutter/services.dart';
 const noWarn = out;
 
 class Assets {
-  static const String folderPath = 'cube_groups';
+  static Future<Map<String, dynamic>> loadJson(String filePath) async {
+    final String json = await rootBundle.loadString(filePath);
+    Map<String, dynamic> map = jsonDecode(json);
 
-  static Stream<Future<Map<String, dynamic>>> loadAll() async* {
-    final filePaths = await getFilePaths();
-    for (String filePath in filePaths) {
-      yield loadJson(filePath);
-    }
+    // out(map);
+    return map;
   }
 
-  static Future<Iterable<String>> getFilePaths() async {
+  static Future<Iterable<String>> getFilePaths(String folderPath) async {
     final manifestJson = await rootBundle.loadString('AssetManifest.json');
 
     final fileNames = jsonDecode(manifestJson)
@@ -26,11 +25,11 @@ class Assets {
     return fileNames;
   }
 
-  static Future<Map<String, dynamic>> loadJson(String filePath) async {
-    final String json = await rootBundle.loadString(filePath);
-    Map<String, dynamic> map = jsonDecode(json);
-
-    // out(map);
-    return map;
+  static Stream<Future<Map<String, dynamic>>> loadAll(
+      String folderPath) async* {
+    final filePaths = await getFilePaths(folderPath);
+    for (String filePath in filePaths) {
+      yield loadJson(filePath);
+    }
   }
 }

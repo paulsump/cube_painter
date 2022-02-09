@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-List<CubeInfo> getCubeGroupList(BuildContext context) {
+List<CubeInfo> getCubeInfos(BuildContext context) {
   final cubeGroupNotifier =
       Provider.of<CubeGroupNotifier>(context, listen: false);
 

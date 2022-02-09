@@ -42,6 +42,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   void initState() {
     _loadAllCubeGroups();
+    // _loadNextGroup();
     super.initState();
   }
 
@@ -64,7 +65,7 @@ class _PainterPageState extends State<PainterPage> {
     ];
 
     final pressedIconFunks = [
-      [Icons.forward, () => _loadNextGroup(context)],
+      [Icons.forward, () => _loadNextGroup()],
       [Icons.save_alt_rounded, _saveToClipboard],
     ];
     return Stack(
@@ -93,9 +94,10 @@ class _PainterPageState extends State<PainterPage> {
             radius: radius,
             onPressed: i == 1
                 ? () {
-                    /// TODO get working
-                    /// TODO set by gestures
-              final zoom =
+                    // TODO get working
+                    // change is seen when change mode back to add
+                    // TODO set by gestures
+                    final zoom =
                         Provider.of<PanZoomNotifier>(context, listen: false);
                     zoom.increment(-1);
                     setState(() {});
@@ -121,14 +123,14 @@ class _PainterPageState extends State<PainterPage> {
     );
   }
 
-  void _loadNextGroup(BuildContext context) {
+  void _loadNextGroup() {
     final cubeGroupNotifier =
         Provider.of<CubeGroupNotifier>(context, listen: false);
 
     cubeGroupNotifier.increment(1);
     _simpleCubes.clear();
 
-    _loadCubeGroup();
+    _addCubeInfos();
     setState(() {});
   }
 
@@ -193,24 +195,20 @@ class _PainterPageState extends State<PainterPage> {
     final cubeGroupNotifier =
         Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    await for (final json in Assets.loadAll()) {
+    await for (final json in Assets.loadAll('data_test')) {
       cubeGroupNotifier.add(CubeGroup.fromJson(await json));
 
       if (cubeGroupNotifier.isFirstTime) {
         cubeGroupNotifier.isFirstTime = false;
-        _loadCubeGroup();
-        //TODO maybe remove if "CubeGroupNotifier listen: true" somewhere?
-        setState(() {});
+        _addCubeInfos();
       }
     }
-    // cubeGroupNotifier.notifyListeners();
   }
 
-  void _loadCubeGroup() {
-    List<CubeInfo> list = getCubeGroupList(context);
-    final int n = list.length;
+  void _addCubeInfos() {
+    List<CubeInfo> list = getCubeInfos(context);
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < list.length; ++i) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
         info: list[i],
@@ -219,12 +217,14 @@ class _PainterPageState extends State<PainterPage> {
         whenComplete: _convertToSimpleCubeAndRemoveSelf,
       ));
     }
+    //TODO maybe remove if "CubeGroupNotifier listen: true" somewhere?
+    setState(() {});
   }
 
   String _getJson() {
     final list = <CubeInfo>[];
 
-    for (CubeInfo cubeInfo in getCubeGroupList(context)) {
+    for (CubeInfo cubeInfo in getCubeInfos(context)) {
       list.add(cubeInfo);
     }
 
@@ -242,7 +242,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _updateCurrentCubeGroup() {
-    List<CubeInfo> list = getCubeGroupList(context);
+    List<CubeInfo> list = getCubeInfos(context);
     list.clear();
 
     for (final cube in _simpleCubes) {
