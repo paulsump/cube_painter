@@ -46,16 +46,8 @@ class _PainterPageState extends State<PainterPage> {
     const double radius = 40;
 
     const double x = radius * W;
-    const double y = radius * H;
+    final double y = Screen.height - 2 * radius * H;
 
-    final Y = Screen.height;
-    final modeIcons = [
-      Icons.zoom_in_rounded,
-      Icons.add,
-      Icons.remove,
-      Icons.content_cut,
-    ];
-    // [Icons.pinch_rounded,pan_tool_alt_rounded zoom_in_map_rounded, () => _forward(context)],
     final pressedIconFunks = [
       [Icons.forward, () => _loadNextGroup(context)],
       [Icons.save_alt_rounded, _saveToClipboard],
@@ -72,18 +64,24 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ),
         Brush(takeCubes: _adoptCubes),
-        for (int i = 0; i < 4; ++i)
+        HexagonButton(
+          icon: Icons.zoom_in_rounded,
+          mode: Mode.zoomPan,
+          center: Offset(x / 2, y),
+          radius: radius,
+        ),
+        for (int i = 1; i < 4; ++i)
           HexagonButton(
-            icon: modeIcons[i],
+            icon: Icons.zoom_in_rounded,
             mode: Mode.values[i],
-            center: Offset(2 * x * i + x / 2, Y - 2 * y),
+            center: Offset(2 * x * i + x / 2, y),
             radius: radius,
           ),
         for (int i = 0; i < 2; ++i)
           HexagonButton(
             icon: pressedIconFunks[i][0] as IconData,
             onPressed: pressedIconFunks[i][1] as VoidCallback,
-            center: Offset(2 * x * (4 + i) + x / 2, Y - 2 * y),
+            center: Offset(2 * x * (4 + i) + x / 2, y),
             radius: radius,
           ),
       ],

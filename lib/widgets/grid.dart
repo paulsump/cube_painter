@@ -19,14 +19,6 @@ final _gradientBL = LinearGradient(
   end: Alignment.topRight,
 );
 
-// final paintBR = Paint()
-//   ..style = PaintingStyle.stroke
-//   ..color = getColor(Side.br);
-//
-// final paintBL = Paint()
-//   ..style = PaintingStyle.stroke
-//   ..color = getColor(Side.bl);
-
 class Grid extends StatelessWidget {
   const Grid({Key? key}) : super(key: key);
 
@@ -43,7 +35,7 @@ class Grid extends StatelessWidget {
 class GridPainter extends CustomPainter {
   final BuildContext context;
 
-  GridPainter({required this.context});
+  const GridPainter({required this.context});
 
   @override
   void paint(Canvas canvas, Size size) {
