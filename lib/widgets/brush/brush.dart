@@ -23,11 +23,11 @@ class Brush extends StatefulWidget {
     required this.adoptCubes,
   }) : super(key: key);
 
-  List<AnimCube> _handOverCubes() {
-    final listCopy = _cubes.toList();
+  void _handOver() {
+    final orphans = _cubes.toList();
 
     _cubes.clear();
-    return listCopy;
+    adoptCubes(orphans);
   }
 
   @override
@@ -75,14 +75,14 @@ class BrushState extends State<Brush> {
         }
       },
       onPanEnd: (details) {
-        widget.adoptCubes(widget._handOverCubes());
+        widget._handOver();
       },
       onTapUp: (details) {
         if (getMode(context) == Mode.zoomPan) {
           return;
         }
         _replaceCube(details.localPosition, context);
-        widget.adoptCubes(widget._handOverCubes());
+        widget._handOver();
       },
     );
   }
