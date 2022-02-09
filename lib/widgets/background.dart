@@ -1,4 +1,4 @@
-import 'package:cube_painter/mode_notifier.dart';
+import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/side.dart';
 import 'package:cube_painter/transform/screen_transform.dart';

@@ -1,4 +1,4 @@
-import 'package:cube_painter/mode_notifier.dart';
+import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';

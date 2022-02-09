@@ -1,5 +1,5 @@
 import 'package:cube_painter/home_page.dart';
-import 'package:cube_painter/mode_notifier.dart';
+import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_group_notifier.dart';
 import 'package:cube_painter/transform/zoom_pan.dart';

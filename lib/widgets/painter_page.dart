@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
-import 'package:cube_painter/mode_notifier.dart';
+import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_group.dart';

@@ -1,6 +1,6 @@
 import 'package:cube_painter/buttons/calc_hexagon_points.dart';
 import 'package:cube_painter/buttons/hexagon_painter.dart';
-import 'package:cube_painter/mode_notifier.dart';
+import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/side.dart';
