@@ -7,7 +7,7 @@ class Hexagon extends StatelessWidget {
   final double radius;
   final Path path;
 
-  // TODO MAke const by callin add poly in build? test profile
+  // TODO MAke const by calling add poly in build? test profile
   Hexagon({
     Key? key,
     required this.center,

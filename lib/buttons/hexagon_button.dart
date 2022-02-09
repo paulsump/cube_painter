@@ -102,8 +102,7 @@ class _HexagonState extends State<HexagonButton>
                           Provider.of<ModeNotifier>(context, listen: false);
 
                       modeHolder.mode = widget.mode!;
-                      // TODO is this doing anything?
-                      _controller.reverse();
+                      _controller.forward();
                     } else {
                       _controller.reset();
                       _controller.forward();
@@ -132,10 +131,9 @@ class _HexagonState extends State<HexagonButton>
 
   Color? get color {
     if (widget.mode != null) {
-      //TODO the true here isn't working, it update coz the background does
       final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
-      if (modeHolder.mode == widget.mode!) {
+      if (modeHolder.mode != widget.mode!) {
         return Color.lerp(
           getColor(Side.t),
           getColor(Side.br),
