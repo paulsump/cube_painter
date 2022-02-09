@@ -45,7 +45,7 @@ class BackgroundState extends State<Background>
     Screen.init(context);
     final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
-    color = modeHolder.color;
+    color = modeHolder.mode == Mode.zoomPan ? null : backgroundColor;
 
     return AnimatedBuilder(
       animation: _controller,

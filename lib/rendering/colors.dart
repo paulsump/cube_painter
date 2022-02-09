@@ -11,3 +11,6 @@ Color getColor(Side vert) {
       return const Color(0xFF543E3D); // Dark
   }
 }
+
+Color get backgroundColor =>
+    Color.lerp(getColor(Side.t), getColor(Side.bl), 0.5)!;
