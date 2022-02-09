@@ -77,7 +77,7 @@ class _PainterPageState extends State<PainterPage> {
             ],
           ),
         ),
-        Brush(takeCubes: _adoptCubes),
+        Brush(adoptCubes: _adoptCubes),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.zoomPan,

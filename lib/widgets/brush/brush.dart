@@ -16,15 +16,14 @@ const noWarn = [out, GridPoint];
 class Brush extends StatefulWidget {
   final _cubes = <AnimCube>[];
 
-  //TODO REname to handoverCubes
-  final void Function(List<AnimCube> takenCubes) takeCubes;
+  final void Function(List<AnimCube> takenCubes) adoptCubes;
 
   Brush({
     Key? key,
-    required this.takeCubes,
+    required this.adoptCubes,
   }) : super(key: key);
 
-  List<AnimCube> _handoverCubes() {
+  List<AnimCube> _handOverCubes() {
     final listCopy = _cubes.toList();
 
     _cubes.clear();
@@ -76,14 +75,14 @@ class BrushState extends State<Brush> {
         }
       },
       onPanEnd: (details) {
-        widget.takeCubes(widget._handoverCubes());
+        widget.adoptCubes(widget._handOverCubes());
       },
       onTapUp: (details) {
         if (getMode(context) == Mode.zoomPan) {
           return;
         }
         _replaceCube(details.localPosition, context);
-        widget.takeCubes(widget._handoverCubes());
+        widget.adoptCubes(widget._handOverCubes());
       },
     );
   }
