@@ -6,7 +6,7 @@ import 'dart:ui';
 class GridPoint {
   final int x, y;
 
-  // static const zero = GridPoint(0,0);
+  static const zero = GridPoint(0, 0);
 
   const GridPoint(this.x, this.y);
 

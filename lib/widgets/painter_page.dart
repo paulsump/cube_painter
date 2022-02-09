@@ -52,12 +52,13 @@ class _PainterPageState extends State<PainterPage> {
 
     final Crop crop = Provider.of<CropNotifier>(context, listen: false).crop;
 
-    final modeSimpleCubes = [
+    final simpleCubeForModes = [
       null,
-      const SimpleCube(info: CubeInfo(center: GridPoint(0, 0), crop: Crop.c)),
-      const SimpleCube(info: CubeInfo(center: GridPoint(0, 0), crop: Crop.c)),
-      SimpleCube(info: CubeInfo(center: GridPoint(0, 0), crop: crop)),
+      const SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: Crop.c)),
+      const SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: Crop.c)),
+      SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: crop)),
     ];
+
     final pressedIconFunks = [
       [Icons.forward, () => _loadNextGroup(context)],
       [Icons.save_alt_rounded, _saveToClipboard],
@@ -82,7 +83,7 @@ class _PainterPageState extends State<PainterPage> {
         ),
         for (int i = 1; i < 4; ++i)
           HexagonButton(
-            simpleCube: modeSimpleCubes[i],
+            unitChild: simpleCubeForModes[i],
             mode: Mode.values[i],
             center: Offset(x * (i + 1), y),
             radius: radius,

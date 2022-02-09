@@ -4,8 +4,6 @@ import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/side.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/transform/screen_transform.dart';
-import 'package:cube_painter/widgets/cubes/simple_cube.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,12 +17,12 @@ class HexagonButton extends StatefulWidget {
   final bool enabled;
   final Mode? mode;
 
-  final SimpleCube? simpleCube;
+  final Widget? unitChild;
 
   const HexagonButton({
     Key? key,
     this.icon,
-    this.simpleCube,
+    this.unitChild,
     this.onPressed,
     required this.center,
     required this.radius,
@@ -74,12 +72,12 @@ class _HexagonState extends State<HexagonButton>
                 color: color,
               ),
             ),
-            if (widget.simpleCube != null)
+            if (widget.unitChild != null)
               Transform.translate(
                 offset: widget.center,
                 child: Transform.scale(
-                  scale: getZoomScale(context),
-                  child: widget.simpleCube,
+                  scale: widget.radius,
+                  child: widget.unitChild,
                 ),
               ),
             if (widget.icon != null)
@@ -89,9 +87,7 @@ class _HexagonState extends State<HexagonButton>
                 child: widget.enabled ? Icon(widget.icon) : null,
               ),
             Transform.translate(
-              offset: widget.center -
-                  const Offset(W, H * 2) * getZoomScale(context),
-              // TODO fix inaccuracy with gesture clip
+              offset: widget.center - const Offset(W, H * 2) * widget.radius,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
