@@ -97,7 +97,7 @@ class _AnimCubeState extends State<AnimCube>
         widget.start,
         widget.end,
         widget.pingPong
-            ? (1 + sin(2 * pi * _controller.value) / 2)
+            ? (1 + sin(2 * pi * _controller.value)) / 2
             : _controller.value,
       )!;
 }

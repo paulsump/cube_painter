@@ -120,10 +120,8 @@ void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
   cubes.add(AnimCube(
     key: UniqueKey(),
     info: CubeInfo(center: center, crop: crop),
-    start: 0.6,
-    end: 0.8,
-    // start:0.0,
-    // end: 1.0,
+    start: 0.5,
+    end: 1.0,
     pingPong: true,
   ));
 }
