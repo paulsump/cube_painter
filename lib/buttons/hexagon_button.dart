@@ -17,7 +17,6 @@ class HexagonButton extends StatefulWidget {
   final Offset center;
   final double radius;
 
-  final bool enabled;
   final Mode? mode;
 
   final Widget? unitChild;
@@ -29,8 +28,6 @@ class HexagonButton extends StatefulWidget {
     this.onPressed,
     required this.center,
     required this.radius,
-    //TODO REMOVE
-    this.enabled = true,
     this.mode,
   }) : super(key: key);
 
@@ -89,14 +86,13 @@ class _HexagonState extends State<HexagonButton>
               Transform.translate(
                 offset: widget.center +
                     const Offset(1, 1) * -IconTheme.of(context).size! / 2,
-                child: widget.enabled ? Icon(widget.icon) : null,
+                child: Icon(widget.icon),
               ),
             Transform.translate(
               offset: widget.center - const Offset(W, H * 2) * widget.radius,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  if (widget.enabled) {
                     if (widget.mode != null) {
                       final modeHolder =
                           Provider.of<ModeNotifier>(context, listen: false);
@@ -108,7 +104,6 @@ class _HexagonState extends State<HexagonButton>
                       _controller.forward();
                     }
                     widget.onPressed?.call();
-                  }
                 },
               ),
             ),
