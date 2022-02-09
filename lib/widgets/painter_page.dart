@@ -124,11 +124,11 @@ class _PainterPageState extends State<PainterPage> {
   void _loadNextGroup(BuildContext context) {
     final cubeGroupNotifier =
         Provider.of<CubeGroupNotifier>(context, listen: false);
+
     cubeGroupNotifier.increment(1);
-
     _simpleCubes.clear();
-    _loadCubeGroup();
 
+    _loadCubeGroup();
     setState(() {});
   }
 
