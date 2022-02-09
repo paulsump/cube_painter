@@ -45,20 +45,7 @@ class BackgroundState extends State<Background>
     Screen.init(context);
     final modeHolder = Provider.of<ModeHolder>(context, listen: true);
 
-    switch (modeHolder.mode) {
-      case Mode.zoomPan:
-        color = null;
-        break;
-      case Mode.add:
-        color = getColor(Side.bl);
-        break;
-      case Mode.erase:
-        color = getColor(Side.t);
-        break;
-      case Mode.crop:
-        color = getColor(Side.br);
-        break;
-    }
+    color = modeHolder.color;
 
     return AnimatedBuilder(
       animation: _controller,

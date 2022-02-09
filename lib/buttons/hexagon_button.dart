@@ -68,6 +68,7 @@ class _HexagonState extends State<HexagonButton>
                 context: context,
                 path: path,
                 alpha: _getAlpha(context),
+                color: _getColor(),
               ),
             ),
             if (widget.icon != null)
@@ -114,5 +115,12 @@ class _HexagonState extends State<HexagonButton>
       }
     }
     return alpha;
+  }
+
+  Color? _getColor() {
+    if (widget.mode != null) {
+      return getModeColor(widget.mode!);
+    }
+    return null;
   }
 }
