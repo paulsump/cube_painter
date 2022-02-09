@@ -6,7 +6,7 @@ import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush_maths.dart';
 import 'package:cube_painter/widgets/brush/positions.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
-import 'package:cube_painter/widgets/scafolding/transformed.dart';
+import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, GridPoint];
