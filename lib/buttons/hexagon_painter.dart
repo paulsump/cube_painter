@@ -19,7 +19,9 @@ class HexagonPainter extends CustomPainter {
     this.borderColor,
   });
 
-  Color get _color => color ?? getColor(Side.t).withOpacity(alpha);
+  Color get _color => color ?? Colors.brown.withOpacity(alpha);
+
+  // Color get _color => color ?? getColor(Side.t).withOpacity(alpha);
 
   Color get _borderColor => borderColor ?? getColor(Side.bl);
 

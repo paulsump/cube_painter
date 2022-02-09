@@ -56,10 +56,7 @@ class _PainterPageState extends State<PainterPage> {
     final unitCubesForModes = [
       null,
       const UnitCube(crop: Crop.c),
-      const UnitCube(
-        crop: Crop.c,
-        style: PaintingStyle.stroke,
-      ),
+      const UnitCube(crop: Crop.c, style: PaintingStyle.stroke),
       UnitCube(crop: crop),
     ];
 
@@ -82,21 +79,21 @@ class _PainterPageState extends State<PainterPage> {
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.zoomPan,
-          center: Offset(x, y),
+          center: Offset(x * 0.5, y),
           radius: radius,
         ),
         for (int i = 1; i < 4; ++i)
           HexagonButton(
             unitChild: unitCubesForModes[i],
             mode: Mode.values[i],
-            center: Offset(x * (i + 1), y),
+            center: Offset(x * (i + 0.5), y),
             radius: radius,
           ),
         for (int i = 0; i < 2; ++i)
           HexagonButton(
             icon: pressedIconFunks[i][0] as IconData,
             onPressed: pressedIconFunks[i][1] as VoidCallback,
-            center: Offset(x * (i + 5), y),
+            center: Offset(x * (i + 4.5), y),
             radius: radius,
           ),
       ],
