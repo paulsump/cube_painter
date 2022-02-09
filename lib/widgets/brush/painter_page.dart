@@ -70,11 +70,7 @@ class _PainterPageState extends State<PainterPage> {
             ],
           ),
         ),
-        Brush(
-          onStartPan: () {},
-          onEndPan: _adoptCubes,
-          onTapUp: _adoptCubes,
-        ),
+        Brush(takeCubes: _adoptCubes),
         for (int i = 0; i < 4; ++i)
           HexagonButton(
             icon: modeIcons[i],

@@ -14,16 +14,11 @@ const noWarn = [out, GridPoint];
 class Brush extends StatefulWidget {
   final _cubes = <AnimCube>[];
 
-  final void Function() onStartPan;
-  final void Function(List<AnimCube> takenCubes) onEndPan;
-
-  final void Function(List<AnimCube> takenCubes) onTapUp;
+  final void Function(List<AnimCube> takenCubes) takeCubes;
 
   Brush({
     Key? key,
-    required this.onStartPan,
-    required this.onEndPan,
-    required this.onTapUp,
+    required this.takeCubes,
   }) : super(key: key);
 
   List<AnimCube> _handoverCubes() {
@@ -56,8 +51,6 @@ class BrushState extends State<Brush> {
         ],
       ),
       onPanStart: (details) {
-        widget.onStartPan();
-
         brushMaths.startFrom(
           screenToUnit(details.localPosition, context),
         );
@@ -89,7 +82,7 @@ class BrushState extends State<Brush> {
         }
       },
       onPanEnd: (details) {
-        widget.onEndPan(widget._handoverCubes());
+        widget.takeCubes(widget._handoverCubes());
       },
       onTapUp: (details) {
         final GridPoint position = brushMaths.getPosition(
@@ -100,7 +93,7 @@ class BrushState extends State<Brush> {
         //  only add if/when user is happy with position
         // so need to wire frame like the pan
         _addCube(widget._cubes, position, Crop.dl);
-        widget.onTapUp(widget._handoverCubes());
+        widget.takeCubes(widget._handoverCubes());
       },
     );
   }
