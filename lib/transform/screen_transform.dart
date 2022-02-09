@@ -1,3 +1,4 @@
+import 'package:cube_painter/notifiers/zoom_pan_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,19 +40,5 @@ class Screen {
 
     final size = mediaQuery.size;
     _size = Size(size.width, size.height - safeAreaHeight);
-  }
-}
-
-/// TODO set by gestures
-class ZoomPan extends ChangeNotifier {
-  static const _scaleStep = 0.1;
-
-  /// equates to the length of the side of each triangle in pixels
-  double scale = 30;
-
-  ///TODO rename and use
-  void increment(int increment) {
-    scale *= 1 + _scaleStep * increment;
-    notifyListeners();
   }
 }

@@ -2,7 +2,7 @@ import 'package:cube_painter/home_page.dart';
 import 'package:cube_painter/model/cube_store.dart';
 import 'package:cube_painter/notifiers/crop_notifier.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
-import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/notifiers/zoom_pan_notifier.dart';
 import 'package:cube_painter/widgets/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
