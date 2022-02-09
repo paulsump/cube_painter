@@ -3,6 +3,7 @@ import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/side.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/transform/zoom_pan.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;

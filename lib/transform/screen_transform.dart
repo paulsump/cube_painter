@@ -1,14 +1,8 @@
-import 'package:cube_painter/notifiers/zoom_pan_notifier.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/zoom_pan.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 const noWarn = out;
-
-double getZoomScale(BuildContext context) {
-  final zoom = Provider.of<ZoomPanNotifier>(context, listen: false);
-  return zoom.scale;
-}
 
 //TODO test?
 Offset screenToUnit(Offset offset, BuildContext context) {
