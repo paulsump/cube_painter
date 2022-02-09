@@ -15,8 +15,8 @@ class HexagonPainter extends CustomPainter {
     required this.context,
     required this.path,
     required this.alpha,
-    required this.color,
-    required this.borderColor,
+    this.color,
+    this.borderColor,
   });
 
   Color get _color => color ?? getColor(Side.t).withOpacity(alpha);

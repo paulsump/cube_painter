@@ -70,8 +70,7 @@ class _HexagonState extends State<HexagonButton>
                 context: context,
                 path: path,
                 alpha: _getAlpha(context),
-                color: _getColor(),
-                borderColor: _getBorderColor(),
+                color: color,
               ),
             ),
             if (widget.icon != null)
@@ -119,7 +118,7 @@ class _HexagonState extends State<HexagonButton>
     return alpha;
   }
 
-  Color? _getColor() {
+  Color? get color {
     if (widget.mode != null) {
       final modeHolder = Provider.of<ModeHolder>(context, listen: true);
 

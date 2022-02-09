@@ -27,7 +27,7 @@ class BackgroundState extends State<Background>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(seconds: 7),
+      duration: const Duration(seconds: 33),
       vsync: this,
     )..repeat();
 
