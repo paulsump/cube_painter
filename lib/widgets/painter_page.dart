@@ -5,9 +5,9 @@ import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_group.dart';
+import 'package:cube_painter/model/cube_group_notifier.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/notifiers/cube_group_notifier.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
@@ -198,10 +198,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _loadCubeGroup() {
-    final cubeGroupNotifier =
-        Provider.of<CubeGroupNotifier>(context, listen: false);
-
-    final list = cubeGroupNotifier.getCurrentCubeGroup().list;
+    List<CubeInfo> list = getCubeGroupList(context);
     final int n = list.length;
 
     for (int i = 0; i < n; ++i) {
@@ -218,10 +215,7 @@ class _PainterPageState extends State<PainterPage> {
   String _getJson() {
     final list = <CubeInfo>[];
 
-    final cubeGroupNotifier =
-        Provider.of<CubeGroupNotifier>(context, listen: false);
-
-    for (CubeInfo cubeInfo in cubeGroupNotifier.getCurrentCubeGroup().list) {
+    for (CubeInfo cubeInfo in getCubeGroupList(context)) {
       list.add(cubeInfo);
     }
 
@@ -239,10 +233,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _updateCurrentCubeGroup() {
-    final cubeGroupNotifier =
-        Provider.of<CubeGroupNotifier>(context, listen: false);
-
-    final list = cubeGroupNotifier.getCurrentCubeGroup().list;
+    List<CubeInfo> list = getCubeGroupList(context);
     list.clear();
 
     for (final cube in _simpleCubes) {
