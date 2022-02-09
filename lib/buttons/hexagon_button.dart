@@ -48,9 +48,7 @@ class _HexagonState extends State<HexagonButton>
     );
     _controller.value = 1;
 
-    final Mode mode = Provider.of<ModeNotifier>(context, listen: false).mode;
-
-    if (widget.mode == mode) {
+    if (widget.mode == getMode(context)) {
       _controller.value = 0;
     }
   }
@@ -94,12 +92,12 @@ class _HexagonState extends State<HexagonButton>
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                     if (widget.mode != null) {
-                      final modeHolder =
-                          Provider.of<ModeNotifier>(context, listen: false);
+                      final modeNotifier =
+                        Provider.of<ModeNotifier>(context, listen: false);
 
-                      modeHolder.mode = widget.mode!;
-                      _controller.forward();
-                    } else {
+                    modeNotifier.mode = widget.mode!;
+                    _controller.forward();
+                  } else {
                       _controller.reset();
                       _controller.forward();
                     }
@@ -116,8 +114,8 @@ class _HexagonState extends State<HexagonButton>
   double _getAlpha(BuildContext context) {
     double alpha = _controller.value;
     if (widget.mode != null) {
-      final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
-      if (modeHolder.mode != widget.mode!) {
+      final modeNotifier = Provider.of<ModeNotifier>(context, listen: true);
+      if (modeNotifier.mode != widget.mode!) {
         alpha = 1;
       }
     }
@@ -126,9 +124,9 @@ class _HexagonState extends State<HexagonButton>
 
   Color? get color {
     if (widget.mode != null) {
-      final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
+      final modeNotifier = Provider.of<ModeNotifier>(context, listen: true);
 
-      if (modeHolder.mode != widget.mode!) {
+      if (modeNotifier.mode != widget.mode!) {
         return Color.lerp(
           getColor(Side.t),
           getColor(Side.br),

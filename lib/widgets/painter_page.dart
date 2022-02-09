@@ -133,8 +133,7 @@ class _PainterPageState extends State<PainterPage> {
 
   // TODO rename takenCubes to adoptedCubes
   void _adoptCubes(List<AnimCube> takenCubes) {
-    final bool erase =
-        Mode.erase == Provider.of<ModeNotifier>(context, listen: false).mode;
+    final bool erase = Mode.erase == getMode(context);
 
     if (erase) {
       for (final AnimCube cube in takenCubes) {
