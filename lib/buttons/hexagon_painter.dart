@@ -8,8 +8,11 @@ class HexagonPainter extends CustomPainter {
 
   final Path path;
   final double alpha;
+
   final Color? color;
   final Color? borderColor;
+
+  final bool repaint;
 
   const HexagonPainter({
     required this.context,
@@ -17,11 +20,10 @@ class HexagonPainter extends CustomPainter {
     required this.alpha,
     this.color,
     this.borderColor,
+    this.repaint = false,
   });
 
   Color get _color => color ?? backgroundColor.withOpacity(alpha);
-
-  // Color get _color => color ?? getColor(Side.t).withOpacity(alpha);
 
   Color get _borderColor => borderColor ?? getColor(Side.bl);
 
@@ -43,5 +45,5 @@ class HexagonPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(HexagonPainter oldDelegate) => false;
+  bool shouldRepaint(HexagonPainter oldDelegate) => repaint;
 }

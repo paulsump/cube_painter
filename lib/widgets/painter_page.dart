@@ -94,6 +94,7 @@ class _PainterPageState extends State<PainterPage> {
                     final cropNotifier =
                         Provider.of<CropNotifier>(context, listen: false);
                     cropNotifier.increment(1);
+                    setState(() {});
                   }
                 : null,
           ),

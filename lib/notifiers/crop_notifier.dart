@@ -1,5 +1,4 @@
 import 'package:cube_painter/model/crop_direction.dart';
-import 'package:cube_painter/out.dart';
 import 'package:flutter/cupertino.dart';
 
 //TODO PUT enum here
@@ -17,8 +16,8 @@ class CropNotifier extends ChangeNotifier {
   void increment(int increment) {
     int index = crop.index + increment;
 
+    //TODO Skip c
     index %= Crop.values.length;
     crop = Crop.values[index];
-    out(crop);
   }
 }

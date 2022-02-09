@@ -29,6 +29,7 @@ class HexagonButton extends StatefulWidget {
     this.onPressed,
     required this.center,
     required this.radius,
+    //TODO REMOVE
     this.enabled = true,
     this.mode,
   }) : super(key: key);
@@ -73,6 +74,7 @@ class _HexagonState extends State<HexagonButton>
                 path: path,
                 alpha: _getAlpha(context),
                 color: color,
+                repaint: true,
               ),
             ),
             if (widget.unitChild != null)
@@ -130,6 +132,7 @@ class _HexagonState extends State<HexagonButton>
 
   Color? get color {
     if (widget.mode != null) {
+      //TODO the true here isn't working, it update coz the background does
       final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
       if (modeHolder.mode == widget.mode!) {
