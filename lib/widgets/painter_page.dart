@@ -13,6 +13,7 @@ import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/transform/unit_ping_pong.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
@@ -194,12 +195,14 @@ class _PainterPageState extends State<PainterPage> {
     final cubeGroupNotifier =
         Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    // _createCubesFromGroup(cubeGroupNotifier);
-    for (CubeInfo cubeInfo in cubeGroupNotifier.getCurrentCubeGroup().list) {
+    final list = cubeGroupNotifier.getCurrentCubeGroup().list;
+    final int n = list.length;
+
+    for (int i = 0; i < n; ++i) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
-        info: cubeInfo,
-        start: 0,
+        info: list[i],
+        start: unitPingPong((i % 6) / 6) / 2,
         end: 1.0,
         whenComplete: _convertToSimpleCube,
       ));

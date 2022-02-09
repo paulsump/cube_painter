@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:cube_painter/model/crop_direction.dart';
@@ -7,6 +6,8 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/widgets/cubes/unit_cube.dart';
 import 'package:flutter/material.dart';
+
+import '../../transform/unit_ping_pong.dart';
 
 const noWarn = [out, Crop];
 
@@ -94,10 +95,8 @@ class _AnimCubeState extends State<AnimCube>
   }
 
   double _scale() => lerpDouble(
-        widget.start,
+    widget.start,
         widget.end,
-        widget.pingPong
-            ? (1 + sin(2 * pi * _controller.value)) / 2
-            : _controller.value,
+        widget.pingPong ? unitPingPong(_controller.value) : _controller.value,
       )!;
 }
