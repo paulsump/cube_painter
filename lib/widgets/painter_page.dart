@@ -161,7 +161,7 @@ class _PainterPageState extends State<PainterPage> {
           info: cube.info,
           start: cube.scale,
           end: erase ? 0.0 : 1.0,
-          whenComplete: erase ? _doNothing : _convertToSimpleCube,
+          whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
         ));
       }
 
@@ -169,14 +169,14 @@ class _PainterPageState extends State<PainterPage> {
     }
   }
 
-  dynamic _doNothing(AnimCube old) {
+  dynamic _removeSelf(AnimCube old) {
+    _animCubes.remove(old);
     return () {};
   }
 
-  dynamic _convertToSimpleCube(AnimCube old) {
+  dynamic _convertToSimpleCubeAndRemoveSelf(AnimCube old) {
     _simpleCubes.add(SimpleCube(info: old.info));
-    _animCubes.remove(old);
-    return () {};
+    return _removeSelf(old);
   }
 
   SimpleCube? _findAt(GridPoint position, List<SimpleCube> list) {
@@ -214,7 +214,7 @@ class _PainterPageState extends State<PainterPage> {
         info: list[i],
         start: unitPingPong((i % 6) / 6) / 2,
         end: 1.0,
-        whenComplete: _convertToSimpleCube,
+        whenComplete: _convertToSimpleCubeAndRemoveSelf,
       ));
     }
   }
