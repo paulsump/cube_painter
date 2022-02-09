@@ -13,12 +13,11 @@ const noWarn = [out, Crop];
 
 class AnimCube extends StatefulWidget {
   final CubeInfo info;
+
   final double start;
   final double end;
-  final bool pingPong;
 
-  //TODO reverse for delete
-  // final bool direction;
+  final bool pingPong;
 
   /// This is bad because it's set by the state,
   /// and also  mean this class can't be const
@@ -28,6 +27,7 @@ class AnimCube extends StatefulWidget {
 
   final dynamic Function(AnimCube old)? whenComplete;
   final Widget cube;
+
   final Offset offset;
 
   AnimCube({
