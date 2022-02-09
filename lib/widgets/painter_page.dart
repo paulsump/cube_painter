@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/mode_notifier.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_group_notifier.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
@@ -194,6 +194,7 @@ class _PainterPageState extends State<PainterPage> {
 
     await for (final json in Assets.loadAll()) {
       cubeGroupNotifier.add(CubeGroup.fromJson(await json));
+
       if (cubeGroupNotifier.isFirstTime) {
         cubeGroupNotifier.isFirstTime = false;
         _loadCubeGroup();

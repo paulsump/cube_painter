@@ -1,7 +1,7 @@
+import 'package:cube_painter/mode_notifier.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
-import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
@@ -89,7 +89,7 @@ class BrushState extends State<Brush> {
 
   void _replaceCube(Offset offset, BuildContext context) {
     final GridPoint position =
-        brushMaths.getPosition(screenToUnit(offset, context));
+    brushMaths.getPosition(screenToUnit(offset, context));
 
     widget._cubes.clear();
     Crop crop = Crop.c;
