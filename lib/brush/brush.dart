@@ -1,3 +1,5 @@
+import 'package:cube_painter/brush/brush_maths.dart';
+import 'package:cube_painter/brush/positions.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/model/crop.dart';
 import 'package:cube_painter/model/cube_info.dart';
@@ -5,8 +7,6 @@ import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
-import 'package:cube_painter/widgets/brush/brush_maths.dart';
-import 'package:cube_painter/widgets/brush/positions.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,6 @@
+import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/main.dart';
 import 'package:cube_painter/widgets/background.dart';
-import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/grid.dart';
 import 'package:flutter_test/flutter_test.dart';
 

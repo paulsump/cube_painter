@@ -1,9 +1,9 @@
 import 'dart:math';
 
+import 'package:cube_painter/brush/positions.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/widgets/brush/positions.dart';
 import 'package:flutter/material.dart';
 
 // TODO test

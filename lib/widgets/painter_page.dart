@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/mode.dart';
@@ -16,7 +17,6 @@ import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/transform/zoom_pan.dart';
-import 'package:cube_painter/widgets/brush/brush.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
 import 'package:cube_painter/widgets/cubes/simple_cube.dart';
 import 'package:cube_painter/widgets/cubes/unit_cube.dart';
