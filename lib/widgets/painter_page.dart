@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
+import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
+import 'package:cube_painter/notifiers/crop_notifier.dart';
 import 'package:cube_painter/notifiers/cube_group_notifier.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
@@ -48,6 +50,14 @@ class _PainterPageState extends State<PainterPage> {
     const double x = 2 * radius * W;
     final double y = Screen.height - 2 * radius * H;
 
+    final Crop crop = Provider.of<CropNotifier>(context, listen: false).crop;
+
+    final modeSimpleCubes = [
+      null,
+      const SimpleCube(info: CubeInfo(center: GridPoint(0, 0), crop: Crop.c)),
+      const SimpleCube(info: CubeInfo(center: GridPoint(0, 0), crop: Crop.c)),
+      SimpleCube(info: CubeInfo(center: GridPoint(0, 0), crop: crop)),
+    ];
     final pressedIconFunks = [
       [Icons.forward, () => _loadNextGroup(context)],
       [Icons.save_alt_rounded, _saveToClipboard],
@@ -72,7 +82,7 @@ class _PainterPageState extends State<PainterPage> {
         ),
         for (int i = 1; i < 4; ++i)
           HexagonButton(
-            icon: Icons.zoom_in_rounded,
+            simpleCube: modeSimpleCubes[i],
             mode: Mode.values[i],
             center: Offset(x * (i + 1), y),
             radius: radius,
