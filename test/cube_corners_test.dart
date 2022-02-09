@@ -1,6 +1,6 @@
 import 'package:cube_painter/model/crop.dart';
-import 'package:cube_painter/rendering/cube_corners.dart';
-import 'package:cube_painter/rendering/side.dart';
+import 'package:cube_painter/widgets/cubes/cube_corners.dart';
+import 'package:cube_painter/widgets/cubes/side.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'equals5.dart';

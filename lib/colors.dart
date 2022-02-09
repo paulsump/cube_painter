@@ -1,4 +1,4 @@
-import 'package:cube_painter/rendering/side.dart';
+import 'package:cube_painter/widgets/cubes/side.dart';
 import 'package:flutter/material.dart';
 
 Color getColor(Side vert) {
