@@ -45,7 +45,7 @@ class _PainterPageState extends State<PainterPage> {
 
     const double radius = 40;
 
-    const double x = radius * W;
+    const double x = 2 * radius * W;
     final double y = Screen.height - 2 * radius * H;
 
     final pressedIconFunks = [
@@ -67,21 +67,21 @@ class _PainterPageState extends State<PainterPage> {
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.zoomPan,
-          center: Offset(x / 2, y),
+          center: Offset(x, y),
           radius: radius,
         ),
         for (int i = 1; i < 4; ++i)
           HexagonButton(
             icon: Icons.zoom_in_rounded,
             mode: Mode.values[i],
-            center: Offset(2 * x * i + x / 2, y),
+            center: Offset(x * (i + 1), y),
             radius: radius,
           ),
         for (int i = 0; i < 2; ++i)
           HexagonButton(
             icon: pressedIconFunks[i][0] as IconData,
             onPressed: pressedIconFunks[i][1] as VoidCallback,
-            center: Offset(2 * x * (4 + i) + x / 2, y),
+            center: Offset(x * (i + 5), y),
             radius: radius,
           ),
       ],
