@@ -9,15 +9,19 @@ class HexagonPainter extends CustomPainter {
   final Path path;
   final double alpha;
   final Color? color;
+  final Color? borderColor;
 
   const HexagonPainter({
     required this.context,
     required this.path,
     required this.alpha,
     required this.color,
+    required this.borderColor,
   });
 
   Color get _color => color ?? getColor(Side.t).withOpacity(alpha);
+
+  Color get _borderColor => borderColor ?? getColor(Side.bl);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -32,7 +36,7 @@ class HexagonPainter extends CustomPainter {
     canvas.drawPath(
         path,
         Paint()
-          ..color = getColor(Side.bl)
+          ..color = _borderColor
           ..style = PaintingStyle.stroke);
   }
 
