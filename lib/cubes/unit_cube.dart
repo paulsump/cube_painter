@@ -1,6 +1,6 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_corners.dart';
-import 'package:cube_painter/model/crop.dart';
+import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
 class UnitCube extends StatelessWidget {

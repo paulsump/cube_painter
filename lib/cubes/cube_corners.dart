@@ -1,6 +1,6 @@
 import 'package:cube_painter/cubes/side.dart';
-import 'package:cube_painter/model/crop.dart';
-import 'package:cube_painter/model/grid_point.dart';
+import 'package:cube_painter/data/crop.dart';
+import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/cupertino.dart';
 

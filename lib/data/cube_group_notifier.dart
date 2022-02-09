@@ -1,5 +1,5 @@
-import 'package:cube_painter/model/cube_group.dart';
-import 'package:cube_painter/model/cube_info.dart';
+import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

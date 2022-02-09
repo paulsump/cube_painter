@@ -1,4 +1,4 @@
-import 'package:cube_painter/model/cube_info.dart';
+import 'package:cube_painter/data/cube_info.dart';
 
 /// For loading and saving all the cube positions and their info
 /// Loaded from a json file.

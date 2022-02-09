@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:cube_painter/model/grid_point.dart';
+import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/out.dart';
 
 const noWarn = out;

@@ -1,4 +1,4 @@
-import 'package:cube_painter/model/grid_point.dart';
+import 'package:cube_painter/data/grid_point.dart';
 import 'package:flutter/material.dart';
 
 const root3over2 = 0.86602540378; // root(3)/2
