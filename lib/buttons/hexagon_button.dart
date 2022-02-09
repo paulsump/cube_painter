@@ -45,9 +45,9 @@ class _HexagonState extends State<HexagonButton>
     );
     _controller.value = 1;
 
-    final modeHolder = Provider.of<ModeNotifier>(context, listen: false);
+    final Mode mode = Provider.of<ModeNotifier>(context, listen: false).mode;
 
-    if (widget.mode == modeHolder.mode) {
+    if (widget.mode == mode) {
       _controller.value = 0;
     }
   }
