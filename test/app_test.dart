@@ -1,7 +1,7 @@
 import 'package:cube_painter/background.dart';
 import 'package:cube_painter/brush/brush.dart';
+import 'package:cube_painter/grid.dart';
 import 'package:cube_painter/main.dart';
-import 'package:cube_painter/widgets/grid.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
