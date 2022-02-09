@@ -4,7 +4,6 @@ import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop.dart';
-import 'package:cube_painter/model/crop_notifier.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';

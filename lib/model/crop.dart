@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 
 /// The direction to crop a cube in is like the
 /// normal vector to the slice line.
@@ -18,4 +19,28 @@ enum Crop {
   dl,
   // 6 down right
   dr,
+}
+
+class CropNotifier extends ChangeNotifier {
+  var _crop = Crop.dl;
+
+  get crop => _crop;
+
+  set crop(value) {
+    _crop = value;
+    notifyListeners();
+  }
+
+  void increment(int value, {int first = 1}) {
+    int index = crop.index + value;
+
+    final int last = Crop.values.length - 1;
+    if (index < first) {
+      index = last;
+    } else if (index > last) {
+      index = first;
+    }
+
+    crop = Crop.values[index];
+  }
 }

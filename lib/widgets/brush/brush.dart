@@ -1,5 +1,4 @@
 import 'package:cube_painter/model/crop.dart';
-import 'package:cube_painter/model/crop_notifier.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
