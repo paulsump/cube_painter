@@ -1,6 +1,7 @@
-import 'package:cube_painter/buttons/mode_holder.dart';
 import 'package:cube_painter/home_page.dart';
 import 'package:cube_painter/model/cube_store.dart';
+import 'package:cube_painter/providers/crop_notifier.dart';
+import 'package:cube_painter/providers/mode_holder.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/background.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class CubePainterApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ZoomPan()),
         ChangeNotifierProvider(create: (_) => CubeStore()),
         ChangeNotifierProvider(create: (_) => ModeHolder()),
+        ChangeNotifierProvider(create: (_) => CropNotifier()),
       ],
       child: const MaterialApp(
         title: 'Cube Painter',

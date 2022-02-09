@@ -1,8 +1,9 @@
-import 'package:cube_painter/buttons/mode_holder.dart';
 import 'package:cube_painter/model/crop_direction.dart';
 import 'package:cube_painter/model/cube_info.dart';
 import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/providers/crop_notifier.dart';
+import 'package:cube_painter/providers/mode_holder.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/widgets/brush/brush_maths.dart';
 import 'package:cube_painter/widgets/brush/positions.dart';
@@ -93,7 +94,12 @@ class BrushState extends State<Brush> {
     // TODO When this is a brush mode ,
     //  only add if/when user is happy with position
     // so need to wire frame like the pan
-    _addCube(widget._cubes, position, Crop.dl);
+    Crop crop = Crop.c;
+    final Mode mode = Provider.of<ModeHolder>(context, listen: false).mode;
+    if (mode == Mode.crop) {
+      crop = Provider.of<CropNotifier>(context, listen: false).crop;
+    }
+    _addCube(widget._cubes, position, crop);
   }
 
   void _updateExtrude(DragUpdateDetails details, BuildContext context) {
