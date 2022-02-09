@@ -93,8 +93,9 @@ class _PainterPageState extends State<PainterPage> {
     // final zoom = Provider.of<Zoom>(context, listen: false);
     // zoom.increment(-1);
 
-    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
-    cubeStore.increment(1);
+    final cubeGroupNotifier =
+        Provider.of<CubeGroupNotifier>(context, listen: false);
+    cubeGroupNotifier.increment(1);
 
     _simpleCubes.clear();
     _loadCubeGroup();
@@ -126,25 +127,27 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _loadAllCubeGroups() async {
-    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
+    final cubeGroupNotifier =
+        Provider.of<CubeGroupNotifier>(context, listen: false);
 
     await for (final json in Assets.loadAll()) {
-      cubeStore.add(CubeGroup.fromJson(await json));
-      if (cubeStore.isFirstTime) {
-        cubeStore.isFirstTime = false;
+      cubeGroupNotifier.add(CubeGroup.fromJson(await json));
+      if (cubeGroupNotifier.isFirstTime) {
+        cubeGroupNotifier.isFirstTime = false;
         _loadCubeGroup();
         //TODO maybe remove if listing true somewhere?
         setState(() {});
       }
     }
-    // cubeStore.notifyListeners();
+    // cubeGroupNotifier.notifyListeners();
   }
 
   void _loadCubeGroup() {
-    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
+    final cubeGroupNotifier =
+        Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    // _createCubesFromGroup(cubeStore);
-    for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
+    // _createCubesFromGroup(cubeGroupNotifier);
+    for (CubeInfo cubeInfo in cubeGroupNotifier.getCurrentCubeGroup().list) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
         info: cubeInfo,
@@ -158,9 +161,10 @@ class _PainterPageState extends State<PainterPage> {
   String _getJson() {
     final list = <CubeInfo>[];
 
-    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
+    final cubeGroupNotifier =
+        Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
+    for (CubeInfo cubeInfo in cubeGroupNotifier.getCurrentCubeGroup().list) {
       list.add(cubeInfo);
     }
 
@@ -178,9 +182,10 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _updateCurrentCubeGroup() {
-    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
+    final cubeGroupNotifier =
+        Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    final list = cubeStore.getCurrentCubeGroup().list;
+    final list = cubeGroupNotifier.getCurrentCubeGroup().list;
     list.clear();
 
     for (final cube in _simpleCubes) {
