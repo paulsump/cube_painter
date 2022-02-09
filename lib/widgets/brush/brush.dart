@@ -83,6 +83,12 @@ class BrushState extends State<Brush> {
         widget.takeCubes(widget._handoverCubes());
       },
       onTapUp: (details) {
+        final Mode mode =
+            Provider.of<ModeNotifier>(context, listen: false).mode;
+
+        if (mode == Mode.zoomPan) {
+          return;
+        }
         _replaceCube(details.localPosition, context);
         widget.takeCubes(widget._handoverCubes());
       },
@@ -97,6 +103,7 @@ class BrushState extends State<Brush> {
     Crop crop = Crop.c;
 
     final Mode mode = Provider.of<ModeNotifier>(context, listen: false).mode;
+
     if (mode == Mode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
     }

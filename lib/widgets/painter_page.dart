@@ -10,6 +10,7 @@ import 'package:cube_painter/model/grid_point.dart';
 import 'package:cube_painter/notifiers/crop_notifier.dart';
 import 'package:cube_painter/notifiers/cube_group_notifier.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
+import 'package:cube_painter/notifiers/zoom_pan_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
@@ -90,13 +91,22 @@ class _PainterPageState extends State<PainterPage> {
             mode: Mode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
-            onPressed: i == 3
+            onPressed: i == 1
                 ? () {
-                    final cropNotifier =
-                        Provider.of<CropNotifier>(context, listen: false);
-                    cropNotifier.increment(-1);
+                    /// TODO get working
+                    /// TODO set by gestures
+                    final zoom =
+                        Provider.of<ZoomPanNotifier>(context, listen: false);
+                    zoom.increment(-1);
+                    setState(() {});
                   }
-                : null,
+                : i == 3
+                    ? () {
+                        final cropNotifier =
+                            Provider.of<CropNotifier>(context, listen: false);
+                        cropNotifier.increment(-1);
+                      }
+                    : null,
           ),
         for (int i = 0; i < 2; ++i)
           HexagonButton(
@@ -112,9 +122,6 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _loadNextGroup(BuildContext context) {
-    // final zoom = Provider.of<Zoom>(context, listen: false);
-    // zoom.increment(-1);
-
     final cubeGroupNotifier =
         Provider.of<CubeGroupNotifier>(context, listen: false);
     cubeGroupNotifier.increment(1);
