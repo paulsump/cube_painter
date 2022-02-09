@@ -91,17 +91,17 @@ class _HexagonState extends State<HexagonButton>
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                    if (widget.mode != null) {
-                      final modeNotifier =
+                  if (widget.mode != null) {
+                    final modeNotifier =
                         Provider.of<ModeNotifier>(context, listen: false);
 
                     modeNotifier.mode = widget.mode!;
                     _controller.forward();
                   } else {
-                      _controller.reset();
-                      _controller.forward();
-                    }
-                    widget.onPressed?.call();
+                    _controller.reset();
+                    _controller.forward();
+                  }
+                  widget.onPressed?.call();
                 },
               ),
             ),
@@ -114,8 +114,8 @@ class _HexagonState extends State<HexagonButton>
   double _getAlpha(BuildContext context) {
     double alpha = _controller.value;
     if (widget.mode != null) {
-      final modeNotifier = Provider.of<ModeNotifier>(context, listen: true);
-      if (modeNotifier.mode != widget.mode!) {
+      if (getMode(context, listen: true) != widget.mode!) {
+        // TODO USE color only for radios?
         alpha = 1;
       }
     }
@@ -124,9 +124,7 @@ class _HexagonState extends State<HexagonButton>
 
   Color? get color {
     if (widget.mode != null) {
-      final modeNotifier = Provider.of<ModeNotifier>(context, listen: true);
-
-      if (modeNotifier.mode != widget.mode!) {
+      if (getMode(context, listen: true) != widget.mode!) {
         return Color.lerp(
           getColor(Side.t),
           getColor(Side.br),

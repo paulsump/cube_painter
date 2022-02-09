@@ -3,7 +3,6 @@ import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/side.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 /// animated background
 class Background extends StatefulWidget {
@@ -43,9 +42,9 @@ class BackgroundState extends State<Background>
   @override
   Widget build(BuildContext context) {
     Screen.init(context);
-    final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
-    color = modeHolder.mode == Mode.zoomPan ? null : backgroundColor;
+    color =
+        getMode(context, listen: true) == Mode.zoomPan ? null : backgroundColor;
 
     return AnimatedBuilder(
       animation: _controller,
