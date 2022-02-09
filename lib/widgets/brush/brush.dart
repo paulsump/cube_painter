@@ -31,7 +31,7 @@ class Brush extends StatefulWidget {
       required this.erase})
       : super(key: key);
 
-  List<AnimCube> _takeCubes() {
+  List<AnimCube> _handoverCubes() {
     final listCopy = _cubes.toList();
 
     _cubes.clear();
@@ -94,7 +94,7 @@ class BrushState extends State<Brush> {
         }
       },
       onPanEnd: (details) {
-        widget.onEndPan(widget._takeCubes());
+        widget.onEndPan(widget._handoverCubes());
       },
       onTapUp: (details) {
         final GridPoint position = brushMaths.getPosition(
@@ -105,7 +105,7 @@ class BrushState extends State<Brush> {
         //  only add if/when user is happy with position
         // so need to wire frame like the pan
         _addCube(widget._cubes, position, widget.crop);
-        widget.onTapUp(widget._takeCubes());
+        widget.onTapUp(widget._handoverCubes());
       },
     );
   }

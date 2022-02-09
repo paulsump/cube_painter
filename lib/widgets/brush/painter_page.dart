@@ -76,8 +76,8 @@ class _PainterPageState extends State<PainterPage> {
         ),
         Brush(
           onStartPan: () {},
-          onEndPan: _takeCubes,
-          onTapUp: _takeCubes,
+          onEndPan: _adoptCubes,
+          onTapUp: _adoptCubes,
           erase: false,
           crop: crop,
         ),
@@ -117,7 +117,7 @@ class _PainterPageState extends State<PainterPage> {
     setState(() {});
   }
 
-  void _takeCubes(List<AnimCube> takenCubes) {
+  void _adoptCubes(List<AnimCube> takenCubes) {
     if (takenCubes.isNotEmpty) {
       // _takeEditBlock();
 
@@ -135,7 +135,6 @@ class _PainterPageState extends State<PainterPage> {
       }
 
       setState(() {});
-      // _save();
     }
   }
 
