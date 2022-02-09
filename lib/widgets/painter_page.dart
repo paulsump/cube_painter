@@ -197,7 +197,7 @@ class _PainterPageState extends State<PainterPage> {
       if (cubeGroupNotifier.isFirstTime) {
         cubeGroupNotifier.isFirstTime = false;
         _loadCubeGroup();
-        //TODO maybe remove if listing true somewhere?
+        //TODO maybe remove if "CubeGroupNotifier listen: true" somewhere?
         setState(() {});
       }
     }
