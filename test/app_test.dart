@@ -14,8 +14,6 @@ void main() {
     expect(find.byType(Grid), findsOneWidget);
     expect(find.byType(Brush), findsOneWidget);
 
-    // expect(find.byType(UnitCube), findsNWidgets(2));
-    // expect(find.byType(CroppedUnitCube), findsNWidgets(1));
 
     // await tester.tap(find.byType(Checkbox));
     // await tester.pump();

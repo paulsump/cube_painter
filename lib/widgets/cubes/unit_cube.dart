@@ -6,9 +6,12 @@ import 'package:flutter/material.dart';
 class UnitCube extends StatelessWidget {
   final Crop crop;
 
+  final PaintingStyle style;
+
   const UnitCube({
     Key? key,
     this.crop = Crop.c,
+    this.style = PaintingStyle.fill,
   }) : super(key: key);
 
   @override
@@ -16,7 +19,8 @@ class UnitCube extends StatelessWidget {
     return CustomPaint(
       painter: _CubePainter(
         context: context,
-        colorsAndPaths: _getColorsAndPaths(crop),
+        colorPathPairs: _getColorsAndPaths(crop),
+        style: style,
       ),
     );
   }
@@ -36,29 +40,32 @@ List<List<dynamic>> _getColorsAndPaths(Crop crop) {
 
 class _CubePainter extends CustomPainter {
   /// list of [Color,Path]
-  final List<List> colorsAndPaths;
+  final List<List> colorPathPairs;
 
   final BuildContext context;
 
+  final PaintingStyle style;
+
   const _CubePainter({
-    required this.colorsAndPaths,
+    required this.colorPathPairs,
     required this.context,
+    required this.style,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    _draw(canvas, PaintingStyle.fill);
+    _draw(canvas, style);
   }
 
   @override
   bool shouldRepaint(_CubePainter oldDelegate) => false;
 
   void _draw(Canvas canvas, PaintingStyle style) {
-    for (final colorAndPath in colorsAndPaths) {
+    for (final colorPathPair in colorPathPairs) {
       canvas.drawPath(
-          colorAndPath[1],
+          colorPathPair[1],
           Paint()
-            ..color = colorAndPath[0] //.withOpacity(opacity)
+            ..color = colorPathPair[0]
             ..style = style);
     }
   }

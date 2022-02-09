@@ -76,7 +76,7 @@ class _HexagonState extends State<HexagonButton>
               Transform.translate(
                 offset: widget.center,
                 child: Transform.scale(
-                  scale: widget.radius,
+                  scale: widget.radius / 2,
                   child: widget.unitChild,
                 ),
               ),

@@ -3,6 +3,7 @@ import 'package:cube_painter/model/grid_point.dart';
 import 'package:flutter/material.dart';
 
 class CubeInfo {
+  //TODO REname to position
   final GridPoint center;
 
   final Crop crop;

@@ -55,7 +55,10 @@ class _PainterPageState extends State<PainterPage> {
     final simpleCubeForModes = [
       null,
       const SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: Crop.c)),
-      const SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: Crop.c)),
+      const SimpleCube(
+        info: CubeInfo(center: GridPoint.zero, crop: Crop.c),
+        // style: PaintingStyle.stroke,
+      ),
       SimpleCube(info: CubeInfo(center: GridPoint.zero, crop: crop)),
     ];
 

@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 class SimpleCube extends StatelessWidget {
   final CubeInfo info;
 
-  const SimpleCube({Key? key, required this.info}) : super(key: key);
+  const SimpleCube({
+    Key? key,
+    required this.info,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
