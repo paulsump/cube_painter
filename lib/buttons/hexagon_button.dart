@@ -1,11 +1,14 @@
 import 'package:cube_painter/buttons/calc_hexagon_points.dart';
 import 'package:cube_painter/buttons/hexagon_painter.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/rendering/colors.dart';
 import 'package:cube_painter/rendering/side.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+const noWarn = out;
 
 class HexagonButton extends StatefulWidget {
   final IconData? icon;
@@ -97,6 +100,7 @@ class _HexagonState extends State<HexagonButton>
                           Provider.of<ModeNotifier>(context, listen: false);
 
                       modeHolder.mode = widget.mode!;
+                      // TODO is this doing anything?
                       _controller.reverse();
                     } else {
                       _controller.reset();

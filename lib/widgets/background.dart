@@ -45,7 +45,9 @@ class BackgroundState extends State<Background>
     Screen.init(context);
     final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
-    color = modeHolder.mode == Mode.zoomPan ? null : backgroundColor;
+    // TODO REMove but check radio buttons still work
+    // color = modeHolder.mode == Mode.zoomPan ? null : backgroundColor;
+    color = _getModeColor(modeHolder.mode);
 
     return AnimatedBuilder(
       animation: _controller,
@@ -96,3 +98,16 @@ final Animatable<Color?> _colorSequence = TweenSequence<Color?>(
     ),
   ],
 );
+
+Color? _getModeColor(Mode mode) {
+  switch (mode) {
+    case Mode.zoomPan:
+      return null;
+    case Mode.add:
+      return getColor(Side.bl);
+    case Mode.erase:
+      return getColor(Side.t);
+    case Mode.crop:
+      return getColor(Side.br);
+  }
+}
