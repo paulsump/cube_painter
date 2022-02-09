@@ -17,11 +17,7 @@ void main() {
       Map<String, dynamic> map = jsonDecode(testJson);
       CubeGroup newCubeGroup = CubeGroup.fromJson(map);
 
-      // out(
-      int i = 0;
-      // for (final newCube in newCubeGroup.list) {
-      //   expect(testCubes[i++], equals(newCube));
-      // }
+      expect(newCubeGroup.list.length, equals(0));
     });
 
     test('save', () {
