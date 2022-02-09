@@ -80,7 +80,7 @@ class _PainterPageState extends State<PainterPage> {
         Brush(adoptCubes: _adoptCubes),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
-          mode: Mode.zoomPan,
+          mode: Mode.panZoom,
           center: Offset(x * 0.5, y),
           radius: radius,
         ),
@@ -94,8 +94,8 @@ class _PainterPageState extends State<PainterPage> {
                 ? () {
                     /// TODO get working
                     /// TODO set by gestures
-                    final zoom =
-                        Provider.of<ZoomPanNotifier>(context, listen: false);
+              final zoom =
+                        Provider.of<PanZoomNotifier>(context, listen: false);
                     zoom.increment(-1);
                     setState(() {});
                   }

@@ -18,7 +18,7 @@ class CubePainterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ZoomPanNotifier()),
+        ChangeNotifierProvider(create: (_) => PanZoomNotifier()),
         ChangeNotifierProvider(create: (_) => CubeGroupNotifier()),
         ChangeNotifierProvider(create: (_) => ModeNotifier()),
         ChangeNotifierProvider(create: (_) => CropNotifier()),

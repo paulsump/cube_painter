@@ -59,7 +59,7 @@ class BrushState extends State<Brush> {
       },
       onPanUpdate: (details) {
         switch (getMode(context)) {
-          case Mode.zoomPan:
+          case Mode.panZoom:
             break;
           case Mode.add:
             _updateExtrude(details, context);
@@ -78,7 +78,7 @@ class BrushState extends State<Brush> {
         widget._handOver();
       },
       onTapUp: (details) {
-        if (getMode(context) == Mode.zoomPan) {
+        if (getMode(context) == Mode.panZoom) {
           return;
         }
         _replaceCube(details.localPosition, context);
