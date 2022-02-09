@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 const noWarn = out;
 
 double getZoomScale(BuildContext context) {
-  final zoom = Provider.of<ZoomPan>(context, listen: false);
+  final zoom = Provider.of<ZoomPanNotifier>(context, listen: false);
   return zoom.scale;
 }
 

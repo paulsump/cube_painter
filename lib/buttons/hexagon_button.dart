@@ -45,7 +45,7 @@ class _HexagonState extends State<HexagonButton>
     );
     _controller.value = 1;
 
-    final modeHolder = Provider.of<ModeHolder>(context, listen: false);
+    final modeHolder = Provider.of<ModeNotifier>(context, listen: false);
 
     if (widget.mode == modeHolder.mode) {
       _controller.value = 0;
@@ -88,7 +88,7 @@ class _HexagonState extends State<HexagonButton>
                   if (widget.enabled) {
                     if (widget.mode != null) {
                       final modeHolder =
-                          Provider.of<ModeHolder>(context, listen: false);
+                          Provider.of<ModeNotifier>(context, listen: false);
 
                       modeHolder.mode = widget.mode!;
                       _controller.reverse();
@@ -110,7 +110,7 @@ class _HexagonState extends State<HexagonButton>
   double _getAlpha(BuildContext context) {
     double alpha = _controller.value;
     if (widget.mode != null) {
-      final modeHolder = Provider.of<ModeHolder>(context, listen: true);
+      final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
       if (modeHolder.mode != widget.mode!) {
         alpha = 1;
       }
@@ -120,7 +120,7 @@ class _HexagonState extends State<HexagonButton>
 
   Color? get color {
     if (widget.mode != null) {
-      final modeHolder = Provider.of<ModeHolder>(context, listen: true);
+      final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
       if (modeHolder.mode == widget.mode!) {
         return getColor(Side.br);

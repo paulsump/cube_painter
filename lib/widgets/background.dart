@@ -43,7 +43,7 @@ class BackgroundState extends State<Background>
   @override
   Widget build(BuildContext context) {
     Screen.init(context);
-    final modeHolder = Provider.of<ModeHolder>(context, listen: true);
+    final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
     color = modeHolder.color;
 

@@ -4,7 +4,7 @@ import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/cube_group.dart';
 import 'package:cube_painter/model/cube_info.dart';
-import 'package:cube_painter/notifiers/cube_store.dart';
+import 'package:cube_painter/notifiers/cube_group_notifier.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
@@ -93,7 +93,7 @@ class _PainterPageState extends State<PainterPage> {
     // final zoom = Provider.of<Zoom>(context, listen: false);
     // zoom.increment(-1);
 
-    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
     cubeStore.increment(1);
 
     _simpleCubes.clear();
@@ -126,7 +126,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _loadAllCubeGroups() async {
-    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
 
     await for (final json in Assets.loadAll()) {
       cubeStore.add(CubeGroup.fromJson(await json));
@@ -141,7 +141,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _loadCubeGroup() {
-    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
 
     // _createCubesFromGroup(cubeStore);
     for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
@@ -158,7 +158,7 @@ class _PainterPageState extends State<PainterPage> {
   String _getJson() {
     final list = <CubeInfo>[];
 
-    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
 
     for (CubeInfo cubeInfo in cubeStore.getCurrentCubeGroup().list) {
       list.add(cubeInfo);
@@ -178,7 +178,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _updateCurrentCubeGroup() {
-    final cubeStore = Provider.of<CubeStore>(context, listen: false);
+    final cubeStore = Provider.of<CubeGroupNotifier>(context, listen: false);
 
     final list = cubeStore.getCurrentCubeGroup().list;
     list.clear();

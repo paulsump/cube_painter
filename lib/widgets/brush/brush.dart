@@ -59,7 +59,8 @@ class BrushState extends State<Brush> {
         );
       },
       onPanUpdate: (details) {
-        final Mode mode = Provider.of<ModeHolder>(context, listen: false).mode;
+        final Mode mode =
+            Provider.of<ModeNotifier>(context, listen: false).mode;
 
         switch (mode) {
           case Mode.zoomPan:
@@ -95,7 +96,7 @@ class BrushState extends State<Brush> {
     //  only add if/when user is happy with position
     // so need to wire frame like the pan
     Crop crop = Crop.c;
-    final Mode mode = Provider.of<ModeHolder>(context, listen: false).mode;
+    final Mode mode = Provider.of<ModeNotifier>(context, listen: false).mode;
     if (mode == Mode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
     }

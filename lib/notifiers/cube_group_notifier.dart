@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-class CubeStore extends ChangeNotifier {
+// TODO only load and keep one CubeGroup
+class CubeGroupNotifier extends ChangeNotifier {
   final _cubeGroups = <CubeGroup>[const CubeGroup([])];
 
   bool isFirstTime = true;

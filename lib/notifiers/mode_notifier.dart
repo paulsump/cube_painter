@@ -17,7 +17,7 @@ Color? getModeColor(Mode mode) {
   }
 }
 
-class ModeHolder extends ChangeNotifier {
+class ModeNotifier extends ChangeNotifier {
   var _mode = Mode.add;
 
   get mode => _mode;
