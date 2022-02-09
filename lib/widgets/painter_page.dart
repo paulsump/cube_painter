@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/model/assets.dart';
 import 'package:cube_painter/model/crop_direction.dart';
@@ -96,6 +97,8 @@ class _PainterPageState extends State<PainterPage> {
             center: Offset(x * (i + 4.5), y),
             radius: radius,
           ),
+        for (int i = 0; i < 7; ++i)
+          Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
       ],
     );
   }

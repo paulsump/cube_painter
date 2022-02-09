@@ -1,6 +1,8 @@
 import 'package:cube_painter/buttons/calc_hexagon_points.dart';
 import 'package:cube_painter/buttons/hexagon_painter.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
+import 'package:cube_painter/rendering/colors.dart';
+import 'package:cube_painter/rendering/side.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -127,7 +129,11 @@ class _HexagonState extends State<HexagonButton>
       final modeHolder = Provider.of<ModeNotifier>(context, listen: true);
 
       if (modeHolder.mode == widget.mode!) {
-        return Colors.red; //getColor(Side.br);
+        return Color.lerp(
+          getColor(Side.t),
+          getColor(Side.br),
+          0.3,
+        )!;
       }
     }
     return null;
