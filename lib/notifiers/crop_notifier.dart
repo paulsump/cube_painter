@@ -13,11 +13,16 @@ class CropNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void increment(int increment) {
-    int index = crop.index + increment;
+  void increment(int value, {int first = 1}) {
+    int index = crop.index + value;
 
-    //TODO Skip c
-    index %= Crop.values.length;
+    final int last = Crop.values.length - 1;
+    if (index < first) {
+      index = last;
+    } else if (index > last) {
+      index = first;
+    }
+
     crop = Crop.values[index];
   }
 }
