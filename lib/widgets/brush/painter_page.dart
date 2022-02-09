@@ -53,9 +53,9 @@ class _PainterPageState extends State<PainterPage> {
 
     final Y = Screen.height;
     final modeIcons = [
+      Icons.zoom_in_rounded,
       Icons.add,
       Icons.remove,
-      Icons.zoom_in_rounded,
       Icons.content_cut,
     ];
     // [Icons.pinch_rounded,pan_tool_alt_rounded zoom_in_map_rounded, () => _forward(context)],

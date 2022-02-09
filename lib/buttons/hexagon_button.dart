@@ -70,7 +70,6 @@ class _HexagonState extends State<HexagonButton>
                 alpha: _getAlpha(context),
               ),
             ),
-            // Line(widget.center - o * 2, widget.center + o * 2),
             if (widget.icon != null)
               Transform.translate(
                 offset: o + widget.center,
