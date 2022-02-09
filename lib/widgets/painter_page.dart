@@ -131,12 +131,20 @@ class _PainterPageState extends State<PainterPage> {
     setState(() {});
   }
 
-  // TODO rename takenCubes to adoptedCubes
-  void _adoptCubes(List<AnimCube> takenCubes) {
+  /// once the brush has finished, it
+  /// yields ownership of it's cubes to this parent widget.
+  /// which then creates a similar list
+  /// If we are in add mode
+  /// the cubes will end up going
+  /// in the simpleCube list once they've animated to full size.
+  /// if we're in erase mode they shrink to zero.
+  /// either way they get removed from the animCubes array once the
+  /// anim is done.
+  void _adoptCubes(List<AnimCube> orphans) {
     final bool erase = Mode.erase == getMode(context);
 
     if (erase) {
-      for (final AnimCube cube in takenCubes) {
+      for (final AnimCube cube in orphans) {
         final SimpleCube? simpleCube = _findAt(cube.info.center, _simpleCubes);
 
         if (simpleCube != null) {
@@ -145,8 +153,8 @@ class _PainterPageState extends State<PainterPage> {
       }
     }
 
-    if (takenCubes.isNotEmpty) {
-      for (final cube in takenCubes) {
+    if (orphans.isNotEmpty) {
+      for (final cube in orphans) {
         //TODO maybe set anim duration
         _animCubes.add(AnimCube(
           key: UniqueKey(),

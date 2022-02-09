@@ -16,7 +16,7 @@ const noWarn = [out, GridPoint];
 class Brush extends StatefulWidget {
   final _cubes = <AnimCube>[];
 
-  final void Function(List<AnimCube> takenCubes) adoptCubes;
+  final void Function(List<AnimCube> orphans) adoptCubes;
 
   Brush({
     Key? key,
