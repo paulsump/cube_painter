@@ -18,18 +18,13 @@ class Brush extends StatefulWidget {
   final void Function(List<AnimCube> takenCubes) onEndPan;
 
   final void Function(List<AnimCube> takenCubes) onTapUp;
-  final Crop crop;
 
-  final bool erase;
-
-  Brush(
-      {Key? key,
-      required this.onStartPan,
-      required this.onEndPan,
-      required this.onTapUp,
-      required this.crop,
-      required this.erase})
-      : super(key: key);
+  Brush({
+    Key? key,
+    required this.onStartPan,
+    required this.onEndPan,
+    required this.onTapUp,
+  }) : super(key: key);
 
   List<AnimCube> _handoverCubes() {
     final listCopy = _cubes.toList();
@@ -104,7 +99,7 @@ class BrushState extends State<Brush> {
         // TODO When this is a brush mode ,
         //  only add if/when user is happy with position
         // so need to wire frame like the pan
-        _addCube(widget._cubes, position, widget.crop);
+        _addCube(widget._cubes, position, Crop.dl);
         widget.onTapUp(widget._handoverCubes());
       },
     );
@@ -121,14 +116,14 @@ AnimCube? _findAt(GridPoint position, List<AnimCube> list) {
 }
 
 void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
-  const double t = 0.6;
 
   cubes.add(AnimCube(
     key: UniqueKey(),
     info: CubeInfo(center: center, crop: crop),
-    start: t,
-    // TODO FIX
-    end: t + 0.2,
+    start: 0.6,
+    end: 0.8,
+    // start:0.0,
+    // end: 1.0,
     pingPong: true,
   ));
 }
