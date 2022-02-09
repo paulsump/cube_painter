@@ -52,7 +52,7 @@ class _PainterPageState extends State<PainterPage> {
     const double x = 2 * radius * W;
     final double y = Screen.height - 2 * radius * H;
 
-    final Crop crop = Provider.of<CropNotifier>(context, listen: false).crop;
+    final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
 
     final unitCubesForModes = [
       null,
@@ -89,6 +89,13 @@ class _PainterPageState extends State<PainterPage> {
             mode: Mode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
+            onPressed: i == 3
+                ? () {
+                    final cropNotifier =
+                        Provider.of<CropNotifier>(context, listen: false);
+                    cropNotifier.increment(1);
+                  }
+                : null,
           ),
         for (int i = 0; i < 2; ++i)
           HexagonButton(
