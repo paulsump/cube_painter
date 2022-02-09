@@ -5,10 +5,10 @@ import 'package:cube_painter/notifiers/crop_notifier.dart';
 import 'package:cube_painter/notifiers/mode_notifier.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/widgets/brush/brush_maths.dart';
 import 'package:cube_painter/widgets/brush/positions.dart';
 import 'package:cube_painter/widgets/cubes/anim_cube.dart';
-import 'package:cube_painter/widgets/transformed.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +48,7 @@ class BrushState extends State<Brush> {
           // HACK without this container,
           // onPanStart etc doesn't get called after cubes are added.
           Container(),
-          Transformed(
+          UnitToScreen(
             child: Stack(children: widget._cubes),
           ),
         ],

@@ -2,11 +2,10 @@ import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:flutter/material.dart';
 
 /// translate to screen, then zoom
-/// TODO Coord - rename tor UnitToScreen
-class Transformed extends StatelessWidget {
+class UnitToScreen extends StatelessWidget {
   final Widget child;
 
-  const Transformed({Key? key, required this.child}) : super(key: key);
+  const UnitToScreen({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
