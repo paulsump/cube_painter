@@ -79,11 +79,14 @@ class BrushState extends State<Brush> {
       onPanEnd: (details) {
         widget._handOver();
       },
-      onTapUp: (details) {
+      onTapDown: (details) {
         if (getMode(context) == Mode.panZoom) {
           return;
         }
         _replaceCube(details.localPosition, context);
+        setState(() {});
+      },
+      onTapUp: (details) {
         widget._handOver();
       },
     );
