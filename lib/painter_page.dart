@@ -138,7 +138,15 @@ class _PainterPageState extends State<PainterPage> {
   void _adoptCubes(List<AnimCube> orphans) {
     final bool erase = Mode.erase == getMode(context);
 
-    _saveForUndo();
+    if (erase) {
+      assert(orphans.length == 1);
+      if (null != _findAt(orphans[0].info.center, _simpleCubes)) {
+        _saveForUndo();
+      }
+    } else {
+      _saveForUndo();
+    }
+
     for (final AnimCube cube in orphans) {
       if (erase) {
         _eraseAt(cube.info);
