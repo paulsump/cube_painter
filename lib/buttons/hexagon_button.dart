@@ -120,16 +120,16 @@ class _HexagonState extends State<HexagonButton>
     );
   }
 
-  Color get _color {
-    if (widget.mode != null) {
-      if (getMode(context, listen: true) != widget.mode!) {
-        return Color.lerp(
-          getColor(Side.t),
-          getColor(Side.br),
-          0.3,
-        )!;
-      }
-    }
-    return Color.lerp(backgroundColor, buttonColor, _controller.value)!;
-  }
+  Color get _color =>
+      widget.mode != null && getMode(context, listen: true) != widget.mode!
+          ? Color.lerp(
+              getColor(Side.t),
+              getColor(Side.br),
+              0.3,
+            )!
+          : Color.lerp(
+              backgroundColor,
+              buttonColor,
+              _controller.value,
+            )!;
 }
