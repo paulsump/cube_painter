@@ -11,6 +11,7 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_group_notifier.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/grid_point.dart';
+import 'package:cube_painter/grid.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
@@ -81,6 +82,7 @@ class _PainterPageState extends State<PainterPage> {
         UnitToScreen(
           child: Stack(
             children: [
+              const Grid(),
               ..._simpleCubes,
               ..._animCubes,
             ],
@@ -89,38 +91,33 @@ class _PainterPageState extends State<PainterPage> {
         Brush(adoptCubes: _adoptCubes),
         // const PanZoomer(),
         HexagonButton(
-          icon: Icons.zoom_in_rounded,
-          mode: Mode.panZoom,
-          center: Offset(x * 0.5, y),
-          radius: radius,
-        ),
+            icon: Icons.zoom_in_rounded,
+            mode: Mode.panZoom,
+            center: Offset(x * 0.5, y),
+            radius: radius,
+            onPressed: () {
+              // TODO set by gestures
+              final zoom = Provider.of<PanZoomNotifier>(context, listen: false);
+              zoom.increment(-1);
+              setState(() {});
+            }),
         for (int i = 1; i < unitCubesForModes.length; ++i)
           HexagonButton(
             unitChild: unitCubesForModes[i],
             mode: Mode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
-            onPressed: i == 1
+            onPressed: i == 3
                 ? () {
-                    // TODO get working
-                    // change is seen when change mode back to add
-                    // TODO set by gestures
-                    final zoom =
-                        Provider.of<PanZoomNotifier>(context, listen: false);
-                    zoom.increment(-1);
-                    setState(() {});
+                    final cropNotifier =
+                        Provider.of<CropNotifier>(context, listen: false);
+                    cropNotifier.increment(-1);
                   }
-                : i == 3
-                    ? () {
-                        final cropNotifier =
-                            Provider.of<CropNotifier>(context, listen: false);
-                        cropNotifier.increment(-1);
-                      }
-                    : null,
+                : null,
           ),
         for (int i = 0; i < buttonInfo.length; ++i)
-            HexagonButton(
-              enabled: buttonInfo[i][0] as bool,
+          HexagonButton(
+            enabled: buttonInfo[i][0] as bool,
             icon: buttonInfo[i][1] as IconData,
             onPressed: buttonInfo[i][2] as VoidCallback,
             center: Offset(x * (i + 4.5), y),
