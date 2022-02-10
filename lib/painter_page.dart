@@ -240,7 +240,6 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   /// For saving to clipboard
-  //TODO FIX FOR Simple cubes and crops
   void _updateCurrentCubeGroup() {
     List<CubeInfo> list = getCubeInfos(context);
     list.clear();

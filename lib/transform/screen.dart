@@ -14,15 +14,14 @@ void initScreen(BuildContext context) {
   screen.init(context);
 }
 
-//TODO test?
 Offset screenToUnit(Offset offset, BuildContext context) {
   return Offset(
           offset.dx, offset.dy - getScreen(context, listen: false).height) /
       getZoomScale(context);
 }
 
-void clip(Canvas canvas, BuildContext context) =>
-    canvas.clipRect(getScreen(context, listen: false).rect);
+// void clip(Canvas canvas, BuildContext context) =>
+//     canvas.clipRect(getScreen(context, listen: false).rect);
 
 class ScreenNotifier extends ChangeNotifier {
   Size? _size;

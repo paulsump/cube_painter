@@ -1,6 +1,5 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
 class HexagonPainter extends CustomPainter {
@@ -29,8 +28,7 @@ class HexagonPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO Remove if not needed
-    clip(canvas, context);
+    // clip(canvas, context);
 
     canvas.drawPath(
         path,

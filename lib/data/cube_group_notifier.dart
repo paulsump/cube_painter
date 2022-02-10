@@ -15,7 +15,6 @@ List<CubeInfo> getCubeInfos(BuildContext context) {
 }
 
 /// the main store of the entire model
-// TODO only load and keep one CubeGroup
 class CubeGroupNotifier extends ChangeNotifier {
   late CubeGroup _cubeGroup;
 

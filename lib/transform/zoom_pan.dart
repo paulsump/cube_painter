@@ -13,7 +13,7 @@ class PanZoomNotifier extends ChangeNotifier {
   /// equates to the length of the side of each triangle in pixels
   double scale = 30;
 
-  ///TODO rename and use
+  // TODO use or remove
   void increment(int increment) {
     scale *= 1 + _scaleStep * increment;
     notifyListeners();
