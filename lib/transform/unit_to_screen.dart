@@ -11,7 +11,7 @@ class UnitToScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      offset: getScreen(context).origin,
+      offset: getScreen(context, listen: false).origin,
       child: Transform.scale(
         scale: getZoomScale(context),
         child: child,

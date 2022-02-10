@@ -40,7 +40,7 @@ class GridPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    int n = _getN(getScreen(context).height / H);
+    int n = _getN(getScreen(context, listen: false).height / H);
     const y = -H;
 
     final rect = Rect.fromPoints(

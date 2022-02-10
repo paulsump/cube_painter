@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-ScreenNotifier getScreen(BuildContext context, {bool listen: false}) {
+ScreenNotifier getScreen(BuildContext context, {required bool listen}) {
   return Provider.of<ScreenNotifier>(context, listen: listen);
 }
 
@@ -16,12 +16,13 @@ void initScreen(BuildContext context) {
 
 //TODO test?
 Offset screenToUnit(Offset offset, BuildContext context) {
-  return Offset(offset.dx, offset.dy - getScreen(context).height) /
+  return Offset(
+          offset.dx, offset.dy - getScreen(context, listen: false).height) /
       getZoomScale(context);
 }
 
 void clip(Canvas canvas, BuildContext context) =>
-    canvas.clipRect(getScreen(context).rect);
+    canvas.clipRect(getScreen(context, listen: false).rect);
 
 class ScreenNotifier extends ChangeNotifier {
   Size? _size;
