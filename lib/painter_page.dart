@@ -34,10 +34,11 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final _undos = [];
-
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
+
+  final List<List<CubeInfo>> _undos = [];
+  final List<List<CubeInfo>> _redos = [];
 
   @override
   void initState() {
@@ -144,12 +145,12 @@ class _PainterPageState extends State<PainterPage> {
 
         if (simpleCube != null) {
           assert(orphans.length == 1);
-          _saveForUndo();
+          _saveTo(_undos);
           _simpleCubes.remove(simpleCube);
         }
       }
     } else {
-      _saveForUndo();
+      _saveTo(_undos);
     }
 
     for (final AnimCube cube in orphans) {
@@ -209,7 +210,7 @@ class _PainterPageState extends State<PainterPage> {
     }
 
     setState(() {});
-    _saveForUndo();
+    _saveTo(_undos);
   }
 
   ///
@@ -262,12 +263,7 @@ class _PainterPageState extends State<PainterPage> {
     setState(() {});
   }
 
-  void _saveForUndo() {
-    final cubeInfos = <CubeInfo>[];
-
-    for (final SimpleCube cube in _simpleCubes) {
-      cubeInfos.add(cube.info);
-    }
-    _undos.add(cubeInfos);
-  }
+  void _saveTo(List<List<CubeInfo>> list) => list.add(
+        List.generate(_simpleCubes.length, (index) => _simpleCubes[index].info),
+      );
 }
