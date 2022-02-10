@@ -24,10 +24,12 @@ class Brush extends StatefulWidget {
   }) : super(key: key);
 
   void _handOver() {
-    final orphans = _cubes.toList();
+    if (_cubes.isNotEmpty) {
+      final orphans = _cubes.toList();
 
-    _cubes.clear();
-    adoptCubes(orphans);
+      _cubes.clear();
+      adoptCubes(orphans);
+    }
   }
 
   @override
@@ -89,7 +91,7 @@ class BrushState extends State<Brush> {
 
   void _replaceCube(Offset offset, BuildContext context) {
     final GridPoint position =
-    brushMaths.getPosition(screenToUnit(offset, context));
+        brushMaths.getPosition(screenToUnit(offset, context));
 
     widget._cubes.clear();
     Crop crop = Crop.c;

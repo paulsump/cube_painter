@@ -19,7 +19,7 @@ class Assets {
 
     final fileNames = jsonDecode(manifestJson)
         .keys
-        .where((String key) => key.startsWith(folderPath));
+        .where((String key) => key.startsWith(folderPath + '/'));
 
     // out(fileNames);
     return fileNames;

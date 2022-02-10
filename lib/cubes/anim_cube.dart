@@ -29,6 +29,7 @@ class AnimCube extends StatefulWidget {
   final Widget cube;
 
   final Offset offset;
+  final int duration;
 
   AnimCube({
     Key? key,
@@ -37,6 +38,7 @@ class AnimCube extends StatefulWidget {
     required this.end,
     this.pingPong = false,
     this.whenComplete,
+    this.duration = 800,
   })  : cube = UnitCube(crop: info.crop),
         offset = gridToUnit(info.center),
         super(key: key);
@@ -52,7 +54,7 @@ class _AnimCubeState extends State<AnimCube>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: Duration(milliseconds: widget.duration),
       vsync: this,
     );
 

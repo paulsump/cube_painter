@@ -34,6 +34,8 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
+  final _undos = [];
+
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
@@ -66,6 +68,7 @@ class _PainterPageState extends State<PainterPage> {
 
     final pressedIconFunks = [
       [Icons.forward, () => _loadNextGroup()],
+      [Icons.undo_rounded, _undo],
       [Icons.save_alt_rounded, _saveToClipboard],
     ];
     return Stack(
@@ -86,7 +89,7 @@ class _PainterPageState extends State<PainterPage> {
           center: Offset(x * 0.5, y),
           radius: radius,
         ),
-        for (int i = 1; i < 4; ++i)
+        for (int i = 1; i < unitCubesForModes.length; ++i)
           HexagonButton(
             unitChild: unitCubesForModes[i],
             mode: Mode.values[i],
@@ -98,26 +101,26 @@ class _PainterPageState extends State<PainterPage> {
                     // change is seen when change mode back to add
                     // TODO set by gestures
                     final zoom =
-                        Provider.of<PanZoomNotifier>(context, listen: false);
-                    zoom.increment(-1);
-                    setState(() {});
-                  }
+              Provider.of<PanZoomNotifier>(context, listen: false);
+              zoom.increment(-1);
+              setState(() {});
+            }
                 : i == 3
-                    ? () {
-                        final cropNotifier =
-                            Provider.of<CropNotifier>(context, listen: false);
-                        cropNotifier.increment(-1);
-                      }
-                    : null,
+                ? () {
+              final cropNotifier =
+              Provider.of<CropNotifier>(context, listen: false);
+              cropNotifier.increment(-1);
+            }
+                : null,
           ),
-        for (int i = 0; i < 2; ++i)
+        for (int i = 0; i < pressedIconFunks.length; ++i)
           HexagonButton(
             icon: pressedIconFunks[i][0] as IconData,
             onPressed: pressedIconFunks[i][1] as VoidCallback,
             center: Offset(x * (i + 4.5), y),
             radius: radius,
           ),
-        for (int i = 0; i < 7; ++i)
+        for (int i = 0; i < 8; ++i)
           Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
       ],
     );
@@ -135,30 +138,30 @@ class _PainterPageState extends State<PainterPage> {
   void _adoptCubes(List<AnimCube> orphans) {
     final bool erase = Mode.erase == getMode(context);
 
-    if (erase) {
-      for (final AnimCube cube in orphans) {
+    final cubeInfos = <CubeInfo>[];
+
+    for (final AnimCube cube in orphans) {
+      cubeInfos.add(cube.info);
+
+      if (erase) {
         final SimpleCube? simpleCube = _findAt(cube.info.center, _simpleCubes);
 
         if (simpleCube != null) {
           _simpleCubes.remove(simpleCube);
         }
       }
-    }
 
-    if (orphans.isNotEmpty) {
-      for (final cube in orphans) {
-        //TODO maybe set anim duration
-        _animCubes.add(AnimCube(
-          key: UniqueKey(),
-          info: cube.info,
-          start: cube.scale,
-          end: erase ? 0.0 : 1.0,
-          whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
-        ));
-      }
-
-      setState(() {});
+      _animCubes.add(AnimCube(
+        key: UniqueKey(),
+        info: cube.info,
+        start: cube.scale,
+        end: erase ? 0.0 : 1.0,
+        whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
+        duration: 222,
+      ));
     }
+    setState(() {});
+    _undos.add([erase, cubeInfos]);
   }
 
   dynamic _removeSelf(AnimCube old) {
@@ -182,7 +185,7 @@ class _PainterPageState extends State<PainterPage> {
 
   void _loadNextGroup() {
     final cubeGroupNotifier =
-        Provider.of<CubeGroupNotifier>(context, listen: false);
+    Provider.of<CubeGroupNotifier>(context, listen: false);
 
     cubeGroupNotifier.increment(1);
     _addCubeGroup();
@@ -238,5 +241,15 @@ class _PainterPageState extends State<PainterPage> {
     // out(json);
     // out('');
     return json;
+  }
+
+  void _undo() {
+    final undo = _undos.last;
+    _undos.removeLast();
+
+    final bool erase = undo[0];
+    final CubeInfo cubeInfo = undo[1];
+
+    if (erase) {}
   }
 }
