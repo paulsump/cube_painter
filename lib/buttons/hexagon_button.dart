@@ -65,13 +65,12 @@ class _HexagonState extends State<HexagonButton>
             Transform.translate(
               offset: widget.center,
               child: Transform.scale(
-                scale: widget.radius,
+                scale: widget.radius * 0.8,
                 origin: const Offset(1, 1),
                 child: CustomPaint(
                   painter: HexagonPainter(
                     context: context,
-                    path: Path()
-                      ..addPolygon(calcUnitHexagonPoints().toList(), true),
+                    path: Path()..addPolygon(calcHexagonPoints(), true),
                     alpha: _getAlpha(context),
                     color: color,
                     repaint: true,

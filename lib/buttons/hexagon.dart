@@ -12,7 +12,7 @@ class Hexagon extends StatelessWidget {
     Key? key,
     required this.center,
     required this.radius,
-  })  : path = Path()..addPolygon(calcUnitHexagonPoints().toList(), true),
+  })  : path = Path()..addPolygon(calcHexagonPoints(), true),
         super(key: key);
 
   @override
