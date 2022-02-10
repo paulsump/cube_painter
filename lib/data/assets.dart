@@ -25,11 +25,15 @@ class Assets {
     return fileNames;
   }
 
-  static Stream<Future<Map<String, dynamic>>> loadAll(
-      String folderPath) async* {
-    final filePaths = await getFilePaths(folderPath);
-    for (String filePath in filePaths) {
-      yield loadJson(filePath);
-    }
-  }
+// //use like this
+// await for (final json in Assets.loadAll('data_test')) {
+//   cubeGroupNotifier.add(CubeGroup.fromJson(await json));
+// }
+// static Stream<Future<Map<String, dynamic>>> loadAll(
+//     String folderPath) async* {
+//   final filePaths = await getFilePaths(folderPath);
+//   for (String filePath in filePaths) {
+//     yield loadJson(filePath);
+//   }
+// }
 }

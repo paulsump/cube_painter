@@ -6,7 +6,6 @@ import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/cubes/simple_cube.dart';
 import 'package:cube_painter/cubes/unit_cube.dart';
-import 'package:cube_painter/data/assets.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_group_notifier.dart';
@@ -41,8 +40,10 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   void initState() {
-    _loadAllCubeGroups();
-    // _loadNextGroup();
+    final cubeGroupNotifier =
+        Provider.of<CubeGroupNotifier>(context, listen: false);
+
+    cubeGroupNotifier.init(whenComplete: _addCubeGroup);
     super.initState();
   }
 
@@ -123,16 +124,6 @@ class _PainterPageState extends State<PainterPage> {
     );
   }
 
-  void _loadNextGroup() {
-    final cubeGroupNotifier =
-        Provider.of<CubeGroupNotifier>(context, listen: false);
-
-    cubeGroupNotifier.increment(1);
-    _simpleCubes.clear();
-
-    _addCubeInfos();
-    setState(() {});
-  }
 
   /// once the brush has finished, it
   /// yields ownership of it's cubes to this parent widget.
@@ -191,21 +182,17 @@ class _PainterPageState extends State<PainterPage> {
     return null;
   }
 
-  void _loadAllCubeGroups() async {
+  void _loadNextGroup() {
     final cubeGroupNotifier =
         Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    await for (final json in Assets.loadAll('data_test')) {
-      cubeGroupNotifier.add(CubeGroup.fromJson(await json));
-
-      if (cubeGroupNotifier.isFirstTime) {
-        cubeGroupNotifier.isFirstTime = false;
-        _addCubeInfos();
-      }
-    }
+    cubeGroupNotifier.increment(1);
+    _addCubeGroup();
   }
 
-  void _addCubeInfos() {
+  void _addCubeGroup() {
+    _simpleCubes.clear();
+    _animCubes.clear();
     List<CubeInfo> list = getCubeInfos(context);
 
     for (int i = 0; i < list.length; ++i) {
@@ -221,6 +208,7 @@ class _PainterPageState extends State<PainterPage> {
     setState(() {});
   }
 
+  /// For saving to clipboard
   String _getJson() {
     final list = <CubeInfo>[];
 
@@ -241,11 +229,13 @@ class _PainterPageState extends State<PainterPage> {
     Clipboard.setData(ClipboardData(text: _getJson()));
   }
 
+  //TODO FIX FOR Simgle cubes and crops
   void _updateCurrentCubeGroup() {
     List<CubeInfo> list = getCubeInfos(context);
     list.clear();
 
     for (final cube in _simpleCubes) {
+      //modify directly so that we don't notify until end
       list.add(cube.info);
     }
   }
