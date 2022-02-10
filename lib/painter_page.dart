@@ -139,19 +139,20 @@ class _PainterPageState extends State<PainterPage> {
     final bool erase = Mode.erase == getMode(context);
 
     if (erase) {
-      assert(orphans.length == 1);
-      if (null != _findAt(orphans[0].info.center, _simpleCubes)) {
-        _saveForUndo();
+      for (final AnimCube cube in orphans) {
+        final SimpleCube? simpleCube = _findAt(cube.info.center, _simpleCubes);
+
+        if (simpleCube != null) {
+          assert(orphans.length == 1);
+          _saveForUndo();
+          _simpleCubes.remove(simpleCube);
+        }
       }
     } else {
       _saveForUndo();
     }
 
     for (final AnimCube cube in orphans) {
-      if (erase) {
-        _eraseAt(cube.info);
-      }
-
       _animCubes.add(AnimCube(
         key: UniqueKey(),
         info: cube.info,
@@ -162,14 +163,6 @@ class _PainterPageState extends State<PainterPage> {
       ));
     }
     setState(() {});
-  }
-
-  void _eraseAt(CubeInfo cubeInfo) {
-    final SimpleCube? simpleCube = _findAt(cubeInfo.center, _simpleCubes);
-
-    if (simpleCube != null) {
-      _simpleCubes.remove(simpleCube);
-    }
   }
 
   dynamic _removeSelf(AnimCube old) {
