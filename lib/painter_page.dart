@@ -14,7 +14,6 @@ import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
@@ -43,7 +42,7 @@ class _PainterPageState extends State<PainterPage> {
     final cubeGroupNotifier =
         Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    cubeGroupNotifier.init(whenComplete: _addCubeGroup);
+    cubeGroupNotifier.init(folderPath: 'data', whenComplete: _addCubeGroup);
     super.initState();
   }
 
@@ -80,7 +79,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ),
         Brush(adoptCubes: _adoptCubes),
-        const PanZoomer(),
+        // const PanZoomer(),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,

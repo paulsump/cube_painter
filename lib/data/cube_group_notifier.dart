@@ -9,7 +9,7 @@ const noWarn = out;
 
 List<CubeInfo> getCubeInfos(BuildContext context) {
   final cubeGroupNotifier =
-  Provider.of<CubeGroupNotifier>(context, listen: false);
+      Provider.of<CubeGroupNotifier>(context, listen: false);
 
   return cubeGroupNotifier.cubeGroup.list;
 }
@@ -24,21 +24,23 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   CubeGroup get cubeGroup => _cubeGroup;
 
-  void init({required VoidCallback whenComplete}) async {
-    final filePaths = await Assets.getFilePaths('data_test');
+  void init({
+    required String folderPath,
+    required VoidCallback whenComplete,
+  }) async {
+    final filePaths = await Assets.getFilePaths(folderPath);
+
     for (String filePath in filePaths) {
       _filePaths.add(filePath);
     }
 
-    // load first one
-    _loadCubeGroup();
+    await _loadCubeGroup();
     whenComplete();
   }
 
-  void _loadCubeGroup() async {
+  Future<void> _loadCubeGroup() async {
     final map = await Assets.loadJson(_filePaths[_currentIndex]);
     _cubeGroup = CubeGroup.fromJson(map);
-    // final String json = await rootBundle.loadString(_filePaths[_currentIndex]);
   }
 
   void increment(int increment) {
