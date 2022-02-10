@@ -32,25 +32,14 @@ class Screen {
     final pad = media.padding;
     final double safeAreaHeight = pad.top + pad.bottom;
 
-    Size newSize = media.size;
+    final Size newSize = media.size;
 
     final double x = newSize.width;
     final double y = newSize.height;
 
-//     if (media.orientation == Orientation.portrait) {
-    newSize = Size(x, y - safeAreaHeight);
-//     } else {
-//       newSize = Size(y, x - safeAreaHeight);
-// //      newSize = Size(y, y);
-//     }
-
-    out('sl');
-    if (size != newSize) {
-      assert(size.width != newSize.width || size.height != newSize.height);
-      //TODO draw a rect or place a widget to see these bounds
-      _size = newSize;
-      out(size);
-      //TODO notifyListeners();
-    }
+    _size = Size(x, y - safeAreaHeight);
+    //TODO draw a rect or place a widget to see these bounds
+    out(size);
+    //TODO notifyListeners();
   }
 }
