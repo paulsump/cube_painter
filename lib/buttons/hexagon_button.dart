@@ -144,6 +144,6 @@ class _HexagonState extends State<HexagonButton>
         )!;
       }
     }
-    return null;
+    return Color.lerp(backgroundColor, buttonColor, _controller.value);
   }
 }
