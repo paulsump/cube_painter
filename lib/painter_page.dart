@@ -41,7 +41,7 @@ class _PainterPageState extends State<PainterPage> {
   final List<SimpleCube> _simpleCubes = [];
 
   late Undoer _undoer;
-  late PressedIconFunks _pressedIconFunks;
+  late PressedIconFunks _buttonInfo;
 
   @override
   void initState() {
@@ -49,14 +49,15 @@ class _PainterPageState extends State<PainterPage> {
         Provider.of<CubeGroupNotifier>(context, listen: false);
 
     cubeGroupNotifier.init(folderPath: 'data', whenComplete: _addCubeGroup);
-
     _undoer = Undoer(_simpleCubes);
-    _pressedIconFunks = [
+
+    _buttonInfo = [
       [Icons.forward, () => _loadNextGroup()],
       [Icons.undo_sharp, () => _undoer.undo(setState)],
       [Icons.redo_sharp, () => _undoer.redo(setState)],
       [Icons.save_alt_sharp, _saveToClipboard],
     ];
+
     super.initState();
   }
 
@@ -78,6 +79,7 @@ class _PainterPageState extends State<PainterPage> {
       UnitCube(crop: crop),
     ];
 
+    final enabled = [true, _undoer.hasUndos, _undoer.hasRedos, true];
 
     return Stack(
       children: [
@@ -121,13 +123,14 @@ class _PainterPageState extends State<PainterPage> {
                       }
                     : null,
           ),
-        for (int i = 0; i < _pressedIconFunks.length; ++i)
-          HexagonButton(
-            icon: _pressedIconFunks[i][0] as IconData,
-            onPressed: _pressedIconFunks[i][1] as VoidCallback,
-            center: Offset(x * (i + 4.5), y),
-            radius: radius,
-          ),
+        for (int i = 0; i < _buttonInfo.length; ++i)
+          if (enabled[i])
+            HexagonButton(
+              icon: _buttonInfo[i][0] as IconData,
+              onPressed: _buttonInfo[i][1] as VoidCallback,
+              center: Offset(x * (i + 4.5), y),
+              radius: radius,
+            ),
         for (int i = 0; i < 8; ++i)
           Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
       ],

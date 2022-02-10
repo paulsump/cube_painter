@@ -12,6 +12,10 @@ class Undoer {
 
   Undoer(this.simpleCubes);
 
+  bool get hasUndos => _undos.isNotEmpty;
+
+  bool get hasRedos => _redos.isNotEmpty;
+
   void save() {
     _saveTo(_undos);
 
