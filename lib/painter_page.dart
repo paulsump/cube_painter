@@ -223,7 +223,7 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   /// For saving to clipboard
-  //TODO FIX FOR Simgle cubes and crops
+  //TODO FIX FOR Simple cubes and crops
   void _updateCurrentCubeGroup() {
     List<CubeInfo> list = getCubeInfos(context);
     list.clear();
@@ -252,28 +252,28 @@ class _PainterPageState extends State<PainterPage> {
 
   void _undo() {
     _popFromPushTo(_undos, _redos);
-    out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
+    // out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
   }
 
   void _redo() {
     _popFromPushTo(_redos, _undos);
-    out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
+    // out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
   }
 
-  String str(List list) {
-    final lengths = <int>[];
-
-    for (final item in list) {
-      lengths.add(item.length);
-    }
-    return '${list.length}($lengths)';
-  }
+  // String str(List list) {
+  //   final lengths = <int>[];
+  //
+  //   for (final item in list) {
+  //     lengths.add(item.length);
+  //   }
+  //   return '${list.length}($lengths)';
+  // }
 
   void _popFromPushTo(DoList popFrom, DoList pushTo) {
     _saveTo(pushTo);
     final List<CubeInfo> cubeInfos = popFrom.removeLast();
 
-    _animCubes.clear();
+    // _animCubes.clear();
     _simpleCubes.clear();
 
     for (final CubeInfo cubeInfo in cubeInfos) {
@@ -290,7 +290,7 @@ class _PainterPageState extends State<PainterPage> {
   void _saveForUndo() {
     _saveTo(_undos);
 
-    out(str(_undos));
+    // out(str(_undos));
     _redos.clear();
   }
 }
