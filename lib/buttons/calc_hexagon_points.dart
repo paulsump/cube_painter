@@ -8,7 +8,8 @@ List<Offset> calcHexagonPoints(Offset center, double outerRadius) {
 
   //TODO TOO HACKY (Lies to API)
   // TODO UPdate tests
-  double radius = 0.75 * outerRadius;
+  // double radius = 0.75 * outerRadius;
+  double radius = outerRadius;
 
   for (Offset offset in calcUnitHexagonPoints()) {
     //TOOD CHANGe calcUnitHexagonPoints() so it doesn't have to be upside down,

@@ -25,7 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-const noWarn = [out, getScreen];
+const noWarn = [out, getScreen, Line];
 
 class PainterPage extends StatefulWidget {
   const PainterPage({
@@ -135,7 +135,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         for (int i = 0; i < 8; ++i)
           Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
-        Line(Offset.zero, getScreen(context, listen: true).rect.bottomRight),
+        // Line(Offset.zero, getScreen(context, listen: true).rect.bottomRight),
       ],
     );
   }
