@@ -119,13 +119,13 @@ class _PainterPageState extends State<PainterPage> {
                     : null,
           ),
         for (int i = 0; i < buttonInfo.length; ++i)
-          if (buttonInfo[i][0] as bool)
             HexagonButton(
-              icon: buttonInfo[i][1] as IconData,
-              onPressed: buttonInfo[i][2] as VoidCallback,
-              center: Offset(x * (i + 4.5), y),
-              radius: radius,
-            ),
+              enabled: buttonInfo[i][0] as bool,
+            icon: buttonInfo[i][1] as IconData,
+            onPressed: buttonInfo[i][2] as VoidCallback,
+            center: Offset(x * (i + 4.5), y),
+            radius: radius,
+          ),
         for (int i = 0; i < 8; ++i)
           Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
       ],

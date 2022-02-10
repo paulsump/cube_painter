@@ -1,8 +1,8 @@
 import 'package:cube_painter/cubes/side.dart';
 import 'package:flutter/material.dart';
 
-Color getColor(Side vert) {
-  switch (vert) {
+Color getColor(Side side) {
+  switch (side) {
     case Side.br:
       return const Color(0xFFFFD8D6); // Light
     case Side.t:

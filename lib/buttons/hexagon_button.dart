@@ -11,18 +11,20 @@ import 'package:provider/provider.dart';
 const noWarn = out;
 
 class HexagonButton extends StatefulWidget {
+  final bool enabled;
   final IconData? icon;
+
   final VoidCallback? onPressed;
-
   final Offset center;
-  final double radius;
 
+  final double radius;
   final Mode? mode;
 
   final Widget? unitChild;
 
   const HexagonButton({
     Key? key,
+    this.enabled = true,
     this.icon,
     this.unitChild,
     this.onPressed,
@@ -77,6 +79,7 @@ class _HexagonState extends State<HexagonButton>
                 offset: widget.center,
                 child: Transform.scale(
                   scale: widget.radius / 2,
+                  // TODO widget.enabled IF needed
                   child: widget.unitChild,
                 ),
               ),
@@ -84,13 +87,19 @@ class _HexagonState extends State<HexagonButton>
               Transform.translate(
                 offset: widget.center +
                     const Offset(1, 1) * -IconTheme.of(context).size! / 2,
-                child: Icon(widget.icon),
+                child: Icon(
+                  widget.icon,
+                  color: getColor(widget.enabled ? Side.br : Side.bl),
+                ),
               ),
             Transform.translate(
               offset: widget.center - const Offset(W, H * 2) * widget.radius,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
+                  if (!widget.enabled) {
+                    return;
+                  }
                   if (widget.mode != null) {
                     final modeNotifier =
                         Provider.of<ModeNotifier>(context, listen: false);
