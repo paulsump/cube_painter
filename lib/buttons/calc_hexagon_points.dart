@@ -11,6 +11,8 @@ List<Offset> calcHexagonPoints(Offset center, double outerRadius) {
   double radius = 0.75 * outerRadius;
 
   for (Offset offset in calcUnitHexagonPoints()) {
+    //TOOD CHANGe calcUnitHexagonPoints() so it doesn't have to be upside down,
+    // thein i can use Transform and const calcUnitHexagonPoints widget
     points.add(offset.scale(radius, -radius) + center);
   }
   return points;

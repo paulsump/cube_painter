@@ -113,6 +113,7 @@ class _PainterPageState extends State<PainterPage> {
         for (int i = 1; i < unitCubesForModes.length; ++i)
           HexagonButton(
             unitChild: unitCubesForModes[i],
+            icon: i == 2 ? Icons.highlight_remove_sharp : null,
             mode: Mode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
@@ -176,6 +177,7 @@ class _PainterPageState extends State<PainterPage> {
           end: erase ? 0.0 : 1.0,
           whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
           duration: 222,
+          wire: erase,
         ));
       }
     }

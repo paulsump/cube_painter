@@ -101,7 +101,9 @@ class BrushState extends State<Brush> {
 
     if (getMode(context) == Mode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
+      out(crop);
     }
+
     _addCube(position, crop);
   }
 
@@ -139,6 +141,7 @@ class BrushState extends State<Brush> {
       start: 0.0,
       end: getMode(context) == Mode.erase ? 3.0 : 1.0,
       pingPong: true,
+      wire: getMode(context) == Mode.erase,
     ));
   }
 }
