@@ -34,14 +34,11 @@ class PainterPage extends StatefulWidget {
   State<PainterPage> createState() => _PainterPageState();
 }
 
-typedef PressedIconFunks = List<List<dynamic>>;
-
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
   late Undoer _undoer;
-  late PressedIconFunks _buttonInfo;
 
   @override
   void initState() {
@@ -50,13 +47,6 @@ class _PainterPageState extends State<PainterPage> {
 
     cubeGroupNotifier.init(folderPath: 'data', whenComplete: _addCubeGroup);
     _undoer = Undoer(_simpleCubes);
-
-    _buttonInfo = [
-      [Icons.forward, () => _loadNextGroup()],
-      [Icons.undo_sharp, () => _undoer.undo(setState)],
-      [Icons.redo_sharp, () => _undoer.redo(setState)],
-      [Icons.save_alt_sharp, _saveToClipboard],
-    ];
 
     super.initState();
   }
@@ -79,7 +69,12 @@ class _PainterPageState extends State<PainterPage> {
       UnitCube(crop: crop),
     ];
 
-    final enabled = [true, _undoer.hasUndos, _undoer.hasRedos, true];
+    final buttonInfo = [
+      [true, Icons.forward, () => _loadNextGroup()],
+      [_undoer.hasUndos, Icons.undo_sharp, () => _undoer.undo(setState)],
+      [_undoer.hasRedos, Icons.redo_sharp, () => _undoer.redo(setState)],
+      [true, Icons.save_alt_sharp, _saveToClipboard],
+    ];
 
     return Stack(
       children: [
@@ -123,11 +118,11 @@ class _PainterPageState extends State<PainterPage> {
                       }
                     : null,
           ),
-        for (int i = 0; i < _buttonInfo.length; ++i)
-          if (enabled[i])
+        for (int i = 0; i < buttonInfo.length; ++i)
+          if (buttonInfo[i][0] as bool)
             HexagonButton(
-              icon: _buttonInfo[i][0] as IconData,
-              onPressed: _buttonInfo[i][1] as VoidCallback,
+              icon: buttonInfo[i][1] as IconData,
+              onPressed: buttonInfo[i][2] as VoidCallback,
               center: Offset(x * (i + 4.5), y),
               radius: radius,
             ),
