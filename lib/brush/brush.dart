@@ -99,7 +99,7 @@ class BrushState extends State<Brush> {
     if (getMode(context) == Mode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
     }
-    _addCube(widget._cubes, position, crop);
+    _addCube(position, crop);
   }
 
   void _updateExtrude(DragUpdateDetails details, BuildContext context) {
@@ -121,12 +121,22 @@ class BrushState extends State<Brush> {
         if (cube != null) {
           widget._cubes.add(cube);
         } else {
-          _addCube(widget._cubes, position, Crop.c);
+          _addCube(position, Crop.c);
         }
       }
       setState(() {});
       previousPositions = positions;
     }
+  }
+
+  void _addCube(GridPoint center, Crop crop) {
+    widget._cubes.add(AnimCube(
+      key: UniqueKey(),
+      info: CubeInfo(center: center, crop: crop),
+      start: 0.0,
+      end: getMode(context) == Mode.erase ? 3.0 : 1.0,
+      pingPong: true,
+    ));
   }
 }
 
@@ -137,15 +147,4 @@ AnimCube? _findAt(GridPoint position, List<AnimCube> list) {
     }
   }
   return null;
-}
-
-void _addCube(List<AnimCube> cubes, GridPoint center, Crop crop) {
-  cubes.add(AnimCube(
-    key: UniqueKey(),
-    info: CubeInfo(center: center, crop: crop),
-    start: 0.0,
-    // start: 0.5,
-    end: 1.0,
-    pingPong: true,
-  ));
 }
