@@ -17,16 +17,16 @@ import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
+import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
-import 'package:cube_painter/transform/zoom_pan.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-const noWarn = [out, getScreen, Line];
+const noWarn = [out, getScreen, Line, PanZoomer];
 
 class PainterPage extends StatefulWidget {
   const PainterPage({
@@ -99,18 +99,14 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ),
         Brush(adoptCubes: _adoptCubes),
-        // const PanZoomer(),
+        if (Mode.panZoom == getMode(context))
+          PanZoomer(setState: () => setState(() {})),
         HexagonButton(
-            icon: Icons.zoom_in_rounded,
-            mode: Mode.panZoom,
-            center: Offset(x * 0.5, y),
-            radius: radius,
-            onPressed: () {
-              // TODO set by gestures
-              final zoom = Provider.of<PanZoomNotifier>(context, listen: false);
-              zoom.increment(-1);
-              setState(() {});
-            }),
+          icon: Icons.zoom_in_rounded,
+          mode: Mode.panZoom,
+          center: Offset(x * 0.5, y),
+          radius: radius,
+        ),
         for (int i = 1; i < unitCubesForModes.length; ++i)
           HexagonButton(
             unitChild: unitCubesForModes[i],
