@@ -27,7 +27,7 @@ class CubeCorners {
 
     switch (crop) {
       case Crop.c:
-        return [
+        return List.unmodifiable([
           [
             Side.bl,
             // |_|
@@ -44,9 +44,9 @@ class CubeCorners {
             // |/
             _offsets([c, tr, br, b])
           ],
-        ];
+        ]);
       case Crop.r:
-        return [
+        return List.unmodifiable([
           [
             Side.t,
             _offsets([c, tl, t])
@@ -55,9 +55,9 @@ class CubeCorners {
             Side.bl,
             _offsets([c, b, bl, tl])
           ],
-        ];
+        ]);
       case Crop.ur:
-        return [
+        return List.unmodifiable([
           [
             Side.bl,
             _offsets([c, b, bl, tl])
@@ -66,9 +66,9 @@ class CubeCorners {
             Side.br,
             _offsets([c, br, b])
           ],
-        ];
+        ]);
       case Crop.ul:
-        return [
+        return List.unmodifiable([
           [
             Side.bl,
             // _|
@@ -80,9 +80,9 @@ class CubeCorners {
             // |/
             _offsets([c, tr, br, b])
           ],
-        ];
+        ]);
       case Crop.l:
-        return [
+        return List.unmodifiable([
           [
             Side.br,
             _offsets([c, tr, br, b])
@@ -91,9 +91,9 @@ class CubeCorners {
             Side.t,
             _offsets([c, t, tr])
           ],
-        ];
+        ]);
       case Crop.dl:
-        return [
+        return List.unmodifiable([
           [
             Side.br,
             // /|
@@ -105,9 +105,9 @@ class CubeCorners {
             // /_/
             _offsets([c, tl, t, tr])
           ],
-        ];
+        ]);
       case Crop.dr:
-        return [
+        return List.unmodifiable([
           [
             Side.bl,
             // |-
@@ -118,7 +118,7 @@ class CubeCorners {
             // /_/
             _offsets([c, tl, t, tr])
           ],
-        ];
+        ]);
     }
   }
 
