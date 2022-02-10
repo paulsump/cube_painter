@@ -5,8 +5,13 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-ScreenNotifier getScreen(BuildContext context) {
-  return Provider.of<ScreenNotifier>(context, listen: false);
+ScreenNotifier getScreen(BuildContext context, {bool listen: false}) {
+  return Provider.of<ScreenNotifier>(context, listen: listen);
+}
+
+void initScreen(BuildContext context) {
+  final screen = getScreen(context, listen: false);
+  screen.init(context);
 }
 
 //TODO test?
@@ -43,7 +48,9 @@ class ScreenNotifier extends ChangeNotifier {
     final double y = newSize.height;
 
     _size = Size(x, y - safeAreaHeight);
-    //TODO NOtify
-    // notifyListeners();
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      notifyListeners();
+    });
   }
 }

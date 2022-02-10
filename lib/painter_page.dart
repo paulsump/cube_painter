@@ -60,7 +60,7 @@ class _PainterPageState extends State<PainterPage> {
     const double radius = 40;
 
     const double x = 2 * radius * W;
-    final double y = getScreen(context).height - 2 * radius * H;
+    final double y = getScreen(context, listen: true).height - 2 * radius * H;
 
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
 
@@ -134,7 +134,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         for (int i = 0; i < 8; ++i)
           Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
-        Line(Offset.zero, getScreen(context).rect.bottomRight),
+        Line(Offset.zero, getScreen(context, listen: true).rect.bottomRight),
       ],
     );
   }
