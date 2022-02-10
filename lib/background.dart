@@ -41,10 +41,10 @@ class BackgroundState extends State<Background>
 
   @override
   Widget build(BuildContext context) {
-    Screen.init(context);
+    getScreen(context).init(context);
 
     color =
-    getMode(context, listen: true) == Mode.panZoom ? null : backgroundColor;
+        getMode(context, listen: true) == Mode.panZoom ? null : backgroundColor;
 
     return AnimatedBuilder(
       animation: _controller,

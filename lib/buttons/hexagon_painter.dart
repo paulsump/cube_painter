@@ -29,7 +29,8 @@ class HexagonPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    clip(canvas);
+    // TODO Remove if not needed
+    clip(canvas, context);
 
     canvas.drawPath(
         path,

@@ -1,34 +1,37 @@
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/zoom_pan.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 const noWarn = out;
 
+ScreenNotifier getScreen(BuildContext context) {
+  return Provider.of<ScreenNotifier>(context, listen: false);
+}
+
 //TODO test?
 Offset screenToUnit(Offset offset, BuildContext context) {
-  return Offset(offset.dx, offset.dy - Screen.height) / getZoomScale(context);
+  return Offset(offset.dx, offset.dy - getScreen(context).height) /
+      getZoomScale(context);
 }
 
-void clip(Canvas canvas) => canvas.clipRect(Screen.rect);
+void clip(Canvas canvas, BuildContext context) =>
+    canvas.clipRect(getScreen(context).rect);
 
 class ScreenNotifier extends ChangeNotifier {
-// TODO Rename Screen to ScreenNotifier
-}
+  Size? _size;
 
-class Screen {
-  static Size? _size;
+  double get width => size.width;
 
-  static double get width => size.width;
+  double get height => size.height;
 
-  static double get height => size.height;
+  Size get size => _size!;
 
-  static Size get size => _size!;
+  Rect get rect => Offset.zero & size;
 
-  static Rect get rect => Offset.zero & size;
+  Offset get origin => Offset(0, height);
 
-  static Offset get origin => Offset(0, height);
-
-  static void init(BuildContext context) {
+  void init(BuildContext context) {
     final media = MediaQuery.of(context);
 
     final pad = media.padding;
@@ -40,8 +43,7 @@ class Screen {
     final double y = newSize.height;
 
     _size = Size(x, y - safeAreaHeight);
-    //TODO draw a rect or place a widget to see these bounds
-    // out(size);
-    //TODO notifyListeners();
+    //TODO NOtify
+    // notifyListeners();
   }
 }
