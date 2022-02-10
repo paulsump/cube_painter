@@ -12,6 +12,7 @@ import 'package:cube_painter/data/cube_group_notifier.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/grid.dart';
+import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
@@ -133,6 +134,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         for (int i = 0; i < 8; ++i)
           Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
+        Line(Offset.zero, Screen.rect.bottomRight),
       ],
     );
   }
