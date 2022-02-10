@@ -164,14 +164,18 @@ class _PainterPageState extends State<PainterPage> {
     }
 
     for (final AnimCube cube in orphans) {
-      _animCubes.add(AnimCube(
-        key: UniqueKey(),
-        info: cube.info,
-        start: cube.scale,
-        end: erase ? 0.0 : 1.0,
-        whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
-        duration: 222,
-      ));
+      if (cube.scale == 1) {
+        _simpleCubes.add(SimpleCube(info: cube.info));
+      } else {
+        _animCubes.add(AnimCube(
+          key: UniqueKey(),
+          info: cube.info,
+          start: cube.scale,
+          end: erase ? 0.0 : 1.0,
+          whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
+          duration: 222,
+        ));
+      }
     }
     setState(() {});
   }
