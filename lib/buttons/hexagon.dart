@@ -12,16 +12,23 @@ class Hexagon extends StatelessWidget {
     Key? key,
     required this.center,
     required this.radius,
-  })  : path = Path()..addPolygon(calcHexagonPoints(center, radius), true),
+  })  : path = Path()..addPolygon(calcUnitHexagonPoints().toList(), true),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: HexagonPainter(
-        context: context,
-        path: path,
-        alpha: 1,
+    return Transform.translate(
+      offset: center,
+      child: Transform.scale(
+        scale: radius,
+        origin: const Offset(1, 1),
+        child: CustomPaint(
+          painter: HexagonPainter(
+            context: context,
+            path: path,
+            alpha: 1,
+          ),
+        ),
       ),
     );
   }

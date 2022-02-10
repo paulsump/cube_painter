@@ -24,10 +24,10 @@ Iterable<Offset> calcUnitHexagonPoints() sync* {
   var vec = Vector2(1, 0);
 
   vec.postmultiply(Matrix2.rotation(angle / 2));
-  yield Offset(vec.x, -vec.y);
+  yield Offset(vec.x, -vec.y).translate(1, 1);
 
   for (int i = 0; i < 5; ++i) {
     vec.postmultiply(Matrix2.rotation(angle));
-    yield Offset(vec.x, -vec.y);
+    yield Offset(vec.x, -vec.y).translate(1, 1);
   }
 }

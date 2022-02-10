@@ -62,15 +62,21 @@ class _HexagonState extends State<HexagonButton>
       builder: (context, child) {
         return Stack(
           children: [
-            CustomPaint(
-              painter: HexagonPainter(
-                context: context,
-                path: Path()
-                  ..addPolygon(
-                      calcHexagonPoints(widget.center, widget.radius), true),
-                alpha: _getAlpha(context),
-                color: color,
-                repaint: true,
+            Transform.translate(
+              offset: widget.center,
+              child: Transform.scale(
+                scale: widget.radius,
+                origin: const Offset(1, 1),
+                child: CustomPaint(
+                  painter: HexagonPainter(
+                    context: context,
+                    path: Path()
+                      ..addPolygon(calcUnitHexagonPoints().toList(), true),
+                    alpha: _getAlpha(context),
+                    color: color,
+                    repaint: true,
+                  ),
+                ),
               ),
             ),
             if (widget.unitChild != null)
