@@ -101,17 +101,17 @@ class _PainterPageState extends State<PainterPage> {
                     // change is seen when change mode back to add
                     // TODO set by gestures
                     final zoom =
-              Provider.of<PanZoomNotifier>(context, listen: false);
-              zoom.increment(-1);
-              setState(() {});
-            }
+                        Provider.of<PanZoomNotifier>(context, listen: false);
+                    zoom.increment(-1);
+                    setState(() {});
+                  }
                 : i == 3
-                ? () {
-              final cropNotifier =
-              Provider.of<CropNotifier>(context, listen: false);
-              cropNotifier.increment(-1);
-            }
-                : null,
+                    ? () {
+                        final cropNotifier =
+                            Provider.of<CropNotifier>(context, listen: false);
+                        cropNotifier.increment(-1);
+                      }
+                    : null,
           ),
         for (int i = 0; i < pressedIconFunks.length; ++i)
           HexagonButton(
@@ -139,16 +139,14 @@ class _PainterPageState extends State<PainterPage> {
     final bool erase = Mode.erase == getMode(context);
 
     final cubeInfos = <CubeInfo>[];
+    final undo = [erase, cubeInfos];
+    _undos.add(undo);
 
     for (final AnimCube cube in orphans) {
       cubeInfos.add(cube.info);
 
       if (erase) {
-        final SimpleCube? simpleCube = _findAt(cube.info.center, _simpleCubes);
-
-        if (simpleCube != null) {
-          _simpleCubes.remove(simpleCube);
-        }
+        undo.add(_eraseAt(cube.info));
       }
 
       _animCubes.add(AnimCube(
@@ -161,7 +159,15 @@ class _PainterPageState extends State<PainterPage> {
       ));
     }
     setState(() {});
-    _undos.add([erase, cubeInfos]);
+  }
+
+  int _eraseAt(CubeInfo cubeInfo) {
+    final int i = _findIndexAt(cubeInfo.center, _simpleCubes);
+
+    if (-1 != i) {
+      _simpleCubes.remove(_simpleCubes[i]);
+    }
+    return i;
   }
 
   dynamic _removeSelf(AnimCube old) {
@@ -174,27 +180,28 @@ class _PainterPageState extends State<PainterPage> {
     return _removeSelf(old);
   }
 
-  SimpleCube? _findAt(GridPoint position, List<SimpleCube> list) {
-    for (final cube in list) {
-      if (position == cube.info.center) {
-        return cube;
+  int _findIndexAt(GridPoint position, List<SimpleCube> list) {
+    for (int i = 0; i < list.length; ++i) {
+      if (position == list[i].info.center) {
+        return i;
       }
     }
-    return null;
+    return -1;
   }
 
   void _loadNextGroup() {
     final cubeGroupNotifier =
-    Provider.of<CubeGroupNotifier>(context, listen: false);
+        Provider.of<CubeGroupNotifier>(context, listen: false);
 
     cubeGroupNotifier.increment(1);
     _addCubeGroup();
   }
 
   void _addCubeGroup() {
+    List<CubeInfo> list = getCubeInfos(context);
+
     _simpleCubes.clear();
     _animCubes.clear();
-    List<CubeInfo> list = getCubeInfos(context);
 
     for (int i = 0; i < list.length; ++i) {
       _animCubes.add(AnimCube(
@@ -248,8 +255,24 @@ class _PainterPageState extends State<PainterPage> {
     _undos.removeLast();
 
     final bool erase = undo[0];
-    final CubeInfo cubeInfo = undo[1];
+    final List<CubeInfo> cubeInfos = undo[1];
 
-    if (erase) {}
+    if (erase) {
+      _animCubes.insert(
+          undo[2],
+          AnimCube(
+            key: UniqueKey(),
+            info: cubeInfos[0],
+            start: 0,
+            end: 1.0,
+            whenComplete: _convertToSimpleCubeAndRemoveSelf,
+            duration: 122,
+          ));
+    } else {
+      for (final CubeInfo cubeInfo in cubeInfos) {
+        _eraseAt(cubeInfo);
+      }
+    }
+    setState(() {});
   }
 }
