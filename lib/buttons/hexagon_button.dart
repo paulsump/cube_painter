@@ -1,4 +1,4 @@
-import 'package:cube_painter/buttons/hexagon_painter.dart';
+import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/mode.dart';
@@ -61,18 +61,11 @@ class _HexagonState extends State<HexagonButton>
       builder: (context, child) {
         return Stack(
           children: [
-            Transform.translate(
-              offset: widget.center,
-              child: Transform.scale(
-                scale: widget.radius * 0.8,
-                origin: const Offset(1, 1),
-                child: CustomPaint(
-                  painter: HexagonPainter(
-                    color: _color,
-                    repaint: true,
-                  ),
-                ),
-              ),
+            Hexagon(
+              center: widget.center,
+              radius: widget.radius * 0.8,
+              color: _color,
+              repaint: true,
             ),
             if (widget.unitChild != null)
               Transform.translate(

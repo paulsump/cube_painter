@@ -1,15 +1,19 @@
 import 'package:cube_painter/buttons/hexagon_painter.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
 class Hexagon extends StatelessWidget {
   final Offset center;
   final double radius;
 
+  final Color color;
+  final bool repaint;
+
   const Hexagon({
     Key? key,
     required this.center,
     required this.radius,
+    required this.color,
+    this.repaint = false,
   }) : super(key: key);
 
   @override
@@ -21,7 +25,8 @@ class Hexagon extends StatelessWidget {
         origin: const Offset(1, 1),
         child: CustomPaint(
           painter: HexagonPainter(
-            color: buttonColor,
+            color: color,
+            repaint: repaint,
           ),
         ),
       ),

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/cubes/simple_cube.dart';
 import 'package:cube_painter/cubes/unit_cube.dart';
@@ -134,7 +135,10 @@ class _PainterPageState extends State<PainterPage> {
             radius: radius,
           ),
         for (int i = 0; i < 8; ++i)
-          Hexagon(center: Offset(x * i, y + 3 * radius * H), radius: radius),
+          Hexagon(
+              center: Offset(x * i, y + 3 * radius * H),
+              radius: radius,
+              color: buttonColor),
         // Line(Offset.zero, getScreen(context, listen: true).rect.bottomRight),
       ],
     );

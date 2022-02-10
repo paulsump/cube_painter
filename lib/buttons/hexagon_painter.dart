@@ -10,7 +10,7 @@ class HexagonPainter extends CustomPainter {
 
   const HexagonPainter({
     required this.color,
-    this.repaint = false,
+    required this.repaint,
   });
 
   @override
