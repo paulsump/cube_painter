@@ -1,4 +1,4 @@
-import 'package:cube_painter/transform/zoom_pan.dart';
+import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/material.dart';
 
 class PanZoomer extends StatefulWidget {
@@ -14,7 +14,6 @@ class PanZoomer extends StatefulWidget {
 }
 
 class _PanZoomerState extends State<PanZoomer> {
-  Offset _offset = Offset.zero;
 
   Offset _initialFocalPoint = Offset.zero;
   Offset _sessionOffset = Offset.zero;
@@ -22,6 +21,10 @@ class _PanZoomerState extends State<PanZoomer> {
   double get _scale => getZoomScale(context);
 
   set _scale(double value) => setZoomScale(context, value);
+
+  Offset get _offset => getPanOffset(context);
+
+  set _offset(Offset value) => setPanOffset(context, value);
 
   double _initialScale = 1.0;
 

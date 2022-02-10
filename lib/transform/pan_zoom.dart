@@ -14,17 +14,34 @@ void setZoomScale(BuildContext context, double scale) {
   zoom.scale = scale;
 }
 
+Offset getPanOffset(BuildContext context) {
+  final zoom = Provider.of<PanZoomNotifier>(context, listen: false);
+  return zoom.offset;
+}
+
+void setPanOffset(BuildContext context, Offset offset) {
+  final zoom = Provider.of<PanZoomNotifier>(context, listen: false);
+  zoom.offset = offset;
+}
+
 class PanZoomNotifier extends ChangeNotifier {
-  static const _scaleStep = 0.1;
+  /// equates to the length of the side of each triangle in pixels
+  double _scale = 30;
+
+  Offset _offset = Offset.zero;
 
   double get scale => _scale;
 
   set scale(double value) {
     _scale = value;
-    // out(_scale);
     notifyListeners();
   }
 
-  /// equates to the length of the side of each triangle in pixels
-  double _scale = 30;
+  Offset get offset => _offset;
+
+  set offset(Offset value) {
+    _offset = value;
+    // out(value);
+    notifyListeners();
+  }
 }

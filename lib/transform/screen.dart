@@ -1,5 +1,5 @@
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/zoom_pan.dart';
+import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
