@@ -33,12 +33,14 @@ class PainterPage extends StatefulWidget {
   State<PainterPage> createState() => _PainterPageState();
 }
 
+typedef DoList = List<List<CubeInfo>>;
+
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
-  final List<List<CubeInfo>> _undos = [];
-  final List<List<CubeInfo>> _redos = [];
+  final DoList _undos = [];
+  final DoList _redos = [];
 
   @override
   void initState() {
@@ -247,23 +249,25 @@ class _PainterPageState extends State<PainterPage> {
     return json;
   }
 
-  void _undo() {
-    final List<CubeInfo> cubeInfos = _undos.last;
-    _undos.removeLast();
+  void _undo() => _popFromPushTo(_undos, _redos);
+
+  void _redo() => _popFromPushTo(_undos, _redos);
+
+  void _popFromPushTo(DoList popFrom, DoList pushTo) {
+    final List<CubeInfo> cubeInfos = popFrom.removeLast();
 
     _animCubes.clear();
     _simpleCubes.clear();
 
     for (final CubeInfo cubeInfo in cubeInfos) {
-      _simpleCubes.add(SimpleCube(
-        key: UniqueKey(),
-        info: cubeInfo,
-      ));
+      _simpleCubes.add(SimpleCube(key: UniqueKey(), info: cubeInfo));
     }
+
     setState(() {});
+    _saveTo(pushTo);
   }
 
-  void _saveTo(List<List<CubeInfo>> list) => list.add(
+  void _saveTo(DoList list) => list.add(
         List.generate(_simpleCubes.length, (index) => _simpleCubes[index].info),
       );
 }
