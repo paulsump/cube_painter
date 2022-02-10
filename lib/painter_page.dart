@@ -18,6 +18,7 @@ import 'package:cube_painter/transform/screen_transform.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/transform/zoom_pan.dart';
+import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -33,14 +34,11 @@ class PainterPage extends StatefulWidget {
   State<PainterPage> createState() => _PainterPageState();
 }
 
-typedef DoList = List<List<CubeInfo>>;
-
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
-  final DoList _undos = [];
-  final DoList _redos = [];
+  late Undoer undoer;
 
   @override
   void initState() {
@@ -48,6 +46,8 @@ class _PainterPageState extends State<PainterPage> {
         Provider.of<CubeGroupNotifier>(context, listen: false);
 
     cubeGroupNotifier.init(folderPath: 'data', whenComplete: _addCubeGroup);
+
+    undoer = Undoer(_simpleCubes);
     super.initState();
   }
 
@@ -71,10 +71,11 @@ class _PainterPageState extends State<PainterPage> {
 
     final pressedIconFunks = [
       [Icons.forward, () => _loadNextGroup()],
-      [Icons.undo_sharp, _undo],
-      [Icons.redo_sharp, _redo],
+      [Icons.undo_sharp, () => undoer.undo(setState)],
+      [Icons.redo_sharp, () => undoer.redo(setState)],
       [Icons.save_alt_sharp, _saveToClipboard],
     ];
+
     return Stack(
       children: [
         UnitToScreen(
@@ -148,12 +149,12 @@ class _PainterPageState extends State<PainterPage> {
 
         if (simpleCube != null) {
           assert(orphans.length == 1);
-          _saveForUndo();
+          undoer.save();
           _simpleCubes.remove(simpleCube);
         }
       }
     } else {
-      _saveForUndo();
+      undoer.save();
     }
 
     for (final AnimCube cube in orphans) {
@@ -248,49 +249,5 @@ class _PainterPageState extends State<PainterPage> {
     // out(json);
     // out('');
     return json;
-  }
-
-  void _undo() {
-    _popFromPushTo(_undos, _redos);
-    // out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
-  }
-
-  void _redo() {
-    _popFromPushTo(_redos, _undos);
-    // out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
-  }
-
-  // String str(List list) {
-  //   final lengths = <int>[];
-  //
-  //   for (final item in list) {
-  //     lengths.add(item.length);
-  //   }
-  //   return '${list.length}($lengths)';
-  // }
-
-  void _popFromPushTo(DoList popFrom, DoList pushTo) {
-    _saveTo(pushTo);
-    final List<CubeInfo> cubeInfos = popFrom.removeLast();
-
-    // _animCubes.clear();
-    _simpleCubes.clear();
-
-    for (final CubeInfo cubeInfo in cubeInfos) {
-      _simpleCubes.add(SimpleCube(key: UniqueKey(), info: cubeInfo));
-    }
-
-    setState(() {});
-  }
-
-  void _saveTo(DoList list) => list.add(
-        List.generate(_simpleCubes.length, (index) => _simpleCubes[index].info),
-      );
-
-  void _saveForUndo() {
-    _saveTo(_undos);
-
-    // out(str(_undos));
-    _redos.clear();
   }
 }
