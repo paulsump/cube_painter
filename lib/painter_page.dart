@@ -34,11 +34,14 @@ class PainterPage extends StatefulWidget {
   State<PainterPage> createState() => _PainterPageState();
 }
 
+typedef PressedIconFunks = List<List<dynamic>>;
+
 class _PainterPageState extends State<PainterPage> {
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
-  late Undoer undoer;
+  late Undoer _undoer;
+  late PressedIconFunks _pressedIconFunks;
 
   @override
   void initState() {
@@ -47,7 +50,13 @@ class _PainterPageState extends State<PainterPage> {
 
     cubeGroupNotifier.init(folderPath: 'data', whenComplete: _addCubeGroup);
 
-    undoer = Undoer(_simpleCubes);
+    _undoer = Undoer(_simpleCubes);
+    _pressedIconFunks = [
+      [Icons.forward, () => _loadNextGroup()],
+      [Icons.undo_sharp, () => _undoer.undo(setState)],
+      [Icons.redo_sharp, () => _undoer.redo(setState)],
+      [Icons.save_alt_sharp, _saveToClipboard],
+    ];
     super.initState();
   }
 
@@ -69,12 +78,6 @@ class _PainterPageState extends State<PainterPage> {
       UnitCube(crop: crop),
     ];
 
-    final pressedIconFunks = [
-      [Icons.forward, () => _loadNextGroup()],
-      [Icons.undo_sharp, () => undoer.undo(setState)],
-      [Icons.redo_sharp, () => undoer.redo(setState)],
-      [Icons.save_alt_sharp, _saveToClipboard],
-    ];
 
     return Stack(
       children: [
@@ -118,10 +121,10 @@ class _PainterPageState extends State<PainterPage> {
                       }
                     : null,
           ),
-        for (int i = 0; i < pressedIconFunks.length; ++i)
+        for (int i = 0; i < _pressedIconFunks.length; ++i)
           HexagonButton(
-            icon: pressedIconFunks[i][0] as IconData,
-            onPressed: pressedIconFunks[i][1] as VoidCallback,
+            icon: _pressedIconFunks[i][0] as IconData,
+            onPressed: _pressedIconFunks[i][1] as VoidCallback,
             center: Offset(x * (i + 4.5), y),
             radius: radius,
           ),
@@ -149,12 +152,12 @@ class _PainterPageState extends State<PainterPage> {
 
         if (simpleCube != null) {
           assert(orphans.length == 1);
-          undoer.save();
+          _undoer.save();
           _simpleCubes.remove(simpleCube);
         }
       }
     } else {
-      undoer.save();
+      _undoer.save();
     }
 
     for (final AnimCube cube in orphans) {
