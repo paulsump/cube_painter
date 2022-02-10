@@ -206,8 +206,9 @@ class _PainterPageState extends State<PainterPage> {
         whenComplete: _convertToSimpleCubeAndRemoveSelf,
       ));
     }
-    //TODO maybe remove if "CubeGroupNotifier listen: true" somewhere?
+
     setState(() {});
+    _saveForUndo();
   }
 
   ///
@@ -256,9 +257,8 @@ class _PainterPageState extends State<PainterPage> {
         key: UniqueKey(),
         info: cubeInfo,
       ));
-
-      setState(() {});
     }
+    setState(() {});
   }
 
   void _saveForUndo() {
