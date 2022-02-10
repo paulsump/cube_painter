@@ -71,8 +71,9 @@ class _PainterPageState extends State<PainterPage> {
 
     final pressedIconFunks = [
       [Icons.forward, () => _loadNextGroup()],
-      [Icons.undo_rounded, _undo],
-      [Icons.save_alt_rounded, _saveToClipboard],
+      [Icons.undo_sharp, _undo],
+      [Icons.redo_sharp, _redo],
+      [Icons.save_alt_sharp, _saveToClipboard],
     ];
     return Stack(
       children: [
@@ -147,12 +148,12 @@ class _PainterPageState extends State<PainterPage> {
 
         if (simpleCube != null) {
           assert(orphans.length == 1);
-          _saveTo(_undos);
+          _saveForUndo();
           _simpleCubes.remove(simpleCube);
         }
       }
     } else {
-      _saveTo(_undos);
+      _saveForUndo();
     }
 
     for (final AnimCube cube in orphans) {
@@ -212,7 +213,7 @@ class _PainterPageState extends State<PainterPage> {
     }
 
     setState(() {});
-    _saveTo(_undos);
+    // _saveForUndo();
   }
 
   ///
@@ -249,11 +250,27 @@ class _PainterPageState extends State<PainterPage> {
     return json;
   }
 
-  void _undo() => _popFromPushTo(_undos, _redos);
+  void _undo() {
+    _popFromPushTo(_undos, _redos);
+    out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
+  }
 
-  void _redo() => _popFromPushTo(_undos, _redos);
+  void _redo() {
+    _popFromPushTo(_redos, _undos);
+    out('${str(_undos)}, ${str(_redos)}->${_simpleCubes.length}');
+  }
+
+  String str(List list) {
+    final lengths = <int>[];
+
+    for (final item in list) {
+      lengths.add(item.length);
+    }
+    return '${list.length}($lengths)';
+  }
 
   void _popFromPushTo(DoList popFrom, DoList pushTo) {
+    _saveTo(pushTo);
     final List<CubeInfo> cubeInfos = popFrom.removeLast();
 
     _animCubes.clear();
@@ -264,10 +281,16 @@ class _PainterPageState extends State<PainterPage> {
     }
 
     setState(() {});
-    _saveTo(pushTo);
   }
 
   void _saveTo(DoList list) => list.add(
         List.generate(_simpleCubes.length, (index) => _simpleCubes[index].info),
       );
+
+  void _saveForUndo() {
+    _saveTo(_undos);
+
+    out(str(_undos));
+    _redos.clear();
+  }
 }
