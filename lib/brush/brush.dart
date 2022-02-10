@@ -116,7 +116,6 @@ class BrushState extends State<Brush> {
       // using order provided by extruder
       // only add new cubes, deleting any old ones
 
-      // TODO test that unused ones are destroyed
       var copy = widget._cubes.toList();
       widget._cubes.clear();
 
