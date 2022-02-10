@@ -27,15 +27,16 @@ class UnitCube extends StatelessWidget {
 }
 
 List<List<dynamic>> _getColorsAndPaths(Crop crop) {
-  List<List<dynamic>> lists = [];
+  final list = CubeCorners.getVertsAndSides(crop);
 
-  for (final vertAndSide in CubeCorners.getVertsAndSides(crop)) {
-    lists.add([
-      getColor(vertAndSide[0]),
-      Path()..addPolygon(vertAndSide[1], true),
-    ]);
-  }
-  return lists;
+  return List.unmodifiable(
+    List.generate(
+        list.length,
+        (index) => List.unmodifiable([
+              getColor(list[index][0]),
+              Path()..addPolygon(list[index][1], true),
+            ])),
+  );
 }
 
 class _CubePainter extends CustomPainter {
