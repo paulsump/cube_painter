@@ -12,9 +12,9 @@ class Undoer {
 
   Undoer(this.simpleCubes);
 
-  bool get hasUndos => _undos.isNotEmpty;
+  bool get canUndo => _undos.isNotEmpty;
 
-  bool get hasRedos => _redos.isNotEmpty;
+  bool get canRedo => _redos.isNotEmpty;
 
   void save() {
     _saveTo(_undos);
@@ -22,22 +22,20 @@ class Undoer {
     _redos.clear();
   }
 
-  void undo(setState) {
-    _popFromPushTo(_undos, _redos);
-    setState(() {});
-  }
+  void undo() => _popFromPushTo(_undos, _redos);
 
-  void redo(setState) {
-    _popFromPushTo(_redos, _undos);
-    setState(() {});
-  }
+  void redo() => _popFromPushTo(_redos, _undos);
+
+  void addLastSimpleCubes() => _addSimpleCubes(_undos.last);
 
   void _popFromPushTo(DoList popFrom, DoList pushTo) {
     _saveTo(pushTo);
 
     simpleCubes.clear();
-    final List<CubeInfo> cubeInfos = popFrom.removeLast();
+    _addSimpleCubes(popFrom.removeLast());
+  }
 
+  void _addSimpleCubes(List<CubeInfo> cubeInfos) {
     for (final CubeInfo cubeInfo in cubeInfos) {
       simpleCubes.add(SimpleCube(key: UniqueKey(), info: cubeInfo));
     }

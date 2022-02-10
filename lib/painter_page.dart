@@ -72,8 +72,16 @@ class _PainterPageState extends State<PainterPage> {
 
     final buttonInfo = [
       [true, Icons.forward, () => _loadNextGroup()],
-      [_undoer.hasUndos, Icons.undo_sharp, () => _undoer.undo(setState)],
-      [_undoer.hasRedos, Icons.redo_sharp, () => _undoer.redo(setState)],
+      [
+        _undoer.canUndo,
+        Icons.undo_sharp,
+        () => {_undoer.undo(), setState(() {})}
+      ],
+      [
+        _undoer.canRedo,
+        Icons.redo_sharp,
+        () => {_undoer.redo(), setState(() {})}
+      ],
       [true, Icons.save_alt_sharp, _saveToClipboard],
     ];
 
