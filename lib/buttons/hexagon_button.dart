@@ -1,4 +1,3 @@
-import 'package:cube_painter/buttons/calc_hexagon_points.dart';
 import 'package:cube_painter/buttons/hexagon_painter.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
@@ -70,9 +69,8 @@ class _HexagonState extends State<HexagonButton>
                 child: CustomPaint(
                   painter: HexagonPainter(
                     context: context,
-                    path: Path()..addPolygon(calcHexagonPoints(), true),
                     alpha: _getAlpha(context),
-                    color: color,
+                    color: _color,
                     repaint: true,
                   ),
                 ),
@@ -126,6 +124,7 @@ class _HexagonState extends State<HexagonButton>
 
   double _getAlpha(BuildContext context) {
     double alpha = _controller.value;
+
     if (widget.mode != null) {
       if (getMode(context, listen: true) != widget.mode!) {
         // TODO USE color only for radios?
@@ -135,7 +134,7 @@ class _HexagonState extends State<HexagonButton>
     return alpha;
   }
 
-  Color? get color {
+  Color? get _color {
     if (widget.mode != null) {
       if (getMode(context, listen: true) != widget.mode!) {
         return Color.lerp(

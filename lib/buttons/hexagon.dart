@@ -1,4 +1,3 @@
-import 'package:cube_painter/buttons/calc_hexagon_points.dart';
 import 'package:cube_painter/buttons/hexagon_painter.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +21,6 @@ class Hexagon extends StatelessWidget {
         child: CustomPaint(
           painter: HexagonPainter(
             context: context,
-            path: Path()..addPolygon(calcHexagonPoints(), true),
             alpha: 1,
           ),
         ),
