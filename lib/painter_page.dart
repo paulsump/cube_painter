@@ -99,8 +99,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ),
         Brush(adoptCubes: _adoptCubes),
-        if (Mode.panZoom == getMode(context))
-          PanZoomer(setState: () => setState(() {})),
+        if (Mode.panZoom == getMode(context)) PanZoomer(setState: setState),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,
