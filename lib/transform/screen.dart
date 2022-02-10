@@ -11,9 +11,10 @@ Offset screenToUnit(Offset offset, BuildContext context) {
 
 void clip(Canvas canvas) => canvas.clipRect(Screen.rect);
 
-// TODO Rename.
-// class ScreenNotifier extends ChangeNotifier {
-// Can't remove by putting in Transformed due to screenToUnit() needing it
+class ScreenNotifier extends ChangeNotifier {
+// TODO Rename Screen to ScreenNotifier
+}
+
 class Screen {
   static Size? _size;
 

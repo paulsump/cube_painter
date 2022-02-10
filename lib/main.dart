@@ -3,6 +3,7 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group_notifier.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/painter_page.dart';
+import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/zoom_pan.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class CubePainterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ScreenNotifier()),
         ChangeNotifierProvider(create: (_) => PanZoomNotifier()),
         ChangeNotifierProvider(create: (_) => CubeGroupNotifier()),
         ChangeNotifierProvider(create: (_) => ModeNotifier()),

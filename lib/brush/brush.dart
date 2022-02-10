@@ -6,7 +6,7 @@ import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

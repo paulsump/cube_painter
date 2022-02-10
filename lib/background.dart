@@ -1,7 +1,7 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/mode.dart';
-import 'package:cube_painter/transform/screen_transform.dart';
+import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
 /// animated background
