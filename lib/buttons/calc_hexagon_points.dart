@@ -14,7 +14,7 @@ List<Offset> calcHexagonPoints(Offset center, double outerRadius) {
   for (Offset offset in calcUnitHexagonPoints()) {
     //TOOD CHANGe calcUnitHexagonPoints() so it doesn't have to be upside down,
     // thein i can use Transform and const calcUnitHexagonPoints widget
-    points.add(offset.scale(radius, -radius) + center);
+    points.add(offset.scale(radius, radius) + center);
   }
   return points;
 }
@@ -24,10 +24,10 @@ Iterable<Offset> calcUnitHexagonPoints() sync* {
   var vec = Vector2(1, 0);
 
   vec.postmultiply(Matrix2.rotation(angle / 2));
-  yield Offset(vec.x, vec.y);
+  yield Offset(vec.x, -vec.y);
 
   for (int i = 0; i < 5; ++i) {
     vec.postmultiply(Matrix2.rotation(angle));
-    yield Offset(vec.x, vec.y);
+    yield Offset(vec.x, -vec.y);
   }
 }
