@@ -21,7 +21,7 @@ class Undoer {
 
   void save() {
     _saveTo(_undos);
-    out(str(_undos));
+    // out(str(_undos));
     _redos.clear();
   }
 
@@ -37,7 +37,7 @@ class Undoer {
     simpleCubes.clear();
     _addSimpleCubes(popFrom.removeLast());
 
-    out('${str(_undos)}, ${str(_redos)}->${simpleCubes.length}');
+    // out('${str(_undos)}, ${str(_redos)}->${simpleCubes.length}');
   }
 
   String str(List list) {

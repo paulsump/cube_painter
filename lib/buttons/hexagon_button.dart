@@ -41,6 +41,8 @@ class _HexagonState extends State<HexagonButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
+  late Path path;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +52,9 @@ class _HexagonState extends State<HexagonButton>
     );
     _controller.value = 1;
 
+    path = Path()
+      ..addPolygon(calcHexagonPoints(widget.center, widget.radius), true);
+
     if (widget.mode == getMode(context)) {
       _controller.value = 0;
     }
@@ -57,9 +62,6 @@ class _HexagonState extends State<HexagonButton>
 
   @override
   Widget build(BuildContext context) {
-    final List<Offset> points = calcHexagonPoints(widget.center, widget.radius);
-    final Path path = Path()..addPolygon(points, true);
-
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {

@@ -3,8 +3,12 @@ import 'dart:ui';
 
 import 'package:vector_math/vector_math.dart';
 
-List<Offset> calcHexagonPoints(Offset center, double radius) {
+List<Offset> calcHexagonPoints(Offset center, double outerRadius) {
   final points = <Offset>[];
+
+  //TODO TOO HACKY (Lies to API)
+  // TODO UPdate tests
+  double radius = 0.75 * outerRadius;
 
   for (Offset offset in calcUnitHexagonPoints()) {
     points.add(offset.scale(radius, -radius) + center);

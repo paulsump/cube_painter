@@ -12,5 +12,9 @@ Color getColor(Side side) {
   }
 }
 
-Color get backgroundColor =>
-    Color.lerp(getColor(Side.t), getColor(Side.bl), 0.5)!;
+Color tweenDarkColor(double t) =>
+    Color.lerp(getColor(Side.t), getColor(Side.bl), t)!;
+
+Color get buttonColor => tweenDarkColor(0.4);
+
+Color get backgroundColor => tweenDarkColor(0.6);

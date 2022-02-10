@@ -23,7 +23,7 @@ class HexagonPainter extends CustomPainter {
     this.repaint = false,
   });
 
-  Color get _color => color ?? backgroundColor.withOpacity(alpha);
+  Color get _color => color ?? buttonColor.withOpacity(alpha);
 
   Color get _borderColor => borderColor ?? getColor(Side.bl);
 
