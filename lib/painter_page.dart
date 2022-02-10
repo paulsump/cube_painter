@@ -168,7 +168,9 @@ class _PainterPageState extends State<PainterPage> {
 
     for (final AnimCube cube in orphans) {
       if (cube.scale == (erase ? 0 : 1)) {
-        _simpleCubes.add(SimpleCube(info: cube.info));
+        if (!erase) {
+          _simpleCubes.add(SimpleCube(info: cube.info));
+        }
       } else {
         _animCubes.add(AnimCube(
           key: UniqueKey(),
