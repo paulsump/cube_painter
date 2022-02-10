@@ -27,12 +27,30 @@ class Screen {
   static Offset get origin => Offset(0, height);
 
   static void init(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+    final media = MediaQuery.of(context);
 
-    final pad = mediaQuery.padding;
+    final pad = media.padding;
     final double safeAreaHeight = pad.top + pad.bottom;
 
-    final size = mediaQuery.size;
-    _size = Size(size.width, size.height - safeAreaHeight);
+    Size newSize = media.size;
+
+    final double x = newSize.width;
+    final double y = newSize.height;
+
+//     if (media.orientation == Orientation.portrait) {
+    newSize = Size(x, y - safeAreaHeight);
+//     } else {
+//       newSize = Size(y, x - safeAreaHeight);
+// //      newSize = Size(y, y);
+//     }
+
+    out('sl');
+    if (size != newSize) {
+      assert(size.width != newSize.width || size.height != newSize.height);
+      //TODO draw a rect or place a widget to see these bounds
+      _size = newSize;
+      out(size);
+      //TODO notifyListeners();
+    }
   }
 }
