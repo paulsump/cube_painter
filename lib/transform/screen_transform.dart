@@ -12,6 +12,7 @@ Offset screenToUnit(Offset offset, BuildContext context) {
 void clip(Canvas canvas) => canvas.clipRect(Screen.rect);
 
 // TODO Rename.
+// class ScreenNotifier extends ChangeNotifier {
 // Can't remove by putting in Transformed due to screenToUnit() needing it
 class Screen {
   static Size? _size;
@@ -39,7 +40,7 @@ class Screen {
 
     _size = Size(x, y - safeAreaHeight);
     //TODO draw a rect or place a widget to see these bounds
-    out(size);
+    // out(size);
     //TODO notifyListeners();
   }
 }

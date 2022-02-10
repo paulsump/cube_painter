@@ -26,10 +26,6 @@ class CropNotifier extends ChangeNotifier {
 
   get crop => _crop;
 
-  set crop(value) {
-    _crop = value;
-    notifyListeners();
-  }
 
   void increment(int value, {int first = 1}) {
     int index = crop.index + value;
@@ -41,6 +37,7 @@ class CropNotifier extends ChangeNotifier {
       index = first;
     }
 
-    crop = Crop.values[index];
+    _crop = Crop.values[index];
+    notifyListeners();
   }
 }
