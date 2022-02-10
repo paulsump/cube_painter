@@ -5,15 +5,12 @@ import 'package:flutter/material.dart';
 class Hexagon extends StatelessWidget {
   final Offset center;
   final double radius;
-  final Path path;
 
-  // TODO MAke const by calling add poly in build? test profile
-  Hexagon({
+  const Hexagon({
     Key? key,
     required this.center,
     required this.radius,
-  })  : path = Path()..addPolygon(calcHexagonPoints(), true),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class Hexagon extends StatelessWidget {
         child: CustomPaint(
           painter: HexagonPainter(
             context: context,
-            path: path,
+            path: Path()..addPolygon(calcHexagonPoints(), true),
             alpha: 1,
           ),
         ),
