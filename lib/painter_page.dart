@@ -123,7 +123,6 @@ class _PainterPageState extends State<PainterPage> {
     );
   }
 
-
   /// once the brush has finished, it
   /// yields ownership of it's cubes to this parent widget.
   /// which then creates a similar list
@@ -207,6 +206,24 @@ class _PainterPageState extends State<PainterPage> {
     setState(() {});
   }
 
+  ///
+  void _saveToClipboard() {
+    _updateCurrentCubeGroup();
+    Clipboard.setData(ClipboardData(text: _getJson()));
+  }
+
+  /// For saving to clipboard
+  //TODO FIX FOR Simgle cubes and crops
+  void _updateCurrentCubeGroup() {
+    List<CubeInfo> list = getCubeInfos(context);
+    list.clear();
+
+    for (final cube in _simpleCubes) {
+      //modify directly so that we don't notify until end
+      list.add(cube.info);
+    }
+  }
+
   /// For saving to clipboard
   String _getJson() {
     final list = <CubeInfo>[];
@@ -221,21 +238,5 @@ class _PainterPageState extends State<PainterPage> {
     // out(json);
     // out('');
     return json;
-  }
-
-  void _saveToClipboard() {
-    _updateCurrentCubeGroup();
-    Clipboard.setData(ClipboardData(text: _getJson()));
-  }
-
-  //TODO FIX FOR Simgle cubes and crops
-  void _updateCurrentCubeGroup() {
-    List<CubeInfo> list = getCubeInfos(context);
-    list.clear();
-
-    for (final cube in _simpleCubes) {
-      //modify directly so that we don't notify until end
-      list.add(cube.info);
-    }
   }
 }
