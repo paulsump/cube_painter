@@ -138,15 +138,10 @@ class _PainterPageState extends State<PainterPage> {
   void _adoptCubes(List<AnimCube> orphans) {
     final bool erase = Mode.erase == getMode(context);
 
-    final cubeInfos = <CubeInfo>[];
-    final undo = [erase, cubeInfos];
-    _undos.add(undo);
-
+    _saveForUndo();
     for (final AnimCube cube in orphans) {
-      cubeInfos.add(cube.info);
-
       if (erase) {
-        undo.add(_eraseAt(cube.info));
+        _eraseAt(cube.info);
       }
 
       _animCubes.add(AnimCube(
@@ -161,13 +156,12 @@ class _PainterPageState extends State<PainterPage> {
     setState(() {});
   }
 
-  int _eraseAt(CubeInfo cubeInfo) {
-    final int i = _findIndexAt(cubeInfo.center, _simpleCubes);
+  void _eraseAt(CubeInfo cubeInfo) {
+    final SimpleCube? simpleCube = _findAt(cubeInfo.center, _simpleCubes);
 
-    if (-1 != i) {
-      _simpleCubes.remove(_simpleCubes[i]);
+    if (simpleCube != null) {
+      _simpleCubes.remove(simpleCube);
     }
-    return i;
   }
 
   dynamic _removeSelf(AnimCube old) {
@@ -180,13 +174,13 @@ class _PainterPageState extends State<PainterPage> {
     return _removeSelf(old);
   }
 
-  int _findIndexAt(GridPoint position, List<SimpleCube> list) {
-    for (int i = 0; i < list.length; ++i) {
-      if (position == list[i].info.center) {
-        return i;
+  SimpleCube? _findAt(GridPoint position, List<SimpleCube> list) {
+    for (final cube in list) {
+      if (position == cube.info.center) {
+        return cube;
       }
     }
-    return -1;
+    return null;
   }
 
   void _loadNextGroup() {
@@ -251,28 +245,28 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _undo() {
-    final undo = _undos.last;
+    final List<CubeInfo> cubeInfos = _undos.last;
     _undos.removeLast();
 
-    final bool erase = undo[0];
-    final List<CubeInfo> cubeInfos = undo[1];
+    _animCubes.clear();
+    _simpleCubes.clear();
 
-    if (erase) {
-      _animCubes.insert(
-          undo[2],
-          AnimCube(
-            key: UniqueKey(),
-            info: cubeInfos[0],
-            start: 0,
-            end: 1.0,
-            whenComplete: _convertToSimpleCubeAndRemoveSelf,
-            duration: 122,
-          ));
-    } else {
-      for (final CubeInfo cubeInfo in cubeInfos) {
-        _eraseAt(cubeInfo);
-      }
+    for (final CubeInfo cubeInfo in cubeInfos) {
+      _simpleCubes.add(SimpleCube(
+        key: UniqueKey(),
+        info: cubeInfo,
+      ));
+
+      setState(() {});
     }
-    setState(() {});
+  }
+
+  void _saveForUndo() {
+    final cubeInfos = <CubeInfo>[];
+
+    for (final SimpleCube cube in _simpleCubes) {
+      cubeInfos.add(cube.info);
+    }
+    _undos.add(cubeInfos);
   }
 }
