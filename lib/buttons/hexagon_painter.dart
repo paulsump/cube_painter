@@ -4,26 +4,14 @@ import 'package:cube_painter/cubes/side.dart';
 import 'package:flutter/material.dart';
 
 class HexagonPainter extends CustomPainter {
-  final BuildContext context;
-
-  final double alpha;
-
-  final Color? color;
-  final Color? borderColor;
+  final Color color;
 
   final bool repaint;
 
   const HexagonPainter({
-    required this.context,
-    required this.alpha,
-    this.color,
-    this.borderColor,
+    required this.color,
     this.repaint = false,
   });
-
-  Color get _color => color ?? buttonColor.withOpacity(alpha);
-
-  Color get _borderColor => borderColor ?? getColor(Side.bl);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -33,13 +21,13 @@ class HexagonPainter extends CustomPainter {
     canvas.drawPath(
         path,
         Paint()
-          ..color = _color
+          ..color = color
           ..style = PaintingStyle.fill);
 
     canvas.drawPath(
         path,
         Paint()
-          ..color = _borderColor
+          ..color = getColor(Side.bl)
           ..style = PaintingStyle.stroke);
   }
 

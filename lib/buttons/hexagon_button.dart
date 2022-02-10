@@ -68,8 +68,6 @@ class _HexagonState extends State<HexagonButton>
                 origin: const Offset(1, 1),
                 child: CustomPaint(
                   painter: HexagonPainter(
-                    context: context,
-                    alpha: _getAlpha(context),
                     color: _color,
                     repaint: true,
                   ),
@@ -122,19 +120,7 @@ class _HexagonState extends State<HexagonButton>
     );
   }
 
-  double _getAlpha(BuildContext context) {
-    double alpha = _controller.value;
-
-    if (widget.mode != null) {
-      if (getMode(context, listen: true) != widget.mode!) {
-        // TODO USE color only for radios?
-        alpha = 1;
-      }
-    }
-    return alpha;
-  }
-
-  Color? get _color {
+  Color get _color {
     if (widget.mode != null) {
       if (getMode(context, listen: true) != widget.mode!) {
         return Color.lerp(
@@ -144,6 +130,6 @@ class _HexagonState extends State<HexagonButton>
         )!;
       }
     }
-    return Color.lerp(backgroundColor, buttonColor, _controller.value);
+    return Color.lerp(backgroundColor, buttonColor, _controller.value)!;
   }
 }
