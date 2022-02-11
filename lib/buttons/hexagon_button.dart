@@ -4,6 +4,7 @@ import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ class HexagonButton extends StatefulWidget {
 
   final VoidCallback? onPressed;
   final Offset center;
+  final Offset iconOffset;
 
   final double radius;
   final Mode? mode;
@@ -25,6 +27,7 @@ class HexagonButton extends StatefulWidget {
     Key? key,
     this.enabled = true,
     this.icon,
+    this.iconOffset = Offset.zero,
     this.unitChild,
     this.onPressed,
     required this.center,
@@ -79,6 +82,7 @@ class _HexagonState extends State<HexagonButton>
             if (widget.icon != null)
               Transform.translate(
                 offset: widget.center +
+                    widget.iconOffset +
                     const Offset(1, 1) * -IconTheme.of(context).size! / 2,
                 child: Icon(
                   widget.icon,

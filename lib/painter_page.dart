@@ -69,12 +69,9 @@ class _PainterPageState extends State<PainterPage> {
 
     final modeButtonInfo = [
       [],
-      [Icons.add_circle_outline_sharp, const UnitCube(crop: Crop.c)],
-      [
-        Icons.highlight_remove_sharp,
-        const UnitCube(crop: Crop.c, style: PaintingStyle.stroke)
-      ],
-      [Icons.add_circle_outline_sharp, UnitCube(crop: crop)],
+      [Icons.add, const UnitCube(crop: Crop.c)],
+      [Icons.remove, const UnitCube(crop: Crop.c, style: PaintingStyle.stroke)],
+      [Icons.add, UnitCube(crop: crop)],
     ];
 
     final otherButtonInfo = [
@@ -91,7 +88,6 @@ class _PainterPageState extends State<PainterPage> {
       [true, Icons.forward, () => _loadNextGroup()],
       [true, Icons.save_alt_sharp, _saveToClipboard],
     ];
-
     return Stack(
       children: [
         UnitToScreen(
@@ -114,6 +110,7 @@ class _PainterPageState extends State<PainterPage> {
         for (int i = 1; i < modeButtonInfo.length; ++i)
           HexagonButton(
             icon: modeButtonInfo[i][0] as IconData,
+            iconOffset: const Offset(1, 1) * -9.4,
             unitChild: modeButtonInfo[i][1] as UnitCube,
             mode: Mode.values[i],
             center: Offset(x * (i + 0.5), y),

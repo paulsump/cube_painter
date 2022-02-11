@@ -100,7 +100,6 @@ class BrushState extends State<Brush> {
 
     if (getMode(context) == Mode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
-      out(crop);
     }
 
     _addCube(position, crop);
