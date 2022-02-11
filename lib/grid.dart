@@ -2,28 +2,42 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/transform/pan_zoom.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
 
 class Grid extends StatelessWidget {
-  const Grid({Key? key}) : super(key: key);
+  final double height;
+
+  final double scale;
+
+  const Grid({
+    Key? key,
+    required this.height,
+    required this.scale,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      CustomPaint(painter: GridPainter(context: context));
+  Widget build(BuildContext context) => CustomPaint(
+          painter: GridPainter(
+        height: height,
+        scale: scale,
+      ));
 }
 
 class GridPainter extends CustomPainter {
-  final BuildContext context;
+  final double height;
 
-  const GridPainter({required this.context});
+  final double scale;
+
+  const GridPainter({
+    required this.height,
+    required this.scale,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    int n = _getN(getScreen(context, listen: false).height / H);
+    int n = _getN(height / H / scale);
     const y = -H;
 
     final rect = Rect.fromPoints(
@@ -54,7 +68,7 @@ class GridPainter extends CustomPainter {
         paintBR,
       );
     }
-    // n = _getN(Screen.width / W);
+    // n = _getN(Screen.width / W/scale);
 
     // right
     for (int i = 0; i < n; i += 2) {
@@ -74,9 +88,7 @@ class GridPainter extends CustomPainter {
     }
   }
 
-  int _getN(double factor) {
-    double N = factor / getZoomScale(context);
-
+  int _getN(double N) {
     int n = N.round();
     return n + n % 2;
   }

@@ -17,6 +17,7 @@ import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
+import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
@@ -92,7 +93,9 @@ class _PainterPageState extends State<PainterPage> {
         UnitToScreen(
           child: Stack(
             children: [
-              const Grid(),
+              Grid(
+                  height: getScreen(context, listen: false).height,
+                  scale: getZoomScale(context)),
               ..._simpleCubes,
               ..._animCubes,
             ],
