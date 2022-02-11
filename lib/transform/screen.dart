@@ -34,7 +34,7 @@ class ScreenNotifier extends ChangeNotifier {
 
   Rect get rect => Offset.zero & size;
 
-  Offset get origin => Offset(0, height);
+  Offset get origin => Offset(width, height) / 2;
 
   void init(BuildContext context) {
     final media = MediaQuery.of(context);

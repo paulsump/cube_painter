@@ -44,12 +44,12 @@ class _PanZoomerState extends State<PanZoomer> {
         _scale = _initialScale * details.scale;
 
         _sessionOffset = details.focalPoint - _initialFocalPoint;
-        _offset = _sessionOffset + _initialOffset;
+        final newOffset = _sessionOffset + _initialOffset;
 
+        _offset = newOffset * details.scale;
         widget.setState(() {});
       },
       onScaleEnd: (details) {
-        _offset = _sessionOffset + _initialOffset;
         _sessionOffset = Offset.zero;
         widget.setState(() {});
       },
