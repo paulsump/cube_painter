@@ -124,14 +124,6 @@ class _HexagonState extends State<HexagonButton>
               getColor(Side.br),
               0.3,
             )!
-          : Color.lerp(
-              backgroundColor,
-              buttonColor,
-              0.3,
-            )!
-      : Color.lerp(
-          backgroundColor,
-          buttonColor,
-          _controller.value,
-        )!;
+          : getButtonColor(0.3)
+      : getButtonColor(_controller.value);
 }

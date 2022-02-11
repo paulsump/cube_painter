@@ -18,3 +18,5 @@ Color tweenDarkColor(double t) =>
 Color get buttonColor => tweenDarkColor(0.3);
 
 Color get backgroundColor => tweenDarkColor(0.6);
+
+Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;

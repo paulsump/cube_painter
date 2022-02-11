@@ -37,6 +37,7 @@ class GridPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // TODO take panOffset off, but don't just move grid - it might move off the correct positions.
     int n = _getN(height / H / scale);
     const y = -H;
 
