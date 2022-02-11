@@ -134,10 +134,6 @@ class _PainterPageState extends State<PainterPage> {
               center: Offset(x * i, y + 3 * radius * H),
               radius: radius,
               color: buttonColor),
-        // Line(
-        //   getScreen(context, listen: true).oldOrigin,
-        //   getScreen(context, listen: true).origin,
-        // ),
       ],
     );
   }

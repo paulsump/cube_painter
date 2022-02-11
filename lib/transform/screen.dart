@@ -31,11 +31,6 @@ class ScreenNotifier extends ChangeNotifier {
 
   Offset get origin => Offset(width, height) / 2;
 
-  Offset get oldOrigin => Offset(0, height);
-
-  // needed for new center origin
-  Offset get brushOffset => Offset.zero;
-
   void init(BuildContext context) {
     final media = MediaQuery.of(context);
 

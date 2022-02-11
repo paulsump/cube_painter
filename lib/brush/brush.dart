@@ -6,7 +6,6 @@ import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,10 +55,7 @@ class BrushState extends State<Brush> {
       ),
       onPanStart: (details) {
         brushMaths.startFrom(
-          screenToUnit(
-              details.localPosition +
-                  getScreen(context, listen: false).brushOffset,
-              context),
+          screenToUnit(details.localPosition, context),
         );
       },
       onPanUpdate: (details) {
@@ -70,17 +66,11 @@ class BrushState extends State<Brush> {
             _updateExtrude(details, context);
             break;
           case Mode.erase:
-            _replaceCube(
-                details.localPosition +
-                    getScreen(context, listen: false).brushOffset,
-                context);
+            _replaceCube(details.localPosition, context);
             setState(() {});
             break;
           case Mode.crop:
-            _replaceCube(
-                details.localPosition +
-                    getScreen(context, listen: false).brushOffset,
-                context);
+            _replaceCube(details.localPosition, context);
             setState(() {});
             break;
         }
@@ -92,10 +82,7 @@ class BrushState extends State<Brush> {
         if (getMode(context) == Mode.panZoom) {
           return;
         }
-        _replaceCube(
-            details.localPosition +
-                getScreen(context, listen: false).brushOffset,
-            context);
+        _replaceCube(details.localPosition, context);
         setState(() {});
       },
       onTapUp: (details) {
@@ -121,9 +108,7 @@ class BrushState extends State<Brush> {
 
   void _updateExtrude(DragUpdateDetails details, BuildContext context) {
     final Positions positions = brushMaths.extrudeTo(
-      screenToUnit(
-          details.localPosition + getScreen(context, listen: false).brushOffset,
-          context),
+      screenToUnit(details.localPosition, context),
     );
 
     if (previousPositions != positions) {

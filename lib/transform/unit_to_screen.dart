@@ -2,11 +2,9 @@ import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
-/// the opposite
+/// the opposite of UnitToScreen
 Offset screenToUnit(Offset offset, BuildContext context) {
   final screen = getScreen(context, listen: false);
-  // offset += screen.oldOrigin - screen.origin;
-  // offset += Offset(-screen.width/2, -screen.height/2);
   return (offset - screen.origin - getPanOffset(context, listen: false)) /
       getZoomScale(context);
 }
