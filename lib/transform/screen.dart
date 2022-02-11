@@ -15,7 +15,6 @@ bool _firstTime = true;
 void initScreen(BuildContext context) {
   final screen = getScreen(context, listen: false);
   screen.init(context);
-
 }
 
 // void clip(Canvas canvas, BuildContext context) =>
@@ -45,14 +44,17 @@ class ScreenNotifier extends ChangeNotifier {
     _size = Size(x, y - safeAreaHeight);
     _origin = Offset(_width, height) / 2;
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      notifyListeners();
+    if (height != 0) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        notifyListeners();
 
-      // Sensible starting point
-      if (_firstTime) {
-        setPanOffset(context, Offset(0, height) - origin);
-        _firstTime = false;
-      }
-    });
+        if (_firstTime) {
+          _firstTime = false;
+
+          // Sensible starting point
+          setPanOffset(context, Offset(0, height) - origin);
+        }
+      });
+    }
   }
 }

@@ -59,6 +59,7 @@ class BrushState extends State<Brush> {
         );
       },
       onScaleUpdate: (details) {
+        // TODO if(details.scale!=1) {zoomer.scaleUpdate)else{
         switch (getMode(context)) {
           case Mode.panZoom:
             break;
