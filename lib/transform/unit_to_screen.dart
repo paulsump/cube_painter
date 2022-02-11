@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 /// the opposite
 Offset screenToUnit(Offset offset, BuildContext context) {
-  return (Offset(
-              offset.dx, offset.dy - getScreen(context, listen: false).height) -
-          getPanOffset(context, listen: false)) /
+  final screen = getScreen(context, listen: false);
+  // offset += screen.oldOrigin - screen.origin;
+  // offset += Offset(-screen.width/2, -screen.height/2);
+  return (offset - screen.origin - getPanOffset(context, listen: false)) /
       getZoomScale(context);
 }
 

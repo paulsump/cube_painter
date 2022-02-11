@@ -18,7 +18,7 @@ void initScreen(BuildContext context) {
 // void clip(Canvas canvas, BuildContext context) =>
 //     canvas.clipRect(getScreen(context, listen: false).rect);
 
-// TODO Use a field instead of orgin and other functions?
+// TODO Use a field instead of origin and other functions?
 // it seems silly because the value only changes when you re-orient the device.
 class ScreenNotifier extends ChangeNotifier {
   Size? _size;
@@ -34,7 +34,7 @@ class ScreenNotifier extends ChangeNotifier {
   Offset get oldOrigin => Offset(0, height);
 
   // needed for new center origin
-  Offset get brushOffset => oldOrigin - origin;
+  Offset get brushOffset => Offset.zero;
 
   void init(BuildContext context) {
     final media = MediaQuery.of(context);
