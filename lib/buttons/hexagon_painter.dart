@@ -8,10 +8,7 @@ class HexagonPainter extends CustomPainter {
 
   final bool repaint;
 
-  const HexagonPainter({
-    required this.color,
-    required this.repaint,
-  });
+  const HexagonPainter({required this.color, required this.repaint});
 
   @override
   void paint(Canvas canvas, Size size) {

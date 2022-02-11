@@ -7,7 +7,7 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/material.dart';
 
-import '../transform/unit_ping_pong.dart';
+import '../unit_ping_pong.dart';
 
 const noWarn = [out, Crop];
 

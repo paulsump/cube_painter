@@ -8,7 +8,7 @@ import 'equals5.dart';
 void main() {
   group('Crop', () {
     test('c', () {
-      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.c);
+      final vertsAndSides = CubeCorners.getCubeSidePoints(Crop.c);
 
       expect(Side.bl, equals(vertsAndSides[0][0]));
       expect(
@@ -42,7 +42,7 @@ void main() {
     });
 
     test('r', () {
-      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.r);
+      final vertsAndSides = CubeCorners.getCubeSidePoints(Crop.r);
 
       expect(Side.t, equals(vertsAndSides[0][0]));
       expect(
@@ -65,7 +65,7 @@ void main() {
     });
 
     test('ur', () {
-      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.ur);
+      final vertsAndSides = CubeCorners.getCubeSidePoints(Crop.ur);
 
       expect(Side.bl, equals(vertsAndSides[0][0]));
 
@@ -89,7 +89,7 @@ void main() {
     });
 
     test('ul', () {
-      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.ul);
+      final vertsAndSides = CubeCorners.getCubeSidePoints(Crop.ul);
 
       expect(Side.bl, equals(vertsAndSides[0][0]));
 
@@ -114,7 +114,7 @@ void main() {
     });
 
     test('l', () {
-      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.l);
+      final vertsAndSides = CubeCorners.getCubeSidePoints(Crop.l);
 
       expect(Side.br, equals(vertsAndSides[0][0]));
 
@@ -139,7 +139,7 @@ void main() {
     });
 
     test('dl', () {
-      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.dl);
+      final vertsAndSides = CubeCorners.getCubeSidePoints(Crop.dl);
 
       expect(Side.br, equals(vertsAndSides[0][0]));
 
@@ -164,7 +164,7 @@ void main() {
     });
 
     test('dr', () {
-      final vertsAndSides = CubeCorners.getVertsAndSides(Crop.dr);
+      final vertsAndSides = CubeCorners.getCubeSidePoints(Crop.dr);
 
       // out(vertsAndSides[0][1]);
       // out(vertsAndSides[1][1]);
