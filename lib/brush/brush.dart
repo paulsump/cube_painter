@@ -56,7 +56,9 @@ class BrushState extends State<Brush> {
       ),
       onPanStart: (details) {
         brushMaths.startFrom(
-          screenToUnit(details.localPosition, context),
+          screenToUnit(
+              details.localPosition + getScreen(context, listen: false).origin2,
+              context),
         );
       },
       onPanUpdate: (details) {
@@ -67,11 +69,17 @@ class BrushState extends State<Brush> {
             _updateExtrude(details, context);
             break;
           case Mode.erase:
-            _replaceCube(details.localPosition, context);
+            _replaceCube(
+                details.localPosition +
+                    getScreen(context, listen: false).origin2,
+                context);
             setState(() {});
             break;
           case Mode.crop:
-            _replaceCube(details.localPosition, context);
+            _replaceCube(
+                details.localPosition +
+                    getScreen(context, listen: false).origin2,
+                context);
             setState(() {});
             break;
         }
@@ -83,7 +91,9 @@ class BrushState extends State<Brush> {
         if (getMode(context) == Mode.panZoom) {
           return;
         }
-        _replaceCube(details.localPosition, context);
+        _replaceCube(
+            details.localPosition + getScreen(context, listen: false).origin2,
+            context);
         setState(() {});
       },
       onTapUp: (details) {
@@ -109,7 +119,9 @@ class BrushState extends State<Brush> {
 
   void _updateExtrude(DragUpdateDetails details, BuildContext context) {
     final Positions positions = brushMaths.extrudeTo(
-      screenToUnit(details.localPosition, context),
+      screenToUnit(
+          details.localPosition + getScreen(context, listen: false).origin2,
+          context),
     );
 
     if (previousPositions != positions) {
