@@ -131,7 +131,7 @@ class _PainterPageState extends State<PainterPage> {
             center: Offset(x * (i + 4.5), y),
             radius: radius,
           ),
-        for (int i = 0; i < 8; ++i)
+        for (int i = 0; i < 9; ++i)
           Hexagon(
               center: Offset(x * i, y + 3 * radius * H),
               radius: radius,
