@@ -67,25 +67,28 @@ class _PainterPageState extends State<PainterPage> {
 
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
 
-    final unitCubesForModes = [
-      null,
-      const UnitCube(crop: Crop.c),
-      const UnitCube(crop: Crop.c, style: PaintingStyle.stroke),
-      UnitCube(crop: crop),
+    final modeButtonInfo = [
+      [Icons.zoom_in_rounded, null],
+      [Icons.add_circle_outline_sharp, const UnitCube(crop: Crop.c)],
+      [
+        Icons.highlight_remove_sharp,
+        const UnitCube(crop: Crop.c, style: PaintingStyle.stroke)
+      ],
+      [Icons.add_circle_outline_sharp, UnitCube(crop: crop)],
     ];
 
-    final buttonInfo = [
-      [true, Icons.forward, () => _loadNextGroup()],
+    final otherButtonInfo = [
       [
         _undoer.canUndo,
         Icons.undo_sharp,
-            () => {_undoer.undo(), setState(() {})}
+        () => {_undoer.undo(), setState(() {})}
       ],
       [
         _undoer.canRedo,
         Icons.redo_sharp,
-            () => {_undoer.redo(), setState(() {})}
+        () => {_undoer.redo(), setState(() {})}
       ],
+      [true, Icons.forward, () => _loadNextGroup()],
       [true, Icons.save_alt_sharp, _saveToClipboard],
     ];
 
@@ -103,31 +106,32 @@ class _PainterPageState extends State<PainterPage> {
         Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context)) PanZoomer(setState: setState),
         HexagonButton(
-          icon: Icons.zoom_in_rounded,
+          icon: modeButtonInfo[0][0] as IconData,
+          unitChild: modeButtonInfo[0][1] as UnitCube,
           mode: Mode.panZoom,
           center: Offset(x * 0.5, y),
           radius: radius,
         ),
-        for (int i = 1; i < unitCubesForModes.length; ++i)
+        for (int i = 1; i < modeButtonInfo.length; ++i)
           HexagonButton(
-            unitChild: unitCubesForModes[i],
-            icon: i == 2 ? Icons.highlight_remove_sharp : null,
+            icon: modeButtonInfo[i][0] as IconData,
+            unitChild: modeButtonInfo[i][1] as UnitCube,
             mode: Mode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
             onPressed: i == 3
                 ? () {
-              final cropNotifier =
-              Provider.of<CropNotifier>(context, listen: false);
-              cropNotifier.increment(-1);
-            }
+                    final cropNotifier =
+                        Provider.of<CropNotifier>(context, listen: false);
+                    cropNotifier.increment(-1);
+                  }
                 : null,
           ),
-        for (int i = 0; i < buttonInfo.length; ++i)
+        for (int i = 0; i < otherButtonInfo.length; ++i)
           HexagonButton(
-            enabled: buttonInfo[i][0] as bool,
-            icon: buttonInfo[i][1] as IconData,
-            onPressed: buttonInfo[i][2] as VoidCallback,
+            enabled: otherButtonInfo[i][0] as bool,
+            icon: otherButtonInfo[i][1] as IconData,
+            onPressed: otherButtonInfo[i][2] as VoidCallback,
             center: Offset(x * (i + 4.5), y),
             radius: radius,
           ),
