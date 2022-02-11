@@ -53,12 +53,12 @@ class BrushState extends State<Brush> {
           ),
         ],
       ),
-      onPanStart: (details) {
+      onScaleStart: (details) {
         brushMaths.startFrom(
-          screenToUnit(details.localPosition, context),
+          screenToUnit(details.focalPoint, context),
         );
       },
-      onPanUpdate: (details) {
+      onScaleUpdate: (details) {
         switch (getMode(context)) {
           case Mode.panZoom:
             break;
@@ -66,16 +66,16 @@ class BrushState extends State<Brush> {
             _updateExtrude(details, context);
             break;
           case Mode.erase:
-            _replaceCube(details.localPosition, context);
+            _replaceCube(details.focalPoint, context);
             setState(() {});
             break;
           case Mode.crop:
-            _replaceCube(details.localPosition, context);
+            _replaceCube(details.focalPoint, context);
             setState(() {});
             break;
         }
       },
-      onPanEnd: (details) {
+      onScaleEnd: (details) {
         widget._handOver();
       },
       onTapDown: (details) {
@@ -105,9 +105,9 @@ class BrushState extends State<Brush> {
     _addCube(position, crop);
   }
 
-  void _updateExtrude(DragUpdateDetails details, BuildContext context) {
+  void _updateExtrude(details, BuildContext context) {
     final Positions positions = brushMaths.extrudeTo(
-      screenToUnit(details.localPosition, context),
+      screenToUnit(details.focalPoint, context),
     );
 
     if (previousPositions != positions) {
