@@ -1,5 +1,8 @@
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 class PanZoomer extends StatefulWidget {
   final void Function(void Function()) setState;
@@ -38,10 +41,11 @@ class _PanZoomerState extends State<PanZoomer> {
         _initialOffset = _offset;
       },
       onScaleUpdate: (details) {
+        _scale = _initialScale * details.scale;
+
         _sessionOffset = details.focalPoint - _initialFocalPoint;
         _offset = _sessionOffset + _initialOffset;
 
-        _scale = _initialScale * details.scale;
         widget.setState(() {});
       },
       onScaleEnd: (details) {
@@ -54,14 +58,13 @@ class _PanZoomerState extends State<PanZoomer> {
           // HACK without this container,
           // onScaleUpdate etc doesn't get called. 'opaque' is also required.
           Container(),
-          if (false)
-            Transform.translate(
-              offset: _offset + _sessionOffset,
-              child: Transform.scale(
-                scale: _scale,
-                child: const FlutterLogo(),
-              ),
-            ),
+          // Transform.translate(
+          //   offset: _offset + _sessionOffset,
+          //   child: Transform.scale(
+          //     scale: _scale,
+          //     child: const FlutterLogo(),
+          //   ),
+          // ),
         ],
       ),
     );
