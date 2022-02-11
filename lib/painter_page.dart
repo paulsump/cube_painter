@@ -59,10 +59,11 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     // TODO instead of clip, use maths to not draw widgets outside screen
 
+    final screen = getScreen(context, listen: true);
     const double radius = 40;
 
     const double x = 2 * radius * W;
-    final double y = getScreen(context, listen: true).height - 2 * radius * H;
+    final double y = screen.height - 2 * radius * H;
 
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
 
@@ -78,12 +79,12 @@ class _PainterPageState extends State<PainterPage> {
       [
         _undoer.canUndo,
         Icons.undo_sharp,
-        () => {_undoer.undo(), setState(() {})}
+            () => {_undoer.undo(), setState(() {})}
       ],
       [
         _undoer.canRedo,
         Icons.redo_sharp,
-        () => {_undoer.redo(), setState(() {})}
+            () => {_undoer.redo(), setState(() {})}
       ],
       [true, Icons.save_alt_sharp, _saveToClipboard],
     ];
@@ -93,9 +94,7 @@ class _PainterPageState extends State<PainterPage> {
         UnitToScreen(
           child: Stack(
             children: [
-              Grid(
-                  height: getScreen(context, listen: false).height,
-                  scale: getZoomScale(context)),
+              Grid(height: screen.height, scale: getZoomScale(context)),
               ..._simpleCubes,
               ..._animCubes,
             ],
@@ -118,10 +117,10 @@ class _PainterPageState extends State<PainterPage> {
             radius: radius,
             onPressed: i == 3
                 ? () {
-                    final cropNotifier =
-                        Provider.of<CropNotifier>(context, listen: false);
-                    cropNotifier.increment(-1);
-                  }
+              final cropNotifier =
+              Provider.of<CropNotifier>(context, listen: false);
+              cropNotifier.increment(-1);
+            }
                 : null,
           ),
         for (int i = 0; i < buttonInfo.length; ++i)
