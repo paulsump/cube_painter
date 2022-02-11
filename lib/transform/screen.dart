@@ -1,4 +1,5 @@
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,9 +10,17 @@ ScreenNotifier getScreen(BuildContext context, {required bool listen}) {
   return Provider.of<ScreenNotifier>(context, listen: listen);
 }
 
+bool _firstTime = true;
+
 void initScreen(BuildContext context) {
   final screen = getScreen(context, listen: false);
   screen.init(context);
+
+  // Sensible starting point
+  if (_firstTime) {
+    setPanOffset(context, Offset(0, screen.height) - screen.origin);
+    _firstTime = false;
+  }
 }
 
 // void clip(Canvas canvas, BuildContext context) =>
