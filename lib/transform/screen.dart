@@ -16,14 +16,17 @@ void initScreen(BuildContext context) {
 }
 
 Offset screenToUnit(Offset offset, BuildContext context) {
-  return Offset(
-          offset.dx, offset.dy - getScreen(context, listen: false).height) /
+  return (Offset(
+              offset.dx, offset.dy - getScreen(context, listen: false).height) -
+          getPanOffset(context, listen: false)) /
       getZoomScale(context);
 }
 
 // void clip(Canvas canvas, BuildContext context) =>
 //     canvas.clipRect(getScreen(context, listen: false).rect);
 
+// TODO Use a field instead of orgin and other functions?
+// it seems silly because the value only changes when you re-orient the device.
 class ScreenNotifier extends ChangeNotifier {
   Size? _size;
 

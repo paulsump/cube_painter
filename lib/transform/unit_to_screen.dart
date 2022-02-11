@@ -14,7 +14,9 @@ class UnitToScreen extends StatelessWidget {
       // old method
       // offset: getScreen(context, listen: false).oldOrigin,
       // new center origin
-      offset: getScreen(context, listen: false).origin,
+      // offset: getScreen(context, listen: false).origin,
+      offset: getPanOffset(context, listen: true) +
+          getScreen(context, listen: false).origin,
       child: Transform.scale(
         scale: getZoomScale(context),
         child: child,

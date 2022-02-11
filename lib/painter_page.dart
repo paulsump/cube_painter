@@ -17,7 +17,6 @@ import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
-import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
@@ -91,7 +90,8 @@ class _PainterPageState extends State<PainterPage> {
     return Stack(
       children: [
         Transform.translate(
-          offset: getPanOffset(context, listen: true),
+          offset: Offset.zero,
+          // offset: getPanOffset(context, listen: true),
           child: Stack(
             children: [
               UnitToScreen(
@@ -103,10 +103,11 @@ class _PainterPageState extends State<PainterPage> {
                   ],
                 ),
               ),
-              Brush(adoptCubes: _adoptCubes),
             ],
           ),
         ),
+        //TODO move this back out of this stakc
+        Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context)) PanZoomer(setState: setState),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
@@ -143,6 +144,10 @@ class _PainterPageState extends State<PainterPage> {
               radius: radius,
               color: buttonColor),
         // Line(Offset.zero, getScreen(context, listen: true).rect.bottomRight),
+        // Line(
+        //   getScreen(context, listen: true).oldOrigin,
+        //   getScreen(context, listen: true).origin,
+        // ),
       ],
     );
   }
