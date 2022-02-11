@@ -82,6 +82,7 @@ class _HexagonState extends State<HexagonButton>
                     const Offset(1, 1) * -IconTheme.of(context).size! / 2,
                 child: Icon(
                   widget.icon,
+                  // color:widget.enabled ?Colors.yellow: getColor( Side.bl),
                   color: getColor(widget.enabled ? Side.br : Side.bl),
                 ),
               ),

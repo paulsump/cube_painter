@@ -68,7 +68,7 @@ class _PainterPageState extends State<PainterPage> {
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
 
     final modeButtonInfo = [
-      [Icons.zoom_in_rounded, null],
+      [],
       [Icons.add_circle_outline_sharp, const UnitCube(crop: Crop.c)],
       [
         Icons.highlight_remove_sharp,
@@ -106,8 +106,7 @@ class _PainterPageState extends State<PainterPage> {
         Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context)) PanZoomer(setState: setState),
         HexagonButton(
-          icon: modeButtonInfo[0][0] as IconData,
-          unitChild: modeButtonInfo[0][1] as UnitCube,
+          icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,
           center: Offset(x * 0.5, y),
           radius: radius,
