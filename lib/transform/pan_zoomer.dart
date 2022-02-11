@@ -37,6 +37,7 @@ class _PanZoomerState extends State<PanZoomer> {
       behavior: HitTestBehavior.opaque,
       onScaleStart: (details) {
         _initialFocalPoint = details.focalPoint;
+
         _initialScale = _scale;
         _initialOffset = _offset;
       },
@@ -53,20 +54,9 @@ class _PanZoomerState extends State<PanZoomer> {
         _sessionOffset = Offset.zero;
         widget.setState(() {});
       },
-      child: Stack(
-        children: [
-          // HACK without this container,
-          // onScaleUpdate etc doesn't get called. 'opaque' is also required.
-          Container(),
-          // Transform.translate(
-          //   offset: _offset + _sessionOffset,
-          //   child: Transform.scale(
-          //     scale: _scale,
-          //     child: const FlutterLogo(),
-          //   ),
-          // ),
-        ],
-      ),
+      // HACK without this container,
+      // onScaleUpdate etc doesn't get called. 'opaque' is also required.
+      child: Container(),
     );
   }
 }

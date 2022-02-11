@@ -1,5 +1,6 @@
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,13 +33,15 @@ class ScreenNotifier extends ChangeNotifier {
 
   Size get size => _size!;
 
-  Rect get rect => Offset.zero & size;
-
   Offset get origin => Offset(width, height) / 2;
 
   Offset get oldOrigin => Offset(0, height);
 
+  //1
   Offset get origin2 => oldOrigin - origin;
+
+  //2
+  // Offset get origin2 => Offset.zero;
 
   void init(BuildContext context) {
     final media = MediaQuery.of(context);
