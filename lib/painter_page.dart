@@ -110,7 +110,7 @@ class _PainterPageState extends State<PainterPage> {
         for (int i = 1; i < modeButtonInfo.length; ++i)
           HexagonButton(
             icon: modeButtonInfo[i][0] as IconData,
-            iconOffset: const Offset(1, 1) * -9.4,
+            iconOffset: const Offset(W, H) * -radius * 0.5,
             unitChild: modeButtonInfo[i][1] as UnitCube,
             mode: Mode.values[i],
             center: Offset(x * (i + 0.5), y),

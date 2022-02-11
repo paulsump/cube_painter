@@ -8,6 +8,7 @@ const noWarn = out;
 class Assets {
   static Future<Map<String, dynamic>> loadJson(String filePath) async {
     final String json = await rootBundle.loadString(filePath);
+
     Map<String, dynamic> map = jsonDecode(json);
 
     // out(map);
