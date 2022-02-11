@@ -14,7 +14,6 @@ class PanZoomer extends StatefulWidget {
 }
 
 class _PanZoomerState extends State<PanZoomer> {
-
   Offset _initialFocalPoint = Offset.zero;
   Offset _sessionOffset = Offset.zero;
 

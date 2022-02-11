@@ -17,6 +17,7 @@ import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
+import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_ping_pong.dart';
@@ -89,16 +90,23 @@ class _PainterPageState extends State<PainterPage> {
 
     return Stack(
       children: [
-        UnitToScreen(
+        Transform.translate(
+          offset: getPanOffset(context, listen: true),
           child: Stack(
             children: [
-              const Grid(),
-              ..._simpleCubes,
-              ..._animCubes,
+              UnitToScreen(
+                child: Stack(
+                  children: [
+                    const Grid(),
+                    ..._simpleCubes,
+                    ..._animCubes,
+                  ],
+                ),
+              ),
+              Brush(adoptCubes: _adoptCubes),
             ],
           ),
         ),
-        Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context)) PanZoomer(setState: setState),
         HexagonButton(
           icon: Icons.zoom_in_rounded,

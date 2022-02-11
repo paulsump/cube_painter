@@ -14,8 +14,9 @@ void setZoomScale(BuildContext context, double scale) {
   zoom.scale = scale;
 }
 
-Offset getPanOffset(BuildContext context) {
-  final zoom = Provider.of<PanZoomNotifier>(context, listen: false);
+Offset getPanOffset(BuildContext context, {bool listen = false}) {
+  final zoom = Provider.of<PanZoomNotifier>(context, listen: listen);
+  if (listen) out(zoom.offset);
   return zoom.offset;
 }
 
@@ -41,7 +42,6 @@ class PanZoomNotifier extends ChangeNotifier {
 
   set offset(Offset value) {
     _offset = value;
-    // out(value);
     notifyListeners();
   }
 }
