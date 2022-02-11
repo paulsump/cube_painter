@@ -2,6 +2,14 @@ import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
+/// the opposite
+Offset screenToUnit(Offset offset, BuildContext context) {
+  return (Offset(
+              offset.dx, offset.dy - getScreen(context, listen: false).height) -
+          getPanOffset(context, listen: false)) /
+      getZoomScale(context);
+}
+
 /// translate to screen, then zoom
 class UnitToScreen extends StatelessWidget {
   final Widget child;
@@ -11,10 +19,6 @@ class UnitToScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      // old method
-      // offset: getScreen(context, listen: false).oldOrigin,
-      // new center origin
-      // offset: getScreen(context, listen: false).origin,
       offset: getPanOffset(context, listen: true) +
           getScreen(context, listen: false).origin,
       child: Transform.scale(

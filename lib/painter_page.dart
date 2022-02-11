@@ -89,24 +89,15 @@ class _PainterPageState extends State<PainterPage> {
 
     return Stack(
       children: [
-        Transform.translate(
-          offset: Offset.zero,
-          // offset: getPanOffset(context, listen: true),
+        UnitToScreen(
           child: Stack(
             children: [
-              UnitToScreen(
-                child: Stack(
-                  children: [
-                    const Grid(),
-                    ..._simpleCubes,
-                    ..._animCubes,
-                  ],
-                ),
-              ),
+              const Grid(),
+              ..._simpleCubes,
+              ..._animCubes,
             ],
           ),
         ),
-        //TODO move this back out of this stakc
         Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context)) PanZoomer(setState: setState),
         HexagonButton(

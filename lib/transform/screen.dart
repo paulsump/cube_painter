@@ -1,5 +1,4 @@
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,12 +14,6 @@ void initScreen(BuildContext context) {
   screen.init(context);
 }
 
-Offset screenToUnit(Offset offset, BuildContext context) {
-  return (Offset(
-              offset.dx, offset.dy - getScreen(context, listen: false).height) -
-          getPanOffset(context, listen: false)) /
-      getZoomScale(context);
-}
 
 // void clip(Canvas canvas, BuildContext context) =>
 //     canvas.clipRect(getScreen(context, listen: false).rect);
@@ -40,10 +33,7 @@ class ScreenNotifier extends ChangeNotifier {
 
   Offset get oldOrigin => Offset(0, height);
 
-  // Old method doesn't need a hacked brush
-  // Offset get brushOffset => Offset.zero;
-
-  // hack needed for new center origin
+  // needed for new center origin
   Offset get brushOffset => oldOrigin - origin;
 
   void init(BuildContext context) {
