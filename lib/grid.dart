@@ -8,29 +8,12 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-final _gradientBR = LinearGradient(
-  colors: [getColor(Side.t), getColor(Side.br)],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
-
-final _gradientBL = LinearGradient(
-  colors: [getColor(Side.bl), getColor(Side.t)],
-  begin: Alignment.bottomLeft,
-  end: Alignment.topRight,
-);
-
 class Grid extends StatelessWidget {
   const Grid({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: GridPainter(
-        context: context,
-      ),
-    );
-  }
+  Widget build(BuildContext context) =>
+      CustomPaint(painter: GridPainter(context: context));
 }
 
 class GridPainter extends CustomPainter {
@@ -101,3 +84,15 @@ class GridPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
+
+final _gradientBR = LinearGradient(
+  colors: [getColor(Side.t), getColor(Side.br)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+final _gradientBL = LinearGradient(
+  colors: [getColor(Side.bl), getColor(Side.t)],
+  begin: Alignment.bottomLeft,
+  end: Alignment.topRight,
+);
