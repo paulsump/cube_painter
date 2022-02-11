@@ -16,6 +16,7 @@ class PanZoomer extends StatefulWidget {
 class _PanZoomerState extends State<PanZoomer> {
   Offset _initialFocalPoint = Offset.zero;
   Offset _sessionOffset = Offset.zero;
+  Offset _initialOffset = Offset.zero;
 
   double get _scale => getZoomScale(context);
 
@@ -34,14 +35,17 @@ class _PanZoomerState extends State<PanZoomer> {
       onScaleStart: (details) {
         _initialFocalPoint = details.focalPoint;
         _initialScale = _scale;
+        _initialOffset = _offset;
       },
       onScaleUpdate: (details) {
         _sessionOffset = details.focalPoint - _initialFocalPoint;
+        _offset = _sessionOffset + _initialOffset;
+
         _scale = _initialScale * details.scale;
         widget.setState(() {});
       },
       onScaleEnd: (details) {
-        _offset += _sessionOffset;
+        _offset = _sessionOffset + _initialOffset;
         _sessionOffset = Offset.zero;
         widget.setState(() {});
       },
