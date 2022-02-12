@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 const double toFiveDecimalPlaces = 0.00001;
 
-bool equalsListOffset5(List<Offset> a, List<Offset> b) {
+bool equalsOffsetListToFiveDecimalPlaces(List<Offset> a, List<Offset> b) {
   final int n = a.length;
 
   if (n != b.length) {

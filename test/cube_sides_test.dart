@@ -5,7 +5,7 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'equals5.dart';
+import 'equals_to_five_decimal_places.dart';
 
 void main() {
   group('Testing calcHexagonOffsets()', () {
@@ -56,7 +56,7 @@ void main() {
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[0][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
@@ -66,7 +66,7 @@ void main() {
 
       expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[1][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),
@@ -76,7 +76,7 @@ void main() {
 
       expect(Side.br, equals(sidesAndUnitOffsets[2][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[2][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[2][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
@@ -90,7 +90,7 @@ void main() {
 
       expect(Side.t, equals(sidesAndUnitOffsets[0][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[0][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),
@@ -99,7 +99,7 @@ void main() {
 
       expect(Side.bl, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[1][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
@@ -114,7 +114,7 @@ void main() {
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[0][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
@@ -124,7 +124,7 @@ void main() {
 
       expect(Side.br, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[1][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0.86603, 0.5),
             Offset(0, 1.0),
@@ -138,7 +138,7 @@ void main() {
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[0][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
@@ -148,7 +148,7 @@ void main() {
       expect(Side.br, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[1][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
@@ -163,7 +163,7 @@ void main() {
       expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[0][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
@@ -174,7 +174,7 @@ void main() {
       expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[1][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0, -1.0),
             Offset(0.86603, -0.5),
@@ -188,7 +188,7 @@ void main() {
       expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[0][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
@@ -198,7 +198,7 @@ void main() {
       expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[1][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),
@@ -215,7 +215,7 @@ void main() {
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[0][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, 0.5),
             Offset(-0.86602, -0.5),
@@ -224,7 +224,7 @@ void main() {
 
       expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equalsListOffset5(sidesAndUnitOffsets[1][1], const [
+          equalsOffsetListToFiveDecimalPlaces(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),
