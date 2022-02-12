@@ -214,10 +214,8 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _loadNextGroup() {
-    final cubeGroupNotifier =
-    Provider.of<CubeGroupNotifier>(context, listen: false);
 
-    cubeGroupNotifier.increment(1);
+    getCubeGroupNotifier(context).increment(1);
     _addCubeGroup();
   }
 
@@ -243,12 +241,6 @@ class _PainterPageState extends State<PainterPage> {
 
   ///
   void _saveToClipboard() {
-    _updateCurrentCubeGroup();
-    Clipboard.setData(ClipboardData(text: _getJson()));
-  }
-
-  /// For saving to clipboard
-  void _updateCurrentCubeGroup() {
     List<CubeInfo> list = getCubeInfos(context);
     list.clear();
 
@@ -256,6 +248,7 @@ class _PainterPageState extends State<PainterPage> {
       //modify directly so that we don't notify until end
       list.add(cube.info);
     }
+    Clipboard.setData(ClipboardData(text: _getJson()));
   }
 
   /// For saving to clipboard

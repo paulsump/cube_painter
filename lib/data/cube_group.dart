@@ -6,11 +6,16 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-List<CubeInfo> getCubeInfos(BuildContext context) {
-  final cubeGroupNotifier =
-      Provider.of<CubeGroupNotifier>(context, listen: false);
+CubeGroupNotifier getCubeGroupNotifier(BuildContext context) {
+  return Provider.of<CubeGroupNotifier>(context, listen: false);
+}
 
-  return cubeGroupNotifier.cubeGroup.list;
+CubeGroup getCubeGroup(BuildContext context) {
+  return getCubeGroupNotifier(context).cubeGroup;
+}
+
+List<CubeInfo> getCubeInfos(BuildContext context) {
+  return getCubeGroup(context).list;
 }
 
 /// The main store of the entire model.
@@ -21,11 +26,11 @@ class CubeGroup {
 
   const CubeGroup(this.list);
 
-  @override
-  String toString() => '$list';
-
   CubeGroup.fromJson(Map<String, dynamic> json)
       : list = _listFromJson(json).toList();
+
+  @override
+  String toString() => '$list';
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
     for (final cubeInfoObject in json['list']) {
