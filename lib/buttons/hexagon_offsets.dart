@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:vector_math/vector_math.dart';
 
-List<Offset> calcHexagonPoints() =>
+List<Offset> calcHexagonOffsets() =>
     UnmodifiableListView(_calcUnitHexagonUnitOffsets());
 // getHexagonOffsets();
 Iterable<Offset> _calcUnitHexagonUnitOffsets() sync* {

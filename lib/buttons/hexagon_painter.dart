@@ -1,4 +1,4 @@
-import 'package:cube_painter/buttons/calc_hexagon_points.dart';
+import 'package:cube_painter/buttons/hexagon_offsets.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class HexagonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // clip(canvas, context);
-    final path = Path()..addPolygon(calcHexagonPoints(), true);
+    final path = Path()..addPolygon(calcHexagonOffsets(), true);
 
     canvas.drawPath(
         path,

@@ -51,7 +51,7 @@ class ScreenNotifier extends ChangeNotifier {
         if (_firstTime) {
           _firstTime = false;
 
-          // Sensible starting point
+          // Sensible starting offset
           setPanOffset(context, Offset(0, height) - origin);
         }
       });

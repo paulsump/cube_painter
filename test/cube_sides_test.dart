@@ -8,11 +8,11 @@ import 'equals5.dart';
 void main() {
   group('Crop', () {
     test('c', () {
-      final sidesAndPoints = getCubeSidesAndPoints(Crop.c);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.c);
 
-      expect(Side.bl, equals(sidesAndPoints[0][0]));
+      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
       expect(
-          equals5(sidesAndPoints[0][1], const [
+          equals5(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
@@ -20,9 +20,9 @@ void main() {
           ]),
           true);
 
-      expect(Side.t, equals(sidesAndPoints[1][0]));
+      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equals5(sidesAndPoints[1][1], const [
+          equals5(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),
@@ -30,9 +30,9 @@ void main() {
           ]),
           true);
 
-      expect(Side.br, equals(sidesAndPoints[2][0]));
+      expect(Side.br, equals(sidesAndUnitOffsets[2][0]));
       expect(
-          equals5(sidesAndPoints[2][1], const [
+          equals5(sidesAndUnitOffsets[2][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
@@ -42,20 +42,20 @@ void main() {
     });
 
     test('r', () {
-      final sidesAndPoints = getCubeSidesAndPoints(Crop.r);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.r);
 
-      expect(Side.t, equals(sidesAndPoints[0][0]));
+      expect(Side.t, equals(sidesAndUnitOffsets[0][0]));
       expect(
-          equals5(sidesAndPoints[0][1], const [
+          equals5(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),
           ]),
           true);
 
-      expect(Side.bl, equals(sidesAndPoints[1][0]));
+      expect(Side.bl, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equals5(sidesAndPoints[1][1], const [
+          equals5(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
@@ -65,12 +65,12 @@ void main() {
     });
 
     test('ur', () {
-      final sidesAndPoints = getCubeSidesAndPoints(Crop.ur);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.ur);
 
-      expect(Side.bl, equals(sidesAndPoints[0][0]));
+      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equals5(sidesAndPoints[0][1], const [
+          equals5(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
@@ -78,9 +78,9 @@ void main() {
           ]),
           true);
 
-      expect(Side.br, equals(sidesAndPoints[1][0]));
+      expect(Side.br, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equals5(sidesAndPoints[1][1], const [
+          equals5(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0.86603, 0.5),
             Offset(0, 1.0),
@@ -89,22 +89,22 @@ void main() {
     });
 
     test('ul', () {
-      final sidesAndPoints = getCubeSidesAndPoints(Crop.ul);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.ul);
 
-      expect(Side.bl, equals(sidesAndPoints[0][0]));
+      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equals5(sidesAndPoints[0][1], const [
+          equals5(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0, 1.0),
             Offset(-0.86602, 0.5),
           ]),
           true);
 
-      expect(Side.br, equals(sidesAndPoints[1][0]));
+      expect(Side.br, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
-          equals5(sidesAndPoints[1][1], const [
+          equals5(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
@@ -114,12 +114,12 @@ void main() {
     });
 
     test('l', () {
-      final sidesAndPoints = getCubeSidesAndPoints(Crop.l);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.l);
 
-      expect(Side.br, equals(sidesAndPoints[0][0]));
+      expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equals5(sidesAndPoints[0][1], const [
+          equals5(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
@@ -127,10 +127,10 @@ void main() {
           ]),
           true);
 
-      expect(Side.t, equals(sidesAndPoints[1][0]));
+      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
-          equals5(sidesAndPoints[1][1], const [
+          equals5(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(0, -1.0),
             Offset(0.86603, -0.5),
@@ -139,22 +139,22 @@ void main() {
     });
 
     test('dl', () {
-      final sidesAndPoints = getCubeSidesAndPoints(Crop.dl);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.dl);
 
-      expect(Side.br, equals(sidesAndPoints[0][0]));
+      expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
-          equals5(sidesAndPoints[0][1], const [
+          equals5(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(0.86603, -0.5),
             Offset(0.86603, 0.5),
           ]),
           true);
 
-      expect(Side.t, equals(sidesAndPoints[1][0]));
+      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
-          equals5(sidesAndPoints[1][1], const [
+          equals5(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),
@@ -164,23 +164,23 @@ void main() {
     });
 
     test('dr', () {
-      final sidesAndPoints = getCubeSidesAndPoints(Crop.dr);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.dr);
 
-      // out(sidesAndPoints[0][1]);
-      // out(sidesAndPoints[1][1]);
+      // out(sidesAndUnitOffsets[0][1]);
+      // out(sidesAndUnitOffsets[1][1]);
 
-      expect(Side.bl, equals(sidesAndPoints[0][0]));
+      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
       expect(
-          equals5(sidesAndPoints[0][1], const [
+          equals5(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, 0.5),
             Offset(-0.86602, -0.5),
           ]),
           true);
 
-      expect(Side.t, equals(sidesAndPoints[1][0]));
+      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
       expect(
-          equals5(sidesAndPoints[1][1], const [
+          equals5(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
             Offset(-0.86602, -0.5),
             Offset(0, -1.0),

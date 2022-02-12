@@ -49,8 +49,8 @@ class BrushMaths {
     return positions;
   }
 
-  GridPoint getPosition(Offset point) {
-    startFrom(point);
+  GridPoint getPosition(Offset unitOffset) {
+    startFrom(unitOffset);
 
     return _roundedFromGrid;
   }
