@@ -83,7 +83,7 @@ class _HexagonState extends State<HexagonButton>
               Transform.translate(
                 offset: widget.center +
                     widget.iconOffset +
-                    const Offset(1, 1) * -IconTheme.of(context).size! / 2,
+                    unitOffset * -IconTheme.of(context).size! / 2,
                 child: Icon(
                   widget.icon,
                   color: getColor(widget.enabled ? Side.br : Side.bl),

@@ -1,4 +1,5 @@
 import 'package:cube_painter/buttons/calc_hexagon_points.dart';
+import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_test/flutter_test.dart';
 const noWarn = out;
 
 void main() {
-  const unitOffset = Offset(1, 1);
 
   const double x = root3over2;
   const double y = 0.5;

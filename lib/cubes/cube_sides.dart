@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
@@ -44,7 +45,7 @@ List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
     indices.length, (i) => gridToUnit(_corners[indices[i]]));
 
 List<Offset> getHexagonOffsets() =>
-    List<Offset>.generate(6, (i) => gridToUnit(_corners[i + 1]));
+    List<Offset>.generate(6, (i) => unitOffset + gridToUnit(_corners[i + 1]));
 
 /// returns polygon points in unit coords
 /// public for test only

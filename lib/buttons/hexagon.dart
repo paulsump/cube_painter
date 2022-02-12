@@ -1,6 +1,8 @@
 import 'package:cube_painter/buttons/hexagon_painter.dart';
 import 'package:flutter/material.dart';
 
+const unitOffset = Offset(1, 1);
+
 class Hexagon extends StatelessWidget {
   final Offset center;
   final double radius;
@@ -22,7 +24,7 @@ class Hexagon extends StatelessWidget {
       offset: center,
       child: Transform.scale(
         scale: radius,
-        origin: const Offset(1, 1),
+        origin: unitOffset,
         child: CustomPaint(
           painter: HexagonPainter(
             color: color,
