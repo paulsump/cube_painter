@@ -1,4 +1,6 @@
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +19,8 @@ class UnitCube extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: _CubePainter(
-        context: context,
         cubeSides: getCubeSides(crop),
+        outline: crop == Crop.c,
         style: style,
       ),
     );
@@ -29,31 +31,37 @@ class _CubePainter extends CustomPainter {
   /// list of [Color,Path]
   final List<CubeSide> cubeSides;
 
-  final BuildContext context;
-
   final PaintingStyle style;
+
+  final bool outline;
 
   const _CubePainter({
     required this.cubeSides,
-    required this.context,
     required this.style,
+    required this.outline,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    _draw(canvas, style);
-  }
-
-  @override
-  bool shouldRepaint(_CubePainter oldDelegate) => false;
-
-  void _draw(Canvas canvas, PaintingStyle style) {
     for (final cubeSide in cubeSides) {
       canvas.drawPath(
           cubeSide.path,
           Paint()
             ..color = cubeSide.color
             ..style = style);
+
+      if (true) {
+        canvas.drawPath(
+            cubeSide.path,
+            Paint()
+              ..color = outline
+                  ? getColor(Side.t)
+                  : cubeSide.color //Colors.deepPurpleAccent
+              ..style = PaintingStyle.stroke);
+      }
     }
   }
+
+  @override
+  bool shouldRepaint(_CubePainter oldDelegate) => false;
 }
