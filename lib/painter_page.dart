@@ -1,12 +1,7 @@
 import 'package:cube_painter/brush/brush.dart';
-import 'package:cube_painter/buttons/hexagon.dart';
-import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/cubes/simple_cube.dart';
-import 'package:cube_painter/cubes/unit_cube.dart';
-import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
@@ -17,14 +12,12 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/tile.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/pan_zoomer.dart';
-import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 const noWarn = [out, getScreen, Line, PanZoomer];
 
@@ -57,28 +50,8 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     // TODO instead of clip, use maths to not draw widgets outside screen
+    final screen = getScreen(context, listen: false);
 
-    final screen = getScreen(context, listen: true);
-    const double radius = 40;
-
-    const double x = 2 * radius * W;
-    final double y = screen.height - 2 * radius * H;
-
-    final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
-
-    final modeButtonInfo = [
-      [],
-      [Icons.add, const UnitCube(crop: Crop.c)],
-      [Icons.remove, const UnitCube(crop: Crop.c, style: PaintingStyle.stroke)],
-      [Icons.add, UnitCube(crop: crop)],
-    ];
-
-    final otherButtonInfo = [
-      [_undoer.canUndo, Icons.undo_sharp, _undoer.undo],
-      [_undoer.canRedo, Icons.redo_sharp, _undoer.redo],
-      [true, Icons.forward, () => getCubeGroupNotifier(context).increment(1)],
-      [true, Icons.save_alt_sharp, _saveToClipboard],
-    ];
     return Stack(
       children: [
         UnitToScreen(
@@ -94,44 +67,11 @@ class _PainterPageState extends State<PainterPage> {
         Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context))
           PanZoomer(onPanZoomChanged: onPanZoomChanged),
-        const HexagonButtonBar(),
-        HexagonButton(
-          icon: Icons.zoom_in_rounded,
-          mode: Mode.panZoom,
-          center: Offset(x * 0.5, y),
-          radius: radius,
+        HexagonButtonBar(
+          undoer: _undoer,
+          saveToClipboard: _saveToClipboard,
         ),
-        for (int i = 1; i < modeButtonInfo.length; ++i)
-          HexagonButton(
-            icon: modeButtonInfo[i][0] as IconData,
-            iconOffset: const Offset(W, H) * -radius * 0.5,
-            unitChild: modeButtonInfo[i][1] as UnitCube,
-            mode: Mode.values[i],
-            center: Offset(x * (i + 0.5), y),
-            radius: radius,
-            onPressed: i == 3
-                ? () {
-                    final cropNotifier =
-                        Provider.of<CropNotifier>(context, listen: false);
-                    cropNotifier.increment(-1);
-                  }
-                : null,
-          ),
-        for (int i = 0; i < otherButtonInfo.length; ++i)
-          HexagonButton(
-            enabled: otherButtonInfo[i][0] as bool,
-            icon: otherButtonInfo[i][1] as IconData,
-            onPressed: otherButtonInfo[i][2] as VoidCallback,
-            center: Offset(x * (i + 4.5), y),
-            radius: radius,
-          ),
-        for (int i = 0;
-            i < 1 + modeButtonInfo.length + otherButtonInfo.length;
-            ++i)
-          Hexagon(
-              center: Offset(x * i, y + 3 * radius * H),
-              radius: radius,
-              color: buttonColor),
+
         // Line(screen.origin,screen.origin+Offset(screen.width/4,screen.height/4)),
       ],
     );
@@ -222,7 +162,6 @@ class _PainterPageState extends State<PainterPage> {
     // _saveForUndo();
   }
 
-  ///
   void _saveToClipboard() {
     final notifier = getCubeGroupNotifier(context);
     notifier.cubeGroup = CubeGroup(
