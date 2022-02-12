@@ -1,5 +1,5 @@
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_corners.dart';
+import 'package:cube_painter/cubes/cube_side_points.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
