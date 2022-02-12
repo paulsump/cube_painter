@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
@@ -235,30 +233,11 @@ class _PainterPageState extends State<PainterPage> {
 
   ///
   void _saveToClipboard() {
-    List<CubeInfo> list = getCubeInfos(context);
-    list.clear();
+    final notifier = getCubeGroupNotifier(context);
+    notifier.cubeGroup = CubeGroup(
+        List.generate(_simpleCubes.length, (i) => _simpleCubes[i].info));
 
-    for (final cube in _simpleCubes) {
-      //modify directly so that we don't notify until end
-      list.add(cube.info);
-    }
-    Clipboard.setData(ClipboardData(text: _getJson()));
-  }
-
-  /// For saving to clipboard
-  String _getJson() {
-    final list = <CubeInfo>[];
-
-    for (CubeInfo cubeInfo in getCubeInfos(context)) {
-      list.add(cubeInfo);
-    }
-
-    final cubeGroup = CubeGroup(list);
-    String json = jsonEncode(cubeGroup);
-    // out('');
-    // out(json);
-    // out('');
-    return json;
+    Clipboard.setData(ClipboardData(text: notifier.json));
   }
 
   void onPanZoomChanged() {

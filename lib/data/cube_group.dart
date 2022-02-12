@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cube_painter/data/assets.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/out.dart';
@@ -49,7 +51,10 @@ class CubeGroupNotifier extends ChangeNotifier {
   final _filePaths = <String>[];
 
   int _currentIndex = 0;
+
   CubeGroup get cubeGroup => _cubeGroup;
+
+  void set cubeGroup(value) => _cubeGroup = value;
 
   void init({
     required String folderPath,
@@ -72,6 +77,8 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     _cubeGroup = CubeGroup.fromJson(map);
   }
+
+  String get json => jsonEncode(cubeGroup);
 
   void increment(int increment) {
     _currentIndex += increment;
