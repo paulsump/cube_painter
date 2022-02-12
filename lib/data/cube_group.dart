@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:cube_painter/data/assets.dart';
@@ -12,12 +13,12 @@ CubeGroupNotifier getCubeGroupNotifier(BuildContext context) {
   return Provider.of<CubeGroupNotifier>(context, listen: false);
 }
 
-CubeGroup getCubeGroup(BuildContext context) {
+CubeGroup _getCubeGroup(BuildContext context) {
   return getCubeGroupNotifier(context).cubeGroup;
 }
 
-List<CubeInfo> getCubeInfos(BuildContext context) {
-  return getCubeGroup(context).list;
+UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context) {
+  return UnmodifiableListView(_getCubeGroup(context).list);
 }
 
 /// The main store of the entire model.
@@ -54,7 +55,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   CubeGroup get cubeGroup => _cubeGroup;
 
-  void set cubeGroup(value) => _cubeGroup = value;
+  set cubeGroup(value) => _cubeGroup = value;
 
   void init({
     required String folderPath,

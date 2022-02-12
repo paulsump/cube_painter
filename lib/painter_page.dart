@@ -46,10 +46,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   void initState() {
-    final cubeGroupNotifier =
-        Provider.of<CubeGroupNotifier>(context, listen: false);
-
-    cubeGroupNotifier.init(folderPath: 'data', addCubes: _addCubes);
+    getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
     _undoer = Undoer(_simpleCubes);
 
     // _tiles = createTiles
@@ -212,15 +209,15 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void _addCubes() {
-    List<CubeInfo> list = getCubeInfos(context);
+    List<CubeInfo> cubeInfos = getCubeInfos(context);
 
     _simpleCubes.clear();
     _animCubes.clear();
 
-    for (int i = 0; i < list.length; ++i) {
+    for (int i = 0; i < cubeInfos.length; ++i) {
       _animCubes.add(AnimCube(
         key: UniqueKey(),
-        info: list[i],
+        info: cubeInfos[i],
         start: unitPingPong((i % 6) / 6) / 2,
         end: 1.0,
         whenComplete: _convertToSimpleCubeAndRemoveSelf,
