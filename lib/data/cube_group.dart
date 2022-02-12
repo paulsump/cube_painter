@@ -44,6 +44,7 @@ class CubeGroup {
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
   late CubeGroup _cubeGroup;
+  late VoidCallback _addCubes;
 
   final _filePaths = <String>[];
   int _currentIndex = 0;
@@ -52,7 +53,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void init({
     required String folderPath,
-    required VoidCallback whenComplete,
+    required VoidCallback addCubes,
   }) async {
     final filePaths = await Assets.getFilePaths(folderPath);
 
@@ -61,7 +62,9 @@ class CubeGroupNotifier extends ChangeNotifier {
     }
 
     await _loadCubeGroup();
-    whenComplete();
+    _addCubes = addCubes;
+
+    _addCubes();
   }
 
   Future<void> _loadCubeGroup() async {
@@ -75,5 +78,6 @@ class CubeGroupNotifier extends ChangeNotifier {
     _currentIndex %= _filePaths.length;
 
     _loadCubeGroup();
+    _addCubes();
   }
 }
