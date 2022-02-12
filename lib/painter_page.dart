@@ -9,7 +9,6 @@ import 'package:cube_painter/cubes/simple_cube.dart';
 import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
-import 'package:cube_painter/data/cube_group_notifier.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/grid.dart';
@@ -40,7 +39,7 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final List<Tile> tiles = [];
+  final List<Tile> gridTiles = [];
 
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
@@ -98,7 +97,7 @@ class _PainterPageState extends State<PainterPage> {
           child: Stack(
             children: [
               Grid(height: screen.height, scale: getZoomScale(context)),
-              ...tiles,
+              ...gridTiles,
               ..._simpleCubes,
               ..._animCubes,
             ],
