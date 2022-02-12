@@ -18,7 +18,7 @@ class UnitCube extends StatelessWidget {
     return CustomPaint(
       painter: _CubePainter(
         context: context,
-        colorPathPairs: getCubeSideColorsAndPaths(crop),
+        cubeSides: getCubeSides(crop),
         style: style,
       ),
     );
@@ -27,14 +27,14 @@ class UnitCube extends StatelessWidget {
 
 class _CubePainter extends CustomPainter {
   /// list of [Color,Path]
-  final List<List> colorPathPairs;
+  final List<CubeSide> cubeSides;
 
   final BuildContext context;
 
   final PaintingStyle style;
 
   const _CubePainter({
-    required this.colorPathPairs,
+    required this.cubeSides,
     required this.context,
     required this.style,
   });
@@ -48,11 +48,11 @@ class _CubePainter extends CustomPainter {
   bool shouldRepaint(_CubePainter oldDelegate) => false;
 
   void _draw(Canvas canvas, PaintingStyle style) {
-    for (final colorPathPair in colorPathPairs) {
+    for (final cubeSide in cubeSides) {
       canvas.drawPath(
-          colorPathPair[1],
+          cubeSide.path,
           Paint()
-            ..color = colorPathPair[0]
+            ..color = cubeSide.color
             ..style = style);
     }
   }

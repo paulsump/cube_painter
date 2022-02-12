@@ -7,16 +7,23 @@ import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/cupertino.dart';
 
-List<List<dynamic>> getCubeSideColorsAndPaths(Crop crop) {
+class CubeSide {
+  final Color color;
+  final Path path;
+
+  const CubeSide(this.color, this.path);
+}
+
+List<CubeSide> getCubeSides(Crop crop) {
   final list = getCubeSidePoints(crop);
 
   return UnmodifiableListView(
     List.generate(
         list.length,
-        (index) => UnmodifiableListView([
+        (index) => CubeSide(
               getColor(list[index][0]),
               Path()..addPolygon(list[index][1], true),
-            ])),
+            )),
   );
 }
 
