@@ -5,7 +5,7 @@ import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/cupertino.dart';
 
 const _corners = <GridPoint>[
-  GridPoint(0, 0), // c center
+  GridPoint.zero, // c center
   // anti clockwise from top right
   // /_/|
   // |_|/

@@ -54,7 +54,7 @@ class _PanZoomerState extends State<PanZoomer> {
         _sessionOffset = Offset.zero;
         widget.setState(() {});
       },
-      // HACK without this container,
+      // Without this container,
       // onScaleUpdate etc doesn't get called. 'opaque' is also required.
       child: Container(),
     );

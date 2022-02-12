@@ -27,9 +27,7 @@ class CubePainterApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         title: 'Cube Painter',
-        home: Background(
-          child: PainterPage(),
-        ),
+        home: Background(child: PainterPage()),
       ),
     );
   }

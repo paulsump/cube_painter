@@ -2,10 +2,9 @@ import 'package:cube_painter/data/grid_point.dart';
 import 'package:flutter/material.dart';
 
 const root3over2 = 0.86602540378; // root(3)/2
+
 const double W = root3over2;
 const double H = 0.5;
-// const double W = 1;
-// const double H = 0;
 
 /// Convert from unit grid (GridPoint)
 /// to unit screen coordinate space (Offset).

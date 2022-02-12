@@ -33,9 +33,7 @@ class Undoer {
 
     simpleCubes.clear();
     _addSimpleCubes(popFrom.removeLast());
-
   }
-
 
   void _addSimpleCubes(List<CubeInfo> cubeInfos) {
     for (final CubeInfo cubeInfo in cubeInfos) {

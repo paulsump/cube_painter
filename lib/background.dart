@@ -4,7 +4,8 @@ import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
-/// animated background
+/// The background and safe area have the same color.
+/// Sometimes the color is animated.
 class Background extends StatefulWidget {
   final Widget child;
 
