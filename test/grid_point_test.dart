@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cube_painter/data/grid_point.dart';
+import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 

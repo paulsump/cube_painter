@@ -11,7 +11,7 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_group_notifier.dart';
 import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/data/grid_point.dart';
+import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/grid.dart';
 import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';

@@ -1,7 +1,8 @@
 import 'dart:ui';
 
-/// x,y offset on the triangle grid -
-/// a coordinate space where x is across and
+/// Grid position x,y
+/// indices on the triangle grid.
+/// A coordinate space where x is across and
 /// y is up and to the right by H and W respectively.
 class Position {
   final int x, y;

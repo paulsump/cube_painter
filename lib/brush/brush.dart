@@ -3,7 +3,7 @@ import 'package:cube_painter/brush/positions.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/data/grid_point.dart';
+import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';

@@ -4,7 +4,7 @@ import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
-import 'package:cube_painter/data/grid_point.dart';
+import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/cupertino.dart';
 

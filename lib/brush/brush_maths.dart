@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:cube_painter/brush/positions.dart';
-import 'package:cube_painter/data/grid_point.dart';
+import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/material.dart';
