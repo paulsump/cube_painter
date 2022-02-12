@@ -14,9 +14,8 @@ class Line extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return CustomPaint(painter: _Painter(from, to, color));
-  }
+  Widget build(BuildContext context) =>
+      CustomPaint(painter: _Painter(from, to, color));
 }
 
 class _Painter extends CustomPainter {

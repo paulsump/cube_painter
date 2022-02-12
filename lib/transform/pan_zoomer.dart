@@ -22,12 +22,11 @@ class _PanZoomerState extends State<PanZoomer> {
   Offset _initialOffset = Offset.zero;
 
   double get _scale => getZoomScale(context);
-
-  set _scale(double value) => setZoomScale(context, value);
-
   Offset get _offset => getPanOffset(context);
 
   set _offset(Offset value) => setPanOffset(context, value);
+
+  set _scale(double value) => setZoomScale(context, value);
 
   double _initialScale = 1.0;
 
@@ -54,8 +53,8 @@ class _PanZoomerState extends State<PanZoomer> {
         _sessionOffset = Offset.zero;
         widget.setState(() {});
       },
-      // Without this container,
-      // onScaleUpdate etc doesn't get called. 'opaque' is also required.
+      // Without this container, gestures stop working
+      // i.e. onScaleUpdate etc doesn't get called. 'opaque' is also required.
       child: Container(),
     );
   }

@@ -16,15 +16,13 @@ class UnitCube extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _Painter(
-        cubeSides: getCubeSides(crop),
-        outline: crop == Crop.c,
-        style: style,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => CustomPaint(
+        painter: _Painter(
+          cubeSides: getCubeSides(crop),
+          outline: crop == Crop.c,
+          style: style,
+        ),
+      );
 }
 
 class _Painter extends CustomPainter {

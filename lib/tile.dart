@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// grid is made up of these line widgets a bit like a wire mesh
 class Tile extends StatelessWidget {
   final Color color;
 
@@ -14,9 +15,8 @@ class Tile extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return CustomPaint(painter: _Painter(from, to, color));
-  }
+  Widget build(BuildContext context) =>
+      CustomPaint(painter: _Painter(from, to, color));
 }
 
 class _Painter extends CustomPainter {

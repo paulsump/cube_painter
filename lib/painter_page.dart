@@ -16,6 +16,7 @@ import 'package:cube_painter/grid.dart';
 import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/tile.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -39,6 +40,8 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
+  final List<Tile> tiles = [];
+
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
 
@@ -52,6 +55,7 @@ class _PainterPageState extends State<PainterPage> {
     cubeGroupNotifier.init(folderPath: 'data', whenComplete: _addCubeGroup);
     _undoer = Undoer(_simpleCubes);
 
+    // _tiles = createTiles
     super.initState();
   }
 
@@ -78,12 +82,12 @@ class _PainterPageState extends State<PainterPage> {
       [
         _undoer.canUndo,
         Icons.undo_sharp,
-        () => {_undoer.undo(), setState(() {})}
+            () => {_undoer.undo(), setState(() {})}
       ],
       [
         _undoer.canRedo,
         Icons.redo_sharp,
-        () => {_undoer.redo(), setState(() {})}
+            () => {_undoer.redo(), setState(() {})}
       ],
       [true, Icons.forward, () => _loadNextGroup()],
       [true, Icons.save_alt_sharp, _saveToClipboard],
@@ -94,6 +98,7 @@ class _PainterPageState extends State<PainterPage> {
           child: Stack(
             children: [
               Grid(height: screen.height, scale: getZoomScale(context)),
+              ...tiles,
               ..._simpleCubes,
               ..._animCubes,
             ],
@@ -117,10 +122,10 @@ class _PainterPageState extends State<PainterPage> {
             radius: radius,
             onPressed: i == 3
                 ? () {
-                    final cropNotifier =
-                        Provider.of<CropNotifier>(context, listen: false);
-                    cropNotifier.increment(-1);
-                  }
+              final cropNotifier =
+              Provider.of<CropNotifier>(context, listen: false);
+              cropNotifier.increment(-1);
+            }
                 : null,
           ),
         for (int i = 0; i < otherButtonInfo.length; ++i)
@@ -132,8 +137,8 @@ class _PainterPageState extends State<PainterPage> {
             radius: radius,
           ),
         for (int i = 0;
-            i < 1 + modeButtonInfo.length + otherButtonInfo.length;
-            ++i)
+        i < 1 + modeButtonInfo.length + otherButtonInfo.length;
+        ++i)
           Hexagon(
               center: Offset(x * i, y + 3 * radius * H),
               radius: radius,
@@ -210,7 +215,7 @@ class _PainterPageState extends State<PainterPage> {
 
   void _loadNextGroup() {
     final cubeGroupNotifier =
-        Provider.of<CubeGroupNotifier>(context, listen: false);
+    Provider.of<CubeGroupNotifier>(context, listen: false);
 
     cubeGroupNotifier.increment(1);
     _addCubeGroup();
