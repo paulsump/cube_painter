@@ -11,7 +11,6 @@ import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/tile.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
-import 'package:cube_painter/transform/pan_zoomer.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/undoer.dart';
