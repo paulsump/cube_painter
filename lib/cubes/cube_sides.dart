@@ -32,6 +32,7 @@ const _corners = <GridPoint>[
 ];
 
 /// returns polygon points in unit coords
+/// public for test only
 List<List<dynamic>> getCubeSidePoints(Crop crop) {
   /// corner indices
   /// anti clockwise

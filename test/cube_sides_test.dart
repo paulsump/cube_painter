@@ -1,4 +1,4 @@
-import 'package:cube_painter/cubes/cube_side_colors_and_paths.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter_test/flutter_test.dart';
