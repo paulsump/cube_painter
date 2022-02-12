@@ -1,6 +1,7 @@
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/cubes/simple_cube.dart';
@@ -101,6 +102,7 @@ class _PainterPageState extends State<PainterPage> {
         Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context))
           PanZoomer(onPanZoomChanged: onPanZoomChanged),
+        HexagonButtonBar(),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,
