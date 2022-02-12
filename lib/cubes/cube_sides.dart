@@ -41,10 +41,11 @@ const _corners = <Position>[
   Position(1, 0), // br
 ];
 
-List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
-    indices.length, (i) => positionToUnitOffset(_corners[indices[i]]));
+List<Offset> getUnitOffsetsFromHexagonCornerIndices(List<int> indices) =>
+    List<Offset>.generate(
+        indices.length, (i) => positionToUnitOffset(_corners[indices[i]]));
 
-List<Offset> getHexagonOffsets() => List<Offset>.generate(
+List<Offset> getHexagonCornerOffsets() => List<Offset>.generate(
     6, (i) => unit + positionToUnitOffset(_corners[i + 1]));
 
 /// returns polygon offsets in unit coords
@@ -61,40 +62,40 @@ List<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
         [
           Side.bl,
           // |_|
-          _offsets([c, b, bl, tl])
+          getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
         [
           Side.t,
           // /_/
-          _offsets([c, tl, t, tr])
+          getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
         [
           Side.br,
           // /|
           // |/
-          _offsets([c, tr, br, b])
+          getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
     case Crop.r:
       return UnmodifiableListView([
         [
           Side.t,
-          _offsets([c, tl, t])
+          getUnitOffsetsFromHexagonCornerIndices([c, tl, t])
         ],
         [
           Side.bl,
-          _offsets([c, b, bl, tl])
+          getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
       ]);
     case Crop.ur:
       return UnmodifiableListView([
         [
           Side.bl,
-          _offsets([c, b, bl, tl])
+          getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
         [
           Side.br,
-          _offsets([c, br, b])
+          getUnitOffsetsFromHexagonCornerIndices([c, br, b])
         ],
       ]);
     case Crop.ul:
@@ -102,24 +103,24 @@ List<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
         [
           Side.bl,
           // _|
-          _offsets([c, b, bl])
+          getUnitOffsetsFromHexagonCornerIndices([c, b, bl])
         ],
         [
           Side.br,
           // /|
           // |/
-          _offsets([c, tr, br, b])
+          getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
     case Crop.l:
       return UnmodifiableListView([
         [
           Side.br,
-          _offsets([c, tr, br, b])
+          getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
         [
           Side.t,
-          _offsets([c, t, tr])
+          getUnitOffsetsFromHexagonCornerIndices([c, t, tr])
         ],
       ]);
     case Crop.dl:
@@ -128,12 +129,12 @@ List<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           Side.br,
           // /|
           // |/
-          _offsets([c, tr, br])
+          getUnitOffsetsFromHexagonCornerIndices([c, tr, br])
         ],
         [
           Side.t,
           // /_/
-          _offsets([c, tl, t, tr])
+          getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
       ]);
     case Crop.dr:
@@ -141,12 +142,12 @@ List<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
         [
           Side.bl,
           // |-
-          _offsets([c, bl, tl])
+          getUnitOffsetsFromHexagonCornerIndices([c, bl, tl])
         ],
         [
           Side.t,
           // /_/
-          _offsets([c, tl, t, tr])
+          getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
       ]);
   }

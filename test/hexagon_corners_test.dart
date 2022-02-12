@@ -1,5 +1,5 @@
 import 'package:cube_painter/buttons/hexagon.dart';
-import 'package:cube_painter/buttons/hexagon_offsets.dart';
+import 'package:cube_painter/buttons/hexagon_corners.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
