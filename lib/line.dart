@@ -15,9 +15,7 @@ class Line extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: LinePainter(from, to, color),
-    );
+    return CustomPaint(painter: LinePainter(from, to, color));
   }
 }
 
@@ -31,13 +29,7 @@ class LinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawLine(
-      from,
-      to,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..color = color,
-    );
+    canvas.drawLine(from, to, Paint()..color = color);
   }
 
   @override

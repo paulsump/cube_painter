@@ -24,7 +24,7 @@ class ScreenNotifier extends ChangeNotifier {
   Size? _size;
   Offset _origin = Offset.zero;
 
-  double get _width => _size!.width;
+  double get width => _size!.width;
 
   double get height => _size!.height;
 
@@ -42,7 +42,7 @@ class ScreenNotifier extends ChangeNotifier {
     final double y = newSize.height;
 
     _size = Size(x, y - safeAreaHeight);
-    _origin = Offset(_width, height) / 2;
+    _origin = Offset(width, height) / 2;
 
     if (height != 0) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {

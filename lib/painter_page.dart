@@ -138,6 +138,7 @@ class _PainterPageState extends State<PainterPage> {
               center: Offset(x * i, y + 3 * radius * H),
               radius: radius,
               color: buttonColor),
+        // Line(screen.origin,screen.origin+Offset(screen.width/4,screen.height/4)),
       ],
     );
   }
