@@ -27,7 +27,7 @@ class UnitCube extends StatelessWidget {
 }
 
 List<List<dynamic>> _getColorsAndPaths(Crop crop) {
-  final list = CubeCorners.getCubeSidePoints(crop);
+  final list = getCubeSidePoints(crop);
 
   return List.unmodifiable(
     List.generate(

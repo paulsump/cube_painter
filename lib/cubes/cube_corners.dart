@@ -4,33 +4,32 @@ import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/cupertino.dart';
 
-class CubeCorners {
-  static const _corners = <GridPoint>[
-    GridPoint(0, 0), // c center
-    // anti clockwise from top right
-    // /_/|
-    // |_|/
-    GridPoint(1, 1), // tr
-    GridPoint(0, 1), // t
-    GridPoint(-1, 0), // tl
-    GridPoint(-1, -1), // bl
-    GridPoint(0, -1), // b bottom
-    GridPoint(1, 0), // br
-  ];
+ const _corners = <GridPoint>[
+  GridPoint(0, 0), // c center
+  // anti clockwise from top right
+  // /_/|
+  // |_|/
+  GridPoint(1, 1), // tr
+  GridPoint(0, 1), // t
+  GridPoint(-1, 0), // tl
+  GridPoint(-1, -1), // bl
+  GridPoint(0, -1), // b bottom
+  GridPoint(1, 0), // br
+];
 
   /// returns polygon points in unit coords
-  static List<List<dynamic>> getCubeSidePoints(Crop crop) {
-    /// corner indices
-    /// anti clockwise
-    /// center, top right, top, top left, bottom left, bottom, bottom right.
-    const int c = 0, tr = 1, t = 2, tl = 3, bl = 4, b = 5, br = 6;
+List<List<dynamic>> getCubeSidePoints(Crop crop) {
+  /// corner indices
+  /// anti clockwise
+  /// center, top right, top, top left, bottom left, bottom, bottom right.
+  const int c = 0, tr = 1, t = 2, tl = 3, bl = 4, b = 5, br = 6;
 
-    switch (crop) {
-      case Crop.c:
-        return List.unmodifiable([
-          [
-            Side.bl,
-            // |_|
+  switch (crop) {
+    case Crop.c:
+      return List.unmodifiable([
+        [
+          Side.bl,
+          // |_|
             _offsets([c, b, bl, tl])
           ],
           [
@@ -122,6 +121,5 @@ class CubeCorners {
     }
   }
 
-  static List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
-      indices.length, (i) => gridToUnit(_corners[indices[i]]));
-}
+List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
+    indices.length, (i) => gridToUnit(_corners[indices[i]]));
