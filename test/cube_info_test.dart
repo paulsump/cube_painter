@@ -9,10 +9,10 @@ import 'package:flutter_test/flutter_test.dart';
 const noWarn = out;
 
 void main() {
-  const testPoint = Position(1, 2);
+  const testPosition = Position(1, 2);
   const testCrop = Crop.dl;
 
-  const testCube = CubeInfo(center: testPoint, crop: testCrop);
+  const testCube = CubeInfo(center: testPosition, crop: testCrop);
 
   group('json', () {
     const testJson = '{"center":{"x":1,"y":2},"cropIndex":5}';

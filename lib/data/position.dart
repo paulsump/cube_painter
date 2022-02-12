@@ -19,7 +19,7 @@ class Position {
 
   operator /(int scale) => Position(x ~/ scale, y ~/ scale);
 
-  // operator -() => GridPoint(-x, -y);
+  // operator -() => Position(-x, -y);
 
   @override
   bool operator ==(Object other) =>

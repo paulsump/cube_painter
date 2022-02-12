@@ -27,14 +27,14 @@ void main() {
     });
   });
 
-  const testPoint = Position(1, 2);
-  const testPoint2 = Position(3, 4);
+  const testPosition = Position(1, 2);
+  const testPosition2 = Position(3, 4);
 
   const testCrop = Crop.dl;
   const testCrop2 = Crop.ul;
 
-  const testCube = CubeInfo(center: testPoint, crop: testCrop);
-  const testCube2 = CubeInfo(center: testPoint2, crop: testCrop2);
+  const testCube = CubeInfo(center: testPosition, crop: testCrop);
+  const testCube2 = CubeInfo(center: testPosition2, crop: testCrop2);
 
   const testCubes = <CubeInfo>[testCube, testCube2];
 

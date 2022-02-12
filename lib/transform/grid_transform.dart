@@ -6,7 +6,7 @@ const root3over2 = 0.86602540378; // root(3)/2
 const double W = root3over2;
 const double H = 0.5;
 
-/// Convert from unit grid (GridPoint)
+/// Convert from unit grid (Position)
 /// to unit screen coordinate space (Offset).
 /// Y is upwards in both coordinate spaces.
 /// We need unit space because
@@ -16,4 +16,5 @@ const double H = 0.5;
 
 Offset unitToGrid(Offset u) => Offset(u.dx / W, H * u.dx / W - u.dy);
 
+//TODO REname to positionToUnitOffset
 Offset gridToUnit(Position g) => Offset(W * g.x, H * g.x - g.y);

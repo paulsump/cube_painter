@@ -5,7 +5,7 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const noWarn = out;
-const testPoint = Position(1, 2);
+const testPosition = Position(1, 2);
 
 void main() {
   group('json', () {
@@ -13,13 +13,13 @@ void main() {
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
-      final newPoint = Position.fromJson(map);
-      // out(newPoint);
-      expect(testPoint, equals(newPoint));
+      final newPosition = Position.fromJson(map);
+      // out(newPosition);
+      expect(testPosition, equals(newPosition));
     });
 
     test('save', () {
-      String newJson = jsonEncode(testPoint);
+      String newJson = jsonEncode(testPosition);
       // out(newJson);
       expect(testJson, equals(newJson));
     });
