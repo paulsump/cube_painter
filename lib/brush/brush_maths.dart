@@ -12,13 +12,13 @@ class BrushMaths {
   /// dragged from point in grid space
   late Offset _fromUnit;
   late Offset _fromGrid;
-  late GridPoint _roundedFromGrid;
+  late Position _roundedFromGrid;
 
   /// scale the drag vector to get the correct length
   int _distance = 0;
 
   /// unit drag vector
-  late GridPoint? _vector;
+  late Position? _vector;
   late bool _reverseOrder;
 
   void startFrom(Offset fromUnit) {
@@ -27,7 +27,7 @@ class BrushMaths {
     _fromUnit = fromUnit;
     _fromGrid = unitToGrid(fromUnit);
 
-    _roundedFromGrid = GridPoint(_fromGrid.dx.round(), _fromGrid.dy.round());
+    _roundedFromGrid = Position(_fromGrid.dx.round(), _fromGrid.dy.round());
   }
 
   Positions extrudeTo(Offset toUnit) {
@@ -49,7 +49,7 @@ class BrushMaths {
     return positions;
   }
 
-  GridPoint getPosition(Offset unitOffset) {
+  Position getPosition(Offset unitOffset) {
     startFrom(unitOffset);
 
     return _roundedFromGrid;
@@ -66,18 +66,18 @@ List _calculateVectorAndReverseOrder(Offset newVector) {
 
   switch (dir) {
     case 0:
-      return [const GridPoint(1, 0), false];
+      return [const Position(1, 0), false];
     case 1:
-      return [const GridPoint(-1, -1), true];
+      return [const Position(-1, -1), true];
     case 2:
-      return [const GridPoint(0, 1), false];
+      return [const Position(0, 1), false];
     case 3:
-      return [const GridPoint(1, 0), true];
+      return [const Position(1, 0), true];
     case -3:
     case -2:
-      return [const GridPoint(-1, -1), false];
+    return [const Position(-1, -1), false];
     case -1:
-      return [const GridPoint(0, 1), true];
+      return [const Position(0, 1), true];
   }
   out(dir);
   assert(false);

@@ -28,17 +28,17 @@ List<CubeSide> getCubeSides(Crop crop) {
   );
 }
 
-const _corners = <GridPoint>[
-  GridPoint.zero, // c center
+const _corners = <Position>[
+  Position.zero, // c center
   // anti clockwise from top right
   // /_/|
   // |_|/
-  GridPoint(1, 1), // tr
-  GridPoint(0, 1), // t
-  GridPoint(-1, 0), // tl
-  GridPoint(-1, -1), // bl
-  GridPoint(0, -1), // b bottom
-  GridPoint(1, 0), // br
+  Position(1, 1), // tr
+  Position(0, 1), // t
+  Position(-1, 0), // tl
+  Position(-1, -1), // bl
+  Position(0, -1), // b bottom
+  Position(1, 0), // br
 ];
 
 List<Offset> _offsets(List<int> indices) => List<Offset>.generate(

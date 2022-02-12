@@ -10,7 +10,7 @@ import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-const noWarn = [out, GridPoint];
+const noWarn = [out, Position];
 
 class Brush extends StatefulWidget {
   final _cubes = <AnimCube>[];
@@ -93,7 +93,7 @@ class BrushState extends State<Brush> {
   }
 
   void _replaceCube(Offset offset, BuildContext context) {
-    final GridPoint position =
+    final Position position =
         brushMaths.getPosition(screenToUnit(offset, context));
 
     widget._cubes.clear();
@@ -118,7 +118,7 @@ class BrushState extends State<Brush> {
       var copy = widget._cubes.toList();
       widget._cubes.clear();
 
-      for (GridPoint position in positions.list) {
+      for (Position position in positions.list) {
         AnimCube? cube = _findAt(position, copy);
 
         if (cube != null) {
@@ -132,7 +132,7 @@ class BrushState extends State<Brush> {
     }
   }
 
-  void _addCube(GridPoint center, Crop crop) {
+  void _addCube(Position center, Crop crop) {
     widget._cubes.add(AnimCube(
       key: UniqueKey(),
       info: CubeInfo(center: center, crop: crop),
@@ -144,7 +144,7 @@ class BrushState extends State<Brush> {
   }
 }
 
-AnimCube? _findAt(GridPoint position, List<AnimCube> list) {
+AnimCube? _findAt(Position position, List<AnimCube> list) {
   for (final cube in list) {
     if (position == cube.info.center) {
       return cube;

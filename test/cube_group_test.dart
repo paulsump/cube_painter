@@ -27,8 +27,8 @@ void main() {
     });
   });
 
-  const testPoint = GridPoint(1, 2);
-  const testPoint2 = GridPoint(3, 4);
+  const testPoint = Position(1, 2);
+  const testPoint2 = Position(3, 4);
 
   const testCrop = Crop.dl;
   const testCrop2 = Crop.ul;

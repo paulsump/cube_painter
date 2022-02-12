@@ -7,7 +7,7 @@ const noWarn = out;
 
 /// for passing around cube positions
 class Positions {
-  final list = <GridPoint>[];
+  final list = <Position>[];
 
   @override
   bool operator ==(Object other) {

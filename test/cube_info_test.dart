@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 const noWarn = out;
 
 void main() {
-  const testPoint = GridPoint(1, 2);
+  const testPoint = Position(1, 2);
   const testCrop = Crop.dl;
 
   const testCube = CubeInfo(center: testPoint, crop: testCrop);

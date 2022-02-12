@@ -198,7 +198,7 @@ class _PainterPageState extends State<PainterPage> {
     return _removeSelf(old);
   }
 
-  SimpleCube? _findAt(GridPoint position, List<SimpleCube> list) {
+  SimpleCube? _findAt(Position position, List<SimpleCube> list) {
     for (final cube in list) {
       if (position == cube.info.center) {
         return cube;

@@ -16,4 +16,4 @@ const double H = 0.5;
 
 Offset unitToGrid(Offset u) => Offset(u.dx / W, H * u.dx / W - u.dy);
 
-Offset gridToUnit(GridPoint g) => Offset(W * g.x, H * g.x - g.y);
+Offset gridToUnit(Position g) => Offset(W * g.x, H * g.x - g.y);

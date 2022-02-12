@@ -3,7 +3,7 @@ import 'package:cube_painter/data/grid_point.dart';
 import 'package:flutter/material.dart';
 
 class CubeInfo {
-  final GridPoint center;
+  final Position center;
 
   final Crop crop;
 
@@ -20,7 +20,7 @@ class CubeInfo {
   String toString() => '$center,$crop';
 
   CubeInfo.fromJson(Map<String, dynamic> json)
-      : center = GridPoint.fromJson(json['center']),
+      : center = Position.fromJson(json['center']),
         crop = Crop.values[json['cropIndex']];
 
   Map<String, dynamic> toJson() => {'center': center, 'cropIndex': crop.index};

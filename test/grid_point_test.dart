@@ -5,7 +5,7 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const noWarn = out;
-const testPoint = GridPoint(1, 2);
+const testPoint = Position(1, 2);
 
 void main() {
   group('json', () {
@@ -13,7 +13,7 @@ void main() {
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
-      final newPoint = GridPoint.fromJson(map);
+      final newPoint = Position.fromJson(map);
       // out(newPoint);
       expect(testPoint, equals(newPoint));
     });
