@@ -45,7 +45,7 @@ class AnimCube extends StatefulWidget {
           crop: info.crop,
           style: wire ? PaintingStyle.stroke : PaintingStyle.fill,
         ),
-        offset = gridToUnit(info.center),
+        offset = positionToUnitOffset(info.center),
         super(key: key);
 
   @override

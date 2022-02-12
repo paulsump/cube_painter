@@ -14,7 +14,7 @@ const double H = 0.5;
 /// it isn't skewed, so
 /// standard vector maths works.
 
-Offset unitToGrid(Offset u) => Offset(u.dx / W, H * u.dx / W - u.dy);
+Offset unitOffsetToPositionOffset(Offset u) =>
+    Offset(u.dx / W, H * u.dx / W - u.dy);
 
-//TODO REname to positionToUnitOffset
-Offset gridToUnit(Position g) => Offset(W * g.x, H * g.x - g.y);
+Offset positionToUnitOffset(Position g) => Offset(W * g.x, H * g.x - g.y);

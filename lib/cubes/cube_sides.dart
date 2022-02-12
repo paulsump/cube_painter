@@ -42,10 +42,10 @@ const _corners = <Position>[
 ];
 
 List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
-    indices.length, (i) => gridToUnit(_corners[indices[i]]));
+    indices.length, (i) => positionToUnitOffset(_corners[indices[i]]));
 
-List<Offset> getHexagonOffsets() =>
-    List<Offset>.generate(6, (i) => unit + gridToUnit(_corners[i + 1]));
+List<Offset> getHexagonOffsets() => List<Offset>.generate(
+    6, (i) => unit + positionToUnitOffset(_corners[i + 1]));
 
 /// returns polygon offsets in unit coords
 /// public for test only

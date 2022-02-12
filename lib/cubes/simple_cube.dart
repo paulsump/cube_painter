@@ -14,7 +14,7 @@ class SimpleCube extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Offset offset = gridToUnit(info.center);
+    final Offset offset = positionToUnitOffset(info.center);
 
     return Transform.translate(
       offset: offset,

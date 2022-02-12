@@ -25,7 +25,7 @@ class BrushMaths {
     _vector = null;
 
     _fromUnit = fromUnit;
-    _fromGrid = unitToGrid(fromUnit);
+    _fromGrid = unitOffsetToPositionOffset(fromUnit);
 
     _roundedFromGrid = Position(_fromGrid.dx.round(), _fromGrid.dy.round());
   }
@@ -36,7 +36,7 @@ class BrushMaths {
     _vector = vecAndReverse[0];
     _reverseOrder = vecAndReverse[1];
 
-    final Offset gridVector = unitToGrid(toUnit) - _fromGrid;
+    final Offset gridVector = unitOffsetToPositionOffset(toUnit) - _fromGrid;
     _distance = gridVector.distance.round();
 
     var positions = Positions();
