@@ -19,18 +19,18 @@ class Grid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-          painter: GridPainter(
+          painter: _Painter(
         height: height,
         scale: scale,
       ));
 }
 
-class GridPainter extends CustomPainter {
+class _Painter extends CustomPainter {
   final double height;
 
   final double scale;
 
-  const GridPainter({
+  const _Painter({
     required this.height,
     required this.scale,
   });

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Line extends StatelessWidget {
+class Tile extends StatelessWidget {
   final Color color;
 
   final Offset from;
   final Offset to;
 
-  const Line(
+  const Tile(
     this.from,
     this.to, {
     Key? key,

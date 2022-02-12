@@ -18,7 +18,7 @@ class UnitCube extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _CubePainter(
+      painter: _Painter(
         cubeSides: getCubeSides(crop),
         outline: crop == Crop.c,
         style: style,
@@ -27,7 +27,7 @@ class UnitCube extends StatelessWidget {
   }
 }
 
-class _CubePainter extends CustomPainter {
+class _Painter extends CustomPainter {
   /// list of [Color,Path]
   final List<CubeSide> cubeSides;
 
@@ -35,7 +35,7 @@ class _CubePainter extends CustomPainter {
 
   final bool outline;
 
-  const _CubePainter({
+  const _Painter({
     required this.cubeSides,
     required this.style,
     required this.outline,
@@ -63,5 +63,5 @@ class _CubePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_CubePainter oldDelegate) => false;
+  bool shouldRepaint(_Painter oldDelegate) => false;
 }
