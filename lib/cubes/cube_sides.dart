@@ -40,6 +40,12 @@ const _corners = <GridPoint>[
   GridPoint(1, 0), // br
 ];
 
+List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
+    indices.length, (i) => gridToUnit(_corners[indices[i]]));
+
+List<Offset> getHexagonOffsets() =>
+    List<Offset>.generate(6, (i) => gridToUnit(_corners[i + 1]));
+
 /// returns polygon points in unit coords
 /// public for test only
 List<List<dynamic>> getCubeSidePoints(Crop crop) {
@@ -144,6 +150,3 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
       ]);
   }
 }
-
-List<Offset> _offsets(List<int> indices) => List<Offset>.generate(
-    indices.length, (i) => gridToUnit(_corners[indices[i]]));

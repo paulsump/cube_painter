@@ -6,7 +6,7 @@ import 'package:vector_math/vector_math.dart';
 
 List<Offset> calcHexagonPoints() =>
     UnmodifiableListView(_calcUnitHexagonPoints());
-
+// getHexagonOffsets();
 Iterable<Offset> _calcUnitHexagonPoints() sync* {
   const double angle = -pi / 3;
   var vec = Vector2(1, 0);
