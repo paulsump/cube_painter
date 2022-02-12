@@ -1,5 +1,5 @@
-import 'package:cube_painter/buttons/hexagon_corners.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:flutter/material.dart';
 
