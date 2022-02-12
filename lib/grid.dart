@@ -41,21 +41,6 @@ class GridPainter extends CustomPainter {
     int n = _getN(height / H / scale);
     const y = -H;
 
-    final rect = Rect.fromPoints(
-      Offset.zero,
-      Offset(n * W, y * n),
-    );
-
-    final paintBR = Paint()
-      ..style = PaintingStyle.stroke
-      ..color = getColor(Side.t);
-    // ..shader = _gradientBR.createShader(rect);
-
-    final paintBL = Paint()
-      ..style = PaintingStyle.stroke
-      ..color = getColor(Side.bl);
-    // ..shader = _gradientBL.createShader(rect);
-
     // left
     for (int i = 2; i < n; i += 2) {
       // lower
@@ -100,14 +85,10 @@ class GridPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
 
-final _gradientBR = LinearGradient(
-  colors: [getColor(Side.t), getColor(Side.br)],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
+final paintBR = Paint()
+  ..style = PaintingStyle.stroke
+  ..color = getColor(Side.t);
 
-final _gradientBL = LinearGradient(
-  colors: [getColor(Side.bl), getColor(Side.t)],
-  begin: Alignment.bottomLeft,
-  end: Alignment.topRight,
-);
+final paintBL = Paint()
+  ..style = PaintingStyle.stroke
+  ..color = getColor(Side.bl);
