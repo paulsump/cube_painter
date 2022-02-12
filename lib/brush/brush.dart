@@ -92,9 +92,9 @@ class BrushState extends State<Brush> {
     );
   }
 
-  void _replaceCube(Offset offset, BuildContext context) {
+  void _replaceCube(Offset point, BuildContext context) {
     final Position position =
-        brushMaths.getPosition(screenToUnit(offset, context));
+        brushMaths.getPosition(screenToUnit(point, context));
 
     widget._cubes.clear();
     Crop crop = Crop.c;

@@ -14,7 +14,8 @@ const double H = 0.5;
 /// it isn't skewed, so
 /// standard vector maths works.
 
-Offset unitOffsetToPositionOffset(Offset u) =>
-    Offset(u.dx / W, H * u.dx / W - u.dy);
+Offset unitOffsetToPositionOffset(Offset unitOffset) =>
+    Offset(unitOffset.dx / W, H * unitOffset.dx / W - unitOffset.dy);
 
-Offset positionToUnitOffset(Position g) => Offset(W * g.x, H * g.x - g.y);
+Offset positionToUnitOffset(Position position) =>
+    Offset(W * position.x, H * position.x - position.y);
