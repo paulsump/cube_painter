@@ -9,11 +9,12 @@ typedef DoList = List<List<CubeInfo>>;
 
 class Undoer {
   final List<SimpleCube> simpleCubes;
+  final void Function(VoidCallback fn) setState;
 
   final DoList _undos = [];
   final DoList _redos = [];
 
-  Undoer(this.simpleCubes);
+  Undoer(this.simpleCubes, {required this.setState});
 
   bool get canUndo => _undos.isNotEmpty;
 
@@ -24,9 +25,15 @@ class Undoer {
     _redos.clear();
   }
 
-  void undo() => _popFromPushTo(_undos, _redos);
+  void undo() {
+    _popFromPushTo(_undos, _redos);
+    setState(() {});
+  }
 
-  void redo() => _popFromPushTo(_redos, _undos);
+  void redo() {
+    _popFromPushTo(_redos, _undos);
+    setState(() {});
+  }
 
   void _popFromPushTo(DoList popFrom, DoList pushTo) {
     _saveTo(pushTo);

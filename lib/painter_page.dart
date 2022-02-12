@@ -48,7 +48,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   void initState() {
     getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
-    _undoer = Undoer(_simpleCubes);
+    _undoer = Undoer(_simpleCubes, setState: setState);
 
     // _tiles = createTiles
     super.initState();
@@ -74,16 +74,8 @@ class _PainterPageState extends State<PainterPage> {
     ];
 
     final otherButtonInfo = [
-      [
-        _undoer.canUndo,
-        Icons.undo_sharp,
-        () => {_undoer.undo(), setState(() {})}
-      ],
-      [
-        _undoer.canRedo,
-        Icons.redo_sharp,
-        () => {_undoer.redo(), setState(() {})}
-      ],
+      [_undoer.canUndo, Icons.undo_sharp, _undoer.undo],
+      [_undoer.canRedo, Icons.redo_sharp, _undoer.redo],
       [true, Icons.forward, () => getCubeGroupNotifier(context).increment(1)],
       [true, Icons.save_alt_sharp, _saveToClipboard],
     ];
@@ -102,7 +94,7 @@ class _PainterPageState extends State<PainterPage> {
         Brush(adoptCubes: _adoptCubes),
         if (Mode.panZoom == getMode(context))
           PanZoomer(onPanZoomChanged: onPanZoomChanged),
-        HexagonButtonBar(),
+        const HexagonButtonBar(),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,
