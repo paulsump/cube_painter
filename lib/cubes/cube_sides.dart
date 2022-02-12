@@ -45,9 +45,7 @@ List<Offset> getUnitOffsetsFromHexagonCornerIndices(List<int> indices) =>
     List<Offset>.generate(
         indices.length, (i) => positionToUnitOffset(_corners[indices[i]]));
 
-List<Offset> calcHexagonOffsets() =>
     // UnmodifiableListView(_calcUnitHexagonUnitOffsets());
-    getHexagonCornerOffsets();
 
 List<Offset> getHexagonCornerOffsets() => List<Offset>.generate(
     6, (i) => unit + positionToUnitOffset(_corners[i + 1]));

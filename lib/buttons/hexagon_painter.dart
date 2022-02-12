@@ -13,7 +13,7 @@ class HexagonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // clip(canvas, context);
-    final path = Path()..addPolygon(calcHexagonOffsets(), true);
+    final path = Path()..addPolygon(getHexagonCornerOffsets(), true);
 
     canvas.drawPath(
         path,
