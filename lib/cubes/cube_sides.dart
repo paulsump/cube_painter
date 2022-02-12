@@ -16,7 +16,7 @@ class CubeSide {
 }
 
 List<CubeSide> getCubeSides(Crop crop) {
-  final list = getCubeSidePoints(crop);
+  final list = getCubeSidesAndPoints(crop);
 
   return UnmodifiableListView(
     List.generate(
@@ -49,7 +49,7 @@ List<Offset> getHexagonOffsets() =>
 
 /// returns polygon points in unit coords
 /// public for test only
-List<List<dynamic>> getCubeSidePoints(Crop crop) {
+List<List<dynamic>> getCubeSidesAndPoints(Crop crop) {
   /// corner indices
   /// anti clockwise
   /// center, top right, top, top left, bottom left, bottom, bottom right.

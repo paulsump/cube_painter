@@ -8,7 +8,7 @@ import 'equals5.dart';
 void main() {
   group('Crop', () {
     test('c', () {
-      final sidesAndPoints = getCubeSidePoints(Crop.c);
+      final sidesAndPoints = getCubeSidesAndPoints(Crop.c);
 
       expect(Side.bl, equals(sidesAndPoints[0][0]));
       expect(
@@ -42,7 +42,7 @@ void main() {
     });
 
     test('r', () {
-      final sidesAndPoints = getCubeSidePoints(Crop.r);
+      final sidesAndPoints = getCubeSidesAndPoints(Crop.r);
 
       expect(Side.t, equals(sidesAndPoints[0][0]));
       expect(
@@ -65,7 +65,7 @@ void main() {
     });
 
     test('ur', () {
-      final sidesAndPoints = getCubeSidePoints(Crop.ur);
+      final sidesAndPoints = getCubeSidesAndPoints(Crop.ur);
 
       expect(Side.bl, equals(sidesAndPoints[0][0]));
 
@@ -89,7 +89,7 @@ void main() {
     });
 
     test('ul', () {
-      final sidesAndPoints = getCubeSidePoints(Crop.ul);
+      final sidesAndPoints = getCubeSidesAndPoints(Crop.ul);
 
       expect(Side.bl, equals(sidesAndPoints[0][0]));
 
@@ -114,7 +114,7 @@ void main() {
     });
 
     test('l', () {
-      final sidesAndPoints = getCubeSidePoints(Crop.l);
+      final sidesAndPoints = getCubeSidesAndPoints(Crop.l);
 
       expect(Side.br, equals(sidesAndPoints[0][0]));
 
@@ -139,7 +139,7 @@ void main() {
     });
 
     test('dl', () {
-      final sidesAndPoints = getCubeSidePoints(Crop.dl);
+      final sidesAndPoints = getCubeSidesAndPoints(Crop.dl);
 
       expect(Side.br, equals(sidesAndPoints[0][0]));
 
@@ -164,7 +164,7 @@ void main() {
     });
 
     test('dr', () {
-      final sidesAndPoints = getCubeSidePoints(Crop.dr);
+      final sidesAndPoints = getCubeSidesAndPoints(Crop.dr);
 
       // out(sidesAndPoints[0][1]);
       // out(sidesAndPoints[1][1]);
