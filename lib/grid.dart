@@ -48,11 +48,13 @@ class GridPainter extends CustomPainter {
 
     final paintBR = Paint()
       ..style = PaintingStyle.stroke
-      ..shader = _gradientBR.createShader(rect);
+      ..color = getColor(Side.t);
+    // ..shader = _gradientBR.createShader(rect);
 
     final paintBL = Paint()
       ..style = PaintingStyle.stroke
-      ..shader = _gradientBL.createShader(rect);
+      ..color = getColor(Side.bl);
+    // ..shader = _gradientBL.createShader(rect);
 
     // left
     for (int i = 2; i < n; i += 2) {
