@@ -105,7 +105,8 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ),
         Brush(adoptCubes: _adoptCubes),
-        if (Mode.panZoom == getMode(context)) PanZoomer(setState: setState),
+        if (Mode.panZoom == getMode(context))
+          PanZoomer(onPanZoomChanged: onPanZoomChanged),
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,
@@ -272,5 +273,9 @@ class _PainterPageState extends State<PainterPage> {
     // out(json);
     // out('');
     return json;
+  }
+
+  void onPanZoomChanged() {
+    //TODO UPdate gridTiles
   }
 }

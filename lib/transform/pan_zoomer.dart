@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 const noWarn = out;
 
 class PanZoomer extends StatefulWidget {
-  final void Function(void Function()) setState;
+  final void Function() onPanZoomChanged;
 
   const PanZoomer({
     Key? key,
-    required this.setState,
+    required this.onPanZoomChanged,
   }) : super(key: key);
 
   @override
@@ -47,11 +47,11 @@ class _PanZoomerState extends State<PanZoomer> {
         final newOffset = _sessionOffset + _initialOffset;
 
         _offset = newOffset * details.scale;
-        widget.setState(() {});
+        widget.onPanZoomChanged();
       },
       onScaleEnd: (details) {
         _sessionOffset = Offset.zero;
-        widget.setState(() {});
+        widget.onPanZoomChanged();
       },
       // Without this container, gestures stop working
       // i.e. onScaleUpdate etc doesn't get called. 'opaque' is also required.
