@@ -15,7 +15,7 @@ class CubeSide {
   const CubeSide(this.color, this.path);
 }
 
-List<CubeSide> getCubeSides(Crop crop) {
+UnmodifiableListView<CubeSide> getCubeSides(Crop crop) {
   final list = getCubeSidesAndUnitOffsets(crop);
 
   return UnmodifiableListView(
@@ -41,18 +41,18 @@ const _corners = <Position>[
   Position(1, 0), // br
 ];
 
-List<Offset> getUnitOffsetsFromHexagonCornerIndices(List<int> indices) =>
-    List<Offset>.generate(
-        indices.length, (i) => positionToUnitOffset(_corners[indices[i]]));
+UnmodifiableListView<Offset> getUnitOffsetsFromHexagonCornerIndices(
+        List<int> indices) =>
+    UnmodifiableListView(List<Offset>.generate(
+        indices.length, (i) => positionToUnitOffset(_corners[indices[i]])));
 
-    // UnmodifiableListView(_calcUnitHexagonUnitOffsets());
-
-List<Offset> getHexagonCornerOffsets() => List<Offset>.generate(
-    6, (i) => unit + positionToUnitOffset(_corners[i + 1]));
+UnmodifiableListView<Offset> getHexagonCornerOffsets() =>
+    UnmodifiableListView(List<Offset>.generate(
+        6, (i) => unit + positionToUnitOffset(_corners[i + 1])));
 
 /// returns polygon offsets in unit coords
 /// public for test only
-List<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
+UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
   /// corner indices
   /// anti clockwise
   /// center, top right, top, top left, bottom left, bottom, bottom right.
