@@ -1,5 +1,4 @@
-import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_side_points.dart';
+import 'package:cube_painter/cubes/cube_side_colors_and_paths.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
@@ -19,24 +18,11 @@ class UnitCube extends StatelessWidget {
     return CustomPaint(
       painter: _CubePainter(
         context: context,
-        colorPathPairs: _getColorsAndPaths(crop),
+        colorPathPairs: getCubeSideColorsAndPaths(crop),
         style: style,
       ),
     );
   }
-}
-
-List<List<dynamic>> _getColorsAndPaths(Crop crop) {
-  final list = getCubeSidePoints(crop);
-
-  return List.unmodifiable(
-    List.generate(
-        list.length,
-        (index) => List.unmodifiable([
-              getColor(list[index][0]),
-              Path()..addPolygon(list[index][1], true),
-            ])),
-  );
 }
 
 class _CubePainter extends CustomPainter {

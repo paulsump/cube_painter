@@ -1,8 +1,22 @@
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/grid_point.dart';
 import 'package:cube_painter/transform/grid_transform.dart';
 import 'package:flutter/cupertino.dart';
+
+List<List<dynamic>> getCubeSideColorsAndPaths(Crop crop) {
+  final list = getCubeSidePoints(crop);
+
+  return List.unmodifiable(
+    List.generate(
+        list.length,
+        (index) => List.unmodifiable([
+              getColor(list[index][0]),
+              Path()..addPolygon(list[index][1], true),
+            ])),
+  );
+}
 
 const _corners = <GridPoint>[
   GridPoint.zero, // c center
