@@ -1,9 +1,11 @@
+import 'dart:collection';
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:vector_math/vector_math.dart';
 
-List<Offset> calcHexagonPoints() => List.unmodifiable(_calcUnitHexagonPoints());
+List<Offset> calcHexagonPoints() =>
+    UnmodifiableListView(_calcUnitHexagonPoints());
 
 Iterable<Offset> _calcUnitHexagonPoints() sync* {
   const double angle = -pi / 3;

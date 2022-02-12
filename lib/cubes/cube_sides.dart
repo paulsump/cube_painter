@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
@@ -8,10 +10,10 @@ import 'package:flutter/cupertino.dart';
 List<List<dynamic>> getCubeSideColorsAndPaths(Crop crop) {
   final list = getCubeSidePoints(crop);
 
-  return List.unmodifiable(
+  return UnmodifiableListView(
     List.generate(
         list.length,
-        (index) => List.unmodifiable([
+        (index) => UnmodifiableListView([
               getColor(list[index][0]),
               Path()..addPolygon(list[index][1], true),
             ])),
@@ -41,7 +43,7 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
 
   switch (crop) {
     case Crop.c:
-      return List.unmodifiable([
+      return UnmodifiableListView([
         [
           Side.bl,
           // |_|
@@ -60,7 +62,7 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
         ],
       ]);
     case Crop.r:
-      return List.unmodifiable([
+      return UnmodifiableListView([
         [
           Side.t,
           _offsets([c, tl, t])
@@ -71,7 +73,7 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
         ],
       ]);
     case Crop.ur:
-      return List.unmodifiable([
+      return UnmodifiableListView([
         [
           Side.bl,
           _offsets([c, b, bl, tl])
@@ -82,7 +84,7 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
         ],
       ]);
     case Crop.ul:
-      return List.unmodifiable([
+      return UnmodifiableListView([
         [
           Side.bl,
           // _|
@@ -96,7 +98,7 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
         ],
       ]);
     case Crop.l:
-      return List.unmodifiable([
+      return UnmodifiableListView([
         [
           Side.br,
           _offsets([c, tr, br, b])
@@ -107,7 +109,7 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
         ],
       ]);
     case Crop.dl:
-      return List.unmodifiable([
+      return UnmodifiableListView([
         [
           Side.br,
           // /|
@@ -121,7 +123,7 @@ List<List<dynamic>> getCubeSidePoints(Crop crop) {
         ],
       ]);
     case Crop.dr:
-      return List.unmodifiable([
+      return UnmodifiableListView([
         [
           Side.bl,
           // |-
