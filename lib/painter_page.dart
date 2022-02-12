@@ -81,14 +81,14 @@ class _PainterPageState extends State<PainterPage> {
       [
         _undoer.canUndo,
         Icons.undo_sharp,
-            () => {_undoer.undo(), setState(() {})}
+        () => {_undoer.undo(), setState(() {})}
       ],
       [
         _undoer.canRedo,
         Icons.redo_sharp,
-            () => {_undoer.redo(), setState(() {})}
+        () => {_undoer.redo(), setState(() {})}
       ],
-      [true, Icons.forward, () => _loadNextGroup()],
+      [true, Icons.forward, () => getCubeGroupNotifier(context).increment(1)],
       [true, Icons.save_alt_sharp, _saveToClipboard],
     ];
     return Stack(
@@ -122,10 +122,10 @@ class _PainterPageState extends State<PainterPage> {
             radius: radius,
             onPressed: i == 3
                 ? () {
-              final cropNotifier =
-              Provider.of<CropNotifier>(context, listen: false);
-              cropNotifier.increment(-1);
-            }
+                    final cropNotifier =
+                        Provider.of<CropNotifier>(context, listen: false);
+                    cropNotifier.increment(-1);
+                  }
                 : null,
           ),
         for (int i = 0; i < otherButtonInfo.length; ++i)
@@ -137,8 +137,8 @@ class _PainterPageState extends State<PainterPage> {
             radius: radius,
           ),
         for (int i = 0;
-        i < 1 + modeButtonInfo.length + otherButtonInfo.length;
-        ++i)
+            i < 1 + modeButtonInfo.length + otherButtonInfo.length;
+            ++i)
           Hexagon(
               center: Offset(x * i, y + 3 * radius * H),
               radius: radius,
@@ -211,11 +211,6 @@ class _PainterPageState extends State<PainterPage> {
       }
     }
     return null;
-  }
-
-  void _loadNextGroup() {
-
-    getCubeGroupNotifier(context).increment(1);
   }
 
   void _addCubes() {

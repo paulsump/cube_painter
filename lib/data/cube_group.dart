@@ -44,11 +44,11 @@ class CubeGroup {
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
   late CubeGroup _cubeGroup;
+
   late VoidCallback _addCubes;
-
   final _filePaths = <String>[];
-  int _currentIndex = 0;
 
+  int _currentIndex = 0;
   CubeGroup get cubeGroup => _cubeGroup;
 
   void init({
