@@ -30,7 +30,7 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final List<Tile> gridTiles = [];
+  final List<Tile> mesh = [];
 
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
@@ -42,7 +42,7 @@ class _PainterPageState extends State<PainterPage> {
     getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
     _undoer = Undoer(_simpleCubes, setState: setState);
 
-    // _tiles = createTiles
+    onPanZoomChanged();
     super.initState();
   }
 
@@ -63,7 +63,7 @@ class _PainterPageState extends State<PainterPage> {
                 child: Stack(
                   children: [
                     Grid(height: screen.height, scale: getZoomScale(context)),
-                    ...gridTiles,
+                    ...mesh,
                     ..._simpleCubes,
                     ..._animCubes,
                   ],
@@ -72,8 +72,7 @@ class _PainterPageState extends State<PainterPage> {
               Brush(adoptCubes: _adoptCubes),
               if (Mode.panZoom == getMode(context, listen: true))
                 PanZoomer(onPanZoomChanged: onPanZoomChanged),
-              Line(screen.center,
-                  screen.center + Offset(screen.width / 4, screen.height / 4)),
+              // Line(screen.center,screen.center + Offset(screen.width / 4, screen.height / 4)),
             ],
           ),
         ),
@@ -175,6 +174,7 @@ class _PainterPageState extends State<PainterPage> {
 
   void _saveToClipboard() {
     final notifier = getCubeGroupNotifier(context);
+
     notifier.cubeGroup = CubeGroup(
         List.generate(_simpleCubes.length, (i) => _simpleCubes[i].info));
 
@@ -182,6 +182,6 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void onPanZoomChanged() {
-    //TODO UPdate gridTiles
+    // mesh.c
   }
 }
