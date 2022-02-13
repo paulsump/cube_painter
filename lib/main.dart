@@ -1,7 +1,7 @@
 import 'package:cube_painter/background.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
-import 'package:cube_painter/mode.dart';
+import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/screen.dart';
@@ -22,7 +22,7 @@ class CubePainterApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ScreenNotifier()),
         ChangeNotifierProvider(create: (_) => PanZoomNotifier()),
         ChangeNotifierProvider(create: (_) => CubeGroupNotifier()),
-        ChangeNotifierProvider(create: (_) => ModeNotifier()),
+        ChangeNotifierProvider(create: (_) => GestureModeNotifier()),
         ChangeNotifierProvider(create: (_) => CropNotifier()),
       ],
       child: const MaterialApp(

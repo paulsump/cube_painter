@@ -6,7 +6,6 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
-// TODO test
 /// the maths for extruding blocks
 class BrushMaths {
   /// dragged from point in grid space

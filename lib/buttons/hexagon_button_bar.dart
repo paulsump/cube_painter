@@ -4,7 +4,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
-import 'package:cube_painter/mode.dart';
+import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class HexagonButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
 
-    final modeButtonInfo = [
+    final gestureModeButtonInfo = [
       [],
       [Icons.add, const UnitCube(crop: Crop.c)],
       [Icons.remove, const UnitCube(crop: Crop.c, style: PaintingStyle.stroke)],
@@ -47,16 +47,16 @@ class HexagonButtonBar extends StatelessWidget {
       children: [
         const HexagonButton(
           icon: Icons.zoom_in_rounded,
-          mode: Mode.panZoom,
+          gestureMode: GestureMode.panZoom,
           center: Offset(x * 0.5, y),
           radius: radius,
         ),
-        for (int i = 1; i < modeButtonInfo.length; ++i)
+        for (int i = 1; i < gestureModeButtonInfo.length; ++i)
           HexagonButton(
-            icon: modeButtonInfo[i][0] as IconData,
+            icon: gestureModeButtonInfo[i][0] as IconData,
             iconOffset: const Offset(W, H) * -radius * 0.5,
-            unitChild: modeButtonInfo[i][1] as UnitCube,
-            mode: Mode.values[i],
+            unitChild: gestureModeButtonInfo[i][1] as UnitCube,
+            gestureMode: GestureMode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
             onPressed: i == 3
@@ -76,7 +76,7 @@ class HexagonButtonBar extends StatelessWidget {
             radius: radius,
           ),
         for (int i = 0;
-            i < 1 + modeButtonInfo.length + otherButtonInfo.length;
+            i < 1 + gestureModeButtonInfo.length + otherButtonInfo.length;
             ++i)
           Hexagon(
               center: Offset(x * i, y + 3 * radius * H),

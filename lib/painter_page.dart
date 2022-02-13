@@ -8,8 +8,8 @@ import 'package:cube_painter/cubes/simple_tile.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
+import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/line.dart';
-import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -80,7 +80,7 @@ class _PainterPageState extends State<PainterPage> {
                 ),
               ),
               Brush(adoptCubes: _adoptCubes),
-              if (Mode.panZoom == getMode(context, listen: true))
+              if (GestureMode.panZoom == getGestureMode(context, listen: true))
                 PanZoomer(onPanZoomChanged: onPanZoomChanged),
               // Line(screen.center,screen.center + Offset(screen.width / 4, screen.height / 4)),
             ],
@@ -100,14 +100,14 @@ class _PainterPageState extends State<PainterPage> {
   /// once the brush has finished, it
   /// yields ownership of it's cubes to this parent widget.
   /// which then creates a similar list
-  /// If we are in add mode
+  /// If we are in add gestureMode
   /// the cubes will end up going
   /// in the simpleCube list once they've animated to full size.
-  /// if we're in erase mode they shrink to zero.
+  /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubes array once the
   /// anim is done.
   void _adoptCubes(List<AnimCube> orphans) {
-    final bool erase = Mode.erase == getMode(context);
+    final bool erase = GestureMode.erase == getGestureMode(context);
 
     if (erase) {
       for (final AnimCube cube in orphans) {

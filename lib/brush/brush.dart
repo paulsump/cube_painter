@@ -4,7 +4,7 @@ import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
-import 'package:cube_painter/mode.dart';
+import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
@@ -60,17 +60,17 @@ class BrushState extends State<Brush> {
       },
       onPanUpdate: (details) {
         // TODO if(details.scale!=1) {zoomer.scaleUpdate)else{
-        switch (getMode(context)) {
-          case Mode.panZoom:
+        switch (getGestureMode(context)) {
+          case GestureMode.panZoom:
             break;
-          case Mode.add:
+          case GestureMode.add:
             _updateExtrude(details, context);
             break;
-          case Mode.erase:
+          case GestureMode.erase:
             _replaceCube(details.localPosition, context);
             setState(() {});
             break;
-          case Mode.crop:
+          case GestureMode.crop:
             _replaceCube(details.localPosition, context);
             setState(() {});
             break;
@@ -80,7 +80,7 @@ class BrushState extends State<Brush> {
         widget._handOver();
       },
       onTapDown: (details) {
-        if (getMode(context) == Mode.panZoom) {
+        if (getGestureMode(context) == GestureMode.panZoom) {
           return;
         }
         _replaceCube(details.localPosition, context);
@@ -99,7 +99,7 @@ class BrushState extends State<Brush> {
     widget._cubes.clear();
     Crop crop = Crop.c;
 
-    if (getMode(context) == Mode.crop) {
+    if (getGestureMode(context) == GestureMode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
     }
 
@@ -137,9 +137,9 @@ class BrushState extends State<Brush> {
       key: UniqueKey(),
       info: CubeInfo(center: center, crop: crop),
       start: 0.0,
-      end: getMode(context) == Mode.erase ? 3.0 : 1.0,
+      end: getGestureMode(context) == GestureMode.erase ? 3.0 : 1.0,
       pingPong: true,
-      wire: getMode(context) == Mode.erase,
+      wire: getGestureMode(context) == GestureMode.erase,
     ));
   }
 }

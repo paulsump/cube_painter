@@ -1,7 +1,7 @@
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
-import 'package:cube_painter/mode.dart';
+import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +19,7 @@ class HexagonButton extends StatefulWidget {
   final Offset iconOffset;
 
   final double radius;
-  final Mode? mode;
+  final GestureMode? gestureMode;
 
   final Widget? unitChild;
 
@@ -32,7 +32,7 @@ class HexagonButton extends StatefulWidget {
     this.onPressed,
     required this.center,
     required this.radius,
-    this.mode,
+    this.gestureMode,
   }) : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class _HexagonState extends State<HexagonButton>
     );
     _controller.value = 1;
 
-    if (widget.mode == getMode(context)) {
+    if (widget.gestureMode == getGestureMode(context)) {
       _controller.value = 0;
     }
   }
@@ -75,7 +75,6 @@ class _HexagonState extends State<HexagonButton>
                 offset: widget.center,
                 child: Transform.scale(
                   scale: widget.radius / 2,
-                  // TODO widget.enabled IF needed
                   child: widget.unitChild,
                 ),
               ),
@@ -97,11 +96,12 @@ class _HexagonState extends State<HexagonButton>
                   if (!widget.enabled) {
                     return;
                   }
-                  if (widget.mode != null) {
-                    final modeNotifier =
-                        Provider.of<ModeNotifier>(context, listen: false);
+                  if (widget.gestureMode != null) {
+                    final gestureModeNotifier =
+                        Provider.of<GestureModeNotifier>(context,
+                            listen: false);
 
-                    modeNotifier.mode = widget.mode!;
+                    gestureModeNotifier.mode = widget.gestureMode!;
                     _controller.forward();
                   } else {
                     _controller.reset();
@@ -117,8 +117,8 @@ class _HexagonState extends State<HexagonButton>
     );
   }
 
-  Color get _color => widget.mode != null
-      ? getMode(context, listen: true) != widget.mode!
+  Color get _color => widget.gestureMode != null
+      ? getGestureMode(context, listen: true) != widget.gestureMode!
           ? radioButtonOffColor
           : radioButtonOnColor
       : getButtonColor(_controller.value);
