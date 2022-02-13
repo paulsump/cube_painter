@@ -39,16 +39,18 @@ LinearGradient _getGradient(Side side) {
   }
 }
 
+const double dt = 0.2;
+const double t = 0.8;
 final _gradientT = LinearGradient(
-  colors: [getColor(Side.br), getColor(Side.bl)],
-  begin: Alignment.centerRight,
-  end: Alignment.centerLeft,
+  colors: [getTweenBLtoTColor(t - dt), getTweenBLtoTColor(t + dt)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
 );
 
 final _gradientBR = LinearGradient(
   colors: [getColor(Side.t), getColor(Side.br)],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
+  begin: Alignment.bottomRight,
+  end: Alignment.topLeft,
 );
 
 final _gradientBL = LinearGradient(
