@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
@@ -10,6 +12,7 @@ import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/undoer.dart';
@@ -151,7 +154,7 @@ class _PainterPageState extends State<PainterPage> {
     return null;
   }
 
-  bool _findCubeAt(Position position) => null != _getCubeAt(position);
+  // bool _findCubeAt(Position position) => null != _getCubeAt(position);
 
   bool _findTileAt(Position position) {
     for (final tile in _tiles) {
@@ -192,14 +195,18 @@ class _PainterPageState extends State<PainterPage> {
 
   void onPanZoomChanged() {
     const n = 44;
+
     for (int x = 0; x < n; ++x) {
       for (int y = 0; y < n; ++y) {
         final position = Position(x, y);
+
         if (!_findTileAt(position)) {
-//          if (!_findTileAt(position) && !_findCubeAt(position)) {
+          final Offset offset = positionToUnitOffset(position);
+
           _tiles.add(
             SimpleTile(
               bottom: position,
+              t: lerpDouble(0.2, 0.9, -offset.dy / n)!,
             ),
           );
         }
