@@ -56,8 +56,6 @@ Paint _getGradientPaint(double t, Path path, PaintingStyle style) {
 LinearGradient _getGradient(double t) => LinearGradient(
       // colors: [getTweenBLtoTColor(t - dt), getTweenBLtoTColor(t + dt)],
       colors: [getTweenBtoGColor(t - dt), getTweenBtoGColor(t + dt)],
-      // begin: Alignment.bottomCenter,
-      // end: Alignment.topCenter,
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
     );

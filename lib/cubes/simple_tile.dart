@@ -19,13 +19,12 @@ class SimpleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Offset offset = positionToUnitOffset(bottom);
-    final unitOffset = positionToUnitOffset(bottom);
-    final double y = -unitOffset.dy;
-// out(unitOffset);
+
+    final double y = -offset.dy;
     return Transform.translate(
       offset: offset,
       child: Tile(t: lerpDouble(0.2, 0.9, y / 44)!),
-      // child: Tile(t: lerpDouble(0.0, 1, (bottom.x+bottom.y )/ (44+44))!),
+      // child: Tile(t: lerpDouble(0.2, 0.3, y / 44)!),
     );
   }
 }

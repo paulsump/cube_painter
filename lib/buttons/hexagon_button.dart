@@ -119,11 +119,7 @@ class _HexagonState extends State<HexagonButton>
 
   Color get _color => widget.mode != null
       ? getMode(context, listen: true) != widget.mode!
-          ? Color.lerp(
-              getColor(Side.t),
-              getColor(Side.br),
-              0.3,
-            )!
-          : getButtonColor(0.3)
+          ? radioButtonOffColor
+          : radioButtonOnColor
       : getButtonColor(_controller.value);
 }
