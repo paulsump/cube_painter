@@ -8,6 +8,7 @@ import 'package:cube_painter/cubes/simple_tile.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
+import 'package:cube_painter/grid.dart';
 import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
@@ -64,8 +65,8 @@ class _PainterPageState extends State<PainterPage> {
               UnitToScreen(
                 child: Stack(
                   children: [
-                    // Grid(height: screen.height, scale: getZoomScale(context)),
-                    ..._tiles,
+                    Grid(height: screen.height, scale: getZoomScale(context)),
+                    // ..._tiles,
                     ..._simpleCubes,
                     ..._animCubes,
                   ],
@@ -196,18 +197,19 @@ class _PainterPageState extends State<PainterPage> {
   // void onPanZoomChanged(double zoomScale) {
   //   final ny = zoomScale.round();
   void onPanZoomChanged() {
+    return;
     final screen = getScreen(context, listen: false);
     final topLeft = screenToUnit(Offset.zero, context);
     final bottomRight =
-        screenToUnit(Offset(screen.width, screen.height), context);
+    screenToUnit(Offset(screen.width, screen.height), context);
     final x1 = topLeft.dx.round();
     final y1 = topLeft.dy.round();
     final x2 = bottomRight.dx.round();
     final y2 = bottomRight.dy.round();
-    // out('$nx,$ny');
+    // out('x1,$y1');
     final ny = y2 - y1;
 
-    if (ny > 66) return;
+    if (ny > 76) return;
     _tiles.clear();
     for (int x = x1; x < x2; ++x) {
       for (int y = y1; y < y2; ++y) {
