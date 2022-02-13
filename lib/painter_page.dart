@@ -51,27 +51,39 @@ class _PainterPageState extends State<PainterPage> {
     // TODO instead of clip, use maths to not draw widgets outside screen
     final screen = getScreen(context, listen: false);
 
-    return Stack(
+    const double buttonsBarHeight = 100;
+
+    return Column(
       children: [
-        UnitToScreen(
+        SizedBox(
+          height: screen.height - buttonsBarHeight,
           child: Stack(
             children: [
-              Grid(height: screen.height, scale: getZoomScale(context)),
-              ...gridTiles,
-              ..._simpleCubes,
-              ..._animCubes,
+              UnitToScreen(
+                child: Stack(
+                  children: [
+                    Grid(height: screen.height, scale: getZoomScale(context)),
+                    ...gridTiles,
+                    ..._simpleCubes,
+                    ..._animCubes,
+                  ],
+                ),
+              ),
+              Brush(adoptCubes: _adoptCubes),
+              if (Mode.panZoom == getMode(context, listen: false))
+                PanZoomer(onPanZoomChanged: onPanZoomChanged),
+
+              // Line(screen.origin,screen.origin+Offset(screen.width/4,screen.height/4)),
             ],
           ),
         ),
-        Brush(adoptCubes: _adoptCubes),
-        if (Mode.panZoom == getMode(context))
-          PanZoomer(onPanZoomChanged: onPanZoomChanged),
-        HexagonButtonBar(
-          undoer: _undoer,
-          saveToClipboard: _saveToClipboard,
+        SizedBox(
+          height: buttonsBarHeight,
+          child: HexagonButtonBar(
+            undoer: _undoer,
+            saveToClipboard: _saveToClipboard,
+          ),
         ),
-
-        // Line(screen.origin,screen.origin+Offset(screen.width/4,screen.height/4)),
       ],
     );
   }

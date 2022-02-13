@@ -43,7 +43,8 @@ class HexagonButtonBar extends StatelessWidget {
     const double x = 2 * radius * W;
 
     final screen = getScreen(context, listen: true);
-    final double y = screen.height - 2 * radius * H;
+    // final double y = screen.height - 2 * radius * H;
+    final double y = 3 * radius * H;
 
     return Stack(
       children: [
