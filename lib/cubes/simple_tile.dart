@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cube_painter/cubes/tile.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -6,9 +8,12 @@ import 'package:flutter/material.dart';
 class SimpleTile extends StatelessWidget {
   final Position bottom;
 
+  final double scale;
+
   const SimpleTile({
     Key? key,
     required this.bottom,
+    required this.scale,
   }) : super(key: key);
 
   @override
@@ -17,7 +22,10 @@ class SimpleTile extends StatelessWidget {
 
     return Transform.translate(
       offset: offset,
-      child: Tile(t: bottom.y / 20),
+      child: Transform.scale(
+        scale: scale,
+        child: Tile(t: lerpDouble(0.4, 0.6, bottom.y / 20)!),
+      ),
     );
   }
 }

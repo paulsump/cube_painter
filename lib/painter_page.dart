@@ -192,16 +192,21 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void onPanZoomChanged() {
-    for (int x = 0; x < 33; ++x) {
-      for (int y = 0; y < 33; ++y) {
+    const double step = 10;
+    const n = 444 ~/ step;
+    out(n);
+    for (int x = 0; x < n; ++x) {
+      for (int y = 0; y < n; ++y) {
         final position = Position(x, y);
-        const step = 5;
         if (x % step == 0 &&
             y % step == 0 &&
             !_findTileAt(position) &&
             !_findCubeAt(position)) {
           _tiles.add(
-            SimpleTile(bottom: position),
+            SimpleTile(
+              bottom: position,
+              scale: step,
+            ),
           );
           out(x + y);
         }
