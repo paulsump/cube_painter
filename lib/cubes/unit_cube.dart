@@ -47,7 +47,7 @@ class _Painter extends CustomPainter {
       canvas.drawPath(
           cubeSide.path,
           Paint()
-            ..color = outline ? getColor(Side.t) : cubeSide.color
+            ..color = outline ? getColor(Side.t) : getColor(cubeSide.side)
             ..style = PaintingStyle.stroke);
     }
   }
