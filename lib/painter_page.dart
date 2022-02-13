@@ -21,7 +21,15 @@ import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-const noWarn = [out, getScreen, Line, PanZoomer];
+const noWarn = [
+  out,
+  getScreen,
+  Line,
+  PanZoomer,
+  lerpDouble,
+  positionToUnitOffset,
+  SimpleTile
+];
 
 class PainterPage extends StatefulWidget {
   const PainterPage({
@@ -33,7 +41,7 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final List<SimpleTile> _tiles = [];
+  // final List<SimpleTile> _tiles = [];
 
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
@@ -157,14 +165,14 @@ class _PainterPageState extends State<PainterPage> {
 
   // bool _findCubeAt(Position position) => null != _getCubeAt(position);
 
-  bool _findTileAt(Position position) {
-    for (final tile in _tiles) {
-      if (position == tile.bottom) {
-        return true;
-      }
-    }
-    return false;
-  }
+  // bool _findTileAt(Position position) {
+  //   for (final tile in _tiles) {
+  //     if (position == tile.bottom) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   void _addCubes() {
     List<CubeInfo> cubeInfos = getCubeInfos(context);
@@ -197,36 +205,35 @@ class _PainterPageState extends State<PainterPage> {
   // void onPanZoomChanged(double zoomScale) {
   //   final ny = zoomScale.round();
   void onPanZoomChanged() {
-    return;
-    final screen = getScreen(context, listen: false);
-    final topLeft = screenToUnit(Offset.zero, context);
-    final bottomRight =
-    screenToUnit(Offset(screen.width, screen.height), context);
-    final x1 = topLeft.dx.round();
-    final y1 = topLeft.dy.round();
-    final x2 = bottomRight.dx.round();
-    final y2 = bottomRight.dy.round();
-    // out('x1,$y1');
-    final ny = y2 - y1;
-
-    if (ny > 76) return;
-    _tiles.clear();
-    for (int x = x1; x < x2; ++x) {
-      for (int y = y1; y < y2; ++y) {
-        final position = Position(x, (x + y) ~/ 2);
-
-        if (true || !_findTileAt(position)) {
-          final Offset offset = positionToUnitOffset(position);
-          _tiles.add(
-            SimpleTile(
-              key: UniqueKey(),
-              bottom: position,
-              t: lerpDouble(0.2, 0.9, -offset.dy / ny)!,
-            ),
-          );
-        }
-      }
-    }
-    setState(() {});
+    // final screen = getScreen(context, listen: false);
+    // final topLeft = screenToUnit(Offset.zero, context);
+    // final bottomRight =
+    // screenToUnit(Offset(screen.width, screen.height), context);
+    // final x1 = topLeft.dx.round();
+    // final y1 = topLeft.dy.round();
+    // final x2 = bottomRight.dx.round();
+    // final y2 = bottomRight.dy.round();
+    // // out('x1,$y1');
+    // final ny = y2 - y1;
+    //
+    // if (ny > 76) return;
+    // _tiles.clear();
+    // for (int x = x1; x < x2; ++x) {
+    //   for (int y = y1; y < y2; ++y) {
+    //     final position = Position(x, (x + y) ~/ 2);
+    //
+    //     if (true || !_findTileAt(position)) {
+    //       final Offset offset = positionToUnitOffset(position);
+    //       _tiles.add(
+    //         SimpleTile(
+    //           key: UniqueKey(),
+    //           bottom: position,
+    //           t: lerpDouble(0.2, 0.9, -offset.dy / ny)!,
+    //         ),
+    //       );
+    //     }
+    //   }
+    // }
+    // setState(() {});
   }
 }

@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:cube_painter/cubes/unit_tile.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
-const noWarn = out;
+const noWarn = [out];
 
 class SimpleTile extends StatelessWidget {
   final Position bottom;
