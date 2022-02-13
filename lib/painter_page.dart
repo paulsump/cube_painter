@@ -59,7 +59,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     // TODO instead of clip, use maths to not draw widgets outside screen
-    final screen = getScreen(context, listen: false);
+    final screen = getScreen(context, listen: true);
 
     const double buttonsBarHeight = 100;
 
