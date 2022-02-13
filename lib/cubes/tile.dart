@@ -1,6 +1,5 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
-import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +31,8 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPath(cubeSide.path,
-        _getGradientPaint(t, cubeSide.side, cubeSide.path, PaintingStyle.fill));
+    canvas.drawPath(
+        cubeSide.path, _getGradientPaint(t, cubeSide.path, PaintingStyle.fill));
 
     canvas.drawPath(
         cubeSide.path,
@@ -48,40 +47,14 @@ class _Painter extends CustomPainter {
 
 const double dt = 0.21;
 
-LinearGradient _getGradient(double t, Side side) {
-  switch (side) {
-    case Side.t:
-      return _gradientT(t);
-    case Side.bl:
-      return _gradientBL;
-    case Side.br:
-      return _gradientBR;
-  }
-}
-
-Paint _getGradientPaint(double t, Side side, Path path, PaintingStyle style) {
+Paint _getGradientPaint(double t, Path path, PaintingStyle style) {
   return Paint()
-    ..shader = _getGradient(t, side).createShader(path.getBounds())
+    ..shader = _getGradient(t).createShader(path.getBounds())
     ..style = style;
 }
 
-_gradientT(double t) => LinearGradient(
+LinearGradient _getGradient(double t) => LinearGradient(
       colors: [getTweenBLtoTColor(t - dt), getTweenBLtoTColor(t + dt)],
-      // colors:[Colors.red, Colors.blue],
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
-      // begin: Alignment.bottomCenter,
-      // end: Alignment.topCenter,
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
     );
-
-final _gradientBR = LinearGradient(
-  colors: [getColor(Side.t), getColor(Side.br)],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
-
-final _gradientBL = LinearGradient(
-  colors: [getColor(Side.bl), getColor(Side.t)],
-  begin: Alignment.bottomLeft,
-  end: Alignment.topRight,
-);
