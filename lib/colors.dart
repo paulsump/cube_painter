@@ -12,11 +12,11 @@ Color getColor(Side side) {
   }
 }
 
-Color getTweenDarkColor(double t) =>
-    Color.lerp(getColor(Side.t), getColor(Side.bl), t)!;
+Color getTweenBLtoTColor(double t) =>
+    Color.lerp(getColor(Side.bl), getColor(Side.t), t)!;
 
-Color get buttonColor => getTweenDarkColor(0.3);
+Color get buttonColor => getTweenBLtoTColor(0.7);
 
-Color get backgroundColor => getTweenDarkColor(0.6);
+Color get backgroundColor => getTweenBLtoTColor(0.4);
 
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;

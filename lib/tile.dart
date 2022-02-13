@@ -67,7 +67,7 @@ Paint _getGradientPaint(double t, Side side, Path path, PaintingStyle style) {
 
 _gradientT(double t) => LinearGradient(
       // colors: [getColor(Side.bl), getColor(Side.br)],
-      colors: [getTweenDarkColor(t - dt), getTweenDarkColor(t + dt)],
+      colors: [getTweenBLtoTColor(t - dt), getTweenBLtoTColor(t + dt)],
       // begin: Alignment.bottomCenter,
       // end: Alignment.topCenter,
       begin: Alignment.topLeft,
