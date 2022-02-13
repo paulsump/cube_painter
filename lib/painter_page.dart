@@ -193,24 +193,38 @@ class _PainterPageState extends State<PainterPage> {
     Clipboard.setData(ClipboardData(text: notifier.json));
   }
 
+  // void onPanZoomChanged(double zoomScale) {
+  //   final ny = zoomScale.round();
   void onPanZoomChanged() {
-    const n = 44;
+    final screen = getScreen(context, listen: false);
+    final topLeft = screenToUnit(Offset.zero, context);
+    final bottomRight =
+        screenToUnit(Offset(screen.width, screen.height), context);
+    final x1 = topLeft.dx.round();
+    final y1 = topLeft.dy.round();
+    final x2 = bottomRight.dx.round();
+    final y2 = bottomRight.dy.round();
+    // out('$nx,$ny');
+    final ny = y2 - y1;
 
-    for (int x = 0; x < n; ++x) {
-      for (int y = 0; y < n; ++y) {
-        final position = Position(x, y);
+    if (ny > 66) return;
+    _tiles.clear();
+    for (int x = x1; x < x2; ++x) {
+      for (int y = y1; y < y2; ++y) {
+        final position = Position(x, (x + y) ~/ 2);
 
-        if (!_findTileAt(position)) {
+        if (true || !_findTileAt(position)) {
           final Offset offset = positionToUnitOffset(position);
-
           _tiles.add(
             SimpleTile(
+              key: UniqueKey(),
               bottom: position,
-              t: lerpDouble(0.2, 0.9, -offset.dy / n)!,
+              t: lerpDouble(0.2, 0.9, -offset.dy / ny)!,
             ),
           );
         }
       }
     }
+    setState(() {});
   }
 }
