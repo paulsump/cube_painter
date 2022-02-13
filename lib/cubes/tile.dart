@@ -45,7 +45,7 @@ class _Painter extends CustomPainter {
   bool shouldRepaint(_Painter oldDelegate) => false;
 }
 
-const double dt = 0.21;
+const double dt = 0.1;
 
 Paint _getGradientPaint(double t, Path path, PaintingStyle style) {
   return Paint()
@@ -54,7 +54,8 @@ Paint _getGradientPaint(double t, Path path, PaintingStyle style) {
 }
 
 LinearGradient _getGradient(double t) => LinearGradient(
-      colors: [getTweenBLtoTColor(t - dt), getTweenBLtoTColor(t + dt)],
+      // colors: [getTweenBLtoTColor(t - dt), getTweenBLtoTColor(t + dt)],
+      colors: [getTweenBtoGColor(t - dt), getTweenBtoGColor(t + dt)],
       // begin: Alignment.bottomCenter,
       // end: Alignment.topCenter,
       begin: Alignment.topCenter,

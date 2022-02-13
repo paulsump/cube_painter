@@ -20,3 +20,8 @@ Color get buttonColor => getTweenBLtoTColor(0.7);
 Color get backgroundColor => getTweenBLtoTColor(0.4);
 
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
+
+const green = Color(0xFF284CA1);
+const blue = Color(0xFF32B875);
+
+Color getTweenBtoGColor(double t) => Color.lerp(blue, green, t)!;

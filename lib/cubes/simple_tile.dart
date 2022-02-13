@@ -24,7 +24,7 @@ class SimpleTile extends StatelessWidget {
       offset: offset,
       child: Transform.scale(
         scale: scale,
-        child: Tile(t: lerpDouble(0.0, 0.1, bottom.y / 20)!),
+        child: Tile(t: lerpDouble(0.0, 1, bottom.y / 44)!),
       ),
     );
   }
