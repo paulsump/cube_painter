@@ -42,11 +42,7 @@ class _Painter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (final cubeSide in cubeSides) {
-      canvas.drawPath(
-          cubeSide.path,
-          Paint()
-            ..color = cubeSide.color
-            ..style = style);
+      canvas.drawPath(cubeSide.path, cubeSide.paint);
 
       canvas.drawPath(
           cubeSide.path,

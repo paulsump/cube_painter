@@ -9,24 +9,81 @@ import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
 
 class CubeSide {
+  final Side side;
   final Color color;
-  final Path path;
 
-  const CubeSide(this.color, this.path);
+  final Path path;
+  final Shader shader;
+  final Paint paint;
+
+  const CubeSide(this.side, this.color, this.path, this.shader, this.paint);
 }
 
 UnmodifiableListView<CubeSide> getCubeSides(Crop crop) {
   final list = getCubeSidesAndUnitOffsets(crop);
 
   return UnmodifiableListView(
-    List.generate(
-        list.length,
-        (index) => CubeSide(
-              getColor(list[index][0]),
-              Path()..addPolygon(list[index][1], true),
-            )),
+    List.generate(list.length, (index) {
+      final path = Path()..addPolygon(list[index][1], true);
+      final Side side = list[index][0];
+
+      return CubeSide(
+          side,
+          getColor(side),
+          path,
+          _getGradient(side).createShader(path.getBounds()),
+          _getPaint(side, path));
+    }),
   );
 }
+
+Paint _getPaint(Side side, Path path) {
+  final style = PaintingStyle.fill;
+  switch (side) {
+    case Side.t:
+      return Paint()
+        ..color = getColor(side)
+        ..style = style;
+    case Side.bl:
+      return Paint()
+        ..shader = _getGradient(side).createShader(path.getBounds())
+        ..style = style;
+    case Side.br:
+      return Paint()
+        // ..color = cubeSide.color
+        ..shader = _getGradient(side).createShader(path.getBounds())
+        ..style = style;
+  }
+}
+
+LinearGradient _getGradient(Side side) {
+  switch (side) {
+    case Side.t:
+      return _gradientT;
+    case Side.bl:
+      return _gradientBL;
+    case Side.br:
+      return _gradientBR;
+  }
+}
+
+final _gradientT = LinearGradient(
+  colors: [getColor(Side.br), getColor(Side.bl)],
+  begin: Alignment.centerRight,
+  end: Alignment.centerLeft,
+);
+
+final _gradientBR = LinearGradient(
+  colors: [getColor(Side.t), getColor(Side.br)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+final _gradientBL = LinearGradient(
+  colors: [getColor(Side.bl), getColor(Side.t)],
+  begin: Alignment.bottomLeft,
+  end: Alignment.topRight,
+);
 
 const _corners = <Position>[
   Position.zero, // c center
