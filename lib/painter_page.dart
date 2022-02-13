@@ -192,7 +192,7 @@ class _PainterPageState extends State<PainterPage> {
 
   void onPanZoomChanged() {
     const double step = 1;
-    const n = 33;
+    const n = 44;
     out(n);
     for (int x = 0; x < n; ++x) {
       for (int y = 0; y < n; ++y) {
