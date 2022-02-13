@@ -11,12 +11,9 @@ const noWarn = out;
 class SimpleTile extends StatelessWidget {
   final Position bottom;
 
-  final double scale;
-
   const SimpleTile({
     Key? key,
     required this.bottom,
-    required this.scale,
   }) : super(key: key);
 
   @override
@@ -27,11 +24,8 @@ class SimpleTile extends StatelessWidget {
 // out(unitOffset);
     return Transform.translate(
       offset: offset,
-      child: Transform.scale(
-        scale: scale,
-        child: Tile(t: lerpDouble(0.2, 0.9, y / 44)!),
-        // child: Tile(t: lerpDouble(0.0, 1, (bottom.x+bottom.y )/ (44+44))!),
-      ),
+      child: Tile(t: lerpDouble(0.2, 0.9, y / 44)!),
+      // child: Tile(t: lerpDouble(0.0, 1, (bottom.x+bottom.y )/ (44+44))!),
     );
   }
 }
