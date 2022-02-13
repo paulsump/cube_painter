@@ -193,21 +193,23 @@ class _PainterPageState extends State<PainterPage> {
 
     final screen = getScreen(context, listen: false);
     final double scale = getZoomScale(context);
-    final Offset panOffset = getPanOffset(context, listen: false) / scale;
-    final Offset center = screen.center / scale;
-    out(panOffset);
 
     final double NX = screen.width / scale;
     final int nx = NX.ceil() + 3;
 
     final double NY = screen.height / scale;
     final int ny = NY.ceil();
-    for (int x = 0; x < nx; ++x) {
-      for (int y = 0; y < ny; ++y) {
-        double h = x % 2 == 0 ? H : 2 * H;
+    for (double x = 0; x < screen.width; x += root3over2 * scale) {
+      for (double y = 0; y < screen.height; y += scale) {
+        double h = x % (root3over2 * scale) == 0 ? H * scale : 2 * H * scale;
         double Y = h + y.toDouble();
         _tiles.add(
-          SimpleTile(bottom: Offset(W * x.toDouble(), Y) - panOffset - center),
+          SimpleTile(
+            bottom: screenToUnit(
+              Offset(W * x, Y),
+              context,
+            ),
+          ),
         );
       }
     }
