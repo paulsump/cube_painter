@@ -26,7 +26,6 @@ class UnitCube extends StatelessWidget {
 }
 
 class _Painter extends CustomPainter {
-  /// list of [Color,Path]
   final List<CubeSide> cubeSides;
 
   final PaintingStyle style;
@@ -42,7 +41,7 @@ class _Painter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (final cubeSide in cubeSides) {
-      canvas.drawPath(cubeSide.path, cubeSide.getGradientPaint(style));
+      canvas.drawPath(cubeSide.path, cubeSide.getPaint(style));
 
       canvas.drawPath(
           cubeSide.path,

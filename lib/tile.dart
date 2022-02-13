@@ -1,37 +1,39 @@
+import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
-/// grid is made up of these line widgets a bit like a wire mesh
 class Tile extends StatelessWidget {
-  final Color color;
-
-  final Offset from;
-  final Offset to;
-
-  const Tile(
-    this.from,
-    this.to, {
+  const Tile({
     Key? key,
-    this.color = Colors.blue,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      CustomPaint(painter: _Painter(from, to, color));
+  Widget build(BuildContext context) => CustomPaint(
+        painter: _Painter(
+          cubeSide: getCubeSides(Crop.c)[1],
+        ),
+      );
 }
 
 class _Painter extends CustomPainter {
-  final Color color;
+  final CubeSide cubeSide;
 
-  final Offset from;
-  final Offset to;
-
-  const _Painter(this.from, this.to, this.color);
+  const _Painter({
+    required this.cubeSide,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawLine(from, to, Paint()..color = color);
+    canvas.drawPath(cubeSide.path, cubeSide.getPaint(PaintingStyle.fill));
+
+    canvas.drawPath(
+        cubeSide.path,
+        Paint()
+          ..color = getColor(cubeSide.side)
+          ..style = PaintingStyle.stroke);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
+  bool shouldRepaint(_Painter oldDelegate) => false;
 }
