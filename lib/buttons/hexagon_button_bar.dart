@@ -6,7 +6,6 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,15 +39,13 @@ class HexagonButtonBar extends StatelessWidget {
     ];
 
     const double radius = 40;
-    const double x = 2 * radius * W;
 
-    final screen = getScreen(context, listen: true);
-    // final double y = screen.height - 2 * radius * H;
-    final double y = 3 * radius * H;
+    const double x = 2 * radius * W;
+    const double y = 3 * radius * H;
 
     return Stack(
       children: [
-        HexagonButton(
+        const HexagonButton(
           icon: Icons.zoom_in_rounded,
           mode: Mode.panZoom,
           center: Offset(x * 0.5, y),
