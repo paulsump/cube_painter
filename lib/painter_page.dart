@@ -195,7 +195,8 @@ class _PainterPageState extends State<PainterPage> {
     for (int x = 0; x < n; ++x) {
       for (int y = 0; y < n; ++y) {
         final position = Position(x, y);
-        if (!_findTileAt(position) && !_findCubeAt(position)) {
+        if (!_findTileAt(position)) {
+//          if (!_findTileAt(position) && !_findCubeAt(position)) {
           _tiles.add(
             SimpleTile(
               bottom: position,
