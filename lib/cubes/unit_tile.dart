@@ -34,16 +34,10 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // out( [getTweenBtoGColor(0.5 - dt), getTweenBtoGColor(0.5 + dt)],);
-    // [Color(0xff2e8c86), Color(0xff2c778f)]
-    // out(cubeSide.path.getBounds());
-    // Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0)
     canvas.drawPath(
-        // cubeSide.path, cubeSide.getPaint( PaintingStyle.fill));
-        // cubeSide.path,paintCache);
         cubeSide.path,
-        _getGradientPaint(0.5, cubeSide.path, PaintingStyle.fill));
-    // cubeSide.path, _getGradientPaint(t, cubeSide.path, PaintingStyle.fill));
+        // _getGradientPaint(0.5, cubeSide.path, PaintingStyle.fill));
+        _getGradientPaint(t, cubeSide.path, PaintingStyle.fill));
 
     // canvas.drawPath(
     //     cubeSide.path,
@@ -56,15 +50,15 @@ class _Painter extends CustomPainter {
   bool shouldRepaint(_Painter oldDelegate) => false;
 }
 
-const double dt = 0.1;
+// final Paint paintCache = Paint()
+//   ..shader = const LinearGradient(
+//     colors: [Color(0xff2e8c86), Color(0xff2c778f)],
+//     begin: Alignment.topCenter,
+//     end: Alignment.bottomCenter,
+//   ).createShader(const Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0))
+//   ..style = PaintingStyle.fill;
 
-final Paint paintCache = Paint()
-  ..shader = const LinearGradient(
-    colors: [Color(0xff2e8c86), Color(0xff2c778f)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  ).createShader(const Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0))
-  ..style = PaintingStyle.fill;
+const double dt = 0.1;
 
 Paint _getGradientPaint(double t, Path path, PaintingStyle style) {
   return Paint()
