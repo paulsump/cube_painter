@@ -71,7 +71,6 @@ class _PainterPageState extends State<PainterPage> {
               UnitToScreen(
                 child: Stack(
                   children: [
-                    // Grid(width:screen.width,height: screen.height, scale: getZoomScale(context)),
                     ..._tiles,
                     ..._simpleCubes,
                     ..._animCubes,
