@@ -191,23 +191,26 @@ class _PainterPageState extends State<PainterPage> {
   void onPanZoomChanged() {
     _tiles.clear();
 
-    const int y1 = -5;
-    const int y2 = 70;
+    final screen = getScreen(context, listen: false);
+    final double scale = getZoomScale(context);
+    final Offset panOffset = getPanOffset(context, listen: false) / scale;
+    final Offset center = screen.center / scale;
+    out(panOffset);
 
-    for (int x = -2; x < 20; ++x) {
-      for (int y = y1; y < y2; ++y) {
-        final position = Position(x, (x + y) ~/ 2);
+    final double NX = screen.width / scale;
+    final int nx = NX.ceil() + 3;
 
-        final Offset offset = positionToUnitOffset(position);
-
+    final double NY = screen.height / scale;
+    final int ny = NY.ceil();
+    for (int x = 0; x < nx; ++x) {
+      for (int y = 0; y < ny; ++y) {
+        double h = x % 2 == 0 ? H : 2 * H;
+        double Y = h + y.toDouble();
         _tiles.add(
-          SimpleTile(
-            key: UniqueKey(),
-            bottom: position,
-          ),
+          SimpleTile(bottom: Offset(W * x.toDouble(), Y) - panOffset - center),
         );
       }
     }
-    // setState(() {});
+    setState(() {});
   }
 }
