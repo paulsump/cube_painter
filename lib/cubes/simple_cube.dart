@@ -20,7 +20,7 @@ class SimpleCube extends StatelessWidget {
     return Transform.translate(
       offset: offset,
       child: info.crop == Crop.c
-          ? Tile(t: info.center.x / 20)
+          ? Tile(t: info.center.y / 20)
           // ? const UnitCube()
           : UnitCube(
               crop: info.crop,
