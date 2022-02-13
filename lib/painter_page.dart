@@ -2,7 +2,7 @@ import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/cubes/simple_cube.dart';
-import 'package:cube_painter/cubes/tile.dart';
+import 'package:cube_painter/cubes/simple_tile.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
@@ -30,7 +30,7 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final List<Tile> mesh = [];
+  final List<SimpleTile> _tiles = [];
 
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
@@ -63,7 +63,7 @@ class _PainterPageState extends State<PainterPage> {
                 child: Stack(
                   children: [
                     Grid(height: screen.height, scale: getZoomScale(context)),
-                    ...mesh,
+                    ..._tiles,
                     ..._simpleCubes,
                     ..._animCubes,
                   ],
@@ -101,7 +101,7 @@ class _PainterPageState extends State<PainterPage> {
 
     if (erase) {
       for (final AnimCube cube in orphans) {
-        final SimpleCube? simpleCube = _findAt(cube.info.center, _simpleCubes);
+        final SimpleCube? simpleCube = _getCubeAt(cube.info.center);
 
         if (simpleCube != null) {
           assert(orphans.length == 1);
@@ -143,13 +143,24 @@ class _PainterPageState extends State<PainterPage> {
     return _removeSelf(old);
   }
 
-  SimpleCube? _findAt(Position position, List<SimpleCube> list) {
-    for (final cube in list) {
+  SimpleCube? _getCubeAt(Position position) {
+    for (final cube in _simpleCubes) {
       if (position == cube.info.center) {
         return cube;
       }
     }
     return null;
+  }
+
+  bool _findCubeAt(Position position) => null != _getCubeAt(position);
+
+  bool _findTileAt(Position position) {
+    for (final tile in _tiles) {
+      if (position == tile.bottom) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void _addCubes() {
@@ -181,6 +192,20 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void onPanZoomChanged() {
-    // mesh.c
+    for (int x = 0; x < 33; ++x) {
+      for (int y = 0; y < 33; ++y) {
+        final position = Position(x, y);
+        const step = 5;
+        if (x % step == 0 &&
+            y % step == 0 &&
+            !_findTileAt(position) &&
+            !_findCubeAt(position)) {
+          _tiles.add(
+            SimpleTile(bottom: position),
+          );
+          out(x + y);
+        }
+      }
+    }
   }
 }
