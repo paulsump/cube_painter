@@ -3,10 +3,10 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
-class Tile extends StatelessWidget {
+class UnitTile extends StatelessWidget {
   final double t;
 
-  const Tile({
+  const UnitTile({
     Key? key,
     required this.t,
   }) : super(key: key);

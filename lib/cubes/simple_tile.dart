@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:cube_painter/cubes/tile.dart';
+import 'package:cube_painter/cubes/unit_tile.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -25,7 +25,7 @@ class SimpleTile extends StatelessWidget {
 
     return Transform.translate(
       offset: offset,
-      child: Tile(t: t),
+      child: UnitTile(t: t),
     );
   }
 }
