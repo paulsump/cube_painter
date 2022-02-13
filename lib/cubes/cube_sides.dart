@@ -10,11 +10,10 @@ import 'package:flutter/cupertino.dart';
 
 class CubeSide {
   final Side side;
-  final Color color;
 
   final Path path;
 
-  const CubeSide(this.side, this.color, this.path);
+  const CubeSide(this.side, this.path);
 
   Paint getPaint(PaintingStyle style) {
     return Paint()
@@ -36,8 +35,7 @@ UnmodifiableListView<CubeSide> getCubeSides(Crop crop) {
     List.generate(list.length, (index) {
       final Side side = list[index][0];
 
-      return CubeSide(
-          side, getColor(side), Path()..addPolygon(list[index][1], true));
+      return CubeSide(side, Path()..addPolygon(list[index][1], true));
     }),
   );
 }
