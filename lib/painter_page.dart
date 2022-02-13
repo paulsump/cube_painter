@@ -8,7 +8,6 @@ import 'package:cube_painter/cubes/simple_tile.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
-import 'package:cube_painter/grid.dart';
 import 'package:cube_painter/line.dart';
 import 'package:cube_painter/mode.dart';
 import 'package:cube_painter/out.dart';
@@ -28,7 +27,7 @@ const noWarn = [
   PanZoomer,
   lerpDouble,
   positionToUnitOffset,
-  SimpleTile
+  SimpleTile,
 ];
 
 class PainterPage extends StatefulWidget {
@@ -73,7 +72,7 @@ class _PainterPageState extends State<PainterPage> {
               UnitToScreen(
                 child: Stack(
                   children: [
-                    Grid(height: screen.height, scale: getZoomScale(context)),
+                    // Grid(width:screen.width,height: screen.height, scale: getZoomScale(context)),
                     // ..._tiles,
                     ..._simpleCubes,
                     ..._animCubes,

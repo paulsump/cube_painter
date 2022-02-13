@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 const noWarn = out;
 
 class Grid extends StatelessWidget {
-  final double height;
+  final double width, height;
 
   final double scale;
 
   const Grid({
     Key? key,
+    required this.width,
     required this.height,
     required this.scale,
   }) : super(key: key);
@@ -20,23 +21,26 @@ class Grid extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CustomPaint(
           painter: _Painter(
+            width: width,
         height: height,
         scale: scale,
       ));
 }
 
 class _Painter extends CustomPainter {
-  final double height;
+  final double width, height;
 
   final double scale;
 
   const _Painter({
+    required this.width,
     required this.height,
     required this.scale,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
+    // clip(canvas,context);
     // TODO take panOffset off, but don't just move grid - it might move off the correct positions.
     int n = _getN(height / H / scale);
     const y = -H;
@@ -56,7 +60,7 @@ class _Painter extends CustomPainter {
         paintBR,
       );
     }
-    // n = _getN(Screen.width / W/scale);
+    // final int nx = _getN(width / W / scale);
 
     // right
     for (int i = 0; i < n; i += 2) {
