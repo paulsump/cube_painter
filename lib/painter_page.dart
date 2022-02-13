@@ -204,7 +204,6 @@ class _PainterPageState extends State<PainterPage> {
           SimpleTile(
             key: UniqueKey(),
             bottom: position,
-            t: lerpDouble(0.2, 0.9, -offset.dy / (y2 - y1))!,
           ),
         );
       }

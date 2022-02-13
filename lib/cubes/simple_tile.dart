@@ -9,12 +9,9 @@ const noWarn = [out];
 class SimpleTile extends StatelessWidget {
   final Position bottom;
 
-  final double t;
-
   const SimpleTile({
     Key? key,
     required this.bottom,
-    required this.t,
   }) : super(key: key);
 
   @override
@@ -23,7 +20,6 @@ class SimpleTile extends StatelessWidget {
 
     return Transform.translate(
       offset: offset,
-      // child: UnitTile(t: t),
       child: const UnitTile(),
     );
   }
