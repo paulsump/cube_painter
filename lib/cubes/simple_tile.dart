@@ -23,7 +23,8 @@ class SimpleTile extends StatelessWidget {
 
     return Transform.translate(
       offset: offset,
-      child: UnitTile(t: t),
+      // child: UnitTile(t: t),
+      child: const UnitTile(),
     );
   }
 }

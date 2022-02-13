@@ -84,18 +84,21 @@ const _corners = <Position>[
   Position(1, 0), // br
 ];
 
-// Offset _getUnitOffsetFromHexagonCornerIndex(int index)=>
-//      positionToUnitOffset(_corners[index]);
-
 UnmodifiableListView<Offset> _getUnitOffsetsFromHexagonCornerIndices(
         List<int> indices) =>
     UnmodifiableListView(List<Offset>.generate(
         indices.length, (i) => positionToUnitOffset(_corners[indices[i]])));
-// indices.length, (i) => _getUnitOffsetFromHexagonCornerIndex(indices[i])));
 
 UnmodifiableListView<Offset> getHexagonCornerOffsets() =>
     UnmodifiableListView(List<Offset>.generate(
         6, (i) => unit + positionToUnitOffset(_corners[i + 1])));
+
+const topSide = [
+  Offset(0, 0.0),
+  Offset(-root3over2, -0.5),
+  Offset(0, -1.0),
+  Offset(root3over2, -0.5),
+];
 
 /// returns polygon offsets in unit coords
 /// public for test only
