@@ -13,10 +13,20 @@ class CubeSide {
   final Color color;
 
   final Path path;
-  final Shader shader;
-  final Paint paint;
 
-  const CubeSide(this.side, this.color, this.path, this.shader, this.paint);
+  const CubeSide(this.side, this.color, this.path);
+
+  Paint getPaint(PaintingStyle style) {
+    return Paint()
+      ..color = getColor(side)
+      ..style = style;
+  }
+
+  Paint getGradientPaint(PaintingStyle style) {
+    return Paint()
+      ..shader = _getGradient(side).createShader(path.getBounds())
+      ..style = style;
+  }
 }
 
 UnmodifiableListView<CubeSide> getCubeSides(Crop crop) {
@@ -24,36 +34,12 @@ UnmodifiableListView<CubeSide> getCubeSides(Crop crop) {
 
   return UnmodifiableListView(
     List.generate(list.length, (index) {
-      final path = Path()..addPolygon(list[index][1], true);
       final Side side = list[index][0];
 
       return CubeSide(
-          side,
-          getColor(side),
-          path,
-          _getGradient(side).createShader(path.getBounds()),
-          _getPaint(side, path));
+          side, getColor(side), Path()..addPolygon(list[index][1], true));
     }),
   );
-}
-
-Paint _getPaint(Side side, Path path) {
-  final style = PaintingStyle.fill;
-  switch (side) {
-    case Side.t:
-      return Paint()
-        ..color = getColor(side)
-        ..style = style;
-    case Side.bl:
-      return Paint()
-        ..shader = _getGradient(side).createShader(path.getBounds())
-        ..style = style;
-    case Side.br:
-      return Paint()
-        // ..color = cubeSide.color
-        ..shader = _getGradient(side).createShader(path.getBounds())
-        ..style = style;
-  }
 }
 
 LinearGradient _getGradient(Side side) {
