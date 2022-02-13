@@ -40,7 +40,7 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  // final List<SimpleTile> _tiles = [];
+  final List<SimpleTile> _tiles = [];
 
   final List<AnimCube> _animCubes = [];
   final List<SimpleCube> _simpleCubes = [];
@@ -58,7 +58,6 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO instead of clip, use maths to not draw widgets outside screen
     final screen = getScreen(context, listen: true);
 
     const double buttonsBarHeight = 100;
@@ -73,7 +72,7 @@ class _PainterPageState extends State<PainterPage> {
                 child: Stack(
                   children: [
                     // Grid(width:screen.width,height: screen.height, scale: getZoomScale(context)),
-                    // ..._tiles,
+                    ..._tiles,
                     ..._simpleCubes,
                     ..._animCubes,
                   ],
@@ -164,14 +163,14 @@ class _PainterPageState extends State<PainterPage> {
 
   // bool _findCubeAt(Position position) => null != _getCubeAt(position);
 
-  // bool _findTileAt(Position position) {
-  //   for (final tile in _tiles) {
-  //     if (position == tile.bottom) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
+  bool _findTileAt(Position position) {
+    for (final tile in _tiles) {
+      if (position == tile.bottom) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   void _addCubes() {
     List<CubeInfo> cubeInfos = getCubeInfos(context);
@@ -201,8 +200,6 @@ class _PainterPageState extends State<PainterPage> {
     Clipboard.setData(ClipboardData(text: notifier.json));
   }
 
-  // void onPanZoomChanged(double zoomScale) {
-  //   final ny = zoomScale.round();
   void onPanZoomChanged() {
     // final screen = getScreen(context, listen: false);
     // final topLeft = screenToUnit(Offset.zero, context);
@@ -216,23 +213,27 @@ class _PainterPageState extends State<PainterPage> {
     // final ny = y2 - y1;
     //
     // if (ny > 76) return;
-    // _tiles.clear();
+    _tiles.clear();
     // for (int x = x1; x < x2; ++x) {
     //   for (int y = y1; y < y2; ++y) {
-    //     final position = Position(x, (x + y) ~/ 2);
-    //
-    //     if (true || !_findTileAt(position)) {
-    //       final Offset offset = positionToUnitOffset(position);
-    //       _tiles.add(
-    //         SimpleTile(
-    //           key: UniqueKey(),
-    //           bottom: position,
-    //           t: lerpDouble(0.2, 0.9, -offset.dy / ny)!,
-    //         ),
-    //       );
-    //     }
-    //   }
-    // }
+    const int ny = 44;
+    const int nx = ny ~/ 2;
+    for (int x = 0; x < nx; ++x) {
+      for (int y = 0; y < ny; ++y) {
+        final position = Position(x, (x + y) ~/ 2);
+
+        if (true || !_findTileAt(position)) {
+          final Offset offset = positionToUnitOffset(position);
+          _tiles.add(
+            SimpleTile(
+              key: UniqueKey(),
+              bottom: position,
+              t: lerpDouble(0.2, 0.9, -offset.dy / ny)!,
+            ),
+          );
+        }
+      }
+    }
     // setState(() {});
   }
 }

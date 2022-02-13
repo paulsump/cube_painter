@@ -59,7 +59,6 @@ class BrushState extends State<Brush> {
         );
       },
       onPanUpdate: (details) {
-        // TODO if(details.scale!=1) {zoomer.scaleUpdate)else{
         switch (getGestureMode(context)) {
           case GestureMode.panZoom:
             break;
