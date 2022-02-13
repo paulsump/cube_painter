@@ -5,13 +5,17 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
 class Tile extends StatelessWidget {
+  final double t;
+
   const Tile({
     Key? key,
+    required this.t,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(
         painter: _Painter(
+          t: t,
           cubeSide: getCubeSides(Crop.c)[1],
         ),
       );
@@ -19,15 +23,17 @@ class Tile extends StatelessWidget {
 
 class _Painter extends CustomPainter {
   final CubeSide cubeSide;
+  final double t;
 
   const _Painter({
+    required this.t,
     required this.cubeSide,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawPath(cubeSide.path,
-        getGradientPaint(cubeSide.side, cubeSide.path, PaintingStyle.fill));
+        _getGradientPaint(t, cubeSide.side, cubeSide.path, PaintingStyle.fill));
 
     canvas.drawPath(
         cubeSide.path,
@@ -40,10 +46,12 @@ class _Painter extends CustomPainter {
   bool shouldRepaint(_Painter oldDelegate) => false;
 }
 
-LinearGradient _getGradient(Side side) {
+const double dt = 0.1;
+
+LinearGradient _getGradient(double t, Side side) {
   switch (side) {
     case Side.t:
-      return _gradientT;
+      return _gradientT(t);
     case Side.bl:
       return _gradientBL;
     case Side.br:
@@ -51,17 +59,20 @@ LinearGradient _getGradient(Side side) {
   }
 }
 
-Paint getGradientPaint(Side side, Path path, PaintingStyle style) {
+Paint _getGradientPaint(double t, Side side, Path path, PaintingStyle style) {
   return Paint()
-    ..shader = _getGradient(side).createShader(path.getBounds())
+    ..shader = _getGradient(t, side).createShader(path.getBounds())
     ..style = style;
 }
 
-final _gradientT = LinearGradient(
-  colors: [getColor(Side.br), getColor(Side.bl)],
-  begin: Alignment.centerRight,
-  end: Alignment.centerLeft,
-);
+_gradientT(double t) => LinearGradient(
+      // colors: [getColor(Side.bl), getColor(Side.br)],
+      colors: [getTweenDarkColor(t - dt), getTweenDarkColor(t + dt)],
+      // begin: Alignment.bottomCenter,
+      // end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
 
 final _gradientBR = LinearGradient(
   colors: [getColor(Side.t), getColor(Side.br)],
