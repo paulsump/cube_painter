@@ -20,7 +20,42 @@ class CubeSide {
       ..color = getColor(side)
       ..style = style;
   }
+
+  Paint getGradientPaint(PaintingStyle style) {
+    return Paint()
+      ..shader = _getGradient(side).createShader(path.getBounds())
+      ..style = style;
+  }
 }
+
+LinearGradient _getGradient(Side side) {
+  switch (side) {
+    case Side.t:
+      return _gradientT;
+    case Side.bl:
+      return _gradientBL;
+    case Side.br:
+      return _gradientBR;
+  }
+}
+
+final _gradientT = LinearGradient(
+  colors: [getColor(Side.br), getColor(Side.bl)],
+  begin: Alignment.centerRight,
+  end: Alignment.centerLeft,
+);
+
+final _gradientBR = LinearGradient(
+  colors: [getColor(Side.t), getColor(Side.br)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+final _gradientBL = LinearGradient(
+  colors: [getColor(Side.bl), getColor(Side.t)],
+  begin: Alignment.bottomLeft,
+  end: Alignment.topRight,
+);
 
 UnmodifiableListView<CubeSide> getCubeSides(Crop crop) {
   final list = getCubeSidesAndUnitOffsets(crop);

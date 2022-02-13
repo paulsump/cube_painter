@@ -41,7 +41,7 @@ class _Painter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (final cubeSide in cubeSides) {
-      canvas.drawPath(cubeSide.path, cubeSide.getPaint(style));
+      canvas.drawPath(cubeSide.path, cubeSide.getGradientPaint(style));
 
       canvas.drawPath(
           cubeSide.path,
