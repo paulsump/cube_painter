@@ -66,7 +66,7 @@ class _HexagonState extends State<HexagonButton>
           children: [
             Hexagon(
               center: widget.center,
-              radius: widget.radius * 0.8,
+              radius: widget.radius,
               color: _color,
               repaint: true,
             ),

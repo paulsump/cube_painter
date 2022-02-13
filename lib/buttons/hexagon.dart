@@ -23,7 +23,7 @@ class Hexagon extends StatelessWidget {
     return Transform.translate(
       offset: center,
       child: Transform.scale(
-        scale: radius,
+        scale: radius * 0.8,
         origin: unit,
         child: CustomPaint(
           painter: HexagonPainter(
