@@ -90,7 +90,7 @@ class _PanZoomerState extends State<PanZoomer> {
         final newOffset = _sessionOffset + _initialOffset;
 
         _offset = newOffset * details.scale;
-        widget.onPanZoomChanged();
+        // widget.onPanZoomChanged();
       },
       onScaleEnd: (details) {
         _sessionOffset = Offset.zero;
