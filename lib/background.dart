@@ -1,6 +1,5 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
-import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -44,11 +43,10 @@ class BackgroundState extends State<Background>
   Widget build(BuildContext context) {
     initScreen(context);
 
-    color =
-        // backgroundColor;
-        getGestureMode(context, listen: true) == GestureMode.panZoom
-            ? null
-            : backgroundColor;
+    color = backgroundColor;
+    // getGestureMode(context, listen: true) == GestureMode.panZoom
+    //     ? null
+    //     : backgroundColor;
 
     return AnimatedBuilder(
       animation: _controller,

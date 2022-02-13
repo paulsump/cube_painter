@@ -161,17 +161,6 @@ class _PainterPageState extends State<PainterPage> {
     return null;
   }
 
-  // bool _findCubeAt(Position position) => null != _getCubeAt(position);
-
-  bool _findTileAt(Position position) {
-    for (final tile in _tiles) {
-      if (position == tile.bottom) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   void _addCubes() {
     List<CubeInfo> cubeInfos = getCubeInfos(context);
 
@@ -201,37 +190,24 @@ class _PainterPageState extends State<PainterPage> {
   }
 
   void onPanZoomChanged() {
-    // final screen = getScreen(context, listen: false);
-    // final topLeft = screenToUnit(Offset.zero, context);
-    // final bottomRight =
-    // screenToUnit(Offset(screen.width, screen.height), context);
-    // final x1 = topLeft.dx.round();
-    // final y1 = topLeft.dy.round();
-    // final x2 = bottomRight.dx.round();
-    // final y2 = bottomRight.dy.round();
-    // // out('x1,$y1');
-    // final ny = y2 - y1;
-    //
-    // if (ny > 76) return;
     _tiles.clear();
-    // for (int x = x1; x < x2; ++x) {
-    //   for (int y = y1; y < y2; ++y) {
-    const int ny = 44;
-    const int nx = ny ~/ 2;
-    for (int x = 0; x < nx; ++x) {
-      for (int y = 0; y < ny; ++y) {
+
+    const int y1 = -5;
+    const int y2 = 70;
+
+    for (int x = -2; x < 20; ++x) {
+      for (int y = y1; y < y2; ++y) {
         final position = Position(x, (x + y) ~/ 2);
 
-        if (true || !_findTileAt(position)) {
-          final Offset offset = positionToUnitOffset(position);
-          _tiles.add(
-            SimpleTile(
-              key: UniqueKey(),
-              bottom: position,
-              t: lerpDouble(0.2, 0.9, -offset.dy / ny)!,
-            ),
-          );
-        }
+        final Offset offset = positionToUnitOffset(position);
+
+        _tiles.add(
+          SimpleTile(
+            key: UniqueKey(),
+            bottom: position,
+            t: lerpDouble(0.2, 0.9, -offset.dy / (y2 - y1))!,
+          ),
+        );
       }
     }
     // setState(() {});
