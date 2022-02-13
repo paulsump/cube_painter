@@ -31,14 +31,14 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPath(
-        cubeSide.path, _getGradientPaint(t, cubeSide.path, PaintingStyle.fill));
-
     // canvas.drawPath(
-    //     cubeSide.path,
-    //     Paint()
-    //       ..color = getColor(cubeSide.side)
-    //       ..style = PaintingStyle.stroke);
+    //     cubeSide.path, _getGradientPaint(t, cubeSide.path, PaintingStyle.fill));
+
+    canvas.drawPath(
+        cubeSide.path,
+        Paint()
+          ..color = getColor(cubeSide.side)
+          ..style = PaintingStyle.stroke);
   }
 
   @override
