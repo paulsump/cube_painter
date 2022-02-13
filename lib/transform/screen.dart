@@ -22,13 +22,14 @@ void initScreen(BuildContext context) {
 
 class ScreenNotifier extends ChangeNotifier {
   Size? _size;
-  Offset _origin = Offset.zero;
+  Offset _center = Offset.zero;
 
   double get width => _size!.width;
 
   double get height => _size!.height;
 
-  Offset get origin => _origin;
+  /// used as the origin for the transform
+  Offset get center => _center;
 
   void init(BuildContext context) {
     final media = MediaQuery.of(context);
@@ -42,7 +43,7 @@ class ScreenNotifier extends ChangeNotifier {
     final double y = newSize.height;
 
     _size = Size(x, y - safeAreaHeight);
-    _origin = Offset(width, height) / 2;
+    _center = Offset(width, height) / 2;
 
     if (height != 0) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -52,7 +53,7 @@ class ScreenNotifier extends ChangeNotifier {
           _firstTime = false;
 
           // Sensible starting offset
-          setPanOffset(context, Offset(0, height) - origin);
+          setPanOffset(context, Offset(0, height) - center);
         }
       });
     }

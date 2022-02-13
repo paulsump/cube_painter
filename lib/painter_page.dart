@@ -72,8 +72,8 @@ class _PainterPageState extends State<PainterPage> {
               Brush(adoptCubes: _adoptCubes),
               if (Mode.panZoom == getMode(context, listen: true))
                 PanZoomer(onPanZoomChanged: onPanZoomChanged),
-
-              // Line(screen.origin,screen.origin+Offset(screen.width/4,screen.height/4)),
+              Line(screen.center,
+                  screen.center + Offset(screen.width / 4, screen.height / 4)),
             ],
           ),
         ),

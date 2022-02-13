@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 Offset screenToUnit(Offset point, BuildContext context) {
   final screen = getScreen(context, listen: false);
 
-  return (point - screen.origin - getPanOffset(context, listen: false)) /
+  return (point - screen.center - getPanOffset(context, listen: false)) /
       getZoomScale(context);
 }
 
@@ -20,7 +20,7 @@ class UnitToScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Transform.translate(
       offset: getPanOffset(context, listen: true) +
-          getScreen(context, listen: false).origin,
+          getScreen(context, listen: false).center,
       child: Transform.scale(
         scale: getZoomScale(context),
         child: child,
