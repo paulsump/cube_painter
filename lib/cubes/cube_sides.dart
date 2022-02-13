@@ -41,10 +41,14 @@ const _corners = <Position>[
   Position(1, 0), // br
 ];
 
-UnmodifiableListView<Offset> getUnitOffsetsFromHexagonCornerIndices(
+// Offset _getUnitOffsetFromHexagonCornerIndex(int index)=>
+//      positionToUnitOffset(_corners[index]);
+
+UnmodifiableListView<Offset> _getUnitOffsetsFromHexagonCornerIndices(
         List<int> indices) =>
     UnmodifiableListView(List<Offset>.generate(
         indices.length, (i) => positionToUnitOffset(_corners[indices[i]])));
+// indices.length, (i) => _getUnitOffsetFromHexagonCornerIndex(indices[i])));
 
 UnmodifiableListView<Offset> getHexagonCornerOffsets() =>
     UnmodifiableListView(List<Offset>.generate(
@@ -64,40 +68,40 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
         [
           Side.bl,
           // |_|
-          getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
+          _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
         [
           Side.t,
           // /_/
-          getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
         [
           Side.br,
           // /|
           // |/
-          getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
     case Crop.r:
       return UnmodifiableListView([
         [
           Side.t,
-          getUnitOffsetsFromHexagonCornerIndices([c, tl, t])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tl, t])
         ],
         [
           Side.bl,
-          getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
+          _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
       ]);
     case Crop.ur:
       return UnmodifiableListView([
         [
           Side.bl,
-          getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
+          _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
         [
           Side.br,
-          getUnitOffsetsFromHexagonCornerIndices([c, br, b])
+          _getUnitOffsetsFromHexagonCornerIndices([c, br, b])
         ],
       ]);
     case Crop.ul:
@@ -105,24 +109,24 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
         [
           Side.bl,
           // _|
-          getUnitOffsetsFromHexagonCornerIndices([c, b, bl])
+          _getUnitOffsetsFromHexagonCornerIndices([c, b, bl])
         ],
         [
           Side.br,
           // /|
           // |/
-          getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
     case Crop.l:
       return UnmodifiableListView([
         [
           Side.br,
-          getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
         [
           Side.t,
-          getUnitOffsetsFromHexagonCornerIndices([c, t, tr])
+          _getUnitOffsetsFromHexagonCornerIndices([c, t, tr])
         ],
       ]);
     case Crop.dl:
@@ -131,12 +135,12 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           Side.br,
           // /|
           // |/
-          getUnitOffsetsFromHexagonCornerIndices([c, tr, br])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tr, br])
         ],
         [
           Side.t,
           // /_/
-          getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
       ]);
     case Crop.dr:
@@ -144,12 +148,12 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
         [
           Side.bl,
           // |-
-          getUnitOffsetsFromHexagonCornerIndices([c, bl, tl])
+          _getUnitOffsetsFromHexagonCornerIndices([c, bl, tl])
         ],
         [
           Side.t,
           // /_/
-          getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
+          _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
       ]);
   }

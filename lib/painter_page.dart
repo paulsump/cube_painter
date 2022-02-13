@@ -169,7 +169,6 @@ class _PainterPageState extends State<PainterPage> {
     }
 
     setState(() {});
-    // _saveForUndo();
   }
 
   void _saveToClipboard() {

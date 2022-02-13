@@ -48,15 +48,11 @@ class _Painter extends CustomPainter {
             ..color = cubeSide.color
             ..style = style);
 
-      if (true) {
-        canvas.drawPath(
-            cubeSide.path,
-            Paint()
-              ..color = outline
-                  ? getColor(Side.t)
-                  : cubeSide.color //Colors.deepPurpleAccent
-              ..style = PaintingStyle.stroke);
-      }
+      canvas.drawPath(
+          cubeSide.path,
+          Paint()
+            ..color = outline ? getColor(Side.t) : cubeSide.color
+            ..style = PaintingStyle.stroke);
     }
   }
 
