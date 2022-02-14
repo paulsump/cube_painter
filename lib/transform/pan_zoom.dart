@@ -88,7 +88,7 @@ class _PanZoomerState extends State<PanZoomer> {
       onScaleUpdate: (details) {
         final scale = _initialScale * details.scale;
 
-        if (scale < 14 || 300 < scale) {
+        if (scale < 15 || 300 < scale) {
           return;
         }
         _scale = scale;

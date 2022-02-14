@@ -51,8 +51,8 @@ class _PainterPageState extends State<PainterPage> {
   @override
   void initState() {
     getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
-    _undoer = Undoer(_simpleCubes, setState: setState);
 
+    _undoer = Undoer(_simpleCubes, setState: setState);
     super.initState();
   }
 
@@ -203,35 +203,38 @@ class _PainterPageState extends State<PainterPage> {
     final double scale = getZoomScale(context);
 
     final Offset panOffset = getPanOffset(context, listen: false) / scale;
+    final int size = 3;
 
+    final double w = size * W;
     double panX = panOffset.dx;
-    panX -= panX % W;
+    panX -= panX % w;
 
-    if ((panX / W) % 2 != 0) {
-      panX -= W;
+    if ((panX / w) % 2 != 0) {
+      panX -= w;
     }
 
+    final double h = size * H;
     double panY = panOffset.dy;
-    panY -= panY % H;
+    panY -= panY % h;
 
-    if ((panY / H) % 2 != 0) {
-      panY -= H;
+    if ((panY / h) % 2 != 0) {
+      panY -= h;
     }
 
     final Offset center = screen.center / scale;
 
     double centerX = center.dx;
-    centerX -= centerX % W;
+    centerX -= centerX % w;
 
-    if ((centerX / W) % 2 != 0) {
-      centerX -= W;
+    if ((centerX / w) % 2 != 0) {
+      centerX -= w;
     }
 
     double centerY = center.dy;
-    centerY -= centerY % H;
+    centerY -= centerY % h;
 
-    if ((centerY / H) % 2 != 0) {
-      centerY -= H;
+    if ((centerY / h) % 2 != 0) {
+      centerY -= h;
     }
 
     final int nx = screen.width ~/ scale;
@@ -245,9 +248,9 @@ class _PainterPageState extends State<PainterPage> {
       padY = 5;
     }
 
-    for (int x = -padX; x < nx + padX; ++x) {
-      for (int y = -padY; y < ny + padY; ++y) {
-        final double h = x % 2 == 0 ? 0 : H;
+    for (int x = -padX; x < nx + padX; x += size) {
+      for (int y = -padY; y < ny + padY; y += size) {
+        final double h = x % (2 * size) == 0 ? 0 : size * H;
 
         double Y = h + y.toDouble();
         double X = W * x.toDouble();
@@ -258,7 +261,10 @@ class _PainterPageState extends State<PainterPage> {
         X -= centerX;
         Y -= centerY;
 
-        _tiles.add(SimpleTile(bottom: Offset(X, Y)));
+        _tiles.add(SimpleTile(
+          bottom: Offset(X, Y),
+          scale: size.toDouble(),
+        ));
       }
     }
     setState(() {});
