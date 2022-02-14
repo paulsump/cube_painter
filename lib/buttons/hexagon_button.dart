@@ -23,16 +23,18 @@ class HexagonButton extends StatefulWidget {
   final GestureMode? gestureMode;
 
   final Widget? unitChild;
+  final String tip;
 
   const HexagonButton({
     Key? key,
+    required this.center,
+    required this.radius,
+    required this.tip,
     this.enabled = true,
     this.icon,
     this.iconOffset = Offset.zero,
     this.unitChild,
     this.onPressed,
-    required this.center,
-    required this.radius,
     this.gestureMode,
   }) : super(key: key);
 
