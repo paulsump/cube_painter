@@ -36,16 +36,12 @@ class ScreenNotifier extends ChangeNotifier {
 
     final double x = constraints.maxWidth;
     final double y = constraints.maxHeight;
-// out('$x,$y,${media.size}');
+
     _size = Size(x, y - safeAreaHeight);
     _center = Offset(width, height) / 2;
 
-    // zero height only occurs in release build
-    assert(height != 0);
-    if (height != 0) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         notifyListeners();
       });
-    }
   }
 }

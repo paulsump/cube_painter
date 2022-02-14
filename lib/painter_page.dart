@@ -37,6 +37,8 @@ class _PainterPageState extends State<PainterPage> {
   @override
   void initState() {
     _cubes.init(setState_: setState, context_: context);
+
+    _tiles.init(setState_: setState, context_: context);
     super.initState();
   }
 
@@ -44,8 +46,7 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
 
-    _tiles.init(setState_: setState, context_: context, height: screen.height);
-
+    _tiles.rebuildIfReorient(height: screen.height);
     const double buttonsBarHeight = 100;
 
     return Column(
@@ -63,11 +64,11 @@ class _PainterPageState extends State<PainterPage> {
                   ],
                 ),
               ),
-              Brush(adoptCubes: _cubes.adoptCubes),
+              Brush(adoptCubes: _cubes.adopt),
               if (GestureMode.panZoom == getGestureMode(context, listen: true))
                 PanZoomer(
-                  onPanZoomUpdate: _tiles.rebuildTiles,
-                  onPanZoomEnd: _tiles.rebuildTiles,
+                  onPanZoomUpdate: _tiles.rebuild,
+                  onPanZoomEnd: _tiles.rebuild,
                 ),
               // Line(screen.center,screen.center + Offset(screen.width / 4, screen.height / 4)),
             ],

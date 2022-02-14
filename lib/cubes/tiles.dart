@@ -25,18 +25,21 @@ class Tiles {
   void init({
     required void Function(VoidCallback fn) setState_,
     required BuildContext context_,
-    required double height,
   }) {
     setState = setState_;
     context = context_;
+  }
 
+  void rebuildIfReorient({
+    required double height,
+  }) {
     if (height != previousScreenHeight) {
-      rebuildTiles();
+      rebuild();
       previousScreenHeight = height;
     }
   }
 
-  void rebuildTiles() {
+  void rebuild() {
     tiles.clear();
 
     final screen = getScreen(context, listen: false);

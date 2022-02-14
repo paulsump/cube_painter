@@ -50,7 +50,7 @@ class Cubes {
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubes array once the
   /// anim is done.
-  void adoptCubes(List<AnimCube> orphans) {
+  void adopt(List<AnimCube> orphans) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
     if (erase) {
