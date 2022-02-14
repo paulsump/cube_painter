@@ -52,13 +52,16 @@ class _PainterPageState extends State<PainterPage> {
     getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
     _undoer = Undoer(_simpleCubes, setState: setState);
 
-    onPanZoomChanged();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
+
+    if (screen.height != 0 && _tiles.isEmpty) {
+      onPanZoomChanged();
+    }
 
     const double buttonsBarHeight = 100;
 

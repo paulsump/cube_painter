@@ -1,4 +1,3 @@
-import 'package:cube_painter/background.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -25,9 +24,14 @@ class CubePainterApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => GestureModeNotifier()),
         ChangeNotifierProvider(create: (_) => CropNotifier()),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'Cube Painter',
-        home: Background(child: PainterPage()),
+        home: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            initScreen(context, constraints);
+            return const SafeArea(child: PainterPage());
+          },
+        ),
       ),
     );
   }

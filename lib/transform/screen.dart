@@ -1,5 +1,4 @@
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,11 +9,9 @@ ScreenNotifier getScreen(BuildContext context, {required bool listen}) {
   return Provider.of<ScreenNotifier>(context, listen: listen);
 }
 
-bool _firstTime = true;
-
-void initScreen(BuildContext context) {
+void initScreen(BuildContext context, BoxConstraints constraints) {
   final screen = getScreen(context, listen: false);
-  screen.init(context);
+  screen.init(context, constraints);
 }
 
 // void clip(Canvas canvas, BuildContext context) =>
@@ -31,30 +28,22 @@ class ScreenNotifier extends ChangeNotifier {
   /// used as the origin for the transform
   Offset get center => _center;
 
-  void init(BuildContext context) {
+  void init(BuildContext context, BoxConstraints constraints) {
     final media = MediaQuery.of(context);
 
     final pad = media.padding;
     final double safeAreaHeight = pad.top + pad.bottom;
 
-    final Size newSize = media.size;
-
-    final double x = newSize.width;
-    final double y = newSize.height;
-
+    final double x = constraints.maxWidth;
+    final double y = constraints.maxHeight;
+// out('$x,$y,${media.size}');
     _size = Size(x, y - safeAreaHeight);
     _center = Offset(width, height) / 2;
 
+    assert(height != 0);
     if (height != 0) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         notifyListeners();
-
-        if (_firstTime) {
-          _firstTime = false;
-
-          // Sensible starting offset
-          setPanOffset(context, Offset(0, height) - center);
-        }
       });
     }
   }
