@@ -27,7 +27,7 @@ class HexagonButtonBar extends StatelessWidget {
     final gestureModeButtonInfo = [
       [],
       [Icons.add, const UnitCube()],
-      [Icons.remove, const UnitCube(style: PaintingStyle.stroke)],
+      [Icons.remove, const UnitCube(wire: true)],
       [Icons.add, UnitCube(crop: crop)],
     ];
 

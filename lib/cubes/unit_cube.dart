@@ -4,20 +4,19 @@ import 'package:flutter/material.dart';
 
 class UnitCube extends StatelessWidget {
   final Crop crop;
-
-  final PaintingStyle style;
+  final bool wire;
 
   const UnitCube({
     Key? key,
     this.crop = Crop.c,
-    this.style = PaintingStyle.fill,
+    this.wire = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(
         painter: _Painter(
           cubeSides: getCubeSides(crop),
-          style: style,
+          wire: wire,
         ),
       );
 }
@@ -25,17 +24,20 @@ class UnitCube extends StatelessWidget {
 class _Painter extends CustomPainter {
   final List<CubeSide> cubeSides;
 
-  final PaintingStyle style;
+  final bool wire;
 
   const _Painter({
     required this.cubeSides,
-    required this.style,
+    required this.wire,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     for (final cubeSide in cubeSides) {
-      canvas.drawPath(cubeSide.path, cubeSide.getGradientPaint(style));
+      canvas.drawPath(
+          cubeSide.path,
+          cubeSide.getGradientPaint(
+              wire ? PaintingStyle.stroke : PaintingStyle.fill));
     }
   }
 
