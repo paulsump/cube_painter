@@ -143,7 +143,6 @@ class _PainterPageState extends State<PainterPage> {
           end: erase ? 0.0 : 1.0,
           whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
           duration: 222,
-          wire: erase,
         ));
       }
     }

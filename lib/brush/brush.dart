@@ -138,7 +138,6 @@ class BrushState extends State<Brush> {
       start: 0.0,
       end: getGestureMode(context) == GestureMode.erase ? 3.0 : 1.0,
       pingPong: true,
-      wire: getGestureMode(context) == GestureMode.erase,
     ));
   }
 }

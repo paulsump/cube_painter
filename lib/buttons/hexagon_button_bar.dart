@@ -37,7 +37,7 @@ class HexagonButtonBar extends StatelessWidget {
       ],
       [
         Icons.remove,
-        const UnitCube(wire: true),
+        const UnitCube(),
         () => _showTip(
             'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
       ],

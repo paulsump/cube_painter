@@ -19,7 +19,6 @@ class AnimCube extends StatefulWidget {
   final double end;
 
   final bool pingPong;
-  final bool wire;
 
   /// This is bad because it's set by the state,
   /// and also  mean this class can't be const
@@ -41,12 +40,10 @@ class AnimCube extends StatefulWidget {
     this.pingPong = false,
     this.whenComplete,
     this.duration = 800,
-    this.wire = false,
-  })  : cube = info.crop == Crop.c && !wire
+  })  : cube = info.crop == Crop.c
             ? const SimpleUnitCube()
             : UnitCube(
                 crop: info.crop,
-                wire: wire,
               ),
         offset = positionToUnitOffset(info.center),
         super(key: key);
