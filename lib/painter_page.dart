@@ -121,6 +121,7 @@ class _PainterPageState extends State<PainterPage> {
 
         if (simpleCube != null) {
           assert(orphans.length == 1);
+
           _undoer.save();
           _simpleCubes.remove(simpleCube);
         }

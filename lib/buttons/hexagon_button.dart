@@ -62,10 +62,9 @@ class _HexagonState extends State<HexagonButton>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Stack(
-          children: [
+        animation: _controller,
+        builder: (context, child) {
+          return Stack(children: [
             Hexagon(
               center: widget.center,
               radius: widget.radius,
@@ -113,10 +112,8 @@ class _HexagonState extends State<HexagonButton>
                 },
               ),
             ),
-          ],
-        );
-      },
-    );
+          ]);
+        });
   }
 
   Color get _color => widget.gestureMode != null

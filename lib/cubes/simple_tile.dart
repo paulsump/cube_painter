@@ -33,9 +33,7 @@ class _UnitTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const CustomPaint(
-        painter: _Painter(),
-      );
+  Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
 }
 
 class _Painter extends CustomPainter {
