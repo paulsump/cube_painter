@@ -28,7 +28,7 @@ class CubePainterApp extends StatelessWidget {
         title: 'Cube Painter',
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            initScreen(context, constraints);
+            storeScreenSize(context, constraints);
             return const SafeArea(child: PainterPage());
           },
         ),

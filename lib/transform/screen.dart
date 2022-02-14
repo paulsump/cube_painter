@@ -9,7 +9,7 @@ ScreenNotifier getScreen(BuildContext context, {required bool listen}) {
   return Provider.of<ScreenNotifier>(context, listen: listen);
 }
 
-void initScreen(BuildContext context, BoxConstraints constraints) {
+void storeScreenSize(BuildContext context, BoxConstraints constraints) {
   final screen = getScreen(context, listen: false);
   screen.init(context, constraints);
 }
@@ -40,6 +40,7 @@ class ScreenNotifier extends ChangeNotifier {
     _size = Size(x, y - safeAreaHeight);
     _center = Offset(width, height) / 2;
 
+    // zero height only occurs in release build
     assert(height != 0);
     if (height != 0) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
