@@ -1,6 +1,7 @@
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/simple_unit_cube.dart';
 import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
@@ -31,13 +32,13 @@ class HexagonButtonBar extends StatelessWidget {
       [],
       [
         Icons.add,
-        const UnitCube(),
+        const SimpleUnitCube(),
         () => _showTip(
             'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
       ],
       [
         Icons.remove,
-        const UnitCube(),
+        const SimpleUnitCube(),
         () => _showTip(
             'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
       ],
@@ -90,7 +91,7 @@ class HexagonButtonBar extends StatelessWidget {
           HexagonButton(
             icon: gestureModeButtonInfo[i][0] as IconData,
             iconOffset: const Offset(W, H) * -radius * 0.5,
-            unitChild: gestureModeButtonInfo[i][1] as UnitCube,
+            unitChild: gestureModeButtonInfo[i][1] as SimpleUnitCube,
             gestureMode: GestureMode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
