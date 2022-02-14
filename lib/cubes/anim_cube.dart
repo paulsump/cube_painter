@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cube_painter/cubes/simple_unit_cube.dart';
 import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_info.dart';
@@ -42,7 +43,7 @@ class AnimCube extends StatefulWidget {
     this.duration = 800,
     this.wire = false,
   })  : cube = info.crop == Crop.c && !wire
-            ? const UnitCube()
+            ? const SimpleUnitCube()
             : UnitCube(
                 crop: info.crop,
                 wire: wire,
