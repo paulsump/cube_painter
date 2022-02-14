@@ -46,6 +46,7 @@ class _PainterPageState extends State<PainterPage> {
   final List<SimpleCube> _simpleCubes = [];
 
   late Undoer _undoer;
+  double previousScreenHeight = 0;
 
   @override
   void initState() {
@@ -59,8 +60,9 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
 
-    if (screen.height != 0 && _tiles.isEmpty) {
+    if (screen.height != previousScreenHeight) {
       _rebuildTiles();
+      previousScreenHeight = screen.height;
     }
 
     const double buttonsBarHeight = 100;
