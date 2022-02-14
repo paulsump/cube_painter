@@ -42,6 +42,12 @@ class HexagonButtonBar extends StatelessWidget {
         () => _showTip(
             'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
       ],
+      [
+        Icons.add,
+        UnitCube(crop: crop),
+        () => _showTip(
+            'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'),
+      ],
     ];
 
     final otherButtonInfo = [
@@ -91,27 +97,19 @@ class HexagonButtonBar extends StatelessWidget {
           HexagonButton(
             icon: gestureModeButtonInfo[i][0] as IconData,
             iconOffset: const Offset(W, H) * -radius * 0.5,
-            unitChild: gestureModeButtonInfo[i][1] as SimpleUnitCube,
+            unitChild: gestureModeButtonInfo[i][1] as Widget,
             gestureMode: GestureMode.values[i],
             center: Offset(x * (i + 0.5), y),
             radius: radius,
+            onPressed: i == 3
+                ? () {
+                    final cropNotifier =
+                        Provider.of<CropNotifier>(context, listen: false);
+                    cropNotifier.increment(-1);
+                  }
+                : null,
             showTip: gestureModeButtonInfo[i][2] as VoidCallback,
           ),
-        HexagonButton(
-          icon: Icons.add,
-          iconOffset: const Offset(W, H) * -radius * 0.5,
-          unitChild: UnitCube(crop: crop),
-          gestureMode: GestureMode.crop,
-          center: const Offset(x * (3 + 0.5), y),
-          radius: radius,
-          onPressed: () {
-            final cropNotifier =
-                Provider.of<CropNotifier>(context, listen: false);
-            cropNotifier.increment(-1);
-          },
-          showTip: () => _showTip(
-              'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'),
-        ),
         for (int i = 0; i < otherButtonInfo.length; ++i)
           HexagonButton(
             enabled: otherButtonInfo[i][0] as bool,
