@@ -1,8 +1,8 @@
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
-class SimpleUnitCube extends StatelessWidget {
-  const SimpleUnitCube({
+class FullUnitCube extends StatelessWidget {
+  const FullUnitCube({
     Key? key,
   }) : super(key: key);
 

@@ -3,14 +3,14 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
 // TODO try to change this to CroppedCube
-class UnitCube extends StatelessWidget {
+class CropUnitCube extends StatelessWidget {
   final Crop crop;
 
-  const UnitCube({Key? key, this.crop = Crop.c}) : super(key: key);
+  const CropUnitCube({Key? key, this.crop = Crop.c}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-    painter: _Painter(cubeSides: getCubeSides(crop)),
+        painter: _Painter(cubeSides: getCubeSides(crop)),
       );
 }
 

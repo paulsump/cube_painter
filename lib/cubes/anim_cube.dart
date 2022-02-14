@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:cube_painter/cubes/simple_unit_cube.dart';
-import 'package:cube_painter/cubes/unit_cube.dart';
+import 'package:cube_painter/cubes/crop_unit_cube.dart';
+import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/out.dart';
@@ -40,9 +40,10 @@ class AnimCube extends StatefulWidget {
     this.pingPong = false,
     this.whenComplete,
     this.duration = 800,
-  })  : cube = info.crop == Crop.c
-            ? const SimpleUnitCube()
-            : UnitCube(crop: info.crop),
+  })
+      : cube = info.crop == Crop.c
+            ? const FullUnitCube()
+            : CropUnitCube(crop: info.crop),
         offset = positionToUnitOffset(info.center),
         super(key: key);
 

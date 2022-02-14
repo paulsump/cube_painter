@@ -1,5 +1,5 @@
-import 'package:cube_painter/cubes/simple_unit_cube.dart';
-import 'package:cube_painter/cubes/unit_cube.dart';
+import 'package:cube_painter/cubes/crop_unit_cube.dart';
+import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -20,10 +20,8 @@ class SimpleCube extends StatelessWidget {
     return Transform.translate(
       offset: offset,
       child: info.crop == Crop.c
-          ? const SimpleUnitCube()
-          : UnitCube(
-              crop: info.crop,
-            ),
+          ? const FullUnitCube()
+          : CropUnitCube(crop: info.crop),
     );
   }
 }
