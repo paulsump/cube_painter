@@ -203,12 +203,12 @@ class _PainterPageState extends State<PainterPage> {
     final double zoomScale = getZoomScale(context);
 
     final Offset panOffset = getPanOffset(context, listen: false) / zoomScale;
-    final int tileScale = zoomScale > 66
+    final int tileScale = zoomScale > 50
         ? 1
         : zoomScale > 30
             ? 2
             : 3;
-    out(zoomScale);
+
     final double w = tileScale * W;
     double panX = panOffset.dx;
     panX -= panX % w;
@@ -247,7 +247,7 @@ class _PainterPageState extends State<PainterPage> {
     int padX = 6;
     int padY = 5;
 
-    if (zoomScale < 40) {
+    if (zoomScale < 44) {
       padX += 2 * tileScale;
       padY += 1 * tileScale;
     }
