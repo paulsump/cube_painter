@@ -42,9 +42,7 @@ class AnimCube extends StatefulWidget {
     this.duration = 800,
   })  : cube = info.crop == Crop.c
             ? const SimpleUnitCube()
-            : UnitCube(
-                crop: info.crop,
-              ),
+            : UnitCube(crop: info.crop),
         offset = positionToUnitOffset(info.center),
         super(key: key);
 
