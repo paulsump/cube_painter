@@ -17,7 +17,6 @@ class UnitCube extends StatelessWidget {
   Widget build(BuildContext context) => CustomPaint(
         painter: _Painter(
           cubeSides: getCubeSides(crop),
-          outline: crop == Crop.c,
           style: style,
         ),
       );
@@ -28,24 +27,15 @@ class _Painter extends CustomPainter {
 
   final PaintingStyle style;
 
-  final bool outline;
-
   const _Painter({
     required this.cubeSides,
     required this.style,
-    required this.outline,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     for (final cubeSide in cubeSides) {
       canvas.drawPath(cubeSide.path, cubeSide.getGradientPaint(style));
-
-      // canvas.drawPath(
-      //     cubeSide.path,
-      //     Paint()
-      //       ..color = outline ? getColor(Side.t) : getColor(cubeSide.side)
-      //       ..style = PaintingStyle.stroke);
     }
   }
 
