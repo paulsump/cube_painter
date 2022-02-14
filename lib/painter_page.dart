@@ -219,13 +219,24 @@ class _PainterPageState extends State<PainterPage> {
     final Offset center = screen.center / scale;
 
     double centerX = center.dx;
+    centerX -= centerX % W;
+
     double centerY = center.dy;
+    centerY -= centerY % H;
 
     final int nx = screen.width ~/ scale;
     final int ny = screen.height ~/ scale;
 
-    for (int x = -3; x < nx + 5; ++x) {
-      for (int y = -6; y < ny + 1; ++y) {
+    int padX = 100 ~/ scale;
+    int padY = 90 ~/ scale;
+
+    if (scale > 15) {
+      padX = 6;
+      padY = 5;
+    }
+
+    for (int x = -padX; x < nx + padX; ++x) {
+      for (int y = -padY; y < ny + padY; ++y) {
         final double h = x % 2 == 0 ? 0 : H;
 
         double Y = h + y.toDouble();
@@ -234,8 +245,8 @@ class _PainterPageState extends State<PainterPage> {
         X -= panX;
         Y -= panY;
 
-        X -= centerX - centerX % W;
-        Y -= centerY - centerY % H;
+        X -= centerX;
+        Y -= centerY;
 
         _tiles.add(SimpleTile(bottom: Offset(X, Y)));
       }
