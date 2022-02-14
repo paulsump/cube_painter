@@ -60,7 +60,7 @@ class _PainterPageState extends State<PainterPage> {
     final screen = getScreen(context, listen: true);
 
     if (screen.height != 0 && _tiles.isEmpty) {
-      onPanZoomChanged();
+      _rebuildTiles();
     }
 
     const double buttonsBarHeight = 100;
@@ -82,7 +82,7 @@ class _PainterPageState extends State<PainterPage> {
               ),
               Brush(adoptCubes: _adoptCubes),
               if (GestureMode.panZoom == getGestureMode(context, listen: true))
-                PanZoomer(onPanZoomChanged: onPanZoomChanged),
+                PanZoomer(onPanZoomEnd: _rebuildTiles),
               // Line(screen.center,screen.center + Offset(screen.width / 4, screen.height / 4)),
             ],
           ),
@@ -191,7 +191,7 @@ class _PainterPageState extends State<PainterPage> {
     Clipboard.setData(ClipboardData(text: notifier.json));
   }
 
-  void onPanZoomChanged() {
+  void _rebuildTiles() {
     _tiles.clear();
 
     final screen = getScreen(context, listen: false);
