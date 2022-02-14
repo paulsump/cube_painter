@@ -1,7 +1,6 @@
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/simple_unit_cube.dart';
 import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
@@ -27,7 +26,7 @@ class HexagonButtonBar extends StatelessWidget {
 
     final gestureModeButtonInfo = [
       [],
-      [Icons.add, const SimpleUnitCube()],
+      [Icons.add, const UnitCube()],
       [Icons.remove, const UnitCube(wire: true)],
       [Icons.add, UnitCube(crop: crop)],
     ];
