@@ -10,8 +10,6 @@ class Assets {
     final String json = await rootBundle.loadString(filePath);
 
     Map<String, dynamic> map = jsonDecode(json);
-
-    // out(map);
     return map;
   }
 
@@ -22,7 +20,6 @@ class Assets {
         .keys
         .where((String key) => key.startsWith(folderPath + '/'));
 
-    // out(fileNames);
     return fileNames;
   }
 

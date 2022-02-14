@@ -74,7 +74,7 @@ class _PainterPageState extends State<PainterPage> {
               UnitToScreen(
                 child: Stack(
                   children: [
-                    // ..._tiles,
+                    ..._tiles,
                     ..._simpleCubes,
                     ..._animCubes,
                   ],
