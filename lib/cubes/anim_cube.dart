@@ -41,10 +41,12 @@ class AnimCube extends StatefulWidget {
     this.whenComplete,
     this.duration = 800,
     this.wire = false,
-  })  : cube = UnitCube(
-          crop: info.crop,
-          style: wire ? PaintingStyle.stroke : PaintingStyle.fill,
-        ),
+  })  : cube = info.crop == Crop.c && !wire
+            ? const UnitCube()
+            : UnitCube(
+                crop: info.crop,
+                style: wire ? PaintingStyle.stroke : PaintingStyle.fill,
+              ),
         offset = positionToUnitOffset(info.center),
         super(key: key);
 
