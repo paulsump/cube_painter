@@ -92,6 +92,7 @@ class HexagonButtonBar extends StatelessWidget {
           radius: radius,
           showTip: () =>
               _showTip('Pinch to zoom in/out or drag to move the canvas'),
+          hideTip: _hideTip,
         ),
         for (int i = 1; i < gestureModeButtonInfo.length; ++i)
           HexagonButton(
@@ -109,6 +110,7 @@ class HexagonButtonBar extends StatelessWidget {
                   }
                 : null,
             showTip: gestureModeButtonInfo[i][2] as VoidCallback,
+            hideTip: _hideTip,
           ),
         for (int i = 0; i < otherButtonInfo.length; ++i)
           HexagonButton(
@@ -118,6 +120,7 @@ class HexagonButtonBar extends StatelessWidget {
             center: Offset(x * (i + 4.5), y),
             radius: radius,
             showTip: otherButtonInfo[i][3] as VoidCallback,
+            hideTip: _hideTip,
           ),
         for (int i = 0;
             i < 1 + gestureModeButtonInfo.length + otherButtonInfo.length;
@@ -133,5 +136,9 @@ class HexagonButtonBar extends StatelessWidget {
   void _showTip(String message) {
     //TODO Pop up a tooltip with
     out(message);
+  }
+
+  void _hideTip() {
+    out('done');
   }
 }

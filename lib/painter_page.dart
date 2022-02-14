@@ -12,6 +12,8 @@ import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
+/// prevent 'organise imports' from removing imports
+/// when temporarily commenting out.
 const noWarn = [
   out,
   getScreen,
@@ -21,9 +23,7 @@ const noWarn = [
 ];
 
 class PainterPage extends StatefulWidget {
-  const PainterPage({
-    Key? key,
-  }) : super(key: key);
+  const PainterPage({Key? key}) : super(key: key);
 
   @override
   State<PainterPage> createState() => _PainterPageState();
