@@ -1,6 +1,5 @@
 import 'dart:collection';
 
-import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
@@ -10,6 +9,8 @@ import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
 
 const noWarn = out;
+
+const unit = Offset(1, 1);
 
 class CubeSide {
   final Side side;

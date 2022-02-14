@@ -1,7 +1,7 @@
-import 'package:cube_painter/buttons/hexagon_painter.dart';
+import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/cubes/side.dart';
 import 'package:flutter/material.dart';
-
-const unit = Offset(1, 1);
 
 class Hexagon extends StatelessWidget {
   final Offset center;
@@ -26,7 +26,7 @@ class Hexagon extends StatelessWidget {
         scale: radius * 0.8,
         origin: unit,
         child: CustomPaint(
-          painter: HexagonPainter(
+          painter: _Painter(
             color: color,
             repaint: repaint,
           ),
@@ -34,4 +34,33 @@ class Hexagon extends StatelessWidget {
       ),
     );
   }
+}
+
+class _Painter extends CustomPainter {
+  final Color color;
+
+  final bool repaint;
+
+  const _Painter({required this.color, required this.repaint});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // clip(canvas, context);
+    final path = Path()..addPolygon(getHexagonCornerOffsets(), true);
+
+    canvas.drawPath(
+        path,
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill);
+
+    canvas.drawPath(
+        path,
+        Paint()
+          ..color = getColor(Side.bl)
+          ..style = PaintingStyle.stroke);
+  }
+
+  @override
+  bool shouldRepaint(_Painter oldDelegate) => repaint;
 }
