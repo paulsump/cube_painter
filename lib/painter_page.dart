@@ -200,12 +200,16 @@ class _PainterPageState extends State<PainterPage> {
     _tiles.clear();
 
     final screen = getScreen(context, listen: false);
-    final double scale = getZoomScale(context);
+    final double zoomScale = getZoomScale(context);
 
-    final Offset panOffset = getPanOffset(context, listen: false) / scale;
-    final int size = 3;
-
-    final double w = size * W;
+    final Offset panOffset = getPanOffset(context, listen: false) / zoomScale;
+    final int tileScale = zoomScale > 66
+        ? 1
+        : zoomScale > 30
+            ? 2
+            : 3;
+    out(zoomScale);
+    final double w = tileScale * W;
     double panX = panOffset.dx;
     panX -= panX % w;
 
@@ -213,7 +217,7 @@ class _PainterPageState extends State<PainterPage> {
       panX -= w;
     }
 
-    final double h = size * H;
+    final double h = tileScale * H;
     double panY = panOffset.dy;
     panY -= panY % h;
 
@@ -221,7 +225,7 @@ class _PainterPageState extends State<PainterPage> {
       panY -= h;
     }
 
-    final Offset center = screen.center / scale;
+    final Offset center = screen.center / zoomScale;
 
     double centerX = center.dx;
     centerX -= centerX % w;
@@ -237,20 +241,20 @@ class _PainterPageState extends State<PainterPage> {
       centerY -= h;
     }
 
-    final int nx = screen.width ~/ scale;
-    final int ny = screen.height ~/ scale;
+    final int nx = screen.width ~/ zoomScale;
+    final int ny = screen.height ~/ zoomScale;
 
-    int padX = 100 ~/ scale;
-    int padY = 90 ~/ scale;
+    int padX = 6;
+    int padY = 5;
 
-    if (scale > 15) {
-      padX = 6;
-      padY = 5;
+    if (zoomScale < 40) {
+      padX += 2 * tileScale;
+      padY += 1 * tileScale;
     }
 
-    for (int x = -padX; x < nx + padX; x += size) {
-      for (int y = -padY; y < ny + padY; y += size) {
-        final double h = x % (2 * size) == 0 ? 0 : size * H;
+    for (int x = -padX; x < nx + padX; x += tileScale) {
+      for (int y = -padY; y < ny + padY; y += tileScale) {
+        final double h = x % (2 * tileScale) == 0 ? 0 : tileScale * H;
 
         double Y = h + y.toDouble();
         double X = W * x.toDouble();
@@ -263,7 +267,7 @@ class _PainterPageState extends State<PainterPage> {
 
         _tiles.add(SimpleTile(
           bottom: Offset(X, Y),
-          scale: size.toDouble(),
+          scale: tileScale.toDouble(),
         ));
       }
     }
