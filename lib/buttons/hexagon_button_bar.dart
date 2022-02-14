@@ -5,10 +5,13 @@ import 'package:cube_painter/cubes/unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+const noWarn = out;
 
 class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
@@ -29,17 +32,20 @@ class HexagonButtonBar extends StatelessWidget {
       [
         Icons.add,
         const UnitCube(),
-        'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'
+        () => _showTip(
+            'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
       ],
       [
         Icons.remove,
         const UnitCube(wire: true),
-        'Tap on a cube to delete it.  You can change the position while you have your finger down.'
+        () => _showTip(
+            'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
       ],
       [
         Icons.add,
         UnitCube(crop: crop),
-        'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'
+        () => _showTip(
+            'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'),
       ],
     ];
 
@@ -48,25 +54,26 @@ class HexagonButtonBar extends StatelessWidget {
         undoer.canUndo,
         Icons.undo_sharp,
         undoer.undo,
-        'Undo the last add or delete operation.'
+        () => _showTip('Undo the last add or delete operation.'),
       ],
       [
         undoer.canRedo,
         Icons.redo_sharp,
         undoer.redo,
-        'Redo the last add or delete operation that was undone.'
+        () =>
+            _showTip('Redo the last add or delete operation that was undone.'),
       ],
       [
         true,
         Icons.forward,
         () => getCubeGroupNotifier(context).increment(1),
-        'Load next group of cubes.'
+        () => _showTip('Load next group of cubes.'),
       ],
       [
         true,
         Icons.save_alt_sharp,
         saveToClipboard,
-        'Save the current group of cubes to the clipboard.'
+        () => _showTip('Save the current group of cubes to the clipboard.'),
       ],
     ];
 
@@ -77,12 +84,13 @@ class HexagonButtonBar extends StatelessWidget {
 
     return Stack(
       children: [
-        const HexagonButton(
+        HexagonButton(
           icon: Icons.zoom_in_rounded,
           gestureMode: GestureMode.panZoom,
-          center: Offset(x * 0.5, y),
+          center: const Offset(x * 0.5, y),
           radius: radius,
-          tip: 'Pinch to zoom in/out or drag to move the canvas',
+          showTip: () =>
+              _showTip('Pinch to zoom in/out or drag to move the canvas'),
         ),
         for (int i = 1; i < gestureModeButtonInfo.length; ++i)
           HexagonButton(
@@ -99,7 +107,7 @@ class HexagonButtonBar extends StatelessWidget {
                     cropNotifier.increment(-1);
                   }
                 : null,
-            tip: gestureModeButtonInfo[i][2] as String,
+            showTip: gestureModeButtonInfo[i][2] as VoidCallback,
           ),
         for (int i = 0; i < otherButtonInfo.length; ++i)
           HexagonButton(
@@ -108,7 +116,7 @@ class HexagonButtonBar extends StatelessWidget {
             onPressed: otherButtonInfo[i][2] as VoidCallback,
             center: Offset(x * (i + 4.5), y),
             radius: radius,
-            tip: otherButtonInfo[i][3] as String,
+            showTip: otherButtonInfo[i][3] as VoidCallback,
           ),
         for (int i = 0;
             i < 1 + gestureModeButtonInfo.length + otherButtonInfo.length;
@@ -119,5 +127,10 @@ class HexagonButtonBar extends StatelessWidget {
               color: buttonColor),
       ],
     );
+  }
+
+  void _showTip(String message) {
+    //TODO Pop up a tooltip with
+    out(message);
   }
 }
