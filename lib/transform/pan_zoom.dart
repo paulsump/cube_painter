@@ -86,7 +86,12 @@ class _PanZoomerState extends State<PanZoomer> {
         _initialOffset = _offset;
       },
       onScaleUpdate: (details) {
-        _scale = _initialScale * details.scale;
+        final scale = _initialScale * details.scale;
+
+        if (scale < 14 || 300 < scale) {
+          return;
+        }
+        _scale = scale;
 
         _sessionOffset = details.focalPoint - _initialFocalPoint;
         final newOffset = _sessionOffset + _initialOffset;
