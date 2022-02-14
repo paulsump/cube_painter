@@ -1,6 +1,4 @@
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
-import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
@@ -43,11 +41,11 @@ class _Painter extends CustomPainter {
     for (final cubeSide in cubeSides) {
       canvas.drawPath(cubeSide.path, cubeSide.getGradientPaint(style));
 
-      canvas.drawPath(
-          cubeSide.path,
-          Paint()
-            ..color = outline ? getColor(Side.t) : getColor(cubeSide.side)
-            ..style = PaintingStyle.stroke);
+      // canvas.drawPath(
+      //     cubeSide.path,
+      //     Paint()
+      //       ..color = outline ? getColor(Side.t) : getColor(cubeSide.side)
+      //       ..style = PaintingStyle.stroke);
     }
   }
 
