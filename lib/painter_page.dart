@@ -221,8 +221,16 @@ class _PainterPageState extends State<PainterPage> {
     double centerX = center.dx;
     centerX -= centerX % W;
 
+    if ((centerX / W) % 2 != 0) {
+      centerX -= W;
+    }
+
     double centerY = center.dy;
     centerY -= centerY % H;
+
+    if ((centerY / H) % 2 != 0) {
+      centerY -= H;
+    }
 
     final int nx = screen.width ~/ scale;
     final int ny = screen.height ~/ scale;
