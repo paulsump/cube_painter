@@ -5,8 +5,11 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/position.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
+
+const noWarn = out;
 
 class CubeSide {
   final Side side;
@@ -22,6 +25,8 @@ class CubeSide {
   }
 
   Paint getGradientPaint(PaintingStyle style) {
+    // out(_getGradient(side));
+    // out(path.getBounds());
     return Paint()
       ..shader = _getGradient(side).createShader(path.getBounds())
       ..style = style;
@@ -98,6 +103,20 @@ const topSide = [
   Offset(-root3over2, -0.5),
   Offset(0, -1.0),
   Offset(root3over2, -0.5),
+];
+
+const bottomLeftSide = [
+  Offset(0, 0.0),
+  Offset(0, 1.0),
+  Offset(-root3over2, 0.5),
+  Offset(-root3over2, -0.5),
+];
+
+const bottomRightSide = [
+  Offset(0, 0.0),
+  Offset(root3over2, -0.5),
+  Offset(root3over2, 0.5),
+  Offset(0, 1.0),
 ];
 
 /// returns polygon offsets in unit coords

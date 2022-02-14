@@ -76,13 +76,7 @@ void main() {
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
       expect(
-          equalsOffsetList(sidesAndUnitOffsets[0][1], const [
-            Offset(0, 0.0),
-            Offset(0, 1.0),
-            Offset(-root3over2, 0.5),
-            Offset(-root3over2, -0.5),
-          ]),
-          true);
+          equalsOffsetList(sidesAndUnitOffsets[0][1], bottomLeftSide), true);
 
       expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
       expect(
@@ -90,13 +84,7 @@ void main() {
 
       expect(Side.br, equals(sidesAndUnitOffsets[2][0]));
       expect(
-          equalsOffsetList(sidesAndUnitOffsets[2][1], const [
-            Offset(0, 0.0),
-            Offset(root3over2, -0.5),
-            Offset(root3over2, 0.5),
-            Offset(0, 1.0),
-          ]),
-          true);
+          equalsOffsetList(sidesAndUnitOffsets[2][1], bottomRightSide), true);
     });
 
     test('r', () {

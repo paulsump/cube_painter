@@ -21,14 +21,14 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPath(Path()..addPolygon(topSide, true), paintCache);
+    canvas.drawPath(Path()..addPolygon(topSide, true), _paintCache);
   }
 
   @override
   bool shouldRepaint(_Painter oldDelegate) => false;
 }
 
-final Paint paintCache = Paint()
+final Paint _paintCache = Paint()
   ..shader = const LinearGradient(
     colors: [Color(0xff2e8c86), Color(0xff2c778f)],
     begin: Alignment.topCenter,
