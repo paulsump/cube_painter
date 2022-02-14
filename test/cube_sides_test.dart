@@ -1,6 +1,4 @@
-import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
-import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,7 +1,6 @@
 import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
-import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';

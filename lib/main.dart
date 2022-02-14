@@ -1,4 +1,4 @@
-import 'package:cube_painter/cubes/side.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';

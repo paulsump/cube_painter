@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/side.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/out.dart';
@@ -11,6 +10,17 @@ import 'package:flutter/cupertino.dart';
 const noWarn = out;
 
 const unit = Offset(1, 1);
+
+/// Used to represent the side of the cube
+/// anti clockwise from top right
+enum Side {
+  // 0 top
+  t,
+  // 1 bottom left
+  bl,
+  // 2 bottom right
+  br
+}
 
 class CubeSide {
   final Side side;
