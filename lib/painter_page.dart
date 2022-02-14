@@ -203,16 +203,16 @@ class _PainterPageState extends State<PainterPage> {
     final Offset panOffset = getPanOffset(context, listen: false) / scale;
 
     double panX = panOffset.dx;
-    final double remainderX = panX % W;
-    panX = panX - remainderX;
+    final double remainderPanX = panX % W;
+    panX = panX - remainderPanX;
 
     if ((panX / W) % 2 != 0) {
       panX -= W;
     }
 
     double panY = panOffset.dy;
-    final double remainderY = panOffset.dy % H;
-    panY = panOffset.dy - remainderY;
+    final double remainderPanY = panOffset.dy % H;
+    panY = panOffset.dy - remainderPanY;
 
     if ((panY / H) % 2 != 0) {
       panY -= H;
