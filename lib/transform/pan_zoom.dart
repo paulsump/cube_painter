@@ -47,10 +47,12 @@ class PanZoomNotifier extends ChangeNotifier {
 }
 
 class PanZoomer extends StatefulWidget {
-  final void Function() onPanZoomEnd;
+  final VoidCallback onPanZoomUpdate;
+  final VoidCallback onPanZoomEnd;
 
   const PanZoomer({
     Key? key,
+    required this.onPanZoomUpdate,
     required this.onPanZoomEnd,
   }) : super(key: key);
 
@@ -90,6 +92,7 @@ class _PanZoomerState extends State<PanZoomer> {
         final newOffset = _sessionOffset + _initialOffset;
 
         _offset = newOffset * details.scale;
+        widget.onPanZoomUpdate();
       },
       onScaleEnd: (details) {
         _sessionOffset = Offset.zero;

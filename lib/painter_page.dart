@@ -82,7 +82,10 @@ class _PainterPageState extends State<PainterPage> {
               ),
               Brush(adoptCubes: _adoptCubes),
               if (GestureMode.panZoom == getGestureMode(context, listen: true))
-                PanZoomer(onPanZoomEnd: _rebuildTiles),
+                PanZoomer(
+                  onPanZoomUpdate: _rebuildTiles,
+                  onPanZoomEnd: _rebuildTiles,
+                ),
               // Line(screen.center,screen.center + Offset(screen.width / 4, screen.height / 4)),
             ],
           ),
