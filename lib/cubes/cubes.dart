@@ -2,14 +2,11 @@ import 'dart:ui';
 
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/cubes/simple_cube.dart';
-import 'package:cube_painter/cubes/simple_tile.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/line.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/undoer.dart';
@@ -20,11 +17,8 @@ import 'package:flutter/services.dart';
 const noWarn = [
   out,
   getScreen,
-  Line,
-  PanZoomer,
   lerpDouble,
   positionToUnitOffset,
-  SimpleTile,
 ];
 
 /// cube widget store & functionality helper

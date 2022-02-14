@@ -33,8 +33,12 @@ class CubePainterApp extends StatelessWidget {
             .copyWith(scaffoldBackgroundColor: getColor(Side.t)),
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            storeScreenSize(context, constraints);
-            return const SafeArea(child: PainterPage());
+            if (constraints.maxHeight == 0) {
+              return Container();
+            } else {
+              storeScreenSize(context, constraints);
+              return const SafeArea(child: PainterPage());
+            }
           },
         ),
       ),
