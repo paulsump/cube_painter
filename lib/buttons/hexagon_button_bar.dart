@@ -7,6 +7,7 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
+import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,12 +32,16 @@ class HexagonButtonBar extends StatelessWidget {
     Key? key,
     required this.undoer,
     required this.saveToClipboard,
+    //TOOD CALC in build() from screen
     required this.height,
     required this.offsetY,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final screen = getScreen(context, listen: true);
+    final bool orient = screen.height < screen.width;
+
     final basicButtonInfo = [
       BasicButtonInfo(
         enabled: undoer.canUndo,
@@ -64,43 +69,51 @@ class HexagonButtonBar extends StatelessWidget {
       ),
     ];
 
+    final borderSide = BorderSide(width: 1.0, color: buttonColor);
+
     return Transform.translate(
-      offset: Offset(0, offsetY - height),
+      offset: Offset(0, orient ? 0 : offsetY - height),
       child: Container(
         height: height,
         decoration: BoxDecoration(
           color: backgroundColor,
-          border: Border(top: BorderSide(width: 1.0, color: buttonColor)),
+          border: Border(
+            top: borderSide,
+            right: borderSide,
+          ),
         ),
         child: Stack(
           children: [
-            _buildGestureModeButton(0, context),
+            _buildGestureModeButton(0, context, orient),
             for (int i = 1; i < GestureMode.values.length; ++i)
-              _buildGestureModeButton(i, context),
+              _buildGestureModeButton(i, context, orient),
             for (int i = 0; i < basicButtonInfo.length; ++i)
-              _buildBasicButton(i, basicButtonInfo, context),
+              _buildBasicButton(i, basicButtonInfo, context, orient),
           ],
         ),
       ),
     );
   }
 
-  Offset _getGestureModeButtonOffset(int i) {
-    // TODO ORient
+  /// TODO ORient
+  Offset _getGestureModeButtonOffset(int i, bool orient) {
+    final double w = W * radius;
+    if (orient) {
+      final double Y = y * (i * 1.5 + 1);
+      return i % 2 == 0 ? Offset(x - w, Y) : Offset(x, Y);
+    }
     return Offset(x * (i + 0.5), y);
   }
 
-  Offset _getBasicButtonOffset(int i) {
-    // TODO ORient
-    return _getGestureModeButtonOffset(i + GestureMode.values.length);
-  }
+  Offset _getBasicButtonOffset(int i, bool orient) =>
+      _getGestureModeButtonOffset(i + GestureMode.values.length, orient);
 
-  Widget _buildGestureModeButton(int i, BuildContext context) {
+  Widget _buildGestureModeButton(int i, BuildContext context, bool orient) {
     if (i == 0) {
       return HexagonButton(
         icon: Icons.zoom_in_rounded,
         gestureMode: GestureMode.panZoom,
-        center: _getGestureModeButtonOffset(i),
+        center: _getGestureModeButtonOffset(i, orient),
         radius: radius,
       );
     } else {
@@ -130,7 +143,7 @@ class HexagonButtonBar extends StatelessWidget {
         iconOffset: const Offset(W, H) * -radius * 0.5,
         unitChild: gestureModeButtonInfo[i][1] as Widget,
         gestureMode: GestureMode.values[i],
-        center: _getGestureModeButtonOffset(i),
+        center: _getGestureModeButtonOffset(i, orient),
         radius: radius,
         onPressed: i == 3
             ? () {
@@ -147,12 +160,13 @@ class HexagonButtonBar extends StatelessWidget {
     int i,
     List<BasicButtonInfo> buttonInfos,
     BuildContext context,
+    bool orient,
   ) =>
       HexagonButton(
         enabled: buttonInfos[i].enabled,
         icon: buttonInfos[i].icon,
         onPressed: buttonInfos[i].onPressed,
-        center: _getBasicButtonOffset(i),
+        center: _getBasicButtonOffset(i, orient),
         radius: radius,
       );
 }
