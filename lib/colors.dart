@@ -22,11 +22,8 @@ Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
 // Color get radioButtonOnColor => getButtonColor(0.3);
 // Color get radioButtonOffColor => Color.lerp(getColor(Side.t), getColor(Side.br), 0.3)!;
 Color get buttonColor => getTweenBtoGColor(0.7);
-
 Color get backgroundColor => getTweenBtoGColor(0.5);
-
 Color get radioButtonOnColor => getTweenBtoGColor(0.3);
-
 Color get radioButtonOffColor => getButtonColor(0.3);
 
 const green = Color(0xFF284CA1);
