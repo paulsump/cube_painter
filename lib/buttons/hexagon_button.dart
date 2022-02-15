@@ -3,7 +3,6 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -92,26 +91,38 @@ class _HexagonState extends State<HexagonButton>
                 ),
               ),
             Transform.translate(
-              offset: widget.center - const Offset(W, H * 2) * widget.radius,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  if (!widget.enabled) {
-                    return;
-                  }
-                  if (widget.gestureMode != null) {
-                    final gestureModeNotifier =
-                    Provider.of<GestureModeNotifier>(context,
-                        listen: false);
+              offset: Offset.zero,
+              // offset: widget.center - const Offset(W, H * 2) * widget.radius,
+              child: Transform.scale(
+                scale: 1, //widget.radius,
+                child: ClipOval(
+                  clipper: CustomClipOval(
+                    // clipper: CustomClipPath(
+                    scale: widget.radius * 1,
+                    offset: widget.center,
+                    //   // offset: widget.center - const Offset(W, H * 2) * widget.radius,
+                  ),
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      if (!widget.enabled) {
+                        return;
+                      }
+                      if (widget.gestureMode != null) {
+                        final gestureModeNotifier =
+                            Provider.of<GestureModeNotifier>(context,
+                                listen: false);
 
-                    gestureModeNotifier.mode = widget.gestureMode!;
-                    _controller.forward();
-                  } else {
-                    _controller.reset();
-                    _controller.forward();
-                  }
-                  widget.onPressed?.call();
-                },
+                        gestureModeNotifier.mode = widget.gestureMode!;
+                        _controller.forward();
+                      } else {
+                        _controller.reset();
+                        _controller.forward();
+                      }
+                      widget.onPressed?.call();
+                    },
+                  ),
+                ),
               ),
             ),
           ]);
@@ -123,4 +134,47 @@ class _HexagonState extends State<HexagonButton>
           ? radioButtonOffColor
           : radioButtonOnColor
       : getButtonColor(_controller.value);
+}
+
+// class CustomClipPath extends CustomClipper<Path> {
+//   final double scale;
+//   final Offset offset;
+//
+//   CustomClipPath({required this.scale, required this.offset});
+//
+//   @override
+//   Path getClip(Size size) {
+//     final path = Path()
+//       ..addPolygon(
+//           getHexagonCornerOffsets2(
+//             scale: scale,
+//             offset: offset,
+//           ),
+//           true);
+//     return path;
+//   }
+//
+//   @override
+//   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+// }
+
+class CustomClipOval extends CustomClipper<Rect> {
+  final double scale;
+  final Offset offset;
+
+  CustomClipOval({required this.scale, required this.offset});
+
+  @override
+  Rect getClip(Size size) {
+    final rect = Rect.fromCircle(center: offset, radius: scale);
+    return rect;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
+    return false;
+  }
+
+// @override
+// bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

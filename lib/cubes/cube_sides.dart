@@ -105,9 +105,17 @@ UnmodifiableListView<Offset> _getUnitOffsetsFromHexagonCornerIndices(
     UnmodifiableListView(List<Offset>.generate(
         indices.length, (i) => positionToUnitOffset(_corners[indices[i]])));
 
-UnmodifiableListView<Offset> getHexagonCornerOffsets() =>
-    UnmodifiableListView(List<Offset>.generate(
-        6, (i) => unit + positionToUnitOffset(_corners[i + 1])));
+UnmodifiableListView<Offset> getHexagonCornerOffsets() => UnmodifiableListView(
+    List<Offset>.generate(6, (i) => positionToUnitOffset(_corners[i + 1])));
+
+// UnmodifiableListView<Offset> getHexagonCornerOffsets2({
+//   required double scale,
+//   required Offset offset,
+// }) =>
+//     UnmodifiableListView(List<Offset>.generate(
+//       6,
+//       (i) => offset + positionToUnitOffset(_corners[i + 1]) * scale,
+//     ));
 
 const topSide = [
   Offset(0, 0.0),
