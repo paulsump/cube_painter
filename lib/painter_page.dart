@@ -49,34 +49,28 @@ class _PainterPageState extends State<PainterPage> {
 
     _tiles.rebuildIfReorient(height: screen.height);
 
-    return Column(
+    return Stack(
       children: [
-        Expanded(
+        UnitToScreen(
           child: Stack(
             children: [
-              UnitToScreen(
-                child: Stack(
-                  children: [
-                    ..._tiles.tiles,
-                    ..._cubes.simpleCubes,
-                    ..._cubes.animCubes,
-                  ],
-                ),
-              ),
-              GestureMode.panZoom == getGestureMode(context, listen: true)
-                  ? PanZoomer(
-                      onPanZoomUpdate: _tiles.rebuild,
-                      onPanZoomEnd: _tiles.rebuild,
-                    )
-                  : Brush(adoptCubes: _cubes.adopt),
-              HexagonButtonBar(
-                undoer: _cubes.undoer,
-                saveToClipboard: _cubes.saveToClipboard,
-                offsetY: screen.height,
-                height: max(screen.width, screen.height) / 11,
-              ),
+              ..._tiles.tiles,
+              ..._cubes.simpleCubes,
+              ..._cubes.animCubes,
             ],
           ),
+        ),
+        GestureMode.panZoom == getGestureMode(context, listen: true)
+            ? PanZoomer(
+                onPanZoomUpdate: _tiles.rebuild,
+                onPanZoomEnd: _tiles.rebuild,
+              )
+            : Brush(adoptCubes: _cubes.adopt),
+        HexagonButtonBar(
+          undoer: _cubes.undoer,
+          saveToClipboard: _cubes.saveToClipboard,
+          offsetY: screen.height,
+          height: max(screen.width, screen.height) / 11,
         ),
       ],
     );
