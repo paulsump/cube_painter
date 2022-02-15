@@ -91,9 +91,9 @@ class _HexagonState extends State<HexagonButton>
                 ),
               ),
             ClipOval(
-              clipper: CustomClipOval(
-                scale: widget.radius,
-                offset: widget.center,
+              clipper: _CircleClipper(
+                radius: widget.radius,
+                center: widget.center,
               ),
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
@@ -127,14 +127,14 @@ class _HexagonState extends State<HexagonButton>
       : getButtonColor(_controller.value);
 }
 
-class CustomClipOval extends CustomClipper<Rect> {
-  final double scale;
-  final Offset offset;
+class _CircleClipper extends CustomClipper<Rect> {
+  final double radius;
+  final Offset center;
 
-  const CustomClipOval({required this.scale, required this.offset});
+  const _CircleClipper({required this.radius, required this.center});
 
   @override
-  Rect getClip(Size size) => Rect.fromCircle(center: offset, radius: scale);
+  Rect getClip(Size size) => Rect.fromCircle(center: center, radius: radius);
 
   @override
   bool shouldReclip(covariant CustomClipper<Rect> oldClipper) => false;
