@@ -1,4 +1,3 @@
-import 'package:cube_painter/buttons/hexagon.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/crop_unit_cube.dart';
@@ -48,7 +47,7 @@ class HexagonButtonBar extends StatelessWidget {
       [
         Icons.remove,
         const FullUnitCube(),
-            () => showTip(
+        () => showTip(
             'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
       ],
       [
@@ -86,7 +85,6 @@ class HexagonButtonBar extends StatelessWidget {
       ],
     ];
 
-    final int n = gestureModeButtonInfo.length + otherButtonInfo.length;
     final double radius = height / 2;
 
     final double x = 2 * radius * W;
@@ -134,11 +132,6 @@ class HexagonButtonBar extends StatelessWidget {
               showTip: otherButtonInfo[i][3] as VoidCallback,
               hideTip: hideTip,
             ),
-          for (int i = 0; i < 1 + n; ++i)
-            Hexagon(
-                center: Offset(x * i, y + 3 * radius * H),
-                radius: radius,
-                color: buttonColor),
         ],
       ),
     );
