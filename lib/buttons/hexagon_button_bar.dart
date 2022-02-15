@@ -17,8 +17,13 @@ class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
 
   final VoidCallback saveToClipboard;
-
   final double height;
+
+  double get radius => height / 2;
+
+  double get x => 2 * radius * W;
+
+  double get y => 2 * radius * H;
 
   const HexagonButtonBar({
     Key? key,
@@ -29,27 +34,6 @@ class HexagonButtonBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
-
-    final gestureModeButtonInfo = [
-      [],
-      [
-        Icons.add,
-        const FullUnitCube(),
-        // 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
-      ],
-      [
-        Icons.remove,
-        const FullUnitCube(),
-        // 'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
-      ],
-      [
-        Icons.add,
-        CropUnitCube(crop: crop),
-        // 'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'),
-      ],
-    ];
-
     final otherButtonInfo = [
       [
         undoer.canUndo,
@@ -77,11 +61,6 @@ class HexagonButtonBar extends StatelessWidget {
       ],
     ];
 
-    final double radius = height / 2;
-
-    final double x = 2 * radius * W;
-    final double y = 2 * radius * H;
-
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -90,28 +69,9 @@ class HexagonButtonBar extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          HexagonButton(
-            icon: Icons.zoom_in_rounded,
-            gestureMode: GestureMode.panZoom,
-            center: Offset(x * 0.5, y),
-            radius: radius,
-          ),
-          for (int i = 1; i < gestureModeButtonInfo.length; ++i)
-            HexagonButton(
-              icon: gestureModeButtonInfo[i][0] as IconData,
-              iconOffset: const Offset(W, H) * -radius * 0.5,
-              unitChild: gestureModeButtonInfo[i][1] as Widget,
-              gestureMode: GestureMode.values[i],
-              center: Offset(x * (i + 0.5), y),
-              radius: radius,
-              onPressed: i == 3
-                  ? () {
-                      final cropNotifier =
-                          Provider.of<CropNotifier>(context, listen: false);
-                      cropNotifier.increment(-1);
-                    }
-                  : null,
-            ),
+          _buildGestureModeButton(0, context),
+          for (int i = 1; i < GestureMode.values.length; ++i)
+            _buildGestureModeButton(i, context),
           for (int i = 0; i < otherButtonInfo.length; ++i)
             HexagonButton(
               enabled: otherButtonInfo[i][0] as bool,
@@ -123,5 +83,53 @@ class HexagonButtonBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildGestureModeButton(int i, BuildContext context) {
+    if (i == 0) {
+      return HexagonButton(
+        icon: Icons.zoom_in_rounded,
+        gestureMode: GestureMode.panZoom,
+        center: Offset(x * 0.5, y),
+        radius: radius,
+      );
+    } else {
+      final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
+
+      final gestureModeButtonInfo = [
+        [],
+        [
+          Icons.add,
+          const FullUnitCube(),
+          // 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
+        ],
+        [
+          Icons.remove,
+          const FullUnitCube(),
+          // 'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
+        ],
+        [
+          Icons.add,
+          CropUnitCube(crop: crop),
+          // 'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'),
+        ],
+      ];
+
+      return HexagonButton(
+        icon: gestureModeButtonInfo[i][0] as IconData,
+        iconOffset: const Offset(W, H) * -radius * 0.5,
+        unitChild: gestureModeButtonInfo[i][1] as Widget,
+        gestureMode: GestureMode.values[i],
+        center: Offset(x * (i + 0.5), y),
+        radius: radius,
+        onPressed: i == 3
+            ? () {
+                final cropNotifier =
+                    Provider.of<CropNotifier>(context, listen: false);
+                cropNotifier.increment(-1);
+              }
+            : null,
+      );
+    }
   }
 }
