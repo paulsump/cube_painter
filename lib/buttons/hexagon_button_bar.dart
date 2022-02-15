@@ -77,7 +77,7 @@ class HexagonButtonBar extends StatelessWidget {
         width: orient ? screen.width / 8 : screen.width,
         height: !orient ? screen.width : screen.width,
         decoration: BoxDecoration(
-          color: Colors.red, //backgroundColor,
+          color: backgroundColor,
           border: Border(
             top: borderSide,
             right: borderSide,
@@ -100,8 +100,9 @@ class HexagonButtonBar extends StatelessWidget {
   Offset _getGestureModeButtonOffset(int i, bool orient) {
     final double w = W * radius;
     if (orient) {
+      final X = x * 1.1;
       final double Y = y * (i * 1.5 + 1);
-      return i % 2 == 0 ? Offset(x - w, Y) : Offset(x, Y);
+      return i % 2 == 0 ? Offset(X - w, Y) : Offset(X, Y);
     }
     return Offset(x * (i + 0.5), y);
   }

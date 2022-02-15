@@ -70,7 +70,7 @@ class _PainterPageState extends State<PainterPage> {
           undoer: _cubes.undoer,
           saveToClipboard: _cubes.saveToClipboard,
           offsetY: screen.height,
-          height: max(screen.width, screen.height) / 11,
+          height: max(screen.width, screen.height) / 12,
         ),
       ],
     );

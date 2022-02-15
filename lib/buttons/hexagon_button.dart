@@ -84,7 +84,7 @@ class _HexagonState extends State<HexagonButton>
                 offset:
                     widget.center + widget.iconOffset + unit * -iconSize / 2,
                 child: Transform.scale(
-                  scale: widget.radius / iconSize,
+                  scale: 0.8 * widget.radius / iconSize,
                   child: Icon(
                     widget.icon,
                     color: getColor(widget.enabled ? Side.br : Side.bl),
