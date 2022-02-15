@@ -63,13 +63,12 @@ class _PainterPageState extends State<PainterPage> {
                   ],
                 ),
               ),
-              Brush(adoptCubes: _cubes.adopt),
-              if (GestureMode.panZoom == getGestureMode(context, listen: true))
-                PanZoomer(
-                  onPanZoomUpdate: _tiles.rebuild,
-                  onPanZoomEnd: _tiles.rebuild,
-                ),
-              // Line(screen.center,screen.center + Offset(screen.width / 4, screen.height / 4)),
+              GestureMode.panZoom == getGestureMode(context, listen: true)
+                  ? PanZoomer(
+                      onPanZoomUpdate: _tiles.rebuild,
+                      onPanZoomEnd: _tiles.rebuild,
+                    )
+                  : Brush(adoptCubes: _cubes.adopt),
             ],
           ),
         ),
@@ -81,5 +80,4 @@ class _PainterPageState extends State<PainterPage> {
       ],
     );
   }
-
 }

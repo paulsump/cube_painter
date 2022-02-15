@@ -17,10 +17,7 @@ class Brush extends StatefulWidget {
 
   final void Function(List<AnimCube> orphans) adoptCubes;
 
-  Brush({
-    Key? key,
-    required this.adoptCubes,
-  }) : super(key: key);
+  Brush({Key? key, required this.adoptCubes}) : super(key: key);
 
   void _handOver() {
     if (_cubes.isNotEmpty) {
@@ -37,6 +34,7 @@ class Brush extends StatefulWidget {
 
 class BrushState extends State<Brush> {
   final brushMaths = BrushMaths();
+
   var previousPositions = Positions();
 
   @override
@@ -59,29 +57,17 @@ class BrushState extends State<Brush> {
         );
       },
       onPanUpdate: (details) {
-        switch (getGestureMode(context)) {
-          case GestureMode.panZoom:
-            break;
-          case GestureMode.add:
-            _updateExtrude(details, context);
-            break;
-          case GestureMode.erase:
-            _replaceCube(details.localPosition, context);
-            setState(() {});
-            break;
-          case GestureMode.crop:
-            _replaceCube(details.localPosition, context);
-            setState(() {});
-            break;
+        if (GestureMode.add == getGestureMode(context)) {
+          _updateExtrude(details, context);
+        } else {
+          _replaceCube(details.localPosition, context);
+          setState(() {});
         }
       },
       onPanEnd: (details) {
         widget._handOver();
       },
       onTapDown: (details) {
-        if (getGestureMode(context) == GestureMode.panZoom) {
-          return;
-        }
         _replaceCube(details.localPosition, context);
         setState(() {});
       },

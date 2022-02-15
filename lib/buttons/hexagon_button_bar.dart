@@ -18,7 +18,6 @@ class HexagonButtonBar extends StatelessWidget {
 
   final VoidCallback saveToClipboard;
 
-
   final double height;
 
   const HexagonButtonBar({
@@ -37,7 +36,7 @@ class HexagonButtonBar extends StatelessWidget {
       [
         Icons.add,
         const FullUnitCube(),
-            // 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
+        // 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
       ],
       [
         Icons.remove,
