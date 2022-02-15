@@ -17,11 +17,15 @@ const noWarn = out;
 class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
   final VoidCallback saveToClipboard;
+  final void Function(String message) showTip;
+  final VoidCallback hideTip;
 
   const HexagonButtonBar({
     Key? key,
     required this.undoer,
     required this.saveToClipboard,
+    required this.showTip,
+    required this.hideTip,
   }) : super(key: key);
 
   @override
@@ -33,19 +37,19 @@ class HexagonButtonBar extends StatelessWidget {
       [
         Icons.add,
         const FullUnitCube(),
-        () => _showTip(
+            () => showTip(
             'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
       ],
       [
         Icons.remove,
         const FullUnitCube(),
-        () => _showTip(
+            () => showTip(
             'Tap on a cube to delete it.  You can change the position while you have your finger down.'),
       ],
       [
         Icons.add,
         CropUnitCube(crop: crop),
-        () => _showTip(
+            () => showTip(
             'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'),
       ],
     ];
@@ -55,26 +59,25 @@ class HexagonButtonBar extends StatelessWidget {
         undoer.canUndo,
         Icons.undo_sharp,
         undoer.undo,
-        () => _showTip('Undo the last add or delete operation.'),
+        () => showTip('Undo the last add or delete operation.'),
       ],
       [
         undoer.canRedo,
         Icons.redo_sharp,
         undoer.redo,
-        () =>
-            _showTip('Redo the last add or delete operation that was undone.'),
+        () => showTip('Redo the last add or delete operation that was undone.'),
       ],
       [
         true,
         Icons.forward,
         () => getCubeGroupNotifier(context).increment(1),
-        () => _showTip('Load next group of cubes.'),
+        () => showTip('Load next group of cubes.'),
       ],
       [
         true,
         Icons.save_alt_sharp,
         saveToClipboard,
-        () => _showTip('Save the current group of cubes to the clipboard.'),
+        () => showTip('Save the current group of cubes to the clipboard.'),
       ],
     ];
 
@@ -91,8 +94,8 @@ class HexagonButtonBar extends StatelessWidget {
           center: const Offset(x * 0.5, y),
           radius: radius,
           showTip: () =>
-              _showTip('Pinch to zoom in/out or drag to move the canvas'),
-          hideTip: _hideTip,
+              showTip('Pinch to zoom in/out or drag to move the canvas'),
+          hideTip: hideTip,
         ),
         for (int i = 1; i < gestureModeButtonInfo.length; ++i)
           HexagonButton(
@@ -110,7 +113,7 @@ class HexagonButtonBar extends StatelessWidget {
                   }
                 : null,
             showTip: gestureModeButtonInfo[i][2] as VoidCallback,
-            hideTip: _hideTip,
+            hideTip: hideTip,
           ),
         for (int i = 0; i < otherButtonInfo.length; ++i)
           HexagonButton(
@@ -120,7 +123,7 @@ class HexagonButtonBar extends StatelessWidget {
             center: Offset(x * (i + 4.5), y),
             radius: radius,
             showTip: otherButtonInfo[i][3] as VoidCallback,
-            hideTip: _hideTip,
+            hideTip: hideTip,
           ),
         for (int i = 0;
             i < 1 + gestureModeButtonInfo.length + otherButtonInfo.length;
@@ -131,14 +134,5 @@ class HexagonButtonBar extends StatelessWidget {
               color: buttonColor),
       ],
     );
-  }
-
-  void _showTip(String message) {
-    //TODO Pop up a tooltip with
-    out(message);
-  }
-
-  void _hideTip() {
-    out('done');
   }
 }

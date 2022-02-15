@@ -33,6 +33,7 @@ class _PainterPageState extends State<PainterPage> {
   final _cubes = Cubes();
 
   final _tiles = Tiles();
+// final _tips = Tips();
 
   @override
   void initState() {
@@ -79,9 +80,25 @@ class _PainterPageState extends State<PainterPage> {
           child: HexagonButtonBar(
             undoer: _cubes.undoer,
             saveToClipboard: _cubes.saveToClipboard,
+            showTip: _showTip,
+            hideTip: _hideTip,
           ),
         ),
       ],
     );
   }
+
+  void _showTip(String message) {
+    out(message);
+    //TODO Text at bottom
+    //TODO Demo wants to use these strings, but i'll refactor if i get to that
+    // demo points to button, presses it and shows tip
+    // extrude add two triangle lines
+    // delete one, undo redo one
+    // crop tto make triangle
+    // zoom in , out
+    // next file , next file , to new one.
+  }
+
+  void _hideTip() {}
 }
