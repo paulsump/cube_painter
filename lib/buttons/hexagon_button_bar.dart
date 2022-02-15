@@ -19,6 +19,8 @@ class HexagonButtonBar extends StatelessWidget {
   final VoidCallback saveToClipboard;
   final double height;
 
+  final double offsetY;
+
   double get radius => height / 2;
 
   double get x => 2 * radius * W;
@@ -30,6 +32,7 @@ class HexagonButtonBar extends StatelessWidget {
     required this.undoer,
     required this.saveToClipboard,
     required this.height,
+    required this.offsetY,
   }) : super(key: key);
 
   @override
@@ -61,20 +64,23 @@ class HexagonButtonBar extends StatelessWidget {
       ),
     ];
 
-    return Container(
-      height: height,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        border: Border(top: BorderSide(width: 1.0, color: buttonColor)),
-      ),
-      child: Stack(
-        children: [
-          _buildGestureModeButton(0, context),
-          for (int i = 1; i < GestureMode.values.length; ++i)
-            _buildGestureModeButton(i, context),
-          for (int i = 0; i < basicButtonInfo.length; ++i)
-            _buildBasicButton(i, basicButtonInfo, context),
-        ],
+    return Transform.translate(
+      offset: Offset(0, offsetY - height),
+      child: Container(
+        height: height,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          border: Border(top: BorderSide(width: 1.0, color: buttonColor)),
+        ),
+        child: Stack(
+          children: [
+            _buildGestureModeButton(0, context),
+            for (int i = 1; i < GestureMode.values.length; ++i)
+              _buildGestureModeButton(i, context),
+            for (int i = 0; i < basicButtonInfo.length; ++i)
+              _buildBasicButton(i, basicButtonInfo, context),
+          ],
+        ),
       ),
     );
   }

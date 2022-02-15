@@ -69,13 +69,14 @@ class _PainterPageState extends State<PainterPage> {
                       onPanZoomEnd: _tiles.rebuild,
                     )
                   : Brush(adoptCubes: _cubes.adopt),
+              HexagonButtonBar(
+                undoer: _cubes.undoer,
+                saveToClipboard: _cubes.saveToClipboard,
+                offsetY: screen.height,
+                height: max(screen.width, screen.height) / 11,
+              ),
             ],
           ),
-        ),
-        HexagonButtonBar(
-          undoer: _cubes.undoer,
-          saveToClipboard: _cubes.saveToClipboard,
-          height: max(screen.width, screen.height) / 11,
         ),
       ],
     );
