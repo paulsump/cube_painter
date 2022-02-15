@@ -53,7 +53,7 @@ class HexagonButtonBar extends StatelessWidget {
       [
         Icons.add,
         CropUnitCube(crop: crop),
-            () => showTip(
+        () => showTip(
             'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.'),
       ],
     ];
@@ -92,7 +92,10 @@ class HexagonButtonBar extends StatelessWidget {
 
     return Container(
       height: height,
-      color: backgroundColor,
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        border: Border(top: BorderSide(width: 1.0, color: buttonColor)),
+      ),
       child: Stack(
         children: [
           HexagonButton(

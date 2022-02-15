@@ -25,7 +25,7 @@ class Hexagon extends StatelessWidget {
     return Transform.translate(
       offset: center,
       child: Transform.scale(
-        scale: radius * 0.8,
+        scale: radius,
         origin: unit,
         child: CustomPaint(
           painter: _Painter(

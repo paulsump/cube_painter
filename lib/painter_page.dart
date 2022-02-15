@@ -78,7 +78,7 @@ class _PainterPageState extends State<PainterPage> {
           saveToClipboard: _cubes.saveToClipboard,
           showTip: _showTip,
           hideTip: _hideTip,
-          height: 80,
+          height: 120,
         ),
       ],
     );
