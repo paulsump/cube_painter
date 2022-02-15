@@ -122,7 +122,7 @@ class BrushState extends State<Brush> {
       key: UniqueKey(),
       info: CubeInfo(center: center, crop: crop),
       start: 0.0,
-      end: getGestureMode(context) == GestureMode.erase ? 3.0 : 1.0,
+      end: getGestureMode(context) == GestureMode.add ? 1.0 : 3.0,
       pingPong: true,
     ));
   }
