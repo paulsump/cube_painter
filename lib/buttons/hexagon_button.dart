@@ -22,14 +22,11 @@ class HexagonButton extends StatefulWidget {
   final GestureMode? gestureMode;
 
   final Widget? unitChild;
-  final VoidCallback showTip, hideTip;
 
   const HexagonButton({
     Key? key,
     required this.center,
     required this.radius,
-    required this.showTip,
-    required this.hideTip,
     this.enabled = true,
     this.icon,
     this.iconOffset = Offset.zero,
@@ -115,8 +112,6 @@ class _HexagonState extends State<HexagonButton>
                   }
                   widget.onPressed?.call();
                 },
-                onLongPress: widget.showTip,
-                onLongPressUp: widget.hideTip,
               ),
             ),
           ]);
