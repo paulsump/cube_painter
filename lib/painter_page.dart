@@ -53,8 +53,7 @@ class _PainterPageState extends State<PainterPage> {
 
     return Column(
       children: [
-        SizedBox(
-          height: screen.height - buttonsBarHeight,
+        Expanded(
           child: Stack(
             children: [
               UnitToScreen(
