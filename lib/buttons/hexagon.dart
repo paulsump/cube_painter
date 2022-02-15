@@ -26,12 +26,8 @@ class Hexagon extends StatelessWidget {
       offset: center,
       child: Transform.scale(
         scale: radius,
-        // origin: unit,
         child: CustomPaint(
-          painter: _Painter(
-            color: color,
-            repaint: repaint,
-          ),
+          painter: _Painter(color: color, repaint: repaint),
         ),
       ),
     );

@@ -90,39 +90,30 @@ class _HexagonState extends State<HexagonButton>
                   ),
                 ),
               ),
-            Transform.translate(
-              offset: Offset.zero,
-              // offset: widget.center - const Offset(W, H * 2) * widget.radius,
-              child: Transform.scale(
-                scale: 1, //widget.radius,
-                child: ClipOval(
-                  clipper: CustomClipOval(
-                    // clipper: CustomClipPath(
-                    scale: widget.radius * 1,
-                    offset: widget.center,
-                    //   // offset: widget.center - const Offset(W, H * 2) * widget.radius,
-                  ),
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () {
-                      if (!widget.enabled) {
-                        return;
-                      }
-                      if (widget.gestureMode != null) {
-                        final gestureModeNotifier =
-                            Provider.of<GestureModeNotifier>(context,
-                                listen: false);
+            ClipOval(
+              clipper: CustomClipOval(
+                scale: widget.radius,
+                offset: widget.center,
+              ),
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  if (!widget.enabled) {
+                    return;
+                  }
+                  if (widget.gestureMode != null) {
+                    final gestureModeNotifier =
+                        Provider.of<GestureModeNotifier>(context,
+                            listen: false);
 
-                        gestureModeNotifier.mode = widget.gestureMode!;
-                        _controller.forward();
-                      } else {
-                        _controller.reset();
-                        _controller.forward();
-                      }
-                      widget.onPressed?.call();
-                    },
-                  ),
-                ),
+                    gestureModeNotifier.mode = widget.gestureMode!;
+                    _controller.forward();
+                  } else {
+                    _controller.reset();
+                    _controller.forward();
+                  }
+                  widget.onPressed?.call();
+                },
               ),
             ),
           ]);
@@ -136,45 +127,15 @@ class _HexagonState extends State<HexagonButton>
       : getButtonColor(_controller.value);
 }
 
-// class CustomClipPath extends CustomClipper<Path> {
-//   final double scale;
-//   final Offset offset;
-//
-//   CustomClipPath({required this.scale, required this.offset});
-//
-//   @override
-//   Path getClip(Size size) {
-//     final path = Path()
-//       ..addPolygon(
-//           getHexagonCornerOffsets2(
-//             scale: scale,
-//             offset: offset,
-//           ),
-//           true);
-//     return path;
-//   }
-//
-//   @override
-//   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-// }
-
 class CustomClipOval extends CustomClipper<Rect> {
   final double scale;
   final Offset offset;
 
-  CustomClipOval({required this.scale, required this.offset});
+  const CustomClipOval({required this.scale, required this.offset});
 
   @override
-  Rect getClip(Size size) {
-    final rect = Rect.fromCircle(center: offset, radius: scale);
-    return rect;
-  }
+  Rect getClip(Size size) => Rect.fromCircle(center: offset, radius: scale);
 
   @override
-  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
-    return false;
-  }
-
-// @override
-// bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) => false;
 }
