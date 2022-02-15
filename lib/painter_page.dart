@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
@@ -78,7 +79,7 @@ class _PainterPageState extends State<PainterPage> {
           saveToClipboard: _cubes.saveToClipboard,
           showTip: _showTip,
           hideTip: _hideTip,
-          height: 120,
+          height: max(screen.width, screen.height) / 11,
         ),
       ],
     );
