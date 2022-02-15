@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -49,7 +48,6 @@ class _PainterPageState extends State<PainterPage> {
     final screen = getScreen(context, listen: true);
 
     _tiles.rebuildIfReorient(height: screen.height);
-    const double buttonsBarHeight = 80;
 
     return Column(
       children: [
@@ -75,16 +73,12 @@ class _PainterPageState extends State<PainterPage> {
             ],
           ),
         ),
-        Container(
-          height: buttonsBarHeight,
-          color: backgroundColor,
-          child: HexagonButtonBar(
-            undoer: _cubes.undoer,
-            saveToClipboard: _cubes.saveToClipboard,
-            showTip: _showTip,
-            hideTip: _hideTip,
-            height: buttonsBarHeight,
-          ),
+        HexagonButtonBar(
+          undoer: _cubes.undoer,
+          saveToClipboard: _cubes.saveToClipboard,
+          showTip: _showTip,
+          hideTip: _hideTip,
+          height: 80,
         ),
       ],
     );

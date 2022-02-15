@@ -42,7 +42,7 @@ class HexagonButtonBar extends StatelessWidget {
       [
         Icons.add,
         const FullUnitCube(),
-            () => showTip(
+        () => showTip(
             'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'),
       ],
       [
@@ -92,51 +92,55 @@ class HexagonButtonBar extends StatelessWidget {
     final double x = 2 * radius * W;
     final double y = 2 * radius * H;
 
-    return Stack(
-      children: [
-        HexagonButton(
-          icon: Icons.zoom_in_rounded,
-          gestureMode: GestureMode.panZoom,
-          center: Offset(x * 0.5, y),
-          radius: radius,
-          showTip: () =>
-              showTip('Pinch to zoom in/out or drag to move the canvas'),
-          hideTip: hideTip,
-        ),
-        for (int i = 1; i < gestureModeButtonInfo.length; ++i)
+    return Container(
+      height: height,
+      color: backgroundColor,
+      child: Stack(
+        children: [
           HexagonButton(
-            icon: gestureModeButtonInfo[i][0] as IconData,
-            iconOffset: const Offset(W, H) * -radius * 0.5,
-            unitChild: gestureModeButtonInfo[i][1] as Widget,
-            gestureMode: GestureMode.values[i],
-            center: Offset(x * (i + 0.5), y),
+            icon: Icons.zoom_in_rounded,
+            gestureMode: GestureMode.panZoom,
+            center: Offset(x * 0.5, y),
             radius: radius,
-            onPressed: i == 3
-                ? () {
-                    final cropNotifier =
-                        Provider.of<CropNotifier>(context, listen: false);
-                    cropNotifier.increment(-1);
-                  }
-                : null,
-            showTip: gestureModeButtonInfo[i][2] as VoidCallback,
+            showTip: () =>
+                showTip('Pinch to zoom in/out or drag to move the canvas'),
             hideTip: hideTip,
           ),
-        for (int i = 0; i < otherButtonInfo.length; ++i)
-          HexagonButton(
-            enabled: otherButtonInfo[i][0] as bool,
-            icon: otherButtonInfo[i][1] as IconData,
-            onPressed: otherButtonInfo[i][2] as VoidCallback,
-            center: Offset(x * (i + 4.5), y),
-            radius: radius,
-            showTip: otherButtonInfo[i][3] as VoidCallback,
-            hideTip: hideTip,
-          ),
-        for (int i = 0; i < 1 + n; ++i)
-          Hexagon(
-              center: Offset(x * i, y + 3 * radius * H),
+          for (int i = 1; i < gestureModeButtonInfo.length; ++i)
+            HexagonButton(
+              icon: gestureModeButtonInfo[i][0] as IconData,
+              iconOffset: const Offset(W, H) * -radius * 0.5,
+              unitChild: gestureModeButtonInfo[i][1] as Widget,
+              gestureMode: GestureMode.values[i],
+              center: Offset(x * (i + 0.5), y),
               radius: radius,
-              color: buttonColor),
-      ],
+              onPressed: i == 3
+                  ? () {
+                      final cropNotifier =
+                          Provider.of<CropNotifier>(context, listen: false);
+                      cropNotifier.increment(-1);
+                    }
+                  : null,
+              showTip: gestureModeButtonInfo[i][2] as VoidCallback,
+              hideTip: hideTip,
+            ),
+          for (int i = 0; i < otherButtonInfo.length; ++i)
+            HexagonButton(
+              enabled: otherButtonInfo[i][0] as bool,
+              icon: otherButtonInfo[i][1] as IconData,
+              onPressed: otherButtonInfo[i][2] as VoidCallback,
+              center: Offset(x * (i + 4.5), y),
+              radius: radius,
+              showTip: otherButtonInfo[i][3] as VoidCallback,
+              hideTip: hideTip,
+            ),
+          for (int i = 0; i < 1 + n; ++i)
+            Hexagon(
+                center: Offset(x * i, y + 3 * radius * H),
+                radius: radius,
+                color: buttonColor),
+        ],
+      ),
     );
   }
 }
