@@ -40,9 +40,8 @@ class _Painter extends CustomPainter {
   const _Painter();
 
   @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawPath(Path()..addPolygon(topSide, true), _paintCache);
-  }
+  void paint(Canvas canvas, Size size) =>
+      canvas.drawPath(Path()..addPolygon(topSide, true), _paintCache);
 
   @override
   bool shouldRepaint(_Painter oldDelegate) => false;
@@ -51,13 +50,17 @@ class _Painter extends CustomPainter {
 final Paint _paintCache = Paint()
   ..shader = const LinearGradient(
     colors: [Color(0xff2e8c86), Color(0xff2c778f)],
+// from https://blog.hunterlab.com/blog/color-measurement/understanding-color-harmony-can-help-enhance-consumer-perception-and-experience/
+//     colors:    [Color(0xff59a69a), Color(0xff6cb092)],
+//   colors:[green,blue],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   ).createShader(const Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0))
   ..style = PaintingStyle.fill;
 
 // const double dt = 0.1;
-
+// const double t = 0.5;
+// final colors= [getTweenBtoGColor(t - dt), getTweenBtoGColor(t + dt)];
 // Paint _getGradientPaint(double t, Path path, PaintingStyle style) {
 //   return Paint()
 //     ..shader = _getGradient(t).createShader(path.getBounds())

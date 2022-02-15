@@ -1,3 +1,4 @@
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,8 @@ class FullUnitCube extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const CustomPaint(
-        painter: _Painter(),
-      );
+    painter: _Painter(),
+  );
 }
 
 class _Painter extends CustomPainter {
@@ -30,7 +31,7 @@ final Paint _paintCacheBR = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomRight,
     end: Alignment.topLeft,
-    colors: [Color(0xfff07f7e), Color(0xffffd8d6)],
+    colors: [top, br],
   ).createShader(const Rect.fromLTRB(0.0, -0.5, 0.9, 1.0))
   ..style = PaintingStyle.fill;
 
@@ -38,7 +39,7 @@ final Paint _paintCacheBL = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
-    colors: [Color(0xff543e3d), Color(0xfff07f7e)],
+    colors: [bl, top],
   ).createShader(const Rect.fromLTRB(-0.9, -0.5, 0.0, 1.0))
   ..style = PaintingStyle.fill;
 
@@ -46,6 +47,6 @@ final Paint _paintCacheT = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xffb16564), Color(0xfff07f7e)],
+    colors: [Color(0xffb16564), top],
   ).createShader(const Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0))
   ..style = PaintingStyle.fill;
