@@ -3,6 +3,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -92,7 +93,7 @@ class _HexagonState extends State<HexagonButton>
               ),
             ClipOval(
               clipper: _CircleClipper(
-                radius: widget.radius,
+                radius: widget.radius * W,
                 center: widget.center,
               ),
               child: GestureDetector(
