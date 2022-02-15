@@ -37,6 +37,7 @@ class Cubes {
   }) {
     setState = setState_;
     context = context_;
+
     getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
     undoer = Undoer(simpleCubes, setState: setState);
   }
