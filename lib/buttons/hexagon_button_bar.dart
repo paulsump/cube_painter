@@ -73,13 +73,7 @@ class HexagonButtonBar extends StatelessWidget {
           for (int i = 1; i < GestureMode.values.length; ++i)
             _buildGestureModeButton(i, context),
           for (int i = 0; i < basicButtonInfo.length; ++i)
-            HexagonButton(
-              enabled: basicButtonInfo[i].enabled,
-              icon: basicButtonInfo[i].icon,
-              onPressed: basicButtonInfo[i].onPressed,
-              center: Offset(x * (i + 4.5), y),
-              radius: radius,
-            ),
+            _buildBasicButton(i, basicButtonInfo, context),
         ],
       ),
     );
@@ -133,8 +127,16 @@ class HexagonButtonBar extends StatelessWidget {
     }
   }
 
-// Widget _buildBasicButton(int i, BuildContext context) {
-// }
+  Widget _buildBasicButton(
+      int i, List<BasicButtonInfo> buttonInfos, BuildContext context) {
+    return HexagonButton(
+      enabled: buttonInfos[i].enabled,
+      icon: buttonInfos[i].icon,
+      onPressed: buttonInfos[i].onPressed,
+      center: Offset(x * (i + 4.5), y),
+      radius: radius,
+    );
+  }
 }
 
 class BasicButtonInfo {
