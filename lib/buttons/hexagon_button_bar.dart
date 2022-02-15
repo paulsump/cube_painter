@@ -34,31 +34,31 @@ class HexagonButtonBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final otherButtonInfo = [
-      [
-        undoer.canUndo,
-        Icons.undo_sharp,
-        undoer.undo,
-        //'Undo the last add or delete operation.'),
-      ],
-      [
-        undoer.canRedo,
-        Icons.redo_sharp,
-        undoer.redo,
-        //'Redo the last add or delete operation that was undone.'),
-      ],
-      [
-        true,
-        Icons.forward,
-        () => getCubeGroupNotifier(context).increment(1),
-        // 'Load next group of cubes.'),
-      ],
-      [
-        true,
-        Icons.save_alt_sharp,
-        saveToClipboard,
-        // 'Save the current group of cubes to the clipboard.'),
-      ],
+    final basicButtonInfo = [
+      BasicButtonInfo(
+        enabled: undoer.canUndo,
+        icon: Icons.undo_sharp,
+        onPressed: undoer.undo,
+        tip: 'Undo the last add or delete operation.',
+      ),
+      BasicButtonInfo(
+        enabled: undoer.canRedo,
+        icon: Icons.redo_sharp,
+        onPressed: undoer.redo,
+        tip: 'Redo the last add or delete operation that was undone.',
+      ),
+      BasicButtonInfo(
+        enabled: true,
+        icon: Icons.forward,
+        onPressed: () => getCubeGroupNotifier(context).increment(1),
+        tip: 'Load next group of cubes.',
+      ),
+      BasicButtonInfo(
+        enabled: true,
+        icon: Icons.save_alt_sharp,
+        onPressed: saveToClipboard,
+        tip: 'Save the current group of cubes to the clipboard.',
+      ),
     ];
 
     return Container(
@@ -72,11 +72,11 @@ class HexagonButtonBar extends StatelessWidget {
           _buildGestureModeButton(0, context),
           for (int i = 1; i < GestureMode.values.length; ++i)
             _buildGestureModeButton(i, context),
-          for (int i = 0; i < otherButtonInfo.length; ++i)
+          for (int i = 0; i < basicButtonInfo.length; ++i)
             HexagonButton(
-              enabled: otherButtonInfo[i][0] as bool,
-              icon: otherButtonInfo[i][1] as IconData,
-              onPressed: otherButtonInfo[i][2] as VoidCallback,
+              enabled: basicButtonInfo[i].enabled,
+              icon: basicButtonInfo[i].icon,
+              onPressed: basicButtonInfo[i].onPressed,
               center: Offset(x * (i + 4.5), y),
               radius: radius,
             ),
@@ -132,4 +132,21 @@ class HexagonButtonBar extends StatelessWidget {
       );
     }
   }
+
+// Widget _buildBasicButton(int i, BuildContext context) {
+// }
+}
+
+class BasicButtonInfo {
+  final bool enabled;
+  final IconData icon;
+  final VoidCallback onPressed;
+  final String tip;
+
+  const BasicButtonInfo({
+    required this.enabled,
+    required this.icon,
+    required this.onPressed,
+    required this.tip,
+  });
 }
