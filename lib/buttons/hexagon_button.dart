@@ -48,7 +48,6 @@ class _HexagonState extends State<HexagonButton>
 
   @override
   void initState() {
-    super.initState();
     _controller = AnimationController(
       duration: const Duration(milliseconds: 150),
       vsync: this,
@@ -58,10 +57,13 @@ class _HexagonState extends State<HexagonButton>
     if (widget.gestureMode == getGestureMode(context)) {
       _controller.value = 0;
     }
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final double iconSize = IconTheme.of(context).size!;
+
     return AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
@@ -82,12 +84,14 @@ class _HexagonState extends State<HexagonButton>
               ),
             if (widget.icon != null)
               Transform.translate(
-                offset: widget.center +
-                    widget.iconOffset +
-                    unit * -IconTheme.of(context).size! / 2,
-                child: Icon(
-                  widget.icon,
-                  color: getColor(widget.enabled ? Side.br : Side.bl),
+                offset:
+                    widget.center + widget.iconOffset + unit * -iconSize / 2,
+                child: Transform.scale(
+                  scale: widget.radius / iconSize,
+                  child: Icon(
+                    widget.icon,
+                    color: getColor(widget.enabled ? Side.br : Side.bl),
+                  ),
                 ),
               ),
             Transform.translate(
@@ -100,8 +104,8 @@ class _HexagonState extends State<HexagonButton>
                   }
                   if (widget.gestureMode != null) {
                     final gestureModeNotifier =
-                        Provider.of<GestureModeNotifier>(context,
-                            listen: false);
+                    Provider.of<GestureModeNotifier>(context,
+                        listen: false);
 
                     gestureModeNotifier.mode = widget.gestureMode!;
                     _controller.forward();
