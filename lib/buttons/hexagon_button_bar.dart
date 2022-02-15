@@ -16,9 +16,13 @@ const noWarn = out;
 
 class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
+
   final VoidCallback saveToClipboard;
+
   final void Function(String message) showTip;
   final VoidCallback hideTip;
+
+  final double height;
 
   const HexagonButtonBar({
     Key? key,
@@ -26,6 +30,7 @@ class HexagonButtonBar extends StatelessWidget {
     required this.saveToClipboard,
     required this.showTip,
     required this.hideTip,
+    required this.height,
   }) : super(key: key);
 
   @override
@@ -81,17 +86,18 @@ class HexagonButtonBar extends StatelessWidget {
       ],
     ];
 
-    const double radius = 40;
+    final int n = gestureModeButtonInfo.length + otherButtonInfo.length;
+    final double radius = height / 2;
 
-    const double x = 2 * radius * W;
-    const double y = 3 * radius * H;
+    final double x = 2 * radius * W;
+    final double y = 2 * radius * H;
 
     return Stack(
       children: [
         HexagonButton(
           icon: Icons.zoom_in_rounded,
           gestureMode: GestureMode.panZoom,
-          center: const Offset(x * 0.5, y),
+          center: Offset(x * 0.5, y),
           radius: radius,
           showTip: () =>
               showTip('Pinch to zoom in/out or drag to move the canvas'),
@@ -125,9 +131,7 @@ class HexagonButtonBar extends StatelessWidget {
             showTip: otherButtonInfo[i][3] as VoidCallback,
             hideTip: hideTip,
           ),
-        for (int i = 0;
-            i < 1 + gestureModeButtonInfo.length + otherButtonInfo.length;
-            ++i)
+        for (int i = 0; i < 1 + n; ++i)
           Hexagon(
               center: Offset(x * i, y + 3 * radius * H),
               radius: radius,

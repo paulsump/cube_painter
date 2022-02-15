@@ -1,6 +1,9 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 class Hexagon extends StatelessWidget {
   final Offset center;

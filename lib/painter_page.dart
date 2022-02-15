@@ -49,7 +49,7 @@ class _PainterPageState extends State<PainterPage> {
     final screen = getScreen(context, listen: true);
 
     _tiles.rebuildIfReorient(height: screen.height);
-    const double buttonsBarHeight = 100;
+    const double buttonsBarHeight = 80;
 
     return Column(
       children: [
@@ -84,6 +84,7 @@ class _PainterPageState extends State<PainterPage> {
             saveToClipboard: _cubes.saveToClipboard,
             showTip: _showTip,
             hideTip: _hideTip,
+            height: buttonsBarHeight,
           ),
         ),
       ],
