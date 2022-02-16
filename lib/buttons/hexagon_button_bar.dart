@@ -106,7 +106,6 @@ class HexagonButtonBar extends StatelessWidget {
     );
   }
 
-  /// TODO ORient
   Offset _getGestureModeButtonOffset(int i, bool orient) {
     final double w = W * radius;
     if (orient) {

@@ -2,7 +2,6 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
 
-// TODO try to change this to CroppedCube
 class CropUnitCube extends StatelessWidget {
   final Crop crop;
 
