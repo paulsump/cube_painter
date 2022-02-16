@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen.dart';
@@ -21,8 +19,13 @@ class ScreenMaths {
 
   late bool orient;
 
+  static const heightFraction = 0.17;
+  static const heightFractionOrient = 0.19;
+
   ScreenMaths({required ScreenNotifier screen})
-      : height = max(screen.width, screen.height) / 12,
-        offsetY = screen.height,
-        orient = screen.height < screen.width;
+      : offsetY = screen.height,
+        orient = screen.height < screen.width,
+        height = screen.height < screen.width
+            ? screen.width * heightFractionOrient / screen.aspect
+            : screen.height * heightFraction * screen.aspect;
 }
