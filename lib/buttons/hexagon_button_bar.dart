@@ -23,7 +23,6 @@ class HexagonButtonBar extends StatelessWidget {
 
   double get height => maths.height;
 
-  double get offsetY => maths.offsetY;
 
   double get radius => maths.radius;
 
@@ -84,7 +83,7 @@ class HexagonButtonBar extends StatelessWidget {
     final borderSide = BorderSide(width: 1.0, color: buttonColor);
 
     return Transform.translate(
-      offset: Offset(0, offsetY),
+      offset: maths.offset,
       child: Container(
         width: orient ? screen.width / 8 : screen.width,
         height: !orient ? screen.width : screen.width,
