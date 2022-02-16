@@ -6,8 +6,10 @@ import 'package:flutter/cupertino.dart';
 const noWarn = out;
 
 class ScreenMaths {
-
   late double radius;
+
+  late double width;
+  late double height;
 
   double get x => 2 * radius * W;
 
@@ -25,10 +27,19 @@ class ScreenMaths {
       : orient = screen.height < screen.width {
     if (orient) {
       radius = screen.width * radiusFactorOrient / screen.aspect;
+      //todo set x for ios
       offset = Offset(0, 0);
+      //TODO FIX
+      width = screen.width / 8;
+      //todo reduce
+      height = screen.width;
     } else {
+      const double padY = 11;
       radius = screen.height * radiusFactor * screen.aspect;
-      offset = Offset(0, screen.height - 2 * radius);
+      offset = Offset(0, screen.height - 2 * radius - 2 * padY);
+      width = screen.width;
+      //todo reduce
+      height = screen.width;
     }
   }
 }

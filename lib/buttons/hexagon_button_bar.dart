@@ -8,7 +8,6 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +19,6 @@ class HexagonButtonBar extends StatelessWidget {
 
   final VoidCallback saveToClipboard;
   final ScreenMaths maths;
-
-
 
   double get radius => maths.radius;
 
@@ -42,7 +39,6 @@ class HexagonButtonBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screen = getScreen(context, listen: true);
 
     final basicButtonInfo = [
       BasicButtonInfo(
@@ -84,14 +80,11 @@ class HexagonButtonBar extends StatelessWidget {
     return Transform.translate(
       offset: maths.offset,
       child: Container(
-        width: orient ? screen.width / 8 : screen.width,
-        height: !orient ? screen.width : screen.width,
+        width: maths.width,
+        height: maths.height,
         decoration: BoxDecoration(
-          color: backgroundColor,
-          border: Border(
-            top: borderSide,
-            right: borderSide,
-          ),
+          color: Colors.red, // backgroundColor,
+          border: Border(top: borderSide, right: borderSide),
         ),
         child: Stack(
           children: [
