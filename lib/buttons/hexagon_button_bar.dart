@@ -28,6 +28,8 @@ class HexagonButtonBar extends StatelessWidget {
 
   double get y => 2 * radius * H;
 
+  double get gap => radius * 0.3;
+
   const HexagonButtonBar({
     Key? key,
     required this.undoer,
@@ -48,24 +50,32 @@ class HexagonButtonBar extends StatelessWidget {
         icon: Icons.undo_sharp,
         onPressed: undoer.undo,
         tip: 'Undo the last add or delete operation.',
+        offset: Offset(gap, 0),
+        orientOffset: Offset(gap - radius * 0.1, gap),
       ),
       BasicButtonInfo(
         enabled: undoer.canRedo,
         icon: Icons.redo_sharp,
         onPressed: undoer.redo,
         tip: 'Redo the last add or delete operation that was undone.',
+        offset: Offset(radius * 0.1 - gap, 0),
+        orientOffset: Offset(radius * 0.1 - gap / 2, -radius * 0.1),
       ),
       BasicButtonInfo(
         enabled: true,
         icon: Icons.forward,
         onPressed: () => getCubeGroupNotifier(context).increment(1),
         tip: 'Load next group of cubes.',
+        offset: Offset(-1 * gap, 0),
+        orientOffset: Offset(-radius * 0.1, -radius * 0.10),
       ),
       BasicButtonInfo(
         enabled: true,
         icon: Icons.save_alt_sharp,
         onPressed: saveToClipboard,
         tip: 'Save the current group of cubes to the clipboard.',
+        offset: Offset(gap, 0),
+        orientOffset: Offset(gap, 0),
       ),
     ];
 
@@ -163,14 +173,18 @@ class HexagonButtonBar extends StatelessWidget {
     List<BasicButtonInfo> buttonInfos,
     BuildContext context,
     bool orient,
-  ) =>
-      HexagonButton(
-        enabled: buttonInfos[i].enabled,
-        icon: buttonInfos[i].icon,
-        onPressed: buttonInfos[i].onPressed,
-        center: _getBasicButtonOffset(i, orient),
-        radius: radius * 0.7,
-      );
+  ) {
+    final BasicButtonInfo info = buttonInfos[i];
+    final Offset extraOffset = orient ? info.orientOffset : info.offset;
+
+    return HexagonButton(
+      enabled: info.enabled,
+      icon: info.icon,
+      onPressed: info.onPressed,
+      center: _getBasicButtonOffset(i, orient) + extraOffset,
+      radius: radius - gap,
+    );
+  }
 }
 
 class BasicButtonInfo {
@@ -178,11 +192,15 @@ class BasicButtonInfo {
   final IconData icon;
   final VoidCallback onPressed;
   final String tip;
+  final Offset offset;
+  final Offset orientOffset;
 
   const BasicButtonInfo({
     required this.enabled,
     required this.icon,
     required this.onPressed,
     required this.tip,
+    required this.offset,
+    required this.orientOffset,
   });
 }
