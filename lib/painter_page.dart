@@ -59,10 +59,7 @@ class _PainterPageState extends State<PainterPage> {
         ),
       ),
       GestureMode.panZoom == getGestureMode(context, listen: true)
-          ? PanZoomer(
-              onPanZoomUpdate: _tiles.rebuild,
-              onPanZoomEnd: _tiles.rebuild,
-            )
+          ? PanZoomer(onPanZoomUpdate: _tiles.rebuild)
           : Brush(adoptCubes: _cubes.adopt),
       HexagonButtonBar(
         undoer: _cubes.undoer,

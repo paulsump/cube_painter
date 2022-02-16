@@ -49,6 +49,5 @@ class Undoer {
   }
 
   void _saveTo(DoList list) => list.add(
-    List.generate(staticCubes.length, (index) => staticCubes[index].info),
-      );
+      List.generate(staticCubes.length, (index) => staticCubes[index].info));
 }

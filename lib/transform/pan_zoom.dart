@@ -48,13 +48,8 @@ class PanZoomNotifier extends ChangeNotifier {
 
 class PanZoomer extends StatefulWidget {
   final VoidCallback onPanZoomUpdate;
-  final VoidCallback onPanZoomEnd;
 
-  const PanZoomer({
-    Key? key,
-    required this.onPanZoomUpdate,
-    required this.onPanZoomEnd,
-  }) : super(key: key);
+  const PanZoomer({Key? key, required this.onPanZoomUpdate}) : super(key: key);
 
   @override
   _PanZoomerState createState() => _PanZoomerState();
@@ -62,7 +57,6 @@ class PanZoomer extends StatefulWidget {
 
 class _PanZoomerState extends State<PanZoomer> {
   Offset _initialFocalPoint = Offset.zero;
-  Offset _sessionOffset = Offset.zero;
   Offset _initialOffset = Offset.zero;
 
   double get _scale => getZoomScale(context);
@@ -93,15 +87,11 @@ class _PanZoomerState extends State<PanZoomer> {
         }
         _scale = scale;
 
-        _sessionOffset = details.focalPoint - _initialFocalPoint;
-        final newOffset = _sessionOffset + _initialOffset;
+        final newOffset =
+            details.focalPoint - _initialFocalPoint + _initialOffset;
 
         _offset = newOffset * details.scale;
         widget.onPanZoomUpdate();
-      },
-      onScaleEnd: (details) {
-        _sessionOffset = Offset.zero;
-        widget.onPanZoomEnd();
       },
       // Without this container, gestures stop working
       // i.e. onScaleUpdate etc doesn't get called. 'opaque' is also required.
