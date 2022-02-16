@@ -23,9 +23,14 @@ class ScreenMaths {
   static const heightFractionOrient = 0.19;
 
   ScreenMaths({required ScreenNotifier screen})
-      : offsetY = screen.height,
+      : offsetY = 0,
         orient = screen.height < screen.width,
-        height = screen.height < screen.width
-            ? screen.width * heightFractionOrient / screen.aspect
-            : screen.height * heightFraction * screen.aspect;
+        height = 0 {
+    if (orient) {
+      height = screen.width * heightFractionOrient / screen.aspect;
+    } else {
+      height = screen.height * heightFraction * screen.aspect;
+      offsetY = screen.height - height;
+    }
+  }
 }

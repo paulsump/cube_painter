@@ -84,7 +84,7 @@ class HexagonButtonBar extends StatelessWidget {
     final borderSide = BorderSide(width: 1.0, color: buttonColor);
 
     return Transform.translate(
-      offset: Offset(0, orient ? 0 : offsetY - height),
+      offset: Offset(0, offsetY),
       child: Container(
         width: orient ? screen.width / 8 : screen.width,
         height: !orient ? screen.width : screen.width,
