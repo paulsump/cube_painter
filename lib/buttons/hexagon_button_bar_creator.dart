@@ -31,8 +31,7 @@ class ScreenMaths {
       offset = Offset(0, 0);
       //TODO FIX
       width = screen.width / 8;
-      //todo reduce
-      height = screen.width;
+      height = screen.height;
     } else {
       const double padY = 11;
       radius = screen.height * radiusFactor * screen.aspect;

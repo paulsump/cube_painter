@@ -34,12 +34,14 @@ class ScreenNotifier extends ChangeNotifier {
     final media = MediaQuery.of(context);
 
     final pad = media.padding;
+    final double safeAreaWidth = pad.left + pad.right;
     final double safeAreaHeight = pad.top + pad.bottom;
 
     final double x = constraints.maxWidth;
     final double y = constraints.maxHeight;
+    out(safeAreaWidth);
 
-    _size = Size(x, y - safeAreaHeight);
+    _size = Size(x - safeAreaWidth, y - safeAreaHeight);
     _center = Offset(width, height) / 2;
 
     WidgetsBinding.instance!.addPostFrameCallback((_) {
