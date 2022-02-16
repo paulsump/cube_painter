@@ -67,16 +67,18 @@ class CubeGroupNotifier extends ChangeNotifier {
       _filePaths.add(filePath);
     }
 
-    await _loadCubeGroup();
     _addCubes = addCubes;
-
-    _addCubes();
+    await _loadCubeGroup();
   }
 
   Future<void> _loadCubeGroup() async {
     final map = await Assets.loadJson(_filePaths[_currentIndex]);
 
     _cubeGroup = CubeGroup.fromJson(map);
+    // TODO if fail, alert user, perhaps skip
+    // TODO finally
+    _addCubes();
+    // TODO clear undo (make undoer a notifer and notifyListeners for button enabled.
   }
 
   String get json => jsonEncode(cubeGroup);
@@ -86,6 +88,5 @@ class CubeGroupNotifier extends ChangeNotifier {
     _currentIndex %= _filePaths.length;
 
     _loadCubeGroup();
-    _addCubes();
   }
 }

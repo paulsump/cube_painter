@@ -39,7 +39,6 @@ class HexagonButtonBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final basicButtonInfo = [
       BasicButtonInfo(
         enabled: undoer.canUndo,
@@ -83,7 +82,8 @@ class HexagonButtonBar extends StatelessWidget {
         width: maths.width,
         height: maths.height,
         decoration: BoxDecoration(
-          color: Colors.red, // backgroundColor,
+          // color: Colors.red,
+          color: backgroundColor,
           border: Border(top: borderSide, right: borderSide),
         ),
         child: Stack(

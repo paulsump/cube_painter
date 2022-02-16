@@ -110,7 +110,6 @@ class Cubes {
   void _addCubes() {
     List<CubeInfo> cubeInfos = getCubeInfos(context);
 
-    // TODO clear undo
     simpleCubes.clear();
     animCubes.clear();
 
