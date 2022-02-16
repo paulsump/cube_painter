@@ -21,7 +21,6 @@ class HexagonButtonBar extends StatelessWidget {
   final VoidCallback saveToClipboard;
   final ScreenMaths maths;
 
-  double get height => maths.height;
 
 
   double get radius => maths.radius;

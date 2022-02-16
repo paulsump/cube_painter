@@ -6,9 +6,8 @@ import 'package:flutter/cupertino.dart';
 const noWarn = out;
 
 class ScreenMaths {
-  late double height;
 
-  double get radius => height / 2;
+  late double radius;
 
   double get x => 2 * radius * W;
 
@@ -19,17 +18,17 @@ class ScreenMaths {
   late bool orient;
   late Offset offset;
 
-  static const heightFraction = 0.17;
-  static const heightFractionOrient = 0.19;
+  static const radiusFactor = 0.085;
+  static const radiusFactorOrient = 0.093;
 
   ScreenMaths({required ScreenNotifier screen})
       : orient = screen.height < screen.width {
     if (orient) {
-      height = screen.width * heightFractionOrient / screen.aspect;
+      radius = screen.width * radiusFactorOrient / screen.aspect;
       offset = Offset(0, 0);
     } else {
-      height = screen.height * heightFraction * screen.aspect;
-      offset = Offset(0, screen.height - height);
+      radius = screen.height * radiusFactor * screen.aspect;
+      offset = Offset(0, screen.height - 2 * radius);
     }
   }
 }
