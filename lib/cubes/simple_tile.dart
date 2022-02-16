@@ -1,8 +1,9 @@
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
-const noWarn = [out];
+const noWarn = [out, green];
 
 class SimpleTile extends StatelessWidget {
   final Offset bottom;
@@ -49,9 +50,15 @@ class _Painter extends CustomPainter {
 
 final Paint _paintCache = Paint()
   ..shader = const LinearGradient(
+    // from diamonds pic
     colors: [Color(0xff2e8c86), Color(0xff2c778f)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
+    // colors: [green, blue],
+    // quilt
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+    //waves
+    // begin: Alignment.topCenter,
+    // end: Alignment.bottomCenter,
   ).createShader(const Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0))
   ..style = PaintingStyle.fill;
 

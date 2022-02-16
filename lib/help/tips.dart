@@ -44,7 +44,7 @@ class Tips {
 class TipNotifier extends ChangeNotifier {
   late Tips _tips;
 
-  String _currentTipId = '';
+  // String _currentTipId = '';
 
   // String get text=>_tips[_currentTipId];
 

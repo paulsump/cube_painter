@@ -38,7 +38,7 @@ Color get radioButtonOffColor => getButtonColor(0.3);
 const green = Color(0xFF284CA1);
 const blue = Color(0xFF32B875);
 // from https://blog.hunterlab.com/blog/color-measurement/understanding-color-harmony-can-help-enhance-consumer-perception-and-experience/
-// const green = Color(0xFF5EA79C);
-// const blue = Color(0xFF3396AD);
+// const green = Color(0xFFE46091);
+// const blue = Color(0xFFB4579E);
 
 Color getTweenBtoGColor(double t) => Color.lerp(blue, green, t)!;
