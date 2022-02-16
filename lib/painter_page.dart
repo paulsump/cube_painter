@@ -32,13 +32,9 @@ class PainterPage extends StatefulWidget {
 class _PainterPageState extends State<PainterPage> {
   final _cubes = Cubes();
 
-  final _tiles = Tiles();
-
   @override
   void initState() {
     _cubes.init(setState_: setState, context_: context);
-
-    _tiles.init(setState_: setState, context_: context);
     super.initState();
   }
 
@@ -46,20 +42,20 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
 
-    _tiles.rebuildIfReorient(height: screen.height);
+    // _tiles.rebuildIfReorient(height: screen.height);
 
     return Stack(children: [
       UnitToScreen(
         child: Stack(
           children: [
-            ..._tiles.tiles,
+            const Tiles(),
             ..._cubes.staticCubes,
             ..._cubes.animCubes,
           ],
         ),
       ),
       GestureMode.panZoom == getGestureMode(context, listen: true)
-          ? PanZoomer(onPanZoomUpdate: _tiles.rebuild)
+          ? PanZoomer(onPanZoomUpdate: () {})
           : Brush(adoptCubes: _cubes.adopt),
       HexagonButtonBar(
         undoer: _cubes.undoer,

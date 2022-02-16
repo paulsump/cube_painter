@@ -82,37 +82,26 @@ final Paint _paintCache = Paint()
 //       end: Alignment.bottomCenter,
 //     );
 
-class Tiles {
-  final List<Tile> tiles = [];
-  double previousScreenHeight = 0;
+class Tiles extends StatelessWidget {
+  // double previousScreenHeight = 0;
 
-  late void Function(VoidCallback fn) setState;
-  late BuildContext context;
+  const Tiles({Key? key}) : super(key: key);
 
-  void init({
-    required void Function(VoidCallback fn) setState_,
-    required BuildContext context_,
-  }) {
-    setState = setState_;
-    context = context_;
-  }
+  // void rebuildIfReorient({
+  //   required double height,
+  // }) {
+  //   if (height != previousScreenHeight) {
+  //     rebuild();
+  //     previousScreenHeight = height;
+  //   }
+  // }
 
-  void rebuildIfReorient({
-    required double height,
-  }) {
-    if (height != previousScreenHeight) {
-      rebuild();
-      previousScreenHeight = height;
-    }
-  }
-
-  void rebuild() {
-    tiles.clear();
-
-    final screen = getScreen(context, listen: false);
+  @override
+  Widget build(BuildContext context) {
+    final screen = getScreen(context, listen: true);
     final double zoomScale = getZoomScale(context);
 
-    final Offset panOffset = getPanOffset(context, listen: false) / zoomScale;
+    final Offset panOffset = getPanOffset(context, listen: true) / zoomScale;
     final int tileScale = zoomScale > 50
         ? 1
         : zoomScale > 30
@@ -162,25 +151,18 @@ class Tiles {
       padY += 1 * tileScale;
     }
 
-    for (int x = -padX; x < nx + padX; x += tileScale) {
-      for (int y = -padY; y < ny + padY; y += tileScale) {
-        final double h = x % (2 * tileScale) == 0 ? 0 : tileScale * H;
-
-        double Y = h + y.toDouble();
-        double X = W * x.toDouble();
-
-        X -= panX;
-        Y -= panY;
-
-        X -= centerX;
-        Y -= centerY;
-
-        tiles.add(Tile(
-          bottom: Offset(X, Y),
-          scale: tileScale.toDouble(),
-        ));
-      }
-    }
-    setState(() {});
+    return Stack(children: [
+      for (int x = -padX; x < nx + padX; x += tileScale)
+        for (int y = -padY; y < ny + padY; y += tileScale)
+          Tile(
+            bottom: Offset(
+                W * x.toDouble() - panX - centerX,
+                (x % (2 * tileScale) == 0 ? 0 : tileScale * H) +
+                    y.toDouble() -
+                    panY -
+                    centerY),
+            scale: tileScale.toDouble(),
+          ),
+    ]);
   }
 }

@@ -92,6 +92,7 @@ class _PanZoomerState extends State<PanZoomer> {
             details.focalPoint - _initialFocalPoint + _initialOffset;
         offset *= details.scale;
 
+        //TODO See if this makes a diff when the tiles widget listens
         if (offset != _offset) {
           _offset = offset;
         }
