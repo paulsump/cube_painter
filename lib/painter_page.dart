@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
-import 'package:cube_painter/buttons/hexagon_button_bar_creator.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -68,7 +67,7 @@ class _PainterPageState extends State<PainterPage> {
       HexagonButtonBar(
         undoer: _cubes.undoer,
         saveToClipboard: _cubes.saveToClipboard,
-        maths: ScreenMaths(screen: screen),
+        screen: screen,
       ),
     ]);
   }

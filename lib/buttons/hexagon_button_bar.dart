@@ -1,5 +1,4 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
-import 'package:cube_painter/buttons/hexagon_button_bar_creator.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/crop_unit_cube.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
@@ -8,6 +7,7 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
+import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
 
   final VoidCallback saveToClipboard;
-  final ScreenMaths maths;
+  final _ScreenMaths maths;
 
   double get radius => maths.radius;
 
@@ -30,12 +30,13 @@ class HexagonButtonBar extends StatelessWidget {
 
   bool get orient => maths.orient;
 
-  const HexagonButtonBar({
+  HexagonButtonBar({
     Key? key,
     required this.undoer,
     required this.saveToClipboard,
-    required this.maths,
-  }) : super(key: key);
+    required ScreenNotifier screen,
+  })  : maths = _ScreenMaths(screen: screen),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,15 +89,13 @@ class HexagonButtonBar extends StatelessWidget {
         ),
         child: Transform.translate(
           offset: Offset(0, maths.padY),
-          child: Stack(
-            children: [
-              _buildGestureModeButton(0, context),
-              for (int i = 1; i < GestureMode.values.length; ++i)
-                _buildGestureModeButton(i, context),
-              for (int i = 0; i < basicButtonInfo.length; ++i)
-                _buildBasicButton(i, basicButtonInfo, context),
-            ],
-          ),
+          child: Stack(children: [
+            _buildGestureModeButton(0, context),
+            for (int i = 1; i < GestureMode.values.length; ++i)
+              _buildGestureModeButton(i, context),
+            for (int i = 0; i < basicButtonInfo.length; ++i)
+              _buildBasicButton(i, basicButtonInfo, context),
+          ]),
         ),
       ),
     );
@@ -177,6 +176,47 @@ class HexagonButtonBar extends StatelessWidget {
       center: _getBasicButtonOffset(i) + extraOffset,
       radius: radius - gap,
     );
+  }
+}
+
+class _ScreenMaths {
+  late double radius;
+
+  late double width;
+  late double height;
+
+  double get x => 2 * radius * W;
+
+  double get y => 2 * radius * H;
+
+  double get gap => radius * 0.3;
+
+  late bool orient;
+  late Offset offset;
+
+  static const radiusFactor = 0.085;
+  static const radiusFactorOrient = 0.093;
+
+  double padY = 0;
+
+  _ScreenMaths({required ScreenNotifier screen})
+      : orient = screen.height < screen.width {
+    if (orient) {
+      radius = screen.width * radiusFactorOrient / screen.aspect;
+      //todo set x for ios
+      offset = Offset(-screen.safeArea.width, 0);
+      //TODO FIX
+      width = screen.width / 8;
+      height = screen.height;
+    } else {
+      padY = 11;
+      // TODO Might not need aspect - fix on iphone without it?
+      radius = screen.height * radiusFactor * screen.aspect;
+      offset = Offset(0, screen.height - 2 * radius - 2 * padY);
+      width = screen.width;
+      //todo reduce
+      height = screen.width;
+    }
   }
 }
 

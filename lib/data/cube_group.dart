@@ -76,9 +76,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     _cubeGroup = CubeGroup.fromJson(map);
     // TODO if fail, alert user, perhaps skip
-    // TODO finally
+    // TODO iff finally:
     _addCubes();
-    // TODO clear undo (make undoer a notifer and notifyListeners for button enabled.
+    // TODO clear undo (make undoer a notifier and notifyListeners for button enabled.
   }
 
   String get json => jsonEncode(cubeGroup);
