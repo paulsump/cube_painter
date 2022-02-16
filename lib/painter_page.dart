@@ -53,7 +53,7 @@ class _PainterPageState extends State<PainterPage> {
         child: Stack(
           children: [
             ..._tiles.tiles,
-            ..._cubes.simpleCubes,
+            ..._cubes.staticCubes,
             ..._cubes.animCubes,
           ],
         ),

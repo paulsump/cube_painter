@@ -5,10 +5,10 @@ import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
-class SimpleCube extends StatelessWidget {
+class StaticCube extends StatelessWidget {
   final CubeInfo info;
 
-  const SimpleCube({
+  const StaticCube({
     Key? key,
     required this.info,
   }) : super(key: key);

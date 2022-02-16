@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:cube_painter/cubes/anim_cube.dart';
-import 'package:cube_painter/cubes/simple_cube.dart';
+import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
@@ -26,7 +26,7 @@ class Cubes {
   late void Function(VoidCallback fn) setState;
 
   final List<AnimCube> animCubes = [];
-  final List<SimpleCube> simpleCubes = [];
+  final List<StaticCube> staticCubes = [];
 
   late Undoer undoer;
   late BuildContext context;
@@ -39,7 +39,7 @@ class Cubes {
     context = context_;
 
     getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
-    undoer = Undoer(simpleCubes, setState: setState);
+    undoer = Undoer(staticCubes, setState: setState);
   }
 
   /// once the brush has finished, it
@@ -47,7 +47,7 @@ class Cubes {
   /// which then creates a similar list
   /// If we are in add gestureMode
   /// the cubes will end up going
-  /// in the simpleCube list once they've animated to full size.
+  /// in the staticCube list once they've animated to full size.
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubes array once the
   /// anim is done.
@@ -56,13 +56,13 @@ class Cubes {
 
     if (erase) {
       for (final AnimCube cube in orphans) {
-        final SimpleCube? simpleCube = _getCubeAt(cube.info.center);
+        final StaticCube? staticCube = _getCubeAt(cube.info.center);
 
-        if (simpleCube != null) {
+        if (staticCube != null) {
           assert(orphans.length == 1);
 
           undoer.save();
-          simpleCubes.remove(simpleCube);
+          staticCubes.remove(staticCube);
         }
       }
     } else {
@@ -72,7 +72,7 @@ class Cubes {
     for (final AnimCube cube in orphans) {
       if (cube.scale == (erase ? 0 : 1)) {
         if (!erase) {
-          simpleCubes.add(SimpleCube(info: cube.info));
+          staticCubes.add(StaticCube(info: cube.info));
         }
       } else {
         animCubes.add(AnimCube(
@@ -80,7 +80,7 @@ class Cubes {
           info: cube.info,
           start: cube.scale,
           end: erase ? 0.0 : 1.0,
-          whenComplete: erase ? _removeSelf : _convertToSimpleCubeAndRemoveSelf,
+          whenComplete: erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
           duration: 222,
         ));
       }
@@ -93,13 +93,13 @@ class Cubes {
     return () {};
   }
 
-  dynamic _convertToSimpleCubeAndRemoveSelf(AnimCube old) {
-    simpleCubes.add(SimpleCube(info: old.info));
+  dynamic _convertToStaticCubeAndRemoveSelf(AnimCube old) {
+    staticCubes.add(StaticCube(info: old.info));
     return _removeSelf(old);
   }
 
-  SimpleCube? _getCubeAt(Position position) {
-    for (final cube in simpleCubes) {
+  StaticCube? _getCubeAt(Position position) {
+    for (final cube in staticCubes) {
       if (position == cube.info.center) {
         return cube;
       }
@@ -110,7 +110,7 @@ class Cubes {
   void _addCubes() {
     List<CubeInfo> cubeInfos = getCubeInfos(context);
 
-    simpleCubes.clear();
+    staticCubes.clear();
     animCubes.clear();
 
     for (int i = 0; i < cubeInfos.length; ++i) {
@@ -119,7 +119,7 @@ class Cubes {
         info: cubeInfos[i],
         start: unitPingPong((i % 6) / 6) / 2,
         end: 1.0,
-        whenComplete: _convertToSimpleCubeAndRemoveSelf,
+        whenComplete: _convertToStaticCubeAndRemoveSelf,
       ));
     }
 
@@ -130,7 +130,7 @@ class Cubes {
     final notifier = getCubeGroupNotifier(context);
 
     notifier.cubeGroup = CubeGroup(
-        List.generate(simpleCubes.length, (i) => simpleCubes[i].info));
+        List.generate(staticCubes.length, (i) => staticCubes[i].info));
 
     Clipboard.setData(ClipboardData(text: notifier.json));
   }

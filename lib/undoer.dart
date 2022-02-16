@@ -1,4 +1,4 @@
-import 'package:cube_painter/cubes/simple_cube.dart';
+import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +8,13 @@ const noWarn = out;
 typedef DoList = List<List<CubeInfo>>;
 
 class Undoer {
-  final List<SimpleCube> simpleCubes;
+  final List<StaticCube> staticCubes;
   final void Function(VoidCallback fn) setState;
 
   final DoList _undos = [];
   final DoList _redos = [];
 
-  Undoer(this.simpleCubes, {required this.setState});
+  Undoer(this.staticCubes, {required this.setState});
 
   bool get canUndo => _undos.isNotEmpty;
 
@@ -38,17 +38,17 @@ class Undoer {
   void _popFromPushTo(DoList popFrom, DoList pushTo) {
     _saveTo(pushTo);
 
-    simpleCubes.clear();
-    _addSimpleCubes(popFrom.removeLast());
+    staticCubes.clear();
+    _addStaticCubes(popFrom.removeLast());
   }
 
-  void _addSimpleCubes(List<CubeInfo> cubeInfos) {
+  void _addStaticCubes(List<CubeInfo> cubeInfos) {
     for (final CubeInfo cubeInfo in cubeInfos) {
-      simpleCubes.add(SimpleCube(key: UniqueKey(), info: cubeInfo));
+      staticCubes.add(StaticCube(key: UniqueKey(), info: cubeInfo));
     }
   }
 
   void _saveTo(DoList list) => list.add(
-        List.generate(simpleCubes.length, (index) => simpleCubes[index].info),
+    List.generate(staticCubes.length, (index) => staticCubes[index].info),
       );
 }
