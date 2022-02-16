@@ -85,12 +85,16 @@ class _PanZoomerState extends State<PanZoomer> {
         if (scale < 15 || 300 < scale) {
           return;
         }
-        _scale = scale;
-
-        final newOffset =
+        if (scale != _scale) {
+          _scale = scale;
+        }
+        Offset offset =
             details.focalPoint - _initialFocalPoint + _initialOffset;
+        offset *= details.scale;
 
-        _offset = newOffset * details.scale;
+        if (offset != _offset) {
+          _offset = offset;
+        }
         widget.onPanZoomUpdate();
       },
       // Without this container, gestures stop working
