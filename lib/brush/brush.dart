@@ -80,9 +80,8 @@ class BrushState extends State<Brush> {
   }
 
   void _updateExtrude(details, BuildContext context) {
-    final Positions positions = brushMaths.extrudeTo(
-      screenToUnit(details.localPosition, context),
-    );
+    final Positions positions =
+        brushMaths.extrudeTo(screenToUnit(details.localPosition, context));
 
     if (previousPositions != positions) {
       // using order provided by extruder

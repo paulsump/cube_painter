@@ -19,8 +19,6 @@ class Position {
 
   operator /(int scale) => Position(x ~/ scale, y ~/ scale);
 
-  // operator -() => Position(-x, -y);
-
   @override
   bool operator ==(Object other) =>
       other is Position ? x == other.x && y == other.y : false;

@@ -38,8 +38,15 @@ class BrushMaths {
 
     final Offset gridVector =
         unitOffsetToPositionOffset(toUnit) - _fromPositionOffset;
-    _distance = gridVector.distance.round();
 
+    double distance = gridVector.distance;
+    if (_vector!.x == _vector!.y) {
+      // for Position(1,1) and Position(-1,-1) are longer vectors than (1,0) etc
+      const root2 = 1.4142135623730950;
+      distance /= root2;
+    }
+
+    _distance = distance.round();
     var positions = Positions();
 
     for (int i = 0; i < _distance; ++i) {
@@ -63,7 +70,7 @@ List _calculateVectorAndReverseOrder(Offset newVector) {
   double direction = newVector.direction + angle / 2;
   direction /= angle;
 
-  int dir = direction.round();
+  final int dir = direction.round();
 
   switch (dir) {
     case 0:
@@ -76,7 +83,7 @@ List _calculateVectorAndReverseOrder(Offset newVector) {
       return [const Position(1, 0), true];
     case -3:
     case -2:
-    return [const Position(-1, -1), false];
+      return [const Position(-1, -1), false];
     case -1:
       return [const Position(0, 1), true];
   }
