@@ -169,7 +169,7 @@ class HexagonButtonBar extends StatelessWidget {
         icon: buttonInfos[i].icon,
         onPressed: buttonInfos[i].onPressed,
         center: _getBasicButtonOffset(i, orient),
-        radius: radius,
+        radius: radius * 0.7,
       );
 }
 
