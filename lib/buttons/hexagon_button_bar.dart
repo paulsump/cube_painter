@@ -19,6 +19,7 @@ class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
 
   final VoidCallback saveToClipboard;
+  final ScreenMaths maths;
 
   double get height => maths.height;
 
@@ -31,7 +32,8 @@ class HexagonButtonBar extends StatelessWidget {
   double get y => maths.y;
 
   double get gap => maths.gap;
-  final ScreenMaths maths;
+
+  bool get orient => maths.orient;
 
   const HexagonButtonBar({
     Key? key,
@@ -43,7 +45,6 @@ class HexagonButtonBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
-    final bool orient = screen.height < screen.width;
 
     final basicButtonInfo = [
       BasicButtonInfo(
@@ -96,18 +97,18 @@ class HexagonButtonBar extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            _buildGestureModeButton(0, context, orient),
+            _buildGestureModeButton(0, context),
             for (int i = 1; i < GestureMode.values.length; ++i)
-              _buildGestureModeButton(i, context, orient),
+              _buildGestureModeButton(i, context),
             for (int i = 0; i < basicButtonInfo.length; ++i)
-              _buildBasicButton(i, basicButtonInfo, context, orient),
+              _buildBasicButton(i, basicButtonInfo, context),
           ],
         ),
       ),
     );
   }
 
-  Offset _getGestureModeButtonOffset(int i, bool orient) {
+  Offset _getGestureModeButtonOffset(int i) {
     final double w = W * radius;
 
     if (orient) {
@@ -119,15 +120,15 @@ class HexagonButtonBar extends StatelessWidget {
     return Offset(x * (i + 0.5), y);
   }
 
-  Offset _getBasicButtonOffset(int i, bool orient) =>
-      _getGestureModeButtonOffset(i + GestureMode.values.length, orient);
+  Offset _getBasicButtonOffset(int i) =>
+      _getGestureModeButtonOffset(i + GestureMode.values.length);
 
-  Widget _buildGestureModeButton(int i, BuildContext context, bool orient) {
+  Widget _buildGestureModeButton(int i, BuildContext context) {
     if (i == 0) {
       return HexagonButton(
         icon: Icons.zoom_in_rounded,
         gestureMode: GestureMode.panZoom,
-        center: _getGestureModeButtonOffset(i, orient),
+        center: _getGestureModeButtonOffset(i),
         radius: radius,
       );
     } else {
@@ -157,7 +158,7 @@ class HexagonButtonBar extends StatelessWidget {
         iconOffset: const Offset(W, H) * -radius * 0.5,
         unitChild: gestureModeButtonInfo[i][1] as Widget,
         gestureMode: GestureMode.values[i],
-        center: _getGestureModeButtonOffset(i, orient),
+        center: _getGestureModeButtonOffset(i),
         radius: radius,
         onPressed: i == 3
             ? () {
@@ -171,11 +172,7 @@ class HexagonButtonBar extends StatelessWidget {
   }
 
   Widget _buildBasicButton(
-    int i,
-    List<BasicButtonInfo> buttonInfos,
-    BuildContext context,
-    bool orient,
-  ) {
+      int i, List<BasicButtonInfo> buttonInfos, BuildContext context) {
     final BasicButtonInfo info = buttonInfos[i];
     final Offset extraOffset = orient ? info.orientOffset : info.offset;
 
@@ -183,7 +180,7 @@ class HexagonButtonBar extends StatelessWidget {
       enabled: info.enabled,
       icon: info.icon,
       onPressed: info.onPressed,
-      center: _getBasicButtonOffset(i, orient) + extraOffset,
+      center: _getBasicButtonOffset(i) + extraOffset,
       radius: radius - gap,
     );
   }
