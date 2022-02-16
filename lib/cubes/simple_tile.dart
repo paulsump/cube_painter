@@ -29,9 +29,7 @@ class SimpleTile extends StatelessWidget {
 }
 
 class _UnitTile extends StatelessWidget {
-  const _UnitTile({
-    Key? key,
-  }) : super(key: key);
+  const _UnitTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
@@ -51,8 +49,10 @@ class _Painter extends CustomPainter {
 final Paint _paintCache = Paint()
   ..shader = const LinearGradient(
     // from diamonds pic
-    colors: [Color(0xff2e8c86), Color(0xff2c778f)],
-    // colors: [green, blue],
+    // colors: [Color(0xff2e8c86), Color(0xff2c778f)],
+    // colors: [ blue,green],
+    // colors:colors,
+    colors: [Color(0xff5ebaa9), Color(0xff3faa98)],
     // quilt
     begin: Alignment.bottomCenter,
     end: Alignment.topCenter,
@@ -64,7 +64,7 @@ final Paint _paintCache = Paint()
 
 // const double dt = 0.1;
 // const double t = 0.5;
-// final colors= [getTweenBtoGColor(t - dt), getTweenBtoGColor(t + dt)];
+// final colors = [getTweenBtoGColor(t - dt), getTweenBtoGColor(t + dt)];
 
 // Paint _getGradientPaint(double t, Path path, PaintingStyle style) {
 //   return Paint()
