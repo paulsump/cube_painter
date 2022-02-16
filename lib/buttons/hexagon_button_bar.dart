@@ -86,14 +86,17 @@ class HexagonButtonBar extends StatelessWidget {
           color: backgroundColor,
           border: Border(top: borderSide, right: borderSide),
         ),
-        child: Stack(
-          children: [
-            _buildGestureModeButton(0, context),
-            for (int i = 1; i < GestureMode.values.length; ++i)
-              _buildGestureModeButton(i, context),
-            for (int i = 0; i < basicButtonInfo.length; ++i)
-              _buildBasicButton(i, basicButtonInfo, context),
-          ],
+        child: Transform.translate(
+          offset: Offset(0, maths.padY),
+          child: Stack(
+            children: [
+              _buildGestureModeButton(0, context),
+              for (int i = 1; i < GestureMode.values.length; ++i)
+                _buildGestureModeButton(i, context),
+              for (int i = 0; i < basicButtonInfo.length; ++i)
+                _buildBasicButton(i, basicButtonInfo, context),
+            ],
+          ),
         ),
       ),
     );

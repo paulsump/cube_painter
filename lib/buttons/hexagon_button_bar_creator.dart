@@ -23,6 +23,8 @@ class ScreenMaths {
   static const radiusFactor = 0.085;
   static const radiusFactorOrient = 0.093;
 
+  double padY = 0;
+
   ScreenMaths({required ScreenNotifier screen})
       : orient = screen.height < screen.width {
     if (orient) {
@@ -33,7 +35,8 @@ class ScreenMaths {
       width = screen.width / 8;
       height = screen.height;
     } else {
-      const double padY = 11;
+      padY = 11;
+      // TODO Might not need aspect - fix on iphone without it?
       radius = screen.height * radiusFactor * screen.aspect;
       offset = Offset(0, screen.height - 2 * radius - 2 * padY);
       width = screen.width;
