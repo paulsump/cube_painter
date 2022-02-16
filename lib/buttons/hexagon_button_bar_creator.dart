@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen.dart';
@@ -5,10 +7,9 @@ import 'package:cube_painter/transform/screen.dart';
 const noWarn = out;
 
 class ScreenMaths {
-  final ScreenNotifier screen;
-  final double height;
+  double height;
 
-  final double offsetY;
+  double offsetY;
 
   double get radius => height / 2;
 
@@ -20,11 +21,8 @@ class ScreenMaths {
 
   late bool orient;
 
-  ScreenMaths({
-    required this.screen,
-    required this.height,
-    required this.offsetY,
-  }) {
-    orient = screen.height < screen.width;
-  }
+  ScreenMaths({required ScreenNotifier screen})
+      : height = max(screen.width, screen.height) / 12,
+        offsetY = screen.height,
+        orient = screen.height < screen.width;
 }
