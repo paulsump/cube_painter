@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out, green];
 
-class SimpleTile extends StatelessWidget {
+class Tile extends StatelessWidget {
   final Offset bottom;
 
   final double scale;
 
-  const SimpleTile({
+  const Tile({
     Key? key,
     required this.bottom,
     required this.scale,

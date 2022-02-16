@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:cube_painter/cubes/simple_tile.dart';
+import 'package:cube_painter/cubes/tile.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -12,11 +12,11 @@ const noWarn = [
   getScreen,
   lerpDouble,
   positionToUnitOffset,
-  SimpleTile,
+  Tile,
 ];
 
 class Tiles {
-  final List<SimpleTile> tiles = [];
+  final List<Tile> tiles = [];
   double previousScreenHeight = 0;
 
   late void Function(VoidCallback fn) setState;
@@ -108,7 +108,7 @@ class Tiles {
         X -= centerX;
         Y -= centerY;
 
-        tiles.add(SimpleTile(
+        tiles.add(Tile(
           bottom: Offset(X, Y),
           scale: tileScale.toDouble(),
         ));
