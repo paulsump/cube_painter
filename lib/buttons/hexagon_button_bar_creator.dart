@@ -28,7 +28,7 @@ class ScreenMaths {
     if (orient) {
       radius = screen.width * radiusFactorOrient / screen.aspect;
       //todo set x for ios
-      offset = Offset(0, 0);
+      offset = Offset(-screen.safeArea.width, 0);
       //TODO FIX
       width = screen.width / 8;
       height = screen.height;
