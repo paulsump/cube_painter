@@ -70,8 +70,6 @@ class _PainterPageState extends State<PainterPage> {
         HexagonButtonBar(
           undoer: _cubes.undoer,
           saveToClipboard: _cubes.saveToClipboard,
-          offsetY: screen.height,
-          height: max(screen.width, screen.height) / 12,
           maths: ScreenMaths(
               screen: screen,
               height: max(screen.width, screen.height) / 12,

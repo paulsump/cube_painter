@@ -18,11 +18,13 @@ class ScreenMaths {
 
   double get gap => radius * 0.3;
 
+  late bool orient;
+
   ScreenMaths({
     required this.screen,
     required this.height,
     required this.offsetY,
   }) {
-    final bool orient = screen.height < screen.width;
+    orient = screen.height < screen.width;
   }
 }

@@ -19,26 +19,24 @@ class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
 
   final VoidCallback saveToClipboard;
-  final double height;
 
-  final double offsetY;
+  double get height => maths.height;
 
-  double get radius => height / 2;
+  double get offsetY => maths.offsetY;
 
-  double get x => 2 * radius * W;
+  double get radius => maths.radius;
 
-  double get y => 2 * radius * H;
+  double get x => maths.x;
 
-  double get gap => radius * 0.3;
+  double get y => maths.y;
+
+  double get gap => maths.gap;
   final ScreenMaths maths;
 
   const HexagonButtonBar({
     Key? key,
     required this.undoer,
     required this.saveToClipboard,
-    //TOOD CALC in build() from screen
-    required this.height,
-    required this.offsetY,
     required this.maths,
   }) : super(key: key);
 
