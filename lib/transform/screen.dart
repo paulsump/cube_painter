@@ -28,6 +28,8 @@ class ScreenNotifier extends ChangeNotifier {
   /// used as the origin for the transform
   Offset get center => _center;
 
+  double get aspect => width / height;
+
   void init(BuildContext context, BoxConstraints constraints) {
     final media = MediaQuery.of(context);
 
@@ -40,8 +42,8 @@ class ScreenNotifier extends ChangeNotifier {
     _size = Size(x, y - safeAreaHeight);
     _center = Offset(width, height) / 2;
 
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
-        notifyListeners();
-      });
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      notifyListeners();
+    });
   }
 }
