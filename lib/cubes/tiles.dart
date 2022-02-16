@@ -83,18 +83,7 @@ final Paint _paintCache = Paint()
 //     );
 
 class Tiles extends StatelessWidget {
-  // double previousScreenHeight = 0;
-
   const Tiles({Key? key}) : super(key: key);
-
-  // void rebuildIfReorient({
-  //   required double height,
-  // }) {
-  //   if (height != previousScreenHeight) {
-  //     rebuild();
-  //     previousScreenHeight = height;
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

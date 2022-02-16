@@ -42,8 +42,6 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
 
-    // _tiles.rebuildIfReorient(height: screen.height);
-
     return Stack(children: [
       UnitToScreen(
         child: Stack(
@@ -55,7 +53,7 @@ class _PainterPageState extends State<PainterPage> {
         ),
       ),
       GestureMode.panZoom == getGestureMode(context, listen: true)
-          ? PanZoomer(onPanZoomUpdate: () {})
+          ? const PanZoomer()
           : Brush(adoptCubes: _cubes.adopt),
       HexagonButtonBar(
         undoer: _cubes.undoer,
