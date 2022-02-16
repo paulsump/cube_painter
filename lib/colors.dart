@@ -7,8 +7,6 @@ Color getColor(Side side) {
       return const Color(0xffffd8d6); // Light
     case Side.t:
       return const Color(0xfff07f7e); // Medium
-// from https://blog.hunterlab.com/blog/color-measurement/understanding-color-harmony-can-help-enhance-consumer-perception-and-experience/
-//       return const Color(0xffee5d60); // Medium
     case Side.bl:
       return const Color(0xff543e3d); // Dark
   }
@@ -19,9 +17,6 @@ const Color top = Color(0xfff07f7e);
 const Color br = Color(0xffffd8d6);
 const Color bl = Color(0xff543e3d);
 
-// const Color top = Color(0xff7DBC8F);
-// const Color br = Color(0xffFFF869);
-// const Color bl = Color(0xff277284);
 Color getTweenBLtoTColor(double t) =>
     Color.lerp(getColor(Side.bl), getColor(Side.t), t)!;
 
