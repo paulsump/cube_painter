@@ -13,17 +13,17 @@ import 'package:provider/provider.dart';
 const noWarn = [out, Position];
 
 class Brush extends StatefulWidget {
-  final _cubes = <AnimCube>[];
+  final _animCubes = <AnimCube>[];
 
   final void Function(List<AnimCube> orphans) adoptCubes;
 
   Brush({Key? key, required this.adoptCubes}) : super(key: key);
 
   void _handOver() {
-    if (_cubes.isNotEmpty) {
-      final orphans = _cubes.toList();
+    if (_animCubes.isNotEmpty) {
+      final orphans = _animCubes.toList();
 
-      _cubes.clear();
+      _animCubes.clear();
       adoptCubes(orphans);
     }
   }
@@ -46,16 +46,11 @@ class BrushState extends State<Brush> {
           // HACK without this container,
           // onPanStart etc doesn't get called after cubes are added.
           Container(),
-          UnitToScreen(
-            child: Stack(children: widget._cubes),
-          ),
+          UnitToScreen(child: Stack(children: widget._animCubes)),
         ],
       ),
-      onPanStart: (details) {
-        brushMaths.startFrom(
-          screenToUnit(details.localPosition, context),
-        );
-      },
+      onPanStart: (details) =>
+          brushMaths.startFrom(screenToUnit(details.localPosition, context)),
       onPanUpdate: (details) {
         if (GestureMode.add == getGestureMode(context)) {
           _updateExtrude(details, context);
@@ -64,31 +59,24 @@ class BrushState extends State<Brush> {
           setState(() {});
         }
       },
-      onPanEnd: (details) {
-        widget._handOver();
-      },
+      onPanEnd: (details) => widget._handOver(),
       onTapDown: (details) {
         _replaceCube(details.localPosition, context);
         setState(() {});
       },
-      onTapUp: (details) {
-        widget._handOver();
-      },
+      onTapUp: (details) => widget._handOver(),
     );
   }
 
   void _replaceCube(Offset point, BuildContext context) {
-    final Position position =
-        brushMaths.getPosition(screenToUnit(point, context));
-
-    widget._cubes.clear();
+    widget._animCubes.clear();
     Crop crop = Crop.c;
 
     if (getGestureMode(context) == GestureMode.crop) {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
     }
 
-    _addCube(position, crop);
+    _addCube(brushMaths.getPosition(screenToUnit(point, context)), crop);
   }
 
   void _updateExtrude(details, BuildContext context) {
@@ -100,14 +88,14 @@ class BrushState extends State<Brush> {
       // using order provided by extruder
       // only add new cubes, deleting any old ones
 
-      var copy = widget._cubes.toList();
-      widget._cubes.clear();
+      var copy = widget._animCubes.toList();
+      widget._animCubes.clear();
 
       for (Position position in positions.list) {
         AnimCube? cube = _findAt(position, copy);
 
         if (cube != null) {
-          widget._cubes.add(cube);
+          widget._animCubes.add(cube);
         } else {
           _addCube(position, Crop.c);
         }
@@ -118,7 +106,7 @@ class BrushState extends State<Brush> {
   }
 
   void _addCube(Position center, Crop crop) {
-    widget._cubes.add(AnimCube(
+    widget._animCubes.add(AnimCube(
       key: UniqueKey(),
       info: CubeInfo(center: center, crop: crop),
       start: 0.0,
