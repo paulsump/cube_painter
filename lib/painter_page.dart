@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
+import 'package:cube_painter/buttons/hexagon_button_bar_creator.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -71,6 +72,10 @@ class _PainterPageState extends State<PainterPage> {
           saveToClipboard: _cubes.saveToClipboard,
           offsetY: screen.height,
           height: max(screen.width, screen.height) / 12,
+          maths: ScreenMaths(
+              screen: screen,
+              height: max(screen.width, screen.height) / 12,
+              offsetY: screen.height),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/hexagon_button_bar_creator.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/crop_unit_cube.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
@@ -29,6 +30,7 @@ class HexagonButtonBar extends StatelessWidget {
   double get y => 2 * radius * H;
 
   double get gap => radius * 0.3;
+  final ScreenMaths maths;
 
   const HexagonButtonBar({
     Key? key,
@@ -37,6 +39,7 @@ class HexagonButtonBar extends StatelessWidget {
     //TOOD CALC in build() from screen
     required this.height,
     required this.offsetY,
+    required this.maths,
   }) : super(key: key);
 
   @override
@@ -108,8 +111,10 @@ class HexagonButtonBar extends StatelessWidget {
 
   Offset _getGestureModeButtonOffset(int i, bool orient) {
     final double w = W * radius;
+
     if (orient) {
       final X = x * 1.1;
+
       final double Y = y * (i * 1.5 + 1);
       return i % 2 == 0 ? Offset(X - w, Y) : Offset(X, Y);
     }
