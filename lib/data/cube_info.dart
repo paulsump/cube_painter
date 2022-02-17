@@ -21,7 +21,11 @@ class CubeInfo {
 
   CubeInfo.fromJson(Map<String, dynamic> json)
       : center = Position.fromJson(json['center']),
-        crop = Crop.values[json['cropIndex']];
+        crop = json.containsKey('cropIndex')
+            ? Crop.values[json['cropIndex']]
+            : Crop.c;
 
-  Map<String, dynamic> toJson() => {'center': center, 'cropIndex': crop.index};
+  Map<String, dynamic> toJson() => Crop.c == crop
+      ? {'center': center}
+      : {'center': center, 'cropIndex': crop.index};
 }
