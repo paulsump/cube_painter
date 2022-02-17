@@ -39,7 +39,7 @@ class Cubes {
     context = context_;
 
     getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
-    undoer = Undoer(staticCubes, setState: setState);
+    undoer = Undoer(context, setState: setState);
   }
 
   /// once the brush has finished, it

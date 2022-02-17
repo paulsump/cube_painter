@@ -26,7 +26,6 @@ UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context,
 void addCubeInfo(CubeInfo info, BuildContext context) {
   final notifier = getCubeGroupNotifier(context);
   notifier.cubeGroup.cubes.add(info);
-  // notifier.notifyListeners();
 }
 
 /// The main store of the entire model.
