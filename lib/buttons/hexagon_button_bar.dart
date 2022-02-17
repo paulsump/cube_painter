@@ -70,7 +70,7 @@ class HexagonButtonBar extends StatelessWidget {
         icon: Icons.save_alt_sharp,
         onPressed: saveToClipboard,
         tip: 'Save the current group of cubes to the clipboard.',
-        offset: Offset(gap, 0),
+        offset: Offset(-1 * gap - radius * 0.1, 0),
         orientOffset: Offset(gap, 0),
       ),
     ];
@@ -194,7 +194,8 @@ class _ScreenMaths {
   late bool orient;
   late Offset offset;
 
-  static const radiusFactor = 0.085;
+  // static const radiusFactor = 0.085;
+  static const radiusFactor = 0.075;
   static const radiusFactorOrient = 0.093;
 
   late double padY;

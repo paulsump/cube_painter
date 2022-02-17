@@ -91,3 +91,4 @@ flutter:
   assets:
     - data/
     - data_test/
+    - data_towers/

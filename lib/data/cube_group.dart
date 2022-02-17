@@ -67,6 +67,8 @@ class CubeGroupNotifier extends ChangeNotifier {
       _filePaths.add(filePath);
     }
 
+    assert(_filePaths.isNotEmpty);
+
     _addCubes = addCubes;
     await _loadCubeGroup();
   }
