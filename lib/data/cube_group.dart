@@ -28,6 +28,11 @@ void addCubeInfo(CubeInfo info, BuildContext context) {
   notifier.cubeGroup.cubes.add(info);
 }
 
+void removeCubeInfo(CubeInfo info, BuildContext context) {
+  final notifier = getCubeGroupNotifier(context);
+  notifier.cubeGroup.cubes.remove(info);
+}
+
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.

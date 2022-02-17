@@ -26,7 +26,6 @@ class Cubes {
   late void Function(VoidCallback fn) setState;
 
   final List<AnimCube> animCubes = [];
-  final List<StaticCube> staticCubes = [];
 
   late Undoer undoer;
   late BuildContext context;
@@ -42,12 +41,21 @@ class Cubes {
     undoer = Undoer(context, setState: setState);
   }
 
+  CubeInfo? _getCubeInfoAt(Position position) {
+    for (final info in getCubeInfos(context)) {
+      if (position == info.center) {
+        return info;
+      }
+    }
+    return null;
+  }
+
   /// once the brush has finished, it
   /// yields ownership of it's cubes to this parent widget.
   /// which then creates a similar list
   /// If we are in add gestureMode
   /// the cubes will end up going
-  /// in the staticCube list once they've animated to full size.
+  /// in the cubeGroup once they've animated to full size.
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubes array once the
   /// anim is done.
@@ -56,13 +64,13 @@ class Cubes {
 
     if (erase) {
       for (final AnimCube cube in orphans) {
-        final StaticCube? staticCube = _getCubeAt(cube.fields.info.center);
+        final CubeInfo? cubeInfo = _getCubeInfoAt(cube.fields.info.center);
 
-        if (staticCube != null) {
+        if (cubeInfo != null) {
           assert(orphans.length == 1);
 
           undoer.save();
-          staticCubes.remove(staticCube);
+          removeCubeInfo(cubeInfo, context);
         }
       }
     } else {
@@ -72,7 +80,7 @@ class Cubes {
     for (final AnimCube cube in orphans) {
       if (cube.fields.scale == (erase ? 0 : 1)) {
         if (!erase) {
-          staticCubes.add(StaticCube(info: cube.fields.info));
+          addCubeInfo(cube.fields.info, context);
         }
       } else {
         animCubes.add(AnimCube(
@@ -104,19 +112,10 @@ class Cubes {
     return _removeSelf(old);
   }
 
-  StaticCube? _getCubeAt(Position position) {
-    for (final cube in staticCubes) {
-      if (position == cube.info.center) {
-        return cube;
-      }
-    }
-    return null;
-  }
 
   void _addCubes() {
     List<CubeInfo> cubeInfos = getCubeInfos(context);
 
-    staticCubes.clear();
     animCubes.clear();
 
     for (int i = 0; i < cubeInfos.length; ++i) {
@@ -137,9 +136,6 @@ class Cubes {
 
   void saveToClipboard() {
     final notifier = getCubeGroupNotifier(context);
-
-    notifier.cubeGroup = CubeGroup(
-        List.generate(staticCubes.length, (i) => staticCubes[i].info));
 
     Clipboard.setData(ClipboardData(text: notifier.json));
   }
