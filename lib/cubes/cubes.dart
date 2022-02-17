@@ -57,7 +57,7 @@ class Cubes {
 
     if (erase) {
       for (final AnimCube cube in orphans) {
-        final StaticCube? staticCube = _getCubeAt(cube.data.info.center);
+        final StaticCube? staticCube = _getCubeAt(cube.fields.info.center);
 
         if (staticCube != null) {
           assert(orphans.length == 1);
@@ -71,16 +71,16 @@ class Cubes {
     }
 
     for (final AnimCube cube in orphans) {
-      if (cube.data.scale == (erase ? 0 : 1)) {
+      if (cube.fields.scale == (erase ? 0 : 1)) {
         if (!erase) {
-          staticCubes.add(StaticCube(info: cube.data.info));
+          staticCubes.add(StaticCube(info: cube.fields.info));
         }
       } else {
         animCubes.add(AnimCube(
           key: UniqueKey(),
-          data: Data(
-            info: cube.data.info,
-            start: cube.data.scale,
+          fields: Fields(
+            info: cube.fields.info,
+            start: cube.fields.scale,
             end: erase ? 0.0 : 1.0,
             whenComplete:
                 erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
@@ -98,7 +98,7 @@ class Cubes {
   }
 
   dynamic _convertToStaticCubeAndRemoveSelf(AnimCube old) {
-    staticCubes.add(StaticCube(info: old.data.info));
+    staticCubes.add(StaticCube(info: old.fields.info));
     return _removeSelf(old);
   }
 
@@ -120,7 +120,7 @@ class Cubes {
     for (int i = 0; i < cubeInfos.length; ++i) {
       animCubes.add(AnimCube(
         key: UniqueKey(),
-        data: Data(
+        fields: Fields(
           info: cubeInfos[i],
           start: unitPingPong((i % 6) / 6) / 2,
           end: 1.0,
