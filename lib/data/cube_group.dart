@@ -49,7 +49,8 @@ class CubeGroup {
 
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
-  CubeGroup _cubeGroup = CubeGroup([]);
+  // set to initial empty list for when it's used before load is complete
+  CubeGroup _cubeGroup = const CubeGroup([]);
 
   late VoidCallback _addCubes;
   final _filePaths = <String>[];

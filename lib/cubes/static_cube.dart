@@ -23,13 +23,10 @@ class StaticCubes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final cubeInfos = getCubeInfos(context, listen: true);
-
     return UnitToScreen(
       child: Stack(
         children: [
           ...staticCubes,
-          // for (CubeInfo info in cubeInfos) StaticCube(info: info),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/cubes/cubes.dart';
+import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -24,6 +25,7 @@ const noWarn = [
   Tiles,
   HexagonButtonBar,
   getCubeInfos,
+  StaticCubes,
 ];
 
 class PainterPage extends StatefulWidget {
@@ -45,15 +47,15 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
-    // final cubeInfos = getCubeInfos(context, listen: true);
+    final cubeInfos = getCubeInfos(context, listen: true);
 
     return Stack(children: [
-      // StaticCubes(cubeInfos:cubeInfos),
+      StaticCubes(cubeInfos: cubeInfos),
       UnitToScreen(
         child: Stack(
           children: [
             // const Tiles(),
-            ..._cubes.staticCubes,
+            // ..._cubes.staticCubes,
             ..._cubes.animCubes,
           ],
         ),
