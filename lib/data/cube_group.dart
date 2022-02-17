@@ -23,6 +23,12 @@ UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context,
   return UnmodifiableListView(_getCubeGroup(context, listen: listen).cubes);
 }
 
+void addCubeInfo(CubeInfo info, BuildContext context) {
+  final notifier = getCubeGroupNotifier(context);
+  notifier.cubeGroup.cubes.add(info);
+  // notifier.notifyListeners();
+}
+
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.

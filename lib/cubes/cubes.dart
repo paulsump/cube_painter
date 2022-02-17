@@ -80,7 +80,8 @@ class Cubes {
           fields: Fields(
             info: cube.fields.info,
             start: cube.fields.scale,
-            end: erase ? 0.0 : 1.0,
+            // end: erase ? 0.0 : 1.0,
+            end: erase ? 0.0 : 0.7,
             whenComplete:
                 erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
             duration: 222,
@@ -97,7 +98,9 @@ class Cubes {
   }
 
   dynamic _convertToStaticCubeAndRemoveSelf(AnimCube old) {
-    staticCubes.add(StaticCube(info: old.fields.info));
+    // add info to cubegroupnotifier here instead.
+    addCubeInfo(old.fields.info, context);
+    // staticCubes.add(StaticCube(info: old.fields.info));
     return _removeSelf(old);
   }
 
@@ -122,7 +125,8 @@ class Cubes {
         fields: Fields(
           info: cubeInfos[i],
           start: unitPingPong((i % 6) / 6) / 2,
-          end: 1.0,
+          // end: 1.0,
+          end: 0.5,
           whenComplete: _convertToStaticCubeAndRemoveSelf,
         ),
       ));
