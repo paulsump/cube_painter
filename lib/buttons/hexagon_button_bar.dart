@@ -197,25 +197,29 @@ class _ScreenMaths {
   static const radiusFactor = 0.085;
   static const radiusFactorOrient = 0.093;
 
-  double padY = 0;
+  late double padY;
 
-  _ScreenMaths({required ScreenNotifier screen})
-      : orient = screen.height < screen.width {
+  _ScreenMaths({required ScreenNotifier screen}) {
+    final double w = screen.width;
+    final double h = screen.height;
+
+    orient = h < w;
     if (orient) {
-      radius = screen.width * radiusFactorOrient / screen.aspect;
+      padY = 0;
+      radius = w * radiusFactorOrient / screen.aspect;
       //todo set x for ios
       offset = Offset(-screen.safeArea.width, 0);
       //TODO FIX
-      width = screen.width / 8;
-      height = screen.height;
+      width = w / 8;
+      height = h;
     } else {
       padY = 11;
       // TODO Might not need aspect - fix on iphone without it?
-      radius = screen.height * radiusFactor * screen.aspect;
+      radius = h * radiusFactor * screen.aspect;
       offset = Offset(0, screen.height - 2 * radius - 2 * padY);
-      width = screen.width;
+      width = w;
       //todo reduce
-      height = screen.width;
+      height = w;
     }
   }
 }
