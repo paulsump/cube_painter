@@ -42,10 +42,11 @@ class Fields {
   double get scale => _scale;
   double _scale = 1;
 
-  //TODO
+  //TODO pass Fields
   final dynamic Function(AnimCube old)? whenComplete;
 
-  // final dynamic Function(Data old)? whenComplete;
+  // final dynamic Function(Fields old)? whenComplete;
+
   final int duration;
 
   Fields({
@@ -96,7 +97,7 @@ class _AnimCubeState extends State<AnimCube>
         //TODO PASS data into whenComplete()
         _controller
             .forward()
-            //TODO
+        //TODO pass Fields
             .whenComplete(widget.fields.whenComplete?.call(widget));
         // .whenComplete(widget.data.whenComplete?.call(widget.data));
       }
