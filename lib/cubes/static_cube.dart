@@ -13,16 +13,16 @@ import 'package:flutter/material.dart';
 const noWarn = [out, UnmodifiableListView, getCubeInfos];
 
 class StaticCubes extends StatelessWidget {
-  final List<StaticCube> staticCubes;
+  final List<StaticCube> _cubes;
 
   StaticCubes({Key? key, required UnmodifiableListView<CubeInfo> cubeInfos})
-      : staticCubes = List.generate(
+      : _cubes = List.generate(
             cubeInfos.length, (i) => StaticCube(info: cubeInfos[i]));
 
   @override
   Widget build(BuildContext context) {
     return UnitToScreen(
-      child: Stack(children: staticCubes),
+      child: Stack(children: _cubes),
     );
   }
 }
