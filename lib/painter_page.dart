@@ -55,8 +55,8 @@ class _PainterPageState extends State<PainterPage> {
       UnitToScreen(
         child: Stack(
           children: [
-            // const Tiles(),
-            // ..._cubes.staticCubes,
+            const Tiles(),
+            ..._cubes.staticCubes,
             ..._cubes.animCubes,
           ],
         ),
@@ -64,11 +64,11 @@ class _PainterPageState extends State<PainterPage> {
       GestureMode.panZoom == getGestureMode(context, listen: true)
           ? const PanZoomer()
           : Brush(adoptCubes: _cubes.adopt),
-      // HexagonButtonBar(
-      //   undoer: _cubes.undoer,
-      //   saveToClipboard: _cubes.saveToClipboard,
-      //   screen: screen,
-      // ),
+      HexagonButtonBar(
+        undoer: _cubes.undoer,
+        saveToClipboard: _cubes.saveToClipboard,
+        screen: screen,
+      ),
     ]);
   }
 }

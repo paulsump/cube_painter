@@ -12,7 +12,8 @@ import '../unit_ping_pong.dart';
 
 const noWarn = [out, Crop];
 
-class AnimCube extends StatefulWidget {
+// TODO rename to AnimCubeInfo
+class Data {
   final CubeInfo info;
 
   final double start;
@@ -20,31 +21,42 @@ class AnimCube extends StatefulWidget {
 
   final bool pingPong;
 
-  /// This is bad because it's set by the state,
-  /// and also  mean this class can't be const
-  /// and also causes the warning about
-  /// non finals on an @immutable
-  double scale = 1;
+  double get scale => _scale;
+  double _scale = 1;
 
   final dynamic Function(AnimCube old)? whenComplete;
-  final Widget cube;
-
-  final Offset offset;
   final int duration;
 
-  AnimCube({
-    Key? key,
+  Data({
     required this.info,
     required this.start,
     required this.end,
     this.pingPong = false,
     this.whenComplete,
     this.duration = 800,
-  })
-      : cube = info.crop == Crop.c
+  });
+}
+
+class AnimCube extends StatefulWidget {
+  /// This is bad because it's set by the state,
+  /// and also  mean this class can't be const
+  /// and also causes the warning about
+  /// non finals on an @immutable
+  // double get scale => _scale;
+  // double _scale = 1;
+  final Data data;
+
+  final Widget cube;
+
+  final Offset offset;
+
+  AnimCube({
+    Key? key,
+    required this.data,
+  })  : cube = data.info.crop == Crop.c
             ? const FullUnitCube()
-            : CropUnitCube(crop: info.crop),
-        offset = positionToUnitOffset(info.center),
+            : CropUnitCube(crop: data.info.crop),
+        offset = positionToUnitOffset(data.info.center),
         super(key: key);
 
   @override
@@ -58,15 +70,18 @@ class _AnimCubeState extends State<AnimCube>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: Duration(milliseconds: widget.duration),
+      duration: Duration(milliseconds: widget.data.duration),
       vsync: this,
     );
 
-    if (widget.start != widget.end) {
-      if (widget.pingPong) {
+    if (widget.data.start != widget.data.end) {
+      if (widget.data.pingPong) {
         _controller.repeat();
       } else {
-        _controller.forward().whenComplete(widget.whenComplete?.call(widget));
+        //TODO PASS data into whenComplete()
+        _controller
+            .forward()
+            .whenComplete(widget.data.whenComplete?.call(widget));
       }
     }
     super.initState();
@@ -83,14 +98,14 @@ class _AnimCubeState extends State<AnimCube>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        widget.scale = _scale();
+        widget.data._scale = _scale();
 
         return Stack(
           children: [
             Transform.translate(
               offset: widget.offset,
               child: Transform.scale(
-                scale: widget.scale,
+                scale: widget.data._scale,
                 child: widget.cube,
               ),
             ),
@@ -101,8 +116,10 @@ class _AnimCubeState extends State<AnimCube>
   }
 
   double _scale() => lerpDouble(
-    widget.start,
-        widget.end,
-        widget.pingPong ? unitPingPong(_controller.value) : _controller.value,
+        widget.data.start,
+        widget.data.end,
+        widget.data.pingPong
+            ? unitPingPong(_controller.value)
+            : _controller.value,
       )!;
 }

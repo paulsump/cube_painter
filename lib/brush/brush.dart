@@ -106,18 +106,19 @@ class BrushState extends State<Brush> {
 
   void _addCube(Position center, Crop crop) {
     widget._animCubes.add(AnimCube(
-      key: UniqueKey(),
-      info: CubeInfo(center: center, crop: crop),
-      start: 0.0,
-      end: getGestureMode(context) == GestureMode.add ? 1.0 : 3.0,
-      pingPong: true,
-    ));
+        key: UniqueKey(),
+        data: Data(
+          info: CubeInfo(center: center, crop: crop),
+          start: 0.0,
+          end: getGestureMode(context) == GestureMode.add ? 1.0 : 3.0,
+          pingPong: true,
+        )));
   }
 }
 
 AnimCube? _findAt(Position position, List<AnimCube> list) {
   for (final cube in list) {
-    if (position == cube.info.center) {
+    if (position == cube.data.info.center) {
       return cube;
     }
   }
