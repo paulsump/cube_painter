@@ -20,7 +20,8 @@ class CubeInfo {
   String toString() => '$center,$crop';
 
   CubeInfo.fromJson(Map<String, dynamic> json)
-      : center = Position.fromJson(json['center']),
+      //HACK position for old files
+      : center = Position.fromJson(json['center']) - Position(9, 19),
         crop = json.containsKey('cropIndex')
             ? Crop.values[json['cropIndex']]
             : Crop.c;

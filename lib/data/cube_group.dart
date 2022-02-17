@@ -81,6 +81,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     final map = await Assets.loadJson(_filePaths[_currentIndex]);
 
     _cubeGroup = CubeGroup.fromJson(map);
+
+    // Clipboard.setData(ClipboardData(text: json));
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
     _addCubes();

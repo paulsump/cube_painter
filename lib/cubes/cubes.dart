@@ -38,8 +38,7 @@ class Cubes {
     setState = setState_;
     context = context_;
 
-    getCubeGroupNotifier(context)
-        .init(folderPath: 'data_towers', addCubes: _addCubes);
+    getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
     undoer = Undoer(staticCubes, setState: setState);
   }
 
