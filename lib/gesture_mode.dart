@@ -8,7 +8,7 @@ GestureMode getGestureMode(BuildContext context, {bool listen = false}) {
 }
 
 class GestureModeNotifier extends ChangeNotifier {
-  var _mode = GestureMode.add;
+  var _mode = GestureMode.panZoom;
 
   get mode => _mode;
 
