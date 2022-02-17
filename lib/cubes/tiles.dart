@@ -8,12 +8,86 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out, green];
 
-class Tile extends StatelessWidget {
+class Tiles extends StatelessWidget {
+  const Tiles({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final screen = getScreen(context, listen: true);
+    final double zoomScale = getZoomScale(context);
+
+    final Offset panOffset = getPanOffset(context, listen: true) / zoomScale;
+    final int tileScale = zoomScale > 50
+        ? 1
+        : zoomScale > 30
+            ? 2
+            : 3;
+
+    final double w = tileScale * W;
+    double panX = panOffset.dx;
+    panX -= panX % w;
+
+    if ((panX / w) % 2 != 0) {
+      panX -= w;
+    }
+
+    final double h = tileScale * H;
+    double panY = panOffset.dy;
+    panY -= panY % h;
+
+    if ((panY / h) % 2 != 0) {
+      panY -= h;
+    }
+
+    final Offset center = screen.center / zoomScale;
+
+    double centerX = center.dx;
+    centerX -= centerX % w;
+
+    if ((centerX / w) % 2 != 0) {
+      centerX -= w;
+    }
+
+    double centerY = center.dy;
+    centerY -= centerY % h;
+
+    if ((centerY / h) % 2 != 0) {
+      centerY -= h;
+    }
+
+    final int nx = screen.width ~/ zoomScale;
+    final int ny = screen.height ~/ zoomScale;
+
+    int padX = 6;
+    int padY = 5;
+
+    if (zoomScale < 44) {
+      padX += 2 * tileScale;
+      padY += 1 * tileScale;
+    }
+
+    return Stack(children: [
+      for (int x = -padX; x < nx + padX; x += tileScale)
+        for (int y = -padY; y < ny + padY; y += tileScale)
+          _Tile(
+            bottom: Offset(
+                W * x.toDouble() - panX - centerX,
+                (x % (2 * tileScale) == 0 ? 0 : tileScale * H) +
+                    y.toDouble() -
+                    panY -
+                    centerY),
+            scale: tileScale.toDouble(),
+          ),
+    ]);
+  }
+}
+
+class _Tile extends StatelessWidget {
   final Offset bottom;
 
   final double scale;
 
-  const Tile({
+  const _Tile({
     Key? key,
     required this.bottom,
     required this.scale,
@@ -81,77 +155,3 @@ final Paint _paintCache = Paint()
 //       begin: Alignment.topCenter,
 //       end: Alignment.bottomCenter,
 //     );
-
-class Tiles extends StatelessWidget {
-  const Tiles({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final screen = getScreen(context, listen: true);
-    final double zoomScale = getZoomScale(context);
-
-    final Offset panOffset = getPanOffset(context, listen: true) / zoomScale;
-    final int tileScale = zoomScale > 50
-        ? 1
-        : zoomScale > 30
-            ? 2
-            : 3;
-
-    final double w = tileScale * W;
-    double panX = panOffset.dx;
-    panX -= panX % w;
-
-    if ((panX / w) % 2 != 0) {
-      panX -= w;
-    }
-
-    final double h = tileScale * H;
-    double panY = panOffset.dy;
-    panY -= panY % h;
-
-    if ((panY / h) % 2 != 0) {
-      panY -= h;
-    }
-
-    final Offset center = screen.center / zoomScale;
-
-    double centerX = center.dx;
-    centerX -= centerX % w;
-
-    if ((centerX / w) % 2 != 0) {
-      centerX -= w;
-    }
-
-    double centerY = center.dy;
-    centerY -= centerY % h;
-
-    if ((centerY / h) % 2 != 0) {
-      centerY -= h;
-    }
-
-    final int nx = screen.width ~/ zoomScale;
-    final int ny = screen.height ~/ zoomScale;
-
-    int padX = 6;
-    int padY = 5;
-
-    if (zoomScale < 44) {
-      padX += 2 * tileScale;
-      padY += 1 * tileScale;
-    }
-
-    return Stack(children: [
-      for (int x = -padX; x < nx + padX; x += tileScale)
-        for (int y = -padY; y < ny + padY; y += tileScale)
-          Tile(
-            bottom: Offset(
-                W * x.toDouble() - panX - centerX,
-                (x % (2 * tileScale) == 0 ? 0 : tileScale * H) +
-                    y.toDouble() -
-                    panY -
-                    centerY),
-            scale: tileScale.toDouble(),
-          ),
-    ]);
-  }
-}
