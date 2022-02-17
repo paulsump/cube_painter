@@ -9,16 +9,18 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-CubeGroupNotifier getCubeGroupNotifier(BuildContext context) {
-  return Provider.of<CubeGroupNotifier>(context, listen: false);
+CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
+    {bool listen = false}) {
+  return Provider.of<CubeGroupNotifier>(context, listen: listen);
 }
 
-CubeGroup _getCubeGroup(BuildContext context) {
-  return getCubeGroupNotifier(context).cubeGroup;
+CubeGroup _getCubeGroup(BuildContext context, {bool listen = false}) {
+  return getCubeGroupNotifier(context, listen: listen).cubeGroup;
 }
 
-UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context) {
-  return UnmodifiableListView(_getCubeGroup(context).cubes);
+UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context,
+    {bool listen = false}) {
+  return UnmodifiableListView(_getCubeGroup(context, listen: listen).cubes);
 }
 
 /// The main store of the entire model.
@@ -47,12 +49,12 @@ class CubeGroup {
 
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
-  late CubeGroup _cubeGroup;
+  CubeGroup _cubeGroup = CubeGroup([]);
 
   late VoidCallback _addCubes;
   final _filePaths = <String>[];
 
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   CubeGroup get cubeGroup => _cubeGroup;
 
@@ -82,6 +84,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     // TODO iff finally:
     _addCubes();
     // TODO clear undo (make undoer a notifier and notifyListeners for button enabled.
+    notifyListeners();
   }
 
   String get json => jsonEncode(cubeGroup);

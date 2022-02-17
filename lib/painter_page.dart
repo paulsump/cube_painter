@@ -4,6 +4,7 @@ import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/tiles.dart';
+import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
@@ -20,6 +21,9 @@ const noWarn = [
   PanZoomer,
   lerpDouble,
   positionToUnitOffset,
+  Tiles,
+  HexagonButtonBar,
+  getCubeInfos,
 ];
 
 class PainterPage extends StatefulWidget {
@@ -41,12 +45,14 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
+    // final cubeInfos = getCubeInfos(context, listen: true);
 
     return Stack(children: [
+      // StaticCubes(cubeInfos:cubeInfos),
       UnitToScreen(
         child: Stack(
           children: [
-            const Tiles(),
+            // const Tiles(),
             ..._cubes.staticCubes,
             ..._cubes.animCubes,
           ],
@@ -55,11 +61,11 @@ class _PainterPageState extends State<PainterPage> {
       GestureMode.panZoom == getGestureMode(context, listen: true)
           ? const PanZoomer()
           : Brush(adoptCubes: _cubes.adopt),
-      HexagonButtonBar(
-        undoer: _cubes.undoer,
-        saveToClipboard: _cubes.saveToClipboard,
-        screen: screen,
-      ),
+      // HexagonButtonBar(
+      //   undoer: _cubes.undoer,
+      //   saveToClipboard: _cubes.saveToClipboard,
+      //   screen: screen,
+      // ),
     ]);
   }
 }
