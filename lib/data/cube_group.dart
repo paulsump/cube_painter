@@ -18,30 +18,31 @@ CubeGroup _getCubeGroup(BuildContext context) {
 }
 
 UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context) {
-  return UnmodifiableListView(_getCubeGroup(context).list);
+  return UnmodifiableListView(_getCubeGroup(context).cubes);
 }
 
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
 class CubeGroup {
-  final List<CubeInfo> list;
+  final List<CubeInfo> cubes;
 
-  const CubeGroup(this.list);
+  const CubeGroup(this.cubes);
 
   CubeGroup.fromJson(Map<String, dynamic> json)
-      : list = _listFromJson(json).toList();
+      : cubes = _listFromJson(json).toList();
 
   @override
-  String toString() => '$list';
+  String toString() => '$cubes';
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
-    for (final cubeInfoObject in json['list']) {
+    for (final cubeInfoObject
+        in json[json.containsKey('cubes') ? 'cubes' : 'list']) {
       yield CubeInfo.fromJson(cubeInfoObject);
     }
   }
 
-  Map<String, dynamic> toJson() => {'list': list};
+  Map<String, dynamic> toJson() => {'cubes': cubes};
 }
 
 /// access to the main store of the entire model
