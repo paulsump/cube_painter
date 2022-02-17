@@ -51,7 +51,6 @@ class _PainterPageState extends State<PainterPage> {
 
     return Stack(children: [
       StaticCubes(cubeInfos: cubeInfos),
-      // const StaticCubes(),
       UnitToScreen(
         child: Stack(
           children: [
