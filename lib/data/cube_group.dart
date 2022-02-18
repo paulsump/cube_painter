@@ -23,11 +23,6 @@ UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context,
   return UnmodifiableListView(_getCubeGroup(context, listen: listen).cubes);
 }
 
-void addCubeInfo(CubeInfo info, BuildContext context) {
-  final notifier = getCubeGroupNotifier(context);
-  notifier.cubeGroup.cubes.add(info);
-}
-
 void removeCubeInfo(CubeInfo info, BuildContext context) {
   final notifier = getCubeGroupNotifier(context);
   notifier.cubeGroup.cubes.remove(info);
@@ -107,5 +102,10 @@ class CubeGroupNotifier extends ChangeNotifier {
     _currentIndex %= _filePaths.length;
 
     _loadCubeGroup();
+  }
+
+  void addCubeInfo(CubeInfo info) {
+    cubeGroup.cubes.add(info);
+    notifyListeners();
   }
 }
