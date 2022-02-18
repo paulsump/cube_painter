@@ -20,7 +20,7 @@ class BrushMaths {
   late Position? _vector;
   late bool _reverseOrder;
 
-  void startFrom(Offset startUnit) {
+  void calcStartPosition(Offset startUnit) {
     _vector = null;
 
     _startUnit = startUnit;
@@ -30,7 +30,7 @@ class BrushMaths {
         _startPositionOffset.dx.round(), _startPositionOffset.dy.round());
   }
 
-  Positions extrudeTo(Offset endUnit) {
+  Positions calcPositionsUpToEndPosition(Offset endUnit) {
     final vectorAndReverse =
         _calculateVectorAndReverseOrder(endUnit - _startUnit);
 
@@ -58,7 +58,7 @@ class BrushMaths {
   }
 
   Position getPosition(Offset unitOffset) {
-    startFrom(unitOffset);
+    calcStartPosition(unitOffset);
 
     return _startPosition;
   }

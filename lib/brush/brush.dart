@@ -53,7 +53,8 @@ class BrushState extends State<Brush> {
       onPanStart: (details) {
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
-          brushMaths.startFrom(screenToUnit(details.localPosition, context));
+          brushMaths
+              .calcStartPosition(screenToUnit(details.localPosition, context));
         }
       },
       onPanUpdate: (details) {
@@ -92,8 +93,8 @@ class BrushState extends State<Brush> {
   }
 
   void _updateExtrude(details, BuildContext context) {
-    final Positions positions =
-        brushMaths.extrudeTo(screenToUnit(details.localPosition, context));
+    final Positions positions = brushMaths.calcPositionsUpToEndPosition(
+        screenToUnit(details.localPosition, context));
 
     if (previousPositions != positions) {
       // using order provided by extruder
