@@ -6,12 +6,12 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
-/// the maths for extruding blocks
+/// the maths for extruding blocks of cubes
 class BrushMaths {
-  /// dragged from point in grid space
-  late Offset _fromUnit;
-  late Offset _fromPositionOffset;
-  late Position _fromPosition;
+  /// dragged start point in grid space
+  late Offset _startUnit;
+  late Offset _startPositionOffset;
+  late Position _startPosition;
 
   /// scale the drag vector to get the correct length
   int _distance = 0;
@@ -20,24 +20,25 @@ class BrushMaths {
   late Position? _vector;
   late bool _reverseOrder;
 
-  void startFrom(Offset fromUnit) {
+  void startFrom(Offset startUnit) {
     _vector = null;
 
-    _fromUnit = fromUnit;
-    _fromPositionOffset = unitOffsetToPositionOffset(fromUnit);
+    _startUnit = startUnit;
+    _startPositionOffset = unitOffsetToPositionOffset(startUnit);
 
-    _fromPosition = Position(
-        _fromPositionOffset.dx.round(), _fromPositionOffset.dy.round());
+    _startPosition = Position(
+        _startPositionOffset.dx.round(), _startPositionOffset.dy.round());
   }
 
-  Positions extrudeTo(Offset toUnit) {
-    final vecAndReverse = _calculateVectorAndReverseOrder(toUnit - _fromUnit);
+  Positions extrudeTo(Offset endUnit) {
+    final vectorAndReverse =
+        _calculateVectorAndReverseOrder(endUnit - _startUnit);
 
-    _vector = vecAndReverse[0];
-    _reverseOrder = vecAndReverse[1];
+    _vector = vectorAndReverse[0];
+    _reverseOrder = vectorAndReverse[1];
 
     final Offset gridVector =
-        unitOffsetToPositionOffset(toUnit) - _fromPositionOffset;
+        unitOffsetToPositionOffset(endUnit) - _startPositionOffset;
 
     double distance = gridVector.distance;
 
@@ -52,14 +53,14 @@ class BrushMaths {
         // _reverseOrder ? _distance + 1 : _distance,
         _distance,
         (i) =>
-        _fromPosition +
+        _startPosition +
             _vector! * (_reverseOrder ? i - _distance + 1 : i)));
   }
 
   Position getPosition(Offset unitOffset) {
     startFrom(unitOffset);
 
-    return _fromPosition;
+    return _startPosition;
   }
 }
 
