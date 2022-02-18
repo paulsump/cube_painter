@@ -203,7 +203,8 @@ class _ScreenMaths {
   static const radiusFactor = 0.075;
   static const radiusFactorOrient = 0.093;
 
-  late final Offset pad;
+  //TODO const pad
+  // late final Offset pad;
   late final double padX;
   late final double padY;
 

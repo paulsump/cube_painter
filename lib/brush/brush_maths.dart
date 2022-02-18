@@ -40,6 +40,7 @@ class BrushMaths {
         unitOffsetToPositionOffset(toUnit) - _fromPositionOffset;
 
     double distance = gridVector.distance;
+
     if (_vector!.x == _vector!.y) {
       // for Position(1,1) and Position(-1,-1) are longer vectors than (1,0) etc
       const root2 = 1.4142135623730950;
@@ -47,14 +48,10 @@ class BrushMaths {
     }
 
     _distance = distance.round();
-    var positions = Positions();
-
-    for (int i = 0; i < _distance; ++i) {
-      final int d = _reverseOrder ? i - _distance : i;
-
-      positions.list.add(_roundedFromGrid + _vector! * d);
-    }
-    return positions;
+    return Positions(List.generate(
+        _distance,
+        (i) =>
+            _roundedFromGrid + _vector! * (_reverseOrder ? i - _distance : i)));
   }
 
   Position getPosition(Offset unitOffset) {

@@ -7,7 +7,11 @@ const noWarn = out;
 
 /// for passing around cube positions
 class Positions {
-  final list = <Position>[];
+  final List<Position> list;
+
+  static const Positions empty = Positions(<Position>[]);
+
+  const Positions(this.list);
 
   @override
   bool operator ==(Object other) {

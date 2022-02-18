@@ -35,7 +35,7 @@ class Brush extends StatefulWidget {
 class BrushState extends State<Brush> {
   final brushMaths = BrushMaths();
 
-  var previousPositions = Positions();
+  var previousPositions = Positions.empty;
 
   @override
   Widget build(BuildContext context) {
