@@ -21,9 +21,7 @@ class ScreenNotifier extends ChangeNotifier {
   Size? _size;
 
   Offset _center = Offset.zero;
-  Size _safeArea = Size.zero;
 
-  double _safeTop = 0;
   double _safeBottom = 0;
 
   EdgeInsets safe = const EdgeInsets.all(0.0);
@@ -37,9 +35,6 @@ class ScreenNotifier extends ChangeNotifier {
 
   double get aspect => width / height;
 
-  Size get safeArea => _safeArea;
-
-  double get safeTop => _safeTop;
 
   double get safeBottom => _safeBottom;
 
@@ -47,15 +42,15 @@ class ScreenNotifier extends ChangeNotifier {
     final media = MediaQuery.of(context);
 
     final pad = media.padding;
-    _safeArea = Size(pad.left + pad.right, pad.top + pad.bottom);
+    final safeWidth = pad.left + pad.right;
+    final safeHeight = pad.top + pad.bottom;
     safe = pad;
-    _safeTop = pad.top;
     _safeBottom = pad.bottom;
 
     final double x = constraints.maxWidth;
     final double y = constraints.maxHeight;
 
-    _size = Size(x - safeArea.width, y - safeArea.height);
+    _size = Size(x - safeWidth, y - safeHeight);
     _center = Offset(width, height) / 2;
 
     WidgetsBinding.instance!.addPostFrameCallback((_) {

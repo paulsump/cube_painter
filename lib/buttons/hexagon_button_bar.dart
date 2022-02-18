@@ -211,12 +211,14 @@ class _ScreenMaths {
     final double h = screen.height;
 
     orient = h < w;
+    final safeBottom = screen.safe.bottom;
+
     if (orient) {
       padY = 11;
       padX = 11;
       radius = w * radiusFactorOrient / screen.aspect;
       //TODO increase more than this for iphone, but has no effect
-      height = h + screen.safe.bottom * 3;
+      height = h + safeBottom * 3;
       offset = Offset(-screen.safe.left, 0);
       width = 3 * radius * W + 2 * padX;
     } else {
@@ -224,8 +226,8 @@ class _ScreenMaths {
       padY = 11;
       // TODO Might not need aspect - fix on iphone without it?
       radius = h * radiusFactor * screen.aspect;
-      height = 2 * (radius + padY) + screen.safeBottom;
-      offset = Offset(0, h - height + screen.safeBottom);
+      height = 2 * (radius + padY) + safeBottom;
+      offset = Offset(0, h - height + safeBottom);
       width = w;
     }
   }
