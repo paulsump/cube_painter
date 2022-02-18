@@ -126,7 +126,6 @@ class Cubes {
     animCubes.clear();
 
     for (int i = 0; i < cubeInfos.length; ++i) {
-      out(i);
       animCubes.add(AnimCube(
         key: UniqueKey(),
         fields: Fields(

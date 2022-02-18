@@ -7,7 +7,6 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
-import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, UnmodifiableListView, getCubeInfos];
@@ -23,11 +22,7 @@ class StaticCubes extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return UnitToScreen(
-      child: Stack(children: _cubes),
-    );
-  }
+  Widget build(BuildContext context) => Stack(children: _cubes);
 }
 
 class StaticCube extends StatelessWidget {
