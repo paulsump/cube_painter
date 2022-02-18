@@ -19,8 +19,14 @@ void storeScreenSize(BuildContext context, BoxConstraints constraints) {
 
 class ScreenNotifier extends ChangeNotifier {
   Size? _size;
+
   Offset _center = Offset.zero;
   Size _safeArea = Size.zero;
+
+  double _safeTop = 0;
+  double _safeBottom = 0;
+
+  EdgeInsets safe = const EdgeInsets.all(0.0);
 
   double get width => _size!.width;
 
@@ -33,11 +39,18 @@ class ScreenNotifier extends ChangeNotifier {
 
   Size get safeArea => _safeArea;
 
+  double get safeTop => _safeTop;
+
+  double get safeBottom => _safeBottom;
+
   void init(BuildContext context, BoxConstraints constraints) {
     final media = MediaQuery.of(context);
 
     final pad = media.padding;
     _safeArea = Size(pad.left + pad.right, pad.top + pad.bottom);
+    safe = pad;
+    _safeTop = pad.top;
+    _safeBottom = pad.bottom;
 
     final double x = constraints.maxWidth;
     final double y = constraints.maxHeight;

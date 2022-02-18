@@ -85,10 +85,15 @@ class HexagonButtonBar extends StatelessWidget {
         decoration: BoxDecoration(
           // color: Colors.red,
           color: backgroundColor,
-          border: Border(top: borderSide, right: borderSide),
+          border: Border(
+              top: borderSide,
+              bottom: borderSide,
+              left: borderSide,
+              right: borderSide),
         ),
         child: Transform.translate(
-          offset: Offset(0, maths.padY),
+          offset: Offset(maths.padX / 3, maths.padY),
+          // offset: Offset(0, maths.padY),
           child: Stack(children: [
             _buildGestureModeButton(0, context),
             for (int i = 1; i < GestureMode.values.length; ++i)
@@ -198,6 +203,7 @@ class _ScreenMaths {
   static const radiusFactor = 0.075;
   static const radiusFactorOrient = 0.093;
 
+  late double padX;
   late double padY;
 
   _ScreenMaths({required ScreenNotifier screen}) {
@@ -206,21 +212,21 @@ class _ScreenMaths {
 
     orient = h < w;
     if (orient) {
-      padY = 0;
+      padY = 11;
+      padX = 11;
       radius = w * radiusFactorOrient / screen.aspect;
-      //todo set x for ios
-      offset = Offset(-screen.safeArea.width, 0);
-      //TODO FIX
-      width = w / 8;
-      height = h;
+      //TODO increase more than this for iphone, but has no effect
+      height = h + screen.safe.bottom * 3;
+      offset = Offset(-screen.safe.left, 0);
+      width = 3 * radius * W + 2 * padX;
     } else {
+      padX = 22;
       padY = 11;
       // TODO Might not need aspect - fix on iphone without it?
       radius = h * radiusFactor * screen.aspect;
-      offset = Offset(0, screen.height - 2 * radius - 2 * padY);
+      height = 2 * (radius + padY) + screen.safeBottom;
+      offset = Offset(0, h - height + screen.safeBottom);
       width = w;
-      //todo reduce
-      height = w;
     }
   }
 }
