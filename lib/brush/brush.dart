@@ -36,6 +36,7 @@ class BrushState extends State<Brush> {
   final brushMaths = BrushMaths();
 
   var previousPositions = Positions.empty;
+  bool tapped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +51,10 @@ class BrushState extends State<Brush> {
         ],
       ),
       onPanStart: (details) {
-        out(details.localPosition);
-
-        //brushMaths.startFrom(screenToUnit(details.localPosition, context));
+        // if tapped, use that fromPosition since it's where the user started, and therefore better
+        if (!tapped) {
+          brushMaths.startFrom(screenToUnit(details.localPosition, context));
+        }
       },
       onPanUpdate: (details) {
         if (GestureMode.add == getGestureMode(context)) {
@@ -62,13 +64,19 @@ class BrushState extends State<Brush> {
           setState(() {});
         }
       },
-      onPanEnd: (details) => widget._handOver(),
+      onPanEnd: (details) {
+        tapped = false;
+        widget._handOver();
+      },
       onTapDown: (details) {
-        out(details.localPosition);
+        tapped = true;
         _replaceCube(details.localPosition, context);
         setState(() {});
       },
-      onTapUp: (details) => widget._handOver(),
+      onTapUp: (details) {
+        tapped = false;
+        widget._handOver();
+      },
     );
   }
 
