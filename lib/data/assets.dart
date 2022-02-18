@@ -13,14 +13,13 @@ class Assets {
     return map;
   }
 
-  static Future<Iterable<String>> getFilePaths(String folderPath) async {
+  static Future<List<String>> getFilePaths(String folderPath) async {
     final manifestJson = await rootBundle.loadString('AssetManifest.json');
 
     final fileNames = jsonDecode(manifestJson)
         .keys
         .where((String key) => key.startsWith(folderPath + '/'));
 
-    return fileNames;
+    return fileNames.toList();
   }
-
 }

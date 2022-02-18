@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cube_painter/data/assets.dart';
 import 'package:cube_painter/data/cube_info.dart';
@@ -60,7 +61,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   late VoidCallback _onSuccessfulLoad;
   final _filePaths = <String>[];
 
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   CubeGroup get cubeGroup => _cubeGroup;
 
@@ -70,23 +71,22 @@ class CubeGroupNotifier extends ChangeNotifier {
     required String folderPath,
     required VoidCallback onSuccessfulLoad,
   }) async {
-    final filePaths = await Assets.getFilePaths(folderPath);
-
-    for (String filePath in filePaths) {
-      _filePaths.add(filePath);
-    }
+    _filePaths.addAll(await Assets.getFilePaths(folderPath));
 
     assert(_filePaths.isNotEmpty);
 
     _onSuccessfulLoad = onSuccessfulLoad;
-    await _loadCubeGroup();
+    await _loadCubeGroup(_filePaths[_currentIndex]);
+    _updateAfterLoad();
   }
 
-  Future<void> _loadCubeGroup() async {
-    final map = await Assets.loadJson(_filePaths[_currentIndex]);
+  Future<void> _loadCubeGroup(String filePath) async {
+    final map = await Assets.loadJson(filePath);
 
     _cubeGroup = CubeGroup.fromJson(map);
+  }
 
+  void _updateAfterLoad() {
     // Clipboard.setData(ClipboardData(text: json));
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
@@ -98,13 +98,32 @@ class CubeGroupNotifier extends ChangeNotifier {
   String get json => jsonEncode(cubeGroup);
 
   void increment(int increment) {
+    assert(1 == increment);
+
     _currentIndex += increment;
     _currentIndex %= _filePaths.length;
 
-    _loadCubeGroup();
+    final String filePath = _filePaths[_currentIndex];
+    _loadCubeGroup(filePath);
+    _updateAfterLoad();
   }
 
-  void addCubeInfo(CubeInfo info) {
-    cubeGroup.cubes.add(info);
+  void addCubeInfo(CubeInfo info) => cubeGroup.cubes.add(info);
+
+  void convertAll() {
+    const String folderPath = '/Users/paulsump/a/cube_painter/data/';
+
+    for (int i = 0; i < _filePaths.length; ++i) {
+      final String filePath = _filePaths[i];
+
+      _loadCubeGroup(filePath);
+      _save(folderPath + filePath);
+    }
+  }
+
+  void _save(String fullFilePath) {
+    out(fullFilePath);
+
+    // File(fullFilePath).writeAsString(json);
   }
 }
