@@ -11,7 +11,7 @@ class BrushMaths {
   /// dragged from point in grid space
   late Offset _fromUnit;
   late Offset _fromPositionOffset;
-  late Position _roundedFromGrid;
+  late Position _fromPosition;
 
   /// scale the drag vector to get the correct length
   int _distance = 0;
@@ -26,7 +26,7 @@ class BrushMaths {
     _fromUnit = fromUnit;
     _fromPositionOffset = unitOffsetToPositionOffset(fromUnit);
 
-    _roundedFromGrid = Position(
+    _fromPosition = Position(
         _fromPositionOffset.dx.round(), _fromPositionOffset.dy.round());
   }
 
@@ -52,14 +52,14 @@ class BrushMaths {
         // _reverseOrder ? _distance + 1 : _distance,
         _distance,
         (i) =>
-            _roundedFromGrid +
+        _fromPosition +
             _vector! * (_reverseOrder ? i - _distance + 1 : i)));
   }
 
   Position getPosition(Offset unitOffset) {
     startFrom(unitOffset);
 
-    return _roundedFromGrid;
+    return _fromPosition;
   }
 }
 
