@@ -49,8 +49,11 @@ class BrushState extends State<Brush> {
           UnitToScreen(child: Stack(children: widget._animCubes)),
         ],
       ),
-      onPanStart: (details) =>
-          brushMaths.startFrom(screenToUnit(details.localPosition, context)),
+      onPanStart: (details) {
+        out(details.localPosition);
+
+        //brushMaths.startFrom(screenToUnit(details.localPosition, context));
+      },
       onPanUpdate: (details) {
         if (GestureMode.add == getGestureMode(context)) {
           _updateExtrude(details, context);
@@ -61,6 +64,7 @@ class BrushState extends State<Brush> {
       },
       onPanEnd: (details) => widget._handOver(),
       onTapDown: (details) {
+        out(details.localPosition);
         _replaceCube(details.localPosition, context);
         setState(() {});
       },

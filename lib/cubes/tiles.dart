@@ -22,7 +22,6 @@ class Tiles extends StatelessWidget {
         : zoomScale < 30
             ? 2
             : 1;
-    out(zoomScale);
 
     final double w = tileScale * W;
     double panX = panOffset.dx;
