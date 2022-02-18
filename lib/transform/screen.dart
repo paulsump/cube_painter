@@ -22,8 +22,6 @@ class ScreenNotifier extends ChangeNotifier {
 
   Offset _center = Offset.zero;
 
-  double _safeBottom = 0;
-
   EdgeInsets safe = const EdgeInsets.all(0.0);
 
   double get width => _size!.width;
@@ -35,17 +33,12 @@ class ScreenNotifier extends ChangeNotifier {
 
   double get aspect => width / height;
 
-
-  double get safeBottom => _safeBottom;
-
   void init(BuildContext context, BoxConstraints constraints) {
     final media = MediaQuery.of(context);
 
-    final pad = media.padding;
-    final safeWidth = pad.left + pad.right;
-    final safeHeight = pad.top + pad.bottom;
-    safe = pad;
-    _safeBottom = pad.bottom;
+    safe = media.padding;
+    final safeWidth = safe.left + safe.right;
+    final safeHeight = safe.top + safe.bottom;
 
     final double x = constraints.maxWidth;
     final double y = constraints.maxHeight;
