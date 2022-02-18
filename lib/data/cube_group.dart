@@ -62,7 +62,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   // set to initial empty list for when it's used before load is complete
   CubeGroup _cubeGroup = const CubeGroup([]);
 
-  late VoidCallback _addCubes;
+  late VoidCallback _onSuccessfulLoad;
   final _filePaths = <String>[];
 
   int _currentIndex = 1;
@@ -73,7 +73,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void init({
     required String folderPath,
-    required VoidCallback addCubes,
+    required VoidCallback onSuccessfulLoad,
   }) async {
     final filePaths = await Assets.getFilePaths(folderPath);
 
@@ -83,7 +83,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     assert(_filePaths.isNotEmpty);
 
-    _addCubes = addCubes;
+    _onSuccessfulLoad = onSuccessfulLoad;
     await _loadCubeGroup();
   }
 
@@ -95,7 +95,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     // Clipboard.setData(ClipboardData(text: json));
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
-    _addCubes();
+    _onSuccessfulLoad();
     // TODO clear undo (make undoer a notifier and notifyListeners for button enabled.
     notifyListeners();
   }

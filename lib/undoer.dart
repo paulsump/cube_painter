@@ -23,6 +23,11 @@ class Undoer {
 
   bool get canRedo => _redos.isNotEmpty;
 
+  void clear() {
+    _undos.clear();
+    _redos.clear();
+  }
+
   void save() {
     _saveTo(_undos);
     _redos.clear();
@@ -43,6 +48,7 @@ class Undoer {
 
     final notifier = getCubeGroupNotifier(context);
     final json = popFrom.removeLast();
+
     Map<String, dynamic> map = jsonDecode(json);
     notifier.cubeGroup = CubeGroup.fromJson(map);
   }

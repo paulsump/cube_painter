@@ -37,7 +37,12 @@ class Cubes {
     setState = setState_;
     context = context_;
 
-    getCubeGroupNotifier(context).init(folderPath: 'data', addCubes: _addCubes);
+    getCubeGroupNotifier(context).init(
+        folderPath: 'data',
+        onSuccessfulLoad: () {
+          undoer.clear();
+          _addAnimCubes();
+        });
     undoer = Undoer(context, setState: setState);
   }
 
@@ -106,19 +111,17 @@ class Cubes {
   }
 
   dynamic _convertToStaticCubeAndRemoveSelf(AnimCube old) {
-    // add info to cubegroupnotifier here instead.
     addCubeInfo(old.fields.info, context);
-    // staticCubes.add(StaticCube(info: old.fields.info));
     return _removeSelf(old);
   }
 
-
-  void _addCubes() {
+  void _addAnimCubes() {
     List<CubeInfo> cubeInfos = getCubeInfos(context);
 
     animCubes.clear();
 
     for (int i = 0; i < cubeInfos.length; ++i) {
+      out(i);
       animCubes.add(AnimCube(
         key: UniqueKey(),
         fields: Fields(
