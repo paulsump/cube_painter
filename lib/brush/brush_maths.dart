@@ -49,9 +49,11 @@ class BrushMaths {
 
     _distance = distance.round();
     return Positions(List.generate(
+        // _reverseOrder ? _distance + 1 : _distance,
         _distance,
         (i) =>
-            _roundedFromGrid + _vector! * (_reverseOrder ? i - _distance : i)));
+            _roundedFromGrid +
+            _vector! * (_reverseOrder ? i - _distance + 1 : i)));
   }
 
   Position getPosition(Offset unitOffset) {
