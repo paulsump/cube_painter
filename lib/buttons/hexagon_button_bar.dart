@@ -185,10 +185,10 @@ class HexagonButtonBar extends StatelessWidget {
 }
 
 class _ScreenMaths {
-  late double radius;
+  late final double radius;
 
-  late double width;
-  late double height;
+  late final double width;
+  late final double height;
 
   double get x => 2 * radius * W;
 
@@ -196,15 +196,16 @@ class _ScreenMaths {
 
   double get gap => radius * 0.3;
 
-  late bool orient;
-  late Offset offset;
+  late final bool orient;
+  late final Offset offset;
 
   // static const radiusFactor = 0.085;
   static const radiusFactor = 0.075;
   static const radiusFactorOrient = 0.093;
 
-  late double padX;
-  late double padY;
+  late final Offset pad;
+  late final double padX;
+  late final double padY;
 
   _ScreenMaths({required ScreenNotifier screen}) {
     final double w = screen.width;

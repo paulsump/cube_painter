@@ -11,29 +11,29 @@ ScreenNotifier getScreen(BuildContext context, {required bool listen}) {
 
 void storeScreenSize(BuildContext context, BoxConstraints constraints) {
   final screen = getScreen(context, listen: false);
-  screen.init(context, constraints);
+  screen._setData(context, constraints);
 }
 
 // void clip(Canvas canvas, BuildContext context) =>
 //     canvas.clipRect(getScreen(context, listen: false).rect);
 
 class ScreenNotifier extends ChangeNotifier {
-  Size? _size;
+  late Size _size;
 
-  Offset _center = Offset.zero;
+  late Offset _center;
 
-  EdgeInsets safe = const EdgeInsets.all(0.0);
+  late EdgeInsets safe;
 
-  double get width => _size!.width;
+  double get width => _size.width;
 
-  double get height => _size!.height;
+  double get height => _size.height;
 
   /// used as the origin for the transform
   Offset get center => _center;
 
   double get aspect => width / height;
 
-  void init(BuildContext context, BoxConstraints constraints) {
+  void _setData(BuildContext context, BoxConstraints constraints) {
     final media = MediaQuery.of(context);
 
     safe = media.padding;
