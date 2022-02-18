@@ -11,24 +11,24 @@ import 'package:flutter/material.dart';
 
 import '../unit_ping_pong.dart';
 
-const noWarn = [out, Crop];
+const noWarn = [out, Crop, UnitToScreen];
 
-class AnimCubes extends StatelessWidget {
-  const AnimCubes({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // final cubeInfos = getCubeInfos(context, listen: true);
-
-    return UnitToScreen(
-      child: Stack(
-        children: [
-          // for (CubeInfo info in cubeInfos) StaticCube(info: info),
-        ],
-      ),
-    );
-  }
-}
+// class AnimCubes extends StatelessWidget {
+//   const AnimCubes({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // final cubeInfos = getCubeInfos(context, listen: true);
+//
+//     return UnitToScreen(
+//       child: Stack(
+//         children: [
+//           // for (CubeInfo info in cubeInfos) StaticCube(info: info),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // TODO rename to AnimCubeFields
 class Fields {

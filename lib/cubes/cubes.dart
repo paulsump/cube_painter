@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:cube_painter/cubes/anim_cube.dart';
-import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';

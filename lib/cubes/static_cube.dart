@@ -15,9 +15,12 @@ const noWarn = [out, UnmodifiableListView, getCubeInfos];
 class StaticCubes extends StatelessWidget {
   final List<StaticCube> _cubes;
 
-  StaticCubes({Key? key, required UnmodifiableListView<CubeInfo> cubeInfos})
-      : _cubes = List.generate(
-            cubeInfos.length, (i) => StaticCube(info: cubeInfos[i]));
+  StaticCubes({
+    Key? key,
+    required UnmodifiableListView<CubeInfo> cubeInfos,
+  })  : _cubes = List.generate(
+            cubeInfos.length, (i) => StaticCube(info: cubeInfos[i])),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

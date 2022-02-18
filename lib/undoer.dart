@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_group.dart';
-import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
