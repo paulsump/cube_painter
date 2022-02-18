@@ -47,9 +47,8 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final screen = getScreen(context, listen: true);
-    out(2);
+
     final cubeInfos = getCubeInfos(context, listen: true);
-    out(3);
     return Stack(children: [
       StaticCubes(cubeInfos: cubeInfos),
       UnitToScreen(

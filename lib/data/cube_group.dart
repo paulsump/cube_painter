@@ -106,6 +106,5 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void addCubeInfo(CubeInfo info) {
     cubeGroup.cubes.add(info);
-    notifyListeners();
   }
 }

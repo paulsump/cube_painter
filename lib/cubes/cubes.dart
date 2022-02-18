@@ -84,8 +84,7 @@ class Cubes {
     for (final AnimCube cube in orphans) {
       if (cube.fields.scale == (erase ? 0 : 1)) {
         if (!erase) {
-          final notifier = getCubeGroupNotifier(context);
-          notifier.addCubeInfo(cube.fields.info);
+          _convertToStaticCube(cube);
         }
       } else {
         animCubes.add(AnimCube(
@@ -110,9 +109,14 @@ class Cubes {
     return () {};
   }
 
-  dynamic _convertToStaticCubeAndRemoveSelf(AnimCube old) {
+  void _convertToStaticCube(AnimCube old) {
     final notifier = getCubeGroupNotifier(context);
+
     notifier.addCubeInfo(old.fields.info);
+  }
+
+  dynamic _convertToStaticCubeAndRemoveSelf(AnimCube old) {
+    _convertToStaticCube(old);
     return _removeSelf(old);
   }
 
