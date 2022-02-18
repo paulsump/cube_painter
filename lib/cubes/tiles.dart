@@ -17,11 +17,12 @@ class Tiles extends StatelessWidget {
     final double zoomScale = getZoomScale(context);
 
     final Offset panOffset = getPanOffset(context, listen: true) / zoomScale;
-    final int tileScale = zoomScale > 50
-        ? 1
-        : zoomScale > 30
+    final int tileScale = zoomScale < 20
+        ? 3
+        : zoomScale < 30
             ? 2
-            : 3;
+            : 1;
+    out(zoomScale);
 
     final double w = tileScale * W;
     double panX = panOffset.dx;
