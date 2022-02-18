@@ -20,6 +20,8 @@ class BrushMaths {
   late Position? _vector;
   late bool _reverseOrder;
 
+  Position get startPosition => _startPosition;
+
   void calcStartPosition(Offset startUnit) {
     _vector = null;
 
@@ -49,18 +51,13 @@ class BrushMaths {
     }
 
     _distance = distance.round();
-    return Positions(List.generate(
-        // _reverseOrder ? _distance + 1 : _distance,
-        _distance,
-        (i) =>
-        _startPosition +
-            _vector! * (_reverseOrder ? i - _distance + 1 : i)));
-  }
-
-  Position getPosition(Offset unitOffset) {
-    calcStartPosition(unitOffset);
-
-    return _startPosition;
+    return Positions(
+      List.generate(
+          _distance,
+          (i) =>
+              _startPosition +
+              _vector! * (_reverseOrder ? i - _distance + 1 : i)),
+    );
   }
 }
 

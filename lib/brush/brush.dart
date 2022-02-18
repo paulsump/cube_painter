@@ -53,8 +53,8 @@ class BrushState extends State<Brush> {
       onPanStart: (details) {
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
-          brushMaths
-              .calcStartPosition(screenToUnit(details.localPosition, context));
+          final Offset startUnit = screenToUnit(details.localPosition, context);
+          brushMaths.calcStartPosition(startUnit);
         }
       },
       onPanUpdate: (details) {
@@ -89,7 +89,9 @@ class BrushState extends State<Brush> {
       crop = Provider.of<CropNotifier>(context, listen: false).crop;
     }
 
-    _addCube(brushMaths.getPosition(screenToUnit(point, context)), crop);
+    final Offset startUnit = screenToUnit(point, context);
+    brushMaths.calcStartPosition(startUnit);
+    _addCube(brushMaths.startPosition, crop);
   }
 
   void _updateExtrude(details, BuildContext context) {
