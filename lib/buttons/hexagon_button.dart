@@ -28,8 +28,8 @@ class HexagonButton extends StatelessWidget {
     const double elevation = 8.0;
 
     return Transform.translate(
-      // offset: Offset(0, on ? elevation / 2 : 0.0),
-      offset: Offset.zero,
+      offset: Offset(0, on ? 1.0 : -1.0) * elevation / 4,
+      // offset: Offset.zero,
       child: ElevatedButton(
         onPressed: onPressed,
         child: child,

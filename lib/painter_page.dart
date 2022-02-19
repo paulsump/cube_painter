@@ -56,6 +56,7 @@ class _PainterPageState extends State<PainterPage> {
     final cubeInfos = getCubeInfos(context, listen: true);
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
     final gestureMode = getGestureMode(context, listen: true);
+    final double iconSize = IconTheme.of(context).size!;
 
     const double barHeight = 87;
     // const double buttonHeight = barHeight + 22;
@@ -71,31 +72,38 @@ class _PainterPageState extends State<PainterPage> {
               onPressed: () {},
               tip: 'TODO'),
           HexagonButton(
-              radioOn: GestureMode.panZoom == gestureMode,
-              child: const Icon(Icons.zoom_in_rounded),
+              radioOn: GestureMode.add == gestureMode,
+              child: Stack(
+                children: [
+                  Transform.translate(
+                    offset: unit * iconSize / 2,
+                    child: Transform.scale(
+                      scale: 21,
+                      child: const FullUnitCube(),
+                    ),
+                  ),
+                  Transform.translate(
+                    offset: unit * -iconSize / 2,
+                    child: Transform.scale(
+                      scale: 29 / iconSize,
+                      child: Icon(
+                        Icons.add,
+                        color: getColor(Side.br),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               onPressed: () {},
               tip: 'TODO'),
           HexagonButton(
-              radioOn: GestureMode.panZoom == gestureMode,
-              child: const Icon(Icons.zoom_in_rounded),
-              onPressed: () {},
-              tip: 'TODO'),
-          // HexagonButton(
-          //     radioOn: GestureMode.add == gestureMode,
-          //     child: Transform.scale(
-          //       scale: 22,
-          //       child: const FullUnitCube(),
-          //     ),
-          //     onPressed: () {},
-          //     tip: 'TODO'),
-          // HexagonButton(
-          //   child: Icon(Icons.undo_sharp,
-          //       color: getColor(
-          //         _cubes.undoer.canUndo ? Side.br : Side.bl,
-          //       )),
-          //   onPressed: _cubes.undoer.undo,
-          //   tip: 'Undo the last add or delete operation.',
-          // ),
+            child: Icon(Icons.undo_sharp,
+                color: getColor(
+                  _cubes.undoer.canUndo ? Side.br : Side.bl,
+                )),
+            onPressed: _cubes.undoer.undo,
+            tip: 'Undo the last add or delete operation.',
+          ),
         ],
       ),
       drawer: Menu(
