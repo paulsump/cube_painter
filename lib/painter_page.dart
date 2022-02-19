@@ -51,9 +51,14 @@ class _PainterPageState extends State<PainterPage> {
 
     final cubeInfos = getCubeInfos(context, listen: true);
     final GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
+
     return Scaffold(
       key: scaffoldState,
-      drawer: const Menu(),
+      drawer: Menu(
+        items: <MenuItem>[
+          MenuItem(text: 'New', icon: Icons.star, callback: () {}),
+        ],
+      ),
       body: SafeArea(
         child: Stack(children: [
           UnitToScreen(
