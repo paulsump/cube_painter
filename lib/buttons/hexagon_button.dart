@@ -15,7 +15,7 @@ class HexagonButton extends StatelessWidget {
     Key? key,
     required this.child,
     required this.onPressed,
-    required this.height,
+    this.height = 99,
     this.radioOn = false,
     required this.tip,
   }) : super(key: key);
@@ -54,8 +54,11 @@ class HexagonButton extends StatelessWidget {
       MaterialState.focused,
     };
     if (states.any(interactiveStates.contains)) {
-      return Color.lerp(top, br, 0.5)!;
+      // return radioButtonOnColor;
+      // return Color.lerp(top, br, 0.5)!;
+      return buttonColor;
     }
-    return top;
+    return buttonColor;
+    // return top;
   }
 }
