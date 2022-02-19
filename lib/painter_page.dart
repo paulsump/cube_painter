@@ -93,7 +93,7 @@ class _PainterPageState extends State<PainterPage> {
           const Divider(
             height: 20,
             thickness: 5,
-            indent: 10,
+            indent: 17,
             endIndent: 0,
             color: Colors.black,
           ),

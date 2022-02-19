@@ -2,7 +2,6 @@ import 'package:cube_painter/buttons/calc_hexagon_path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-
 /// A border that fits a Hexagon within the available space.
 ///
 /// Typically used with [ShapeDecoration] to draw a Hexagon.
@@ -48,12 +47,18 @@ class HexagonBorder extends OutlinedBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return calcHexagonPath(rect.center, (rect.shortestSide - side.width) / 2.0);
+    return calcHexagonPath(
+      rect.center,
+      (rect.shortestSide - side.width) / 2.0,
+    );
   }
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return calcHexagonPath(rect.center, rect.shortestSide / 2.0);
+    return calcHexagonPath(
+      rect.center,
+      rect.shortestSide / 2.0,
+    );
   }
 
   @override
