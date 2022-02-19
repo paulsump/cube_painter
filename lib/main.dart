@@ -1,3 +1,5 @@
+import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -29,9 +31,26 @@ class CubePainterApp extends StatelessWidget {
         // theme:
         // ThemeData.dark()
         //     .copyWith(scaffoldBackgroundColor: backgroundColor),
-        // theme: ThemeData(
-        //   primaryColor: Colors.red,
-        // ),
+        theme: ThemeData(
+          // primaryColor: Colors.red,
+          // backgroundColor: Colors.red,
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: getColor(Side.br),
+                // displayColor: Colors.red,
+                fontSizeFactor: 1.5,
+              ),
+          // iconTheme: IconTheme(
+          //   data: IconThemeData(color: Colors.blue),
+          // ),
+          // iconTheme: IconThemeData(color: Colors.pink),
+          // iconTheme: Theme.of(context)
+          //     .iconTheme
+          //     .copyWith(color: getColor(Side.br)), // -> ignored
+          // buttonTheme: Theme.of(context).buttonTheme.copyWith(
+          //       buttonColor: Colors.red,
+          //       splashColor: Colors.red,
+          //     ), // -> works
+        ),
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             if (constraints.maxHeight == 0) {
@@ -47,4 +66,3 @@ class CubePainterApp extends StatelessWidget {
     );
   }
 }
-

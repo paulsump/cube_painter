@@ -1,4 +1,5 @@
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
 class MenuItem {
@@ -21,25 +22,34 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: backgroundColor,
+      child: Container(
+        color: backgroundColor,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: backgroundColor,
+              ),
+              child: const Text('Options'),
             ),
-            child: const Text('Options'),
-          ),
-          for (MenuItem item in items)
-            ListTile(
-              leading: Icon(item.icon),
-              title: Text(item.text),
-              onTap: () {
-                item.callback();
-                Navigator.pop(context);
-              },
-            ),
-        ],
+            for (MenuItem item in items)
+              Container(
+                color: backgroundColor,
+                child: ListTile(
+                  leading: Icon(
+                    item.icon,
+                    color: getColor(Side.br),
+                  ),
+                  title: Text(item.text),
+                  onTap: () {
+                    item.callback();
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

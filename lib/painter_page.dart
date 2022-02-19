@@ -63,8 +63,8 @@ class _PainterPageState extends State<PainterPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: barHeight,
-        // title: const Text("Cube Painter"),
-        backgroundColor: backgroundColor,
+        // backgroundColor: backgroundColor,
+        backgroundColor: Colors.transparent,
         actions: <Widget>[
           HexagonButton(
               radioOn: GestureMode.panZoom == gestureMode,
@@ -108,7 +108,12 @@ class _PainterPageState extends State<PainterPage> {
       ),
       drawer: Menu(
         items: <MenuItem>[
-          MenuItem(text: 'Clear', icon: Icons.star, callback: () {}),
+          MenuItem(
+              text: 'New',
+              icon: Icons.star,
+              callback: () {
+                //TODO clear cubes
+              }),
           MenuItem(
             text: 'Forward',
             icon: Icons.forward,
