@@ -43,7 +43,7 @@ class HexagonButton extends StatelessWidget {
           backgroundColor:
               MaterialStateProperty.resolveWith(getBackgroundColor),
           // side: MaterialStateProperty.all(borderSide),
-          shape: MaterialStateProperty.all(const HexagonBorder()),
+          shape: MaterialStateProperty.all(HexagonBorder(side: borderSide)),
         ),
       ),
     );

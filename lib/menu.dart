@@ -56,7 +56,7 @@ class Menu extends StatelessWidget {
                 color: backgroundColor,
                 child: ListTile(
                   leading: brush,
-                  title: Text('Crop'),
+                  title: const Text('Crop'),
                   onTap: () {
                     // item.callback();
                     Navigator.pop(context);

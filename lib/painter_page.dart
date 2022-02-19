@@ -33,6 +33,8 @@ const noWarn = [
   HexagonButtonBar,
   getCubeInfos,
   StaticCubes,
+  Crop.c,
+  Provider,
 ];
 
 class PainterPage extends StatefulWidget {
@@ -54,7 +56,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final cubeInfos = getCubeInfos(context, listen: true);
-    final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
+    // final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
     final gestureMode = getGestureMode(context, listen: true);
 
     const double barHeight = 87;
@@ -112,7 +114,7 @@ class _PainterPageState extends State<PainterPage> {
             callback: _cubes.saveToClipboard,
           ),
         ],
-        brushs: [
+        brushs: const [
           // CubeButton(gestureMode: gestureMode, iconSize: iconSize),
         ],
       ),

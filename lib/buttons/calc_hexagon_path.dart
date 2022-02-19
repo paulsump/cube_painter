@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:cube_painter/out.dart';
 import 'package:vector_math/vector_math.dart';
 
+const noWarn = out;
+
 //TODO remove this file
 Path calcHexagonPath(Offset center, double radius) {
   final points = <Offset>[];
