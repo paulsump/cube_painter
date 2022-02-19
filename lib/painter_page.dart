@@ -64,12 +64,42 @@ class _PainterPageState extends State<PainterPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: barHeight,
+        // leading: HexagonButton(
+        //    child: const Icon(Icons.menu_sharp),
+        //   onPressed: () {
+        //     setGestureMode(GestureMode.panZoom, context);
+        //   },
+        //   tip: 'TODO',
+        // ),
         backgroundColor: backgroundColor,
         // backgroundColor: Colors.transparent,
         actions: <Widget>[
           HexagonButton(
+            child: Icon(Icons.undo_sharp,
+                color: getColor(
+                  _cubes.undoer.canUndo ? Side.br : Side.bl,
+                )),
+            onPressed: _cubes.undoer.undo,
+            tip: 'Undo the last add or delete operation.',
+          ),
+          HexagonButton(
+            child: Icon(Icons.redo_sharp,
+                color: getColor(
+                  _cubes.undoer.canRedo ? Side.br : Side.bl,
+                )),
+            onPressed: _cubes.undoer.redo,
+            tip: 'Redo the last add or delete operation that was undone.',
+          ),
+          const Divider(
+            height: 20,
+            thickness: 5,
+            indent: 10,
+            endIndent: 0,
+            color: Colors.black,
+          ),
+          HexagonButton(
             radioOn: GestureMode.panZoom == gestureMode,
-            child: const Icon(Icons.zoom_in_rounded),
+            child: const Icon(Icons.zoom_in_sharp),
             onPressed: () {
               setGestureMode(GestureMode.panZoom, context);
             },
@@ -92,22 +122,6 @@ class _PainterPageState extends State<PainterPage> {
             },
             tip:
                 'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-          ),
-          HexagonButton(
-            child: Icon(Icons.undo_sharp,
-                color: getColor(
-                  _cubes.undoer.canUndo ? Side.br : Side.bl,
-                )),
-            onPressed: _cubes.undoer.undo,
-            tip: 'Undo the last add or delete operation.',
-          ),
-          HexagonButton(
-            child: Icon(Icons.redo_sharp,
-                color: getColor(
-                  _cubes.undoer.canRedo ? Side.br : Side.bl,
-                )),
-            onPressed: _cubes.undoer.redo,
-            tip: 'Redo the last add or delete operation that was undone.',
           ),
         ],
       ),

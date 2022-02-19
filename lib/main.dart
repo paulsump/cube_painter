@@ -49,7 +49,11 @@ class CubePainterApp extends StatelessWidget {
           // buttonTheme: Theme.of(context).buttonTheme.copyWith(
           //       buttonColor: Colors.red,
           //       splashColor: Colors.red,
-          //     ), // -> works
+          //     ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            primary: buttonColor,
+          )),
         ),
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {

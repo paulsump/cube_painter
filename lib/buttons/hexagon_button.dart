@@ -40,8 +40,8 @@ class HexagonButton extends StatelessWidget {
           shadowColor: on ? null : MaterialStateProperty.all(bl),
           padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
           // fixedSize: MaterialStateProperty.all(Size(height, height)),
-          backgroundColor:
-              MaterialStateProperty.resolveWith(getBackgroundColor),
+          // backgroundColor:
+          //     MaterialStateProperty.resolveWith(getBackgroundColor),
           // side: MaterialStateProperty.all(borderSide),
           shape: MaterialStateProperty.all(HexagonBorder(side: borderSide)),
         ),
@@ -49,18 +49,18 @@ class HexagonButton extends StatelessWidget {
     );
   }
 
-  Color getBackgroundColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      // return radioButtonOnColor;
-      // return Color.lerp(top, br, 0.5)!;
-      return buttonColor;
-    }
-    return buttonColor;
-    // return top;
-  }
+// Color getBackgroundColor(Set<MaterialState> states) {
+//   const Set<MaterialState> interactiveStates = <MaterialState>{
+//     MaterialState.pressed,
+//     MaterialState.hovered,
+//     MaterialState.focused,
+//   };
+//   if (states.any(interactiveStates.contains)) {
+//     // return radioButtonOnColor;
+//     // return Color.lerp(top, br, 0.5)!;
+//     return buttonColor;
+//   }
+//   return buttonColor;
+//   // return top;
+// }
 }
