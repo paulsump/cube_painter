@@ -65,6 +65,7 @@ class _PainterPageState extends State<PainterPage> {
         backgroundColor: backgroundColor,
         actions: <Widget>[
           HexagonButton(
+            radioOn: true,
             height: buttonHeight,
             child: const Icon(Icons.shopping_cart), // enabled: info.enabled,
             onPressed: () {},
