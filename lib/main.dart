@@ -19,6 +19,7 @@ class CubePainterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ScreenNotifier()),
@@ -31,19 +32,37 @@ class CubePainterApp extends StatelessWidget {
         title: 'Cube Painter',
         theme: ThemeData.dark()
             .copyWith(scaffoldBackgroundColor: getColor(Side.t)),
-        home: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxHeight == 0) {
-              return Container();
-            } else {
-              storeScreenSize(context, constraints);
-              return WillPopScope(
-                  onWillPop: () async => false,
-                  child: const SafeArea(child: PainterPage()));
-            }
-          },
+        home: Scaffold(
+          key: scaffoldState,
+          drawer: const Menu(),
+          body: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxHeight == 0) {
+                return Container();
+              } else {
+                storeScreenSize(context, constraints);
+                return WillPopScope(
+                    onWillPop: () async => false,
+                    child: SafeArea(
+                        child: PainterPage(scaffoldState: scaffoldState)));
+              }
+            },
+          ),
         ),
       ),
+    );
+  }
+}
+
+class Menu extends StatelessWidget {
+  const Menu({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black,
+      width: 99,
+      height: 99,
     );
   }
 }

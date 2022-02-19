@@ -29,7 +29,9 @@ const noWarn = [
 ];
 
 class PainterPage extends StatefulWidget {
-  const PainterPage({Key? key}) : super(key: key);
+  GlobalKey<ScaffoldState> scaffoldState;
+
+  PainterPage({Key? key, required this.scaffoldState}) : super(key: key);
 
   @override
   State<PainterPage> createState() => _PainterPageState();
@@ -63,10 +65,10 @@ class _PainterPageState extends State<PainterPage> {
           ? const PanZoomer()
           : Brush(adoptCubes: _cubes.adopt),
       HexagonButtonBar(
-        undoer: _cubes.undoer,
-        saveToClipboard: _cubes.saveToClipboard,
-        screen: screen,
-      ),
+          undoer: _cubes.undoer,
+          saveToClipboard: _cubes.saveToClipboard,
+          screen: screen,
+          scaffoldState: widget.scaffoldState),
     ]);
   }
 }

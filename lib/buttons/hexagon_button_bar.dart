@@ -12,7 +12,7 @@ import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-const noWarn = out;
+const noWarn = [out, getCubeGroupNotifier];
 
 class HexagonButtonBar extends StatelessWidget {
   final Undoer undoer;
@@ -29,12 +29,14 @@ class HexagonButtonBar extends StatelessWidget {
   double get gap => maths.gap;
 
   bool get orient => maths.orient;
+  GlobalKey<ScaffoldState> scaffoldState;
 
   HexagonButtonBar({
     Key? key,
     required this.undoer,
     required this.saveToClipboard,
     required ScreenNotifier screen,
+    required this.scaffoldState,
   })  : maths = _ScreenMaths(screen: screen),
         super(key: key);
 
@@ -60,7 +62,8 @@ class HexagonButtonBar extends StatelessWidget {
       BasicButtonInfo(
         enabled: true,
         icon: Icons.forward,
-        onPressed: () => getCubeGroupNotifier(context).increment(1),
+        // onPressed: () => getCubeGroupNotifier(context).increment(1),
+        onPressed: () => scaffoldState.currentState!.openDrawer(),
         // onPressed: () => getCubeGroupNotifier(context).convertAll(),
         tip: 'Load next group of cubes.',
         offset: Offset(-1 * gap, 0),
