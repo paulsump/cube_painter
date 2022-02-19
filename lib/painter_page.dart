@@ -7,6 +7,7 @@ import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -29,9 +30,7 @@ const noWarn = [
 ];
 
 class PainterPage extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldState;
-
-  const PainterPage({Key? key, required this.scaffoldState}) : super(key: key);
+  const PainterPage({Key? key}) : super(key: key);
 
   @override
   State<PainterPage> createState() => _PainterPageState();
@@ -51,24 +50,29 @@ class _PainterPageState extends State<PainterPage> {
     final screen = getScreen(context, listen: true);
 
     final cubeInfos = getCubeInfos(context, listen: true);
-    return Stack(children: [
-      UnitToScreen(
-        child: Stack(
-          children: [
-            const Tiles(),
-            StaticCubes(cubeInfos: cubeInfos),
-            ..._cubes.animCubes,
-          ],
+    final GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
+    return Scaffold(
+      key: scaffoldState,
+      drawer: const Menu(),
+      body: Stack(children: [
+        UnitToScreen(
+          child: Stack(
+            children: [
+              const Tiles(),
+              StaticCubes(cubeInfos: cubeInfos),
+              ..._cubes.animCubes,
+            ],
+          ),
         ),
-      ),
-      GestureMode.panZoom == getGestureMode(context, listen: true)
-          ? const PanZoomer()
-          : Brush(adoptCubes: _cubes.adopt),
-      HexagonButtonBar(
-          undoer: _cubes.undoer,
-          saveToClipboard: _cubes.saveToClipboard,
-          screen: screen,
-          scaffoldState: widget.scaffoldState),
-    ]);
+        GestureMode.panZoom == getGestureMode(context, listen: true)
+            ? const PanZoomer()
+            : Brush(adoptCubes: _cubes.adopt),
+        HexagonButtonBar(
+            undoer: _cubes.undoer,
+            saveToClipboard: _cubes.saveToClipboard,
+            screen: screen,
+            scaffoldState: scaffoldState),
+      ]),
+    );
   }
 }

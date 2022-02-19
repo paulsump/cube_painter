@@ -2,7 +2,6 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/menu.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/screen.dart';
@@ -20,7 +19,6 @@ class CubePainterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ScreenNotifier()),
@@ -33,22 +31,17 @@ class CubePainterApp extends StatelessWidget {
         title: 'Cube Painter',
         theme: ThemeData.dark()
             .copyWith(scaffoldBackgroundColor: getColor(Side.t)),
-        home: Scaffold(
-          key: scaffoldState,
-          drawer: const Menu(),
-          body: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              if (constraints.maxHeight == 0) {
-                return Container();
-              } else {
-                storeScreenSize(context, constraints);
-                return WillPopScope(
-                    onWillPop: () async => false,
-                    child: SafeArea(
-                        child: PainterPage(scaffoldState: scaffoldState)));
-              }
-            },
-          ),
+        home: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxHeight == 0) {
+              return Container();
+            } else {
+              storeScreenSize(context, constraints);
+              return WillPopScope(
+                  onWillPop: () async => false,
+                  child: const SafeArea(child: PainterPage()));
+            }
+          },
         ),
       ),
     );
