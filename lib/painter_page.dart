@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
-import 'package:cube_painter/buttons/old_hexagon_button.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
@@ -54,26 +54,31 @@ class _PainterPageState extends State<PainterPage> {
     final cubeInfos = getCubeInfos(context, listen: true);
     final GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
 
+    const double barHeight = 77;
+    const double buttonHeight = barHeight + 22;
+
     return Scaffold(
       key: scaffoldState,
       appBar: AppBar(
-        toolbarHeight: 88,
-        title: Text("Cube Painter"),
+        toolbarHeight: barHeight,
+        title: const Text("Cube Painter"),
+        backgroundColor: backgroundColor,
         actions: <Widget>[
           HexagonButton(
-            height: 122,
-            child: const Text('hi'), // enabled: info.enabled,
+            height: buttonHeight,
+            child: const Icon(Icons.shopping_cart), // enabled: info.enabled,
             onPressed: () {},
             // icon: Icons.shopping_cart,
             // center: Offset(222,20),
             // radius: 20,
           ),
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            tooltip: 'Open shopping cart',
-            onPressed: () {
-              // handle the press
-            },
+          HexagonButton(
+            height: buttonHeight,
+            child: const Text('hi'), // enabled: info.enabled,
+            onPressed: () {},
+            // icon: Icons.shopping_cart,
+            // center: Offset(222,20),
+            // radius: 20,
           ),
         ],
       ),

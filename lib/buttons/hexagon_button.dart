@@ -1,6 +1,6 @@
+import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:cube_painter/buttons/hexagon_border.dart';
 
 class HexagonButton extends StatelessWidget {
   final void Function() onPressed;
@@ -18,6 +18,8 @@ class HexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
+
     return SizedBox(
       // width: 200.0,
       width: 0.66 * height,
@@ -27,23 +29,17 @@ class HexagonButton extends StatelessWidget {
         child: child,
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(8.0),
-          shadowColor: MaterialStateProperty.resolveWith(getShadowColor),
-          backgroundColor: MaterialStateProperty.resolveWith(getColor),
-          shape: MaterialStateProperty.all(
-            const HexagonBorder(),
-            // const HexagonBorder(side: BorderSide(width: 5)),
-            // CircleBorder(),
-            // BeveledRectangleBorder(
-            //   borderRadius: BorderRadius.circular(12),
-            //   side: BorderSide(width: 2.0, color: Colors.lightBlue.shade50),
-            // ),
-          ),
+          shadowColor: MaterialStateProperty.all(bl),
+          backgroundColor:
+              MaterialStateProperty.resolveWith(getBackgroundColor),
+          side: MaterialStateProperty.all(borderSide),
+          shape: MaterialStateProperty.all(const HexagonBorder()),
         ),
       ),
     );
   }
 
-  Color getColor(Set<MaterialState> states) {
+  Color getBackgroundColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
       MaterialState.hovered,
@@ -53,18 +49,5 @@ class HexagonButton extends StatelessWidget {
       return Color.lerp(top, br, 0.5)!;
     }
     return top;
-  }
-
-  Color getShadowColor(Set<MaterialState> states) {
-    return br;
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.blue;
-    }
-    return Colors.red;
   }
 }

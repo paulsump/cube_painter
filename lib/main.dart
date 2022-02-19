@@ -1,4 +1,3 @@
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -7,8 +6,6 @@ import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'colors.dart';
 
 void main() => runApp(createApp());
 
@@ -29,8 +26,12 @@ class CubePainterApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Cube Painter',
-        theme: ThemeData.dark()
-            .copyWith(scaffoldBackgroundColor: getColor(Side.t)),
+        // theme:
+        // ThemeData.dark()
+        //     .copyWith(scaffoldBackgroundColor: backgroundColor),
+        // theme: ThemeData(
+        //   primaryColor: Colors.red,
+        // ),
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             if (constraints.maxHeight == 0) {

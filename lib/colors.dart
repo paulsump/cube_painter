@@ -23,6 +23,8 @@ const Color bl = Color(0xff543e3d);
 Color getTweenBLtoTColor(double t) =>
     Color.lerp(getColor(Side.bl), getColor(Side.t), t)!;
 
+Color buttonBorderColor = getTweenBLtoTColor(0.5);
+
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
 
 Color get buttonColor => getTweenBtoGColor(0.7);
