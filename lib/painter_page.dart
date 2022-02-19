@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
+import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/old_hexagon_button.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
@@ -55,8 +57,17 @@ class _PainterPageState extends State<PainterPage> {
     return Scaffold(
       key: scaffoldState,
       appBar: AppBar(
+        toolbarHeight: 88,
         title: Text("Cube Painter"),
         actions: <Widget>[
+          HexagonButton(
+            height: 122,
+            child: const Text('hi'), // enabled: info.enabled,
+            onPressed: () {},
+            // icon: Icons.shopping_cart,
+            // center: Offset(222,20),
+            // radius: 20,
+          ),
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             tooltip: 'Open shopping cart',

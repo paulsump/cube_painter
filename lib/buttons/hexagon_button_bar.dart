@@ -1,4 +1,4 @@
-import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/old_hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/crop_unit_cube.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
@@ -127,7 +127,7 @@ class HexagonButtonBar extends StatelessWidget {
 
   Widget _buildGestureModeButton(int i, BuildContext context) {
     if (i == 0) {
-      return HexagonButton(
+      return OldHexagonButton(
         icon: Icons.zoom_in_rounded,
         gestureMode: GestureMode.panZoom,
         center: _getGestureModeButtonOffset(i),
@@ -155,7 +155,7 @@ class HexagonButtonBar extends StatelessWidget {
         ],
       ];
 
-      return HexagonButton(
+      return OldHexagonButton(
         icon: gestureModeButtonInfo[i][0] as IconData,
         iconOffset: const Offset(W, H) * -radius * 0.5,
         unitChild: gestureModeButtonInfo[i][1] as Widget,
@@ -178,7 +178,7 @@ class HexagonButtonBar extends StatelessWidget {
     final BasicButtonInfo info = buttonInfos[i];
     final Offset extraOffset = orient ? info.orientOffset : info.offset;
 
-    return HexagonButton(
+    return OldHexagonButton(
       enabled: info.enabled,
       icon: info.icon,
       onPressed: info.onPressed,
