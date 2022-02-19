@@ -76,14 +76,16 @@ class CubeGroupNotifier extends ChangeNotifier {
     assert(_filePaths.isNotEmpty);
 
     _onSuccessfulLoad = onSuccessfulLoad;
-    await _loadCubeGroup(_filePaths[_currentIndex]);
-    _updateAfterLoad();
+    await _loadCubeGroup(_filePaths[_currentIndex],
+        onSuccess: _updateAfterLoad);
   }
 
-  Future<void> _loadCubeGroup(String filePath) async {
+  Future<void> _loadCubeGroup(String filePath,
+      {required VoidCallback onSuccess}) async {
     final map = await Assets.loadJson(filePath);
 
     _cubeGroup = CubeGroup.fromJson(map);
+    onSuccess();
   }
 
   void _updateAfterLoad() {
@@ -104,26 +106,25 @@ class CubeGroupNotifier extends ChangeNotifier {
     _currentIndex %= _filePaths.length;
 
     final String filePath = _filePaths[_currentIndex];
-    _loadCubeGroup(filePath);
-    _updateAfterLoad();
+
+    _loadCubeGroup(filePath, onSuccess: _updateAfterLoad);
   }
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubes.add(info);
 
   void convertAll() {
-    const String folderPath = '/Users/paulsump/a/cube_painter/data/';
+    const String folderPath = '/Users/paulsump/a/cube_painter/';
 
     for (int i = 0; i < _filePaths.length; ++i) {
       final String filePath = _filePaths[i];
 
-      _loadCubeGroup(filePath);
-      _save(folderPath + filePath);
+      _loadCubeGroup(filePath, onSuccess: () => _save(folderPath + filePath));
     }
   }
 
   void _save(String fullFilePath) {
     out(fullFilePath);
 
-    // File(fullFilePath).writeAsString(json);
+    File(fullFilePath).writeAsString(json);
   }
 }

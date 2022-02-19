@@ -61,6 +61,7 @@ class HexagonButtonBar extends StatelessWidget {
         enabled: true,
         icon: Icons.forward,
         onPressed: () => getCubeGroupNotifier(context).increment(1),
+        // onPressed: () => getCubeGroupNotifier(context).convertAll(),
         tip: 'Load next group of cubes.',
         offset: Offset(-1 * gap, 0),
         orientOffset: Offset(-radius * 0.1, -radius * 0.10),
