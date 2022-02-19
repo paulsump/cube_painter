@@ -56,7 +56,17 @@ class _PainterPageState extends State<PainterPage> {
       key: scaffoldState,
       drawer: Menu(
         items: <MenuItem>[
-          MenuItem(text: 'New', icon: Icons.star, callback: () {}),
+          MenuItem(text: 'Clear', icon: Icons.star, callback: () {}),
+          MenuItem(
+            text: 'Forward',
+            icon: Icons.forward,
+            callback: getCubeGroupNotifier(context).forward,
+          ),
+          MenuItem(
+            text: 'Save to clipboard',
+            icon: Icons.save_alt_sharp,
+            callback: _cubes.saveToClipboard,
+          ),
         ],
       ),
       body: SafeArea(
