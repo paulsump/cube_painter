@@ -54,6 +54,18 @@ class _PainterPageState extends State<PainterPage> {
 
     return Scaffold(
       key: scaffoldState,
+      appBar: AppBar(
+        title: Text("Cube Painter"),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            tooltip: 'Open shopping cart',
+            onPressed: () {
+              // handle the press
+            },
+          ),
+        ],
+      ),
       drawer: Menu(
         items: <MenuItem>[
           MenuItem(text: 'Clear', icon: Icons.star, callback: () {}),
