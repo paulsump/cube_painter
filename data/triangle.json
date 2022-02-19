@@ -1,333 +1,286 @@
 {
-  "list": [
+  "cubes": [
     {
       "center": {
         "x": 9,
         "y": 19
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 8,
         "y": 18
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 7,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 8,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 9,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 10,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 11,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 12,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 18
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 19
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 20
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 21
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 22
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 23
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 24
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 25
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 26
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 12,
         "y": 25
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 11,
         "y": 24
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 10,
         "y": 23
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 9,
         "y": 22
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 8,
         "y": 21
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 7,
         "y": 20
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 6,
         "y": 19
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 5,
         "y": 18
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 4,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 3,
         "y": 16
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 2,
         "y": 15
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 1,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 2,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 3,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 4,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 5,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 6,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 7,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 8,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 9,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 10,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 11,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 12,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 14,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 15,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 14
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 11,
         "y": 21
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 10,
         "y": 20
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
@@ -347,29 +300,25 @@
       "center": {
         "x": 13,
         "y": 23
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 24
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 25
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 13,
         "y": 26
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
@@ -389,92 +338,79 @@
       "center": {
         "x": 16,
         "y": 15
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 16
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 17
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 18
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 19
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 20
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 21
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 22
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 23
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 24
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 25
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 16,
         "y": 26
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 15,
         "y": 25
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
@@ -487,22 +423,19 @@
       "center": {
         "x": 19,
         "y": 29
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 18,
         "y": 28
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 17,
         "y": 27
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
@@ -515,22 +448,19 @@
       "center": {
         "x": 16,
         "y": 29
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 15,
         "y": 28
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 14,
         "y": 27
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
@@ -543,29 +473,25 @@
       "center": {
         "x": 17,
         "y": 30
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 18,
         "y": 30
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 19,
         "y": 30
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 20,
         "y": 30
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
@@ -592,15 +518,13 @@
       "center": {
         "x": 11,
         "y": 15
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
         "x": 11,
         "y": 16
-      },
-      "cropIndex": 0
+      }
     },
     {
       "center": {
