@@ -83,6 +83,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   Future<void> _loadCubeGroup(String filePath,
       {required VoidCallback onSuccess}) async {
     final map = await Assets.loadJson(filePath);
+    out(filePath);
 
     _cubeGroup = CubeGroup.fromJson(map);
     onSuccess();
