@@ -6,42 +6,48 @@ import 'package:cube_painter/gesture_mode.dart';
 import 'package:flutter/material.dart';
 
 class CubeButton extends StatelessWidget {
+  final bool? radioOn;
+  final String tip;
+  final void Function() onPressed;
+  final IconData icon;
+
   const CubeButton({
     Key? key,
-    required this.gestureMode,
-    required this.iconSize,
+    this.radioOn,
+    required this.onPressed,
+    required this.icon,
+    required this.tip,
   }) : super(key: key);
-
-  final GestureMode gestureMode;
-  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
+    final double iconSize = IconTheme.of(context).size!;
     // final gestureMode = getGestureMode(context, listen: true);
     return HexagonButton(
-        radioOn: GestureMode.add == gestureMode,
-        child: Stack(
-          children: [
-            Transform.translate(
-              offset: unit * iconSize / 2,
-              child: Transform.scale(
-                scale: 21,
-                child: const FullUnitCube(),
+      radioOn: radioOn,
+      child: Stack(
+        children: [
+          Transform.translate(
+            offset: unit * iconSize / 2,
+            child: Transform.scale(
+              scale: 21,
+              child: const FullUnitCube(),
+            ),
+          ),
+          Transform.translate(
+            offset: unit * -iconSize / 2,
+            child: Transform.scale(
+              scale: 29 / iconSize,
+              child: Icon(
+                icon,
+                color: getColor(Side.br),
               ),
             ),
-            Transform.translate(
-              offset: unit * -iconSize / 2,
-              child: Transform.scale(
-                scale: 29 / iconSize,
-                child: Icon(
-                  Icons.add,
-                  color: getColor(Side.br),
-                ),
-              ),
-            ),
-          ],
-        ),
-        onPressed: () {},
-        tip: 'TODO');
+          ),
+        ],
+      ),
+      onPressed: onPressed,
+      tip: tip,
+    );
   }
 }

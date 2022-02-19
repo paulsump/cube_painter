@@ -56,7 +56,6 @@ class _PainterPageState extends State<PainterPage> {
     final cubeInfos = getCubeInfos(context, listen: true);
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
     final gestureMode = getGestureMode(context, listen: true);
-    final double iconSize = IconTheme.of(context).size!;
 
     const double barHeight = 87;
     // const double buttonHeight = barHeight + 22;
@@ -70,14 +69,19 @@ class _PainterPageState extends State<PainterPage> {
             radioOn: GestureMode.panZoom == gestureMode,
             child: const Icon(Icons.zoom_in_rounded),
             onPressed: () {
-              final gestureModeNotifier =
-                  Provider.of<GestureModeNotifier>(context, listen: false);
-
-              gestureModeNotifier.mode = GestureMode.panZoom;
+              setGestureMode(GestureMode.panZoom, context);
             },
             tip: 'TODO',
           ),
-          CubeButton(gestureMode: gestureMode, iconSize: iconSize),
+          CubeButton(
+            radioOn: GestureMode.add == gestureMode,
+            icon: Icons.add,
+            onPressed: () {
+              setGestureMode(GestureMode.add, context);
+            },
+            tip:
+                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+          ),
           HexagonButton(
             child: Icon(Icons.undo_sharp,
                 color: getColor(
@@ -109,7 +113,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ],
         brushs: [
-          CubeButton(gestureMode: gestureMode, iconSize: iconSize),
+          // CubeButton(gestureMode: gestureMode, iconSize: iconSize),
         ],
       ),
       body: SafeArea(
