@@ -84,6 +84,15 @@ class _PainterPageState extends State<PainterPage> {
             tip:
                 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
           ),
+          CubeButton(
+            radioOn: GestureMode.erase == gestureMode,
+            icon: Icons.remove,
+            onPressed: () {
+              setGestureMode(GestureMode.erase, context);
+            },
+            tip:
+                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+          ),
           HexagonButton(
             child: Icon(Icons.undo_sharp,
                 color: getColor(
