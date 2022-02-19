@@ -91,7 +91,7 @@ class _PainterPageState extends State<PainterPage> {
               setGestureMode(GestureMode.erase, context);
             },
             tip:
-                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
           ),
           HexagonButton(
             child: Icon(Icons.undo_sharp,
@@ -100,6 +100,14 @@ class _PainterPageState extends State<PainterPage> {
                 )),
             onPressed: _cubes.undoer.undo,
             tip: 'Undo the last add or delete operation.',
+          ),
+          HexagonButton(
+            child: Icon(Icons.redo_sharp,
+                color: getColor(
+                  _cubes.undoer.canRedo ? Side.br : Side.bl,
+                )),
+            onPressed: _cubes.undoer.redo,
+            tip: 'Redo the last add or delete operation that was undone.',
           ),
         ],
       ),
