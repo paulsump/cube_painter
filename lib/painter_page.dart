@@ -29,9 +29,9 @@ const noWarn = [
 ];
 
 class PainterPage extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldState;
+  final GlobalKey<ScaffoldState> scaffoldState;
 
-  PainterPage({Key? key, required this.scaffoldState}) : super(key: key);
+  const PainterPage({Key? key, required this.scaffoldState}) : super(key: key);
 
   @override
   State<PainterPage> createState() => _PainterPageState();
