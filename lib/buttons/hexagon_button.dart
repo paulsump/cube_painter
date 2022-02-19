@@ -17,7 +17,7 @@ class HexagonButton extends StatelessWidget {
     Key? key,
     required this.child,
     required this.onPressed,
-    this.height = 99,
+    this.height = 100,
     this.radioOn,
     required this.tip,
   }) : super(key: key);
@@ -28,22 +28,22 @@ class HexagonButton extends StatelessWidget {
     const double elevation = 8.0;
 
     return Transform.translate(
-      offset: Offset(0, on ? elevation / 2 : 0.0),
-      child: SizedBox(
-        width: 0.66 * height,
-        height: height,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          child: child,
-          //TODO onLongPressed, tip
-          style: ButtonStyle(
-            elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
-            shadowColor: on ? null : MaterialStateProperty.all(bl),
-            backgroundColor:
-                MaterialStateProperty.resolveWith(getBackgroundColor),
-            side: MaterialStateProperty.all(borderSide),
-            shape: MaterialStateProperty.all(const HexagonBorder()),
-          ),
+      // offset: Offset(0, on ? elevation / 2 : 0.0),
+      offset: Offset.zero,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: child,
+
+        //TODO onLongPressed, tip
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
+          shadowColor: on ? null : MaterialStateProperty.all(bl),
+          padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
+          fixedSize: MaterialStateProperty.all(Size(height, height)),
+          backgroundColor:
+              MaterialStateProperty.resolveWith(getBackgroundColor),
+          // side: MaterialStateProperty.all(borderSide),
+          shape: MaterialStateProperty.all(const HexagonBorder()),
         ),
       ),
     );

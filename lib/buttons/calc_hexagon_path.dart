@@ -1,10 +1,12 @@
 import 'dart:ui';
 import 'dart:math';
 
+import 'package:cube_painter/out.dart';
 import 'package:vector_math/vector_math.dart';
 
 //TODO remove this file
 Path calcHexagonPath(Offset center, double radius) {
+  out(radius);
   final points = <Offset>[];
   for (Offset offset in _hexagonPoints()) {
     points.add(offset * radius + center);

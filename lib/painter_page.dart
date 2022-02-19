@@ -57,7 +57,7 @@ class _PainterPageState extends State<PainterPage> {
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
     final gestureMode = getGestureMode(context, listen: true);
 
-    const double barHeight = 77;
+    const double barHeight = 177;
     // const double buttonHeight = barHeight + 22;
     return Scaffold(
       appBar: AppBar(
@@ -71,21 +71,31 @@ class _PainterPageState extends State<PainterPage> {
               onPressed: () {},
               tip: 'TODO'),
           HexagonButton(
-              radioOn: GestureMode.add == gestureMode,
-              child: Transform.scale(
-                scale: 22,
-                child: const FullUnitCube(),
-              ),
+              radioOn: GestureMode.panZoom == gestureMode,
+              child: const Icon(Icons.zoom_in_rounded),
               onPressed: () {},
               tip: 'TODO'),
           HexagonButton(
-            child: Icon(Icons.undo_sharp,
-                color: getColor(
-                  _cubes.undoer.canUndo ? Side.br : Side.bl,
-                )),
-            onPressed: _cubes.undoer.undo,
-            tip: 'Undo the last add or delete operation.',
-          ),
+              radioOn: GestureMode.panZoom == gestureMode,
+              child: const Icon(Icons.zoom_in_rounded),
+              onPressed: () {},
+              tip: 'TODO'),
+          // HexagonButton(
+          //     radioOn: GestureMode.add == gestureMode,
+          //     child: Transform.scale(
+          //       scale: 22,
+          //       child: const FullUnitCube(),
+          //     ),
+          //     onPressed: () {},
+          //     tip: 'TODO'),
+          // HexagonButton(
+          //   child: Icon(Icons.undo_sharp,
+          //       color: getColor(
+          //         _cubes.undoer.canUndo ? Side.br : Side.bl,
+          //       )),
+          //   onPressed: _cubes.undoer.undo,
+          //   tip: 'Undo the last add or delete operation.',
+          // ),
         ],
       ),
       drawer: Menu(
