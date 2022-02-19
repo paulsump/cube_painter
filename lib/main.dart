@@ -38,8 +38,7 @@ class CubePainterApp extends StatelessWidget {
             } else {
               storeScreenSize(context, constraints);
               return WillPopScope(
-                  onWillPop: () async => false,
-                  child: const SafeArea(child: PainterPage()));
+                  onWillPop: () async => false, child: const PainterPage());
             }
           },
         ),

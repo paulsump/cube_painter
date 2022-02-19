@@ -54,25 +54,27 @@ class _PainterPageState extends State<PainterPage> {
     return Scaffold(
       key: scaffoldState,
       drawer: const Menu(),
-      body: Stack(children: [
-        UnitToScreen(
-          child: Stack(
-            children: [
-              const Tiles(),
-              StaticCubes(cubeInfos: cubeInfos),
-              ..._cubes.animCubes,
-            ],
+      body: SafeArea(
+        child: Stack(children: [
+          UnitToScreen(
+            child: Stack(
+              children: [
+                const Tiles(),
+                StaticCubes(cubeInfos: cubeInfos),
+                ..._cubes.animCubes,
+              ],
+            ),
           ),
-        ),
-        GestureMode.panZoom == getGestureMode(context, listen: true)
-            ? const PanZoomer()
-            : Brush(adoptCubes: _cubes.adopt),
-        HexagonButtonBar(
-            undoer: _cubes.undoer,
-            saveToClipboard: _cubes.saveToClipboard,
-            screen: screen,
-            scaffoldState: scaffoldState),
-      ]),
+          GestureMode.panZoom == getGestureMode(context, listen: true)
+              ? const PanZoomer()
+              : Brush(adoptCubes: _cubes.adopt),
+          HexagonButtonBar(
+              undoer: _cubes.undoer,
+              saveToClipboard: _cubes.saveToClipboard,
+              screen: screen,
+              scaffoldState: scaffoldState),
+        ]),
+      ),
     );
   }
 }
