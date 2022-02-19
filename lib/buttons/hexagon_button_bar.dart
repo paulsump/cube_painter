@@ -29,7 +29,7 @@ class HexagonButtonBar extends StatelessWidget {
   double get gap => maths.gap;
 
   bool get orient => maths.orient;
-  GlobalKey<ScaffoldState> scaffoldState;
+  final GlobalKey<ScaffoldState> scaffoldState;
 
   HexagonButtonBar({
     Key? key,

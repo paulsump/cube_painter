@@ -2,6 +2,7 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/menu.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/screen.dart';
@@ -54,15 +55,3 @@ class CubePainterApp extends StatelessWidget {
   }
 }
 
-class Menu extends StatelessWidget {
-  const Menu({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      width: 99,
-      height: 99,
-    );
-  }
-}
