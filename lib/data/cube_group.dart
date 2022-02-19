@@ -128,4 +128,10 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     File(fullFilePath).writeAsString(json);
   }
+
+  void clear() {
+    _cubeGroup.cubes.clear();
+    _updateAfterLoad();
+    //TODO FIX tiles disappear, same as load empty.json
+  }
 }

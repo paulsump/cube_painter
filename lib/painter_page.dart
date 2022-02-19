@@ -112,7 +112,8 @@ class _PainterPageState extends State<PainterPage> {
               text: 'New',
               icon: Icons.star,
               callback: () {
-                //TODO clear cubes
+                final notifier = getCubeGroupNotifier(context);
+                notifier.clear();
               }),
           MenuItem(
             text: 'Forward',
