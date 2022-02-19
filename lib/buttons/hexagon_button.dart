@@ -9,6 +9,7 @@ class HexagonButton extends StatelessWidget {
 
   final double height;
   final bool radioOn;
+  final String tip;
 
   const HexagonButton({
     Key? key,
@@ -16,6 +17,7 @@ class HexagonButton extends StatelessWidget {
     required this.onPressed,
     required this.height,
     this.radioOn = false,
+    required this.tip,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class HexagonButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           child: child,
+          //TODO onLongPressed, tip
           style: ButtonStyle(
             elevation: MaterialStateProperty.all(radioOn ? 0.0 : elevation),
             shadowColor: radioOn ? null : MaterialStateProperty.all(bl),
