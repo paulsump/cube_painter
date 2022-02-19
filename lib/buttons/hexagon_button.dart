@@ -39,7 +39,7 @@ class HexagonButton extends StatelessWidget {
           elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
           shadowColor: on ? null : MaterialStateProperty.all(bl),
           padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
-          fixedSize: MaterialStateProperty.all(Size(height, height)),
+          // fixedSize: MaterialStateProperty.all(Size(height, height)),
           backgroundColor:
               MaterialStateProperty.resolveWith(getBackgroundColor),
           // side: MaterialStateProperty.all(borderSide),

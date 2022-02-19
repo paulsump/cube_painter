@@ -57,7 +57,7 @@ class _PainterPageState extends State<PainterPage> {
     final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
     final gestureMode = getGestureMode(context, listen: true);
 
-    const double barHeight = 177;
+    const double barHeight = 87;
     // const double buttonHeight = barHeight + 22;
     return Scaffold(
       appBar: AppBar(
