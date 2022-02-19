@@ -44,8 +44,7 @@ class CubeGroup {
   String toString() => '$cubes';
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
-    for (final cubeInfoObject
-        in json[json.containsKey('cubes') ? 'cubes' : 'list']) {
+    for (final cubeInfoObject in json['cubes']) {
       yield CubeInfo.fromJson(cubeInfoObject);
     }
   }
@@ -83,7 +82,6 @@ class CubeGroupNotifier extends ChangeNotifier {
   Future<void> _loadCubeGroup(String filePath,
       {required VoidCallback onSuccess}) async {
     final map = await Assets.loadJson(filePath);
-    out(filePath);
 
     _cubeGroup = CubeGroup.fromJson(map);
     onSuccess();
