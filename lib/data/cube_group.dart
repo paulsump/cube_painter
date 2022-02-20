@@ -69,7 +69,6 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   set cubeGroup(value) {
     _cubeGroup = value;
-    out('set');
   }
 
   void init({
@@ -91,7 +90,6 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     _cubeGroup = CubeGroup.fromJson(map);
     onSuccess();
-    out('hi');
   }
 
   void _updateAfterLoad() {

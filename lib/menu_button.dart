@@ -36,7 +36,6 @@ class MenuButton extends StatelessWidget {
           setGestureMode(
               crop == Crop.c ? GestureMode.add : GestureMode.crop, context);
           setCrop(crop, context);
-          out(crop);
           Navigator.pop(context);
         },
         tip: Crop.c == crop
