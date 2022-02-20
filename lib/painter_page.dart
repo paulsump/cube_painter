@@ -121,7 +121,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ],
       ),
-      drawer: Menu(cubes: _cubes),
+      drawer: const Menu(),
       body: SafeArea(
         child: Stack(children: [
           UnitToScreen(

@@ -12,9 +12,7 @@ import 'package:flutter/services.dart';
 const noWarn = out;
 
 class Menu extends StatelessWidget {
-  final Cubes cubes;
-
-  const Menu({Key? key, required this.cubes}) : super(key: key);
+  const Menu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +43,6 @@ class Menu extends StatelessWidget {
     const xm = 4 + margin;
     const double x2 = 9;
 
-    final bool canUndo = cubes.undoer.canUndo;
-    final bool canRedo = cubes.undoer.canRedo;
-
-    void undo() {
-      if (canUndo) {
-        cubes.undoer.undo();
-        Navigator.pop(context);
-      }
-    }
-
-    void redo() {
-      if (canRedo) {
-        cubes.undoer.redo();
-        Navigator.pop(context);
-      }
-    }
-
     return Drawer(
       child: Container(
         color: backgroundColor,
@@ -91,31 +72,6 @@ class Menu extends StatelessWidget {
                   },
                 ),
               ),
-            const Divider(),
-            ListTile(
-              leading: HexagonButton(
-                child: Icon(Icons.undo_sharp,
-                    color: getColor(
-                      canUndo ? Side.br : Side.bl,
-                    )),
-                onPressed: canUndo ? undo : null,
-                tip: 'Undo the last add or delete operation.',
-              ),
-              title: Text('Undo'),
-              onTap: undo,
-            ),
-            ListTile(
-              leading: HexagonButton(
-                child: Icon(Icons.redo_sharp,
-                    color: getColor(
-                      canRedo ? Side.br : Side.bl,
-                    )),
-                onPressed: canRedo ? redo : null,
-                tip: 'Redo the last add or delete operation that was undone.',
-              ),
-              title: Text('Redo'),
-              onTap: redo,
-            ),
             const Divider(),
             const Center(child: Text('Painting Modes')),
             const SizedBox(height: 22),
