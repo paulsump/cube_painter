@@ -69,6 +69,7 @@ class _PainterPageState extends State<PainterPage> {
         // backgroundColor: Colors.transparent,
         actions: <Widget>[
           HexagonButton(
+            height: 55,
             child: Icon(Icons.undo_sharp,
                 color: getColor(
                   canUndo ? Side.br : Side.bl,
@@ -77,6 +78,7 @@ class _PainterPageState extends State<PainterPage> {
             tip: 'Undo the last add or delete operation.',
           ),
           HexagonButton(
+            height: 55,
             child: Icon(Icons.redo_sharp,
                 color: getColor(
                   canRedo ? Side.br : Side.bl,
