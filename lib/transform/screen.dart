@@ -32,6 +32,7 @@ class ScreenNotifier extends ChangeNotifier {
   Offset get center => _center;
 
   double get aspect => width / height;
+  // bool get landscape => width > height;
 
   void _setData(BuildContext context, BoxConstraints constraints) {
     final media = MediaQuery.of(context);
@@ -40,10 +41,10 @@ class ScreenNotifier extends ChangeNotifier {
     final safeWidth = safe.left + safe.right;
     final safeHeight = safe.top + safe.bottom;
 
-    final double x = constraints.maxWidth;
-    final double y = constraints.maxHeight;
+    final double w = constraints.maxWidth;
+    final double h = constraints.maxHeight;
 
-    _size = Size(x - safeWidth, y - safeHeight);
+    _size = Size(w - safeWidth, h - safeHeight);
     _center = Offset(width, height) / 2;
 
     WidgetsBinding.instance!.addPostFrameCallback((_) {
