@@ -46,15 +46,16 @@ class Menu extends StatelessWidget {
                   },
                 ),
               ),
-            for (MenuButton button in buttons)
-              Container(
-                color: backgroundColor,
-                child: ListTile(
-                  leading: button,
-                  title: const Text('Cube Type'),
-                  // onTap: button.onPressed,
-                ),
-              ),
+            Row(children: [
+              for (MenuButton button in buttons) button,
+              // Container(
+              //   color: backgroundColor,
+              //   child: ListTile(
+              //     leading: button,
+              //     title: const Text('Cube Type'),
+              //   ),
+              // ),
+            ]),
           ],
         ),
       ),

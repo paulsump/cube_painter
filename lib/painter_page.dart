@@ -146,6 +146,7 @@ class _PainterPageState extends State<PainterPage> {
         ],
         buttons: const [
           MenuButton(crop: Crop.dl),
+          MenuButton(crop: Crop.c),
         ],
       ),
       body: SafeArea(
