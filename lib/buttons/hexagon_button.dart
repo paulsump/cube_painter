@@ -44,26 +44,13 @@ class HexagonButton extends StatelessWidget {
           shape: MaterialStateProperty.all(
             HexagonBorder(side: borderSide),
           ),
-          backgroundColor:
-              MaterialStateProperty.resolveWith(getBackgroundColor),
+          backgroundColor: MaterialStateProperty.all(radioOn == null
+              ? buttonColor
+              : radioOn!
+                  ? radioButtonOnColor
+                  : buttonColor),
         ),
       ),
     );
-  }
-
-  Color getBackgroundColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-
-    if (states.any(interactiveStates.contains)) {
-      // return radioButtonOnColor;
-      // return Color.lerp(top, br, 0.5)!;
-      return buttonColor;
-    }
-    return buttonColor;
-    // return top;
   }
 }
