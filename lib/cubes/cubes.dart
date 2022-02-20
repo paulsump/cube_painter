@@ -142,8 +142,7 @@ class Cubes {
       ));
     }
 
-    // TODO add this to fix the adding twice on load bug
-    // cubeGroupNotifier.clear(update:false);
+    cubeGroupNotifier.clear(update: false);
     setState(() {});
   }
 
