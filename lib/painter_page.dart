@@ -125,7 +125,7 @@ class _PainterPageState extends State<PainterPage> {
             child: Stack(
               children: [
                 const Tiles(),
-                StaticCubes(cubeInfos: cubeInfos),
+                if (cubeInfos.isNotEmpty) StaticCubes(cubeInfos: cubeInfos),
                 ..._cubes.animCubes,
               ],
             ),
