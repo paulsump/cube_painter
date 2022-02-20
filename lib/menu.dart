@@ -35,7 +35,7 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            SizedBox(height: -10.0 + MediaQuery.of(context).padding.top),
+            SizedBox(height: 0.0 + MediaQuery.of(context).padding.top),
             const Center(child: Text('Slice Mode')),
             const SizedBox(height: 22),
             Row(children: const [
