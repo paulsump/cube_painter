@@ -6,12 +6,12 @@ import 'package:cube_painter/menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class MenuItem {
+class _Item {
   final VoidCallback callback;
   final String text;
   final IconData icon;
 
-  const MenuItem({
+  const _Item({
     required this.callback,
     required this.text,
     required this.icon,
@@ -25,18 +25,18 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubeGroupnotifier = getCubeGroupNotifier(context);
 
-    final List<MenuItem> items = <MenuItem>[
-      MenuItem(
+    final items = <_Item>[
+      _Item(
         text: 'New',
         icon: Icons.star,
         callback: cubeGroupnotifier.clear,
       ),
-      MenuItem(
+      _Item(
         text: 'Load Next',
         icon: Icons.forward,
         callback: cubeGroupnotifier.forward,
       ),
-      MenuItem(
+      _Item(
         text: 'Save to Clipboard',
         icon: Icons.save_alt_sharp,
         callback: () =>
@@ -74,7 +74,7 @@ class Menu extends StatelessWidget {
             ]),
             const SizedBox(height: 22),
             const Divider(),
-            for (MenuItem item in items)
+            for (_Item item in items)
               Container(
                 color: backgroundColor,
                 child: ListTile(

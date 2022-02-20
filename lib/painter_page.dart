@@ -120,7 +120,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ],
       ),
-      drawer: Menu(),
+      drawer: const Menu(),
       body: SafeArea(
         child: Stack(children: [
           UnitToScreen(
