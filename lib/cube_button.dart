@@ -15,6 +15,8 @@ class CubeButton extends StatelessWidget {
   final String tip;
   final Crop crop;
 
+  final double height;
+
   const CubeButton({
     Key? key,
     this.radioOn,
@@ -22,6 +24,7 @@ class CubeButton extends StatelessWidget {
     required this.icon,
     required this.tip,
     this.crop = Crop.c,
+    this.height = 70,
   }) : super(key: key);
 
   @override
@@ -29,6 +32,7 @@ class CubeButton extends StatelessWidget {
     final double iconSize = IconTheme.of(context).size!;
 
     return HexagonButton(
+      height: height,
       radioOn: radioOn,
       child: Stack(
         children: [

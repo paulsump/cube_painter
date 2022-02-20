@@ -7,19 +7,23 @@ import 'package:provider/provider.dart';
 
 class MenuButton extends StatelessWidget {
   final Crop crop;
+  final double offsetX;
 
   const MenuButton({
     Key? key,
     required this.crop,
+    required this.offsetX,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final currentGestureMode = getGestureMode(context, listen: true);
+
     final Crop currentCrop =
         Provider.of<CropNotifier>(context, listen: true).crop;
 
     return CubeButton(
+      height: 69,
       crop: crop,
       radioOn:
           (currentCrop == crop && currentGestureMode == GestureMode.crop) ||

@@ -40,7 +40,7 @@ class HexagonButton extends StatelessWidget {
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
           shadowColor: on ? null : MaterialStateProperty.all(bl),
-          maximumSize: MaterialStateProperty.all(Size(height, height)),
+          minimumSize: MaterialStateProperty.all(Size(height, height)),
           shape: MaterialStateProperty.all(HexagonBorder(side: borderSide)),
         ),
       ),
