@@ -20,7 +20,7 @@ class UnitToScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Transform.translate(
       offset: getPanOffset(context, listen: true) +
-          getScreen(context, listen: false).center,
+          getScreen(context, listen: true).center,
       child: Transform.scale(
         scale: getZoomScale(context),
         child: child,
