@@ -29,17 +29,7 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const SizedBox(
-              height: 20.0,
-              // child: DrawerHeader(
-              //   decoration: BoxDecoration(
-              //     color: backgroundColor,
-              //   ),
-              //   child: const Text(''),
-              //   margin: const EdgeInsets.all(0.0),
-              //   padding: const EdgeInsets.all(0.0),
-              // ),
-            ),
+            const SizedBox(height: 20.0),
             for (MenuItem item in items)
               Container(
                 color: backgroundColor,
