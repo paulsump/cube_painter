@@ -3,9 +3,9 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MenuButton extends StatelessWidget {
-
   final Crop crop;
 
   const MenuButton({
@@ -15,23 +15,27 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Transform.scale(
-    //   scale: 21,
-    //   child: CropUnitCube(crop: crop),
-    // ),
-    final mode = getGestureMode(context, listen: true);
+    final currentGestureMode = getGestureMode(context, listen: true);
+    final Crop currentCrop =
+        Provider.of<CropNotifier>(context, listen: true).crop;
 
     return CubeButton(
-      radioOn: mode == crop,
+      crop: crop,
+      radioOn:
+          (currentCrop == crop && currentGestureMode == GestureMode.crop) ||
+              (crop == Crop.c && currentGestureMode == GestureMode.add),
       icon: Icons.add,
       onPressed: () {
-        setGestureMode(GestureMode.crop, context);
+        // if(mode!=GestureMode.crop){
+        setGestureMode(
+            crop == Crop.c ? GestureMode.add : GestureMode.crop, context);
         setCrop(crop, context);
         out(crop);
         Navigator.pop(context);
       },
-      tip:
-          'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+      tip: Crop.c == crop
+          ? 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'
+          : 'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.',
     );
   }
 }
