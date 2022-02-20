@@ -1,8 +1,10 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
+import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MenuItem {
   final VoidCallback callback;
@@ -17,12 +19,31 @@ class MenuItem {
 }
 
 class Menu extends StatelessWidget {
-  final List<MenuItem> items;
-
-  const Menu({Key? key, required this.items}) : super(key: key);
+  const Menu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cubeGroupnotifier = getCubeGroupNotifier(context);
+
+    final List<MenuItem> items = <MenuItem>[
+      MenuItem(
+        text: 'New',
+        icon: Icons.star,
+        callback: cubeGroupnotifier.clear,
+      ),
+      MenuItem(
+        text: 'Load Next',
+        icon: Icons.forward,
+        callback: cubeGroupnotifier.forward,
+      ),
+      MenuItem(
+        text: 'Save to Clipboard',
+        icon: Icons.save_alt_sharp,
+        callback: () =>
+            Clipboard.setData(ClipboardData(text: cubeGroupnotifier.json)),
+      ),
+    ];
+
     const margin = 23;
     const x0 = 39 + margin;
     const double x1 = 12;

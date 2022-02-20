@@ -120,25 +120,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ],
       ),
-      drawer: Menu(
-        items: <MenuItem>[
-          MenuItem(
-            text: 'New',
-            icon: Icons.star,
-            callback: getCubeGroupNotifier(context).clear,
-          ),
-          MenuItem(
-            text: 'Forward',
-            icon: Icons.forward,
-            callback: getCubeGroupNotifier(context).forward,
-          ),
-          MenuItem(
-            text: 'Save to Clipboard',
-            icon: Icons.save_alt_sharp,
-            callback: _cubes.saveToClipboard,
-          ),
-        ],
-      ),
+      drawer: Menu(),
       body: SafeArea(
         child: Stack(children: [
           UnitToScreen(

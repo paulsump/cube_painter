@@ -141,6 +141,7 @@ class Cubes {
     setState(() {});
   }
 
+  ///TODO remove (only for bar)
   void saveToClipboard() {
     final notifier = getCubeGroupNotifier(context);
 
