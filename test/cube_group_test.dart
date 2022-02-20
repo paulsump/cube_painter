@@ -11,7 +11,7 @@ const noWarn = out;
 
 void main() {
   group('json empty', () {
-    const testJson = '{"list":[]}';
+    const testJson = '{"cubes":[]}';
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
@@ -40,7 +40,7 @@ void main() {
 
   group('json two cubes', () {
     const testJson =
-        '{"list":[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]}';
+        '{"cubes":[{"center":{"x":1,"y":2},"cropIndex":5},{"center":{"x":3,"y":4},"cropIndex":3}]}';
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
