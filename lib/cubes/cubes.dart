@@ -134,9 +134,7 @@ class Cubes {
         fields: Fields(
           info: cubeInfos[i],
           start: unitPingPong((i % 6) / 6) / 2,
-          // TODO add this after fixing the adding twice on load bug
-          // end: 1.0,
-          end: 0.7,
+          end: 1.0,
           whenComplete: _convertToStaticCubeAndRemoveSelf,
         ),
       ));
