@@ -145,9 +145,20 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ],
         brushs: [
-          Transform.scale(
-            scale: 21,
-            child: CropUnitCube(crop: crop),
+          // Transform.scale(
+          //   scale: 21,
+          //   child: CropUnitCube(crop: crop),
+          // ),
+          CubeButton(
+            radioOn: GestureMode.add == gestureMode,
+            icon: Icons.add,
+            onPressed: () {
+              setGestureMode(GestureMode.crop, context);
+              setCrop(Crop.dl, context);
+              Navigator.pop(context);
+            },
+            tip:
+                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
           ),
         ],
       ),
