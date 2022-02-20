@@ -25,16 +25,16 @@ Color getTweenBLtoTColor(double t) =>
 
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
 
-Color get buttonColor => getTweenBtoGColor(0.7);
+Color get buttonColor => getTweenBtoGColor(0.3);
 
 Color get buttonBorderColor => getTweenBtoGColor(0.9);
 
-Color get backgroundColor => getTweenBtoGColor(0.5);
+Color get backgroundColor => getTweenBtoGColor(0.6);
 
-Color get radioButtonOnColor => getButtonColor(0.0);
+Color get radioButtonOnColor => getTweenBtoGColor(0.4);
 
 //TODO use or delete
-Color get radioButtonOffColor => getTweenBtoGColor(0.8);
+// Color get radioButtonOffColor => getTweenBtoGColor(0.8);
 
 // from https://www.designwizard.com/blog/design-trends/colour-combination
 const softPink = Color(0xFFFFDDE2);
