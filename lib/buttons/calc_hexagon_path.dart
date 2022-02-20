@@ -9,6 +9,7 @@ const noWarn = out;
 //TODO remove this file
 Path calcHexagonPath(Offset center, double radius) {
   final points = <Offset>[];
+
   for (Offset offset in _hexagonPoints()) {
     points.add(offset * radius + center);
   }
