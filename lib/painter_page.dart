@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
-import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cube_button.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
@@ -30,7 +29,6 @@ const noWarn = [
   lerpDouble,
   positionToUnitOffset,
   Tiles,
-  HexagonButtonBar,
   getCubeInfos,
   StaticCubes,
   Crop.c,
