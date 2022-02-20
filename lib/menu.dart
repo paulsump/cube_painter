@@ -9,17 +9,7 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class _Item {
-  final VoidCallback callback;
-  final String text;
-  final IconData icon;
-
-  const _Item({
-    required this.callback,
-    required this.text,
-    required this.icon,
-  });
-}
+const noWarn = out;
 
 class Menu extends StatelessWidget {
   final Cubes cubes;
@@ -83,9 +73,16 @@ class Menu extends StatelessWidget {
               Container(
                 color: backgroundColor,
                 child: ListTile(
-                  leading: Icon(
-                    item.icon,
-                    color: getColor(Side.br),
+                  leading: HexagonButton(
+                    child: Icon(
+                      item.icon,
+                      color: getColor(Side.br),
+                    ),
+                    onPressed: () {
+                      item.callback();
+                      Navigator.pop(context);
+                    },
+                    tip: 'Undo the last add or delete operation.',
                   ),
                   title: Text(item.text),
                   onTap: () {
@@ -142,4 +139,16 @@ class Menu extends StatelessWidget {
       ),
     );
   }
+}
+
+class _Item {
+  final VoidCallback callback;
+  final String text;
+  final IconData icon;
+
+  const _Item({
+    required this.callback,
+    required this.text,
+    required this.icon,
+  });
 }
