@@ -12,7 +12,6 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu.dart';
-import 'package:cube_painter/open_menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -65,9 +64,9 @@ class _PainterPageState extends State<PainterPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: barHeight,
-        backgroundColor: backgroundColor,
-        // backgroundColor: Colors.transparent,
-        leading: const OpenMenuButton(),
+        // backgroundColor: backgroundColor,
+        backgroundColor: Colors.transparent,
+        // leading: const OpenMenuButton(),
         actions: <Widget>[
           HexagonButton(
             height: 55,
@@ -109,7 +108,7 @@ class _PainterPageState extends State<PainterPage> {
             onPressed: () {
               setGestureMode(GestureMode.panZoom, context);
             },
-            tip: 'TODO',
+            tip: 'Pinch to zoom, drag to move around.',
           ),
           CubeButton(
             radioOn: GestureMode.add == gestureMode,
