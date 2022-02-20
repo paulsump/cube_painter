@@ -23,7 +23,10 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double x = 33;
+    const x0 = 39;
+    const double x1 = 12;
+    const xm = 4;
+    const double x2 = 9;
 
     return Drawer(
       child: Container(
@@ -35,17 +38,17 @@ class Menu extends StatelessWidget {
             const Center(child: Text('Slice Mode')),
             const SizedBox(height: 22),
             Row(children: const [
-              MenuButton(crop: Crop.dr, offsetX: 3 + x),
-              MenuButton(crop: Crop.dl, offsetX: 3),
+              MenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
+              MenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
             ]),
             Row(children: const [
-              MenuButton(crop: Crop.r, offsetX: 3),
-              MenuButton(crop: Crop.c, offsetX: 3),
-              MenuButton(crop: Crop.l, offsetX: 3),
+              MenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
+              MenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
+              MenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
             ]),
             Row(children: const [
-              MenuButton(crop: Crop.ur, offsetX: 3),
-              MenuButton(crop: Crop.ul, offsetX: 3),
+              MenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
+              MenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
             ]),
             const SizedBox(height: 22),
             const Divider(),
