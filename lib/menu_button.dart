@@ -5,6 +5,8 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+const noWarn = out;
+
 class MenuButton extends StatelessWidget {
   final Crop crop;
   final double offsetX;

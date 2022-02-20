@@ -4,6 +4,7 @@ import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cube_button.dart';
+import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
@@ -11,6 +12,7 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu.dart';
+import 'package:cube_painter/open_menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -18,8 +20,6 @@ import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'package:cube_painter/cubes/cube_sides.dart';
 
 /// prevent 'organise imports' from removing imports
 /// when temporarily commenting out.
@@ -67,6 +67,7 @@ class _PainterPageState extends State<PainterPage> {
         toolbarHeight: barHeight,
         backgroundColor: backgroundColor,
         // backgroundColor: Colors.transparent,
+        leading: const OpenMenuButton(),
         actions: <Widget>[
           HexagonButton(
             height: 55,
