@@ -129,12 +129,10 @@ class _PainterPageState extends State<PainterPage> {
       drawer: Menu(
         items: <MenuItem>[
           MenuItem(
-              text: 'New',
-              icon: Icons.star,
-              callback: () {
-                final notifier = getCubeGroupNotifier(context);
-                notifier.clear();
-              }),
+            text: 'New',
+            icon: Icons.star,
+            callback: getCubeGroupNotifier(context).clear,
+          ),
           MenuItem(
             text: 'Forward',
             icon: Icons.forward,
