@@ -1,7 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
-import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu_button.dart';
@@ -49,10 +48,12 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const SizedBox(height: 40.0),
+            // const SizedBox(height: 55.0),
+            SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
             for (_Item item in items)
               Container(
                 color: backgroundColor,
+                height: 66,
                 child: ListTile(
                   leading: HexagonButton(
                     child: Icon(
