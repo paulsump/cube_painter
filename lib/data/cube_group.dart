@@ -104,7 +104,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   String get json => jsonEncode(cubeGroup);
 
-  void forward() => increment(1);
+  void loadNext() => increment(1);
 
   void increment(int increment) {
     assert(1 == increment);

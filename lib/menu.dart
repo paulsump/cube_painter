@@ -34,7 +34,7 @@ class Menu extends StatelessWidget {
       _Item(
         text: 'Load Next',
         icon: Icons.forward,
-        callback: cubeGroupNotifier.forward,
+        callback: cubeGroupNotifier.loadNext,
       ),
       _Item(
         text: 'Save to Clipboard',
