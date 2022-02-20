@@ -1,5 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
 class HexagonButton extends StatelessWidget {
@@ -31,9 +32,11 @@ class HexagonButton extends StatelessWidget {
       offset: Offset(0, on ? 1.0 : -1.0) * elevation / 4,
       child: ElevatedButton(
         onPressed: onPressed,
+        onLongPress: () {
+          //TODO tip
+          out(tip);
+        },
         child: child,
-
-        //TODO onLongPressed, tip
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
           shadowColor: on ? null : MaterialStateProperty.all(bl),

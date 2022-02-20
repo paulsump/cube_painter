@@ -139,7 +139,7 @@ class _PainterPageState extends State<PainterPage> {
             callback: getCubeGroupNotifier(context).forward,
           ),
           MenuItem(
-            text: 'Save to clipboard',
+            text: 'Save to Clipboard',
             icon: Icons.save_alt_sharp,
             callback: _cubes.saveToClipboard,
           ),

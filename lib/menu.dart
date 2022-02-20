@@ -29,11 +29,16 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: backgroundColor,
-              ),
-              child: const Text('Options'),
+            const SizedBox(
+              height: 20.0,
+              // child: DrawerHeader(
+              //   decoration: BoxDecoration(
+              //     color: backgroundColor,
+              //   ),
+              //   child: const Text(''),
+              //   margin: const EdgeInsets.all(0.0),
+              //   padding: const EdgeInsets.all(0.0),
+              // ),
             ),
             for (MenuItem item in items)
               Container(
@@ -55,7 +60,7 @@ class Menu extends StatelessWidget {
                 color: backgroundColor,
                 child: ListTile(
                   leading: brush,
-                  title: const Text('Place Half Cube'),
+                  title: const Text('Cube Type'),
                   onTap: () {
                     // item.callback();
                     Navigator.pop(context);
