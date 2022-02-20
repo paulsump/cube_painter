@@ -23,13 +23,31 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double x = 33;
+
     return Drawer(
       child: Container(
         color: backgroundColor,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            // const SizedBox(height: 20.0),
+            SizedBox(height: -10.0 + MediaQuery.of(context).padding.top),
+            const Center(child: Text('Slice Mode')),
+            const SizedBox(height: 22),
+            Row(children: const [
+              MenuButton(crop: Crop.dr, offsetX: 3 + x),
+              MenuButton(crop: Crop.dl, offsetX: 3),
+            ]),
+            Row(children: const [
+              MenuButton(crop: Crop.r, offsetX: 3),
+              MenuButton(crop: Crop.c, offsetX: 3),
+              MenuButton(crop: Crop.l, offsetX: 3),
+            ]),
+            Row(children: const [
+              MenuButton(crop: Crop.ur, offsetX: 3),
+              MenuButton(crop: Crop.ul, offsetX: 3),
+            ]),
+            const SizedBox(height: 22),
             const Divider(),
             for (MenuItem item in items)
               Container(
@@ -46,22 +64,6 @@ class Menu extends StatelessWidget {
                   },
                 ),
               ),
-            const Divider(),
-            const Center(child: Text('Cube Types')),
-            const Divider(),
-            Row(children: const [
-              MenuButton(crop: Crop.dr, offsetX: 3),
-              MenuButton(crop: Crop.dl, offsetX: 3),
-            ]),
-            Row(children: const [
-              MenuButton(crop: Crop.r, offsetX: 3),
-              MenuButton(crop: Crop.c, offsetX: 3),
-              MenuButton(crop: Crop.l, offsetX: 3),
-            ]),
-            Row(children: const [
-              MenuButton(crop: Crop.ur, offsetX: 3),
-              MenuButton(crop: Crop.ul, offsetX: 3),
-            ]),
           ],
         ),
       ),

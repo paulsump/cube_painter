@@ -10,7 +10,7 @@ class CubeButton extends StatelessWidget {
   final bool? radioOn;
 
   final void Function() onPressed;
-  final IconData icon;
+  final IconData? icon;
 
   final String tip;
   final Crop crop;
@@ -21,7 +21,7 @@ class CubeButton extends StatelessWidget {
     Key? key,
     this.radioOn,
     required this.onPressed,
-    required this.icon,
+    this.icon,
     required this.tip,
     this.crop = Crop.c,
     this.height = 70,
@@ -37,7 +37,7 @@ class CubeButton extends StatelessWidget {
       child: Stack(
         children: [
           Transform.translate(
-            offset: unit * iconSize / 2,
+            offset: null != icon ? unit * iconSize / 2 : Offset.zero,
             child: Transform.scale(
               scale: 21,
               child: crop == Crop.c
@@ -45,16 +45,17 @@ class CubeButton extends StatelessWidget {
                   : CropUnitCube(crop: crop),
             ),
           ),
-          Transform.translate(
-            offset: unit * -iconSize / 2,
-            child: Transform.scale(
-              scale: 29 / iconSize,
-              child: Icon(
-                icon,
-                color: getColor(Side.br),
+          if (null != icon)
+            Transform.translate(
+              offset: unit * -iconSize / 2,
+              child: Transform.scale(
+                scale: 29 / iconSize,
+                child: Icon(
+                  icon,
+                  color: getColor(Side.br),
+                ),
               ),
             ),
-          ),
         ],
       ),
       onPressed: onPressed,

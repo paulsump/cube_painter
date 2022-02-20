@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 /// normal vector to the slice line.
 /// So it's sliced perpendicular to the cropping direction
 /// anti clockwise from right
-/// TODO REname to Slice
+/// TODO REname to Slice and SliceModeNotifier
 /// TODO REname each to opposite of current
 /// TODO rename to topLeft, bottomRight
 enum Crop {
