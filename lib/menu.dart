@@ -1,5 +1,6 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/menu_button.dart';
 import 'package:flutter/material.dart';
 
@@ -17,10 +18,8 @@ class MenuItem {
 
 class Menu extends StatelessWidget {
   final List<MenuItem> items;
-  final List<MenuButton> buttons;
 
-  const Menu({Key? key, required this.items, required this.buttons})
-      : super(key: key);
+  const Menu({Key? key, required this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,8 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const SizedBox(height: 20.0),
+            // const SizedBox(height: 20.0),
+            const Divider(),
             for (MenuItem item in items)
               Container(
                 color: backgroundColor,
@@ -46,15 +46,21 @@ class Menu extends StatelessWidget {
                   },
                 ),
               ),
-            Row(children: [
-              for (MenuButton button in buttons) button,
-              // Container(
-              //   color: backgroundColor,
-              //   child: ListTile(
-              //     leading: button,
-              //     title: const Text('Cube Type'),
-              //   ),
-              // ),
+            const Divider(),
+            const Center(child: Text('Cube Types')),
+            const Divider(),
+            Row(children: const [
+              MenuButton(crop: Crop.dr),
+              MenuButton(crop: Crop.dl),
+            ]),
+            Row(children: const [
+              MenuButton(crop: Crop.r),
+              MenuButton(crop: Crop.c),
+              MenuButton(crop: Crop.l),
+            ]),
+            Row(children: const [
+              MenuButton(crop: Crop.ur),
+              MenuButton(crop: Crop.ul),
             ]),
           ],
         ),
