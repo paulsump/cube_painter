@@ -57,7 +57,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final cubeInfos = getCubeInfos(context, listen: true);
-    final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
+    // final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
     final gestureMode = getGestureMode(context, listen: true);
 
     const double barHeight = 87;
@@ -145,10 +145,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ],
         buttons: const [
-          MenuButton(
-            crop: Crop.dl,
-            icon: Icons.add,
-          ),
+          MenuButton(crop: Crop.dl),
         ],
       ),
       body: SafeArea(

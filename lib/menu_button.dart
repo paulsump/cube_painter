@@ -5,14 +5,12 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
 class MenuButton extends StatelessWidget {
-  final IconData icon;
 
   final Crop crop;
 
   const MenuButton({
     Key? key,
     required this.crop,
-    required this.icon,
   }) : super(key: key);
 
   @override
