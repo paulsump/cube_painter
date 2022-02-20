@@ -19,6 +19,8 @@ import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:cube_painter/cubes/cube_sides.dart';
+
 /// prevent 'organise imports' from removing imports
 /// when temporarily commenting out.
 const noWarn = [
@@ -57,12 +59,31 @@ class _PainterPageState extends State<PainterPage> {
     final gestureMode = getGestureMode(context, listen: true);
     const double barHeight = 87;
 
+    final bool canUndo = _cubes.undoer.canUndo;
+    final bool canRedo = _cubes.undoer.canRedo;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: barHeight,
         backgroundColor: backgroundColor,
         // backgroundColor: Colors.transparent,
         actions: <Widget>[
+          HexagonButton(
+            child: Icon(Icons.undo_sharp,
+                color: getColor(
+                  canUndo ? Side.br : Side.bl,
+                )),
+            onPressed: canUndo ? _cubes.undoer.undo : null,
+            tip: 'Undo the last add or delete operation.',
+          ),
+          HexagonButton(
+            child: Icon(Icons.redo_sharp,
+                color: getColor(
+                  canRedo ? Side.br : Side.bl,
+                )),
+            onPressed: canRedo ? _cubes.undoer.redo : null,
+            tip: 'Redo the last add or delete operation that was undone.',
+          ),
           const Divider(
             height: 20,
             thickness: 5,
