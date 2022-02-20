@@ -98,6 +98,15 @@ class _PainterPageState extends State<PainterPage> {
             endIndent: 0,
             color: Colors.black,
           ),
+          CubeButton(
+            radioOn: GestureMode.erase == gestureMode,
+            icon: Icons.remove,
+            onPressed: () {
+              setGestureMode(GestureMode.erase, context);
+            },
+            tip:
+                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+          ),
           HexagonButton(
             radioOn: GestureMode.panZoom == gestureMode,
             child: const Icon(Icons.zoom_in_sharp),
@@ -114,15 +123,6 @@ class _PainterPageState extends State<PainterPage> {
             },
             tip:
                 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
-          ),
-          CubeButton(
-            radioOn: GestureMode.erase == gestureMode,
-            icon: Icons.remove,
-            onPressed: () {
-              setGestureMode(GestureMode.erase, context);
-            },
-            tip:
-                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
           ),
         ],
       ),
