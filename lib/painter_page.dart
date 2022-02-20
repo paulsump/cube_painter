@@ -5,7 +5,6 @@ import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cube_button.dart';
-import 'package:cube_painter/cubes/crop_unit_cube.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
@@ -14,6 +13,7 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu.dart';
+import 'package:cube_painter/menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -144,21 +144,10 @@ class _PainterPageState extends State<PainterPage> {
             callback: _cubes.saveToClipboard,
           ),
         ],
-        brushs: [
-          // Transform.scale(
-          //   scale: 21,
-          //   child: CropUnitCube(crop: crop),
-          // ),
-          CubeButton(
-            radioOn: GestureMode.add == gestureMode,
+        buttons: const [
+          MenuButton(
+            crop: Crop.dl,
             icon: Icons.add,
-            onPressed: () {
-              setGestureMode(GestureMode.crop, context);
-              setCrop(Crop.dl, context);
-              Navigator.pop(context);
-            },
-            tip:
-                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
           ),
         ],
       ),

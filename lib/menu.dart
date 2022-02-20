@@ -1,6 +1,7 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cube_button.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/menu_button.dart';
 import 'package:flutter/material.dart';
 
 class MenuItem {
@@ -17,9 +18,9 @@ class MenuItem {
 
 class Menu extends StatelessWidget {
   final List<MenuItem> items;
-  final List<CubeButton> brushs;
+  final List<MenuButton> buttons;
 
-  const Menu({Key? key, required this.items, required this.brushs})
+  const Menu({Key? key, required this.items, required this.buttons})
       : super(key: key);
 
   @override
@@ -46,16 +47,13 @@ class Menu extends StatelessWidget {
                   },
                 ),
               ),
-            for (CubeButton brush in brushs)
+            for (MenuButton button in buttons)
               Container(
                 color: backgroundColor,
                 child: ListTile(
-                  leading: brush,
+                  leading: button,
                   title: const Text('Cube Type'),
-                  onTap: () {
-                    brush.onPressed();
-                    // Navigator.pop(context);
-                  },
+                  // onTap: button.onPressed,
                 ),
               ),
           ],
