@@ -91,6 +91,7 @@ class BrushState extends State<Brush> {
 
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
+
     _addCube(brushMaths.startPosition, crop);
   }
 

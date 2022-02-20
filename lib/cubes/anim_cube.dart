@@ -45,8 +45,6 @@ class Fields {
   //TODO pass Fields
   final dynamic Function(AnimCube old)? whenComplete;
 
-  // final dynamic Function(Fields old)? whenComplete;
-
   final int duration;
 
   Fields({

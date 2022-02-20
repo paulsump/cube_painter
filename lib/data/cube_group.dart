@@ -19,6 +19,7 @@ CubeGroup _getCubeGroup(BuildContext context, {bool listen = false}) {
   return getCubeGroupNotifier(context, listen: listen).cubeGroup;
 }
 
+// TODO remove this function
 UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context,
     {bool listen = false}) {
   return UnmodifiableListView(_getCubeGroup(context, listen: listen).cubes);
@@ -33,15 +34,17 @@ void removeCubeInfo(CubeInfo info, BuildContext context) {
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
 class CubeGroup {
-  final List<CubeInfo> cubes;
+  final List<CubeInfo> _cubes;
 
-  const CubeGroup(this.cubes);
+  const CubeGroup(this._cubes);
+
+  List<CubeInfo> get cubes => _cubes;
 
   CubeGroup.fromJson(Map<String, dynamic> json)
-      : cubes = _listFromJson(json).toList();
+      : _cubes = _listFromJson(json).toList();
 
   @override
-  String toString() => '$cubes';
+  String toString() => '$_cubes';
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
     for (final cubeInfoObject in json['cubes']) {
@@ -49,7 +52,7 @@ class CubeGroup {
     }
   }
 
-  Map<String, dynamic> toJson() => {'cubes': cubes};
+  Map<String, dynamic> toJson() => {'cubes': _cubes};
 }
 
 /// access to the main store of the entire model
@@ -64,7 +67,10 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   CubeGroup get cubeGroup => _cubeGroup;
 
-  set cubeGroup(value) => _cubeGroup = value;
+  set cubeGroup(value) {
+    _cubeGroup = value;
+    out('set');
+  }
 
   void init({
     required String folderPath,
@@ -73,8 +79,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     _filePaths.addAll(await Assets.getFilePaths(folderPath));
 
     assert(_filePaths.isNotEmpty);
-
     _onSuccessfulLoad = onSuccessfulLoad;
+
     await _loadCubeGroup(_filePaths[_currentIndex],
         onSuccess: _updateAfterLoad);
   }
@@ -85,10 +91,10 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     _cubeGroup = CubeGroup.fromJson(map);
     onSuccess();
+    out('hi');
   }
 
   void _updateAfterLoad() {
-    // Clipboard.setData(ClipboardData(text: json));
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
     _onSuccessfulLoad();
@@ -129,9 +135,10 @@ class CubeGroupNotifier extends ChangeNotifier {
     File(fullFilePath).writeAsString(json);
   }
 
-  void clear() {
+  void clear({bool update = true}) {
     _cubeGroup.cubes.clear();
-    _updateAfterLoad();
-    //TODO FIX tiles disappear, same as load empty.json
+    if (update) {
+      _updateAfterLoad();
+    } //TODO FIX tiles disappear, same as load empty.json
   }
 }

@@ -42,6 +42,7 @@ class Cubes {
           undoer.clear();
           _addAnimCubes();
         });
+
     undoer = Undoer(context, setState: setState);
   }
 
@@ -92,8 +93,8 @@ class Cubes {
           fields: Fields(
             info: cube.fields.info,
             start: cube.fields.scale,
-            //TODO test delete then put back
-            // end: erase ? 0.0 : 1.0,
+//TODO            Fix extrude leaves in wrong order on simulator       //THEN put back
+// end: erase ? 0.0 : 1.0,
             end: erase ? 0.0 : 0.7,
             whenComplete:
                 erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
@@ -122,7 +123,8 @@ class Cubes {
   }
 
   void _addAnimCubes() {
-    List<CubeInfo> cubeInfos = getCubeInfos(context);
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubes;
 
     animCubes.clear();
 
@@ -132,12 +134,16 @@ class Cubes {
         fields: Fields(
           info: cubeInfos[i],
           start: unitPingPong((i % 6) / 6) / 2,
-          end: 1.0,
+          // TODO add this after fixing the adding twice on load bug
+          // end: 1.0,
+          end: 0.7,
           whenComplete: _convertToStaticCubeAndRemoveSelf,
         ),
       ));
     }
 
+    // TODO add this to fix the adding twice on load bug
+    // cubeGroupNotifier.clear(update:false);
     setState(() {});
   }
 

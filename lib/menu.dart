@@ -23,24 +23,24 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubeGroupnotifier = getCubeGroupNotifier(context);
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
 
     final items = <_Item>[
       _Item(
         text: 'New',
         icon: Icons.star,
-        callback: cubeGroupnotifier.clear,
+        callback: cubeGroupNotifier.clear,
       ),
       _Item(
         text: 'Load Next',
         icon: Icons.forward,
-        callback: cubeGroupnotifier.forward,
+        callback: cubeGroupNotifier.forward,
       ),
       _Item(
         text: 'Save to Clipboard',
         icon: Icons.save_alt_sharp,
         callback: () =>
-            Clipboard.setData(ClipboardData(text: cubeGroupnotifier.json)),
+            Clipboard.setData(ClipboardData(text: cubeGroupNotifier.json)),
       ),
     ];
 

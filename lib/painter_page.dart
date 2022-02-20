@@ -54,7 +54,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final cubeInfos = getCubeInfos(context, listen: true);
-
+    out(cubeInfos.length);
     final gestureMode = getGestureMode(context, listen: true);
     const double barHeight = 87;
 
