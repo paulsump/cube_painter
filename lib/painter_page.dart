@@ -56,38 +56,33 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final cubeInfos = getCubeInfos(context, listen: true);
-    // final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
-    final gestureMode = getGestureMode(context, listen: true);
 
+    final gestureMode = getGestureMode(context, listen: true);
     const double barHeight = 87;
-    // const double buttonHeight = barHeight + 22;
+
+    final bool canUndo = _cubes.undoer.canUndo;
+    final bool canRedo = _cubes.undoer.canRedo;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: barHeight,
-        // leading: HexagonButton(
-        //    child: const Icon(Icons.menu_sharp),
-        //   onPressed: () {
-        //     setGestureMode(GestureMode.panZoom, context);
-        //   },
-        //   tip: 'TODO',
-        // ),
         backgroundColor: backgroundColor,
         // backgroundColor: Colors.transparent,
         actions: <Widget>[
           HexagonButton(
             child: Icon(Icons.undo_sharp,
                 color: getColor(
-                  _cubes.undoer.canUndo ? Side.br : Side.bl,
+                  canUndo ? Side.br : Side.bl,
                 )),
-            onPressed: _cubes.undoer.undo,
+            onPressed: canUndo ? _cubes.undoer.undo : null,
             tip: 'Undo the last add or delete operation.',
           ),
           HexagonButton(
             child: Icon(Icons.redo_sharp,
                 color: getColor(
-                  _cubes.undoer.canRedo ? Side.br : Side.bl,
+                  canRedo ? Side.br : Side.bl,
                 )),
-            onPressed: _cubes.undoer.redo,
+            onPressed: canRedo ? _cubes.undoer.redo : null,
             tip: 'Redo the last add or delete operation that was undone.',
           ),
           const Divider(

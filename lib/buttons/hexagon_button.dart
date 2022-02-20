@@ -4,7 +4,7 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
 class HexagonButton extends StatelessWidget {
-  final void Function() onPressed;
+  final VoidCallback? onPressed;
 
   final Widget child;
 
@@ -21,6 +21,7 @@ class HexagonButton extends StatelessWidget {
     this.height = 70,
     this.radioOn,
     required this.tip,
+//TODO ENABLED FOr redo
   }) : super(key: key);
 
   @override

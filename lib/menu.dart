@@ -23,9 +23,10 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const x0 = 39;
+    const margin = 23;
+    const x0 = 39 + margin;
     const double x1 = 12;
-    const xm = 4;
+    const xm = 4 + margin;
     const double x2 = 9;
 
     return Drawer(
@@ -67,6 +68,7 @@ class Menu extends StatelessWidget {
                   },
                 ),
               ),
+            const Divider(),
           ],
         ),
       ),
