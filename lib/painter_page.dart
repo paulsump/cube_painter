@@ -5,6 +5,7 @@ import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/hexagon_button_bar.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cube_button.dart';
+import 'package:cube_painter/cubes/crop_unit_cube.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
@@ -56,7 +57,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final cubeInfos = getCubeInfos(context, listen: true);
-    // final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
+    final Crop crop = Provider.of<CropNotifier>(context, listen: true).crop;
     final gestureMode = getGestureMode(context, listen: true);
 
     const double barHeight = 87;
@@ -145,8 +146,11 @@ class _PainterPageState extends State<PainterPage> {
             callback: _cubes.saveToClipboard,
           ),
         ],
-        brushs: const [
-          // CubeButton(gestureMode: gestureMode, iconSize: iconSize),
+        brushs: [
+          Transform.scale(
+            scale: 21,
+            child: CropUnitCube(crop: crop),
+          ),
         ],
       ),
       body: SafeArea(

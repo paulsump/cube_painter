@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 
 class CubeButton extends StatelessWidget {
   final bool? radioOn;
-  final String tip;
+
   final void Function() onPressed;
   final IconData icon;
+
+  final String tip;
 
   const CubeButton({
     Key? key,
@@ -21,7 +23,7 @@ class CubeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double iconSize = IconTheme.of(context).size!;
-    // final gestureMode = getGestureMode(context, listen: true);
+
     return HexagonButton(
       radioOn: radioOn,
       child: Stack(

@@ -17,7 +17,7 @@ class MenuItem {
 
 class Menu extends StatelessWidget {
   final List<MenuItem> items;
-  final List<CubeButton> brushs;
+  final List<Widget> brushs;
 
   const Menu({Key? key, required this.items, required this.brushs})
       : super(key: key);
@@ -51,12 +51,12 @@ class Menu extends StatelessWidget {
                   },
                 ),
               ),
-            for (CubeButton brush in brushs)
+            for (Widget brush in brushs)
               Container(
                 color: backgroundColor,
                 child: ListTile(
                   leading: brush,
-                  title: const Text('Crop'),
+                  title: const Text('Place Half Cube'),
                   onTap: () {
                     // item.callback();
                     Navigator.pop(context);
