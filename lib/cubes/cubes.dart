@@ -37,7 +37,7 @@ class Cubes {
     context = context_;
 
     getCubeGroupNotifier(context).init(
-        folderPath: 'data',
+        folderPath: 'data_test',
         onSuccessfulLoad: () {
           undoer.clear();
           _addAnimCubes();
@@ -92,6 +92,7 @@ class Cubes {
           fields: Fields(
             info: cube.fields.info,
             start: cube.fields.scale,
+            //TODO test delete then put back
             // end: erase ? 0.0 : 1.0,
             end: erase ? 0.0 : 0.7,
             whenComplete:
@@ -131,8 +132,7 @@ class Cubes {
         fields: Fields(
           info: cubeInfos[i],
           start: unitPingPong((i % 6) / 6) / 2,
-          // end: 1.0,
-          end: 0.5,
+          end: 1.0,
           whenComplete: _convertToStaticCubeAndRemoveSelf,
         ),
       ));
