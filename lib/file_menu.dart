@@ -32,29 +32,30 @@ class FileMenu extends StatelessWidget {
       ),
     ];
 
-
-    return Drawer(
-      child: Container(
-        color: backgroundColor,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-            MenuTextItem(
-                item: TextItem(
-              text: 'New',
-              icon: Icons.star,
-              // TODO create new persisted file,
-              // so as not to overwrite the current one
-              callback: cubeGroupNotifier.clear,
-            )),
-            const Center(child: Text('Save Current:')),
-            Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
-            const Center(child: Text('Load from:')),
-            Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
-            for (TextItem item in items) MenuTextItem(item: item),
-            const Divider(),
-          ],
+    return LayoutBuilder(
+      builder: (context, constraints) => Drawer(
+        child: Container(
+          color: backgroundColor,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
+              MenuTextItem(
+                  item: TextItem(
+                text: 'New',
+                icon: Icons.star,
+                // TODO create new persisted file,
+                // so as not to overwrite the current one
+                callback: cubeGroupNotifier.clear,
+              )),
+              const Center(child: Text('Save Current:')),
+              Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
+              const Center(child: Text('Load from:')),
+              Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
+              for (TextItem item in items) MenuTextItem(item: item),
+              const Divider(),
+            ],
+          ),
         ),
       ),
     );

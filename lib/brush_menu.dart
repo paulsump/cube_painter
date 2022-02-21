@@ -42,41 +42,43 @@ class BrushMenu extends StatelessWidget {
     const double x1 = 12;
     const xm = 4 + margin;
     const double x2 = 9;
-    const double offsetX = -5;
+    const eraseAndPanZoomOffsetX = Offset(-5, 0);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          ListTile(
-            leading: HexagonButton(
-              child: Icon(Icons.undo_sharp,
-                  color: getColor(
-                    canUndo ? Side.br : Side.bl,
-                  )),
-              onPressed: canUndo ? undo : null,
-              tip: 'Undo the last add or delete operation.',
+          Transform.translate(
+            // offset:  Offset(constraints.maxWidth/2,0),
+            offset: Offset.zero,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                HexagonButton(
+                  child: Icon(Icons.undo_sharp,
+                      color: getColor(
+                        canUndo ? Side.br : Side.bl,
+                      )),
+                  onPressed: canUndo ? undo : null,
+                  tip: 'Undo the last add or delete operation.',
+                ),
+                HexagonButton(
+                  child: Icon(Icons.redo_sharp,
+                      color: getColor(
+                        canRedo ? Side.br : Side.bl,
+                      )),
+                  onPressed: canRedo ? redo : null,
+                  tip: 'Redo the last add or delete operation that was undone.',
+                ),
+              ],
             ),
-            title: const Text('Undo'),
-            onTap: undo,
-          ),
-          ListTile(
-            leading: HexagonButton(
-              child: Icon(Icons.redo_sharp,
-                  color: getColor(
-                    canRedo ? Side.br : Side.bl,
-                  )),
-              onPressed: canRedo ? redo : null,
-              tip: 'Redo the last add or delete operation that was undone.',
-            ),
-            title: const Text('Redo'),
-            onTap: redo,
           ),
           const Divider(),
           const Center(child: Text('Brushes')),
           const SizedBox(height: 22),
           Transform.translate(
-            offset: Offset(offsetX, 0),
+            offset: eraseAndPanZoomOffsetX,
             child: CubeButton(
               radioOn: GestureMode.erase == gestureMode,
               icon: Icons.remove,
@@ -101,7 +103,7 @@ class BrushMenu extends StatelessWidget {
             BrushMenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
           ]),
           Transform.translate(
-            offset: Offset(offsetX, 0),
+            offset: eraseAndPanZoomOffsetX,
             child: HexagonButton(
               radioOn: GestureMode.panZoom == gestureMode,
               child: const Icon(Icons.zoom_in_sharp),
