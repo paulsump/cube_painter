@@ -34,7 +34,7 @@ class BrushMenuButton extends StatelessWidget {
         setGestureMode(
             crop == Crop.c ? GestureMode.add : GestureMode.crop, context);
         setCrop(crop, context);
-        Navigator.pop(context);
+        // Navigator.pop(context);
       },
       tip: Crop.c == crop
           ? 'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.'

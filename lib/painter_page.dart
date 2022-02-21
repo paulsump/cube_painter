@@ -55,15 +55,6 @@ class _PainterPageState extends State<PainterPage> {
     const double barHeight = 87;
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: barHeight,
-        // backgroundColor: backgroundColor,
-        backgroundColor: Colors.transparent,
-        leading: const OpenMenuButton(endDrawer: false),
-        actions: const <Widget>[
-          OpenMenuButton(endDrawer: true),
-        ],
-      ),
       drawer: const FileMenu(),
       endDrawer: BrushMenu(cubes: _cubes),
       body: SafeArea(
@@ -81,6 +72,11 @@ class _PainterPageState extends State<PainterPage> {
           GestureMode.panZoom == getGestureMode(context, listen: true)
               ? const PanZoomer()
               : Brush(adoptCubes: _cubes.adopt),
+          const OpenMenuButton(endDrawer: false),
+          Transform.translate(
+            offset: Offset(MediaQuery.of(context).size.width - 55, 0),
+            child: const OpenMenuButton(endDrawer: true),
+          ),
         ]),
       ),
     );
