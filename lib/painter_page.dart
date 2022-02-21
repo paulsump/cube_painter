@@ -121,7 +121,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
         ],
       ),
-      drawer: const Menu(),
+      drawer: const FileMenu(),
       endDrawer: const BrushMenu(),
       body: SafeArea(
         child: Stack(children: [

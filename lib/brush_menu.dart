@@ -1,8 +1,6 @@
-import 'package:cube_painter/cubes/thumbnail.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu_button.dart';
-import 'package:cube_painter/menu_text_item.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -15,23 +13,6 @@ class BrushMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
-    final items = <TextItem>[
-      TextItem(
-        text: 'Load',
-        icon: Icons.file_open_sharp,
-        callback: cubeGroupNotifier.load,
-      ),
-      TextItem(
-        text: 'Save',
-        icon: Icons.save,
-        callback: cubeGroupNotifier.save,
-      ),
-      TextItem(
-        text: 'Next Example',
-        icon: Icons.forward,
-        callback: cubeGroupNotifier.loadNextExample,
-      ),
-    ];
 
     const margin = 23;
     const x0 = 39 + margin;
@@ -46,20 +27,6 @@ class BrushMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          MenuTextItem(
-              item: TextItem(
-            text: 'New',
-            icon: Icons.star,
-            // TODO create new persisted file,
-            // so as not to overwrite the current one
-            callback: cubeGroupNotifier.clear,
-          )),
-          const Center(child: Text('Save Current:')),
-          Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
-          const Center(child: Text('Load from:')),
-          Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
-          for (TextItem item in items) MenuTextItem(item: item),
-          const Divider(),
           const Center(child: Text('Painting Modes')),
           const SizedBox(height: 22),
           Row(children: const [
