@@ -42,7 +42,7 @@ class BrushMenu extends StatelessWidget {
     const double x1 = 12;
     const xm = 4 + margin;
     const double x2 = 9;
-
+    const double offsetX = -5;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -73,8 +73,20 @@ class BrushMenu extends StatelessWidget {
             onTap: redo,
           ),
           const Divider(),
-          const Center(child: Text('Painting Modes')),
+          const Center(child: Text('Brushes')),
           const SizedBox(height: 22),
+          Transform.translate(
+            offset: Offset(offsetX, 0),
+            child: CubeButton(
+              radioOn: GestureMode.erase == gestureMode,
+              icon: Icons.remove,
+              onPressed: () {
+                setGestureMode(GestureMode.erase, context);
+              },
+              tip:
+                  'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+            ),
+          ),
           Row(children: const [
             BrushMenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
             BrushMenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
@@ -88,34 +100,21 @@ class BrushMenu extends StatelessWidget {
             BrushMenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
             BrushMenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
           ]),
-          const SizedBox(height: 22),
+          Transform.translate(
+            offset: Offset(offsetX, 0),
+            child: HexagonButton(
+              radioOn: GestureMode.panZoom == gestureMode,
+              child: const Icon(Icons.zoom_in_sharp),
+              onPressed: () {
+                setGestureMode(GestureMode.panZoom, context);
+              },
+              tip: 'Pinch to zoom, drag to move around.',
+            ),
+          ),
+          const SizedBox(height: 3),
+          const Center(child: Text('Pan / Zoom')),
           const Divider(),
-          CubeButton(
-            radioOn: GestureMode.erase == gestureMode,
-            icon: Icons.remove,
-            onPressed: () {
-              setGestureMode(GestureMode.erase, context);
-            },
-            tip:
-            'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-          ),
-          HexagonButton(
-            radioOn: GestureMode.panZoom == gestureMode,
-            child: const Icon(Icons.zoom_in_sharp),
-            onPressed: () {
-              setGestureMode(GestureMode.panZoom, context);
-            },
-            tip: 'Pinch to zoom, drag to move around.',
-          ),
-          CubeButton(
-            radioOn: GestureMode.add == gestureMode,
-            icon: Icons.add,
-            onPressed: () {
-              setGestureMode(GestureMode.add, context);
-            },
-            tip:
-            'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
-          ),
+          const SizedBox(height: 22),
         ],
       ),
     );
