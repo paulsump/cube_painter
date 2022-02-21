@@ -72,10 +72,10 @@ class CubeGroupNotifier extends ChangeNotifier {
   }
 
   void init({
-    required String folderPath,
+    required String samplesFolderPath,
     required VoidCallback onSuccessfulLoad,
   }) async {
-    _sampleFilePaths.addAll(await Assets.getFilePaths(folderPath));
+    _sampleFilePaths.addAll(await Assets.getFilePaths(samplesFolderPath));
 
     assert(_sampleFilePaths.isNotEmpty);
     _onSuccessfulLoad = onSuccessfulLoad;
