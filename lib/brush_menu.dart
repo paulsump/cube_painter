@@ -37,12 +37,14 @@ class BrushMenu extends StatelessWidget {
       }
     }
 
-    const margin = 23;
-    const x0 = 39 + margin;
-    const double x1 = 12;
-    const xm = 4 + margin;
-    const double x2 = 9;
-    const eraseAndPanZoomOffsetX = Offset(-5, 0);
+    //TODO Remove
+    const margin = 0;
+    const x0 = 0 + margin;
+    const double x1 = 0;
+    const xm = 0 + margin;
+    const double x2 = 0;
+    const eraseAndPanZoomOffsetX = Offset(0, 0);
+    const pad = SizedBox(width: 14);
 
     return Drawer(
       child: ListView(
@@ -63,6 +65,7 @@ class BrushMenu extends StatelessWidget {
                   onPressed: canUndo ? undo : null,
                   tip: 'Undo the last add or delete operation.',
                 ),
+                pad,
                 HexagonButton(
                   child: Icon(Icons.redo_sharp,
                       color: getColor(
@@ -89,19 +92,32 @@ class BrushMenu extends StatelessWidget {
                   'Tap on a cube to delete it.  You can change the position while you have your finger down.',
             ),
           ),
-          Row(children: const [
-            BrushMenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
-            BrushMenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
-          ]),
-          Row(children: const [
-            BrushMenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
-            BrushMenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
-            BrushMenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
-          ]),
-          Row(children: const [
-            BrushMenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
-            BrushMenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
-          ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              BrushMenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
+              pad,
+              BrushMenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              BrushMenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
+              pad,
+              BrushMenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
+              pad,
+              BrushMenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              BrushMenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
+              pad,
+              BrushMenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
+            ],
+          ),
           Transform.translate(
             offset: eraseAndPanZoomOffsetX,
             child: HexagonButton(
