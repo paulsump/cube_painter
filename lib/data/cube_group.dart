@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cube_painter/data/assets.dart';
 import 'package:cube_painter/data/cube_info.dart';
+import 'package:cube_painter/data/persist.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,8 @@ class CubeGroupNotifier extends ChangeNotifier {
   // set to initial empty list for when it's used before load is complete
   CubeGroup _cubeGroup = const CubeGroup([]);
 
+  final persist = Persist(fileName: "persisted1.json");
+
   late VoidCallback _onSuccessfulLoad;
   final _exampleFilePaths = <String>[];
 
@@ -80,13 +83,21 @@ class CubeGroupNotifier extends ChangeNotifier {
     assert(_exampleFilePaths.isNotEmpty);
     _onSuccessfulLoad = onSuccessfulLoad;
 
-    await _loadCubeGroup(_exampleFilePaths[_currentIndex],
+    await _loadExampleCubeGroup(_exampleFilePaths[_currentIndex],
         onSuccess: _updateAfterLoad);
   }
 
-  Future<void> _loadCubeGroup(String filePath,
+  Future<void> _loadExampleCubeGroup(String filePath,
       {required VoidCallback onSuccess}) async {
     final map = await Assets.loadJson(filePath);
+
+    _cubeGroup = CubeGroup.fromJson(map);
+    onSuccess();
+  }
+
+  void _loadPersistedCubeGroup(String json,
+      {required VoidCallback onSuccess}) async {
+    Map<String, dynamic> map = jsonDecode(json);
 
     _cubeGroup = CubeGroup.fromJson(map);
     onSuccess();
@@ -102,7 +113,16 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   String get json => jsonEncode(cubeGroup);
 
-  void loadNext() => increment(1);
+  void load() async {
+    String filePath = await persist.load();
+    _loadPersistedCubeGroup(filePath, onSuccess: _updateAfterLoad);
+  }
+
+  void save() {
+    persist.save(json);
+  }
+
+  void loadNextExample() => increment(1);
 
   void increment(int increment) {
     assert(1 == increment);
@@ -112,7 +132,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     final String filePath = _exampleFilePaths[_currentIndex];
 
-    _loadCubeGroup(filePath, onSuccess: _updateAfterLoad);
+    _loadExampleCubeGroup(filePath, onSuccess: _updateAfterLoad);
   }
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubes.add(info);
@@ -123,7 +143,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     for (int i = 0; i < _exampleFilePaths.length; ++i) {
       final String filePath = _exampleFilePaths[i];
 
-      _loadCubeGroup(filePath, onSuccess: () => _save(folderPath + filePath));
+      _loadExampleCubeGroup(filePath,
+          onSuccess: () => _save(folderPath + filePath));
     }
   }
 

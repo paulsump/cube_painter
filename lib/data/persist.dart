@@ -1,12 +1,17 @@
+import 'package:cube_painter/out.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
 class Persist {
-  static const String _fileName = "persisted1.csv";
+  final String fileName;
+
+  Persist({required this.fileName});
 
   Future<String> load() async {
     File file = File(await _getFilePath());
+    // out(file.path);
     // file.delete();
+    // return '';
 
     if (!file.existsSync()) {
       return '';
@@ -19,8 +24,11 @@ class Persist {
     try {
       File file = File(await _getFilePath());
       file.writeAsString(text);
+      out(file.path);
+      out(text);
     } catch (e) {
       // doesn't work on windows or mac
+      out(e);
     }
   }
 
@@ -28,6 +36,6 @@ class Persist {
     Directory folder = await getApplicationDocumentsDirectory();
 
     String path = folder.path;
-    return '$path/$_fileName';
+    return '$path/$fileName';
   }
 }

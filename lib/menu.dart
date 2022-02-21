@@ -6,7 +6,6 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 const noWarn = out;
 
@@ -21,24 +20,24 @@ class Menu extends StatelessWidget {
       _Item(
         text: 'New',
         icon: Icons.star,
+        // TODO create new persisted file,
+        // so as not to overwrite the current one
         callback: cubeGroupNotifier.clear,
       ),
       _Item(
         text: 'Load',
         icon: Icons.file_open_sharp,
-        callback: cubeGroupNotifier.loadNext,
+        callback: cubeGroupNotifier.load,
       ),
       _Item(
-        text: 'Save to Clipboard',
+        text: 'Save',
         icon: Icons.save,
-        callback: () => Clipboard.setData(
-          ClipboardData(text: cubeGroupNotifier.json),
-        ),
+        callback: cubeGroupNotifier.save,
       ),
       _Item(
         text: 'Next Example',
         icon: Icons.forward,
-        callback: cubeGroupNotifier.loadNext,
+        callback: cubeGroupNotifier.loadNextExample,
       ),
     ];
 
@@ -56,8 +55,8 @@ class Menu extends StatelessWidget {
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
           for (_Item item in items)
-            Container(
-              // color: backgroundColor,
+            SizedBox(
+              // Container(      color: backgroundColor,
               height: 66,
               child: ListTile(
                 leading: HexagonButton(
