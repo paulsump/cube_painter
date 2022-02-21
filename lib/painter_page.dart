@@ -3,9 +3,7 @@ import 'dart:ui';
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/brush_menu.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cube_button.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
@@ -59,8 +57,6 @@ class _PainterPageState extends State<PainterPage> {
     final gestureMode = getGestureMode(context, listen: true);
     const double barHeight = 87;
 
-    final bool canUndo = _cubes.undoer.canUndo;
-    final bool canRedo = _cubes.undoer.canRedo;
 
     return Scaffold(
       appBar: AppBar(
@@ -70,24 +66,6 @@ class _PainterPageState extends State<PainterPage> {
         leading: const OpenMenuButton(endDrawer: false),
         actions: <Widget>[
           const OpenMenuButton(endDrawer: true),
-          HexagonButton(
-            height: 55,
-            child: Icon(Icons.undo_sharp,
-                color: getColor(
-                  canUndo ? Side.br : Side.bl,
-                )),
-            onPressed: canUndo ? _cubes.undoer.undo : null,
-            tip: 'Undo the last add or delete operation.',
-          ),
-          HexagonButton(
-            height: 55,
-            child: Icon(Icons.redo_sharp,
-                color: getColor(
-                  canRedo ? Side.br : Side.bl,
-                )),
-            onPressed: canRedo ? _cubes.undoer.redo : null,
-            tip: 'Redo the last add or delete operation that was undone.',
-          ),
           const Divider(
             height: 20,
             thickness: 5,
