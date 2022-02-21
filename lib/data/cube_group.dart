@@ -19,11 +19,6 @@ CubeGroup getCubeGroup(BuildContext context, {bool listen = false}) {
   return getCubeGroupNotifier(context, listen: listen).cubeGroup;
 }
 
-void removeCubeInfo(CubeInfo info, BuildContext context) {
-  final notifier = getCubeGroupNotifier(context);
-  notifier.cubeGroup.cubes.remove(info);
-}
-
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.

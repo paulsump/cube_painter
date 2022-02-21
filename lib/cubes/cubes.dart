@@ -46,8 +46,8 @@ class Cubes {
     undoer = Undoer(context, setState: setState);
   }
 
-  CubeInfo? _getCubeInfoAt(Position position) {
-    for (final info in getCubeGroup(context).cubes) {
+  CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
+    for (final info in cubeInfos) {
       if (position == info.center) {
         return info;
       }
@@ -67,15 +67,19 @@ class Cubes {
   void adopt(List<AnimCube> orphans) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubes;
+
     if (erase) {
       for (final AnimCube cube in orphans) {
-        final CubeInfo? cubeInfo = _getCubeInfoAt(cube.fields.info.center);
+        final CubeInfo? cubeInfo =
+            _getCubeInfoAt(cube.fields.info.center, cubeInfos);
 
         if (cubeInfo != null) {
           assert(orphans.length == 1);
 
           undoer.save();
-          removeCubeInfo(cubeInfo, context);
+          cubeInfos.remove(cubeInfo);
         }
       }
     } else {
@@ -124,7 +128,7 @@ class Cubes {
 
   void _addAnimCubes() {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
-    List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubes;
+    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubes;
 
     animCubes.clear();
 
