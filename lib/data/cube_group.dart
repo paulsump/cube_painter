@@ -23,17 +23,17 @@ CubeGroup getCubeGroup(BuildContext context, {bool listen = false}) {
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
 class CubeGroup {
-  final List<CubeInfo> _cubes;
+  final List<CubeInfo> _cubeInfos;
 
-  const CubeGroup(this._cubes);
+  const CubeGroup(this._cubeInfos);
 
-  List<CubeInfo> get cubes => _cubes;
+  List<CubeInfo> get cubeInfos => _cubeInfos;
 
   CubeGroup.fromJson(Map<String, dynamic> json)
-      : _cubes = _listFromJson(json).toList();
+      : _cubeInfos = _listFromJson(json).toList();
 
   @override
-  String toString() => '$_cubes';
+  String toString() => '$_cubeInfos';
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
     for (final cubeInfoObject in json['cubes']) {
@@ -41,7 +41,7 @@ class CubeGroup {
     }
   }
 
-  Map<String, dynamic> toJson() => {'cubes': _cubes};
+  Map<String, dynamic> toJson() => {'cubes': _cubeInfos};
 }
 
 /// access to the main store of the entire model
@@ -123,7 +123,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     _loadExampleCubeGroup(filePath, onSuccess: _updateAfterLoad);
   }
 
-  void addCubeInfo(CubeInfo info) => cubeGroup.cubes.add(info);
+  void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
 
   void convertAll() {
     const String folderPath = '/Users/paulsump/a/cube_painter/';
@@ -143,7 +143,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   }
 
   void clear({bool update = true}) {
-    _cubeGroup.cubes.clear();
+    _cubeGroup.cubeInfos.clear();
     if (update) {
       _updateAfterLoad();
     }

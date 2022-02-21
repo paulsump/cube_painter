@@ -4,7 +4,6 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +41,7 @@ class Thumbnail extends StatelessWidget {
     double maxX = -9999999;
     double maxY = -9999999;
 
-    for (CubeInfo info in cubeGroup.cubes) {
+    for (CubeInfo info in cubeGroup.cubeInfos) {
       final offset = positionToUnitOffset(info.center);
 
       if (minX > offset.dx) {

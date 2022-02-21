@@ -15,8 +15,8 @@ class StaticCubes extends StatelessWidget {
   StaticCubes({
     Key? key,
     required CubeGroup cubeGroup,
-  })  : _cubes = List.generate(cubeGroup.cubes.length,
-            (i) => StaticCube(info: cubeGroup.cubes[i])),
+  })  : _cubes = List.generate(cubeGroup.cubeInfos.length,
+            (i) => StaticCube(info: cubeGroup.cubeInfos[i])),
         super(key: key);
 
   @override

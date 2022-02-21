@@ -68,7 +68,7 @@ class Cubes {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
     final cubeGroupNotifier = getCubeGroupNotifier(context);
-    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubes;
+    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubeInfos;
 
     if (erase) {
       for (final AnimCube cube in orphans) {
@@ -128,7 +128,7 @@ class Cubes {
 
   void _addAnimCubes() {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
-    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubes;
+    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubeInfos;
 
     animCubes.clear();
 
