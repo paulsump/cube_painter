@@ -13,6 +13,7 @@ import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/file_menu.dart';
 import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/open_menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -66,8 +67,9 @@ class _PainterPageState extends State<PainterPage> {
         toolbarHeight: barHeight,
         // backgroundColor: backgroundColor,
         backgroundColor: Colors.transparent,
-        // leading: const OpenMenuButton(),
+        leading: const OpenMenuButton(endDrawer: false),
         actions: <Widget>[
+          const OpenMenuButton(endDrawer: true),
           HexagonButton(
             height: 55,
             child: Icon(Icons.undo_sharp,
