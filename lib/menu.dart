@@ -44,7 +44,7 @@ class Menu extends StatelessWidget {
 
     return Drawer(
       child: Container(
-        color: backgroundColor,
+        // color: backgroundColor,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -52,7 +52,7 @@ class Menu extends StatelessWidget {
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
             for (_Item item in items)
               Container(
-                color: backgroundColor,
+                // color: backgroundColor,
                 height: 66,
                 child: ListTile(
                   leading: HexagonButton(

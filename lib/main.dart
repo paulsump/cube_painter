@@ -34,6 +34,8 @@ class CubePainterApp extends StatelessWidget {
         theme: ThemeData(
           // primaryColor: Colors.red,
           // backgroundColor: Colors.red,
+          canvasColor: Colors.transparent,
+          //or any other color you want. e.g Colors.blue.withOpacity(0.5)
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: getColor(Side.br),
                 // displayColor: Colors.red,
@@ -52,8 +54,8 @@ class CubePainterApp extends StatelessWidget {
           //     ),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-            primary: buttonColor,
-          )),
+                primary: buttonColor,
+              )),
         ),
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
