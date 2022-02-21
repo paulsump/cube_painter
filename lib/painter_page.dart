@@ -53,7 +53,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cubeInfos = getCubeInfos(context, listen: true);
+    final cubeGroup = getCubeGroup(context, listen: true);
 
     final gestureMode = getGestureMode(context, listen: true);
     const double barHeight = 87;
@@ -128,7 +128,8 @@ class _PainterPageState extends State<PainterPage> {
             child: Stack(
               children: [
                 const Tiles(),
-                if (cubeInfos.isNotEmpty) StaticCubes(cubeInfos: cubeInfos),
+                if (cubeGroup.cubes.isNotEmpty)
+                  StaticCubes(cubeGroup: cubeGroup),
                 ..._cubes.animCubes,
               ],
             ),

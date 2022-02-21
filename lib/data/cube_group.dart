@@ -16,14 +16,14 @@ CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
   return Provider.of<CubeGroupNotifier>(context, listen: listen);
 }
 
-CubeGroup _getCubeGroup(BuildContext context, {bool listen = false}) {
+CubeGroup getCubeGroup(BuildContext context, {bool listen = false}) {
   return getCubeGroupNotifier(context, listen: listen).cubeGroup;
 }
 
 // TODO remove this function
 UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context,
     {bool listen = false}) {
-  return UnmodifiableListView(_getCubeGroup(context, listen: listen).cubes);
+  return UnmodifiableListView(getCubeGroup(context, listen: listen).cubes);
 }
 
 void removeCubeInfo(CubeInfo info, BuildContext context) {
