@@ -106,9 +106,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     _loadPersistedCubeGroup(filePath, onSuccess: _updateAfterLoad);
   }
 
-  void save() {
-    persist.save(json);
-  }
+  void save() => persist.save(json);
 
   void loadNextExample() => increment(1);
 
