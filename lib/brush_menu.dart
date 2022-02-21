@@ -37,13 +37,6 @@ class BrushMenu extends StatelessWidget {
       }
     }
 
-    //TODO Remove
-    const margin = 0;
-    const x0 = 0 + margin;
-    const double x1 = 0;
-    const xm = 0 + margin;
-    const double x2 = 0;
-    const eraseAndPanZoomOffsetX = Offset(0, 0);
     const pad = SizedBox(width: 14);
 
     return Drawer(
@@ -80,54 +73,48 @@ class BrushMenu extends StatelessWidget {
           const Divider(),
           const Center(child: Text('Brushes')),
           const SizedBox(height: 22),
-          Transform.translate(
-            offset: eraseAndPanZoomOffsetX,
-            child: CubeButton(
-              radioOn: GestureMode.erase == gestureMode,
-              icon: Icons.remove,
-              onPressed: () {
-                setGestureMode(GestureMode.erase, context);
-              },
-              tip:
-                  'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-            ),
+          CubeButton(
+            radioOn: GestureMode.erase == gestureMode,
+            icon: Icons.remove,
+            onPressed: () {
+              setGestureMode(GestureMode.erase, context);
+            },
+            tip:
+                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              BrushMenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
+              BrushMenuButton(crop: Crop.dr),
               pad,
-              BrushMenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
+              BrushMenuButton(crop: Crop.dl),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              BrushMenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
+              BrushMenuButton(crop: Crop.r),
               pad,
-              BrushMenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
+              BrushMenuButton(crop: Crop.c),
               pad,
-              BrushMenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
+              BrushMenuButton(crop: Crop.l),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              BrushMenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
+              BrushMenuButton(crop: Crop.ur),
               pad,
-              BrushMenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
+              BrushMenuButton(crop: Crop.ul),
             ],
           ),
-          Transform.translate(
-            offset: eraseAndPanZoomOffsetX,
-            child: HexagonButton(
-              radioOn: GestureMode.panZoom == gestureMode,
-              child: const Icon(Icons.zoom_in_sharp),
-              onPressed: () {
-                setGestureMode(GestureMode.panZoom, context);
-              },
-              tip: 'Pinch to zoom, drag to move around.',
-            ),
+          HexagonButton(
+            radioOn: GestureMode.panZoom == gestureMode,
+            child: const Icon(Icons.zoom_in_sharp),
+            onPressed: () {
+              setGestureMode(GestureMode.panZoom, context);
+            },
+            tip: 'Pinch to zoom, drag to move around.',
           ),
           const SizedBox(height: 3),
           const Center(child: Text('Pan / Zoom')),
