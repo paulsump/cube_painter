@@ -55,9 +55,7 @@ class Menu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          Thumbnail(
-            cubeGroup: cubeGroupNotifier.cubeGroup,
-          ),
+          Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
           for (_Item item in items)
             SizedBox(
               // Container(      color: backgroundColor,
