@@ -7,11 +7,11 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-class MenuButton extends StatelessWidget {
+class BrushMenuButton extends StatelessWidget {
   final Crop crop;
   final double offsetX;
 
-  const MenuButton({
+  const BrushMenuButton({
     Key? key,
     required this.crop,
     required this.offsetX,

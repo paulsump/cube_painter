@@ -1,3 +1,4 @@
+import 'package:cube_painter/brush_menu_button.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cube_button.dart';
@@ -5,7 +6,6 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -76,17 +76,17 @@ class BrushMenu extends StatelessWidget {
           const Center(child: Text('Painting Modes')),
           const SizedBox(height: 22),
           Row(children: const [
-            MenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
-            MenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
+            BrushMenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
+            BrushMenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
           ]),
           Row(children: const [
-            MenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
-            MenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
-            MenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
+            BrushMenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
+            BrushMenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
+            BrushMenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
           ]),
           Row(children: const [
-            MenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
-            MenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
+            BrushMenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
+            BrushMenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
           ]),
           const SizedBox(height: 22),
           const Divider(),
@@ -97,7 +97,7 @@ class BrushMenu extends StatelessWidget {
               setGestureMode(GestureMode.erase, context);
             },
             tip:
-                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+            'Tap on a cube to delete it.  You can change the position while you have your finger down.',
           ),
           HexagonButton(
             radioOn: GestureMode.panZoom == gestureMode,
@@ -114,7 +114,7 @@ class BrushMenu extends StatelessWidget {
               setGestureMode(GestureMode.add, context);
             },
             tip:
-                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+            'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
           ),
         ],
       ),
