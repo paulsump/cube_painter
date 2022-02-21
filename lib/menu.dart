@@ -24,15 +24,21 @@ class Menu extends StatelessWidget {
         callback: cubeGroupNotifier.clear,
       ),
       _Item(
-        text: 'Load Next',
-        icon: Icons.forward,
+        text: 'Load',
+        icon: Icons.file_open_sharp,
         callback: cubeGroupNotifier.loadNext,
       ),
       _Item(
         text: 'Save to Clipboard',
-        icon: Icons.save_alt_sharp,
-        callback: () =>
-            Clipboard.setData(ClipboardData(text: cubeGroupNotifier.json)),
+        icon: Icons.save,
+        callback: () => Clipboard.setData(
+          ClipboardData(text: cubeGroupNotifier.json),
+        ),
+      ),
+      _Item(
+        text: 'Next Example',
+        icon: Icons.forward,
+        callback: cubeGroupNotifier.loadNext,
       ),
     ];
 
@@ -43,56 +49,54 @@ class Menu extends StatelessWidget {
     const double x2 = 9;
 
     return Drawer(
-      child: Container(
-        // color: backgroundColor,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            // const SizedBox(height: 55.0),
-            SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-            for (_Item item in items)
-              Container(
-                // color: backgroundColor,
-                height: 66,
-                child: ListTile(
-                  leading: HexagonButton(
-                    child: Icon(
-                      item.icon,
-                      color: getColor(Side.br),
-                    ),
-                    onPressed: () {
-                      item.callback();
-                      Navigator.pop(context);
-                    },
-                    tip: 'Undo the last add or delete operation.',
+      // child: Container(
+      // color: backgroundColor,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
+          for (_Item item in items)
+            Container(
+              // color: backgroundColor,
+              height: 66,
+              child: ListTile(
+                leading: HexagonButton(
+                  child: Icon(
+                    item.icon,
+                    color: getColor(Side.br),
                   ),
-                  title: Text(item.text),
-                  onTap: () {
+                  onPressed: () {
                     item.callback();
                     Navigator.pop(context);
                   },
+                  tip: 'Undo the last add or delete operation.',
                 ),
+                title: Text(item.text),
+                onTap: () {
+                  item.callback();
+                  Navigator.pop(context);
+                },
               ),
-            const Divider(),
-            const Center(child: Text('Painting Modes')),
-            const SizedBox(height: 22),
-            Row(children: const [
-              MenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
-              MenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
-            ]),
-            Row(children: const [
-              MenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
-              MenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
-              MenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
-            ]),
-            Row(children: const [
-              MenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
-              MenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
-            ]),
-            const SizedBox(height: 22),
-            const Divider(),
-          ],
-        ),
+            ),
+          const Divider(),
+          const Center(child: Text('Painting Modes')),
+          const SizedBox(height: 22),
+          Row(children: const [
+            MenuButton(crop: Crop.dr, offsetX: x0 + x1 * 1),
+            MenuButton(crop: Crop.dl, offsetX: x0 + x1 * 2),
+          ]),
+          Row(children: const [
+            MenuButton(crop: Crop.r, offsetX: xm + x2 * 1),
+            MenuButton(crop: Crop.c, offsetX: xm + x2 * 2),
+            MenuButton(crop: Crop.l, offsetX: xm + x2 * 3),
+          ]),
+          Row(children: const [
+            MenuButton(crop: Crop.ur, offsetX: x0 + x1 * 1),
+            MenuButton(crop: Crop.ul, offsetX: x0 + x1 * 2),
+          ]),
+          const SizedBox(height: 22),
+          const Divider(),
+        ],
       ),
     );
   }

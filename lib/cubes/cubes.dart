@@ -37,7 +37,7 @@ class Cubes {
     context = context_;
 
     getCubeGroupNotifier(context).init(
-        samplesFolderPath: 'data_test',
+        examplesFolderPath: 'data_test',
         onSuccessfulLoad: () {
           undoer.clear();
           _addAnimCubes();

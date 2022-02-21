@@ -61,7 +61,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   CubeGroup _cubeGroup = const CubeGroup([]);
 
   late VoidCallback _onSuccessfulLoad;
-  final _sampleFilePaths = <String>[];
+  final _exampleFilePaths = <String>[];
 
   int _currentIndex = 0;
 
@@ -72,15 +72,15 @@ class CubeGroupNotifier extends ChangeNotifier {
   }
 
   void init({
-    required String samplesFolderPath,
+    required String examplesFolderPath,
     required VoidCallback onSuccessfulLoad,
   }) async {
-    _sampleFilePaths.addAll(await Assets.getFilePaths(samplesFolderPath));
+    _exampleFilePaths.addAll(await Assets.getFilePaths(examplesFolderPath));
 
-    assert(_sampleFilePaths.isNotEmpty);
+    assert(_exampleFilePaths.isNotEmpty);
     _onSuccessfulLoad = onSuccessfulLoad;
 
-    await _loadCubeGroup(_sampleFilePaths[_currentIndex],
+    await _loadCubeGroup(_exampleFilePaths[_currentIndex],
         onSuccess: _updateAfterLoad);
   }
 
@@ -108,9 +108,9 @@ class CubeGroupNotifier extends ChangeNotifier {
     assert(1 == increment);
 
     _currentIndex += increment;
-    _currentIndex %= _sampleFilePaths.length;
+    _currentIndex %= _exampleFilePaths.length;
 
-    final String filePath = _sampleFilePaths[_currentIndex];
+    final String filePath = _exampleFilePaths[_currentIndex];
 
     _loadCubeGroup(filePath, onSuccess: _updateAfterLoad);
   }
@@ -120,8 +120,8 @@ class CubeGroupNotifier extends ChangeNotifier {
   void convertAll() {
     const String folderPath = '/Users/paulsump/a/cube_painter/';
 
-    for (int i = 0; i < _sampleFilePaths.length; ++i) {
-      final String filePath = _sampleFilePaths[i];
+    for (int i = 0; i < _exampleFilePaths.length; ++i) {
+      final String filePath = _exampleFilePaths[i];
 
       _loadCubeGroup(filePath, onSuccess: () => _save(folderPath + filePath));
     }
