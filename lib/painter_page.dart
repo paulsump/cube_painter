@@ -2,8 +2,6 @@ import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/brush_menu.dart';
-import 'package:cube_painter/buttons/hexagon_button.dart';
-import 'package:cube_painter/cube_button.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
@@ -54,9 +52,7 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     final cubeGroup = getCubeGroup(context, listen: true);
 
-    final gestureMode = getGestureMode(context, listen: true);
     const double barHeight = 87;
-
 
     return Scaffold(
       appBar: AppBar(
@@ -64,41 +60,8 @@ class _PainterPageState extends State<PainterPage> {
         // backgroundColor: backgroundColor,
         backgroundColor: Colors.transparent,
         leading: const OpenMenuButton(endDrawer: false),
-        actions: <Widget>[
-          const OpenMenuButton(endDrawer: true),
-          const Divider(
-            height: 20,
-            thickness: 5,
-            indent: 17,
-            endIndent: 0,
-            color: Colors.black,
-          ),
-          CubeButton(
-            radioOn: GestureMode.erase == gestureMode,
-            icon: Icons.remove,
-            onPressed: () {
-              setGestureMode(GestureMode.erase, context);
-            },
-            tip:
-                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-          ),
-          HexagonButton(
-            radioOn: GestureMode.panZoom == gestureMode,
-            child: const Icon(Icons.zoom_in_sharp),
-            onPressed: () {
-              setGestureMode(GestureMode.panZoom, context);
-            },
-            tip: 'Pinch to zoom, drag to move around.',
-          ),
-          CubeButton(
-            radioOn: GestureMode.add == gestureMode,
-            icon: Icons.add,
-            onPressed: () {
-              setGestureMode(GestureMode.add, context);
-            },
-            tip:
-                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
-          ),
+        actions: const <Widget>[
+          OpenMenuButton(endDrawer: true),
         ],
       ),
       drawer: const FileMenu(),

@@ -1,9 +1,10 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cube_button.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
-import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class BrushMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final gestureMode = getGestureMode(context, listen: true);
 
     final bool canUndo = cubes.undoer.canUndo;
     final bool canRedo = cubes.undoer.canRedo;
@@ -89,6 +90,32 @@ class BrushMenu extends StatelessWidget {
           ]),
           const SizedBox(height: 22),
           const Divider(),
+          CubeButton(
+            radioOn: GestureMode.erase == gestureMode,
+            icon: Icons.remove,
+            onPressed: () {
+              setGestureMode(GestureMode.erase, context);
+            },
+            tip:
+                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+          ),
+          HexagonButton(
+            radioOn: GestureMode.panZoom == gestureMode,
+            child: const Icon(Icons.zoom_in_sharp),
+            onPressed: () {
+              setGestureMode(GestureMode.panZoom, context);
+            },
+            tip: 'Pinch to zoom, drag to move around.',
+          ),
+          CubeButton(
+            radioOn: GestureMode.add == gestureMode,
+            icon: Icons.add,
+            onPressed: () {
+              setGestureMode(GestureMode.add, context);
+            },
+            tip:
+                'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+          ),
         ],
       ),
     );
