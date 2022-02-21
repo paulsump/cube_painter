@@ -29,7 +29,6 @@ const noWarn = [
   lerpDouble,
   positionToUnitOffset,
   Tiles,
-  getCubeInfos,
   StaticCubes,
   Crop.c,
   Provider,

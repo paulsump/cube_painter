@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
@@ -18,12 +17,6 @@ CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
 
 CubeGroup getCubeGroup(BuildContext context, {bool listen = false}) {
   return getCubeGroupNotifier(context, listen: listen).cubeGroup;
-}
-
-// TODO remove this function
-UnmodifiableListView<CubeInfo> getCubeInfos(BuildContext context,
-    {bool listen = false}) {
-  return UnmodifiableListView(getCubeGroup(context, listen: listen).cubes);
 }
 
 void removeCubeInfo(CubeInfo info, BuildContext context) {

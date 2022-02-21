@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:cube_painter/cubes/crop_unit_cube.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
@@ -9,7 +7,7 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
-const noWarn = [out, UnmodifiableListView, getCubeInfos];
+const noWarn = [out];
 
 class StaticCubes extends StatelessWidget {
   final List<StaticCube> _cubes;
@@ -17,8 +15,7 @@ class StaticCubes extends StatelessWidget {
   StaticCubes({
     Key? key,
     required CubeGroup cubeGroup,
-  })
-      : _cubes = List.generate(cubeGroup.cubes.length,
+  })  : _cubes = List.generate(cubeGroup.cubes.length,
             (i) => StaticCube(info: cubeGroup.cubes[i])),
         super(key: key);
 

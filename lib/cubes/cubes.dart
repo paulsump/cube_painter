@@ -47,7 +47,7 @@ class Cubes {
   }
 
   CubeInfo? _getCubeInfoAt(Position position) {
-    for (final info in getCubeInfos(context)) {
+    for (final info in getCubeGroup(context).cubes) {
       if (position == info.center) {
         return info;
       }

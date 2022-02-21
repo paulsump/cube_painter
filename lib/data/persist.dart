@@ -26,23 +26,26 @@ class Persist {
     try {
       File file = File(await _getFilePath());
       file.writeAsString(text);
-      out(file.path);
-      out(text);
+      // out(file.path);
+      // out(text);
     } catch (e) {
-      // doesn't work on windows or mac
+      // works on devices
+      // doesn't work on windows chrome or simulators
       out(e);
     }
   }
 
   Future<String> _getFilePath() async {
-    Directory folder = await getApplicationDocumentsDirectory();
+    final Directory folder = await getApplicationDocumentsDirectory();
 
-    String path = folder.path;
+    final String path = folder.path;
     return '$path/$fileName';
   }
 
-// List<String> getAllFilePaths(){
-//   file = io.Directory("$directory/resume/").listSync();  //use your folder name insted of resume.
-//
-// }
+  List<String> getAllFilePaths(String folderPath) {
+    final List<FileSystemEntity> fileEntities =
+        Directory(folderPath).listSync();
+
+    return List.generate(fileEntities.length, (i) => fileEntities[i].path);
+  }
 }

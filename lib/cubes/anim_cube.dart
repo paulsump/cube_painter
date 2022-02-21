@@ -13,22 +13,8 @@ import '../unit_ping_pong.dart';
 
 const noWarn = [out, Crop, UnitToScreen];
 
-// class AnimCubes extends StatelessWidget {
-//   const AnimCubes({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // final cubeInfos = getCubeInfos(context, listen: true);
-//
-//     return UnitToScreen(
-//       child: Stack(
-//         children: [
-//           // for (CubeInfo info in cubeInfos) StaticCube(info: info),
-//         ],
-//       ),
-//     );
-//   }
-// }
+//TODO COPy from StaticCubes
+// class AnimCubes extends StatelessWidget { }
 
 // TODO rename to AnimCubeFields
 class Fields {
