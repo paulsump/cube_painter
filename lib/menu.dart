@@ -1,10 +1,8 @@
-import 'package:cube_painter/buttons/hexagon_button.dart';
-import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/thumbnail.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu_button.dart';
+import 'package:cube_painter/menu_text_item.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -17,25 +15,18 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
-    final items = <_Item>[
-      _Item(
-        text: 'New',
-        icon: Icons.star,
-        // TODO create new persisted file,
-        // so as not to overwrite the current one
-        callback: cubeGroupNotifier.clear,
-      ),
-      _Item(
+    final items = <TextItem>[
+      TextItem(
         text: 'Load',
         icon: Icons.file_open_sharp,
         callback: cubeGroupNotifier.load,
       ),
-      _Item(
+      TextItem(
         text: 'Save',
         icon: Icons.save,
         callback: cubeGroupNotifier.save,
       ),
-      _Item(
+      TextItem(
         text: 'Next Example',
         icon: Icons.forward,
         callback: cubeGroupNotifier.loadNextExample,
@@ -55,30 +46,19 @@ class Menu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
+          MenuTextItem(
+              item: TextItem(
+            text: 'New',
+            icon: Icons.star,
+            // TODO create new persisted file,
+            // so as not to overwrite the current one
+            callback: cubeGroupNotifier.clear,
+          )),
+          const Center(child: Text('Save Current:')),
           Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
-          for (_Item item in items)
-            SizedBox(
-              // Container(      color: backgroundColor,
-              height: 66,
-              child: ListTile(
-                leading: HexagonButton(
-                  child: Icon(
-                    item.icon,
-                    color: getColor(Side.br),
-                  ),
-                  onPressed: () {
-                    item.callback();
-                    Navigator.pop(context);
-                  },
-                  tip: 'Undo the last add or delete operation.',
-                ),
-                title: Text(item.text),
-                onTap: () {
-                  item.callback();
-                  Navigator.pop(context);
-                },
-              ),
-            ),
+          const Center(child: Text('Load from:')),
+          Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
+          for (TextItem item in items) MenuTextItem(item: item),
           const Divider(),
           const Center(child: Text('Painting Modes')),
           const SizedBox(height: 22),
@@ -101,16 +81,4 @@ class Menu extends StatelessWidget {
       ),
     );
   }
-}
-
-class _Item {
-  final VoidCallback callback;
-  final String text;
-  final IconData icon;
-
-  const _Item({
-    required this.callback,
-    required this.text,
-    required this.icon,
-  });
 }

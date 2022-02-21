@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cube_painter/out.dart';
 import 'package:path_provider/path_provider.dart';
 
+//TODO this shouldn't be a class
 class Persist {
   final String fileName;
 
@@ -39,4 +40,9 @@ class Persist {
     String path = folder.path;
     return '$path/$fileName';
   }
+
+// List<String> getAllFilePaths(){
+//   file = io.Directory("$directory/resume/").listSync();  //use your folder name insted of resume.
+//
+// }
 }
