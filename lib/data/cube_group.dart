@@ -43,21 +43,20 @@ class CubeGroup {
 
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
-  final _cubeGroups = <CubeGroup>[];
+  final _cubeGroups = <String, CubeGroup>{};
 
   bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
 
-  late String currentFilePath;
+  late String _currentFilePath;
 
   late VoidCallback _onSuccessfulLoad;
 
-  final int _currentIndex = 0;
+  CubeGroup get cubeGroup => _cubeGroups[_currentFilePath]!;
 
-  CubeGroup get cubeGroup => _cubeGroups[_currentIndex];
+  //TODO check where this is used
+  set cubeGroup(value) => _cubeGroups[_currentFilePath] = value;
 
-  set cubeGroup(value) => _cubeGroups[_currentIndex] = value;
-
-  List<CubeGroup> get cubeGroups => _cubeGroups;
+  Iterable<CubeGroup> get cubeGroups => _cubeGroups.values;
 
   void init({
     required VoidCallback onSuccessfulLoad,
@@ -70,7 +69,6 @@ class CubeGroupNotifier extends ChangeNotifier {
     _updateAfterLoad();
   }
 
-
   void _updateAfterLoad() {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
@@ -82,14 +80,12 @@ class CubeGroupNotifier extends ChangeNotifier {
   String get json => jsonEncode(cubeGroup);
 
   void load({required String filePath}) {
-    currentFilePath = filePath;
+    _currentFilePath = filePath;
 
-    //TODO MAP
-    // cubeGroup = _cubeGroups[currentFilePath];
     _updateAfterLoad();
   }
 
-  void save() => saveString(filePath: currentFilePath, string: json);
+  void save() => saveString(filePath: _currentFilePath, string: json);
 
   void saveACopy() {
     //TODO Gen filename
@@ -112,17 +108,19 @@ class CubeGroupNotifier extends ChangeNotifier {
     final Directory appFolder = await getApplicationDocumentsDirectory();
     await Assets.copyAllFromTo(assetsFolder, appFolder.path);
 
-    await for (final FileSystemEntity f in appFolder.list()) {
-      if (f.path.endsWith('.json')) {
-        File file = File(f.path);
+    await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
+      final String path = fileSystemEntity.path;
+
+      if (path.endsWith('.json')) {
+        final File file = File(path);
 
         // TODO Most recent
-        currentFilePath = f.path;
+        _currentFilePath = path;
 
         String json = await file.readAsString();
         final map = jsonDecode(json);
 
-        _cubeGroups.add(CubeGroup.fromJson(await map));
+        _cubeGroups[path] = CubeGroup.fromJson(await map);
       }
     }
   }
