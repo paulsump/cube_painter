@@ -1,6 +1,6 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
-import 'package:cube_painter/menu/menu_text_item.dart';
+import 'package:cube_painter/menu/file_menu_text_item.dart';
 import 'package:cube_painter/menu/thumbnail.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class FileMenu extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-              MenuTextItem(
+              FileMenuTextItem(
                   item: TextItem(
                 text: 'New',
                 icon: Icons.star,
@@ -54,7 +54,7 @@ class FileMenu extends StatelessWidget {
               const Center(child: Text('Load from:')),
               for (String imagePath in cubeGroupNotifier.allImagePaths)
                 ImageThumb(filePath: imagePath),
-              for (TextItem item in items) MenuTextItem(item: item),
+              for (TextItem item in items) FileMenuTextItem(item: item),
               const Divider(),
             ],
           ),

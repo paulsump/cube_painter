@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
 class TextItem {
@@ -15,8 +14,8 @@ class TextItem {
   });
 }
 
-class MenuTextItem extends StatelessWidget {
-  const MenuTextItem({
+class FileMenuTextItem extends StatelessWidget {
+  const FileMenuTextItem({
     Key? key,
     required this.item,
   }) : super(key: key);
@@ -32,7 +31,7 @@ class MenuTextItem extends StatelessWidget {
         leading: HexagonButton(
           child: Icon(
             item.icon,
-            color: getColor(Side.br),
+            color: enabledIconColor,
           ),
           onPressed: () {
             item.callback();

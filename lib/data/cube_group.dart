@@ -69,9 +69,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   CubeGroup get cubeGroup => _cubeGroups[_currentIndex];
 
-  set cubeGroup(value) {
-    _cubeGroups[_currentIndex] = value;
-  }
+  set cubeGroup(value) => _cubeGroups[_currentIndex] = value;
 
   void init({
     required String examplesFolderPath,
@@ -88,7 +86,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     _loadAllCubeGroups();
 
     // TODO load previous run's file,
-    // not example every time
+    // not an example every time
     await _loadExampleCubeGroup(_exampleFilePaths[_currentIndex],
         onSuccess: _updateAfterLoad);
   }

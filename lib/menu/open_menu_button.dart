@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
 class OpenMenuButton extends StatelessWidget {
@@ -14,7 +13,7 @@ class OpenMenuButton extends StatelessWidget {
     return HexagonButton(
       height: 55,
       child: Icon(endDrawer ? Icons.brush_sharp : Icons.folder_sharp,
-          color: getColor(Side.br)),
+          color: enabledIconColor),
       onPressed: endDrawer ? scaffold.openEndDrawer : scaffold.openDrawer,
       tip:
           'Open the side menu.  You can also get this menu by swiping from the left.',

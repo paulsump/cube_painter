@@ -1,5 +1,4 @@
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -37,7 +36,7 @@ class CubePainterApp extends StatelessWidget {
           // canvasColor: Colors.transparent,
           canvasColor: backgroundColor.withOpacity(0.4),
           textTheme: Theme.of(context).textTheme.apply(
-                bodyColor: getColor(Side.br),
+                bodyColor: textColor,
                 // displayColor: Colors.red,
                 fontSizeFactor: 1.5,
               ),

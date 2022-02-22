@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -51,19 +50,19 @@ class BrushMenu extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 HexagonButton(
-                  child: Icon(Icons.undo_sharp,
-                      color: getColor(
-                        canUndo ? Side.br : Side.bl,
-                      )),
+                  child: Icon(
+                    Icons.undo_sharp,
+                    color: canUndo ? enabledIconColor : disabledIconColor,
+                  ),
                   onPressed: canUndo ? undo : null,
                   tip: 'Undo the last add or delete operation.',
                 ),
                 pad,
                 HexagonButton(
-                  child: Icon(Icons.redo_sharp,
-                      color: getColor(
-                        canRedo ? Side.br : Side.bl,
-                      )),
+                  child: Icon(
+                    Icons.redo_sharp,
+                    color: canRedo ? enabledIconColor : disabledIconColor,
+                  ),
                   onPressed: canRedo ? redo : null,
                   tip: 'Redo the last add or delete operation that was undone.',
                 ),
@@ -110,7 +109,10 @@ class BrushMenu extends StatelessWidget {
           ),
           HexagonButton(
             radioOn: GestureMode.panZoom == gestureMode,
-            child: const Icon(Icons.zoom_in_sharp),
+            child: Icon(
+              Icons.zoom_in_sharp,
+              color: enabledIconColor,
+            ),
             onPressed: () {
               setGestureMode(GestureMode.panZoom, context);
             },
