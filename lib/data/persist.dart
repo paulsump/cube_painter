@@ -3,12 +3,7 @@ import 'dart:io';
 import 'package:cube_painter/out.dart';
 import 'package:path_provider/path_provider.dart';
 
-class FileLocation {
-  final String fileName;
-  final bool sample;
-
-  FileLocation({required this.fileName, required this.sample});
-}
+//TODO REname to AppFolder something?
 
 //TODO Persist shouldn't be a class
 class Persisted {
@@ -29,7 +24,8 @@ class Persisted {
     return await file.readAsString();
   }
 
-  void save(String text) async {
+  //TODO rename to saveString?
+  Future<void> saveString(String text) async {
     try {
       File file = File(await _getFilePath());
       file.writeAsString(text);
