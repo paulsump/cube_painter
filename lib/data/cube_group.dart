@@ -70,13 +70,6 @@ class CubeGroupNotifier extends ChangeNotifier {
     _updateAfterLoad();
   }
 
-  void _loadPersistedCubeGroup(String json,
-      {required VoidCallback onSuccess}) async {
-    Map<String, dynamic> map = jsonDecode(json);
-
-    cubeGroup = CubeGroup.fromJson(map);
-    onSuccess();
-  }
 
   void _updateAfterLoad() {
     // TODO if fail, alert user, perhaps skip
@@ -88,15 +81,12 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   String get json => jsonEncode(cubeGroup);
 
-  //Todo rename and delete
-  void loadNew({required String filePath}) {
+  void load({required String filePath}) {
     currentFilePath = filePath;
-    load();
-  }
 
-  void load() async {
-    String filePath = await loadString(filePath: currentFilePath);
-    _loadPersistedCubeGroup(filePath, onSuccess: _updateAfterLoad);
+    //TODO MAP
+    // cubeGroup = _cubeGroups[currentFilePath];
+    _updateAfterLoad();
   }
 
   void save() => saveString(filePath: currentFilePath, string: json);

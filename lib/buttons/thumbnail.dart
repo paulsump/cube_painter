@@ -20,7 +20,6 @@ class Thumbnail extends StatelessWidget {
 
     return Container(
       color: Colors.transparent,
-      // color: backgroundColor,
       width: 99,
       height: 179,
       child: Transform.scale(

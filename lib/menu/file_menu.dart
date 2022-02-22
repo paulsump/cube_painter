@@ -66,7 +66,7 @@ class FileMenu extends StatelessWidget {
                   onPressed: () {
                     //TODO load file when press button
 
-                    cubeGroupNotifier.loadNew(filePath: '0.todo');
+                    cubeGroupNotifier.load(filePath: '0.todo');
                   },
                   tip: "Load this cube group",
                 ),
