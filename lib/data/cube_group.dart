@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cube_painter/data/assets.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/persist.dart';
+import 'package:cube_painter/menu/file.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,6 +55,8 @@ class CubeGroupNotifier extends ChangeNotifier {
   late VoidCallback _onSuccessfulLoad;
   final _exampleFilePaths = <String>[];
 
+  late List<String> allImagePaths;
+
   String get currentName {
     final path = _exampleFilePaths[_currentIndex];
 
@@ -73,6 +76,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     required String examplesFolderPath,
     required VoidCallback onSuccessfulLoad,
   }) async {
+    allImagePaths = await getAllImagePaths();
+    out(allImagePaths);
     _exampleFilePaths.addAll(await Assets.getFilePaths(examplesFolderPath));
 
     assert(_exampleFilePaths.isNotEmpty);

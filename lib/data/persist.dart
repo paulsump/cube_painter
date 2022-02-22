@@ -42,10 +42,4 @@ class Persist {
     return '$path/$fileName';
   }
 
-  List<String> getAllFilePaths(String folderPath) {
-    final List<FileSystemEntity> fileEntities =
-        Directory(folderPath).listSync();
-
-    return List.generate(fileEntities.length, (i) => fileEntities[i].path);
-  }
 }

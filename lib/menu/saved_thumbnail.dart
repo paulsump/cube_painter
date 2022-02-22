@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-class SavedThumbnail extends StatelessWidget {
-  final String fileName;
+class ImageThumb extends StatelessWidget {
+  final String filePath;
 
-  const SavedThumbnail({
+  const ImageThumb({
     Key? key,
-    required this.fileName,
+    required this.filePath,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Image(image: AssetImage('images/$fileName'));
+    return Image(image: AssetImage('$filePath'));
   }
+
+//TODO onTap, load
+// final cubeGroupNotifier = getCubeGroupNotifier(context);
+// if (cubeGroupNotifier.currentName == 'triangle')
+
 }

@@ -52,8 +52,8 @@ class FileMenu extends StatelessWidget {
               const Center(child: Text('Save Current:')),
               Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
               const Center(child: Text('Load from:')),
-              if (cubeGroupNotifier.currentName == 'triangle')
-                const SavedThumbnail(fileName: 'triangle.png'),
+              for (String imagePath in cubeGroupNotifier.allImagePaths)
+                ImageThumb(filePath: imagePath),
               for (TextItem item in items) MenuTextItem(item: item),
               const Divider(),
             ],
