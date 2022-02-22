@@ -60,14 +60,10 @@ class FileMenu extends StatelessWidget {
                 'Load:',
                 // style: TextStyle(fontStyle: FontStyle.,)
               ),
-              for (CubeGroup cubeGroup in cubeGroupNotifier.cubeGroups)
+              for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
                 HexagonButton(
-                  child: Thumbnail(cubeGroup: cubeGroup),
-                  onPressed: () {
-                    //TODO load file when press button
-
-                    cubeGroupNotifier.load(filePath: '0.todo');
-                  },
+                  child: Thumbnail(cubeGroup: entry.value),
+                  onPressed: () => cubeGroupNotifier.load(filePath: entry.key),
                   tip: "Load this cube group",
                 ),
               const Divider(),

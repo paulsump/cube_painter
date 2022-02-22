@@ -27,7 +27,6 @@ class FileMenuTextItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // Container(      color: backgroundColor,
       height: 66,
       child: ListTile(
         trailing: HexagonButton(
@@ -43,10 +42,6 @@ class FileMenuTextItem extends StatelessWidget {
           tip: item.tip,
         ),
         title: Text(item.text),
-        // onTap: () {
-        //   item.callback();
-        //   Navigator.pop(context);
-        // },
       ),
     );
   }

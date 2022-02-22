@@ -57,7 +57,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     _cubeGroups[_currentFilePath] = cubeGroup;
   }
 
-  Iterable<CubeGroup> get cubeGroups => _cubeGroups.values;
+  // Map<String,CubeGroup> get cubeGroups => _cubeGroups;
+  Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
 
   void init({
     required VoidCallback onSuccessfulLoad,
