@@ -17,11 +17,6 @@ CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
   return Provider.of<CubeGroupNotifier>(context, listen: listen);
 }
 
-// TODO REMOVE THIS FUNCTION
-CubeGroup getCubeGroup(BuildContext context, {bool listen = false}) {
-  return getCubeGroupNotifier(context, listen: listen).cubeGroup;
-}
-
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
@@ -73,6 +68,8 @@ class CubeGroupNotifier extends ChangeNotifier {
   CubeGroup get cubeGroup => _cubeGroups[_currentIndex];
 
   set cubeGroup(value) => _cubeGroups[_currentIndex] = value;
+
+  List<CubeGroup> get cubeGroups => _cubeGroups;
 
   void init({
     required String examplesFolderPath,

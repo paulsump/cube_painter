@@ -53,6 +53,8 @@ class FileMenu extends StatelessWidget {
               const Center(child: Text('Save Current:')),
               GeneratedThumb(cubeGroup: cubeGroupNotifier.cubeGroup),
               const Center(child: Text('Load from:')),
+              for (CubeGroup cubeGroup in cubeGroupNotifier.cubeGroups)
+                GeneratedThumb(cubeGroup: cubeGroup),
               for (String imagePath in cubeGroupNotifier.allImagePaths)
                 ImageThumb(filePath: imagePath),
               for (TextItem item in items) FileMenuTextItem(item: item),
