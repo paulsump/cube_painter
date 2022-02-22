@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cube_painter/out.dart';
 import 'package:path_provider/path_provider.dart';
 
-//TODO this shouldn't be a class
+//TODO Persist shouldn't be a class
 class Persist {
   final String fileName;
 

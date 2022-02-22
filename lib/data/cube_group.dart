@@ -54,6 +54,13 @@ class CubeGroupNotifier extends ChangeNotifier {
   late VoidCallback _onSuccessfulLoad;
   final _exampleFilePaths = <String>[];
 
+  String get currentName {
+    final path = _exampleFilePaths[_currentIndex];
+
+    out(path);
+    return path.split("/").last.replaceFirst('.json', '');
+  }
+
   int _currentIndex = 0;
 
   CubeGroup get cubeGroup => _cubeGroup;
