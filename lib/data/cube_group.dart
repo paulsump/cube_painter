@@ -53,8 +53,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   CubeGroup get cubeGroup => _cubeGroups[_currentFilePath]!;
 
-  //TODO check where this is used
-  set cubeGroup(value) => _cubeGroups[_currentFilePath] = value;
+  void setCubeGroup(CubeGroup cubeGroup) {
+    _cubeGroups[_currentFilePath] = cubeGroup;
+  }
 
   Iterable<CubeGroup> get cubeGroups => _cubeGroups.values;
 

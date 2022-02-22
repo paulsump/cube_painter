@@ -48,7 +48,7 @@ class Undoer {
     final json = popFrom.removeLast();
 
     Map<String, dynamic> map = jsonDecode(json);
-    notifier.cubeGroup = CubeGroup.fromJson(map);
+    notifier.setCubeGroup(CubeGroup.fromJson(map));
   }
 
   void _saveTo(DoList list) {
