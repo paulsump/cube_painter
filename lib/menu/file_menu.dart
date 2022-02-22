@@ -19,6 +19,7 @@ class FileMenu extends StatelessWidget {
     final items = <TextItem>[
       TextItem(
         text: 'New',
+        tip: 'Create a new cube group',
         icon: Icons.star,
         // TODO create new persisted file,
         // so as not to overwrite the current one
@@ -33,11 +34,14 @@ class FileMenu extends StatelessWidget {
       // ),
       TextItem(
         text: 'Save',
+        tip: 'Save the current cube group',
         icon: Icons.save,
         callback: cubeGroupNotifier.save,
       ),
       TextItem(
-        text: 'Save a Copy',
+        text: 'Save a copy',
+        tip:
+            'Save the current cube group in a new file and start using that group',
         icon: Icons.copy_sharp,
         callback: cubeGroupNotifier.saveACopy,
       ),

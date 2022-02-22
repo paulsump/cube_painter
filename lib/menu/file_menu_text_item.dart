@@ -3,14 +3,16 @@ import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextItem {
-  final VoidCallback callback;
   final String text;
+  final String tip;
   final IconData icon;
+  final VoidCallback callback;
 
   const TextItem({
-    required this.callback,
     required this.text,
+    required this.tip,
     required this.icon,
+    required this.callback,
   });
 }
 
@@ -38,7 +40,7 @@ class FileMenuTextItem extends StatelessWidget {
             item.callback();
             Navigator.pop(context);
           },
-          tip: 'Undo the last add or delete operation.',
+          tip: item.tip,
         ),
         title: Text(item.text),
         onTap: () {
