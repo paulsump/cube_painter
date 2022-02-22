@@ -62,14 +62,12 @@ class FileMenu extends StatelessWidget {
               ),
               for (CubeGroup cubeGroup in cubeGroupNotifier.cubeGroups)
                 HexagonButton(
-                  child: GeneratedThumb(cubeGroup: cubeGroup),
+                  child: Thumbnail(cubeGroup: cubeGroup),
                   onPressed: () {
                     //TODO load file when press button
                   },
                   tip: "Load this cube group",
                 ),
-              // for (String imagePath in cubeGroupNotifier.allImagePaths)
-              //   ImageThumb(filePath: imagePath),
               const Divider(),
             ],
           ),

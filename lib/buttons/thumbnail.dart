@@ -22,24 +22,10 @@ class ThumbButton extends StatelessWidget {
   }
 }
 
-class ImageThumb extends StatelessWidget {
-  final String filePath;
-
-  const ImageThumb({
-    Key? key,
-    required this.filePath,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Image(image: AssetImage(filePath));
-  }
-}
-
-class GeneratedThumb extends StatelessWidget {
+class Thumbnail extends StatelessWidget {
   final CubeGroup cubeGroup;
 
-  const GeneratedThumb({Key? key, required this.cubeGroup}) : super(key: key);
+  const Thumbnail({Key? key, required this.cubeGroup}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
