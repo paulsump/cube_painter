@@ -1,10 +1,10 @@
+import 'package:cube_painter/buttons/brush_menu_button.dart';
+import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/menu/brush_menu_button.dart';
-import 'package:cube_painter/menu/cube_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -82,7 +82,7 @@ class BrushMenu extends StatelessWidget {
               setGestureMode(GestureMode.erase, context);
             },
             tip:
-                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+            'Tap on a cube to delete it.  You can change the position while you have your finger down.',
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

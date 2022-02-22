@@ -1,6 +1,6 @@
+import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/menu/cube_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +26,8 @@ class BrushMenuButton extends StatelessWidget {
       height: 69,
       crop: crop,
       radioOn:
-          (currentCrop == crop && currentGestureMode == GestureMode.crop) ||
-              (crop == Crop.c && currentGestureMode == GestureMode.add),
+      (currentCrop == crop && currentGestureMode == GestureMode.crop) ||
+          (crop == Crop.c && currentGestureMode == GestureMode.add),
       // icon: Icons.add,
       onPressed: () {
         // if(mode!=GestureMode.crop){

@@ -1,7 +1,7 @@
+import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/file_menu_text_item.dart';
-import 'package:cube_painter/menu/thumbnail.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -16,20 +16,29 @@ class FileMenu extends StatelessWidget {
 
     final items = <TextItem>[
       TextItem(
-        text: 'Load',
-        icon: Icons.file_open_sharp,
-        callback: cubeGroupNotifier.load,
+        text: 'New',
+        icon: Icons.star,
+        // TODO create new persisted file,
+        // so as not to overwrite the current one
+        //TODO alert('are you sure,save current file?');
+        callback: cubeGroupNotifier.createPersisted,
+        // callback: cubeGroupNotifier.save,
       ),
+      // TextItem(
+      //   text: 'Load',
+      //   icon: Icons.file_open_sharp,
+      //   callback: cubeGroupNotifier.load,
+      // ),
       TextItem(
         text: 'Save',
         icon: Icons.save,
         callback: cubeGroupNotifier.save,
       ),
-      TextItem(
-        text: 'Next Example',
-        icon: Icons.forward,
-        callback: cubeGroupNotifier.loadNextExample,
-      ),
+      // TextItem(
+      //   text: 'Next Example',
+      //   icon: Icons.forward,
+      //   callback: cubeGroupNotifier.loadNextExample,
+      // ),
     ];
 
     return LayoutBuilder(
@@ -40,24 +49,12 @@ class FileMenu extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-              FileMenuTextItem(
-                  item: TextItem(
-                text: 'New',
-                icon: Icons.star,
-                // TODO create new persisted file,
-                // so as not to overwrite the current one
-                //TODO alert('are you sure,save current file?');
-                callback: cubeGroupNotifier.createPersisted,
-                // callback: cubeGroupNotifier.save,
-              )),
-              const Center(child: Text('Save Current:')),
-              GeneratedThumb(cubeGroup: cubeGroupNotifier.cubeGroup),
+              for (TextItem item in items) FileMenuTextItem(item: item),
               const Center(child: Text('Load from:')),
               for (CubeGroup cubeGroup in cubeGroupNotifier.cubeGroups)
                 GeneratedThumb(cubeGroup: cubeGroup),
-              for (String imagePath in cubeGroupNotifier.allImagePaths)
-                ImageThumb(filePath: imagePath),
-              for (TextItem item in items) FileMenuTextItem(item: item),
+              // for (String imagePath in cubeGroupNotifier.allImagePaths)
+              //   ImageThumb(filePath: imagePath),
               const Divider(),
             ],
           ),

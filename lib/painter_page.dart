@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
+import 'package:cube_painter/buttons/open_menu_button.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
@@ -9,7 +10,6 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu/brush_menu.dart';
 import 'package:cube_painter/menu/file_menu.dart';
-import 'package:cube_painter/menu/open_menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
