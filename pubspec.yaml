@@ -90,7 +90,5 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
-    - data/
-    - data_test/
-    - data_towers/
-    - images/
+    - examples/
+    - examples_test/

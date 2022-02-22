@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cube_painter/out.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +30,18 @@ class Assets {
 
     for (String filePath in filePaths) {
       yield loadJson(filePath);
+    }
+  }
+
+  static void copyAllFromTo(
+      String fromAssetFolderPath, String toAppFolderPath) async {
+    final filePaths = await getFilePaths(fromAssetFolderPath);
+
+    for (String filePath in filePaths) {
+      File file = File(filePath);
+      out(file.path.split('/').last);
+      out('$toAppFolderPath/${file.path.split('/').last}');
+      //copy
     }
   }
 }

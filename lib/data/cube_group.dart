@@ -44,7 +44,6 @@ class CubeGroup {
 
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
-  // final _cubeGroups = <CubeGroup>[const CubeGroup([])];
   final _cubeGroups = <CubeGroup>[];
 
   bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
@@ -164,11 +163,11 @@ class CubeGroupNotifier extends ChangeNotifier {
   //   }
   // }
 
-  void _save(String fullFilePath) {
-    out(fullFilePath);
-
-    File(fullFilePath).writeAsString(json);
-  }
+  // void _save(String fullFilePath) {
+  //   out(fullFilePath);
+  //
+  //   File(fullFilePath).writeAsString(json);
+  // }
 
   void createPersisted() {
     //todo createPersisted
@@ -197,8 +196,10 @@ class CubeGroupNotifier extends ChangeNotifier {
       }
     }
 
-    await for (final json in Assets.loadAll('data')) {
+    await for (final json in Assets.loadAll('examples')) {
       _cubeGroups.add(CubeGroup.fromJson(await json));
     }
+
+    Assets.copyAllFromTo('examples', folder.path);
   }
 }
