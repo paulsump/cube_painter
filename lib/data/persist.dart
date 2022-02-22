@@ -4,10 +4,10 @@ import 'package:cube_painter/out.dart';
 import 'package:path_provider/path_provider.dart';
 
 //TODO Persist shouldn't be a class
-class Persist {
+class Persisted {
   final String fileName;
 
-  Persist({required this.fileName});
+  Persisted({required this.fileName});
 
   Future<String> load() async {
     File file = File(await _getFilePath());

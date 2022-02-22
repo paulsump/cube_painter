@@ -50,7 +50,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   // set to initial empty list for when it's used before load is complete
   CubeGroup _cubeGroup = const CubeGroup([]);
 
-  final persist = Persist(fileName: "persisted1.json");
+  late Persisted persisted;
 
   late VoidCallback _onSuccessfulLoad;
   final _exampleFilePaths = <String>[];
@@ -77,11 +77,12 @@ class CubeGroupNotifier extends ChangeNotifier {
     required VoidCallback onSuccessfulLoad,
   }) async {
     allImagePaths = await getAllImagePaths();
-    out(allImagePaths);
-    _exampleFilePaths.addAll(await Assets.getFilePaths(examplesFolderPath));
 
+    _exampleFilePaths.addAll(await Assets.getFilePaths(examplesFolderPath));
     assert(_exampleFilePaths.isNotEmpty);
+
     _onSuccessfulLoad = onSuccessfulLoad;
+    persisted = Persisted(fileName: "persisted1.json");
 
     await _loadExampleCubeGroup(_exampleFilePaths[_currentIndex],
         onSuccess: _updateAfterLoad);
@@ -114,11 +115,19 @@ class CubeGroupNotifier extends ChangeNotifier {
   String get json => jsonEncode(cubeGroup);
 
   void load() async {
-    String filePath = await persist.load();
+    String filePath = await persisted.load();
     _loadPersistedCubeGroup(filePath, onSuccess: _updateAfterLoad);
   }
 
-  void save() => persist.save(json);
+  void loadPersisted(Persisted newPersisted) async {
+    String filePath = await newPersisted.load();
+    _loadPersistedCubeGroup(filePath, onSuccess: () {
+      persisted = newPersisted;
+      _updateAfterLoad();
+    });
+  }
+
+  void save() => persisted.save(json);
 
   void loadNextExample() => increment(1);
 

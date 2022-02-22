@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cube_painter/data/assets.dart';
 import 'package:path_provider/path_provider.dart';
 
+//TODO MERge this file into assets and persist
 List<String> getAllFilePaths(String folderPath) {
   final List<FileSystemEntity> fileEntities = Directory(folderPath).listSync();
 
