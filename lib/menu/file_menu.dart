@@ -2,6 +2,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/thumbnail.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/menu_text_item.dart';
+import 'package:cube_painter/menu/saved_thumbnail.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class FileMenu extends StatelessWidget {
               const Center(child: Text('Save Current:')),
               Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
               const Center(child: Text('Load from:')),
-              Thumbnail(cubeGroup: cubeGroupNotifier.cubeGroup),
+              const SavedThumbnail(fileName: 'example1.png'),
               for (TextItem item in items) MenuTextItem(item: item),
               const Divider(),
             ],
