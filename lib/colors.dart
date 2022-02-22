@@ -12,9 +12,10 @@ Color getColor(Side side) {
   }
 }
 
-Color disabledIconColor = Colors.grey; //getColor(Side.bl);
+Color disabledIconColor = Colors.grey;
 Color enabledIconColor = getColor(Side.bl);
 Color textColor = enabledIconColor;
+Color lightTextColor = getColor(Side.br);
 
 // TODO rename these
 const Color top = Color(0xfff07f7e);

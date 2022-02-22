@@ -70,7 +70,8 @@ class BrushMenu extends StatelessWidget {
             ),
           ),
           const Divider(),
-          const Center(child: Text('Brush...')),
+          Center(
+              child: Text('Brush...', style: TextStyle(color: lightTextColor))),
           const SizedBox(height: 22),
           CubeButton(
             radioOn: GestureMode.erase == gestureMode,
@@ -119,7 +120,9 @@ class BrushMenu extends StatelessWidget {
             tip: 'Pinch to zoom, drag to move around.',
           ),
           const SizedBox(height: 3),
-          const Center(child: Text('...or Pan / Zoom')),
+          Center(
+              child: Text('...or Pan / Zoom',
+                  style: TextStyle(color: lightTextColor))),
           const Divider(),
           const SizedBox(height: 22),
         ],
