@@ -1,7 +1,7 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/thumbnail.dart';
 import 'package:cube_painter/data/cube_group.dart';
-import 'package:cube_painter/menu_text_item.dart';
+import 'package:cube_painter/menu/menu_text_item.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 

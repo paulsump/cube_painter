@@ -1,6 +1,6 @@
-import 'package:cube_painter/cube_button.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/menu/cube_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
