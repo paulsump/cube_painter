@@ -1,47 +1,28 @@
 import 'dart:io';
 
 import 'package:cube_painter/out.dart';
-import 'package:path_provider/path_provider.dart';
 
-//TODO REname to AppFolder something?
+Future<String> loadString({required String filePath}) async {
+  File file = File(filePath);
+  // file.delete();
 
-//TODO Persist shouldn't be a class
-class Persisted {
-  final String fileName;
+  if (!file.existsSync()) {
+    return '';
+  }
 
-  Persisted({required this.fileName});
+  return await file.readAsString();
+}
 
-  Future<String> load() async {
-    File file = File(await _getFilePath());
+Future<void> saveString(
+    {required String filePath, required String string}) async {
+  try {
+    File file = File(filePath);
+    file.writeAsString(string);
     // out(file.path);
-    // file.delete();
-    // return '';
-
-    if (!file.existsSync()) {
-      return '';
-    }
-
-    return await file.readAsString();
-  }
-
-  //TODO rename to saveString?
-  Future<void> saveString(String text) async {
-    try {
-      File file = File(await _getFilePath());
-      file.writeAsString(text);
-      // out(file.path);
-      // out(text);
-    } catch (e) {
-      // works on devices
-      // doesn't work on windows chrome or simulators
-      out(e);
-    }
-  }
-
-  Future<String> _getFilePath() async {
-    final Directory folder = await getApplicationDocumentsDirectory();
-
-    final String path = folder.path;
-    return '$path/$fileName';
+    // out(text);
+  } catch (e) {
+    // works on devices
+    // doesn't work on windows chrome or simulators
+    out(e);
   }
 }

@@ -30,7 +30,7 @@ class FileMenuTextItem extends StatelessWidget {
       // Container(      color: backgroundColor,
       height: 66,
       child: ListTile(
-        leading: HexagonButton(
+        trailing: HexagonButton(
           child: Icon(
             item.icon,
             color: enabledIconColor,
@@ -43,10 +43,10 @@ class FileMenuTextItem extends StatelessWidget {
           tip: item.tip,
         ),
         title: Text(item.text),
-        onTap: () {
-          item.callback();
-          Navigator.pop(context);
-        },
+        // onTap: () {
+        //   item.callback();
+        //   Navigator.pop(context);
+        // },
       ),
     );
   }

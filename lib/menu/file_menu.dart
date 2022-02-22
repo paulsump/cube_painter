@@ -65,6 +65,8 @@ class FileMenu extends StatelessWidget {
                   child: Thumbnail(cubeGroup: cubeGroup),
                   onPressed: () {
                     //TODO load file when press button
+
+                    cubeGroupNotifier.loadNew(filePath: '0.todo');
                   },
                   tip: "Load this cube group",
                 ),

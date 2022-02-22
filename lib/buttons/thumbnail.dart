@@ -3,24 +3,8 @@ import 'dart:math';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/data/persist.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
-
-class ThumbButton extends StatelessWidget {
-  const ThumbButton({Key? key}) : super(key: key);
-
-  void tap(context) {
-//TODO onTap, load
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
-    cubeGroupNotifier.loadPersisted(Persisted(fileName: 'triangle'));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 
 class Thumbnail extends StatelessWidget {
   final CubeGroup cubeGroup;

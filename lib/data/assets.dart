@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cube_painter/data/persist.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 const noWarn = out;
 
@@ -37,12 +39,15 @@ class Assets {
       String fromAssetFolderPath, String toAppFolderPath) async {
     final filePaths = await getFilePaths(fromAssetFolderPath);
 
+    final Directory appFolder = await getApplicationDocumentsDirectory();
+
     for (String filePath in filePaths) {
       final String json = await rootBundle.loadString(filePath);
-      final fileName = filePath.split('/').last;
 
-      final persisted = Persisted(fileName: fileName);
-      await persisted.saveString(json);
+      final fileName = filePath.split('/').last;
+      final String path = appFolder.path;
+
+      await saveString(filePath: '$path/$fileName', string: json);
     }
   }
 }

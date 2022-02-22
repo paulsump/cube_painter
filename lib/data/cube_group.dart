@@ -47,7 +47,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
 
-  late Persisted persisted;
+  late String currentFilePath;
 
   late VoidCallback _onSuccessfulLoad;
 
@@ -63,22 +63,12 @@ class CubeGroupNotifier extends ChangeNotifier {
     required VoidCallback onSuccessfulLoad,
   }) async {
     _onSuccessfulLoad = onSuccessfulLoad;
-    persisted = Persisted(fileName: "persisted1.json");
 
     await _loadAllCubeGroups();
-    // out(cubeGroup.cubeInfos.length);
 
     // TODO load previous run's file,
     _updateAfterLoad();
   }
-
-  // void _loadSampleCubeGroup(String filePath,
-  //     {required VoidCallback onSuccess}) async {
-  //   final map = await Assets.loadJson(filePath);
-  //
-  //   cubeGroup = CubeGroup.fromJson(map);
-  //   onSuccess();
-  // }
 
   void _loadPersistedCubeGroup(String json,
       {required VoidCallback onSuccess}) async {
@@ -98,26 +88,24 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   String get json => jsonEncode(cubeGroup);
 
+  //Todo rename and delete
+  void loadNew({required String filePath}) {
+    currentFilePath = filePath;
+    load();
+  }
+
   void load() async {
-    String filePath = await persisted.load();
+    String filePath = await loadString(filePath: currentFilePath);
     _loadPersistedCubeGroup(filePath, onSuccess: _updateAfterLoad);
   }
 
-  void loadPersisted(Persisted newPersisted) async {
-    String filePath = await newPersisted.load();
-
-    _loadPersistedCubeGroup(filePath, onSuccess: () {
-      persisted = newPersisted;
-      _updateAfterLoad();
-    });
-  }
-
-  void save() => persisted.saveString(json);
+  void save() => saveString(filePath: currentFilePath, string: json);
 
   void saveACopy() {
     //TODO Gen filename
-    //TODO Set persisted
-    // persisted.save(json);
+    // fileName = millisecondsSinceEpoc
+    //TODO Set currentFilePath = '$path/$fileName'
+    // await saveString(filePath: currentFilePath, string:json);
   }
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
@@ -130,19 +118,16 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   Future<void> _loadAllCubeGroups() async {
     const assetsFolder = 'samples';
-    final Directory appFolder = await getApplicationDocumentsDirectory();
 
+    final Directory appFolder = await getApplicationDocumentsDirectory();
     await Assets.copyAllFromTo(assetsFolder, appFolder.path);
 
-    // await for (final json in Assets.loadAll(assetsFolder)) {
-    //   _cubeGroups.add(CubeGroup.fromJson(await json));
-    // }
-
-    out('ls');
     await for (final FileSystemEntity f in appFolder.list()) {
       if (f.path.endsWith('.json')) {
-        out(f.path);
         File file = File(f.path);
+
+        // TODO Most recent
+        currentFilePath = f.path;
 
         String json = await file.readAsString();
         final map = jsonDecode(json);
