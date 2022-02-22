@@ -135,6 +135,12 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void save() => persisted.save(json);
 
+  void saveACopy() {
+    //TODO Gen filename
+    //TODO Set persisted
+    // persisted.save(json);
+  }
+
   void loadNextExample() => increment(1);
 
   void increment(int increment) {

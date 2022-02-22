@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
@@ -50,14 +49,14 @@ class GeneratedThumb extends StatelessWidget {
     final offset = scoff[1];
 
     return Container(
-      // color: Colors.transparent,
-      color: backgroundColor,
+      color: Colors.transparent,
+      // color: backgroundColor,
       width: 99,
       height: 179,
       child: Transform.scale(
         scale: 111 / scale,
         child: Transform.translate(
-          offset: const Offset(140, 90) - offset,
+          offset: const Offset(55, 90) - offset,
           child: StaticCubes(cubeGroup: cubeGroup),
         ),
       ),

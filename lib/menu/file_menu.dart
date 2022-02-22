@@ -1,9 +1,11 @@
+import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/file_menu_text_item.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 const noWarn = out;
 
@@ -34,6 +36,11 @@ class FileMenu extends StatelessWidget {
         icon: Icons.save,
         callback: cubeGroupNotifier.save,
       ),
+      TextItem(
+        text: 'Save a Copy',
+        icon: Icons.copy_sharp,
+        callback: cubeGroupNotifier.saveACopy,
+      ),
       // TextItem(
       //   text: 'Next Example',
       //   icon: Icons.forward,
@@ -50,9 +57,19 @@ class FileMenu extends StatelessWidget {
             children: [
               SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
               for (TextItem item in items) FileMenuTextItem(item: item),
-              const Center(child: Text('Load from:')),
+              const Divider(),
+              const Text(
+                'Load:',
+                // style: TextStyle(fontStyle: FontStyle.,)
+              ),
               for (CubeGroup cubeGroup in cubeGroupNotifier.cubeGroups)
-                GeneratedThumb(cubeGroup: cubeGroup),
+                HexagonButton(
+                  child: GeneratedThumb(cubeGroup: cubeGroup),
+                  onPressed: () {
+                    //TODO load file when press button
+                  },
+                  tip: "Load this cube group",
+                ),
               // for (String imagePath in cubeGroupNotifier.allImagePaths)
               //   ImageThumb(filePath: imagePath),
               const Divider(),
