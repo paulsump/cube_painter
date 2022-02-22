@@ -107,22 +107,38 @@ class CubeGroupNotifier extends ChangeNotifier {
     const assetsFolder = 'samples';
 
     final Directory appFolder = await getApplicationDocumentsDirectory();
+    // TODO do we want to do this every time, or just the first time?
     await Assets.copyAllFromTo(assetsFolder, appFolder.path);
+
+    List<String> paths = await getAllAppFilePaths(appFolder);
+
+    // display in reverse chronological order (most recent first)
+    // this is because the file name is a number that increases with time.
+    paths.sort((a, b) => b.compareTo(a));
+
+    //  Most recent
+    _currentFilePath = paths[0];
+
+    for (final String path in paths) {
+      final File file = File(path);
+
+      String json = await file.readAsString();
+      final map = jsonDecode(json);
+
+      _cubeGroups[path] = CubeGroup.fromJson(await map);
+    }
+  }
+
+  Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
+    final paths = <String>[];
 
     await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
       final String path = fileSystemEntity.path;
 
       if (path.endsWith('.json')) {
-        final File file = File(path);
-
-        // TODO Most recent
-        _currentFilePath = path;
-
-        String json = await file.readAsString();
-        final map = jsonDecode(json);
-
-        _cubeGroups[path] = CubeGroup.fromJson(await map);
+        paths.add(path);
       }
     }
+    return paths;
   }
 }
