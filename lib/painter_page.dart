@@ -50,7 +50,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cubeGroup = getCubeGroup(context, listen: true);
+    final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
 
     return Scaffold(
       drawer: const FileMenu(),
@@ -61,8 +61,8 @@ class _PainterPageState extends State<PainterPage> {
             child: Stack(
               children: [
                 const Tiles(),
-                if (cubeGroup.cubeInfos.isNotEmpty)
-                  StaticCubes(cubeGroup: cubeGroup),
+                if (cubeGroupNotifier.hasCubes)
+                  StaticCubes(cubeGroup: cubeGroupNotifier.cubeGroup),
                 ..._cubes.animCubes,
               ],
             ),

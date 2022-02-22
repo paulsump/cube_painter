@@ -17,6 +17,7 @@ CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
   return Provider.of<CubeGroupNotifier>(context, listen: listen);
 }
 
+// TODO REMOVE THIS FUNCTION
 CubeGroup getCubeGroup(BuildContext context, {bool listen = false}) {
   return getCubeGroupNotifier(context, listen: listen).cubeGroup;
 }
@@ -48,9 +49,10 @@ class CubeGroup {
 
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
-  //TODO MAKE _cubeGroups LATE coz..
-  // need to add one with empty list for when it's used before load is complete
-  final _cubeGroups = <CubeGroup>[const CubeGroup([])];
+  // final _cubeGroups = <CubeGroup>[const CubeGroup([])];
+  final _cubeGroups = <CubeGroup>[];
+
+  bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
 
   late Persisted persisted;
 
@@ -84,15 +86,17 @@ class CubeGroupNotifier extends ChangeNotifier {
     _onSuccessfulLoad = onSuccessfulLoad;
     persisted = Persisted(fileName: "persisted1.json");
 
-    _loadAllCubeGroups();
+    await _loadAllCubeGroups();
+    // out(cubeGroup.cubeInfos.length);
 
     // TODO load previous run's file,
+    _updateAfterLoad();
     // not an example every time
-    await _loadExampleCubeGroup(_exampleFilePaths[_currentIndex],
-        onSuccess: _updateAfterLoad);
+    // await _loadExampleCubeGroup(_exampleFilePaths[_currentIndex],
+    //     onSuccess: _updateAfterLoad);
   }
 
-  Future<void> _loadExampleCubeGroup(String filePath,
+  void _loadExampleCubeGroup(String filePath,
       {required VoidCallback onSuccess}) async {
     final map = await Assets.loadJson(filePath);
 
@@ -168,27 +172,28 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void createPersisted() {
     //todo createPersisted
+    //TODO REMOve
+    // clear();
+    //     _updateAfterLoad();
   }
 
   void clear() {
+    // if (cubeGroup.cubeInfos.isNotEmpty) {
     cubeGroup.cubeInfos.clear();
-    //   if (update) {
-    //     _updateAfterLoad();
-    //   }
+    // }
   }
 
-  void _loadAllCubeGroups() async {
+  Future<void> _loadAllCubeGroups() async {
     final Directory folder = await getApplicationDocumentsDirectory();
 
     await for (final FileSystemEntity f in folder.list()) {
       if (f.path.endsWith('.json')) {
-        out(f.path);
-        // File file = File(f.path);
-        //
-        // String json = await file.readAsString();
-        // final map = jsonDecode(json);
-        //
-        // _cubeGroups.add(CubeGroup.fromJson(await map));
+        // out(f.path);
+        File file = File(f.path);
+
+        String json = await file.readAsString();
+        final map = jsonDecode(json);
+        _cubeGroups.add(CubeGroup.fromJson(await map));
       }
     }
 
