@@ -14,7 +14,7 @@ void setGestureMode(GestureMode mode, BuildContext context) {
 }
 
 class GestureModeNotifier extends ChangeNotifier {
-  var _mode = GestureMode.panZoom;
+  var _mode = GestureMode.add;
 
   get mode => _mode;
 

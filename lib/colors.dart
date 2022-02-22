@@ -12,8 +12,10 @@ Color getColor(Side side) {
   }
 }
 
+double iconSize = 33;
 Color disabledIconColor = Colors.grey;
-Color enabledIconColor = getColor(Side.bl);
+
+Color get enabledIconColor => getTweenBLtoTColor(0.4);
 Color textColor = enabledIconColor;
 Color lightTextColor = getColor(Side.br);
 

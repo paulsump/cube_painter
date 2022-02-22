@@ -7,6 +7,7 @@ import 'package:cube_painter/data/persist.dart';
 import 'package:cube_painter/menu/file.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 const noWarn = out;
@@ -47,8 +48,8 @@ class CubeGroup {
 
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
-  // add one with empty list for when it's used before load is complete
-  //TODO MAKE _cubeGroups LATE
+  //TODO MAKE _cubeGroups LATE coz..
+  // need to add one with empty list for when it's used before load is complete
   final _cubeGroups = <CubeGroup>[const CubeGroup([])];
 
   late Persisted persisted;
@@ -177,6 +178,20 @@ class CubeGroupNotifier extends ChangeNotifier {
   }
 
   void _loadAllCubeGroups() async {
+    final Directory folder = await getApplicationDocumentsDirectory();
+
+    await for (final FileSystemEntity f in folder.list()) {
+      if (f.path.endsWith('.json')) {
+        out(f.path);
+        // File file = File(f.path);
+        //
+        // String json = await file.readAsString();
+        // final map = jsonDecode(json);
+        //
+        // _cubeGroups.add(CubeGroup.fromJson(await map));
+      }
+    }
+
     await for (final json in Assets.loadAll('data')) {
       _cubeGroups.add(CubeGroup.fromJson(await json));
     }

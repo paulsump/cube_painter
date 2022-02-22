@@ -53,6 +53,7 @@ class BrushMenu extends StatelessWidget {
                   child: Icon(
                     Icons.undo_sharp,
                     color: canUndo ? enabledIconColor : disabledIconColor,
+                    size: iconSize,
                   ),
                   onPressed: canUndo ? undo : null,
                   tip: 'Undo the last add or delete operation.',
@@ -62,6 +63,7 @@ class BrushMenu extends StatelessWidget {
                   child: Icon(
                     Icons.redo_sharp,
                     color: canRedo ? enabledIconColor : disabledIconColor,
+                    size: iconSize,
                   ),
                   onPressed: canRedo ? redo : null,
                   tip: 'Redo the last add or delete operation that was undone.',
@@ -113,10 +115,9 @@ class BrushMenu extends StatelessWidget {
             child: Icon(
               Icons.zoom_in_sharp,
               color: enabledIconColor,
+              size: iconSize,
             ),
-            onPressed: () {
-              setGestureMode(GestureMode.panZoom, context);
-            },
+            onPressed: () => setGestureMode(GestureMode.panZoom, context),
             tip: 'Pinch to zoom, drag to move around.',
           ),
           const SizedBox(height: 3),

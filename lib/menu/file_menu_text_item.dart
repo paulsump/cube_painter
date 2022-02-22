@@ -32,6 +32,7 @@ class FileMenuTextItem extends StatelessWidget {
           child: Icon(
             item.icon,
             color: enabledIconColor,
+            size: iconSize,
           ),
           onPressed: () {
             item.callback();

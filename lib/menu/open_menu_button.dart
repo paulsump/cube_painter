@@ -12,8 +12,11 @@ class OpenMenuButton extends StatelessWidget {
     final scaffold = Scaffold.of(context);
     return HexagonButton(
       height: 55,
-      child: Icon(endDrawer ? Icons.brush_sharp : Icons.folder_sharp,
-          color: enabledIconColor),
+      child: Icon(
+        endDrawer ? Icons.brush_sharp : Icons.folder_sharp,
+        color: enabledIconColor,
+        size: iconSize,
+      ),
       onPressed: endDrawer ? scaffold.openEndDrawer : scaffold.openDrawer,
       tip:
           'Open the side menu.  You can also get this menu by swiping from the left.',
