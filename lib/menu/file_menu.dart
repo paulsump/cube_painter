@@ -5,7 +5,6 @@ import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/file_menu_text_item.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 const noWarn = out;
 
@@ -45,11 +44,6 @@ class FileMenu extends StatelessWidget {
         icon: Icons.copy_sharp,
         callback: cubeGroupNotifier.saveACopy,
       ),
-      // TextItem(
-      //   text: 'Next Example',
-      //   icon: Icons.forward,
-      //   callback: cubeGroupNotifier.loadNextExample,
-      // ),
     ];
 
     return LayoutBuilder(

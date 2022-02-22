@@ -3,6 +3,13 @@ import 'dart:io';
 import 'package:cube_painter/out.dart';
 import 'package:path_provider/path_provider.dart';
 
+class FileLocation {
+  final String fileName;
+  final bool sample;
+
+  FileLocation({required this.fileName, required this.sample});
+}
+
 //TODO Persist shouldn't be a class
 class Persisted {
   final String fileName;
@@ -41,5 +48,4 @@ class Persisted {
     final String path = folder.path;
     return '$path/$fileName';
   }
-
 }
