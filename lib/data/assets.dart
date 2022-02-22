@@ -26,14 +26,14 @@ class Assets {
     return fileNames.toList();
   }
 
-  static Stream<Future<Map<String, dynamic>>> loadAll(
-      String folderPath) async* {
-    final filePaths = await getFilePaths(folderPath);
-
-    for (String filePath in filePaths) {
-      yield loadJson(filePath);
-    }
-  }
+  // static Stream<Future<Map<String, dynamic>>> loadAll(
+  //     String folderPath) async* {
+  //   final filePaths = await getFilePaths(folderPath);
+  //
+  //   for (String filePath in filePaths) {
+  //     yield loadJson(filePath);
+  //   }
+  // }
 
   static Future<void> copyAllFromTo(
       String fromAssetFolderPath, String toAppFolderPath) async {

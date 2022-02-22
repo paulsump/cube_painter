@@ -18,11 +18,10 @@ Future<void> saveString(
   try {
     File file = File(filePath);
     file.writeAsString(string);
-    // out(file.path);
-    // out(text);
   } catch (e) {
     // works on devices
-    // doesn't work on windows chrome or simulators
+    // but doesn't work on windows chrome
+    // test if it works on simulators
     out(e);
   }
 }
