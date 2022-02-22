@@ -46,7 +46,8 @@ class FileMenu extends StatelessWidget {
                 icon: Icons.star,
                 // TODO create new persisted file,
                 // so as not to overwrite the current one
-                callback: cubeGroupNotifier.clear,
+                //TODO alert('are you sure,save current file?');
+                callback: cubeGroupNotifier.createPersisted,
               )),
               const Center(child: Text('Save Current:')),
               GeneratedThumb(cubeGroup: cubeGroupNotifier.cubeGroup),

@@ -144,7 +144,7 @@ class Cubes {
       ));
     }
 
-    cubeGroupNotifier.clear(update: false);
+    cubeGroupNotifier.clear();
     setState(() {});
   }
 

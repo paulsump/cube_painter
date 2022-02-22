@@ -47,8 +47,9 @@ class CubeGroup {
 
 /// access to the main store of the entire model
 class CubeGroupNotifier extends ChangeNotifier {
-  // set to initial empty list for when it's used before load is complete
-  CubeGroup _cubeGroup = const CubeGroup([]);
+  // add one with empty list for when it's used before load is complete
+  //TODO MAKE _cubeGroups LATE
+  final _cubeGroups = <CubeGroup>[const CubeGroup([])];
 
   late Persisted persisted;
 
@@ -66,10 +67,10 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   int _currentIndex = 0;
 
-  CubeGroup get cubeGroup => _cubeGroup;
+  CubeGroup get cubeGroup => _cubeGroups[_currentIndex];
 
   set cubeGroup(value) {
-    _cubeGroup = value;
+    _cubeGroups[_currentIndex] = value;
   }
 
   void init({
@@ -84,6 +85,10 @@ class CubeGroupNotifier extends ChangeNotifier {
     _onSuccessfulLoad = onSuccessfulLoad;
     persisted = Persisted(fileName: "persisted1.json");
 
+    _loadAllCubeGroups();
+
+    // TODO load previous run's file,
+    // not example every time
     await _loadExampleCubeGroup(_exampleFilePaths[_currentIndex],
         onSuccess: _updateAfterLoad);
   }
@@ -92,7 +97,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       {required VoidCallback onSuccess}) async {
     final map = await Assets.loadJson(filePath);
 
-    _cubeGroup = CubeGroup.fromJson(map);
+    cubeGroup = CubeGroup.fromJson(map);
     onSuccess();
   }
 
@@ -100,7 +105,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       {required VoidCallback onSuccess}) async {
     Map<String, dynamic> map = jsonDecode(json);
 
-    _cubeGroup = CubeGroup.fromJson(map);
+    cubeGroup = CubeGroup.fromJson(map);
     onSuccess();
   }
 
@@ -121,6 +126,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void loadPersisted(Persisted newPersisted) async {
     String filePath = await newPersisted.load();
+
     _loadPersistedCubeGroup(filePath, onSuccess: () {
       persisted = newPersisted;
       _updateAfterLoad();
@@ -161,10 +167,20 @@ class CubeGroupNotifier extends ChangeNotifier {
     File(fullFilePath).writeAsString(json);
   }
 
-  void clear({bool update = true}) {
-    _cubeGroup.cubeInfos.clear();
-    if (update) {
-      _updateAfterLoad();
+  void createPersisted() {
+    //todo createPersisted
+  }
+
+  void clear() {
+    cubeGroup.cubeInfos.clear();
+    //   if (update) {
+    //     _updateAfterLoad();
+    //   }
+  }
+
+  void _loadAllCubeGroups() async {
+    await for (final json in Assets.loadAll('data')) {
+      _cubeGroups.add(CubeGroup.fromJson(await json));
     }
   }
 }
