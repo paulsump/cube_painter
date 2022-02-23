@@ -128,30 +128,41 @@ class _FileMenuState extends State<FileMenu> {
 
   void _deleteFile({required String filePath}) async {
     if (await _userConfirmDelete()) {
-      out(1);
-      // final cubeGroupNotifier = getCubeGroupNotifier(context);
-      //
-      // await cubeGroupNotifier.deleteFile(filePath: filePath);
-      // setState(() {});
+      final cubeGroupNotifier = getCubeGroupNotifier(context);
+
+      await cubeGroupNotifier.deleteFile(filePath: filePath);
+      setState(() {});
     }
-    out('don');
   }
 
   Future<bool> _userConfirmDelete() async {
-    return await _askYesNoOrCancel();
+    return await _askYesNoOrCancel(
+      title: "Delete",
+      content: "Delete this file?",
+//TODO ideally display the thumbnail, so they can be sure.
+    );
   }
 
   Future<bool> _userConfirmLoad() async {
-    return await _askYesNoOrCancel();
+    return await _askYesNoOrCancel(
+        title: "Load",
+        content: "Save the current changes?",
+        yesCallBack: () {
+          final cubeGroupNotifier = getCubeGroupNotifier(context);
+          cubeGroupNotifier.saveFile();
+        });
   }
 
-  Future<bool> _askYesNoOrCancel() async {
+  Future<bool> _askYesNoOrCancel({
+    required String title,
+    required String content,
+    VoidCallback? yesCallBack,
+  }) async {
     final alert = Alert(
-      title: "Delete",
-      content: "Save the current file?",
+      title: title,
+      content: content,
       yesCallBack: () {
-        // TODO Save
-        out('save');
+        yesCallBack?.call();
         Navigator.of(context).pop(true);
       },
       noCallBack: () {

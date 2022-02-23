@@ -54,9 +54,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   late VoidCallback _onSuccessfulLoad;
 
-  String savedJson = '';
+  String _savedJson = '';
 
-  bool get modified => json != savedJson;
+  bool get modified => json != _savedJson;
 
   bool get hasCubes =>
       _cubeGroups.isNotEmpty &&
@@ -113,7 +113,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     await _loadAllCubeGroups();
 
-    savedJson = json;
+    _savedJson = json;
 
     // TODO load previous run's file, by saving settings
     _updateAfterLoad();
@@ -134,7 +134,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   void loadFile({required String filePath}) {
     // if (_saved(context)) {
     saveCurrentFilePath(filePath);
-    savedJson = json;
+    _savedJson = json;
 
     _updateAfterLoad();
     // }
@@ -142,7 +142,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void saveFile() async {
     await saveString(filePath: currentFilePath, string: json);
-    savedJson = json;
+    _savedJson = json;
   }
 
   void saveACopyFile() async {
@@ -151,7 +151,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     await setNewFilePath();
     setJson(jsonCopy);
 
-    savedJson = json;
+    _savedJson = json;
     saveFile();
   }
 
@@ -179,7 +179,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     // insert the new one at the top
     setCubeGroup(CubeGroup.empty());
-    savedJson = json;
+    _savedJson = json;
 
     _cubeGroups.addAll(copy);
     _updateAfterLoad();
