@@ -136,10 +136,12 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   Future<bool> _userConfirmDelete() async {
+//TODO ideally display the thumbnail, so they can be sure.
+
     return await _askYesNoOrCancel(
       title: "Delete",
       content: "Delete this file?",
-//TODO ideally display the thumbnail, so they can be sure.
+      yesCancelOnly: true,
     );
   }
 
@@ -157,6 +159,7 @@ class _FileMenuState extends State<FileMenu> {
     required String title,
     required String content,
     VoidCallback? yesCallBack,
+    bool yesCancelOnly = false,
   }) async {
     final alert = Alert(
       title: title,
@@ -165,9 +168,11 @@ class _FileMenuState extends State<FileMenu> {
         yesCallBack?.call();
         Navigator.of(context).pop(true);
       },
-      noCallBack: () {
-        Navigator.of(context).pop(true);
-      },
+      noCallBack: yesCancelOnly
+          ? null
+          : () {
+              Navigator.of(context).pop(true);
+            },
       cancelCallBack: () {
         Navigator.of(context).pop(false);
       },

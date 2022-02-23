@@ -7,7 +7,7 @@ class Alert extends StatelessWidget {
   final String title;
   final String content;
   final VoidCallback yesCallBack;
-  final VoidCallback noCallBack;
+  final VoidCallback? noCallBack;
   final VoidCallback cancelCallBack;
 
   Alert({
@@ -39,10 +39,11 @@ class Alert extends StatelessWidget {
             child: Text("Yes", style: textStyle),
             onPressed: yesCallBack,
           ),
-          TextButton(
-            child: Text("No", style: textStyle),
-            onPressed: noCallBack,
-          ),
+          if (noCallBack != null)
+            TextButton(
+              child: Text("No", style: textStyle),
+              onPressed: noCallBack,
+            ),
           TextButton(
             child: Text("Cancel", style: textStyle),
             onPressed: cancelCallBack,
