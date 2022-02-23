@@ -7,12 +7,14 @@ class TextItem {
   final String tip;
   final IconData icon;
   final VoidCallback callback;
+  final bool enabled;
 
   const TextItem({
     required this.text,
     required this.tip,
     required this.icon,
     required this.callback,
+    this.enabled = true,
   });
 }
 
@@ -32,13 +34,15 @@ class FileMenuTextItem extends StatelessWidget {
         trailing: HexagonButton(
           child: Icon(
             item.icon,
-            color: enabledIconColor,
+            color: item.enabled ? enabledIconColor : disabledIconColor,
             size: iconSize,
           ),
-          onPressed: () {
-            item.callback();
-            Navigator.pop(context);
-          },
+          onPressed: item.enabled
+              ? () {
+                  item.callback();
+                  Navigator.pop(context);
+                }
+              : null,
           tip: item.tip,
         ),
         title: Text(item.text),

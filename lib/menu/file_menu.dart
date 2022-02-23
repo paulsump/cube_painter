@@ -22,19 +22,14 @@ class FileMenu extends StatelessWidget {
         // TODO create new persisted file,
         // so as not to overwrite the current one
         //TODO alert('are you sure,save current file?');
-        callback: cubeGroupNotifier.createPersisted,
-        // callback: cubeGroupNotifier.save,
+        callback: cubeGroupNotifier.newOrClear,
       ),
-      // TextItem(
-      //   text: 'Load',
-      //   icon: Icons.file_open_sharp,
-      //   callback: cubeGroupNotifier.load,
-      // ),
       TextItem(
         text: 'Save',
         tip: 'Save the current cube group',
         icon: Icons.save,
         callback: cubeGroupNotifier.save,
+        enabled: cubeGroupNotifier.canSave,
       ),
       TextItem(
         text: 'Save a copy',

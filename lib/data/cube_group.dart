@@ -49,6 +49,10 @@ class CubeGroup {
 class CubeGroupNotifier extends ChangeNotifier {
   final _cubeGroups = <String, CubeGroup>{};
 
+  late Settings _settings;
+
+  late VoidCallback _onSuccessfulLoad;
+
   bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
 
   String get currentFilePath => _settings.currentFilePath;
@@ -58,10 +62,6 @@ class CubeGroupNotifier extends ChangeNotifier {
     //TODO SAVE SETTINGS toJson
   }
 
-  late Settings _settings;
-
-  late VoidCallback _onSuccessfulLoad;
-
   CubeGroup get cubeGroup => _cubeGroups[currentFilePath]!;
 
   void setCubeGroup(CubeGroup cubeGroup) {
@@ -70,6 +70,8 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   // Map<String,CubeGroup> get cubeGroups => _cubeGroups;
   Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
+
+  bool get canSave => currentFilePath.endsWith(userCubesExtension);
 
   void init({
     required VoidCallback onSuccessfulLoad,
@@ -117,7 +119,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
 
-  void createPersisted() {
+  void newOrClear() {
     //todo createPersisted
   }
 
@@ -146,14 +148,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     for (final String path in paths) {
       final File file = File(path);
 
-      out(file.path);
-      // if (!file.path.endsWith('.userCubes.json')) {
-      //   file.delete();
-      // }
-
-      String json = await file.readAsString();
-      final map = jsonDecode(json);
-
+      final map = jsonDecode(await file.readAsString());
       _cubeGroups[path] = CubeGroup.fromJson(await map);
     }
   }
