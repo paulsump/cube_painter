@@ -47,7 +47,7 @@ class Undoer {
     final notifier = getCubeGroupNotifier(context);
     final json = popFrom.removeLast();
 
-    Map<String, dynamic> map = jsonDecode(json);
+    final Map<String, dynamic> map = jsonDecode(json);
     notifier.setCubeGroup(CubeGroup.fromJson(map));
   }
 

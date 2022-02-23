@@ -27,6 +27,7 @@ class CubeGroup {
   final List<CubeInfo> _cubeInfos;
 
   const CubeGroup(this._cubeInfos);
+  CubeGroup.empty() : _cubeInfos = <CubeInfo>[];
 
   List<CubeInfo> get cubeInfos => _cubeInfos;
 
@@ -53,7 +54,21 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   late VoidCallback _onSuccessfulLoad;
 
-  bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
+  bool get hasCubes =>
+      _cubeGroups.isNotEmpty &&
+      _hasCubeGroupForCurrentFilePath &&
+      cubeGroup.cubeInfos.isNotEmpty;
+
+  bool get _hasCubeGroupForCurrentFilePath {
+    if (!_cubeGroups.containsKey(currentFilePath)) {
+      out(currentFilePath);
+
+      assert(false,
+          "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
+      return false;
+    }
+    return true;
+  }
 
   String get currentFilePath => _settings.currentFilePath;
 
@@ -63,7 +78,13 @@ class CubeGroupNotifier extends ChangeNotifier {
     //TODO SAVE SETTINGS toJson
   }
 
-  CubeGroup get cubeGroup => _cubeGroups[currentFilePath]!;
+  CubeGroup get cubeGroup {
+    if (!_hasCubeGroupForCurrentFilePath) {
+      // PREvent irreversible crash for debugging purposes now
+      return CubeGroup.empty();
+    }
+    return _cubeGroups[currentFilePath]!;
+  }
 
   void setCubeGroup(CubeGroup cubeGroup) {
     _cubeGroups[currentFilePath] = cubeGroup;
@@ -113,7 +134,12 @@ class CubeGroupNotifier extends ChangeNotifier {
       await saveString(filePath: currentFilePath, string: json);
 
   void saveACopyFile() async {
+    final jsonCopy = json;
+
     await setNewFilePath();
+    final Map<String, dynamic> map = jsonDecode(jsonCopy);
+
+    setCubeGroup(CubeGroup.fromJson(map));
     saveFile();
   }
 
@@ -130,7 +156,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   Future<void> createNewFile() async {
     await setNewFilePath();
 
-    setCubeGroup(CubeGroup(<CubeInfo>[]));
+    setCubeGroup(CubeGroup.empty());
     _updateAfterLoad();
   }
 
