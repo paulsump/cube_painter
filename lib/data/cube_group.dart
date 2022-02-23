@@ -95,6 +95,8 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   bool get canSave => currentFilePath.endsWith(userCubesExtension);
 
+  bool get canDelete => canSave && _cubeGroups.isNotEmpty;
+
   void init({
     required VoidCallback onSuccessfulLoad,
   }) async {
@@ -138,6 +140,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     await setNewFilePath();
     setJson(jsonCopy);
+
     saveFile();
   }
 
@@ -164,16 +167,19 @@ class CubeGroupNotifier extends ChangeNotifier {
     _updateAfterLoad();
   }
 
+  void deleteFile() async {
+    //TODO DElete file
+    //TODO if empty, createNewFile()
+    //TODO else Open _cubeGroups[0]
+  }
+
   void clear() => cubeGroup.cubeInfos.clear();
 
   Future<void> _loadAllCubeGroups() async {
-    const assetsFolder = 'samples';
+    // TODO do we want to do this every time, or just the first time?
+    loadSamples(notify: false);
 
     final Directory appFolder = await getApplicationDocumentsDirectory();
-
-    // TODO do we want to do this every time, or just the first time?
-    await Assets.copyAllFromTo(assetsFolder, appFolder.path,
-        extensionReplacement: sampleCubesExtension);
 
     List<String> paths = await getAllAppFilePaths(appFolder);
 
@@ -206,5 +212,18 @@ class CubeGroupNotifier extends ChangeNotifier {
       }
     }
     return paths;
+  }
+
+  void loadSamples({required bool notify}) async {
+    const assetsFolder = 'samples';
+
+    final Directory appFolder = await getApplicationDocumentsDirectory();
+
+    await Assets.copyAllFromTo(assetsFolder, appFolder.path,
+        extensionReplacement: sampleCubesExtension);
+
+    if (notify) {
+      notifyListeners();
+    }
   }
 }

@@ -38,6 +38,14 @@ class FileMenu extends StatelessWidget {
         icon: Icons.copy_sharp,
         callback: cubeGroupNotifier.saveACopyFile,
       ),
+      TextItem(
+        text: 'Delete',
+        tip:
+            'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
+        icon: Icons.delete_forever_sharp,
+        callback: cubeGroupNotifier.deleteFile,
+        enabled: cubeGroupNotifier.canDelete,
+      ),
     ];
 
     return LayoutBuilder(
@@ -50,9 +58,12 @@ class FileMenu extends StatelessWidget {
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
             for (TextItem item in items) FileMenuTextItem(item: item),
             const Divider(),
-            const Text(
-              'Load:',
-              // style: TextStyle(fontStyle: FontStyle.,)
+            const Padding(
+              padding: EdgeInsets.only(left: 16),
+              child: Text(
+                'Open...',
+                // style: TextStyle(fontStyle: FontStyle.,)
+              ),
             ),
             for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
               HexagonButton(
@@ -62,6 +73,14 @@ class FileMenu extends StatelessWidget {
                 tip: "Load this cube group",
               ),
             const Divider(),
+            FileMenuTextItem(
+              item: TextItem(
+                text: 'Load Samples',
+                tip: 'Load the example files',
+                icon: Icons.menu_open_sharp,
+                callback: () => cubeGroupNotifier.loadSamples(notify: true),
+              ),
+            ),
           ],
         ),
       ),
