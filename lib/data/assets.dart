@@ -33,9 +33,12 @@ class Assets {
     final String appFolderPath = '${appFolder.path}${Platform.pathSeparator}';
 
     for (String assetFilePath in assetFilePaths) {
-      final fileName = assetFilePath.split(Platform.pathSeparator).last;
+      final assetFileName = assetFilePath.split(Platform.pathSeparator).last;
 
-      final String appFilePath = '$appFolderPath$fileName';
+      final appFileName =
+          assetFileName.replaceFirst('.json', '.sampleCubes.json');
+
+      final String appFilePath = '$appFolderPath$appFileName';
       File appFile = File(appFilePath);
 
       if (!await appFile.exists()) {

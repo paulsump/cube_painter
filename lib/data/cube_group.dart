@@ -125,11 +125,28 @@ class CubeGroupNotifier extends ChangeNotifier {
     for (final String path in paths) {
       final File file = File(path);
 
+      // out(file.path);
+      // if (file.path.endsWith('user0.json')) {
+      //   renameFileNameOnly(file, '0userCubes.json');
+      // } else {
+      //   file.delete();
+      // }
+
       String json = await file.readAsString();
       final map = jsonDecode(json);
 
       _cubeGroups[path] = CubeGroup.fromJson(await map);
     }
+  }
+
+  void renameFileNameOnly(File file, String newFileName) {
+    final filePath = file.path;
+
+    final lastSeparator = filePath.lastIndexOf(Platform.pathSeparator);
+    final newFilePath = filePath.substring(0, lastSeparator + 1) + newFileName;
+
+    out(newFilePath);
+    file.rename(newFilePath);
   }
 
   Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
@@ -139,6 +156,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       final String path = fileSystemEntity.path;
 
       if (path.endsWith('.json')) {
+        // if (path.endsWith('userCubes.json') || path.startsWith('sampleCubes.json')) {
         paths.add(path);
       }
     }
