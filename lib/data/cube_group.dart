@@ -165,7 +165,13 @@ class CubeGroupNotifier extends ChangeNotifier {
   Future<void> createNewFile() async {
     await setNewFilePath();
 
+    final copy = Map<String, CubeGroup>.from(_cubeGroups);
+    _cubeGroups.clear();
+
+    // insert the new one at the top
     setCubeGroup(CubeGroup.empty());
+
+    _cubeGroups.addAll(copy);
     _updateAfterLoad();
   }
 
