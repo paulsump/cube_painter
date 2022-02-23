@@ -173,7 +173,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     file.delete();
 
     if (currentFilePath == filePath) {
-      if (_cubeGroups.length == 1) {
+      if (_cubeGroups.isEmpty) {
         createNewFile();
       } else {
         loadFile(filePath: _cubeGroups.keys.first);

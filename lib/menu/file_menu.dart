@@ -101,7 +101,10 @@ class _FileMenuState extends State<FileMenu> {
                 text: 'Load Samples',
                 tip: 'Load the example files',
                 icon: Icons.menu_open_sharp,
-                callback: () => cubeGroupNotifier.loadSamples(notify: true),
+                callback: () {
+                  cubeGroupNotifier.loadSamples(notify: true);
+                  setState(() {});
+                },
               ),
             ),
           ],
