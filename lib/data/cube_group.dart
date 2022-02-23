@@ -93,9 +93,8 @@ class CubeGroupNotifier extends ChangeNotifier {
   // Map<String,CubeGroup> get cubeGroups => _cubeGroups;
   Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
 
+  // TODO REMOVE
   bool get canSave => currentFilePath.endsWith(userCubesExtension);
-
-  bool get canDelete => canSave && _cubeGroups.isNotEmpty;
 
   void init({
     required VoidCallback onSuccessfulLoad,
@@ -167,8 +166,10 @@ class CubeGroupNotifier extends ChangeNotifier {
     _updateAfterLoad();
   }
 
-  void deleteFile() async {
+  void deleteFile({required String filePath}) async {
     //TODO DElete file
+    // final File file = File(filePath);
+    // file.delete();
     //TODO if empty, createNewFile()
     //TODO else Open _cubeGroups[0]
   }

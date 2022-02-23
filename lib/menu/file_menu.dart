@@ -1,5 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/file_menu_text_item.dart';
 import 'package:cube_painter/out.dart';
@@ -38,14 +39,6 @@ class FileMenu extends StatelessWidget {
         icon: Icons.copy_sharp,
         callback: cubeGroupNotifier.saveACopyFile,
       ),
-      TextItem(
-        text: 'Delete',
-        tip:
-            'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
-        icon: Icons.delete_forever_sharp,
-        callback: cubeGroupNotifier.deleteFile,
-        enabled: cubeGroupNotifier.canDelete,
-      ),
     ];
 
     return LayoutBuilder(
@@ -60,17 +53,47 @@ class FileMenu extends StatelessWidget {
             const Divider(),
             const Padding(
               padding: EdgeInsets.only(left: 16),
-              child: Text(
-                'Open...',
-                // style: TextStyle(fontStyle: FontStyle.,)
-              ),
+              child: Text('Open...'),
             ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: Text('Delete'),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 16),
+                    child: Text('Open'),
+                  ),
+                ]),
             for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
-              HexagonButton(
-                child: Thumbnail(cubeGroup: entry.value),
-                onPressed: () =>
-                    cubeGroupNotifier.loadFile(filePath: entry.key),
-                tip: "Load this cube group",
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  HexagonButton(
+                    height: 66,
+                    child: Icon(
+                      Icons.delete_forever_sharp,
+                      size: iconSize,
+                    ),
+                    tip:
+                        'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
+                    onPressed: () =>
+                        cubeGroupNotifier.deleteFile(filePath: entry.key),
+                  ),
+                  Thumbnail(cubeGroup: entry.value),
+                  HexagonButton(
+                    height: 66,
+                    child: Icon(
+                      Icons.open_in_new,
+                      size: iconSize,
+                    ),
+                    onPressed: () =>
+                        cubeGroupNotifier.loadFile(filePath: entry.key),
+                    tip: "Load this cube group",
+                  ),
+                ],
               ),
             const Divider(),
             FileMenuTextItem(
