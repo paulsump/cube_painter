@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +43,7 @@ class Undoer {
     _saveTo(pushTo);
 
     final notifier = getCubeGroupNotifier(context);
-    final json = popFrom.removeLast();
-
-    final Map<String, dynamic> map = jsonDecode(json);
-    notifier.setCubeGroup(CubeGroup.fromJson(map));
+    notifier.setJson(popFrom.removeLast());
   }
 
   void _saveTo(DoList list) {

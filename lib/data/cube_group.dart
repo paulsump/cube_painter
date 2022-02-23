@@ -137,10 +137,14 @@ class CubeGroupNotifier extends ChangeNotifier {
     final jsonCopy = json;
 
     await setNewFilePath();
-    final Map<String, dynamic> map = jsonDecode(jsonCopy);
+    setJson(jsonCopy);
+    saveFile();
+  }
+
+  void setJson(String json) {
+    final Map<String, dynamic> map = jsonDecode(json);
 
     setCubeGroup(CubeGroup.fromJson(map));
-    saveFile();
   }
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
