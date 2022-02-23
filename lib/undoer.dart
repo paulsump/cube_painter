@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-typedef DoList = List<String>;
+typedef JsonList = List<String>;
 
 class Undoer {
   final BuildContext context;
   final void Function(VoidCallback fn) setState;
 
-  final DoList _undos = [];
-  final DoList _redos = [];
+  final JsonList _undos = [];
+  final JsonList _redos = [];
 
   Undoer(this.context, {required this.setState});
 
@@ -39,14 +39,14 @@ class Undoer {
     setState(() {});
   }
 
-  void _popFromPushTo(DoList popFrom, DoList pushTo) {
+  void _popFromPushTo(JsonList popFrom, JsonList pushTo) {
     _saveTo(pushTo);
 
     final notifier = getCubeGroupNotifier(context);
     notifier.setJson(popFrom.removeLast());
   }
 
-  void _saveTo(DoList list) {
+  void _saveTo(JsonList list) {
     final notifier = getCubeGroupNotifier(context);
     list.add(notifier.json);
   }

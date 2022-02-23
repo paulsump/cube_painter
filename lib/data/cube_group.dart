@@ -54,6 +54,10 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   late VoidCallback _onSuccessfulLoad;
 
+  String savedJson = '';
+
+  bool get modified => json != savedJson;
+
   bool get hasCubes =>
       _cubeGroups.isNotEmpty &&
       _hasCubeGroupForCurrentFilePath &&
@@ -62,6 +66,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   bool get _hasCubeGroupForCurrentFilePath {
     if (!_cubeGroups.containsKey(currentFilePath)) {
       out(currentFilePath);
+      out(_cubeGroups.keys);
 
       assert(false,
           "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
@@ -86,19 +91,15 @@ class CubeGroupNotifier extends ChangeNotifier {
     return _cubeGroups[currentFilePath]!;
   }
 
-  void setCubeGroup(CubeGroup cubeGroup) {
-    _cubeGroups[currentFilePath] = cubeGroup;
-  }
+  void setCubeGroup(CubeGroup cubeGroup) =>
+      _cubeGroups[currentFilePath] = cubeGroup;
 
-  // Map<String,CubeGroup> get cubeGroups => _cubeGroups;
   Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
 
-  // TODO REMOVE
-  bool get canSave => currentFilePath.endsWith(userCubesExtension);
+  // TODO REMOVE?
+  bool get canSave => modified && currentFilePath.endsWith(userCubesExtension);
 
-  void init({
-    required VoidCallback onSuccessfulLoad,
-  }) async {
+  void init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
 
     // TODO load fromJson
@@ -112,7 +113,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     await _loadAllCubeGroups();
 
-    // TODO load previous run's file,
+    savedJson = json;
+
+    // TODO load previous run's file, by saving settings
     _updateAfterLoad();
   }
 
@@ -130,12 +133,15 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void loadFile({required String filePath}) {
     saveCurrentFilePath(filePath);
+    savedJson = json;
 
     _updateAfterLoad();
   }
 
-  void saveFile() async =>
-      await saveString(filePath: currentFilePath, string: json);
+  void saveFile() async {
+    await saveString(filePath: currentFilePath, string: json);
+    savedJson = json;
+  }
 
   void saveACopyFile() async {
     final jsonCopy = json;
@@ -143,6 +149,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     await setNewFilePath();
     setJson(jsonCopy);
 
+    savedJson = json;
     saveFile();
   }
 
@@ -170,6 +177,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     // insert the new one at the top
     setCubeGroup(CubeGroup.empty());
+    savedJson = json;
 
     _cubeGroups.addAll(copy);
     _updateAfterLoad();
