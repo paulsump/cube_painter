@@ -25,7 +25,7 @@ class Thumbnail extends StatelessWidget {
       child: Transform.scale(
         scale: 111 / scale,
         child: Transform.translate(
-          offset: const Offset(55, 90) - offset,
+          offset: const Offset(50, 90) - offset,
           child: StaticCubes(cubeGroup: cubeGroup),
         ),
       ),

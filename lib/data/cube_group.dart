@@ -132,10 +132,12 @@ class CubeGroupNotifier extends ChangeNotifier {
   String get json => jsonEncode(cubeGroup);
 
   void loadFile({required String filePath}) {
+    // if (_saved(context)) {
     saveCurrentFilePath(filePath);
     savedJson = json;
 
     _updateAfterLoad();
+    // }
   }
 
   void saveFile() async {
@@ -253,4 +255,28 @@ class CubeGroupNotifier extends ChangeNotifier {
     await Assets.copyAllFromTo(assetsFolder, appFolder.path,
         extensionReplacement: sampleCubesExtension);
   }
+
+// bool _saved(context) {
+//   if (!modified) {
+//     return true;
+//   }
+//   _showDialog(context);
+//   return true;
+// }
+//
+// void _showDialog(BuildContext context) {
+//   VoidCallback continueCallBack = () => {
+//         Navigator.of(context).pop(),
+//         // code on continue comes here
+//       };
+//   Alert alert = Alert("Abort",
+//       "Are you sure you want to abort this operation?", continueCallBack);
+//
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return alert;
+//     },
+//   );
+// }
 }
