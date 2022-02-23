@@ -167,11 +167,20 @@ class CubeGroupNotifier extends ChangeNotifier {
   }
 
   void deleteFile({required String filePath}) async {
-    //TODO DElete file
-    // final File file = File(filePath);
-    // file.delete();
-    //TODO if empty, createNewFile()
-    //TODO else Open _cubeGroups[0]
+    _cubeGroups.remove(filePath);
+
+    final File file = File(filePath);
+    file.delete();
+
+    if (currentFilePath == filePath) {
+      if (_cubeGroups.length == 1) {
+        createNewFile();
+      } else {
+        loadFile(filePath: _cubeGroups.keys.first);
+      }
+    }
+
+    notifyListeners();
   }
 
   void clear() => cubeGroup.cubeInfos.clear();

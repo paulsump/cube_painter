@@ -51,10 +51,6 @@ class FileMenu extends StatelessWidget {
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
             for (TextItem item in items) FileMenuTextItem(item: item),
             const Divider(),
-            const Padding(
-              padding: EdgeInsets.only(left: 16),
-              child: Text('Open...'),
-            ),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
