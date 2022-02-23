@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cube_painter/data/persist.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -33,11 +32,18 @@ class Assets {
     final Directory appFolder = await getApplicationDocumentsDirectory();
     final String appFolderPath = '${appFolder.path}${Platform.pathSeparator}';
 
-    for (String filePath in assetFilePaths) {
-      final fileName = filePath.split(Platform.pathSeparator).last;
+    for (String assetFilePath in assetFilePaths) {
+      final fileName = assetFilePath.split(Platform.pathSeparator).last;
+
       final String appFilePath = '$appFolderPath$fileName';
-      final String json = await rootBundle.loadString(filePath);
-      await saveString(filePath: appFilePath, string: json);
+      File appFile = File(appFilePath);
+
+      if (!await appFile.exists()) {
+        out('copying $appFilePath');
+
+        final String assetJson = await rootBundle.loadString(assetFilePath);
+        await appFile.writeAsString(assetJson);
+      }
     }
   }
 }
