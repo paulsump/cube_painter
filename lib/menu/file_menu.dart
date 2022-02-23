@@ -22,9 +22,9 @@ class _FileMenuState extends State<FileMenu> {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
     pop(VoidCallback funk) => () {
-      funk();
-      Navigator.pop(context);
-    };
+          funk();
+          Navigator.pop(context);
+        };
 
     final items = <TextItem>[
       TextItem(
@@ -46,7 +46,7 @@ class _FileMenuState extends State<FileMenu> {
       TextItem(
         text: 'Save a copy',
         tip:
-        'Save the current cube group in a new file and start using that group',
+            'Save the current cube group in a new file and start using that group',
         icon: Icons.copy_sharp,
         callback: pop(cubeGroupNotifier.saveACopyFile),
       ),
@@ -85,7 +85,7 @@ class _FileMenuState extends State<FileMenu> {
                       size: iconSize,
                     ),
                     tip:
-                    'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
+                        'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
                     onPressed: () => _deleteFile(filePath: entry.key),
                   ),
                   Thumbnail(cubeGroup: entry.value),
@@ -95,8 +95,7 @@ class _FileMenuState extends State<FileMenu> {
                       Icons.open_in_new,
                       size: iconSize,
                     ),
-                    onPressed: () =>
-                        cubeGroupNotifier.loadFile(filePath: entry.key),
+                    onPressed: () => _loadFile(filePath: entry.key),
                     tip: "Load this cube group",
                   ),
                 ],
@@ -119,42 +118,61 @@ class _FileMenuState extends State<FileMenu> {
     );
   }
 
-  void _deleteFile({required String filePath}) async {
-    _saved();
-    // final cubeGroupNotifier = getCubeGroupNotifier(context);
-    //
-    // await cubeGroupNotifier.deleteFile(filePath: filePath);
-    // setState(() {});
+  void _loadFile({required String filePath}) async {
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+
+    if (!cubeGroupNotifier.modified || await _userConfirmLoad()) {
+      cubeGroupNotifier.loadFile(filePath: filePath);
+    }
   }
 
-  bool _saved() {
+  void _deleteFile({required String filePath}) async {
+    if (await _userConfirmDelete()) {
+      out(1);
+      // final cubeGroupNotifier = getCubeGroupNotifier(context);
+      //
+      // await cubeGroupNotifier.deleteFile(filePath: filePath);
+      // setState(() {});
+    }
+    out('don');
+  }
+
+  Future<bool> _userConfirmDelete() {
+    return _saved();
+  }
+
+  Future<bool> _userConfirmLoad() {
+    return _saved();
+  }
+
+  Future<bool> _saved() async {
     // if (!modified) {
     //   return true;
     // }
-    _showDialog();
-    return true;
+    return await _showDialog();
   }
 
-  void _showDialog() {
+  Future<bool> _showDialog() async {
     final alert = Alert(
       title: "Delete",
       content: "Save the current file?",
       yesCallBack: () {
-        Navigator.of(context).pop();
         // TODO Save
+        out('save');
+        Navigator.of(context).pop(true);
 //TODO return true
       },
       noCallBack: () {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
 //TODO return true
       },
       cancelCallBack: () {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(false);
 //TODO return false
       },
     );
 
-    showDialog(
+    return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return alert;
