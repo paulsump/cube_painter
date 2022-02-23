@@ -52,7 +52,7 @@ class CubeButton extends StatelessWidget {
                 scale: 29 / iconSize,
                 child: Icon(
                   icon,
-                  color: lightIconColor,
+                  color: enabledIconColor,
                 ),
               ),
             ),

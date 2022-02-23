@@ -15,11 +15,8 @@ Color getColor(Side side) {
 double iconSize = 33;
 Color disabledIconColor = Colors.grey;
 
-Color enabledIconColor = getTweenBLtoTColor(0.4);
+Color enabledIconColor = getColor(Side.br);
 Color textColor = enabledIconColor;
-
-Color lightIconColor = getColor(Side.br);
-Color lightTextColor = lightIconColor;
 
 // TODO rename these
 const Color top = Color(0xfff07f7e);

@@ -72,8 +72,7 @@ class BrushMenu extends StatelessWidget {
             ),
           ),
           const Divider(),
-          Center(
-              child: Text('Brush...', style: TextStyle(color: lightTextColor))),
+          Center(child: Text('Brush...', style: TextStyle(color: textColor))),
           const SizedBox(height: 22),
           CubeButton(
             radioOn: GestureMode.erase == gestureMode,
@@ -82,7 +81,7 @@ class BrushMenu extends StatelessWidget {
               setGestureMode(GestureMode.erase, context);
             },
             tip:
-            'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -122,8 +121,8 @@ class BrushMenu extends StatelessWidget {
           ),
           const SizedBox(height: 3),
           Center(
-              child: Text('...or Pan / Zoom',
-                  style: TextStyle(color: lightTextColor))),
+              child:
+                  Text('...or Pan / Zoom', style: TextStyle(color: textColor))),
           const Divider(),
           const SizedBox(height: 22),
         ],
