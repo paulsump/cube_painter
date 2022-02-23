@@ -4,6 +4,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/file_menu_text_item.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/question.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -119,9 +120,35 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _deleteFile({required String filePath}) async {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    _saved();
+    // final cubeGroupNotifier = getCubeGroupNotifier(context);
+    //
+    // await cubeGroupNotifier.deleteFile(filePath: filePath);
+    // setState(() {});
+  }
 
-    await cubeGroupNotifier.deleteFile(filePath: filePath);
-    setState(() {});
+  bool _saved() {
+    // if (!modified) {
+    //   return true;
+    // }
+    _showDialog();
+    return true;
+  }
+
+  void _showDialog() {
+    final alert = Question(
+        title: "Delete",
+        content: "Save the current file?",
+        yesCallBack: () => {
+              Navigator.of(context).pop(),
+              // code on continue comes here
+            });
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
