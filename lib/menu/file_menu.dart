@@ -1,4 +1,5 @@
 import 'package:cube_painter/alert.dart';
+import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
@@ -30,7 +31,8 @@ class _FileMenuState extends State<FileMenu> {
       TextItem(
         text: 'New',
         tip: 'Create a new cube group',
-        icon: Icons.star,
+        icon: docNew,
+        iconSize: appIconSize,
         // TODO create new persisted file,
         // so as not to overwrite the current one
         //TODO alert('are you sure,save current file?');
@@ -40,6 +42,7 @@ class _FileMenuState extends State<FileMenu> {
         text: 'Save',
         tip: 'Save the current cube group',
         icon: Icons.save,
+        iconSize: iconSize,
         callback: pop(cubeGroupNotifier.saveFile),
         enabled: cubeGroupNotifier.modified,
       ),
@@ -47,7 +50,8 @@ class _FileMenuState extends State<FileMenu> {
         text: 'Save a copy',
         tip:
             'Save the current cube group in a new file and start using that group',
-        icon: Icons.copy_sharp,
+        icon: copy,
+        iconSize: appIconSize,
         callback: pop(cubeGroupNotifier.saveACopyFile),
       ),
     ];
@@ -92,8 +96,8 @@ class _FileMenuState extends State<FileMenu> {
                   HexagonButton(
                     height: 66,
                     child: Icon(
-                      Icons.open_in_new,
-                      size: iconSize,
+                      folderOpenEmpty,
+                      size: appIconSize,
                     ),
                     onPressed: () => _loadFile(filePath: entry.key),
                     tip: "Load this cube group",
@@ -106,6 +110,7 @@ class _FileMenuState extends State<FileMenu> {
                 text: 'Load Samples',
                 tip: 'Load the example files',
                 icon: Icons.menu_open_sharp,
+                iconSize: iconSize,
                 callback: () {
                   cubeGroupNotifier.loadSamples();
                   setState(() {});

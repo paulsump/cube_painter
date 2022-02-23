@@ -13,6 +13,7 @@ Color getColor(Side side) {
 }
 
 double iconSize = 33;
+double appIconSize = 27;
 Color disabledIconColor = Colors.grey;
 
 Color enabledIconColor = getColor(Side.br);

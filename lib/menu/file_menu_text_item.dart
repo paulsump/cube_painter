@@ -6,6 +6,7 @@ class TextItem {
   final String text;
   final String tip;
   final IconData icon;
+  final double iconSize;
   final VoidCallback callback;
   final bool enabled;
 
@@ -13,6 +14,7 @@ class TextItem {
     required this.text,
     required this.tip,
     required this.icon,
+    required this.iconSize,
     required this.callback,
     this.enabled = true,
   });
@@ -35,7 +37,7 @@ class FileMenuTextItem extends StatelessWidget {
           child: Icon(
             item.icon,
             color: item.enabled ? enabledIconColor : disabledIconColor,
-            size: iconSize,
+            size: item.iconSize,
           ),
           onPressed: item.enabled ? item.callback : null,
           tip: item.tip,

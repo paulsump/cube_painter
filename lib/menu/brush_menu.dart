@@ -1,3 +1,4 @@
+import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/brush_menu_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
@@ -76,7 +77,7 @@ class BrushMenu extends StatelessWidget {
           const SizedBox(height: 22),
           CubeButton(
             radioOn: GestureMode.erase == gestureMode,
-            icon: Icons.remove,
+            icon: cancelOutline,
             onPressed: () {
               setGestureMode(GestureMode.erase, context);
             },
@@ -122,7 +123,7 @@ class BrushMenu extends StatelessWidget {
           const SizedBox(height: 3),
           Center(
               child:
-                  Text('...or Pan / Zoom', style: TextStyle(color: textColor))),
+              Text('...or Pan / Zoom', style: TextStyle(color: textColor))),
           const Divider(),
           const SizedBox(height: 22),
         ],

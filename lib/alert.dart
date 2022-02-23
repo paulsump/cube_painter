@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
@@ -36,20 +37,29 @@ class Alert extends StatelessWidget {
         ),
         actions: <Widget>[
           HexagonButton(
-            child: const Icon(Icons.check_sharp),
+            child: Icon(
+              thumbsUp,
+              size: appIconSize,
+            ),
             onPressed: yesCallBack,
             // TODO pass yes tip in
             tip: 'Yes - Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
             HexagonButton(
-              child: const Icon(Icons.do_not_disturb_alt_sharp),
+              child: Icon(
+                thumbsDown,
+                size: appIconSize,
+              ),
               onPressed: noCallBack,
               // TODO pass no tip in
               tip: 'No - Do the operation, but say no to the question.',
             ),
           HexagonButton(
-            child: const Icon(Icons.cancel_presentation_sharp),
+            child: Icon(
+              cancelOutline,
+              size: appIconSize,
+            ),
             onPressed: cancelCallBack,
             tip: 'Cancel - Do nothing.',
           ),
