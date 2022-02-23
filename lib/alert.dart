@@ -11,7 +11,7 @@ class Alert extends StatelessWidget {
   final VoidCallback? noCallBack;
   final VoidCallback cancelCallBack;
 
-  Alert({
+  const Alert({
     Key? key,
     required this.title,
     required this.content,
@@ -20,7 +20,6 @@ class Alert extends StatelessWidget {
     required this.cancelCallBack,
   }) : super(key: key);
 
-  // final TextStyle textStyle = TextStyle(color: textColor);
   static const double _blur = 2;
 
   @override
@@ -38,24 +37,21 @@ class Alert extends StatelessWidget {
         actions: <Widget>[
           HexagonButton(
             child: const Icon(Icons.check_sharp),
-            // child: Text("Yes", style: textStyle),
             onPressed: yesCallBack,
             // TODO pass yes tip in
-            tip: 'Confirm that you do want to do this.',
+            tip: 'Yes - Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
             HexagonButton(
               child: const Icon(Icons.do_not_disturb_alt_sharp),
-              // child: Text("No", style: textStyle),
               onPressed: noCallBack,
               // TODO pass no tip in
-              tip: 'Do the operation, but say no to the question.',
+              tip: 'No - Do the operation, but say no to the question.',
             ),
           HexagonButton(
             child: const Icon(Icons.cancel_presentation_sharp),
-            // child: Text("Cancel", style: textStyle),
             onPressed: cancelCallBack,
-            tip: 'Do nothing.',
+            tip: 'Cancel - Do nothing.',
           ),
         ],
       ),

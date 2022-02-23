@@ -66,7 +66,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   bool get _hasCubeGroupForCurrentFilePath {
     if (!_cubeGroups.containsKey(currentFilePath)) {
       out(currentFilePath);
-      out(_cubeGroups.keys);
+      // out(_cubeGroups.keys);
 
       assert(false,
           "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
@@ -95,9 +95,6 @@ class CubeGroupNotifier extends ChangeNotifier {
       _cubeGroups[currentFilePath] = cubeGroup;
 
   Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
-
-  // TODO REMOVE?
-  bool get canSave => modified && currentFilePath.endsWith(userCubesExtension);
 
   void init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
@@ -135,7 +132,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     // if (_saved(context)) {
     saveCurrentFilePath(filePath);
     _savedJson = json;
-
+    out(json);
     _updateAfterLoad();
     // }
   }
@@ -255,5 +252,4 @@ class CubeGroupNotifier extends ChangeNotifier {
     await Assets.copyAllFromTo(assetsFolder, appFolder.path,
         extensionReplacement: sampleCubesExtension);
   }
-
 }

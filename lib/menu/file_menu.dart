@@ -41,7 +41,7 @@ class _FileMenuState extends State<FileMenu> {
         tip: 'Save the current cube group',
         icon: Icons.save,
         callback: pop(cubeGroupNotifier.saveFile),
-        enabled: cubeGroupNotifier.canSave,
+        enabled: cubeGroupNotifier.modified,
       ),
       TextItem(
         text: 'Save a copy',
@@ -151,7 +151,9 @@ class _FileMenuState extends State<FileMenu> {
         content: "Save the current changes?",
         yesCallBack: () {
           final cubeGroupNotifier = getCubeGroupNotifier(context);
+
           cubeGroupNotifier.saveFile();
+          setState(() {});
         });
   }
 
