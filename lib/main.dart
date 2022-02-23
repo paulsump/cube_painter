@@ -51,6 +51,10 @@ class CubePainterApp extends StatelessWidget {
           //       buttonColor: Colors.red,
           //       splashColor: Colors.red,
           //     ),
+          // buttonTheme: ButtonThemeData(
+          //   buttonColor: Colors.deepPurple,     //  <-- dark color
+          //   textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
+          // ),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
             primary: buttonColor,

@@ -1,10 +1,10 @@
+import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/file_menu_text_item.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/question.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -22,9 +22,9 @@ class _FileMenuState extends State<FileMenu> {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
     pop(VoidCallback funk) => () {
-          funk();
-          Navigator.pop(context);
-        };
+      funk();
+      Navigator.pop(context);
+    };
 
     final items = <TextItem>[
       TextItem(
@@ -46,7 +46,7 @@ class _FileMenuState extends State<FileMenu> {
       TextItem(
         text: 'Save a copy',
         tip:
-            'Save the current cube group in a new file and start using that group',
+        'Save the current cube group in a new file and start using that group',
         icon: Icons.copy_sharp,
         callback: pop(cubeGroupNotifier.saveACopyFile),
       ),
@@ -85,7 +85,7 @@ class _FileMenuState extends State<FileMenu> {
                       size: iconSize,
                     ),
                     tip:
-                        'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
+                    'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
                     onPressed: () => _deleteFile(filePath: entry.key),
                   ),
                   Thumbnail(cubeGroup: entry.value),
@@ -136,13 +136,23 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _showDialog() {
-    final alert = Question(
-        title: "Delete",
-        content: "Save the current file?",
-        yesCallBack: () => {
-              Navigator.of(context).pop(),
-              // code on continue comes here
-            });
+    final alert = Alert(
+      title: "Delete",
+      content: "Save the current file?",
+      yesCallBack: () {
+        Navigator.of(context).pop();
+        // TODO Save
+//TODO return true
+      },
+      noCallBack: () {
+        Navigator.of(context).pop();
+//TODO return true
+      },
+      cancelCallBack: () {
+        Navigator.of(context).pop();
+//TODO return false
+      },
+    );
 
     showDialog(
       context: context,
