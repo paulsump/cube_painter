@@ -48,6 +48,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
 
   late String _currentFilePath;
+// late Settings  settings;
 
   late VoidCallback _onSuccessfulLoad;
 
@@ -126,9 +127,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       final File file = File(path);
 
       // out(file.path);
-      // if (file.path.endsWith('user0.json')) {
-      //   renameFileNameOnly(file, '0userCubes.json');
-      // } else {
+      // if (!file.path.endsWith('.userCubes.json')) {
       //   file.delete();
       // }
 
@@ -139,15 +138,15 @@ class CubeGroupNotifier extends ChangeNotifier {
     }
   }
 
-  void renameFileNameOnly(File file, String newFileName) {
-    final filePath = file.path;
-
-    final lastSeparator = filePath.lastIndexOf(Platform.pathSeparator);
-    final newFilePath = filePath.substring(0, lastSeparator + 1) + newFileName;
-
-    out(newFilePath);
-    file.rename(newFilePath);
-  }
+  // void renameFileNameOnly(File file, String newFileName) {
+  //   final filePath = file.path;
+  //
+  //   final lastSeparator = filePath.lastIndexOf(Platform.pathSeparator);
+  //   final newFilePath = filePath.substring(0, lastSeparator + 1) + newFileName;
+  //
+  //   out(newFilePath);
+  //   file.rename(newFilePath);
+  // }
 
   Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
     final paths = <String>[];
@@ -155,8 +154,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
       final String path = fileSystemEntity.path;
 
-      if (path.endsWith('.json')) {
-        // if (path.endsWith('userCubes.json') || path.startsWith('sampleCubes.json')) {
+      if (path.endsWith('.userCubes.json') ||
+          path.endsWith('.sampleCubes.json')) {
         paths.add(path);
       }
     }
