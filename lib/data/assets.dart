@@ -28,16 +28,16 @@ class Assets {
 
   static Future<void> copyAllFromTo(
       String fromAssetFolderPath, String toAppFolderPath) async {
-    final filePaths = await getFilePaths(fromAssetFolderPath);
+    final assetFilePaths = await getFilePaths(fromAssetFolderPath);
 
     final Directory appFolder = await getApplicationDocumentsDirectory();
-    final String path = '${appFolder.path}${Platform.pathSeparator}';
+    final String appFolderPath = '${appFolder.path}${Platform.pathSeparator}';
 
-    for (String filePath in filePaths) {
-      final String json = await rootBundle.loadString(filePath);
-
+    for (String filePath in assetFilePaths) {
       final fileName = filePath.split(Platform.pathSeparator).last;
-      await saveString(filePath: '$path$fileName', string: json);
+      final String appFilePath = '$appFolderPath$fileName';
+      final String json = await rootBundle.loadString(filePath);
+      await saveString(filePath: appFilePath, string: json);
     }
   }
 }

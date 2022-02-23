@@ -125,28 +125,11 @@ class CubeGroupNotifier extends ChangeNotifier {
     for (final String path in paths) {
       final File file = File(path);
 
-      out(file.path);
-//       if (file.path.endsWith('persisted1.json')) {
-//         renameFileNameOnly(file, 'user0.json');
-//       }
-//       else{
-// file.delete();
-//       }
-
       String json = await file.readAsString();
       final map = jsonDecode(json);
 
       _cubeGroups[path] = CubeGroup.fromJson(await map);
     }
-  }
-
-  void renameFileNameOnly(File file, String newFileName) {
-    final filePath = file.path;
-
-    final lastSeparator = filePath.lastIndexOf(Platform.pathSeparator);
-    final newFilePath = filePath.substring(0, lastSeparator + 1) + newFileName;
-    out(newFilePath);
-    file.rename(newFilePath);
   }
 
   Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
