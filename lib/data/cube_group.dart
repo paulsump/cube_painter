@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cube_painter/data/assets.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/persist.dart';
+import 'package:cube_painter/data/settings.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,6 +16,9 @@ CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
     {bool listen = false}) {
   return Provider.of<CubeGroupNotifier>(context, listen: listen);
 }
+
+const sampleCubesExtension = '.sampleCubes.json';
+const userCubesExtension = '.userCubes.json';
 
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
@@ -47,15 +51,21 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   bool get hasCubes => _cubeGroups.isNotEmpty && cubeGroup.cubeInfos.isNotEmpty;
 
-  late String _currentFilePath;
-// late Settings  settings;
+  String get currentFilePath => _settings.currentFilePath;
+
+  void saveCurrentFilePath(value) {
+    _settings.currentFilePath = value;
+    //TODO SAVE SETTINGS toJson
+  }
+
+  late Settings _settings;
 
   late VoidCallback _onSuccessfulLoad;
 
-  CubeGroup get cubeGroup => _cubeGroups[_currentFilePath]!;
+  CubeGroup get cubeGroup => _cubeGroups[currentFilePath]!;
 
   void setCubeGroup(CubeGroup cubeGroup) {
-    _cubeGroups[_currentFilePath] = cubeGroup;
+    _cubeGroups[currentFilePath] = cubeGroup;
   }
 
   // Map<String,CubeGroup> get cubeGroups => _cubeGroups;
@@ -65,6 +75,12 @@ class CubeGroupNotifier extends ChangeNotifier {
     required VoidCallback onSuccessfulLoad,
   }) async {
     _onSuccessfulLoad = onSuccessfulLoad;
+
+    // TODO load fromJson
+    _settings = Settings.fromJson({
+      'currentFilePath': '',
+      'showCrops': true,
+    });
 
     await _loadAllCubeGroups();
 
@@ -85,12 +101,12 @@ class CubeGroupNotifier extends ChangeNotifier {
   String get json => jsonEncode(cubeGroup);
 
   void load({required String filePath}) {
-    _currentFilePath = filePath;
+    saveCurrentFilePath(filePath);
 
     _updateAfterLoad();
   }
 
-  void save() => saveString(filePath: _currentFilePath, string: json);
+  void save() => saveString(filePath: currentFilePath, string: json);
 
   void saveACopy() {
     //TODO Gen filename
@@ -111,8 +127,10 @@ class CubeGroupNotifier extends ChangeNotifier {
     const assetsFolder = 'samples';
 
     final Directory appFolder = await getApplicationDocumentsDirectory();
+
     // TODO do we want to do this every time, or just the first time?
-    await Assets.copyAllFromTo(assetsFolder, appFolder.path);
+    await Assets.copyAllFromTo(assetsFolder, appFolder.path,
+        extensionReplacement: sampleCubesExtension);
 
     List<String> paths = await getAllAppFilePaths(appFolder);
 
@@ -120,13 +138,15 @@ class CubeGroupNotifier extends ChangeNotifier {
     // this is because the file name is a number that increases with time.
     paths.sort((a, b) => b.compareTo(a));
 
-    //  Most recently created is now first in list
-    _currentFilePath = paths[0];
+    if (currentFilePath.isEmpty) {
+      //  Most recently created is now first in list
+      saveCurrentFilePath(paths[0]);
+    }
 
     for (final String path in paths) {
       final File file = File(path);
 
-      // out(file.path);
+      out(file.path);
       // if (!file.path.endsWith('.userCubes.json')) {
       //   file.delete();
       // }
@@ -138,24 +158,14 @@ class CubeGroupNotifier extends ChangeNotifier {
     }
   }
 
-  // void renameFileNameOnly(File file, String newFileName) {
-  //   final filePath = file.path;
-  //
-  //   final lastSeparator = filePath.lastIndexOf(Platform.pathSeparator);
-  //   final newFilePath = filePath.substring(0, lastSeparator + 1) + newFileName;
-  //
-  //   out(newFilePath);
-  //   file.rename(newFilePath);
-  // }
-
   Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
     final paths = <String>[];
 
     await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
       final String path = fileSystemEntity.path;
 
-      if (path.endsWith('.userCubes.json') ||
-          path.endsWith('.sampleCubes.json')) {
+      if (path.endsWith(userCubesExtension) ||
+          path.endsWith(sampleCubesExtension)) {
         paths.add(path);
       }
     }

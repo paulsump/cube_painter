@@ -1,13 +1,13 @@
 class Settings {
-  String currentFileName;
+  String currentFilePath;
   bool showCrops;
 
   Settings.fromJson(Map<String, dynamic> json)
-      : currentFileName = json['currentFileName'],
+      : currentFilePath = json['currentFilePath'],
         showCrops = json['showCrops'];
 
   Map<String, dynamic> toJson() => {
-        'currentFileName': currentFileName,
+        'currentFilePath': currentFilePath,
         'showCrops': showCrops,
       };
 }

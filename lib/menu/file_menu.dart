@@ -47,27 +47,26 @@ class FileMenu extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) => Drawer(
-        child: Container(
-          // color: backgroundColor,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-              for (TextItem item in items) FileMenuTextItem(item: item),
-              const Divider(),
-              const Text(
-                'Load:',
-                // style: TextStyle(fontStyle: FontStyle.,)
+        // child: Container(
+        // color: backgroundColor,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
+            for (TextItem item in items) FileMenuTextItem(item: item),
+            const Divider(),
+            const Text(
+              'Load:',
+              // style: TextStyle(fontStyle: FontStyle.,)
+            ),
+            for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
+              HexagonButton(
+                child: Thumbnail(cubeGroup: entry.value),
+                onPressed: () => cubeGroupNotifier.load(filePath: entry.key),
+                tip: "Load this cube group",
               ),
-              for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
-                HexagonButton(
-                  child: Thumbnail(cubeGroup: entry.value),
-                  onPressed: () => cubeGroupNotifier.load(filePath: entry.key),
-                  tip: "Load this cube group",
-                ),
-              const Divider(),
-            ],
-          ),
+            const Divider(),
+          ],
         ),
       ),
     );

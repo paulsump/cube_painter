@@ -26,7 +26,8 @@ class Assets {
   }
 
   static Future<void> copyAllFromTo(
-      String fromAssetFolderPath, String toAppFolderPath) async {
+      String fromAssetFolderPath, String toAppFolderPath,
+      {required String extensionReplacement}) async {
     final assetFilePaths = await getFilePaths(fromAssetFolderPath);
 
     final Directory appFolder = await getApplicationDocumentsDirectory();
@@ -36,7 +37,7 @@ class Assets {
       final assetFileName = assetFilePath.split(Platform.pathSeparator).last;
 
       final appFileName =
-          assetFileName.replaceFirst('.json', '.sampleCubes.json');
+          assetFileName.replaceFirst('.json', extensionReplacement);
 
       final String appFilePath = '$appFolderPath$appFileName';
       File appFile = File(appFilePath);
