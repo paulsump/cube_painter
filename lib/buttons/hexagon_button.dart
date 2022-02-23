@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
 class HexagonButton extends StatelessWidget {
@@ -18,9 +17,9 @@ class HexagonButton extends StatelessWidget {
     Key? key,
     required this.child,
     required this.onPressed,
+    required this.tip,
     this.height = 70,
     this.radioOn,
-    required this.tip,
 //TODO ENABLED FOr redo
   }) : super(key: key);
 
@@ -31,25 +30,25 @@ class HexagonButton extends StatelessWidget {
 
     return Transform.translate(
       offset: Offset(0, on ? 1.0 : -1.0) * elevation / 4,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        onLongPress: () {
-          //TODO tip
-          out(tip);
-        },
-        child: child,
-        style: ButtonStyle(
-          elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
-          shadowColor: on ? null : MaterialStateProperty.all(bl),
-          minimumSize: MaterialStateProperty.all(Size(height, height)),
-          shape: MaterialStateProperty.all(
-            HexagonBorder(side: borderSide),
+      child: Tooltip(
+        message: tip,
+        decoration: BoxDecoration(color: backgroundColor.withOpacity(0.7)),
+        child: ElevatedButton(
+          onPressed: onPressed,
+          child: child,
+          style: ButtonStyle(
+            elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
+            shadowColor: on ? null : MaterialStateProperty.all(bl),
+            minimumSize: MaterialStateProperty.all(Size(height, height)),
+            shape: MaterialStateProperty.all(
+              HexagonBorder(side: borderSide),
+            ),
+            backgroundColor: MaterialStateProperty.all(radioOn == null
+                ? buttonColor
+                : radioOn!
+                    ? radioButtonOnColor
+                    : buttonColor),
           ),
-          backgroundColor: MaterialStateProperty.all(radioOn == null
-              ? buttonColor
-              : radioOn!
-                  ? radioButtonOnColor
-                  : buttonColor),
         ),
       ),
     );

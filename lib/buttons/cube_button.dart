@@ -19,10 +19,10 @@ class CubeButton extends StatelessWidget {
 
   const CubeButton({
     Key? key,
-    this.radioOn,
     required this.onPressed,
-    this.icon,
     required this.tip,
+    this.radioOn,
+    this.icon,
     this.crop = Crop.c,
     this.height = 70,
   }) : super(key: key);
