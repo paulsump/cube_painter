@@ -55,6 +55,7 @@ class _PainterPageState extends State<PainterPage> {
     final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
 
     final bool canUndo = _cubes.undoer.canUndo;
+    final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       drawer: const FileMenu(),
@@ -76,11 +77,11 @@ class _PainterPageState extends State<PainterPage> {
               : Brush(adoptCubes: _cubes.adopt),
           const OpenMenuButton(endDrawer: false),
           Transform.translate(
-            offset: Offset(MediaQuery.of(context).size.width - 60, 0),
+            offset: Offset(width - 60, 0),
             child: const OpenMenuButton(endDrawer: true),
           ),
           Transform.translate(
-            offset: Offset(MediaQuery.of(context).size.width - 60, 55),
+            offset: Offset(width - 60, 55),
             child: HexagonButton(
               height: 55,
               child: Icon(
