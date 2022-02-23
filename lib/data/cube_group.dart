@@ -74,9 +74,11 @@ class CubeGroupNotifier extends ChangeNotifier {
   void _updateAfterLoad() {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
-    _onSuccessfulLoad();
-    // TODO clear undo (make undoer a notifier and notifyListeners for button enabled.
-    notifyListeners();
+    if (_cubeGroups.isNotEmpty) {
+      _onSuccessfulLoad();
+      // TODO clear undo (make undoer a notifier and notifyListeners for button enabled.
+      notifyListeners();
+    }
   }
 
   String get json => jsonEncode(cubeGroup);
@@ -117,19 +119,34 @@ class CubeGroupNotifier extends ChangeNotifier {
     // this is because the file name is a number that increases with time.
     paths.sort((a, b) => b.compareTo(a));
 
-    //  Most recent
+    //  Most recently created is now first in list
     _currentFilePath = paths[0];
 
     for (final String path in paths) {
       final File file = File(path);
-// file.rename();
-      // file.delete();
+
+      out(file.path);
+//       if (file.path.endsWith('persisted1.json')) {
+//         renameFileNameOnly(file, 'user0.json');
+//       }
+//       else{
+// file.delete();
+//       }
 
       String json = await file.readAsString();
       final map = jsonDecode(json);
 
       _cubeGroups[path] = CubeGroup.fromJson(await map);
     }
+  }
+
+  void renameFileNameOnly(File file, String newFileName) {
+    final filePath = file.path;
+
+    final lastSeparator = filePath.lastIndexOf(Platform.pathSeparator);
+    final newFilePath = filePath.substring(0, lastSeparator + 1) + newFileName;
+    out(newFilePath);
+    file.rename(newFilePath);
   }
 
   Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
