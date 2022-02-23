@@ -8,9 +8,14 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-class FileMenu extends StatelessWidget {
+class FileMenu extends StatefulWidget {
   const FileMenu({Key? key}) : super(key: key);
 
+  @override
+  State<FileMenu> createState() => _FileMenuState();
+}
+
+class _FileMenuState extends State<FileMenu> {
   @override
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
@@ -75,8 +80,7 @@ class FileMenu extends StatelessWidget {
                     ),
                     tip:
                         'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
-                    onPressed: () =>
-                        cubeGroupNotifier.deleteFile(filePath: entry.key),
+                    onPressed: () => _deleteFile(filePath: entry.key),
                   ),
                   Thumbnail(cubeGroup: entry.value),
                   HexagonButton(
@@ -104,5 +108,12 @@ class FileMenu extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _deleteFile({required String filePath}) async {
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+
+    await cubeGroupNotifier.deleteFile(filePath: filePath);
+    setState(() {});
   }
 }

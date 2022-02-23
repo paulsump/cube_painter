@@ -166,7 +166,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     _updateAfterLoad();
   }
 
-  void deleteFile({required String filePath}) async {
+  Future<void> deleteFile({required String filePath}) async {
     _cubeGroups.remove(filePath);
 
     final File file = File(filePath);
