@@ -20,6 +20,11 @@ class _FileMenuState extends State<FileMenu> {
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
+    pop(VoidCallback funk) => () {
+          funk();
+          Navigator.pop(context);
+        };
+
     final items = <TextItem>[
       TextItem(
         text: 'New',
@@ -28,13 +33,13 @@ class _FileMenuState extends State<FileMenu> {
         // TODO create new persisted file,
         // so as not to overwrite the current one
         //TODO alert('are you sure,save current file?');
-        callback: cubeGroupNotifier.createNewFile,
+        callback: pop(cubeGroupNotifier.createNewFile),
       ),
       TextItem(
         text: 'Save',
         tip: 'Save the current cube group',
         icon: Icons.save,
-        callback: cubeGroupNotifier.saveFile,
+        callback: pop(cubeGroupNotifier.saveFile),
         enabled: cubeGroupNotifier.canSave,
       ),
       TextItem(
@@ -42,7 +47,7 @@ class _FileMenuState extends State<FileMenu> {
         tip:
             'Save the current cube group in a new file and start using that group',
         icon: Icons.copy_sharp,
-        callback: cubeGroupNotifier.saveACopyFile,
+        callback: pop(cubeGroupNotifier.saveACopyFile),
       ),
     ];
 

@@ -37,12 +37,7 @@ class FileMenuTextItem extends StatelessWidget {
             color: item.enabled ? enabledIconColor : disabledIconColor,
             size: iconSize,
           ),
-          onPressed: item.enabled
-              ? () {
-                  item.callback();
-                  Navigator.pop(context);
-                }
-              : null,
+          onPressed: item.enabled ? item.callback : null,
           tip: item.tip,
         ),
         title: Text(item.text),
