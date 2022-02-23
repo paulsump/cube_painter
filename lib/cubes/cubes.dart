@@ -97,8 +97,8 @@ class Cubes {
             info: cube.fields.info,
             start: cube.fields.scale,
 //TODO            Fix extrude leaves in wrong order on simulator       //THEN put back
-// end: erase ? 0.0 : 1.0,
-            end: erase ? 0.0 : 0.7,
+            end: erase ? 0.0 : 1.0,
+            // end: erase ? 0.0 : 0.7,
             whenComplete:
                 erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
             duration: 222,

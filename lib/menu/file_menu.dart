@@ -22,13 +22,13 @@ class FileMenu extends StatelessWidget {
         // TODO create new persisted file,
         // so as not to overwrite the current one
         //TODO alert('are you sure,save current file?');
-        callback: cubeGroupNotifier.newOrClear,
+        callback: cubeGroupNotifier.createNewFile,
       ),
       TextItem(
         text: 'Save',
         tip: 'Save the current cube group',
         icon: Icons.save,
-        callback: cubeGroupNotifier.save,
+        callback: cubeGroupNotifier.saveFile,
         enabled: cubeGroupNotifier.canSave,
       ),
       TextItem(
@@ -36,7 +36,7 @@ class FileMenu extends StatelessWidget {
         tip:
             'Save the current cube group in a new file and start using that group',
         icon: Icons.copy_sharp,
-        callback: cubeGroupNotifier.saveACopy,
+        callback: cubeGroupNotifier.saveACopyFile,
       ),
     ];
 
@@ -57,7 +57,8 @@ class FileMenu extends StatelessWidget {
             for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
               HexagonButton(
                 child: Thumbnail(cubeGroup: entry.value),
-                onPressed: () => cubeGroupNotifier.load(filePath: entry.key),
+                onPressed: () =>
+                    cubeGroupNotifier.loadFile(filePath: entry.key),
                 tip: "Load this cube group",
               ),
             const Divider(),

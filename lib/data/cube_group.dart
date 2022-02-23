@@ -57,8 +57,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   String get currentFilePath => _settings.currentFilePath;
 
-  void saveCurrentFilePath(value) {
-    _settings.currentFilePath = value;
+  void saveCurrentFilePath(String filePath) {
+    _settings.currentFilePath = filePath;
+
     //TODO SAVE SETTINGS toJson
   }
 
@@ -102,25 +103,35 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   String get json => jsonEncode(cubeGroup);
 
-  void load({required String filePath}) {
+  void loadFile({required String filePath}) {
     saveCurrentFilePath(filePath);
 
     _updateAfterLoad();
   }
 
-  void save() => saveString(filePath: currentFilePath, string: json);
+  void saveFile() async =>
+      await saveString(filePath: currentFilePath, string: json);
 
-  void saveACopy() {
-    //TODO Gen filename
-    // fileName = millisecondsSinceEpoc
-    //TODO Set currentFilePath = '$path/$fileName'
-    // await saveString(filePath: currentFilePath, string:json);
+  void saveACopyFile() async {
+    await setNewFilePath();
+    saveFile();
   }
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
 
-  void newOrClear() {
-    //todo createPersisted
+  Future<void> setNewFilePath() async {
+    final Directory appFolder = await getApplicationDocumentsDirectory();
+    final String appFolderPath = '${appFolder.path}${Platform.pathSeparator}';
+
+    final int uniqueId = DateTime.now().millisecondsSinceEpoch;
+    saveCurrentFilePath('$appFolderPath$uniqueId$userCubesExtension');
+  }
+
+  Future<void> createNewFile() async {
+    await setNewFilePath();
+
+    setCubeGroup(CubeGroup(<CubeInfo>[]));
+    _updateAfterLoad();
   }
 
   void clear() => cubeGroup.cubeInfos.clear();
