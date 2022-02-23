@@ -137,22 +137,15 @@ class _FileMenuState extends State<FileMenu> {
     out('don');
   }
 
-  Future<bool> _userConfirmDelete() {
-    return _saved();
+  Future<bool> _userConfirmDelete() async {
+    return await _askYesNoOrCancel();
   }
 
-  Future<bool> _userConfirmLoad() {
-    return _saved();
+  Future<bool> _userConfirmLoad() async {
+    return await _askYesNoOrCancel();
   }
 
-  Future<bool> _saved() async {
-    // if (!modified) {
-    //   return true;
-    // }
-    return await _showDialog();
-  }
-
-  Future<bool> _showDialog() async {
+  Future<bool> _askYesNoOrCancel() async {
     final alert = Alert(
       title: "Delete",
       content: "Save the current file?",
@@ -160,15 +153,12 @@ class _FileMenuState extends State<FileMenu> {
         // TODO Save
         out('save');
         Navigator.of(context).pop(true);
-//TODO return true
       },
       noCallBack: () {
         Navigator.of(context).pop(true);
-//TODO return true
       },
       cancelCallBack: () {
         Navigator.of(context).pop(false);
-//TODO return false
       },
     );
 
