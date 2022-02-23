@@ -122,6 +122,8 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     for (final String path in paths) {
       final File file = File(path);
+// file.rename();
+      // file.delete();
 
       String json = await file.readAsString();
       final map = jsonDecode(json);

@@ -4,7 +4,6 @@ import 'package:cube_painter/out.dart';
 
 Future<String> loadString({required String filePath}) async {
   File file = File(filePath);
-  // file.delete();
 
   if (!file.existsSync()) {
     return '';

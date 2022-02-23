@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/menu/file_menu_text_item.dart';
 import 'package:cube_painter/out.dart';
@@ -49,7 +48,7 @@ class FileMenu extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) => Drawer(
         child: Container(
-          color: backgroundColor,
+          // color: backgroundColor,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [

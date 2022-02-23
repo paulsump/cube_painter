@@ -26,28 +26,18 @@ class Assets {
     return fileNames.toList();
   }
 
-  // static Stream<Future<Map<String, dynamic>>> loadAll(
-  //     String folderPath) async* {
-  //   final filePaths = await getFilePaths(folderPath);
-  //
-  //   for (String filePath in filePaths) {
-  //     yield loadJson(filePath);
-  //   }
-  // }
-
   static Future<void> copyAllFromTo(
       String fromAssetFolderPath, String toAppFolderPath) async {
     final filePaths = await getFilePaths(fromAssetFolderPath);
 
     final Directory appFolder = await getApplicationDocumentsDirectory();
+    final String path = '${appFolder.path}${Platform.pathSeparator}';
 
     for (String filePath in filePaths) {
       final String json = await rootBundle.loadString(filePath);
 
-      final fileName = filePath.split('/').last;
-      final String path = appFolder.path;
-
-      await saveString(filePath: '$path/$fileName', string: json);
+      final fileName = filePath.split(Platform.pathSeparator).last;
+      await saveString(filePath: '$path$fileName', string: json);
     }
   }
 }
