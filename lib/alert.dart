@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class Alert extends StatelessWidget {
     required this.cancelCallBack,
   }) : super(key: key);
 
-  final TextStyle textStyle = TextStyle(color: textColor);
+  // final TextStyle textStyle = TextStyle(color: textColor);
   static const double _blur = 2;
 
   @override
@@ -35,18 +36,26 @@ class Alert extends StatelessWidget {
           content,
         ),
         actions: <Widget>[
-          TextButton(
-            child: Text("Yes", style: textStyle),
+          HexagonButton(
+            child: const Icon(Icons.check_sharp),
+            // child: Text("Yes", style: textStyle),
             onPressed: yesCallBack,
+            // TODO pass yes tip in
+            tip: 'Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
-            TextButton(
-              child: Text("No", style: textStyle),
+            HexagonButton(
+              child: const Icon(Icons.do_not_disturb_alt_sharp),
+              // child: Text("No", style: textStyle),
               onPressed: noCallBack,
+              // TODO pass no tip in
+              tip: 'Do the operation, but say no to the question.',
             ),
-          TextButton(
-            child: Text("Cancel", style: textStyle),
+          HexagonButton(
+            child: const Icon(Icons.cancel_presentation_sharp),
+            // child: Text("Cancel", style: textStyle),
             onPressed: cancelCallBack,
+            tip: 'Do nothing.',
           ),
         ],
       ),
