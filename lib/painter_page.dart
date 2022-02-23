@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
+import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/open_menu_button.dart';
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
@@ -52,6 +54,8 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
 
+    final bool canUndo = _cubes.undoer.canUndo;
+
     return Scaffold(
       drawer: const FileMenu(),
       endDrawer: BrushMenu(cubes: _cubes),
@@ -72,8 +76,21 @@ class _PainterPageState extends State<PainterPage> {
               : Brush(adoptCubes: _cubes.adopt),
           const OpenMenuButton(endDrawer: false),
           Transform.translate(
-            offset: Offset(MediaQuery.of(context).size.width - 55, 0),
+            offset: Offset(MediaQuery.of(context).size.width - 60, 0),
             child: const OpenMenuButton(endDrawer: true),
+          ),
+          Transform.translate(
+            offset: Offset(MediaQuery.of(context).size.width - 60, 55),
+            child: HexagonButton(
+              height: 55,
+              child: Icon(
+                Icons.undo_sharp,
+                size: iconSize,
+                color: canUndo ? enabledIconColor : disabledIconColor,
+              ),
+              onPressed: canUndo ? _cubes.undoer.undo : null,
+              tip: 'Undo the last add or delete operation.',
+            ),
           ),
         ]),
       ),

@@ -123,6 +123,7 @@ class _FileMenuState extends State<FileMenu> {
 
     if (!cubeGroupNotifier.modified || await _userConfirmLoad()) {
       cubeGroupNotifier.loadFile(filePath: filePath);
+      setState(() {});
     }
   }
 
@@ -153,7 +154,6 @@ class _FileMenuState extends State<FileMenu> {
           final cubeGroupNotifier = getCubeGroupNotifier(context);
 
           cubeGroupNotifier.saveFile();
-          setState(() {});
         });
   }
 
