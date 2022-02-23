@@ -107,6 +107,9 @@ class CubeGroupNotifier extends ChangeNotifier {
       'showCrops': true,
     });
 
+    // TODO do we want to do this every time, or just the first time?
+    await copySamples();
+
     await _loadAllCubeGroups();
 
     // TODO load previous run's file,
@@ -185,10 +188,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void clear() => cubeGroup.cubeInfos.clear();
 
-  Future<void> _loadAllCubeGroups() async {
-    // TODO do we want to do this every time, or just the first time?
-    loadSamples(notify: false);
-
+  Future<void> _loadAllCubeGroups({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     List<String> paths = await getAllAppFilePaths(appFolder);
@@ -203,10 +203,12 @@ class CubeGroupNotifier extends ChangeNotifier {
     }
 
     for (final String path in paths) {
-      final File file = File(path);
+      if (!(ignoreCurrent && path == currentFilePath)) {
+        final File file = File(path);
 
-      final map = jsonDecode(await file.readAsString());
-      _cubeGroups[path] = CubeGroup.fromJson(await map);
+        final map = jsonDecode(await file.readAsString());
+        _cubeGroups[path] = CubeGroup.fromJson(await map);
+      }
     }
   }
 
@@ -224,16 +226,17 @@ class CubeGroupNotifier extends ChangeNotifier {
     return paths;
   }
 
-  void loadSamples({required bool notify}) async {
+  void loadSamples() async {
+    copySamples();
+    _loadAllCubeGroups(ignoreCurrent: true);
+  }
+
+  Future<void> copySamples() async {
     const assetsFolder = 'samples';
 
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     await Assets.copyAllFromTo(assetsFolder, appFolder.path,
         extensionReplacement: sampleCubesExtension);
-
-    if (notify) {
-      notifyListeners();
-    }
   }
 }
