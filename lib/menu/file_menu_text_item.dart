@@ -2,7 +2,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextItem {
-  final String text;
+  final String title;
   final String tip;
   final IconData icon;
   final double iconSize;
@@ -10,7 +10,7 @@ class TextItem {
   final bool enabled;
 
   const TextItem({
-    required this.text,
+    required this.title,
     required this.tip,
     required this.icon,
     required this.iconSize,
@@ -43,7 +43,7 @@ class FileMenuTextItem extends StatelessWidget {
             onPressed: item.enabled ? item.callback : null,
           ),
         ),
-        title: Text(item.text),
+        title: Text(item.title),
       ),
     );
   }
