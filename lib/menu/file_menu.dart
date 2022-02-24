@@ -65,6 +65,7 @@ class _FileMenuState extends State<FileMenu> {
     ];
 
     final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
+    const double offsetX = 55;
 
     return LayoutBuilder(
       builder: (context, constraints) => Drawer(
@@ -82,26 +83,31 @@ class _FileMenuState extends State<FileMenu> {
               child: Text('Open...',
                   style: TextStyle(fontWeight: FontWeight.bold)),
             ),
-            for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
-              Tooltip(
-                message: 'Load this cube group',
-                child: TextButton(
-                  onPressed: () => _loadFile(filePath: entry.key),
-                  child: Thumbnail(cubeGroup: entry.value),
-                  style: ButtonStyle(
-                    // elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
-                    // shadowColor: on ? null : MaterialStateProperty.all(bl),
-                    // minimumSize: MaterialStateProperty.all(Size(height, height)),
-                    shape: MaterialStateProperty.all(
-                      HexagonBorder(side: borderSide),
+            for (int i = 0; i < cubeGroupNotifier.cubeGroupEntries.length; ++i)
+              Transform.translate(
+                offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
+                child: Tooltip(
+                  message: 'Load this cube group',
+                  child: TextButton(
+                    onPressed: () => _loadFile(
+                        filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
+                    child: Thumbnail(
+                        cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
+                    style: ButtonStyle(
+                      // elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
+                      // shadowColor: on ? null : MaterialStateProperty.all(bl),
+                      // minimumSize: MaterialStateProperty.all(Size(height, height)),
+                      shape: MaterialStateProperty.all(
+                        HexagonBorder(side: borderSide),
+                      ),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => buttonColor),
+                      // backgroundColor: MaterialStateProperty.all(radioOn == null
+                      //     ? buttonColor
+                      //     : radioOn!
+                      //     ? radioButtonOnColor
+                      //     : buttonColor),
                     ),
-                    overlayColor:
-                        MaterialStateColor.resolveWith((states) => buttonColor),
-                    // backgroundColor: MaterialStateProperty.all(radioOn == null
-                    //     ? buttonColor
-                    //     : radioOn!
-                    //     ? radioButtonOnColor
-                    //     : buttonColor),
                   ),
                 ),
               ),

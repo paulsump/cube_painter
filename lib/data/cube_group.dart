@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
@@ -27,6 +28,7 @@ class CubeGroup {
   final List<CubeInfo> _cubeInfos;
 
   const CubeGroup(this._cubeInfos);
+
   CubeGroup.empty() : _cubeInfos = <CubeInfo>[];
 
   List<CubeInfo> get cubeInfos => _cubeInfos;
@@ -60,8 +62,8 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   bool get hasCubes =>
       _cubeGroups.isNotEmpty &&
-      _hasCubeGroupForCurrentFilePath &&
-      cubeGroup.cubeInfos.isNotEmpty;
+          _hasCubeGroupForCurrentFilePath &&
+          cubeGroup.cubeInfos.isNotEmpty;
 
   bool get _hasCubeGroupForCurrentFilePath {
     if (!_cubeGroups.containsKey(currentFilePath)) {
@@ -69,7 +71,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       // out(_cubeGroups.keys);
 
       assert(false,
-          "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
+      "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
       return false;
     }
     return true;
@@ -94,8 +96,11 @@ class CubeGroupNotifier extends ChangeNotifier {
   void setCubeGroup(CubeGroup cubeGroup) =>
       _cubeGroups[currentFilePath] = cubeGroup;
 
-  Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
+  UnmodifiableListView<MapEntry> get cubeGroupEntries =>
+      UnmodifiableListView<MapEntry>(_cubeGroups.entries.toList());
 
+  // Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
+// get forE=>_cubeGroups.forEach;
   void init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
 
