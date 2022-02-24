@@ -6,6 +6,7 @@ import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
+import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class BrushMenu extends StatefulWidget {
 }
 
 class _BrushMenuState extends State<BrushMenu> {
-  bool _more = false;
+  bool get showCrops => getCubeGroupNotifier(context).showCrops;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +103,7 @@ class _BrushMenuState extends State<BrushMenu> {
               ),
             ],
           ),
-          if (_more)
+          if (showCrops)
             Column(
               children: [
                 Row(
@@ -138,10 +139,11 @@ class _BrushMenuState extends State<BrushMenu> {
           const SizedBox(height: 3),
           Center(
               child: TextButton(
-            child: Text(_more ? '...Less' : 'More...',
+                child: Text(showCrops ? '...Less' : 'More...',
                 style: TextStyle(color: textColor)),
             onPressed: () {
-              _more = !_more;
+              final cubeGroupNotifier = getCubeGroupNotifier(context);
+              cubeGroupNotifier.saveShowCrops(!showCrops);
               setState(() {});
             },
           )),

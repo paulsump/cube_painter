@@ -87,6 +87,14 @@ class CubeGroupNotifier extends ChangeNotifier {
     saveSettings();
   }
 
+  bool get showCrops => _settings.showCrops;
+
+  void saveShowCrops(bool value) {
+    _settings.showCrops = value;
+
+    saveSettings();
+  }
+
   CubeGroup get cubeGroup {
     if (!_hasCubeGroupForCurrentFilePath) {
       // PREvent irreversible crash for debugging purposes now
@@ -123,11 +131,10 @@ class CubeGroupNotifier extends ChangeNotifier {
 
       _settings.copiedSamples = true;
     }
-    await _loadAllCubeGroups();
 
+    await _loadAllCubeGroups();
     _savedJson = json;
 
-    // TODO load previous run's file, by saving settings
     _updateAfterLoad();
   }
 
