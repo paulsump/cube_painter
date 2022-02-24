@@ -24,14 +24,12 @@ class _FileMenuState extends State<FileMenu> {
 
     final items = <TextItem>[
       TextItem(
-        title: 'New',
         tip: 'Create a new file',
         icon: docNew,
         iconSize: appIconSize,
         callback: _newFile,
       ),
       TextItem(
-        title: 'Save',
         tip: 'Save the current file',
         icon: Icons.save,
         iconSize: iconSize,
@@ -39,14 +37,12 @@ class _FileMenuState extends State<FileMenu> {
         enabled: cubeGroupNotifier.modified,
       ),
       TextItem(
-        title: 'Save a copy',
         tip: 'Create a copy of this file and load it.',
         icon: copy,
         iconSize: appIconSize,
         callback: _saveACopyFile,
       ),
       TextItem(
-        title: 'Delete',
         tip:
             'Delete the current file. The next file is loaded or a new blank one is created.',
         icon: Icons.delete,
