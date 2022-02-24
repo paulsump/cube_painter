@@ -1,7 +1,7 @@
 import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/brush_menu_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
-import 'package:cube_painter/buttons/hexagon_border.dart';
+import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
@@ -33,7 +33,6 @@ class _BrushMenuState extends State<BrushMenu> {
 
     const double w = 14;
     const pad = SizedBox(width: w);
-    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
 
     return Drawer(
       child: ListView(
@@ -46,49 +45,30 @@ class _BrushMenuState extends State<BrushMenu> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Tooltip(
-                  message: 'Undo the last add or delete operation.',
-                  child: TextButton(
-                    child: SizedBox(
-                      height: 60,
-                      child: Icon(
-                        Icons.undo_sharp,
-                        color: canUndo ? enabledIconColor : disabledIconColor,
-                        size: iconSize,
-                      ),
-                    ),
-                    onPressed: canUndo ? widget.cubes.undoer.undo : null,
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        HexagonBorder(side: borderSide),
-                      ),
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => buttonColor),
+                HexagonBorderButton(
+                  tip: 'Undo the last add or delete operation.',
+                  child: SizedBox(
+                    height: 60,
+                    child: Icon(
+                      Icons.undo_sharp,
+                      color: canUndo ? enabledIconColor : disabledIconColor,
+                      size: iconSize,
                     ),
                   ),
+                  onPressed: canUndo ? widget.cubes.undoer.undo : null,
                 ),
                 pad,
-                Tooltip(
-                  message:
-                      'Redo the last add or delete operation that was undone.',
-                  child: TextButton(
-                    child: SizedBox(
-                      height: 60,
-                      child: Icon(
-                        Icons.redo_sharp,
-                        color: canRedo ? enabledIconColor : disabledIconColor,
-                        size: iconSize,
-                      ),
-                    ),
-                    onPressed: canUndo ? widget.cubes.undoer.redo : null,
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        HexagonBorder(side: borderSide),
-                      ),
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => buttonColor),
+                HexagonBorderButton(
+                  tip: 'Redo the last add or delete operation that was undone.',
+                  child: SizedBox(
+                    height: 60,
+                    child: Icon(
+                      Icons.redo_sharp,
+                      color: canRedo ? enabledIconColor : disabledIconColor,
+                      size: iconSize,
                     ),
                   ),
+                  onPressed: canRedo ? widget.cubes.undoer.redo : null,
                 ),
               ],
             ),

@@ -3,7 +3,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
 class HexagonBorderButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   final Widget child;
   final String tip;
