@@ -80,21 +80,12 @@ class _FileMenuState extends State<FileMenu> {
                   style: TextStyle(fontWeight: FontWeight.bold)),
             ),
             for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Thumbnail(cubeGroup: entry.value),
-                  Tooltip(
-                    message: 'Load this cube group',
-                    child: IconButton(
-                      icon: Icon(
-                        folderOpenEmpty,
-                        size: appIconSize,
-                      ),
-                      onPressed: () => _loadFile(filePath: entry.key),
-                    ),
-                  ),
-                ],
+              Tooltip(
+                message: 'Load this cube group',
+                child: TextButton(
+                  onPressed: () => _loadFile(filePath: entry.key),
+                  child: Thumbnail(cubeGroup: entry.value),
+                ),
               ),
             const Divider(),
             // TODO JUST remove this loadSamples option
@@ -121,7 +112,7 @@ class _FileMenuState extends State<FileMenu> {
   void _loadFile({required String filePath}) async {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
-    if (!cubeGroupNotifier.modified || await _userConfirmLoad()) {
+    if (!cubeGroupNotifier.modified || await _askLoad()) {
       cubeGroupNotifier.loadFile(filePath: filePath);
       setState(() {});
     }
@@ -130,11 +121,10 @@ class _FileMenuState extends State<FileMenu> {
   void _deleteCurrentFile() async {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
     _deleteFile(filePath: cubeGroupNotifier.currentFilePath);
-    //TODO The next file is loaded or a new blank one is created
   }
 
   void _deleteFile({required String filePath}) async {
-    if (await _userConfirmDelete()) {
+    if (await _askDelete()) {
       final cubeGroupNotifier = getCubeGroupNotifier(context);
 
       await cubeGroupNotifier.deleteFile(filePath: filePath);
@@ -142,17 +132,17 @@ class _FileMenuState extends State<FileMenu> {
     }
   }
 
-  Future<bool> _userConfirmDelete() async {
+  Future<bool> _askDelete() async {
 //TODO ideally display the thumbnail, so they can be sure.
 
     return await _askYesNoOrCancel(
       title: "Delete",
-      content: "Delete this file?",
+      content: "Delete current file?",
       yesCancelOnly: true,
     );
   }
 
-  Future<bool> _userConfirmLoad() async {
+  Future<bool> _askLoad() async {
     return await _askYesNoOrCancel(
         title: "Load",
         content: "Save the current changes?",
