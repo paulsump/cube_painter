@@ -11,7 +11,6 @@ import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 const noWarn = [
   out,
@@ -36,11 +35,10 @@ class Cubes {
     setState = setState_;
     context = context_;
 
-    getCubeGroupNotifier(context).init(
-        onSuccessfulLoad: () {
-          undoer.clear();
-          _addAnimCubes();
-        });
+    getCubeGroupNotifier(context).init(onSuccessfulLoad: () {
+      undoer.clear();
+      _addAnimCubes();
+    });
 
     undoer = Undoer(context, setState: setState);
   }
@@ -145,12 +143,5 @@ class Cubes {
 
     cubeGroupNotifier.clear();
     setState(() {});
-  }
-
-  ///TODO remove (only for bar)
-  void saveToClipboard() {
-    final notifier = getCubeGroupNotifier(context);
-
-    Clipboard.setData(ClipboardData(text: notifier.json));
   }
 }

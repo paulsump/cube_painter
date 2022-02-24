@@ -20,7 +20,6 @@ class HexagonElevatedButton extends StatelessWidget {
     required this.tip,
     this.height = 70,
     this.radioOn,
-//TODO ENABLED FOr redo
   }) : super(key: key);
 
   @override

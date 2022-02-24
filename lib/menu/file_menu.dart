@@ -134,8 +134,6 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   Future<bool> _askDelete() async {
-//TODO ideally display the thumbnail, so they can be sure.
-
     return await _askYesNoOrCancel(
       title: 'Delete',
       content: 'Delete current file?',
