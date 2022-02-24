@@ -60,16 +60,34 @@ class BrushMenu extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(),
-          const SizedBox(height: 22),
-          CubeButton(
-            radioOn: GestureMode.erase == gestureMode,
-            icon: cancelOutline,
-            onPressed: () {
-              setGestureMode(GestureMode.erase, context);
-            },
-            tip:
-                'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+          // const Divider(),
+          // const SizedBox(height: 22),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CubeButton(
+                radioOn: GestureMode.erase == gestureMode,
+                icon: cancelOutline,
+                onPressed: () {
+                  setGestureMode(GestureMode.erase, context);
+                },
+                tip:
+                    'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+              ),
+              pad,
+              const BrushMenuButton(crop: Crop.c),
+              pad,
+              HexagonButton(
+                radioOn: GestureMode.panZoom == gestureMode,
+                child: Icon(
+                  Icons.zoom_in_sharp,
+                  color: enabledIconColor,
+                  size: iconSize,
+                ),
+                onPressed: () => setGestureMode(GestureMode.panZoom, context),
+                tip: 'Pinch to zoom, drag to move around.',
+              ),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -83,10 +101,10 @@ class BrushMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               BrushMenuButton(crop: Crop.r),
-              // pad7,
-              pad,
-              BrushMenuButton(crop: Crop.c),
-              pad,
+              SizedBox(width: w * 7, child: Icon(plusOutline)),
+              // pad,
+              // BrushMenuButton(crop: Crop.c),
+              // pad,
               BrushMenuButton(crop: Crop.l),
             ],
           ),
@@ -98,16 +116,7 @@ class BrushMenu extends StatelessWidget {
               BrushMenuButton(crop: Crop.ul),
             ],
           ),
-          HexagonButton(
-            radioOn: GestureMode.panZoom == gestureMode,
-            child: Icon(
-              Icons.zoom_in_sharp,
-              color: enabledIconColor,
-              size: iconSize,
-            ),
-            onPressed: () => setGestureMode(GestureMode.panZoom, context),
-            tip: 'Pinch to zoom, drag to move around.',
-          ),
+
           const SizedBox(height: 3),
           Center(
               child: TextButton(

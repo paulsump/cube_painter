@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 const _kFontFam = 'AppIcons';
 const String? _kFontPkg = null;
 
+const IconData plusOutline =
+    IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 const IconData cancelOutline =
     IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 const IconData docNew =
