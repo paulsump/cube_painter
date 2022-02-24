@@ -88,7 +88,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   CubeGroup get cubeGroup {
     if (!_hasCubeGroupForCurrentFilePath) {
-      // PREvent irreversible crash for debugging purposes now
+      // prevent irreversible crash for now, for debugging purposes.
       return CubeGroup.empty();
     }
     return _cubeGroups[currentFilePath]!;
@@ -100,8 +100,6 @@ class CubeGroupNotifier extends ChangeNotifier {
   UnmodifiableListView<MapEntry> get cubeGroupEntries =>
       UnmodifiableListView<MapEntry>(_cubeGroups.entries.toList());
 
-  // Iterable<MapEntry> get cubeGroupEntries => _cubeGroups.entries;
-// get forE=>_cubeGroups.forEach;
   void init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
 
@@ -129,13 +127,14 @@ class CubeGroupNotifier extends ChangeNotifier {
       //  Most recently created is now first in list
       saveCurrentFilePath(firstPath);
     }
+
     if (!_cubeGroups.containsKey(currentFilePath)) {
-      // assert(false);
+      out("currentFilePath not found ('$currentFilePath'), so using the first in the list");
+
       saveCurrentFilePath(firstPath);
     }
 
     _savedJson = json;
-
     _updateAfterLoad();
   }
 
@@ -181,8 +180,9 @@ class CubeGroupNotifier extends ChangeNotifier {
   Future<void> setNewFilePath() async {
     final String appFolderPath = await getAppFolderPath();
 
-    final int uniqueId = DateTime.now().millisecondsSinceEpoch - 1645648060000;
-    out(uniqueId);
+    final int uniqueId =
+        (DateTime.now().millisecondsSinceEpoch - 1645648060000) ~/ 100;
+
     saveCurrentFilePath('$appFolderPath$uniqueId$cubesExtension');
   }
 
@@ -215,7 +215,11 @@ class CubeGroupNotifier extends ChangeNotifier {
     _cubeGroups.remove(filePath);
 
     final File file = File(filePath);
-    file.delete();
+
+    //we might never have saved a new filename, so check existence
+    if (await file.exists()) {
+      file.delete();
+    }
 
     if (currentFilePath == filePath) {
       if (_cubeGroups.isEmpty) {
@@ -237,7 +241,6 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     // display in reverse chronological order (most recent first)
     // this is because the file name is a number that increases with time.
-    //TODO fix this so it only uses the number
     paths.sort((a, b) => b.compareTo(a));
 
     for (final String path in paths) {

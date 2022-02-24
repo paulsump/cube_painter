@@ -29,7 +29,7 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          const Center(child: Text('Brush Modes')),
+          const Center(child: Text('Advanced Brush Modes')),
           const SizedBox(height: 15.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
