@@ -9,8 +9,6 @@ import 'package:flutter/cupertino.dart';
 
 const noWarn = out;
 
-const unit = Offset(1, 1);
-
 /// Used to represent the side of the cube
 /// anti clockwise from top right
 enum Side {

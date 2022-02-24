@@ -1,7 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/crop_unit_cube.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +30,7 @@ class CubeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final offset = const Offset(1, 1) * iconSize! / 2;
 
     return HexagonElevatedButton(
       height: height,
@@ -38,7 +38,7 @@ class CubeButton extends StatelessWidget {
       child: Stack(
         children: [
           Transform.translate(
-            offset: null != icon ? unit * iconSize! / 2 : Offset.zero,
+            offset: null != icon ? offset : Offset.zero,
             child: Transform.scale(
               scale: 21,
               child: crop == Crop.c
@@ -48,7 +48,7 @@ class CubeButton extends StatelessWidget {
           ),
           if (null != icon)
             Transform.translate(
-              offset: unit * -iconSize! / 2,
+              offset: -offset,
               child: Transform.scale(
                 scale: 29 / iconSize!,
                 child: Icon(
