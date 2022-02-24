@@ -123,7 +123,17 @@ class CubeGroupNotifier extends ChangeNotifier {
       _settings.copiedSamples = true;
     }
 
-    await _loadAllCubeGroups();
+    final firstPath = await _loadAllCubeGroups();
+
+    if (currentFilePath.isEmpty) {
+      //  Most recently created is now first in list
+      saveCurrentFilePath(firstPath);
+    }
+    if (!_cubeGroups.containsKey(currentFilePath)) {
+      // assert(false);
+      saveCurrentFilePath(firstPath);
+    }
+
     _savedJson = json;
 
     _updateAfterLoad();
@@ -170,8 +180,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   Future<void> setNewFilePath() async {
     final String appFolderPath = await getAppFolderPath();
-
-    final int uniqueId = DateTime.now().millisecondsSinceEpoch;
+//TODO 164564806
+    final int uniqueId =
+        DateTime.now().millisecondsSinceEpoch; //-1645648060000;
     saveCurrentFilePath('$appFolderPath$uniqueId$userCubesExtension');
   }
 
@@ -219,27 +230,25 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   void clear() => cubeGroup.cubeInfos.clear();
 
-  Future<void> _loadAllCubeGroups({bool ignoreCurrent = false}) async {
+  Future<String> _loadAllCubeGroups({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     List<String> paths = await getAllAppFilePaths(appFolder);
 
     // display in reverse chronological order (most recent first)
     // this is because the file name is a number that increases with time.
+    //TODO fix this so it only uses the number
     paths.sort((a, b) => b.compareTo(a));
 
-    if (currentFilePath.isEmpty) {
-      //  Most recently created is now first in list
-      saveCurrentFilePath(paths[0]);
-    }
-
     for (final String path in paths) {
-      if (!(ignoreCurrent && path == currentFilePath)) {
-        final File file = File(path);
+      //TODO PUT this back for the pop funk
+      // if (!(ignoreCurrent && path == currentFilePath)) {
+      final File file = File(path);
 
-        _cubeGroups[path] = CubeGroup.fromString(await file.readAsString());
-      }
+      _cubeGroups[path] = CubeGroup.fromString(await file.readAsString());
     }
+
+    return paths.first;
   }
 
   Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
@@ -264,12 +273,6 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   Future<void> saveSettings() async {
     saveString(filePath: settingsPath, string: _settings.toString());
-  }
-
-  void loadSamples() async {
-    copySamples();
-
-    _loadAllCubeGroups(ignoreCurrent: true);
   }
 
   Future<void> copySamples() async {
