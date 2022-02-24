@@ -3,7 +3,6 @@ import 'dart:convert';
 class Settings {
   String currentFilePath;
 
-  bool showCrops;
   bool copiedSamples;
 
   static const String fileName = 'settings.json';
@@ -15,12 +14,10 @@ class Settings {
 
   Settings.fromJson(Map<String, dynamic> json)
       : currentFilePath = json['currentFilePath'],
-        copiedSamples = json['copiedSamples'],
-        showCrops = json['showCrops'];
+        copiedSamples = json['copiedSamples'];
 
   Map<String, dynamic> toJson() => {
         'currentFilePath': currentFilePath,
         'copiedSamples': copiedSamples,
-        'showCrops': showCrops,
       };
 }
