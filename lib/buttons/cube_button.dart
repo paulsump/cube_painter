@@ -30,7 +30,8 @@ class CubeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final offset = const Offset(1, 1) * iconSize! / 2;
+    final offset =
+        null != icon ? const Offset(1, 1) * iconSize! / 2 : Offset.zero;
 
     return HexagonElevatedButton(
       height: height,
@@ -38,7 +39,7 @@ class CubeButton extends StatelessWidget {
       child: Stack(
         children: [
           Transform.translate(
-            offset: null != icon ? offset : Offset.zero,
+            offset: offset,
             child: Transform.scale(
               scale: 21,
               child: crop == Crop.c
