@@ -82,6 +82,7 @@ class _BrushMenuState extends State<BrushMenu> {
               CubeButton(
                 radioOn: GestureMode.erase == gestureMode,
                 icon: cancelOutline,
+                iconSize: appIconSize,
                 onPressed: () {
                   setGestureMode(GestureMode.erase, context);
                 },
@@ -89,14 +90,24 @@ class _BrushMenuState extends State<BrushMenu> {
                     'Tap on a cube to delete it.  You can change the position while you have your finger down.',
               ),
               pad,
-              const BrushMenuButton(crop: Crop.c),
+              CubeButton(
+                radioOn: GestureMode.add == gestureMode,
+                icon: plusOutline,
+                iconSize: appIconSize,
+                onPressed: () {
+                  setGestureMode(GestureMode.add, context);
+                  setCrop(Crop.c, context);
+                },
+                tip:
+                    'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+              ),
               pad,
               HexagonElevatedButton(
                 radioOn: GestureMode.panZoom == gestureMode,
                 child: Icon(
                   Icons.zoom_in_sharp,
+                  size: iconSize * 1.2,
                   color: enabledIconColor,
-                  size: iconSize,
                 ),
                 onPressed: () => setGestureMode(GestureMode.panZoom, context),
                 tip: 'Pinch to zoom, drag to move around.',

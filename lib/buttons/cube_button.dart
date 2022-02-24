@@ -12,9 +12,10 @@ class CubeButton extends StatelessWidget {
   final void Function() onPressed;
   final IconData? icon;
 
+  final double? iconSize;
   final String tip;
-  final Crop crop;
 
+  final Crop crop;
   final double height;
 
   const CubeButton({
@@ -23,13 +24,13 @@ class CubeButton extends StatelessWidget {
     required this.tip,
     this.radioOn,
     this.icon,
+    this.iconSize,
     this.crop = Crop.c,
     this.height = 70,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double iconSize = IconTheme.of(context).size!;
 
     return HexagonElevatedButton(
       height: height,
@@ -37,7 +38,7 @@ class CubeButton extends StatelessWidget {
       child: Stack(
         children: [
           Transform.translate(
-            offset: null != icon ? unit * iconSize / 2 : Offset.zero,
+            offset: null != icon ? unit * iconSize! / 2 : Offset.zero,
             child: Transform.scale(
               scale: 21,
               child: crop == Crop.c
@@ -47,9 +48,9 @@ class CubeButton extends StatelessWidget {
           ),
           if (null != icon)
             Transform.translate(
-              offset: unit * -iconSize / 2,
+              offset: unit * -iconSize! / 2,
               child: Transform.scale(
-                scale: 29 / iconSize,
+                scale: 29 / iconSize!,
                 child: Icon(
                   icon,
                   color: enabledIconColor,
