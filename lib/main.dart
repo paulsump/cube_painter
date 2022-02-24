@@ -40,16 +40,12 @@ class CubePainterApp extends StatelessWidget {
                 // displayColor: Colors.red,
                 fontSizeFactor: 1.5,
               ),
-          // iconTheme: IconTheme(
-          //   data: IconThemeData(color: Colors.blue),
-          // ),
-          // iconTheme: IconThemeData(color: Colors.pink),
-          // iconTheme: Theme.of(context)
-          //     .iconTheme
-          //     .copyWith(color: getColor(Side.br)), // -> ignored
+          // for icon buttons only atm
+          iconTheme:
+              Theme.of(context).iconTheme.copyWith(color: enabledIconColor),
           // buttonTheme: Theme.of(context).buttonTheme.copyWith(
           //       buttonColor: Colors.red,
-          //       splashColor: Colors.red,
+          //       splashColor: Colors.blue,
           //     ),
           // buttonTheme: ButtonThemeData(
           //   buttonColor: Colors.deepPurple,     //  <-- dark color

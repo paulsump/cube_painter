@@ -1,6 +1,5 @@
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/app_icons.dart';
-import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
@@ -66,50 +65,48 @@ class _FileMenuState extends State<FileMenu> {
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
             for (TextItem item in items) FileMenuTextItem(item: item),
             const Divider(),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 16),
-                    child: Text('Delete'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 16),
-                    child: Text('Open'),
-                  ),
-                ]),
+            const Padding(
+              padding: EdgeInsets.only(left: 16),
+              // FIX diference in fontWeight
+              child: Text('Open...'),
+            ),
             for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  HexagonButton(
-                    height: 66,
-                    child: Icon(
-                      Icons.delete_forever_sharp,
-                      size: iconSize,
-                    ),
-                    tip:
+                  Tooltip(
+                    message:
                         'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
-                    onPressed: () => _deleteFile(filePath: entry.key),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.delete_forever_sharp,
+                        size: iconSize,
+                      ),
+                      onPressed: () => _deleteFile(filePath: entry.key),
+                    ),
                   ),
                   Thumbnail(cubeGroup: entry.value),
-                  HexagonButton(
-                    height: 66,
-                    child: Icon(
-                      folderOpenEmpty,
-                      size: appIconSize,
+                  Tooltip(
+                    message: 'Load this cube group',
+                    child: IconButton(
+                      icon: Icon(
+                        folderOpenEmpty,
+                        size: appIconSize,
+                      ),
+                      onPressed: () => _loadFile(filePath: entry.key),
                     ),
-                    onPressed: () => _loadFile(filePath: entry.key),
-                    tip: "Load this cube group",
                   ),
                 ],
               ),
             const Divider(),
+            // TODO JUST remove this loadSamples option
             FileMenuTextItem(
               item: TextItem(
-                text: 'Load Samples',
+                //TODO Re word 'Load Samples' - could be seen as 'open samples'
+                text: 'Show Samples...',
                 tip: 'Load the example files',
-                icon: Icons.menu_open_sharp,
+                icon: Icons.download_sharp,
+                //menu_open_sharp,
                 iconSize: iconSize,
                 callback: () {
                   cubeGroupNotifier.loadSamples();

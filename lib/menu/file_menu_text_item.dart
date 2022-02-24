@@ -1,4 +1,3 @@
-import 'package:cube_painter/buttons/hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -33,14 +32,16 @@ class FileMenuTextItem extends StatelessWidget {
     return SizedBox(
       height: 66,
       child: ListTile(
-        trailing: HexagonButton(
-          child: Icon(
-            item.icon,
-            color: item.enabled ? enabledIconColor : disabledIconColor,
-            size: item.iconSize,
+        trailing: Tooltip(
+          message: item.tip,
+          child: IconButton(
+            icon: Icon(
+              item.icon,
+              color: item.enabled ? enabledIconColor : disabledIconColor,
+              size: item.iconSize,
+            ),
+            onPressed: item.enabled ? item.callback : null,
           ),
-          onPressed: item.enabled ? item.callback : null,
-          tip: item.tip,
         ),
         title: Text(item.text),
       ),

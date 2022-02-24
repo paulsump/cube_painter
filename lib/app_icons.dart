@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// TODO surround with class
+
 const _kFontFam = 'AppIcons';
 const String? _kFontPkg = null;
 
