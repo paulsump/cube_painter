@@ -36,7 +36,11 @@ class CubeGroup {
   CubeGroup.fromJson(Map<String, dynamic> json)
       : _cubeInfos = _listFromJson(json).toList();
 
+  Map<String, dynamic> toJson() => {'cubes': _cubeInfos};
+
   CubeGroup.fromJsonString(String json) : this.fromJson(jsonDecode(json));
+
+  String get jsonString => jsonEncode(this);
 
   @override
   String toString() => '$_cubeInfos';
@@ -46,8 +50,6 @@ class CubeGroup {
       yield CubeInfo.fromJson(cubeInfoObject);
     }
   }
-
-  Map<String, dynamic> toJson() => {'cubes': _cubeInfos};
 }
 
 /// access to the main store of the entire model
@@ -132,7 +134,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     }
   }
 
-  String get json => jsonEncode(cubeGroup);
+  String get json => cubeGroup.jsonString;
 
   void loadFile({required String filePath}) {
     saveCurrentFilePath(filePath);
