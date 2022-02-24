@@ -54,6 +54,7 @@ class CubeGroup {
 class CubeGroupNotifier extends ChangeNotifier {
   final _cubeGroups = <String, CubeGroup>{};
 
+  late String settingsPath;
   late Settings _settings;
 
   late VoidCallback _onSuccessfulLoad;
@@ -83,7 +84,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
 
-    //TODO save settings toJson
+    saveSettings();
   }
 
   CubeGroup get cubeGroup {
@@ -105,14 +106,23 @@ class CubeGroupNotifier extends ChangeNotifier {
   void init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
 
-    // TODO load fromJson
-    _settings = Settings.fromJson({
-      'currentFilePath': '',
-      'showCrops': true,
-    });
+    settingsPath = await getSettingsPath();
+
+    if (!await File(settingsPath).exists()) {
+      _settings = Settings.fromJson({
+        'currentFilePath': '',
+        'copiedSamples': false,
+        'showCrops': false,
+      });
+    } else {
+      out('f');
+      _settings = Settings.fromString(await loadString(filePath: settingsPath));
+    }
 
     // TODO do we want to do this every time, or just the first time?
+    // if(!_settings.copiedSamples){
     await copySamples();
+    _settings.copiedSamples = true;
 
     await _loadAllCubeGroups();
 
@@ -143,6 +153,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   Future<void> saveFile() async {
     await saveString(filePath: currentFilePath, string: json);
+
     _savedJson = json;
   }
 
@@ -161,11 +172,16 @@ class CubeGroupNotifier extends ChangeNotifier {
   void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
 
   Future<void> setNewFilePath() async {
-    final Directory appFolder = await getApplicationDocumentsDirectory();
-    final String appFolderPath = '${appFolder.path}${Platform.pathSeparator}';
+    final String appFolderPath = await getAppFolderPath();
 
     final int uniqueId = DateTime.now().millisecondsSinceEpoch;
     saveCurrentFilePath('$appFolderPath$uniqueId$userCubesExtension');
+  }
+
+  Future<String> getAppFolderPath() async {
+    final Directory appFolder = await getApplicationDocumentsDirectory();
+
+    return '${appFolder.path}${Platform.pathSeparator}';
   }
 
   Future<void> newFile() async {
@@ -243,17 +259,42 @@ class CubeGroupNotifier extends ChangeNotifier {
     return paths;
   }
 
+  // Future<bool> settingsFileExists() async {
+  // final Directory appFolder = await getApplicationDocumentsDirectory();
+  //
+  // await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
+  //   final String path = fileSystemEntity.path;
+  //
+  //   if (path.endsWith(Settings.fileName)) {
+  //     return path;
+  //   }
+  // }
+  // return '';
+  // return File(getSettingsPath()).exists();
+  // }
+
+  Future<String> getSettingsPath() async {
+    final String appFolderPath = await getAppFolderPath();
+
+    return '$appFolderPath${Settings.fileName}';
+  }
+
+  Future<void> saveSettings() async {
+    saveString(filePath: settingsPath, string: _settings.toString());
+  }
+
   void loadSamples() async {
     copySamples();
+
     _loadAllCubeGroups(ignoreCurrent: true);
   }
 
   Future<void> copySamples() async {
     const assetsFolder = 'samples';
 
-    final Directory appFolder = await getApplicationDocumentsDirectory();
+    final String appFolderPath = await getAppFolderPath();
 
-    await Assets.copyAllFromTo(assetsFolder, appFolder.path,
+    await Assets.copyAllFromTo(assetsFolder, appFolderPath,
         extensionReplacement: sampleCubesExtension);
   }
 }

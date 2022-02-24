@@ -6,6 +6,8 @@ class Settings {
   bool showCrops;
   bool copiedSamples;
 
+  static const String fileName = 'settings.json';
+
   Settings.fromString(String json) : this.fromJson(jsonDecode(json));
 
   @override

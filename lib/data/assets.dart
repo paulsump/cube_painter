@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:cube_painter/out.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 
 const noWarn = out;
 
@@ -30,16 +29,13 @@ class Assets {
       {required String extensionReplacement}) async {
     final assetFilePaths = await getFilePaths(fromAssetFolderPath);
 
-    final Directory appFolder = await getApplicationDocumentsDirectory();
-    final String appFolderPath = '${appFolder.path}${Platform.pathSeparator}';
-
     for (String assetFilePath in assetFilePaths) {
       final assetFileName = assetFilePath.split(Platform.pathSeparator).last;
 
       final appFileName =
           assetFileName.replaceFirst('.json', extensionReplacement);
 
-      final String appFilePath = '$appFolderPath$appFileName';
+      final String appFilePath = '$toAppFolderPath$appFileName';
       File appFile = File(appFilePath);
 
       if (!await appFile.exists()) {
