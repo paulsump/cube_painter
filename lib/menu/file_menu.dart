@@ -1,9 +1,9 @@
 import 'package:cube_painter/alert.dart';
-import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/menu/file_menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +25,8 @@ class _FileMenuState extends State<FileMenu> {
     final items = <MenuItem>[
       MenuItem(
         tip: 'Create a new file',
-        icon: docNew,
-        iconSize: appIconSize,
+        icon: DownloadedIcons.docNew,
+        iconSize: downloadedIconSize,
         callback: _newFile,
       ),
       MenuItem(
@@ -38,8 +38,8 @@ class _FileMenuState extends State<FileMenu> {
       ),
       MenuItem(
         tip: 'Create a copy of this file and load it.',
-        icon: copy,
-        iconSize: appIconSize,
+        icon: DownloadedIcons.copy,
+        iconSize: downloadedIconSize,
         callback: _saveACopyFile,
       ),
       MenuItem(

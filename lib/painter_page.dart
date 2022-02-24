@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
@@ -11,6 +10,7 @@ import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu/file_menu.dart';
 import 'package:cube_painter/menu/gesture_mode_menu.dart';
@@ -118,8 +118,8 @@ class _PainterPageState extends State<PainterPage> {
 
               child: CubeButton(
                 radioOn: GestureMode.add == gestureMode,
-                icon: plusOutline,
-                iconSize: appIconSize,
+                icon: DownloadedIcons.plusOutline,
+                iconSize: downloadedIconSize,
                 onPressed: () {
                   setGestureMode(GestureMode.add, context);
                   setCrop(Crop.c, context);

@@ -1,10 +1,10 @@
-import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/crop_cube_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +38,8 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
             children: [
               CubeButton(
                 radioOn: GestureMode.erase == gestureMode,
-                icon: cancelOutline,
-                iconSize: appIconSize,
+                icon: DownloadedIcons.cancelOutline,
+                iconSize: downloadedIconSize,
                 onPressed: () {
                   setGestureMode(GestureMode.erase, context);
                 },
@@ -49,8 +49,8 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
               pad,
               CubeButton(
                 radioOn: GestureMode.add == gestureMode,
-                icon: plusOutline,
-                iconSize: appIconSize,
+                icon: DownloadedIcons.plusOutline,
+                iconSize: downloadedIconSize,
                 onPressed: () {
                   setGestureMode(GestureMode.add, context);
                   setCrop(Crop.c, context);
@@ -86,7 +86,8 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     CropCubeButton(crop: Crop.r),
-                    SizedBox(width: w * 7, child: Icon(plusOutline)),
+                    SizedBox(
+                        width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
                     // pad,
                     // BrushMenuButton(crop: Crop.c),
                     // pad,

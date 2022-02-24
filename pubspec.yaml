@@ -90,9 +90,9 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   fonts:
-    - family: AppIcons
+    - family: DownloadedIcons
       fonts:
-        - asset: fonts/AppIcons.ttf
+        - asset: fonts/DownloadedIcons.ttf
   assets:
     - samples/
     - samples_test/
