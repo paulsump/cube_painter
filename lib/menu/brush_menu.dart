@@ -23,20 +23,6 @@ class BrushMenu extends StatelessWidget {
     final bool canUndo = cubes.undoer.canUndo;
     final bool canRedo = cubes.undoer.canRedo;
 
-    void undo() {
-      if (canUndo) {
-        cubes.undoer.undo();
-        // Navigator.pop(context);
-      }
-    }
-
-    void redo() {
-      if (canRedo) {
-        cubes.undoer.redo();
-        // Navigator.pop(context);
-      }
-    }
-
     const pad = SizedBox(width: 14);
 
     return Drawer(
@@ -56,7 +42,7 @@ class BrushMenu extends StatelessWidget {
                     color: canUndo ? enabledIconColor : disabledIconColor,
                     size: iconSize,
                   ),
-                  onPressed: canUndo ? undo : null,
+                  onPressed: canUndo ? cubes.undoer.undo : null,
                   tip: 'Undo the last add or delete operation.',
                 ),
                 pad,
@@ -66,7 +52,7 @@ class BrushMenu extends StatelessWidget {
                     color: canRedo ? enabledIconColor : disabledIconColor,
                     size: iconSize,
                   ),
-                  onPressed: canRedo ? redo : null,
+                  onPressed: canRedo ? cubes.undoer.redo : null,
                   tip: 'Redo the last add or delete operation that was undone.',
                 ),
               ],
@@ -123,7 +109,7 @@ class BrushMenu extends StatelessWidget {
           const SizedBox(height: 3),
           Center(
               child:
-              Text('...or Pan / Zoom', style: TextStyle(color: textColor))),
+                  Text('...or Pan / Zoom', style: TextStyle(color: textColor))),
           const Divider(),
           const SizedBox(height: 22),
         ],
