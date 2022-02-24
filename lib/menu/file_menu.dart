@@ -1,6 +1,6 @@
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/app_icons.dart';
-import 'package:cube_painter/buttons/hexagon_border.dart';
+import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
@@ -51,7 +51,6 @@ class _FileMenuState extends State<FileMenu> {
       ),
     ];
 
-    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
     const double offsetX = 55;
 
     return LayoutBuilder(
@@ -71,21 +70,12 @@ class _FileMenuState extends State<FileMenu> {
             for (int i = 0; i < cubeGroupNotifier.cubeGroupEntries.length; ++i)
               Transform.translate(
                 offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
-                child: Tooltip(
-                  message: 'Load this file',
-                  child: TextButton(
-                    onPressed: () => _loadFile(
-                        filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
-                    child: Thumbnail(
-                        cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        HexagonBorder(side: borderSide),
-                      ),
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => buttonColor),
-                    ),
-                  ),
+                child: HexagonBorderButton(
+                  tip: 'Load this file',
+                  onPressed: () => _loadFile(
+                      filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
+                  child: Thumbnail(
+                      cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
                 ),
               ),
             const Divider(),
