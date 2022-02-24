@@ -152,9 +152,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     final jsonCopy = json;
 
     await setNewFilePath();
-    setJson(jsonCopy);
-    //TODO Fix saveCopy doesn't insert at top
-    // pushCubeGroup
+    pushCubeGroup(CubeGroup.fromJsonString(jsonCopy));
+
     _savedJson = json;
     saveFile();
   }
