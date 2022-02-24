@@ -18,8 +18,7 @@ CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
   return Provider.of<CubeGroupNotifier>(context, listen: listen);
 }
 
-const sampleCubesExtension = '.sampleCubes.json';
-const userCubesExtension = '.userCubes.json';
+const cubesExtension = '.cubes.json';
 
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
@@ -184,7 +183,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     final int uniqueId = DateTime.now().millisecondsSinceEpoch - 1645648060000;
     out(uniqueId);
-    saveCurrentFilePath('$appFolderPath$uniqueId$userCubesExtension');
+    saveCurrentFilePath('$appFolderPath$uniqueId$cubesExtension');
   }
 
   Future<String> getAppFolderPath() async {
@@ -258,8 +257,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
       final String path = fileSystemEntity.path;
 
-      if (path.endsWith(userCubesExtension) ||
-          path.endsWith(sampleCubesExtension)) {
+      if (path.endsWith(cubesExtension)) {
         paths.add(path);
       }
     }
@@ -282,6 +280,6 @@ class CubeGroupNotifier extends ChangeNotifier {
     final String appFolderPath = await getAppFolderPath();
 
     await Assets.copyAllFromTo(assetsFolder, appFolderPath,
-        extensionReplacement: sampleCubesExtension);
+        extensionReplacement: cubesExtension);
   }
 }
