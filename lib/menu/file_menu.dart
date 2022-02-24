@@ -77,12 +77,6 @@ class _FileMenuState extends State<FileMenu> {
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
             for (TextItem item in items) FileMenuTextItem(item: item),
             const Divider(),
-            const Padding(
-              padding: EdgeInsets.only(left: 16),
-              // FIX difference in fontWeight
-              child: Text('Open...',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-            ),
             for (int i = 0; i < cubeGroupNotifier.cubeGroupEntries.length; ++i)
               Transform.translate(
                 offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
@@ -112,21 +106,6 @@ class _FileMenuState extends State<FileMenu> {
                 ),
               ),
             const Divider(),
-            // TODO JUST remove this loadSamples option
-            FileMenuTextItem(
-              item: TextItem(
-                //TODO Re word 'Load Samples' - could be seen as 'open samples'
-                text: 'Show Samples...',
-                tip: 'Load the example files',
-                icon: Icons.download_sharp,
-                //menu_open_sharp,
-                iconSize: iconSize,
-                callback: () {
-                  cubeGroupNotifier.loadSamples();
-                  setState(() {});
-                },
-              ),
-            ),
           ],
         ),
       ),

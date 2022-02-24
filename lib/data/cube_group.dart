@@ -68,7 +68,6 @@ class CubeGroupNotifier extends ChangeNotifier {
   bool get _hasCubeGroupForCurrentFilePath {
     if (!_cubeGroups.containsKey(currentFilePath)) {
       out(currentFilePath);
-      // out(_cubeGroups.keys);
 
       assert(false,
       "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
@@ -82,7 +81,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
 
-    //TODO SAVE SETTINGS toJson
+    //TODO save settings toJson
   }
 
   CubeGroup get cubeGroup {
@@ -150,6 +149,7 @@ class CubeGroupNotifier extends ChangeNotifier {
   void saveACopyFile() async {
     final jsonCopy = json;
 
+    //TODO Fix saveCopy doesn't insert at top
     await setNewFilePath();
     setJson(jsonCopy);
 
@@ -176,15 +176,19 @@ class CubeGroupNotifier extends ChangeNotifier {
   Future<void> createNewFile() async {
     await setNewFilePath();
 
-    final copy = Map<String, CubeGroup>.from(_cubeGroups);
-    _cubeGroups.clear();
-
-    // insert the new one at the top
-    setCubeGroup(CubeGroup.empty());
+    pushCubeGroup(CubeGroup.empty());
     _savedJson = json;
+    _updateAfterLoad();
+  }
+
+  // insert at the top of the list
+  void pushCubeGroup(CubeGroup cubeGroup) {
+    final copy = Map<String, CubeGroup>.from(_cubeGroups);
+
+    _cubeGroups.clear();
+    setCubeGroup(cubeGroup);
 
     _cubeGroups.addAll(copy);
-    _updateAfterLoad();
   }
 
   Future<void> deleteFile({required String filePath}) async {
