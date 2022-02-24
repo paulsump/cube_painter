@@ -1,5 +1,6 @@
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/app_icons.dart';
+import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
@@ -63,6 +64,8 @@ class _FileMenuState extends State<FileMenu> {
       ),
     ];
 
+    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
+
     return LayoutBuilder(
       builder: (context, constraints) => Drawer(
         // child: Container(
@@ -85,6 +88,21 @@ class _FileMenuState extends State<FileMenu> {
                 child: TextButton(
                   onPressed: () => _loadFile(filePath: entry.key),
                   child: Thumbnail(cubeGroup: entry.value),
+                  style: ButtonStyle(
+                    // elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
+                    // shadowColor: on ? null : MaterialStateProperty.all(bl),
+                    // minimumSize: MaterialStateProperty.all(Size(height, height)),
+                    shape: MaterialStateProperty.all(
+                      HexagonBorder(side: borderSide),
+                    ),
+                    overlayColor:
+                        MaterialStateColor.resolveWith((states) => buttonColor),
+                    // backgroundColor: MaterialStateProperty.all(radioOn == null
+                    //     ? buttonColor
+                    //     : radioOn!
+                    //     ? radioButtonOnColor
+                    //     : buttonColor),
+                  ),
                 ),
               ),
             const Divider(),
