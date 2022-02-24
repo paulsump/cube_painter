@@ -36,6 +36,8 @@ class CubeGroup {
   CubeGroup.fromJson(Map<String, dynamic> json)
       : _cubeInfos = _listFromJson(json).toList();
 
+  CubeGroup.fromJsonString(String json) : this.fromJson(jsonDecode(json));
+
   @override
   String toString() => '$_cubeInfos';
 
@@ -62,15 +64,15 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   bool get hasCubes =>
       _cubeGroups.isNotEmpty &&
-          _hasCubeGroupForCurrentFilePath &&
-          cubeGroup.cubeInfos.isNotEmpty;
+      _hasCubeGroupForCurrentFilePath &&
+      cubeGroup.cubeInfos.isNotEmpty;
 
   bool get _hasCubeGroupForCurrentFilePath {
     if (!_cubeGroups.containsKey(currentFilePath)) {
       out(currentFilePath);
 
       assert(false,
-      "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
+          "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
       return false;
     }
     return true;
@@ -133,12 +135,10 @@ class CubeGroupNotifier extends ChangeNotifier {
   String get json => jsonEncode(cubeGroup);
 
   void loadFile({required String filePath}) {
-    // if (_saved(context)) {
     saveCurrentFilePath(filePath);
+
     _savedJson = json;
-    out(json);
     _updateAfterLoad();
-    // }
   }
 
   void saveFile() async {
@@ -149,19 +149,15 @@ class CubeGroupNotifier extends ChangeNotifier {
   void saveACopyFile() async {
     final jsonCopy = json;
 
-    //TODO Fix saveCopy doesn't insert at top
     await setNewFilePath();
     setJson(jsonCopy);
-
+    //TODO Fix saveCopy doesn't insert at top
+    // pushCubeGroup
     _savedJson = json;
     saveFile();
   }
 
-  void setJson(String json) {
-    final Map<String, dynamic> map = jsonDecode(json);
-
-    setCubeGroup(CubeGroup.fromJson(map));
-  }
+  void setJson(String json) => setCubeGroup(CubeGroup.fromJsonString(json));
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
 
