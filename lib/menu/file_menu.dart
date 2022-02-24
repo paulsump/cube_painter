@@ -79,19 +79,11 @@ class _FileMenuState extends State<FileMenu> {
                     child: Thumbnail(
                         cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
                     style: ButtonStyle(
-                      // elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
-                      // shadowColor: on ? null : MaterialStateProperty.all(bl),
-                      // minimumSize: MaterialStateProperty.all(Size(height, height)),
                       shape: MaterialStateProperty.all(
                         HexagonBorder(side: borderSide),
                       ),
                       overlayColor: MaterialStateColor.resolveWith(
                           (states) => buttonColor),
-                      // backgroundColor: MaterialStateProperty.all(radioOn == null
-                      //     ? buttonColor
-                      //     : radioOn!
-                      //     ? radioButtonOnColor
-                      //     : buttonColor),
                     ),
                   ),
                 ),
