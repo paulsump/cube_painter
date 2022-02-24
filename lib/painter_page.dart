@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/brush/brush.dart';
+import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/buttons/open_menu_button.dart';
 import 'package:cube_painter/colors.dart';
@@ -107,6 +109,38 @@ class _PainterPageState extends State<PainterPage> {
                 size: iconSize,
               ),
               onPressed: canRedo ? _cubes.undoer.redo : null,
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(width - 66 - 7, 55),
+            child: SizedBox(
+              // height: 55,
+
+              child: CubeButton(
+                radioOn: GestureMode.add == gestureMode,
+                icon: plusOutline,
+                iconSize: appIconSize,
+                onPressed: () {
+                  setGestureMode(GestureMode.add, context);
+                  setCrop(Crop.c, context);
+                },
+                tip:
+                    'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(width - 66 - 7, 55 * 2 + 12),
+            child: HexagonElevatedButton(
+              // height: 55,
+              radioOn: GestureMode.panZoom == gestureMode,
+              child: Icon(
+                Icons.zoom_in_sharp,
+                size: iconSize * 1.2,
+                color: enabledIconColor,
+              ),
+              onPressed: () => setGestureMode(GestureMode.panZoom, context),
+              tip: 'Pinch to zoom, drag to move around.',
             ),
           ),
         ]),
