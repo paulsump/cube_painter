@@ -33,15 +33,15 @@ class CubeGroup {
 
   List<CubeInfo> get cubeInfos => _cubeInfos;
 
-  CubeGroup.fromJson(Map<String, dynamic> json)
-      : _cubeInfos = _listFromJson(json).toList();
-
-  Map<String, dynamic> toJson() => {'cubes': _cubeInfos};
-
   CubeGroup.fromString(String json) : this.fromJson(jsonDecode(json));
 
   @override
   String toString() => jsonEncode(this);
+
+  CubeGroup.fromJson(Map<String, dynamic> json)
+      : _cubeInfos = _listFromJson(json).toList();
+
+  Map<String, dynamic> toJson() => {'cubes': _cubeInfos};
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
     for (final cubeInfoObject in json['cubes']) {
