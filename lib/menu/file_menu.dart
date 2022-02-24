@@ -53,6 +53,14 @@ class _FileMenuState extends State<FileMenu> {
         iconSize: appIconSize,
         callback: pop(cubeGroupNotifier.saveACopyFile),
       ),
+      TextItem(
+        text: 'Delete',
+        tip:
+            'Delete the current file. The next file is loaded or a new blank one is created.',
+        icon: Icons.delete,
+        iconSize: iconSize,
+        callback: _deleteCurrentFile,
+      ),
     ];
 
     return LayoutBuilder(
@@ -67,24 +75,14 @@ class _FileMenuState extends State<FileMenu> {
             const Divider(),
             const Padding(
               padding: EdgeInsets.only(left: 16),
-              // FIX diference in fontWeight
-              child: Text('Open...'),
+              // FIX difference in fontWeight
+              child: Text('Open...',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
             ),
             for (MapEntry entry in cubeGroupNotifier.cubeGroupEntries)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Tooltip(
-                    message:
-                        'Delete the current file. After deleting, the next file is loaded or a new blank one is created',
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.delete_forever_sharp,
-                        size: iconSize,
-                      ),
-                      onPressed: () => _deleteFile(filePath: entry.key),
-                    ),
-                  ),
                   Thumbnail(cubeGroup: entry.value),
                   Tooltip(
                     message: 'Load this cube group',
@@ -127,6 +125,12 @@ class _FileMenuState extends State<FileMenu> {
       cubeGroupNotifier.loadFile(filePath: filePath);
       setState(() {});
     }
+  }
+
+  void _deleteCurrentFile() async {
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    _deleteFile(filePath: cubeGroupNotifier.currentFilePath);
+    //TODO The next file is loaded or a new blank one is created
   }
 
   void _deleteFile({required String filePath}) async {
