@@ -38,12 +38,10 @@ class CubeGroup {
 
   Map<String, dynamic> toJson() => {'cubes': _cubeInfos};
 
-  CubeGroup.fromJsonString(String json) : this.fromJson(jsonDecode(json));
-
-  String get jsonString => jsonEncode(this);
+  CubeGroup.fromString(String json) : this.fromJson(jsonDecode(json));
 
   @override
-  String toString() => '$_cubeInfos';
+  String toString() => jsonEncode(this);
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
     for (final cubeInfoObject in json['cubes']) {
@@ -134,7 +132,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     }
   }
 
-  String get json => cubeGroup.jsonString;
+  String get json => cubeGroup.toString();
 
   void loadFile({required String filePath}) {
     saveCurrentFilePath(filePath);
@@ -152,13 +150,13 @@ class CubeGroupNotifier extends ChangeNotifier {
     final jsonCopy = json;
 
     await setNewFilePath();
-    pushCubeGroup(CubeGroup.fromJsonString(jsonCopy));
+    pushCubeGroup(CubeGroup.fromString(jsonCopy));
 
     _savedJson = json;
     saveFile();
   }
 
-  void setJson(String json) => setCubeGroup(CubeGroup.fromJsonString(json));
+  void setJson(String json) => setCubeGroup(CubeGroup.fromString(json));
 
   void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
 
@@ -226,7 +224,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       if (!(ignoreCurrent && path == currentFilePath)) {
         final File file = File(path);
 
-        _cubeGroups[path] = CubeGroup.fromJsonString(await file.readAsString());
+        _cubeGroups[path] = CubeGroup.fromString(await file.readAsString());
       }
     }
   }

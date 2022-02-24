@@ -20,8 +20,8 @@ void main() {
       expect(newCubeGroup.cubeInfos.length, equals(0));
     });
 
-    test('load jsonString', () {
-      CubeGroup newCubeGroup = CubeGroup.fromJsonString(testJson);
+    test('load toString()', () {
+      CubeGroup newCubeGroup = CubeGroup.fromString(testJson);
       expect(newCubeGroup.cubeInfos.length, equals(0));
     });
 
@@ -31,9 +31,9 @@ void main() {
       expect(testJson, equals(newJson));
     });
 
-    test('save jsonString', () {
+    test('save toString()', () {
       const cubeGroup = CubeGroup(<CubeInfo>[]);
-      String newJson = cubeGroup.jsonString;
+      String newJson = cubeGroup.toString();
       expect(testJson, equals(newJson));
     });
   });
@@ -63,8 +63,8 @@ void main() {
       }
     });
 
-    test('load jsonString', () {
-      CubeGroup newCubeGroup = CubeGroup.fromJsonString(testJson);
+    test('load toString()', () {
+      CubeGroup newCubeGroup = CubeGroup.fromString(testJson);
 
       int i = 0;
       for (final newCube in newCubeGroup.cubeInfos) {
@@ -78,9 +78,9 @@ void main() {
       expect(testJson, equals(newJson));
     });
 
-    test('save jsonString', () {
+    test('save toString()', () {
       const cubeGroup = CubeGroup(testCubes);
-      String newJson = cubeGroup.jsonString;
+      String newJson = cubeGroup.toString();
       expect(testJson, equals(newJson));
     });
   });
