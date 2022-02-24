@@ -11,7 +11,7 @@ class OpenMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final scaffold = Scaffold.of(context);
     return HexagonElevatedButton(
-      height: 55,
+      height: 66,
       child: Icon(
         endDrawer ? Icons.brush_sharp : Icons.folder_sharp,
         color: enabledIconColor,

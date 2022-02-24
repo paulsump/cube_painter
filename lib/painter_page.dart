@@ -82,13 +82,13 @@ class _PainterPageState extends State<PainterPage> {
               : Brush(adoptCubes: _cubes.adopt),
           const OpenMenuButton(endDrawer: false),
           Transform.translate(
-            offset: Offset(width - 60, 0),
+            offset: Offset(width - 66 - 4, 0),
             child: const OpenMenuButton(endDrawer: true),
           ),
           Transform.translate(
-            offset: Offset(width - 60 - 55 * 2, 0),
+            offset: Offset(width - 66 * 5 - 4, 0),
             child: HexagonElevatedButton(
-              height: 55,
+              height: 66,
               child: Icon(
                 Icons.undo_sharp,
                 size: iconSize,
@@ -99,9 +99,9 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 60 - 55, 0),
+            offset: Offset(width - 66 * 4 - 4, 0),
             child: HexagonElevatedButton(
-              height: 55,
+              height: 66,
               tip: 'Redo the last add or delete operation that was undone.',
               child: Icon(
                 Icons.redo_sharp,
@@ -112,10 +112,9 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 - 7, 55),
+            offset: Offset(width - 66 * 3 - 4, 0),
             child: SizedBox(
-              // height: 55,
-
+              height: 66,
               child: CubeButton(
                 radioOn: GestureMode.add == gestureMode,
                 icon: DownloadedIcons.plusOutline,
@@ -130,9 +129,9 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 - 7, 55 * 2 + 12),
+            offset: Offset(width - 66 * 2 - 4, 0),
             child: HexagonElevatedButton(
-              // height: 55,
+              height: 66,
               radioOn: GestureMode.panZoom == gestureMode,
               child: Icon(
                 Icons.zoom_in_sharp,

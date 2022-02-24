@@ -105,19 +105,6 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
               ],
             ),
 
-          const SizedBox(height: 3),
-          Center(
-              child: TextButton(
-            child: Text(showCrops ? '...Less' : 'More...',
-                style: TextStyle(color: textColor)),
-            onPressed: () {
-              final cubeGroupNotifier = getCubeGroupNotifier(context);
-              cubeGroupNotifier.saveShowCrops(!showCrops);
-              setState(() {});
-            },
-          )),
-          const Divider(),
-          const SizedBox(height: 22),
         ],
       ),
     );
