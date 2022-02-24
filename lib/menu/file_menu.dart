@@ -4,7 +4,7 @@ import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
-import 'package:cube_painter/menu/file_menu_text_item.dart';
+import 'package:cube_painter/menu/file_menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -22,27 +22,27 @@ class _FileMenuState extends State<FileMenu> {
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
-    final items = <TextItem>[
-      TextItem(
+    final items = <MenuItem>[
+      MenuItem(
         tip: 'Create a new file',
         icon: docNew,
         iconSize: appIconSize,
         callback: _newFile,
       ),
-      TextItem(
+      MenuItem(
         tip: 'Save the current file',
         icon: Icons.save,
         iconSize: iconSize,
         callback: _saveFile,
         enabled: cubeGroupNotifier.modified,
       ),
-      TextItem(
+      MenuItem(
         tip: 'Create a copy of this file and load it.',
         icon: copy,
         iconSize: appIconSize,
         callback: _saveACopyFile,
       ),
-      TextItem(
+      MenuItem(
         tip:
             'Delete the current file. The next file is loaded or a new blank one is created.',
         icon: Icons.delete,
@@ -64,7 +64,7 @@ class _FileMenuState extends State<FileMenu> {
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
             Row(
               children: [
-                for (TextItem item in items) FileMenuButton(item: item),
+                for (MenuItem item in items) FileMenuButton(item: item),
               ],
             ),
             const Divider(),

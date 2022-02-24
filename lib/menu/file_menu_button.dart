@@ -1,14 +1,14 @@
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
-class TextItem {
+class MenuItem {
   final String tip;
   final IconData icon;
   final double iconSize;
   final VoidCallback callback;
   final bool enabled;
 
-  const TextItem({
+  const MenuItem({
     required this.tip,
     required this.icon,
     required this.iconSize,
@@ -24,7 +24,7 @@ class FileMenuButton extends StatelessWidget {
     required this.item,
   }) : super(key: key);
 
-  final TextItem item;
+  final MenuItem item;
 
   @override
   Widget build(BuildContext context) {
