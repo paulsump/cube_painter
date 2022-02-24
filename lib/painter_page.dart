@@ -10,8 +10,8 @@ import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/menu/brush_menu.dart';
 import 'package:cube_painter/menu/file_menu.dart';
+import 'package:cube_painter/menu/gesture_mode_menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -53,6 +53,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
+    final gestureMode = getGestureMode(context, listen: true);
 
     final bool canUndo = _cubes.undoer.canUndo;
     final bool canRedo = _cubes.undoer.canRedo;
@@ -61,7 +62,7 @@ class _PainterPageState extends State<PainterPage> {
 
     return Scaffold(
       drawer: const FileMenu(),
-      endDrawer: BrushMenu(cubes: _cubes),
+      endDrawer: const GestureModeMenu(),
       body: SafeArea(
         child: Stack(children: [
           UnitToScreen(
@@ -74,7 +75,7 @@ class _PainterPageState extends State<PainterPage> {
               ],
             ),
           ),
-          GestureMode.panZoom == getGestureMode(context, listen: true)
+          GestureMode.panZoom == gestureMode
               ? const PanZoomer()
               : Brush(adoptCubes: _cubes.adopt),
           const OpenMenuButton(endDrawer: false),

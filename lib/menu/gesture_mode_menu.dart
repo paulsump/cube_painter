@@ -3,7 +3,6 @@ import 'package:cube_painter/buttons/crop_cube_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -12,16 +11,14 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-class BrushMenu extends StatefulWidget {
-  final Cubes cubes;
-
-  const BrushMenu({Key? key, required this.cubes}) : super(key: key);
+class GestureModeMenu extends StatefulWidget {
+  const GestureModeMenu({Key? key}) : super(key: key);
 
   @override
-  State<BrushMenu> createState() => _BrushMenuState();
+  State<GestureModeMenu> createState() => _GestureModeMenuState();
 }
 
-class _BrushMenuState extends State<BrushMenu> {
+class _GestureModeMenuState extends State<GestureModeMenu> {
   bool get showCrops => getCubeGroupNotifier(context).showCrops;
 
   @override
@@ -36,8 +33,6 @@ class _BrushMenuState extends State<BrushMenu> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          // const Divider(),
-          // const SizedBox(height: 22),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

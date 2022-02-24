@@ -10,7 +10,7 @@ void setGestureMode(GestureMode mode, BuildContext context) {
   final gestureModeNotifier =
       Provider.of<GestureModeNotifier>(context, listen: false);
 
-  gestureModeNotifier.mode = mode;
+  gestureModeNotifier.setMode(mode);
 }
 
 class GestureModeNotifier extends ChangeNotifier {
@@ -18,8 +18,8 @@ class GestureModeNotifier extends ChangeNotifier {
 
   get mode => _mode;
 
-  set mode(value) {
-    _mode = value;
+  void setMode(GestureMode mode) {
+    _mode = mode;
     notifyListeners();
   }
 }
