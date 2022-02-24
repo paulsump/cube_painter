@@ -12,12 +12,12 @@ Color getColor(Side side) {
   }
 }
 
-double iconSize = 33;
-double downloadedIconSize = 27;
-Color disabledIconColor = Colors.grey;
+const double iconSize = 33;
+const double downloadedIconSize = 27;
+const Color disabledIconColor = Colors.grey;
 
-Color enabledIconColor = getColor(Side.br);
-Color textColor = enabledIconColor;
+final Color enabledIconColor = getColor(Side.br);
+final Color textColor = enabledIconColor;
 
 // TODO rename these
 const Color top = Color(0xfff07f7e);

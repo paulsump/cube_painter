@@ -33,12 +33,11 @@ class CubePainterApp extends StatelessWidget {
         theme: ThemeData(
           // primaryColor: Colors.red,
           // backgroundColor: Colors.red,
-          // canvasColor: Colors.transparent,
           canvasColor: backgroundColor.withOpacity(0.4),
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: textColor,
                 // displayColor: Colors.red,
-                fontSizeFactor: 1.5,
+                fontSizeFactor: 1.0,
               ),
           // for icon buttons only atm
           iconTheme:

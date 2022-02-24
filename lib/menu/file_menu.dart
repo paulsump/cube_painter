@@ -55,18 +55,19 @@ class _FileMenuState extends State<FileMenu> {
 
     return LayoutBuilder(
       builder: (context, constraints) => Drawer(
-        // child: Container(
-        // color: backgroundColor,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
+            const Center(child: Text('File')),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 for (MenuItem item in items) FileMenuButton(item: item),
               ],
             ),
             const Divider(),
+            // Stack(children: [
             for (int i = 0; i < cubeGroupNotifier.cubeGroupEntries.length; ++i)
               Transform.translate(
                 offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
@@ -78,6 +79,7 @@ class _FileMenuState extends State<FileMenu> {
                       cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
                 ),
               ),
+            // ]),
             const Divider(),
           ],
         ),
