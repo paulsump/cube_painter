@@ -170,7 +170,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     saveCurrentFilePath('$appFolderPath$uniqueId$userCubesExtension');
   }
 
-  Future<void> createNewFile() async {
+  Future<void> newFile() async {
     await setNewFilePath();
 
     pushCubeGroup(CubeGroup.empty());
@@ -196,7 +196,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     if (currentFilePath == filePath) {
       if (_cubeGroups.isEmpty) {
-        createNewFile();
+        newFile();
       } else {
         loadFile(filePath: _cubeGroups.keys.first);
       }

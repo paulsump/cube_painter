@@ -25,17 +25,14 @@ class _FileMenuState extends State<FileMenu> {
     final items = <TextItem>[
       TextItem(
         text: 'New',
-        tip: 'Create a new cube group',
+        tip: 'Create a new file',
         icon: docNew,
         iconSize: appIconSize,
-        // TODO create new persisted file,
-        // so as not to overwrite the current one
-        //TODO alert('are you sure,save current file?');
-        callback: cubeGroupNotifier.createNewFile,
+        callback: _newFile,
       ),
       TextItem(
         text: 'Save',
-        tip: 'Save the current cube group',
+        tip: 'Save the current file',
         icon: Icons.save,
         iconSize: iconSize,
         callback: cubeGroupNotifier.saveFile,
@@ -43,8 +40,7 @@ class _FileMenuState extends State<FileMenu> {
       ),
       TextItem(
         text: 'Save a copy',
-        tip:
-            'Save the current cube group in a new file and start using that group',
+        tip: 'Create a copy of this file and load it.',
         icon: copy,
         iconSize: appIconSize,
         callback: cubeGroupNotifier.saveACopyFile,
@@ -76,7 +72,7 @@ class _FileMenuState extends State<FileMenu> {
               Transform.translate(
                 offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
                 child: Tooltip(
-                  message: 'Load this cube group',
+                  message: 'Load this file',
                   child: TextButton(
                     onPressed: () => _loadFile(
                         filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
@@ -107,10 +103,21 @@ class _FileMenuState extends State<FileMenu> {
     );
   }
 
+  void _newFile() async {
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+
+    if (!cubeGroupNotifier.modified ||
+        await _askSaveCurrent(title: 'New File')) {
+      cubeGroupNotifier.newFile();
+      setState(() {});
+    }
+  }
+
   void _loadFile({required String filePath}) async {
     final cubeGroupNotifier = getCubeGroupNotifier(context);
 
-    if (!cubeGroupNotifier.modified || await _askLoad()) {
+    if (!cubeGroupNotifier.modified ||
+        await _askSaveCurrent(title: 'Load File')) {
       cubeGroupNotifier.loadFile(filePath: filePath);
       setState(() {});
     }
@@ -134,16 +141,16 @@ class _FileMenuState extends State<FileMenu> {
 //TODO ideally display the thumbnail, so they can be sure.
 
     return await _askYesNoOrCancel(
-      title: "Delete",
-      content: "Delete current file?",
+      title: 'Delete',
+      content: 'Delete current file?',
       yesCancelOnly: true,
     );
   }
 
-  Future<bool> _askLoad() async {
+  Future<bool> _askSaveCurrent({required String title}) async {
     return await _askYesNoOrCancel(
-        title: "Load",
-        content: "Save the current changes?",
+        title: title,
+        content: 'Save the current changes?',
         yesCallBack: () {
           final cubeGroupNotifier = getCubeGroupNotifier(context);
 
