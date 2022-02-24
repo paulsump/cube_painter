@@ -108,6 +108,14 @@ class BrushMenu extends StatelessWidget {
             onPressed: () => setGestureMode(GestureMode.panZoom, context),
             tip: 'Pinch to zoom, drag to move around.',
           ),
+          const SizedBox(height: 3),
+          Center(
+              child: TextButton(
+            child: Text('More...', style: TextStyle(color: textColor)),
+            onPressed: () {},
+          )),
+          const Divider(),
+          const SizedBox(height: 22),
         ],
       ),
     );
