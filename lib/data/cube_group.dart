@@ -121,6 +121,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       await copySamples();
 
       _settings.copiedSamples = true;
+      await saveSettings();
     }
 
     final firstPath = await _loadAllCubeGroups();
@@ -180,9 +181,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   Future<void> setNewFilePath() async {
     final String appFolderPath = await getAppFolderPath();
-//TODO 164564806
-    final int uniqueId =
-        DateTime.now().millisecondsSinceEpoch; //-1645648060000;
+
+    final int uniqueId = DateTime.now().millisecondsSinceEpoch - 1645648060000;
+    out(uniqueId);
     saveCurrentFilePath('$appFolderPath$uniqueId$userCubesExtension');
   }
 
