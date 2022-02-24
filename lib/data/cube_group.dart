@@ -241,11 +241,11 @@ class CubeGroupNotifier extends ChangeNotifier {
     paths.sort((a, b) => b.compareTo(a));
 
     for (final String path in paths) {
-      //TODO PUT this back for the pop funk
-      // if (!(ignoreCurrent && path == currentFilePath)) {
-      final File file = File(path);
+      if (!(ignoreCurrent && path == currentFilePath)) {
+        final File file = File(path);
 
-      _cubeGroups[path] = CubeGroup.fromString(await file.readAsString());
+        _cubeGroups[path] = CubeGroup.fromString(await file.readAsString());
+      }
     }
 
     return paths.first;

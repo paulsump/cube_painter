@@ -37,7 +37,7 @@ class Alert extends StatelessWidget {
         ),
         actions: <Widget>[
           HexagonElevatedButton(
-            child: Icon(
+            child: const Icon(
               DownloadedIcons.thumbsUp,
               size: downloadedIconSize,
             ),
@@ -47,7 +47,7 @@ class Alert extends StatelessWidget {
           ),
           if (noCallBack != null)
             HexagonElevatedButton(
-              child: Icon(
+              child: const Icon(
                 DownloadedIcons.thumbsDown,
                 size: downloadedIconSize,
               ),
@@ -56,7 +56,7 @@ class Alert extends StatelessWidget {
               tip: 'No - Do the operation, but say no to the question.',
             ),
           HexagonElevatedButton(
-            child: Icon(
+            child: const Icon(
               DownloadedIcons.cancelOutline,
               size: downloadedIconSize,
             ),
