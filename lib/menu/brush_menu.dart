@@ -23,7 +23,9 @@ class BrushMenu extends StatelessWidget {
     final bool canUndo = cubes.undoer.canUndo;
     final bool canRedo = cubes.undoer.canRedo;
 
-    const pad = SizedBox(width: 14);
+    const double w = 14;
+    const pad = SizedBox(width: w);
+    // const pad7 = SizedBox(width: w*7);
 
     return Drawer(
       child: ListView(
@@ -59,7 +61,6 @@ class BrushMenu extends StatelessWidget {
             ),
           ),
           const Divider(),
-          Center(child: Text('Brush...', style: TextStyle(color: textColor))),
           const SizedBox(height: 22),
           CubeButton(
             radioOn: GestureMode.erase == gestureMode,
@@ -82,6 +83,7 @@ class BrushMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               BrushMenuButton(crop: Crop.r),
+              // pad7,
               pad,
               BrushMenuButton(crop: Crop.c),
               pad,
@@ -106,12 +108,6 @@ class BrushMenu extends StatelessWidget {
             onPressed: () => setGestureMode(GestureMode.panZoom, context),
             tip: 'Pinch to zoom, drag to move around.',
           ),
-          const SizedBox(height: 3),
-          Center(
-              child:
-                  Text('...or Pan / Zoom', style: TextStyle(color: textColor))),
-          const Divider(),
-          const SizedBox(height: 22),
         ],
       ),
     );
