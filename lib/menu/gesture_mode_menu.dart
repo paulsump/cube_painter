@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/crop_cube_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
-import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
@@ -33,44 +32,6 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CubeButton(
-                radioOn: GestureMode.erase == gestureMode,
-                icon: DownloadedIcons.cancelOutline,
-                iconSize: downloadedIconSize,
-                onPressed: () {
-                  setGestureMode(GestureMode.erase, context);
-                },
-                tip:
-                    'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-              ),
-              pad,
-              CubeButton(
-                radioOn: GestureMode.add == gestureMode,
-                icon: DownloadedIcons.plusOutline,
-                iconSize: downloadedIconSize,
-                onPressed: () {
-                  setGestureMode(GestureMode.add, context);
-                  setCrop(Crop.c, context);
-                },
-                tip:
-                    'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
-              ),
-              pad,
-              HexagonElevatedButton(
-                radioOn: GestureMode.panZoom == gestureMode,
-                child: Icon(
-                  Icons.zoom_in_sharp,
-                  size: iconSize * 1.2,
-                  color: enabledIconColor,
-                ),
-                onPressed: () => setGestureMode(GestureMode.panZoom, context),
-                tip: 'Pinch to zoom, drag to move around.',
-              ),
-            ],
-          ),
           if (showCrops)
             Column(
               children: [
@@ -84,14 +45,25 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CropCubeButton(crop: Crop.r),
-                    SizedBox(
-                        width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
+                  children: [
+                    const CropCubeButton(crop: Crop.r),
+                    // SizedBox(
+                    //     width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
                     // pad,
                     // BrushMenuButton(crop: Crop.c),
-                    // pad,
-                    CropCubeButton(crop: Crop.l),
+                    pad,
+                    CubeButton(
+                      radioOn: GestureMode.erase == gestureMode,
+                      icon: DownloadedIcons.cancelOutline,
+                      iconSize: downloadedIconSize,
+                      onPressed: () {
+                        setGestureMode(GestureMode.erase, context);
+                      },
+                      tip:
+                          'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                    ),
+                    pad,
+                    const CropCubeButton(crop: Crop.l),
                   ],
                 ),
                 Row(
@@ -104,7 +76,6 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
                 ),
               ],
             ),
-
         ],
       ),
     );
