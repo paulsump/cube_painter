@@ -7,10 +7,10 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-class BrushMenuButton extends StatelessWidget {
+class CropCubeButton extends StatelessWidget {
   final Crop crop;
 
-  const BrushMenuButton({
+  const CropCubeButton({
     Key? key,
     required this.crop,
   }) : super(key: key);

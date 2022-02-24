@@ -1,5 +1,5 @@
 import 'package:cube_painter/app_icons.dart';
-import 'package:cube_painter/buttons/brush_menu_button.dart';
+import 'package:cube_painter/buttons/crop_cube_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
@@ -120,28 +120,28 @@ class _BrushMenuState extends State<BrushMenu> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    BrushMenuButton(crop: Crop.dr),
+                    CropCubeButton(crop: Crop.dr),
                     pad,
-                    BrushMenuButton(crop: Crop.dl),
+                    CropCubeButton(crop: Crop.dl),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    BrushMenuButton(crop: Crop.r),
+                    CropCubeButton(crop: Crop.r),
                     SizedBox(width: w * 7, child: Icon(plusOutline)),
                     // pad,
                     // BrushMenuButton(crop: Crop.c),
                     // pad,
-                    BrushMenuButton(crop: Crop.l),
+                    CropCubeButton(crop: Crop.l),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    BrushMenuButton(crop: Crop.ur),
+                    CropCubeButton(crop: Crop.ur),
                     pad,
-                    BrushMenuButton(crop: Crop.ul),
+                    CropCubeButton(crop: Crop.ul),
                   ],
                 ),
               ],
