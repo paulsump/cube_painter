@@ -67,19 +67,26 @@ class _FileMenuState extends State<FileMenu> {
               ],
             ),
             const Divider(),
-            // Stack(children: [
-            for (int i = 0; i < cubeGroupNotifier.cubeGroupEntries.length; ++i)
-              Transform.translate(
-                offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
-                child: HexagonBorderButton(
-                  tip: 'Load this file',
-                  onPressed: () => _loadFile(
-                      filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
-                  child: Thumbnail(
-                      cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
+            Stack(children: [
+              for (int i = 0;
+                  i < cubeGroupNotifier.cubeGroupEntries.length;
+                  ++i)
+                Transform.translate(
+                  offset:
+                      Offset(99 + (i % 2 == 0 ? -offsetX : offsetX), i * 180),
+                  child: Transform.scale(
+                    scale: 1.66,
+                    child: HexagonBorderButton(
+                      tip: 'Load this file',
+                      onPressed: () => _loadFile(
+                          filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
+                      child: Thumbnail(
+                          cubeGroup:
+                              cubeGroupNotifier.cubeGroupEntries[i].value),
+                    ),
+                  ),
                 ),
-              ),
-            // ]),
+            ]),
             const Divider(),
           ],
         ),
