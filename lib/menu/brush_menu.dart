@@ -11,17 +11,24 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-class BrushMenu extends StatelessWidget {
+class BrushMenu extends StatefulWidget {
   final Cubes cubes;
 
   const BrushMenu({Key? key, required this.cubes}) : super(key: key);
 
   @override
+  State<BrushMenu> createState() => _BrushMenuState();
+}
+
+class _BrushMenuState extends State<BrushMenu> {
+  bool _more = false;
+
+  @override
   Widget build(BuildContext context) {
     final gestureMode = getGestureMode(context, listen: true);
 
-    final bool canUndo = cubes.undoer.canUndo;
-    final bool canRedo = cubes.undoer.canRedo;
+    final bool canUndo = widget.cubes.undoer.canUndo;
+    final bool canRedo = widget.cubes.undoer.canRedo;
 
     const double w = 14;
     const pad = SizedBox(width: w);
@@ -44,7 +51,7 @@ class BrushMenu extends StatelessWidget {
                     color: canUndo ? enabledIconColor : disabledIconColor,
                     size: iconSize,
                   ),
-                  onPressed: canUndo ? cubes.undoer.undo : null,
+                  onPressed: canUndo ? widget.cubes.undoer.undo : null,
                   tip: 'Undo the last add or delete operation.',
                 ),
                 pad,
@@ -54,7 +61,7 @@ class BrushMenu extends StatelessWidget {
                     color: canRedo ? enabledIconColor : disabledIconColor,
                     size: iconSize,
                   ),
-                  onPressed: canRedo ? cubes.undoer.redo : null,
+                  onPressed: canRedo ? widget.cubes.undoer.redo : null,
                   tip: 'Redo the last add or delete operation that was undone.',
                 ),
               ],
@@ -89,39 +96,48 @@ class BrushMenu extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              BrushMenuButton(crop: Crop.dr),
-              pad,
-              BrushMenuButton(crop: Crop.dl),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              BrushMenuButton(crop: Crop.r),
-              SizedBox(width: w * 7, child: Icon(plusOutline)),
-              // pad,
-              // BrushMenuButton(crop: Crop.c),
-              // pad,
-              BrushMenuButton(crop: Crop.l),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              BrushMenuButton(crop: Crop.ur),
-              pad,
-              BrushMenuButton(crop: Crop.ul),
-            ],
-          ),
+          if (_more)
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    BrushMenuButton(crop: Crop.dr),
+                    pad,
+                    BrushMenuButton(crop: Crop.dl),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    BrushMenuButton(crop: Crop.r),
+                    SizedBox(width: w * 7, child: Icon(plusOutline)),
+                    // pad,
+                    // BrushMenuButton(crop: Crop.c),
+                    // pad,
+                    BrushMenuButton(crop: Crop.l),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    BrushMenuButton(crop: Crop.ur),
+                    pad,
+                    BrushMenuButton(crop: Crop.ul),
+                  ],
+                ),
+              ],
+            ),
 
           const SizedBox(height: 3),
           Center(
               child: TextButton(
-            child: Text('More...', style: TextStyle(color: textColor)),
-            onPressed: () {},
+            child: Text(_more ? '...Less' : 'More...',
+                style: TextStyle(color: textColor)),
+            onPressed: () {
+              _more = !_more;
+              setState(() {});
+            },
           )),
           const Divider(),
           const SizedBox(height: 22),
