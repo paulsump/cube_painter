@@ -115,15 +115,14 @@ class CubeGroupNotifier extends ChangeNotifier {
         'showCrops': false,
       });
     } else {
-      out('f');
       _settings = Settings.fromString(await loadString(filePath: settingsPath));
     }
 
-    // TODO do we want to do this every time, or just the first time?
-    // if(!_settings.copiedSamples){
-    await copySamples();
-    _settings.copiedSamples = true;
+    if (!_settings.copiedSamples) {
+      await copySamples();
 
+      _settings.copiedSamples = true;
+    }
     await _loadAllCubeGroups();
 
     _savedJson = json;
@@ -137,7 +136,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     // TODO iff finally:
     if (_cubeGroups.isNotEmpty) {
       _onSuccessfulLoad();
-      // TODO clear undo (make undoer a notifier and notifyListeners for button enabled.
+
       notifyListeners();
     }
   }
@@ -258,20 +257,6 @@ class CubeGroupNotifier extends ChangeNotifier {
     }
     return paths;
   }
-
-  // Future<bool> settingsFileExists() async {
-  // final Directory appFolder = await getApplicationDocumentsDirectory();
-  //
-  // await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
-  //   final String path = fileSystemEntity.path;
-  //
-  //   if (path.endsWith(Settings.fileName)) {
-  //     return path;
-  //   }
-  // }
-  // return '';
-  // return File(getSettingsPath()).exists();
-  // }
 
   Future<String> getSettingsPath() async {
     final String appFolderPath = await getAppFolderPath();
