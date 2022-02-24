@@ -226,8 +226,7 @@ class CubeGroupNotifier extends ChangeNotifier {
       if (!(ignoreCurrent && path == currentFilePath)) {
         final File file = File(path);
 
-        final map = jsonDecode(await file.readAsString());
-        _cubeGroups[path] = CubeGroup.fromJson(await map);
+        _cubeGroups[path] = CubeGroup.fromJsonString(await file.readAsString());
       }
     }
   }
