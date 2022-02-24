@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:cube_painter/app_icons.dart';
-import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class Alert extends StatelessWidget {
           content,
         ),
         actions: <Widget>[
-          HexagonButton(
+          HexagonElevatedButton(
             child: Icon(
               thumbsUp,
               size: appIconSize,
@@ -46,7 +46,7 @@ class Alert extends StatelessWidget {
             tip: 'Yes - Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
-            HexagonButton(
+            HexagonElevatedButton(
               child: Icon(
                 thumbsDown,
                 size: appIconSize,
@@ -55,7 +55,7 @@ class Alert extends StatelessWidget {
               // TODO pass no tip in
               tip: 'No - Do the operation, but say no to the question.',
             ),
-          HexagonButton(
+          HexagonElevatedButton(
             child: Icon(
               cancelOutline,
               size: appIconSize,

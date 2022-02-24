@@ -2,7 +2,7 @@ import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
-class HexagonButton extends StatelessWidget {
+class HexagonElevatedButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   final Widget child;
@@ -13,7 +13,7 @@ class HexagonButton extends StatelessWidget {
   final bool? radioOn;
   final String tip;
 
-  const HexagonButton({
+  const HexagonElevatedButton({
     Key? key,
     required this.child,
     required this.onPressed,

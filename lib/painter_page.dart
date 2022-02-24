@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:cube_painter/brush/brush.dart';
-import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/buttons/open_menu_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
@@ -82,7 +82,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
           Transform.translate(
             offset: Offset(width - 60, 55),
-            child: HexagonButton(
+            child: HexagonElevatedButton(
               height: 55,
               child: Icon(
                 Icons.undo_sharp,

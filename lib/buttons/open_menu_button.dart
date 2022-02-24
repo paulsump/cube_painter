@@ -1,4 +1,4 @@
-import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class OpenMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffold = Scaffold.of(context);
-    return HexagonButton(
+    return HexagonElevatedButton(
       height: 55,
       child: Icon(
         endDrawer ? Icons.brush_sharp : Icons.folder_sharp,

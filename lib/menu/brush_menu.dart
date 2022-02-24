@@ -2,7 +2,7 @@ import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/brush_menu_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_border.dart';
-import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/data/crop.dart';
@@ -110,7 +110,7 @@ class _BrushMenuState extends State<BrushMenu> {
               pad,
               const BrushMenuButton(crop: Crop.c),
               pad,
-              HexagonButton(
+              HexagonElevatedButton(
                 radioOn: GestureMode.panZoom == gestureMode,
                 child: Icon(
                   Icons.zoom_in_sharp,

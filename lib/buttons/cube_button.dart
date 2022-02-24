@@ -1,4 +1,4 @@
-import 'package:cube_painter/buttons/hexagon_button.dart';
+import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/crop_unit_cube.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
@@ -31,7 +31,7 @@ class CubeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final double iconSize = IconTheme.of(context).size!;
 
-    return HexagonButton(
+    return HexagonElevatedButton(
       height: height,
       radioOn: radioOn,
       child: Stack(
