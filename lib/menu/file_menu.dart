@@ -35,7 +35,7 @@ class _FileMenuState extends State<FileMenu> {
         tip: 'Save the current file',
         icon: Icons.save,
         iconSize: iconSize,
-        callback: cubeGroupNotifier.saveFile,
+        callback: _saveFile,
         enabled: cubeGroupNotifier.modified,
       ),
       TextItem(
@@ -43,7 +43,7 @@ class _FileMenuState extends State<FileMenu> {
         tip: 'Create a copy of this file and load it.',
         icon: copy,
         iconSize: appIconSize,
-        callback: cubeGroupNotifier.saveACopyFile,
+        callback: _saveACopyFile,
       ),
       TextItem(
         title: 'Delete',
@@ -66,7 +66,11 @@ class _FileMenuState extends State<FileMenu> {
           padding: EdgeInsets.zero,
           children: [
             SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-            for (TextItem item in items) FileMenuTextItem(item: item),
+            Row(
+              children: [
+                for (TextItem item in items) FileMenuButton(item: item),
+              ],
+            ),
             const Divider(),
             for (int i = 0; i < cubeGroupNotifier.cubeGroupEntries.length; ++i)
               Transform.translate(
@@ -121,6 +125,20 @@ class _FileMenuState extends State<FileMenu> {
       cubeGroupNotifier.loadFile(filePath: filePath);
       setState(() {});
     }
+  }
+
+  void _saveFile() async {
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+
+    await cubeGroupNotifier.saveFile();
+    setState(() {});
+  }
+
+  void _saveACopyFile() async {
+    final cubeGroupNotifier = getCubeGroupNotifier(context);
+
+    await cubeGroupNotifier.saveACopyFile();
+    setState(() {});
   }
 
   void _deleteCurrentFile() async {

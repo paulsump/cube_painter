@@ -48,3 +48,27 @@ class FileMenuTextItem extends StatelessWidget {
     );
   }
 }
+
+class FileMenuButton extends StatelessWidget {
+  const FileMenuButton({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
+
+  final TextItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: item.tip,
+      child: IconButton(
+        icon: Icon(
+          item.icon,
+          color: item.enabled ? enabledIconColor : disabledIconColor,
+          size: item.iconSize,
+        ),
+        onPressed: item.enabled ? item.callback : null,
+      ),
+    );
+  }
+}

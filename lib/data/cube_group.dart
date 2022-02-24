@@ -143,12 +143,12 @@ class CubeGroupNotifier extends ChangeNotifier {
     _updateAfterLoad();
   }
 
-  void saveFile() async {
+  Future<void> saveFile() async {
     await saveString(filePath: currentFilePath, string: json);
     _savedJson = json;
   }
 
-  void saveACopyFile() async {
+  Future<void> saveACopyFile() async {
     final jsonCopy = json;
 
     await setNewFilePath();
@@ -175,6 +175,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     pushCubeGroup(CubeGroup.empty());
     _savedJson = json;
+
     _updateAfterLoad();
   }
 
