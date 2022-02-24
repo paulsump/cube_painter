@@ -29,47 +29,41 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          Column(
+          const Center(child: Text('Brush Modes')),
+          const SizedBox(height: 15.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CropCubeButton(crop: Crop.dr),
+              pad,
+              CropCubeButton(crop: Crop.dl),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CropCubeButton(crop: Crop.dr),
-                  pad,
-                  CropCubeButton(crop: Crop.dl),
-                ],
+              const CropCubeButton(crop: Crop.r),
+              pad,
+              CubeButton(
+                radioOn: GestureMode.erase == gestureMode,
+                icon: DownloadedIcons.cancelOutline,
+                iconSize: downloadedIconSize,
+                onPressed: () {
+                  setGestureMode(GestureMode.erase, context);
+                },
+                tip:
+                    'Tap on a cube to delete it.  You can change the position while you have your finger down.',
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CropCubeButton(crop: Crop.r),
-                  // SizedBox(
-                  //     width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
-                  // pad,
-                  // BrushMenuButton(crop: Crop.c),
-                  pad,
-                  CubeButton(
-                    radioOn: GestureMode.erase == gestureMode,
-                    icon: DownloadedIcons.cancelOutline,
-                    iconSize: downloadedIconSize,
-                    onPressed: () {
-                      setGestureMode(GestureMode.erase, context);
-                    },
-                    tip:
-                        'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-                  ),
-                  pad,
-                  const CropCubeButton(crop: Crop.l),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CropCubeButton(crop: Crop.ur),
-                  pad,
-                  CropCubeButton(crop: Crop.ul),
-                ],
-              ),
+              pad,
+              const CropCubeButton(crop: Crop.l),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CropCubeButton(crop: Crop.ur),
+              pad,
+              CropCubeButton(crop: Crop.ul),
             ],
           ),
         ],
