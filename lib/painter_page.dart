@@ -55,6 +55,8 @@ class _PainterPageState extends State<PainterPage> {
     final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
 
     final bool canUndo = _cubes.undoer.canUndo;
+    final bool canRedo = _cubes.undoer.canRedo;
+
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -81,7 +83,7 @@ class _PainterPageState extends State<PainterPage> {
             child: const OpenMenuButton(endDrawer: true),
           ),
           Transform.translate(
-            offset: Offset(width - 60, 55),
+            offset: Offset(width - 60 - 55 * 2, 0),
             child: HexagonElevatedButton(
               height: 55,
               child: Icon(
@@ -91,6 +93,19 @@ class _PainterPageState extends State<PainterPage> {
               ),
               onPressed: canUndo ? _cubes.undoer.undo : null,
               tip: 'Undo the last add or delete operation.',
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(width - 60 - 55, 0),
+            child: HexagonElevatedButton(
+              height: 55,
+              tip: 'Redo the last add or delete operation that was undone.',
+              child: Icon(
+                Icons.redo_sharp,
+                color: canRedo ? enabledIconColor : disabledIconColor,
+                size: iconSize,
+              ),
+              onPressed: canRedo ? _cubes.undoer.redo : null,
             ),
           ),
         ]),

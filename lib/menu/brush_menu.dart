@@ -1,7 +1,6 @@
 import 'package:cube_painter/app_icons.dart';
 import 'package:cube_painter/buttons/crop_cube_button.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
-import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
@@ -29,9 +28,6 @@ class _BrushMenuState extends State<BrushMenu> {
   Widget build(BuildContext context) {
     final gestureMode = getGestureMode(context, listen: true);
 
-    final bool canUndo = widget.cubes.undoer.canUndo;
-    final bool canRedo = widget.cubes.undoer.canRedo;
-
     const double w = 14;
     const pad = SizedBox(width: w);
 
@@ -40,40 +36,6 @@ class _BrushMenuState extends State<BrushMenu> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          Transform.translate(
-            // offset:  Offset(constraints.maxWidth/2,0),
-            offset: Offset.zero,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                HexagonBorderButton(
-                  tip: 'Undo the last add or delete operation.',
-                  child: SizedBox(
-                    height: 60,
-                    child: Icon(
-                      Icons.undo_sharp,
-                      color: canUndo ? enabledIconColor : disabledIconColor,
-                      size: iconSize,
-                    ),
-                  ),
-                  onPressed: canUndo ? widget.cubes.undoer.undo : null,
-                ),
-                pad,
-                HexagonBorderButton(
-                  tip: 'Redo the last add or delete operation that was undone.',
-                  child: SizedBox(
-                    height: 60,
-                    child: Icon(
-                      Icons.redo_sharp,
-                      color: canRedo ? enabledIconColor : disabledIconColor,
-                      size: iconSize,
-                    ),
-                  ),
-                  onPressed: canRedo ? widget.cubes.undoer.redo : null,
-                ),
-              ],
-            ),
-          ),
           // const Divider(),
           // const SizedBox(height: 22),
           Row(
@@ -150,7 +112,7 @@ class _BrushMenuState extends State<BrushMenu> {
           const SizedBox(height: 3),
           Center(
               child: TextButton(
-                child: Text(showCrops ? '...Less' : 'More...',
+            child: Text(showCrops ? '...Less' : 'More...',
                 style: TextStyle(color: textColor)),
             onPressed: () {
               final cubeGroupNotifier = getCubeGroupNotifier(context);
