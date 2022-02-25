@@ -86,7 +86,7 @@ class BrushState extends State<Brush> {
     Slice slice = Slice.whole;
 
     if (getGestureMode(context) == GestureMode.slice) {
-      slice = Provider.of<SliceModeNotifier>(context, listen: false).slice;
+      slice = Provider.of<GestureModeNotifier>(context, listen: false).slice;
     }
 
     final Offset startUnit = screenToUnit(point, context);

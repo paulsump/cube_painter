@@ -17,10 +17,11 @@ class SliceCubeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentGestureMode = getGestureMode(context, listen: true);
+    final gestureModeNotifier =
+        Provider.of<GestureModeNotifier>(context, listen: true);
 
-    final Slice currentSlice =
-        Provider.of<SliceModeNotifier>(context, listen: true).slice;
+    final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
+    final Slice currentSlice = gestureModeNotifier.slice;
 
     return CubeButton(
       slice: slice,
