@@ -24,7 +24,6 @@ class HexagonElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
     const double elevation = 8.0;
 
     return Transform.translate(
@@ -32,23 +31,28 @@ class HexagonElevatedButton extends StatelessWidget {
       child: Tooltip(
         message: tip,
         decoration: BoxDecoration(color: backgroundColor.withOpacity(0.7)),
-        child: ElevatedButton(
-          onPressed: onPressed,
-          child: child,
-          style: ButtonStyle(
-            elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
-            shadowColor: on ? null : MaterialStateProperty.all(bl),
-            minimumSize: MaterialStateProperty.all(Size(height, height)),
-            shape: MaterialStateProperty.all(
-              HexagonBorder(side: borderSide),
-            ),
-            backgroundColor: MaterialStateProperty.all(radioOn == null
-                ? buttonColor
-                : radioOn!
-                    ? radioButtonOnColor
-                    : buttonColor),
-          ),
+        child: _buildElevatedButton(elevation),
+      ),
+    );
+  }
+
+  ElevatedButton _buildElevatedButton(double elevation) {
+    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: child,
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
+        shadowColor: on ? null : MaterialStateProperty.all(bl),
+        minimumSize: MaterialStateProperty.all(Size(height, height)),
+        shape: MaterialStateProperty.all(
+          HexagonBorder(side: borderSide),
         ),
+        backgroundColor: MaterialStateProperty.all(radioOn == null
+            ? buttonColor
+            : radioOn!
+                ? radioButtonOnColor
+                : buttonColor),
       ),
     );
   }
