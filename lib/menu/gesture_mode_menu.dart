@@ -1,6 +1,4 @@
 import 'package:cube_painter/buttons/crop_cube_button.dart';
-import 'package:cube_painter/buttons/cube_button.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -29,7 +27,7 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
-          const Center(child: Text('Advanced Brush Modes')),
+          const Center(child: Text('Slices')),
           const SizedBox(height: 15.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,21 +39,14 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const CropCubeButton(crop: Crop.r),
+            children: const [
+              CropCubeButton(crop: Crop.r),
               pad,
-              CubeButton(
-                radioOn: GestureMode.erase == gestureMode,
-                icon: DownloadedIcons.cancelOutline,
-                iconSize: downloadedIconSize,
-                onPressed: () {
-                  setGestureMode(GestureMode.erase, context);
-                },
-                tip:
-                    'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-              ),
+              SizedBox(width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
               pad,
-              const CropCubeButton(crop: Crop.l),
+              // BrushMenuButton(crop: Crop.c),
+              pad,
+              CropCubeButton(crop: Crop.l),
             ],
           ),
           Row(

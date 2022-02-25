@@ -273,9 +273,8 @@ class CubeGroupNotifier extends ChangeNotifier {
     return '$appFolderPath${Settings.fileName}';
   }
 
-  Future<void> saveSettings() async {
-    saveString(filePath: settingsPath, string: _settings.toString());
-  }
+  Future<void> saveSettings() async =>
+      saveString(filePath: settingsPath, string: _settings.toString());
 
   Future<void> copySamples() async {
     const assetsFolder = 'samples';

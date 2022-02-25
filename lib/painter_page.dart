@@ -82,11 +82,7 @@ class _PainterPageState extends State<PainterPage> {
               : Brush(adoptCubes: _cubes.adopt),
           const OpenMenuButton(endDrawer: false),
           Transform.translate(
-            offset: Offset(width - 66 - 4, 0),
-            child: const OpenMenuButton(endDrawer: true),
-          ),
-          Transform.translate(
-            offset: Offset(width - 66 * 5 - 4, 0),
+            offset: Offset(width - 66 * 6 - 4, 0),
             child: HexagonElevatedButton(
               height: 66,
               child: Icon(
@@ -99,7 +95,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 * 4 - 4, 0),
+            offset: Offset(width - 66 * 5 - 4, 0),
             child: HexagonElevatedButton(
               height: 66,
               tip: 'Redo the last add or delete operation that was undone.',
@@ -112,7 +108,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 * 3 - 4, 0),
+            offset: Offset(width - 66 * 4 - 4, 0),
             child: SizedBox(
               height: 66,
               child: CubeButton(
@@ -129,6 +125,19 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
+            offset: Offset(width - 66 * 3 - 4, 0),
+            child: CubeButton(
+              radioOn: GestureMode.erase == gestureMode,
+              icon: DownloadedIcons.cancelOutline,
+              iconSize: downloadedIconSize,
+              onPressed: () {
+                setGestureMode(GestureMode.erase, context);
+              },
+              tip:
+                  'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+            ),
+          ),
+          Transform.translate(
             offset: Offset(width - 66 * 2 - 4, 0),
             child: HexagonElevatedButton(
               height: 66,
@@ -141,6 +150,10 @@ class _PainterPageState extends State<PainterPage> {
               onPressed: () => setGestureMode(GestureMode.panZoom, context),
               tip: 'Pinch to zoom, drag to move around.',
             ),
+          ),
+          Transform.translate(
+            offset: Offset(width - 66 - 4, 0),
+            child: const OpenMenuButton(endDrawer: true),
           ),
         ]),
       ),
