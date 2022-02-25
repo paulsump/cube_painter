@@ -14,7 +14,7 @@ import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu/file_menu.dart';
-import 'package:cube_painter/menu/gesture_mode_menu.dart';
+import 'package:cube_painter/menu/slice_mode_menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
@@ -66,7 +66,7 @@ class _PainterPageState extends State<PainterPage> {
 
     return Scaffold(
       drawer: const FileMenu(),
-      endDrawer: const GestureModeMenu(),
+      endDrawer: const SliceModeMenu(),
       drawerEnableOpenDragGesture: false,
       body: SafeArea(
         child: Stack(children: [

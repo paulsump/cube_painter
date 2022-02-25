@@ -6,17 +6,16 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-class GestureModeMenu extends StatefulWidget {
-  const GestureModeMenu({Key? key}) : super(key: key);
+class SliceModeMenu extends StatefulWidget {
+  const SliceModeMenu({Key? key}) : super(key: key);
 
   @override
-  State<GestureModeMenu> createState() => _GestureModeMenuState();
+  State<SliceModeMenu> createState() => _SliceModeMenuState();
 }
 
-class _GestureModeMenuState extends State<GestureModeMenu> {
+class _SliceModeMenuState extends State<SliceModeMenu> {
   @override
   Widget build(BuildContext context) {
-
     const double w = 14;
     const pad = SizedBox(width: w);
 
