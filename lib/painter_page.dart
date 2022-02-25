@@ -66,6 +66,7 @@ class _PainterPageState extends State<PainterPage> {
     return Scaffold(
       drawer: const FileMenu(),
       endDrawer: const GestureModeMenu(),
+      drawerEnableOpenDragGesture: false,
       body: SafeArea(
         child: Stack(children: [
           UnitToScreen(
