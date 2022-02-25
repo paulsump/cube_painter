@@ -82,11 +82,11 @@ class _PainterPageState extends State<PainterPage> {
             child: SizedBox(
               height: 72,
               child: CubeButton(
-                radioOn: GestureMode.add == gestureMode,
+                radioOn: GestureMode.addWhole == gestureMode,
                 icon: DownloadedIcons.plusOutline,
                 iconSize: downloadedIconSize,
                 onPressed: () {
-                  setGestureMode(GestureMode.add, context);
+                  setGestureMode(GestureMode.addWhole, context);
                   setSliceMode(Slice.whole, context);
                 },
                 tip:

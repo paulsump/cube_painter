@@ -2,8 +2,7 @@ import 'package:cube_painter/data/slice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-//TODO MERGE slices into here
-enum GestureMode { panZoom, add, erase, slice }
+enum GestureMode { panZoom, addWhole, erase, slice }
 
 GestureMode getGestureMode(BuildContext context, {bool listen = false}) =>
     Provider.of<GestureModeNotifier>(context, listen: listen).gestureMode;
@@ -23,7 +22,7 @@ void setSliceMode(Slice slice, BuildContext context) {
 }
 
 class GestureModeNotifier extends ChangeNotifier {
-  var _gestureMode = GestureMode.add;
+  var _gestureMode = GestureMode.addWhole;
   var _slice = Slice.topRight;
 
   get gestureMode => _gestureMode;

@@ -58,7 +58,7 @@ class BrushState extends State<Brush> {
         }
       },
       onPanUpdate: (details) {
-        if (GestureMode.add == getGestureMode(context)) {
+        if (GestureMode.addWhole == getGestureMode(context)) {
           _updateExtrude(details, context);
         } else {
           _replaceCube(details.localPosition, context);
@@ -126,7 +126,7 @@ class BrushState extends State<Brush> {
         fields: Fields(
           info: CubeInfo(center: center, slice: slice),
           start: 0.0,
-          end: getGestureMode(context) == GestureMode.add ? 1.0 : 3.0,
+          end: getGestureMode(context) == GestureMode.addWhole ? 1.0 : 3.0,
           pingPong: true,
         )));
   }
