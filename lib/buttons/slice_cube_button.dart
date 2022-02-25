@@ -25,9 +25,10 @@ class SliceCubeButton extends StatelessWidget {
 
     return CubeButton(
       slice: slice,
-      radioOn: currentSlice == slice && currentGestureMode == GestureMode.slice,
+      radioOn:
+          currentSlice == slice && currentGestureMode == GestureMode.addSlice,
       onPressed: () {
-        setGestureMode(GestureMode.slice, context);
+        setGestureMode(GestureMode.addSlice, context);
         setSliceMode(slice, context);
         Navigator.pop(context);
       },

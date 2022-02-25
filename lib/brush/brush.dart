@@ -85,7 +85,7 @@ class BrushState extends State<Brush> {
     widget._animCubes.clear();
     Slice slice = Slice.whole;
 
-    if (getGestureMode(context) == GestureMode.slice) {
+    if (getGestureMode(context) == GestureMode.addSlice) {
       slice = Provider.of<GestureModeNotifier>(context, listen: false).slice;
     }
 
