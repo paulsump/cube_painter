@@ -12,7 +12,7 @@ void main() {
   const testPosition = Position(1, 2);
 
   group('json with slice', () {
-    const testSlice = Slice.dl;
+    const testSlice = Slice.topRight;
 
     const testCube = CubeInfo(center: testPosition, slice: testSlice);
     const testJson = '{"center":{"x":1,"y":2},"sliceIndex":5}';

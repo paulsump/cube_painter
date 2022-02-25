@@ -5,7 +5,7 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const noWarn = out;
-const testSlice = Slice.dl;
+const testSlice = Slice.topRight;
 
 void main() {
   group('json', () {

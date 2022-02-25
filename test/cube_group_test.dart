@@ -41,8 +41,8 @@ void main() {
   const testPosition = Position(1, 2);
   const testPosition2 = Position(3, 4);
 
-  const testSlice = Slice.dl;
-  const testSlice2 = Slice.ul;
+  const testSlice = Slice.topRight;
+  const testSlice2 = Slice.bottomRight;
 
   const testCube = CubeInfo(center: testPosition, slice: testSlice);
   const testCube2 = CubeInfo(center: testPosition2, slice: testSlice2);

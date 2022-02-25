@@ -155,7 +155,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
-    case Slice.r:
+    case Slice.left:
       return UnmodifiableListView([
         [
           Side.t,
@@ -166,7 +166,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
           _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
       ]);
-    case Slice.ur:
+    case Slice.bottomLeft:
       return UnmodifiableListView([
         [
           Side.bl,
@@ -177,7 +177,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
           _getUnitOffsetsFromHexagonCornerIndices([c, br, b])
         ],
       ]);
-    case Slice.ul:
+    case Slice.bottomRight:
       return UnmodifiableListView([
         [
           Side.bl,
@@ -191,7 +191,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
-    case Slice.l:
+    case Slice.right:
       return UnmodifiableListView([
         [
           Side.br,
@@ -202,7 +202,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
           _getUnitOffsetsFromHexagonCornerIndices([c, t, tr])
         ],
       ]);
-    case Slice.dl:
+    case Slice.topRight:
       return UnmodifiableListView([
         [
           Side.br,
@@ -216,7 +216,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
           _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
       ]);
-    case Slice.dr:
+    case Slice.topLeft:
       return UnmodifiableListView([
         [
           Side.bl,

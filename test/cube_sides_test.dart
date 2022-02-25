@@ -84,7 +84,7 @@ void main() {
     });
 
     test('r', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.r);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.left);
 
       expect(Side.t, equals(sidesAndUnitOffsets[0][0]));
       expect(
@@ -107,7 +107,7 @@ void main() {
     });
 
     test('ur', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.ur);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.bottomLeft);
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
@@ -131,7 +131,7 @@ void main() {
     });
 
     test('ul', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.ul);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.bottomRight);
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
@@ -156,7 +156,7 @@ void main() {
     });
 
     test('l', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.l);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.right);
 
       expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
@@ -181,7 +181,7 @@ void main() {
     });
 
     test('dl', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.dl);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.topRight);
 
       expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
@@ -206,7 +206,7 @@ void main() {
     });
 
     test('dr', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.dr);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.topLeft);
 
       // out(sidesAndUnitOffsets[0][1]);
       // out(sidesAndUnitOffsets[1][1]);
