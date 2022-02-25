@@ -17,8 +17,7 @@ void storeScreenSize(BuildContext context, BoxConstraints constraints) {
 // void clip(Canvas canvas, BuildContext context) =>
 //     canvas.clipRect(getScreen(context, listen: false).rect);
 
-//TODO remove this class and use
-// MediaQuery.of(context).size
+//TODO remove ScreenNotifier class and use MediaQuery.of(context).size
 class ScreenNotifier extends ChangeNotifier {
   late Size _size;
 
