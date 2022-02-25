@@ -84,9 +84,11 @@ class PanZoomer extends StatelessWidget {
 
         offset *= details.scale;
 
+        // Pan limits - Don’t allow pan past place where can’t zoom limit to.
+        offset = Offset(offset.dx.clamp(-100, 130), offset.dy.clamp(-250, 280));
+
         //TODO See if this makes a diff when the tiles widget listens
         if (offset != getPanOffset(context)) {
-//TODO PAN LIMITS
           setPanOffset(context, offset);
         }
       },
