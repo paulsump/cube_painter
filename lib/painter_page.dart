@@ -58,11 +58,10 @@ class _PainterPageState extends State<PainterPage> {
     final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
 
     final gestureMode = getGestureMode(context, listen: true);
+    final double width = MediaQuery.of(context).size.width;
 
     final bool canUndo = _cubes.undoer.canUndo;
     final bool canRedo = _cubes.undoer.canRedo;
-
-    final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       drawer: const FileMenu(),
@@ -85,32 +84,6 @@ class _PainterPageState extends State<PainterPage> {
               : Brush(adoptCubes: _cubes.adopt),
           const OpenFileMenuButton(),
           Transform.translate(
-            offset: Offset(width - 66 * 6 + 22, 0),
-            child: HexagonElevatedButton(
-              height: 66,
-              child: Icon(
-                Icons.undo_sharp,
-                size: iconSize,
-                color: canUndo ? enabledIconColor : disabledIconColor,
-              ),
-              onPressed: canUndo ? _cubes.undoer.undo : null,
-              tip: 'Undo the last add or delete operation.',
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(width - 66 * 5 + 14, 0),
-            child: HexagonElevatedButton(
-              height: 66,
-              tip: 'Redo the last add or delete operation that was undone.',
-              child: Icon(
-                Icons.redo_sharp,
-                color: canRedo ? enabledIconColor : disabledIconColor,
-                size: iconSize,
-              ),
-              onPressed: canRedo ? _cubes.undoer.redo : null,
-            ),
-          ),
-          Transform.translate(
             offset: Offset(width - 66 * 4 + 18, 0),
             child: SizedBox(
               height: 66,
@@ -128,7 +101,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 * 3 + 12, 0),
+            offset: Offset(width - 66 * 3 + 11.5, 0),
             child: CubeButton(
               radioOn: GestureMode.erase == gestureMode,
               icon: DownloadedIcons.cancelOutline,
@@ -141,9 +114,8 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 * 2 + 8, 0),
+            offset: Offset(width - 66 * 2 + 7, 1),
             child: HexagonElevatedButton(
-              height: 66,
               radioOn: GestureMode.panZoom == gestureMode,
               child: Icon(
                 Icons.zoom_in_sharp,
@@ -155,9 +127,35 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 - 0, 0),
+            offset: Offset(width - 66 - 1.5, 0),
             child: const OpenSliceMenuButton(),
           ),
+          if (canUndo || canRedo)
+            Transform.translate(
+              offset: Offset(width - 66 + 1, 66 * 1 + 3),
+              child: HexagonElevatedButton(
+                child: Icon(
+                  Icons.undo_sharp,
+                  size: iconSize,
+                  color: canUndo ? enabledIconColor : disabledIconColor,
+                ),
+                onPressed: canUndo ? _cubes.undoer.undo : null,
+                tip: 'Undo the last add or delete operation.',
+              ),
+            ),
+          if (canRedo)
+            Transform.translate(
+              offset: Offset(width - 66 + 1, 66 * 2 + 3),
+              child: HexagonElevatedButton(
+                tip: 'Redo the last add or delete operation that was undone.',
+                child: Icon(
+                  Icons.redo_sharp,
+                  color: canRedo ? enabledIconColor : disabledIconColor,
+                  size: iconSize,
+                ),
+                onPressed: canRedo ? _cubes.undoer.redo : null,
+              ),
+            ),
         ]),
       ),
     );

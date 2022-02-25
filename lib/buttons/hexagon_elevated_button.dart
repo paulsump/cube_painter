@@ -18,7 +18,7 @@ class HexagonElevatedButton extends StatelessWidget {
     required this.child,
     required this.onPressed,
     required this.tip,
-    this.height = 70,
+    this.height = 66,
     this.radioOn,
   }) : super(key: key);
 
@@ -45,7 +45,7 @@ class HexagonElevatedButton extends StatelessWidget {
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
         shadowColor: on ? null : MaterialStateProperty.all(bl),
-        minimumSize: MaterialStateProperty.all(Size(height, height)),
+        fixedSize: MaterialStateProperty.all(Size(height, height)),
         shape: MaterialStateProperty.all(
           HexagonBorder(side: borderSide),
         ),
