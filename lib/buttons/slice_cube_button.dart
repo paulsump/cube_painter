@@ -7,17 +7,12 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-// TODO mabybe split into two classes , one with onPressed
 class SliceCubeButton extends StatelessWidget {
   final Slice slice;
-  final VoidCallback? onPressed;
-  final String? tip;
 
   const SliceCubeButton({
     Key? key,
     required this.slice,
-    this.onPressed,
-    this.tip,
   }) : super(key: key);
 
   @override
@@ -31,13 +26,12 @@ class SliceCubeButton extends StatelessWidget {
       height: 69,
       slice: slice,
       radioOn: currentSlice == slice && currentGestureMode == GestureMode.slice,
-      onPressed: onPressed ??
-          () {
-            setGestureMode(GestureMode.slice, context);
-            setSliceMode(slice, context);
-            Navigator.pop(context);
-          },
-      tip: tip ?? 'For adding ${getSliceName(slice)} slices of cubes.',
+      onPressed: () {
+        setGestureMode(GestureMode.slice, context);
+        setSliceMode(slice, context);
+        Navigator.pop(context);
+      },
+      tip: 'For adding ${getSliceName(slice)} slices of cubes.',
     );
   }
 }
