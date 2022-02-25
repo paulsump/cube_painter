@@ -55,6 +55,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   Widget build(BuildContext context) {
     final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
+
     final gestureMode = getGestureMode(context, listen: true);
 
     final bool canUndo = _cubes.undoer.canUndo;
@@ -82,7 +83,7 @@ class _PainterPageState extends State<PainterPage> {
               : Brush(adoptCubes: _cubes.adopt),
           const OpenMenuButton(endDrawer: false),
           Transform.translate(
-            offset: Offset(width - 66 * 6 - 4, 0),
+            offset: Offset(width - 66 * 6 + 8, 0),
             child: HexagonElevatedButton(
               height: 66,
               child: Icon(
@@ -95,7 +96,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 * 5 - 4, 0),
+            offset: Offset(width - 66 * 5 - 0, 0),
             child: HexagonElevatedButton(
               height: 66,
               tip: 'Redo the last add or delete operation that was undone.',
@@ -152,7 +153,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 - 4, 0),
+            offset: Offset(width - 66 - 0, 0),
             child: const OpenMenuButton(endDrawer: true),
           ),
         ]),

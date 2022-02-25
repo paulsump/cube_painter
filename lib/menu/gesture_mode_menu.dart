@@ -1,7 +1,6 @@
 import 'package:cube_painter/buttons/crop_cube_button.dart';
 import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/downloaded_icons.dart';
-import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,6 @@ class GestureModeMenu extends StatefulWidget {
 class _GestureModeMenuState extends State<GestureModeMenu> {
   @override
   Widget build(BuildContext context) {
-    final gestureMode = getGestureMode(context, listen: true);
 
     const double w = 14;
     const pad = SizedBox(width: w);
@@ -41,11 +39,10 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               CropCubeButton(crop: Crop.r),
-              pad,
               SizedBox(width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
-              pad,
+              // pad,
               // BrushMenuButton(crop: Crop.c),
-              pad,
+              // pad,
               CropCubeButton(crop: Crop.l),
             ],
           ),

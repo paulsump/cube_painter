@@ -5,14 +5,14 @@ class MenuItem {
   final String tip;
   final IconData icon;
   final double iconSize;
-  final VoidCallback callback;
+  final VoidCallback onPressed;
   final bool enabled;
 
   const MenuItem({
     required this.tip,
     required this.icon,
     required this.iconSize,
-    required this.callback,
+    required this.onPressed,
     this.enabled = true,
   });
 }
@@ -36,7 +36,7 @@ class FileMenuButton extends StatelessWidget {
           color: item.enabled ? enabledIconColor : disabledIconColor,
           size: item.iconSize,
         ),
-        onPressed: item.enabled ? item.callback : null,
+        onPressed: item.enabled ? item.onPressed : null,
       ),
     );
   }

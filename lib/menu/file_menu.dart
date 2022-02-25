@@ -27,27 +27,27 @@ class _FileMenuState extends State<FileMenu> {
         tip: 'Create a new file',
         icon: DownloadedIcons.docNew,
         iconSize: downloadedIconSize,
-        callback: _newFile,
+        onPressed: _newFile,
       ),
       MenuItem(
         tip: 'Save the current file',
         icon: Icons.save,
         iconSize: iconSize,
-        callback: _saveFile,
+        onPressed: _saveFile,
         enabled: cubeGroupNotifier.modified,
       ),
       MenuItem(
         tip: 'Create a copy of this file and load it.',
         icon: DownloadedIcons.copy,
         iconSize: downloadedIconSize,
-        callback: _saveACopyFile,
+        onPressed: _saveACopyFile,
       ),
       MenuItem(
         tip:
             'Delete the current file. The next file is loaded or a new blank one is created.',
         icon: Icons.delete,
         iconSize: iconSize,
-        callback: _deleteCurrentFile,
+        onPressed: _deleteCurrentFile,
       ),
     ];
 
