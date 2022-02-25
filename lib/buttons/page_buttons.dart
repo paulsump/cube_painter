@@ -72,7 +72,7 @@ class PageButtons extends StatelessWidget {
                 const OpenSliceMenuButton(),
               ]),
             ]),
-        Column(children: [
+        Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
           if (canUndo || canRedo)
             HexagonElevatedButton(
               child: Icon(
