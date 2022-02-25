@@ -3,12 +3,9 @@ import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
 /// the opposite of UnitToScreen
-Offset screenToUnit(Offset point, BuildContext context) {
-  final screen = getScreen(context, listen: false);
-
-  return (point - screen.center - getPanOffset(context, listen: false)) /
-      getZoomScale(context);
-}
+Offset screenToUnit(Offset point, BuildContext context) =>
+    (point - getScreenCenter(context) - getPanOffset(context, listen: false)) /
+    getZoomScale(context);
 
 /// translate to screen, then zoom
 class UnitToScreen extends StatelessWidget {
