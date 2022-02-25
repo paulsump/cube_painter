@@ -14,19 +14,19 @@ void main() {
 
   const testCube = CubeInfo(center: testPosition, slice: testCrop);
 
+  //TOOO values.byName('
   group('json', () {
     const testJson = '{"center":{"x":1,"y":2},"sliceIndex":5}';
+
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
 
       final newCube = CubeInfo.fromJson(map);
-      // out(newCube);
       expect(testCube, equals(newCube));
     });
 
     test('save', () {
       String newJson = jsonEncode(testCube);
-      // out(newJson);
       expect(testJson, equals(newJson));
     });
   });

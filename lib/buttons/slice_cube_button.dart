@@ -35,8 +35,7 @@ class SliceCubeButton extends StatelessWidget {
             setSliceMode(slice, context);
             Navigator.pop(context);
           },
-      tip:
-          'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.',
+      tip: 'For adding ${slice.toString().split('.').last} slices of cubes.',
     );
   }
 }

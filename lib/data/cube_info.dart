@@ -22,6 +22,7 @@ class CubeInfo {
 
   CubeInfo.fromJson(Map<String, dynamic> json)
       : center = Position.fromJson(json['center']),
+  //TODO Use toString() and values.byName('
         slice = json.containsKey('sliceIndex')
             ? Slice.values[json['sliceIndex']]
             : Slice.c;
