@@ -1,11 +1,12 @@
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/slice.dart';
+import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
 class SliceUnitCube extends StatelessWidget {
   final Slice slice;
 
-  const SliceUnitCube({Key? key, this.slice = Slice.whole}) : super(key: key);
+  const SliceUnitCube({Key? key, required this.slice}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(
@@ -20,6 +21,7 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    out(cubeSides.length);
     for (final cubeSide in cubeSides) {
       canvas.drawPath(
           cubeSide.path, cubeSide.getGradientPaint(PaintingStyle.fill));
