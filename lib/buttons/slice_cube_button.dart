@@ -28,12 +28,7 @@ class SliceCubeButton extends StatelessWidget {
       radioOn:
           currentSlice == slice && currentGestureMode == GestureMode.addSlice,
       onPressed: () {
-        final gestureModeNotifier =
-            Provider.of<GestureModeNotifier>(context, listen: false);
-
-        gestureModeNotifier.setMode(GestureMode.addSlice);
         gestureModeNotifier.setSlice(slice);
-
         Navigator.pop(context);
       },
       tip: 'For adding ${getSliceName(slice)} slices of cubes.',

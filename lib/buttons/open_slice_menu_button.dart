@@ -9,12 +9,17 @@ class OpenSliceMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Slice currentSlice =
-        Provider.of<GestureModeNotifier>(context, listen: true).slice;
+    final gestureModeNotifier =
+        Provider.of<GestureModeNotifier>(context, listen: true);
+
+    final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
+    final Slice currentSlice = gestureModeNotifier.slice;
 
     return _SliceCubeButton(
       slice: currentSlice,
-      onPressed: Scaffold.of(context).openEndDrawer,
+      onPressed: () => currentGestureMode == GestureMode.addSlice
+          ? Scaffold.of(context).openEndDrawer()
+          : gestureModeNotifier.setMode(GestureMode.addSlice),
       tip: 'Open the slices menu',
     );
   }
