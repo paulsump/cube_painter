@@ -14,8 +14,16 @@ void storeScreenSize(BuildContext context, BoxConstraints constraints) {
   screen._setData(context, constraints);
 }
 
-// void clip(Canvas canvas, BuildContext context) =>
-//     canvas.clipRect(getScreen(context, listen: false).rect);
+Size getScreenSize(BuildContext context) => MediaQuery.of(context).size;
+
+double getScreenWidth(BuildContext context) => getScreenSize(context).width;
+
+double getScreenHeight(BuildContext context) => getScreenSize(context).height;
+
+Offset getScreenCenter(BuildContext context) {
+  final size = getScreenSize(context);
+  return Offset(size.width, size.height) / 2;
+}
 
 //TODO remove ScreenNotifier class and use MediaQuery.of(context).size
 class ScreenNotifier extends ChangeNotifier {

@@ -13,7 +13,6 @@ class Tiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screen = getScreen(context, listen: true);
     final double zoomScale = getZoomScale(context, listen: false);
 
     final Offset panOffset = getPanOffset(context, listen: true) / zoomScale;
@@ -39,7 +38,7 @@ class Tiles extends StatelessWidget {
       panY -= h;
     }
 
-    final Offset center = screen.center / zoomScale;
+    final Offset center = getScreenCenter(context) / zoomScale;
 
     double centerX = center.dx;
     centerX -= centerX % w;
@@ -55,8 +54,8 @@ class Tiles extends StatelessWidget {
       centerY -= h;
     }
 
-    final int nx = screen.width ~/ zoomScale;
-    final int ny = screen.height ~/ zoomScale;
+    final int nx = getScreenWidth(context) ~/ zoomScale;
+    final int ny = getScreenHeight(context) ~/ zoomScale;
 
     int padX = 6;
     int padY = 5;

@@ -15,6 +15,7 @@ import 'package:cube_painter/menu/file_menu.dart';
 import 'package:cube_painter/menu/slice_mode_menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
+import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class _PainterPageState extends State<PainterPage> {
     final cubeGroupNotifier = getCubeGroupNotifier(context, listen: true);
 
     final gestureMode = getGestureMode(context, listen: true);
-    final double width = MediaQuery.of(context).size.width;
+    final double width = getScreenWidth(context);
 
     final bool canUndo = _cubes.undoer.canUndo;
     final bool canRedo = _cubes.undoer.canRedo;
