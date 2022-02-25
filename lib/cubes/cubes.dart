@@ -6,18 +6,11 @@ import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/position_to_unit.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
 
-const noWarn = [
-  out,
-  getScreen,
-  lerpDouble,
-  positionToUnitOffset,
-];
+const noWarn = [out];
 
 /// cube widget store & functionality helper
 class Cubes {

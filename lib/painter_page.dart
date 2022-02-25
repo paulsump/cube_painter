@@ -17,8 +17,6 @@ import 'package:cube_painter/menu/file_menu.dart';
 import 'package:cube_painter/menu/slice_mode_menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
-import 'package:cube_painter/transform/position_to_unit.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,10 +25,7 @@ import 'package:provider/provider.dart';
 /// when temporarily commenting out.
 const noWarn = [
   out,
-  getScreen,
   PanZoomer,
-  lerpDouble,
-  positionToUnitOffset,
   Tiles,
   StaticCubes,
   Slice.whole,
