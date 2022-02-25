@@ -14,9 +14,8 @@ import 'package:provider/provider.dart';
 const noWarn = out;
 
 CubeGroupNotifier getCubeGroupNotifier(BuildContext context,
-    {bool listen = false}) {
-  return Provider.of<CubeGroupNotifier>(context, listen: listen);
-}
+        {bool listen = false}) =>
+    Provider.of<CubeGroupNotifier>(context, listen: listen);
 
 const cubesExtension = '.cubes.json';
 
