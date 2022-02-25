@@ -71,7 +71,6 @@ class CubeGroupNotifier extends ChangeNotifier {
     if (!_cubeGroups.containsKey(currentFilePath)) {
       out(currentFilePath);
 
-      // assert(false, "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
       return false;
     }
     return true;
@@ -87,6 +86,9 @@ class CubeGroupNotifier extends ChangeNotifier {
 
   CubeGroup get cubeGroup {
     if (!_hasCubeGroupForCurrentFilePath) {
+      assert(false,
+          "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
+
       // prevent irreversible crash for now, for debugging purposes.
       return CubeGroup.empty();
     }
