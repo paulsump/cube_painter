@@ -80,7 +80,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           GestureMode.panZoom == gestureMode
-              ? const PanZoomer()
+              ? PanZoomer()
               : Brush(adoptCubes: _cubes.adopt),
           const OpenFileMenuButton(),
           Transform.translate(

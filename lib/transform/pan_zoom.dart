@@ -46,27 +46,23 @@ class PanZoomNotifier extends ChangeNotifier {
   }
 }
 
-class PanZoomer extends StatefulWidget {
+class InitialValues {
+  late Offset _initialFocalPoint;
+  late Offset _initialOffset;
 
-  const PanZoomer({Key? key}) : super(key: key);
+  late double _initialScale;
 
-  @override
-  _PanZoomerState createState() => _PanZoomerState();
+  void init() {}
 }
 
-class _PanZoomerState extends State<PanZoomer> {
-  Offset _initialFocalPoint = Offset.zero;
-  Offset _initialOffset = Offset.zero;
+class PanZoomer extends StatelessWidget {
+  late Offset _initialFocalPoint;
+  late Offset _initialOffset;
 
-  double get _scale => getZoomScale(context);
+  // final InitialValues _initialValues;
+  PanZoomer({Key? key}) : super(key: key);
 
-  Offset get _offset => getPanOffset(context);
-
-  set _offset(Offset value) => setPanOffset(context, value);
-
-  set _scale(double value) => setZoomScale(context, value);
-
-  double _initialScale = 1.0;
+  late double _initialScale;
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +71,8 @@ class _PanZoomerState extends State<PanZoomer> {
       onScaleStart: (details) {
         _initialFocalPoint = details.focalPoint;
 
-        _initialScale = _scale;
-        _initialOffset = _offset;
+        _initialScale = getZoomScale(context);
+        _initialOffset = getPanOffset(context);
       },
       onScaleUpdate: (details) {
         final scale = _initialScale * details.scale;
@@ -84,16 +80,20 @@ class _PanZoomerState extends State<PanZoomer> {
         if (scale < 15 || 300 < scale) {
           return;
         }
-        if (scale != _scale) {
-          _scale = scale;
+
+        if (scale != getZoomScale(context)) {
+          setZoomScale(context, scale);
         }
+
         Offset offset =
             details.focalPoint - _initialFocalPoint + _initialOffset;
+
         offset *= details.scale;
 
         //TODO See if this makes a diff when the tiles widget listens
-        if (offset != _offset) {
-          _offset = offset;
+        if (offset != getPanOffset(context)) {
+//TODO PAN LIMITS
+          setPanOffset(context, offset);
         }
       },
       // Without this container, gestures stop working
