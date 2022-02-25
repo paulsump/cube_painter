@@ -5,7 +5,6 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/menu/file_menu_button.dart';
-import 'package:cube_painter/menu/safe_pad.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -53,36 +52,41 @@ class _FileMenuState extends State<FileMenu> {
     ];
 
     const double offsetX = 55;
+    const padY = SizedBox(height: 15.0);
 
     return LayoutBuilder(
       builder: (context, constraints) => Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const SafePad(),
-            const Center(child: Text('File')),
-            const SizedBox(height: 15.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                for (MenuItem item in items) FileMenuButton(item: item),
-              ],
-            ),
-            const SizedBox(height: 5.0),
-            const Divider(),
-            for (int i = 0; i < cubeGroupNotifier.cubeGroupEntries.length; ++i)
-              Transform.translate(
-                offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
-                child: HexagonBorderButton(
-                  tip: 'Load this file',
-                  onPressed: () => _loadFile(
-                      filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
-                  child: Thumbnail(
-                      cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
-                ),
+        child: SafeArea(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              padY,
+              const Center(child: Text('File')),
+              padY,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  for (MenuItem item in items) FileMenuButton(item: item),
+                ],
               ),
-            const Divider(),
-          ],
+              const SizedBox(height: 5.0),
+              const Divider(),
+              for (int i = 0;
+                  i < cubeGroupNotifier.cubeGroupEntries.length;
+                  ++i)
+                Transform.translate(
+                  offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
+                  child: HexagonBorderButton(
+                    tip: 'Load this file',
+                    onPressed: () => _loadFile(
+                        filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
+                    child: Thumbnail(
+                        cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
+                  ),
+                ),
+              const Divider(),
+            ],
+          ),
         ),
       ),
     );

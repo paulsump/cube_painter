@@ -1,7 +1,6 @@
 import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/downloaded_icons.dart';
-import 'package:cube_painter/menu/safe_pad.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -18,43 +17,47 @@ class _SliceModeMenuState extends State<SliceModeMenu> {
   @override
   Widget build(BuildContext context) {
     const double w = 14;
-    const pad = SizedBox(width: w);
+    const padX = SizedBox(width: w);
+    const padY = SizedBox(height: 15.0);
 
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          const SafePad(),
-          const Center(child: Text('Slices')),
-          const SizedBox(height: 15.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              SliceCubeButton(slice: Slice.topLeft),
-              pad,
-              SliceCubeButton(slice: Slice.topRight),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              SliceCubeButton(slice: Slice.left),
-              SizedBox(width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
-              // pad,
-              // BrushMenuButton(slice: Slice.c),
-              // pad,
-              SliceCubeButton(slice: Slice.right),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              SliceCubeButton(slice: Slice.bottomLeft),
-              pad,
-              SliceCubeButton(slice: Slice.bottomRight),
-            ],
-          ),
-        ],
+      child: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            padY,
+            const Center(child: Text('Slices')),
+            padY,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                SliceCubeButton(slice: Slice.topLeft),
+                padX,
+                SliceCubeButton(slice: Slice.topRight),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                SliceCubeButton(slice: Slice.left),
+                SizedBox(
+                    width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
+                // padX,
+                // BrushMenuButton(slice: Slice.c),
+                // padX,
+                SliceCubeButton(slice: Slice.right),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                SliceCubeButton(slice: Slice.bottomLeft),
+                padX,
+                SliceCubeButton(slice: Slice.bottomRight),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
