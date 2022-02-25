@@ -105,6 +105,7 @@ class CubeGroupNotifier extends ChangeNotifier {
 
     settingsPath = await getSettingsPath();
 
+    // if(true){
     if (!await File(settingsPath).exists()) {
       _settings = Settings.fromJson({
         'currentFilePath': '',

@@ -1,5 +1,5 @@
 import 'package:cube_painter/cubes/cube_sides.dart';
-import 'package:cube_painter/data/crop.dart';
+import 'package:cube_painter/data/slice.dart';
 import 'package:flutter/material.dart';
 
 class CropUnitCube extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/data/crop.dart';
 import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';

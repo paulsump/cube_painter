@@ -1,7 +1,7 @@
-import 'package:cube_painter/buttons/crop_cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
+import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/data/crop.dart';
+import 'package:cube_painter/data/slice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
