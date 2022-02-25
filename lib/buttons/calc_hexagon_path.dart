@@ -1,12 +1,12 @@
-import 'dart:ui';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:cube_painter/out.dart';
 import 'package:vector_math/vector_math.dart';
 
 const noWarn = out;
 
-//TODO remove this file
+//TODO remove this file and use getHexagonCornerOffsets() instead
 Path calcHexagonPath(Offset center, double radius) {
   final points = <Offset>[];
 
