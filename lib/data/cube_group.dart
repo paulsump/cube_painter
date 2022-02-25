@@ -199,6 +199,7 @@ class CubeGroupNotifier extends ChangeNotifier {
     _savedJson = json;
 
     _updateAfterLoad();
+    saveFile();
   }
 
   // insert at the top of the list
