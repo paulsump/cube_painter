@@ -84,9 +84,9 @@ class _PainterPageState extends State<PainterPage> {
               : Brush(adoptCubes: _cubes.adopt),
           const OpenFileMenuButton(),
           Transform.translate(
-            offset: Offset(width - 66 * 4 + 18, 0),
+            offset: Offset(width - 66 * 4 + 15.5, 0),
             child: SizedBox(
-              height: 66,
+              height: 72,
               child: CubeButton(
                 radioOn: GestureMode.add == gestureMode,
                 icon: DownloadedIcons.plusOutline,
@@ -101,7 +101,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 * 3 + 11.5, 0),
+            offset: Offset(width - 66 * 3 + 10.5, 0),
             child: CubeButton(
               radioOn: GestureMode.erase == gestureMode,
               icon: DownloadedIcons.cancelOutline,
@@ -114,8 +114,9 @@ class _PainterPageState extends State<PainterPage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(width - 66 * 2 + 7, 1),
+            offset: Offset(width - 66 * 2 + 5.5, 1),
             child: HexagonElevatedButton(
+              height: 68,
               radioOn: GestureMode.panZoom == gestureMode,
               child: Icon(
                 Icons.zoom_in_sharp,

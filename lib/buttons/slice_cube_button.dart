@@ -23,7 +23,6 @@ class SliceCubeButton extends StatelessWidget {
         Provider.of<SliceModeNotifier>(context, listen: true).slice;
 
     return CubeButton(
-      height: 69,
       slice: slice,
       radioOn: currentSlice == slice && currentGestureMode == GestureMode.slice,
       onPressed: () {
