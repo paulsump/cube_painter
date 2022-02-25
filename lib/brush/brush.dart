@@ -83,7 +83,7 @@ class BrushState extends State<Brush> {
 
   void _replaceCube(Offset point, BuildContext context) {
     widget._animCubes.clear();
-    Slice slice = Slice.c;
+    Slice slice = Slice.whole;
 
     if (getGestureMode(context) == GestureMode.slice) {
       slice = Provider.of<SliceModeNotifier>(context, listen: false).slice;
@@ -112,7 +112,7 @@ class BrushState extends State<Brush> {
         if (cube != null) {
           widget._animCubes.add(cube);
         } else {
-          _addCube(position, Slice.c);
+          _addCube(position, Slice.whole);
         }
       }
       setState(() {});

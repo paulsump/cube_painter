@@ -136,7 +136,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
   const int c = 0, tr = 1, t = 2, tl = 3, bl = 4, b = 5, br = 6;
 
   switch (slice) {
-    case Slice.c:
+    case Slice.whole:
       return UnmodifiableListView([
         [
           Side.bl,

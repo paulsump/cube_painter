@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class SliceUnitCube extends StatelessWidget {
   final Slice slice;
 
-  const SliceUnitCube({Key? key, this.slice = Slice.c}) : super(key: key);
+  const SliceUnitCube({Key? key, this.slice = Slice.whole}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(

@@ -70,7 +70,7 @@ void main() {
 
   group('Slice', () {
     test('c', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.c);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.whole);
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
       expect(equalsOffsetList(sidesAndUnitOffsets[0][1], bottomLeftSide), true);

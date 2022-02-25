@@ -24,7 +24,7 @@ class CubeButton extends StatelessWidget {
     this.radioOn,
     this.icon,
     this.iconSize,
-    this.slice = Slice.c,
+    this.slice = Slice.whole,
     this.height = 70,
   }) : super(key: key);
 
@@ -42,7 +42,7 @@ class CubeButton extends StatelessWidget {
             offset: offset,
             child: Transform.scale(
               scale: 21,
-              child: slice == Slice.c
+              child: slice == Slice.whole
                   ? const FullUnitCube()
                   : SliceUnitCube(slice: slice),
             ),

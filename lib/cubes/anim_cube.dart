@@ -53,7 +53,7 @@ class AnimCube extends StatefulWidget {
   AnimCube({
     Key? key,
     required this.fields,
-  })  : cube = fields.info.slice == Slice.c
+  })  : cube = fields.info.slice == Slice.whole
             ? const FullUnitCube()
             : SliceUnitCube(slice: fields.info.slice),
         offset = positionToUnitOffset(fields.info.center),

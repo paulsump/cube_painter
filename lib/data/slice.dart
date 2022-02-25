@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 /// TODO rename to topLeft, bottomRight
 enum Slice {
   // 0 center
-  c,
+  whole,
   // 1 right
   r,
   // 2 up right
