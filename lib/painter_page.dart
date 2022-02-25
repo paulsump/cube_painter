@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
-import 'package:cube_painter/buttons/open_menu_button.dart';
+import 'package:cube_painter/buttons/open_file_menu_button.dart';
+import 'package:cube_painter/buttons/open_slice_menu_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
@@ -82,7 +83,7 @@ class _PainterPageState extends State<PainterPage> {
           GestureMode.panZoom == gestureMode
               ? const PanZoomer()
               : Brush(adoptCubes: _cubes.adopt),
-          const OpenMenuButton(endDrawer: false),
+          const OpenFileMenuButton(),
           Transform.translate(
             offset: Offset(width - 66 * 6 + 22, 0),
             child: HexagonElevatedButton(
@@ -155,7 +156,7 @@ class _PainterPageState extends State<PainterPage> {
           ),
           Transform.translate(
             offset: Offset(width - 66 - 0, 0),
-            child: const OpenMenuButton(endDrawer: true),
+            child: const OpenSliceMenuButton(),
           ),
         ]),
       ),
