@@ -15,8 +15,7 @@ class OpenFileMenuButton extends StatelessWidget {
         size: iconSize,
       ),
       onPressed: Scaffold.of(context).openDrawer,
-      tip:
-          'Open the side menu.  You can also get this menu by swiping from the left.',
+      tip: 'Open the file menu.',
     );
   }
 }
