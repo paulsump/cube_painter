@@ -1,5 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/downloaded_icons.dart';
 import 'package:flutter/material.dart';
 
 class OpenFileMenuButton extends StatelessWidget {
@@ -12,7 +13,7 @@ class OpenFileMenuButton extends StatelessWidget {
       child: Icon(
         Icons.folder_sharp,
         color: enabledIconColor,
-        size: iconSize,
+        size: normalIconSize,
       ),
       onPressed: Scaffold.of(context).openDrawer,
       tip: 'Open the file menu.',

@@ -12,8 +12,6 @@ Color getColor(Side side) {
   }
 }
 
-const double iconSize = 33;
-const double downloadedIconSize = 27;
 const Color disabledIconColor = Colors.grey;
 
 final Color enabledIconColor = getColor(Side.br);

@@ -1,7 +1,6 @@
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/menu/file_menu_button.dart';
@@ -32,7 +31,7 @@ class _FileMenuState extends State<FileMenu> {
       MenuItem(
         tip: 'Save the current file',
         icon: Icons.save,
-        iconSize: iconSize,
+        iconSize: normalIconSize,
         onPressed: _saveFile,
         enabled: cubeGroupNotifier.modified,
       ),
@@ -46,7 +45,7 @@ class _FileMenuState extends State<FileMenu> {
         tip:
             'Delete the current file. The next file is loaded or a new blank one is created.',
         icon: Icons.delete,
-        iconSize: iconSize,
+        iconSize: normalIconSize,
         onPressed: _deleteCurrentFile,
       ),
     ];

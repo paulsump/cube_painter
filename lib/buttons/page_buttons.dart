@@ -63,7 +63,7 @@ class PageButtons extends StatelessWidget {
                   radioOn: GestureMode.panZoom == gestureMode,
                   child: Icon(
                     Icons.zoom_in_sharp,
-                    size: iconSize * 1.2,
+                    size: normalIconSize * 1.2,
                     color: enabledIconColor,
                   ),
                   onPressed: () => setGestureMode(GestureMode.panZoom, context),
@@ -77,7 +77,7 @@ class PageButtons extends StatelessWidget {
             HexagonElevatedButton(
               child: Icon(
                 Icons.undo_sharp,
-                size: iconSize,
+                size: normalIconSize,
                 color: canUndo ? enabledIconColor : disabledIconColor,
               ),
               onPressed: canUndo ? undoer.undo : null,
@@ -89,7 +89,7 @@ class PageButtons extends StatelessWidget {
               child: Icon(
                 Icons.redo_sharp,
                 color: canRedo ? enabledIconColor : disabledIconColor,
-                size: iconSize,
+                size: normalIconSize,
               ),
               onPressed: canRedo ? undoer.redo : null,
             ),

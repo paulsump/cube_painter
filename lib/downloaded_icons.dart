@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const double normalIconSize = 33;
+const double downloadedIconSize = 27;
+
 class DownloadedIcons {
   static const _kFontFam = 'DownloadedIcons';
   static const String? _kFontPkg = null;
