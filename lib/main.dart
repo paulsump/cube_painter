@@ -4,7 +4,6 @@ import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
-import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,6 @@ class CubePainterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ScreenNotifier()),
         ChangeNotifierProvider(create: (_) => PanZoomNotifier()),
         ChangeNotifierProvider(create: (_) => CubeGroupNotifier()),
         ChangeNotifierProvider(create: (_) => GestureModeNotifier()),
@@ -60,7 +58,6 @@ class CubePainterApp extends StatelessWidget {
             if (constraints.maxHeight == 0) {
               return Container();
             } else {
-              storeScreenSize(context, constraints);
               return WillPopScope(
                   onWillPop: () async => false, child: const PainterPage());
             }
