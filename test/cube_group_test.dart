@@ -44,8 +44,8 @@ void main() {
   const testCrop = Slice.dl;
   const testCrop2 = Slice.ul;
 
-  const testCube = CubeInfo(center: testPosition, crop: testCrop);
-  const testCube2 = CubeInfo(center: testPosition2, crop: testCrop2);
+  const testCube = CubeInfo(center: testPosition, slice: testCrop);
+  const testCube2 = CubeInfo(center: testPosition2, slice: testCrop2);
 
   const testCubes = <CubeInfo>[testCube, testCube2];
 

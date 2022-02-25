@@ -25,18 +25,19 @@ enum Slice {
   dr,
 }
 
-void setCrop(Slice crop, BuildContext context) {
-  final cropNotifier = Provider.of<SliceModeNotifier>(context, listen: false);
-  cropNotifier.setCrop(crop);
+void setSliceMode(Slice slice, BuildContext context) {
+  final sliceModeNotifier =
+      Provider.of<SliceModeNotifier>(context, listen: false);
+  sliceModeNotifier.setSlice(slice);
 }
 
 class SliceModeNotifier extends ChangeNotifier {
-  var _crop = Slice.dl;
+  var _slice = Slice.dl;
 
-  get crop => _crop;
+  get slice => _slice;
 
-  void setCrop(Slice crop) {
-    _crop = crop;
+  void setSlice(Slice slice) {
+    _slice = slice;
     notifyListeners();
   }
 }

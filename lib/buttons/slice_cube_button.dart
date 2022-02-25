@@ -8,13 +8,13 @@ import 'package:provider/provider.dart';
 const noWarn = out;
 
 // TODO mabybe split into two classes , one with onPressed
-class CropCubeButton extends StatelessWidget {
-  final Slice crop;
+class SliceCubeButton extends StatelessWidget {
+  final Slice slice;
   final VoidCallback? onPressed;
 
-  const CropCubeButton({
+  const SliceCubeButton({
     Key? key,
-    required this.crop,
+    required this.slice,
     this.onPressed,
   }) : super(key: key);
 
@@ -22,17 +22,17 @@ class CropCubeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentGestureMode = getGestureMode(context, listen: true);
 
-    final Slice currentCrop =
-        Provider.of<SliceModeNotifier>(context, listen: true).crop;
+    final Slice currentSlice =
+        Provider.of<SliceModeNotifier>(context, listen: true).slice;
 
     return CubeButton(
       height: 69,
-      crop: crop,
-      radioOn: currentCrop == crop && currentGestureMode == GestureMode.slice,
+      slice: slice,
+      radioOn: currentSlice == slice && currentGestureMode == GestureMode.slice,
       onPressed: onPressed ??
           () {
             setGestureMode(GestureMode.slice, context);
-            setCrop(crop, context);
+            setSliceMode(slice, context);
             Navigator.pop(context);
           },
       tip:

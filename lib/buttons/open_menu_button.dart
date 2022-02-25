@@ -15,12 +15,12 @@ class OpenMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     //TODO REMOVE endDrawer
     final scaffold = Scaffold.of(context);
-    final Slice currentCrop =
-        Provider.of<SliceModeNotifier>(context, listen: true).crop;
+    final Slice currentSlice =
+        Provider.of<SliceModeNotifier>(context, listen: true).slice;
 
     return endDrawer
-        ? CropCubeButton(
-            crop: currentCrop,
+        ? SliceCubeButton(
+            slice: currentSlice,
             onPressed: Scaffold.of(context).openEndDrawer,
           )
         : HexagonElevatedButton(

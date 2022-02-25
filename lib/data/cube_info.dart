@@ -5,27 +5,28 @@ import 'package:flutter/material.dart';
 class CubeInfo {
   final Position center;
 
-  final Slice crop;
+  final Slice slice;
 
-  const CubeInfo({required this.center, required this.crop});
-
-  @override
-  bool operator ==(Object other) =>
-      other is CubeInfo ? center == other.center && crop == other.crop : false;
+  const CubeInfo({required this.center, required this.slice});
 
   @override
-  int get hashCode => hashValues(center, crop);
+  bool operator ==(Object other) => other is CubeInfo
+      ? center == other.center && slice == other.slice
+      : false;
 
   @override
-  String toString() => '$center,$crop';
+  int get hashCode => hashValues(center, slice);
+
+  @override
+  String toString() => '$center,$slice';
 
   CubeInfo.fromJson(Map<String, dynamic> json)
       : center = Position.fromJson(json['center']),
-        crop = json.containsKey('sliceIndex')
+        slice = json.containsKey('sliceIndex')
             ? Slice.values[json['sliceIndex']]
             : Slice.c;
 
-  Map<String, dynamic> toJson() => Slice.c == crop
+  Map<String, dynamic> toJson() => Slice.c == slice
       ? {'center': center}
-      : {'center': center, 'sliceIndex': crop.index};
+      : {'center': center, 'sliceIndex': slice.index};
 }

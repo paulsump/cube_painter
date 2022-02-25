@@ -86,7 +86,7 @@ class BrushState extends State<Brush> {
     Slice crop = Slice.c;
 
     if (getGestureMode(context) == GestureMode.slice) {
-      crop = Provider.of<SliceModeNotifier>(context, listen: false).crop;
+      crop = Provider.of<SliceModeNotifier>(context, listen: false).slice;
     }
 
     final Offset startUnit = screenToUnit(point, context);
@@ -124,7 +124,7 @@ class BrushState extends State<Brush> {
     widget._animCubes.add(AnimCube(
         key: UniqueKey(),
         fields: Fields(
-          info: CubeInfo(center: center, crop: crop),
+          info: CubeInfo(center: center, slice: crop),
           start: 0.0,
           end: getGestureMode(context) == GestureMode.add ? 1.0 : 3.0,
           pingPong: true,

@@ -30,28 +30,28 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              CropCubeButton(crop: Slice.dr),
+              SliceCubeButton(slice: Slice.dr),
               pad,
-              CropCubeButton(crop: Slice.dl),
+              SliceCubeButton(slice: Slice.dl),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              CropCubeButton(crop: Slice.r),
+              SliceCubeButton(slice: Slice.r),
               SizedBox(width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
               // pad,
               // BrushMenuButton(crop: Crop.c),
               // pad,
-              CropCubeButton(crop: Slice.l),
+              SliceCubeButton(slice: Slice.l),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              CropCubeButton(crop: Slice.ur),
+              SliceCubeButton(slice: Slice.ur),
               pad,
-              CropCubeButton(crop: Slice.ul),
+              SliceCubeButton(slice: Slice.ul),
             ],
           ),
         ],

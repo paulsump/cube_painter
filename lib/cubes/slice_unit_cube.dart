@@ -2,10 +2,10 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:flutter/material.dart';
 
-class CropUnitCube extends StatelessWidget {
+class SliceUnitCube extends StatelessWidget {
   final Slice crop;
 
-  const CropUnitCube({Key? key, this.crop = Slice.c}) : super(key: key);
+  const SliceUnitCube({Key? key, this.crop = Slice.c}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(
