@@ -15,7 +15,7 @@ void main() {
   const testCube = CubeInfo(center: testPosition, crop: testCrop);
 
   group('json', () {
-    const testJson = '{"center":{"x":1,"y":2},"cropIndex":5}';
+    const testJson = '{"center":{"x":1,"y":2},"sliceIndex":5}';
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
 

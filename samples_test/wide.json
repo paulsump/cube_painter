@@ -1157,28 +1157,28 @@
         "x": 11,
         "y": 4
       },
-      "cropIndex": 6
+      "sliceIndex": 6
     },
     {
       "center": {
         "x": 9,
         "y": -1
       },
-      "cropIndex": 4
+      "sliceIndex": 4
     },
     {
       "center": {
         "x": 9,
         "y": -2
       },
-      "cropIndex": 3
+      "sliceIndex": 3
     },
     {
       "center": {
         "x": 10,
         "y": -2
       },
-      "cropIndex": 3
+      "sliceIndex": 3
     },
     {
       "center": {
@@ -1299,7 +1299,7 @@
         "x": 24,
         "y": 20
       },
-      "cropIndex": 3
+      "sliceIndex": 3
     }
   ]
 }

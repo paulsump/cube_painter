@@ -287,14 +287,14 @@
         "x": 0,
         "y": 7
       },
-      "cropIndex": 2
+      "sliceIndex": 2
     },
     {
       "center": {
         "x": 0,
         "y": 8
       },
-      "cropIndex": 2
+      "sliceIndex": 2
     },
     {
       "center": {
@@ -511,7 +511,7 @@
         "x": -5,
         "y": -2
       },
-      "cropIndex": 2
+      "sliceIndex": 2
     },
     {
       "center": {
@@ -650,28 +650,28 @@
         "x": 3,
         "y": 4
       },
-      "cropIndex": 5
+      "sliceIndex": 5
     },
     {
       "center": {
         "x": 4,
         "y": 4
       },
-      "cropIndex": 1
+      "sliceIndex": 1
     },
     {
       "center": {
         "x": 0,
         "y": 2
       },
-      "cropIndex": 2
+      "sliceIndex": 2
     },
     {
       "center": {
         "x": 0,
         "y": 2
       },
-      "cropIndex": 3
+      "sliceIndex": 3
     },
     {
       "center": {
@@ -804,7 +804,7 @@
         "x": -2,
         "y": -3
       },
-      "cropIndex": 1
+      "sliceIndex": 1
     },
     {
       "center": {
@@ -949,7 +949,7 @@
         "x": -7,
         "y": -7
       },
-      "cropIndex": 2
+      "sliceIndex": 2
     },
     {
       "center": {
