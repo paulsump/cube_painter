@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../unit_ping_pong.dart';
 
-const noWarn = [out, Crop, UnitToScreen];
+const noWarn = [out, Slice, UnitToScreen];
 
 //TODO COPy from StaticCubes
 // class AnimCubes extends StatelessWidget { }
@@ -53,7 +53,7 @@ class AnimCube extends StatefulWidget {
   AnimCube({
     Key? key,
     required this.fields,
-  })  : cube = fields.info.crop == Crop.c
+  })  : cube = fields.info.crop == Slice.c
             ? const FullUnitCube()
             : CropUnitCube(crop: fields.info.crop),
         offset = positionToUnitOffset(fields.info.center),

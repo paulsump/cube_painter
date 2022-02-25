@@ -14,7 +14,7 @@ class CubeButton extends StatelessWidget {
   final double? iconSize;
   final String tip;
 
-  final Crop crop;
+  final Slice crop;
   final double height;
 
   const CubeButton({
@@ -24,7 +24,7 @@ class CubeButton extends StatelessWidget {
     this.radioOn,
     this.icon,
     this.iconSize,
-    this.crop = Crop.c,
+    this.crop = Slice.c,
     this.height = 70,
   }) : super(key: key);
 
@@ -42,7 +42,7 @@ class CubeButton extends StatelessWidget {
             offset: offset,
             child: Transform.scale(
               scale: 21,
-              child: crop == Crop.c
+              child: crop == Slice.c
                   ? const FullUnitCube()
                   : CropUnitCube(crop: crop),
             ),

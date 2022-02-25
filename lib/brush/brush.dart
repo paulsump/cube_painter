@@ -83,10 +83,10 @@ class BrushState extends State<Brush> {
 
   void _replaceCube(Offset point, BuildContext context) {
     widget._animCubes.clear();
-    Crop crop = Crop.c;
+    Slice crop = Slice.c;
 
-    if (getGestureMode(context) == GestureMode.crop) {
-      crop = Provider.of<CropNotifier>(context, listen: false).crop;
+    if (getGestureMode(context) == GestureMode.slice) {
+      crop = Provider.of<SliceModeNotifier>(context, listen: false).crop;
     }
 
     final Offset startUnit = screenToUnit(point, context);
@@ -112,7 +112,7 @@ class BrushState extends State<Brush> {
         if (cube != null) {
           widget._animCubes.add(cube);
         } else {
-          _addCube(position, Crop.c);
+          _addCube(position, Slice.c);
         }
       }
       setState(() {});
@@ -120,7 +120,7 @@ class BrushState extends State<Brush> {
     }
   }
 
-  void _addCube(Position center, Crop crop) {
+  void _addCube(Position center, Slice crop) {
     widget._animCubes.add(AnimCube(
         key: UniqueKey(),
         fields: Fields(

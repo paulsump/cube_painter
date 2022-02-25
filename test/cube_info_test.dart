@@ -10,7 +10,7 @@ const noWarn = out;
 
 void main() {
   const testPosition = Position(1, 2);
-  const testCrop = Crop.dl;
+  const testCrop = Slice.dl;
 
   const testCube = CubeInfo(center: testPosition, crop: testCrop);
 

@@ -15,8 +15,8 @@ class OpenMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     //TODO REMOVE endDrawer
     final scaffold = Scaffold.of(context);
-    final Crop currentCrop =
-        Provider.of<CropNotifier>(context, listen: true).crop;
+    final Slice currentCrop =
+        Provider.of<SliceModeNotifier>(context, listen: true).crop;
 
     return endDrawer
         ? CropCubeButton(

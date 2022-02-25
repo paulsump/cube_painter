@@ -5,14 +5,14 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const noWarn = out;
-const testCrop = Crop.dl;
+const testCrop = Slice.dl;
 
 void main() {
   group('json', () {
     test('load', () {
       int index = jsonDecode('5');
       out(index);
-      final newCrop = Crop.values[index];
+      final newCrop = Slice.values[index];
       out(newCrop);
       expect(testCrop, equals(newCrop));
     });

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-enum GestureMode { panZoom, add, erase, crop }
+enum GestureMode { panZoom, add, erase, slice }
 
 GestureMode getGestureMode(BuildContext context, {bool listen = false}) =>
     Provider.of<GestureModeNotifier>(context, listen: listen).mode;

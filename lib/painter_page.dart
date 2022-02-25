@@ -32,7 +32,7 @@ const noWarn = [
   positionToUnitOffset,
   Tiles,
   StaticCubes,
-  Crop.c,
+  Slice.c,
   Provider,
 ];
 
@@ -118,7 +118,7 @@ class _PainterPageState extends State<PainterPage> {
                 iconSize: downloadedIconSize,
                 onPressed: () {
                   setGestureMode(GestureMode.add, context);
-                  setCrop(Crop.c, context);
+                  setCrop(Slice.c, context);
                 },
                 tip:
                     'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',

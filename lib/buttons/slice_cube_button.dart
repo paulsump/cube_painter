@@ -9,7 +9,7 @@ const noWarn = out;
 
 // TODO mabybe split into two classes , one with onPressed
 class CropCubeButton extends StatelessWidget {
-  final Crop crop;
+  final Slice crop;
   final VoidCallback? onPressed;
 
   const CropCubeButton({
@@ -22,16 +22,16 @@ class CropCubeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentGestureMode = getGestureMode(context, listen: true);
 
-    final Crop currentCrop =
-        Provider.of<CropNotifier>(context, listen: true).crop;
+    final Slice currentCrop =
+        Provider.of<SliceModeNotifier>(context, listen: true).crop;
 
     return CubeButton(
       height: 69,
       crop: crop,
-      radioOn: currentCrop == crop && currentGestureMode == GestureMode.crop,
+      radioOn: currentCrop == crop && currentGestureMode == GestureMode.slice,
       onPressed: onPressed ??
           () {
-            setGestureMode(GestureMode.crop, context);
+            setGestureMode(GestureMode.slice, context);
             setCrop(crop, context);
             Navigator.pop(context);
           },

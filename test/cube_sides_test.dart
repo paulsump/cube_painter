@@ -70,15 +70,13 @@ void main() {
 
   group('Crop', () {
     test('c', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.c);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.c);
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
-      expect(
-          equalsOffsetList(sidesAndUnitOffsets[0][1], bottomLeftSide), true);
+      expect(equalsOffsetList(sidesAndUnitOffsets[0][1], bottomLeftSide), true);
 
       expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
-      expect(
-          equalsOffsetList(sidesAndUnitOffsets[1][1], topSide), true);
+      expect(equalsOffsetList(sidesAndUnitOffsets[1][1], topSide), true);
 
       expect(Side.br, equals(sidesAndUnitOffsets[2][0]));
       expect(
@@ -86,7 +84,7 @@ void main() {
     });
 
     test('r', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.r);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.r);
 
       expect(Side.t, equals(sidesAndUnitOffsets[0][0]));
       expect(
@@ -109,7 +107,7 @@ void main() {
     });
 
     test('ur', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.ur);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.ur);
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
@@ -133,7 +131,7 @@ void main() {
     });
 
     test('ul', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.ul);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.ul);
 
       expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
 
@@ -158,7 +156,7 @@ void main() {
     });
 
     test('l', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.l);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.l);
 
       expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
@@ -183,7 +181,7 @@ void main() {
     });
 
     test('dl', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.dl);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.dl);
 
       expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
 
@@ -208,7 +206,7 @@ void main() {
     });
 
     test('dr', () {
-      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Crop.dr);
+      final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.dr);
 
       // out(sidesAndUnitOffsets[0][1]);
       // out(sidesAndUnitOffsets[1][1]);

@@ -38,7 +38,7 @@ class StaticCube extends StatelessWidget {
 
     return Transform.translate(
       offset: offset,
-      child: info.crop == Crop.c
+      child: info.crop == Slice.c
           ? const FullUnitCube()
           : CropUnitCube(crop: info.crop),
     );

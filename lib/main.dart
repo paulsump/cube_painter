@@ -23,7 +23,7 @@ class CubePainterApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PanZoomNotifier()),
         ChangeNotifierProvider(create: (_) => CubeGroupNotifier()),
         ChangeNotifierProvider(create: (_) => GestureModeNotifier()),
-        ChangeNotifierProvider(create: (_) => CropNotifier()),
+        ChangeNotifierProvider(create: (_) => SliceModeNotifier()),
       ],
       child: MaterialApp(
         title: 'Cube Painter',

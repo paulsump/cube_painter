@@ -73,7 +73,7 @@ final _gradientBL = LinearGradient(
   end: Alignment.topRight,
 );
 
-UnmodifiableListView<CubeSide> getCubeSides(Crop crop) {
+UnmodifiableListView<CubeSide> getCubeSides(Slice crop) {
   final list = getCubeSidesAndUnitOffsets(crop);
 
   return UnmodifiableListView(
@@ -129,14 +129,14 @@ const bottomRightSide = [
 
 /// returns polygon offsets in unit coords
 /// public for test only
-UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
+UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice crop) {
   /// corner indices
   /// anti clockwise
   /// center, top right, top, top left, bottom left, bottom, bottom right.
   const int c = 0, tr = 1, t = 2, tl = 3, bl = 4, b = 5, br = 6;
 
   switch (crop) {
-    case Crop.c:
+    case Slice.c:
       return UnmodifiableListView([
         [
           Side.bl,
@@ -155,7 +155,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
-    case Crop.r:
+    case Slice.r:
       return UnmodifiableListView([
         [
           Side.t,
@@ -166,7 +166,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
       ]);
-    case Crop.ur:
+    case Slice.ur:
       return UnmodifiableListView([
         [
           Side.bl,
@@ -177,7 +177,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           _getUnitOffsetsFromHexagonCornerIndices([c, br, b])
         ],
       ]);
-    case Crop.ul:
+    case Slice.ul:
       return UnmodifiableListView([
         [
           Side.bl,
@@ -191,7 +191,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
       ]);
-    case Crop.l:
+    case Slice.l:
       return UnmodifiableListView([
         [
           Side.br,
@@ -202,7 +202,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           _getUnitOffsetsFromHexagonCornerIndices([c, t, tr])
         ],
       ]);
-    case Crop.dl:
+    case Slice.dl:
       return UnmodifiableListView([
         [
           Side.br,
@@ -216,7 +216,7 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Crop crop) {
           _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
       ]);
-    case Crop.dr:
+    case Slice.dr:
       return UnmodifiableListView([
         [
           Side.bl,

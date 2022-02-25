@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-/// The direction to crop a cube in is like the
-/// normal vector to the slice line.
-/// So it's sliced perpendicular to the cropping direction
+/// TODO FIX this comment when i change them all
+/// The normal vector to the slice line.
+/// So it's sliced perpendicular to the cr*pping direction
 /// anti clockwise from right
 /// TODO REname to Slice and SliceModeNotifier
 /// TODO REname each to opposite of current
 /// TODO rename to topLeft, bottomRight
-enum Crop {
+enum Slice {
   // 0 center
   c,
   // 1 right
@@ -25,17 +25,17 @@ enum Crop {
   dr,
 }
 
-void setCrop(Crop crop, BuildContext context) {
-  final cropNotifier = Provider.of<CropNotifier>(context, listen: false);
+void setCrop(Slice crop, BuildContext context) {
+  final cropNotifier = Provider.of<SliceModeNotifier>(context, listen: false);
   cropNotifier.setCrop(crop);
 }
 
-class CropNotifier extends ChangeNotifier {
-  var _crop = Crop.dl;
+class SliceModeNotifier extends ChangeNotifier {
+  var _crop = Slice.dl;
 
   get crop => _crop;
 
-  void setCrop(Crop crop) {
+  void setCrop(Slice crop) {
     _crop = crop;
     notifyListeners();
   }

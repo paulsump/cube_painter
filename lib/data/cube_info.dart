@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CubeInfo {
   final Position center;
 
-  final Crop crop;
+  final Slice crop;
 
   const CubeInfo({required this.center, required this.crop});
 
@@ -22,10 +22,10 @@ class CubeInfo {
   CubeInfo.fromJson(Map<String, dynamic> json)
       : center = Position.fromJson(json['center']),
         crop = json.containsKey('sliceIndex')
-            ? Crop.values[json['sliceIndex']]
-            : Crop.c;
+            ? Slice.values[json['sliceIndex']]
+            : Slice.c;
 
-  Map<String, dynamic> toJson() => Crop.c == crop
+  Map<String, dynamic> toJson() => Slice.c == crop
       ? {'center': center}
       : {'center': center, 'sliceIndex': crop.index};
 }
