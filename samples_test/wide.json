@@ -1157,28 +1157,28 @@
         "x": 11,
         "y": 4
       },
-      "sliceIndex": 6
+      "slice": "topLeft"
     },
     {
       "center": {
         "x": 9,
         "y": -1
       },
-      "sliceIndex": 4
+      "slice": "right"
     },
     {
       "center": {
         "x": 9,
         "y": -2
       },
-      "sliceIndex": 3
+      "slice": "bottomRight"
     },
     {
       "center": {
         "x": 10,
         "y": -2
       },
-      "sliceIndex": 3
+      "slice": "bottomRight"
     },
     {
       "center": {
@@ -1299,7 +1299,7 @@
         "x": 24,
         "y": 20
       },
-      "sliceIndex": 3
+      "slice": "bottomRight"
     }
   ]
 }

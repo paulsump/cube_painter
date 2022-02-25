@@ -35,7 +35,7 @@ class SliceCubeButton extends StatelessWidget {
             setSliceMode(slice, context);
             Navigator.pop(context);
           },
-      tip: 'For adding ${slice.toString().split('.').last} slices of cubes.',
+      tip: 'For adding ${getSliceName(slice)} slices of cubes.',
     );
   }
 }

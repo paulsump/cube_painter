@@ -51,7 +51,7 @@ void main() {
 
   group('json two cubes', () {
     const testJson =
-        '{"cubes":[{"center":{"x":1,"y":2},"sliceIndex":5},{"center":{"x":3,"y":4},"sliceIndex":3}]}';
+        '{"cubes":[{"center":{"x":1,"y":2},"slice":"topRight"},{"center":{"x":3,"y":4},"slice":"bottomRight"}]}';
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);

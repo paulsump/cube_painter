@@ -15,7 +15,7 @@ void main() {
     const testSlice = Slice.topRight;
 
     const testCube = CubeInfo(center: testPosition, slice: testSlice);
-    const testJson = '{"center":{"x":1,"y":2},"sliceIndex":5}';
+    const testJson = '{"center":{"x":1,"y":2},"slice":"topRight"}';
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);

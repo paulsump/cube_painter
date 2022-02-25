@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 /// These enums say which half e.g. left or right half,
 /// or whole for a normal, complete cube.
 /// The values are go around anti clockwise from the left.
-/// TODO rename to topLeft, bottomRight
 enum Slice {
   // 0
   whole,
@@ -22,6 +21,8 @@ enum Slice {
   // 6
   topLeft,
 }
+
+String getSliceName(Slice slice) => slice.toString().split('.').last;
 
 void setSliceMode(Slice slice, BuildContext context) {
   final sliceModeNotifier =

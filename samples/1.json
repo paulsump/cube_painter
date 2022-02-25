@@ -641,7 +641,7 @@
         "x": 1,
         "y": -7
       },
-      "sliceIndex": 2
+      "slice": "bottomLeft"
     }
   ]
 }
