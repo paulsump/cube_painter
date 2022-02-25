@@ -177,11 +177,13 @@ class _FileMenuState extends State<FileMenu> {
       },
     );
 
-    return await showDialog(
+    final bool? yes = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return alert;
       },
     );
+
+    return yes ?? false;
   }
 }

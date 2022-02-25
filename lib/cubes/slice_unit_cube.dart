@@ -1,6 +1,5 @@
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/data/slice.dart';
-import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
 class SliceUnitCube extends StatelessWidget {
@@ -21,7 +20,6 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    out(cubeSides.length);
     for (final cubeSide in cubeSides) {
       canvas.drawPath(
           cubeSide.path, cubeSide.getGradientPaint(PaintingStyle.fill));
