@@ -10,13 +10,31 @@ const noWarn = out;
 
 void main() {
   const testPosition = Position(1, 2);
-  const testSlice = Slice.dl;
 
-  const testCube = CubeInfo(center: testPosition, slice: testSlice);
+  group('json with slice', () {
+    const testSlice = Slice.dl;
 
-  //TOOO values.byName('
-  group('json', () {
+    const testCube = CubeInfo(center: testPosition, slice: testSlice);
     const testJson = '{"center":{"x":1,"y":2},"sliceIndex":5}';
+
+    test('load', () {
+      Map<String, dynamic> map = jsonDecode(testJson);
+
+      final newCube = CubeInfo.fromJson(map);
+      expect(testCube, equals(newCube));
+    });
+
+    test('save', () {
+      String newJson = jsonEncode(testCube);
+      expect(testJson, equals(newJson));
+    });
+  });
+
+  group('json with no slice', () {
+    const testSlice = Slice.whole;
+
+    const testCube = CubeInfo(center: testPosition, slice: testSlice);
+    const testJson = '{"center":{"x":1,"y":2}}';
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
