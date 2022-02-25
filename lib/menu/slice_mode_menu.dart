@@ -1,6 +1,7 @@
 import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/downloaded_icons.dart';
+import 'package:cube_painter/menu/safe_pad.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class _SliceModeMenuState extends State<SliceModeMenu> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          SizedBox(height: 10.0 + MediaQuery.of(context).padding.top),
+          const SafePad(),
           const Center(child: Text('Slices')),
           const SizedBox(height: 15.0),
           Row(

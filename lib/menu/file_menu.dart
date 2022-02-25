@@ -5,6 +5,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/menu/file_menu_button.dart';
+import 'package:cube_painter/menu/safe_pad.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class _FileMenuState extends State<FileMenu> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            SizedBox(height: 15.0 + MediaQuery.of(context).padding.top),
+            const SafePad(),
             const Center(child: Text('File')),
             const SizedBox(height: 15.0),
             Row(

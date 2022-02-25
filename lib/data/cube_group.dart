@@ -29,9 +29,9 @@ class CubeGroup {
 
   CubeGroup.empty() : _cubeInfos = <CubeInfo>[];
 
-  List<CubeInfo> get cubeInfos => _cubeInfos;
-
   CubeGroup.fromString(String json) : this.fromJson(jsonDecode(json));
+
+  List<CubeInfo> get cubeInfos => _cubeInfos;
 
   @override
   String toString() => jsonEncode(this);
