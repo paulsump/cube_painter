@@ -1,3 +1,4 @@
+import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,6 @@ class MenuItem {
   });
 }
 
-
 class FileMenuButton extends StatelessWidget {
   const FileMenuButton({
     Key? key,
@@ -28,15 +28,27 @@ class FileMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
+
+    const double height = 70;
+    const size = Size(height, height);
+
     return Tooltip(
       message: item.tip,
-      child: IconButton(
-        icon: Icon(
+      child: TextButton(
+        child: Icon(
           item.icon,
           color: item.enabled ? enabledIconColor : disabledIconColor,
           size: item.iconSize,
         ),
         onPressed: item.enabled ? item.onPressed : null,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(
+            HexagonBorder(side: borderSide),
+          ),
+          overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
+          fixedSize: MaterialStateProperty.all(size),
+        ),
       ),
     );
   }
