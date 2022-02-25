@@ -41,7 +41,7 @@ class _GestureModeMenuState extends State<GestureModeMenu> {
               SliceCubeButton(slice: Slice.r),
               SizedBox(width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
               // pad,
-              // BrushMenuButton(crop: Crop.c),
+              // BrushMenuButton(slice: Slice.c),
               // pad,
               SliceCubeButton(slice: Slice.l),
             ],

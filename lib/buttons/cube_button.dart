@@ -44,7 +44,7 @@ class CubeButton extends StatelessWidget {
               scale: 21,
               child: slice == Slice.c
                   ? const FullUnitCube()
-                  : SliceUnitCube(crop: slice),
+                  : SliceUnitCube(slice: slice),
             ),
           ),
           if (null != icon)

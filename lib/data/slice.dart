@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-/// TODO FIX this comment when i change them all
-/// The normal vector to the slice line.
-/// So it's sliced perpendicular to the cr*pping direction
-/// anti clockwise from right
-/// TODO REname to Slice and SliceModeNotifier
-/// TODO REname each to opposite of current
+/// TODO Renamed to Slice.topLeft etc - renamed each slice enum to opposite of what it was. Like a slice of pizza, but you get half. These enums say which half e.g. left or right half, or whole for a normal, complete cube.
+/// Like a slice of pizza, but you get half.
+/// These enums say which half e.g. left or right half,
+/// or whole for a normal, complete cube.
+/// The values are go around anti clockwise from the left.
 /// TODO rename to topLeft, bottomRight
 enum Slice {
   // 0 center

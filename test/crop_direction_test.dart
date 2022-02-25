@@ -5,19 +5,19 @@ import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const noWarn = out;
-const testCrop = Slice.dl;
+const testSlice = Slice.dl;
 
 void main() {
   group('json', () {
     test('load', () {
       int index = jsonDecode('5');
       out(index);
-      final newCrop = Slice.values[index];
-      out(newCrop);
-      expect(testCrop, equals(newCrop));
+      final newSlice = Slice.values[index];
+      out(newSlice);
+      expect(testSlice, equals(newSlice));
     });
     test('save', () {
-      String json = jsonEncode(testCrop.index);
+      String json = jsonEncode(testSlice.index);
       out(json);
       expect('5', equals(json));
     });

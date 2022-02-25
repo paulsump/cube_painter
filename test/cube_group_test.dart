@@ -41,11 +41,11 @@ void main() {
   const testPosition = Position(1, 2);
   const testPosition2 = Position(3, 4);
 
-  const testCrop = Slice.dl;
-  const testCrop2 = Slice.ul;
+  const testSlice = Slice.dl;
+  const testSlice2 = Slice.ul;
 
-  const testCube = CubeInfo(center: testPosition, slice: testCrop);
-  const testCube2 = CubeInfo(center: testPosition2, slice: testCrop2);
+  const testCube = CubeInfo(center: testPosition, slice: testSlice);
+  const testCube2 = CubeInfo(center: testPosition2, slice: testSlice2);
 
   const testCubes = <CubeInfo>[testCube, testCube2];
 

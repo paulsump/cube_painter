@@ -40,7 +40,7 @@ class StaticCube extends StatelessWidget {
       offset: offset,
       child: info.slice == Slice.c
           ? const FullUnitCube()
-          : SliceUnitCube(crop: info.slice),
+          : SliceUnitCube(slice: info.slice),
     );
   }
 }

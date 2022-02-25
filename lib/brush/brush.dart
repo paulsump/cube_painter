@@ -83,16 +83,16 @@ class BrushState extends State<Brush> {
 
   void _replaceCube(Offset point, BuildContext context) {
     widget._animCubes.clear();
-    Slice crop = Slice.c;
+    Slice slice = Slice.c;
 
     if (getGestureMode(context) == GestureMode.slice) {
-      crop = Provider.of<SliceModeNotifier>(context, listen: false).slice;
+      slice = Provider.of<SliceModeNotifier>(context, listen: false).slice;
     }
 
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
 
-    _addCube(brushMaths.startPosition, crop);
+    _addCube(brushMaths.startPosition, slice);
   }
 
   void _updateExtrude(details, BuildContext context) {
@@ -120,11 +120,11 @@ class BrushState extends State<Brush> {
     }
   }
 
-  void _addCube(Position center, Slice crop) {
+  void _addCube(Position center, Slice slice) {
     widget._animCubes.add(AnimCube(
         key: UniqueKey(),
         fields: Fields(
-          info: CubeInfo(center: center, slice: crop),
+          info: CubeInfo(center: center, slice: slice),
           start: 0.0,
           end: getGestureMode(context) == GestureMode.add ? 1.0 : 3.0,
           pingPong: true,

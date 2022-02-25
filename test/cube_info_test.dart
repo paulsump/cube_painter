@@ -10,9 +10,9 @@ const noWarn = out;
 
 void main() {
   const testPosition = Position(1, 2);
-  const testCrop = Slice.dl;
+  const testSlice = Slice.dl;
 
-  const testCube = CubeInfo(center: testPosition, slice: testCrop);
+  const testCube = CubeInfo(center: testPosition, slice: testSlice);
 
   //TOOO values.byName('
   group('json', () {

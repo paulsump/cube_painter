@@ -3,13 +3,13 @@ import 'package:cube_painter/data/slice.dart';
 import 'package:flutter/material.dart';
 
 class SliceUnitCube extends StatelessWidget {
-  final Slice crop;
+  final Slice slice;
 
-  const SliceUnitCube({Key? key, this.crop = Slice.c}) : super(key: key);
+  const SliceUnitCube({Key? key, this.slice = Slice.c}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        painter: _Painter(cubeSides: getCubeSides(crop)),
+        painter: _Painter(cubeSides: getCubeSides(slice)),
       );
 }
 

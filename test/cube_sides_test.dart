@@ -68,7 +68,7 @@ void main() {
     });
   });
 
-  group('Crop', () {
+  group('Slice', () {
     test('c', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.c);
 
