@@ -33,6 +33,7 @@ class CropCubeButton extends StatelessWidget {
           () {
             setGestureMode(GestureMode.crop, context);
             setCrop(crop, context);
+            Navigator.pop(context);
           },
       tip:
           'Tap to add half a cube.  Cycle through the six options by pressing this button again.  You can change the position while you have your finger down.',
