@@ -47,35 +47,29 @@ class PanZoomNotifier extends ChangeNotifier {
 }
 
 class InitialValues {
-  late Offset _initialFocalPoint;
-  late Offset _initialOffset;
+  late Offset focalPoint;
+  late Offset offset;
 
-  late double _initialScale;
-
-  void init() {}
+  late double scale;
 }
 
 class PanZoomer extends StatelessWidget {
-  late Offset _initialFocalPoint;
-  late Offset _initialOffset;
+  final _initial = InitialValues();
 
-  // final InitialValues _initialValues;
   PanZoomer({Key? key}) : super(key: key);
-
-  late double _initialScale;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onScaleStart: (details) {
-        _initialFocalPoint = details.focalPoint;
+        _initial.focalPoint = details.focalPoint;
 
-        _initialScale = getZoomScale(context);
-        _initialOffset = getPanOffset(context);
+        _initial.scale = getZoomScale(context);
+        _initial.offset = getPanOffset(context);
       },
       onScaleUpdate: (details) {
-        final scale = _initialScale * details.scale;
+        final scale = _initial.scale * details.scale;
 
         if (scale < 15 || 300 < scale) {
           return;
@@ -86,7 +80,7 @@ class PanZoomer extends StatelessWidget {
         }
 
         Offset offset =
-            details.focalPoint - _initialFocalPoint + _initialOffset;
+            details.focalPoint - _initial.focalPoint + _initial.offset;
 
         offset *= details.scale;
 
