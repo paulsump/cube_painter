@@ -38,6 +38,7 @@ class HexagonElevatedButton extends StatelessWidget {
 
   ElevatedButton _buildElevatedButton(double elevation) {
     final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
+
     return ElevatedButton(
       onPressed: onPressed,
       child: child,

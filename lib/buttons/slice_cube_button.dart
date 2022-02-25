@@ -11,11 +11,13 @@ const noWarn = out;
 class SliceCubeButton extends StatelessWidget {
   final Slice slice;
   final VoidCallback? onPressed;
+  final String? tip;
 
   const SliceCubeButton({
     Key? key,
     required this.slice,
     this.onPressed,
+    this.tip,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class SliceCubeButton extends StatelessWidget {
             setSliceMode(slice, context);
             Navigator.pop(context);
           },
-      tip: 'For adding ${getSliceName(slice)} slices of cubes.',
+      tip: tip ?? 'For adding ${getSliceName(slice)} slices of cubes.',
     );
   }
 }

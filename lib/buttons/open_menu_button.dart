@@ -22,6 +22,7 @@ class OpenMenuButton extends StatelessWidget {
         ? SliceCubeButton(
             slice: currentSlice,
             onPressed: Scaffold.of(context).openEndDrawer,
+            tip: 'Open the slices menu',
           )
         : HexagonElevatedButton(
             height: 66,
