@@ -20,11 +20,14 @@ class Thumbnail extends StatelessWidget {
 
     return Container(
       color: Colors.transparent,
+      /// TODO Responsive to screen size- magic numbers
       width: 99,
       height: 179,
       child: Transform.scale(
         scale: 111 / scale,
         child: Transform.translate(
+
+          /// TODO Responsive to screen size- magic numbers
           offset: const Offset(47.5, 90) - offset,
           child: StaticCubes(cubeGroup: cubeGroup),
         ),

@@ -27,6 +27,7 @@ void setPanOffset(BuildContext context, Offset offset) {
 
 class PanZoomNotifier extends ChangeNotifier {
   /// equates to the length of the side of each triangle in pixels
+  /// TODO Responsive to screen size- magic numbers
   double _scale = 30;
 
   Offset _offset = Offset.zero;
@@ -71,6 +72,7 @@ class PanZoomer extends StatelessWidget {
       onScaleUpdate: (details) {
         final scale = _initial.scale * details.scale;
 
+        /// TODO Responsive to screen size- magic numbers
         if (scale < 15 || 300 < scale) {
           return;
         }
@@ -85,6 +87,7 @@ class PanZoomer extends StatelessWidget {
         offset *= details.scale;
 
         // Pan limits - Don’t allow pan past place where can’t zoom limit to.
+        /// TODO Responsive to screen size- magic numbers
         offset = Offset(offset.dx.clamp(-100, 130), offset.dy.clamp(-250, 280));
 
         //TODO See if this makes a diff when the tiles widget listens
