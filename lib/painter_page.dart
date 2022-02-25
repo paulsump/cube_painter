@@ -85,10 +85,7 @@ class _PainterPageState extends State<PainterPage> {
                 radioOn: GestureMode.addWhole == gestureMode,
                 icon: DownloadedIcons.plusOutline,
                 iconSize: downloadedIconSize,
-                onPressed: () {
-                  setGestureMode(GestureMode.addWhole, context);
-                  setSliceMode(Slice.whole, context);
-                },
+                onPressed: () => setGestureMode(GestureMode.addWhole, context),
                 tip:
                     'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
               ),
