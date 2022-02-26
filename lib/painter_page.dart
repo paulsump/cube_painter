@@ -8,7 +8,7 @@ import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/ground.dart';
-import 'package:cube_painter/menu/file_menu.dart';
+import 'package:cube_painter/menu/paintings_menu.dart';
 import 'package:cube_painter/menu/slice_mode_menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
