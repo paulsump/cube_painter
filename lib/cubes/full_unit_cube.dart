@@ -3,14 +3,10 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
 class FullUnitCube extends StatelessWidget {
-  const FullUnitCube({
-    Key? key,
-  }) : super(key: key);
+  const FullUnitCube({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const CustomPaint(
-    painter: _Painter(),
-  );
+  Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
 }
 
 class _Painter extends CustomPainter {
