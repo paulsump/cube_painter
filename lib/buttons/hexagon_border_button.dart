@@ -17,7 +17,6 @@ class HexagonBorderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
 
     return Tooltip(
       message: tip,
@@ -25,9 +24,7 @@ class HexagonBorderButton extends StatelessWidget {
         onPressed: onPressed,
         child: child,
         style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            HexagonBorder(side: borderSide),
-          ),
+          shape: hexagonBorderShape,
           overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
         ),
       ),

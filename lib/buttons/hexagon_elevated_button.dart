@@ -35,7 +35,6 @@ class HexagonElevatedButton extends StatelessWidget {
   }
 
   ElevatedButton _buildElevatedButton() {
-    final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
 
     return ElevatedButton(
       onPressed: onPressed,
@@ -44,9 +43,7 @@ class HexagonElevatedButton extends StatelessWidget {
         elevation: MaterialStateProperty.all(on ? 0.0 : buttonElevation),
         shadowColor: on ? null : MaterialStateProperty.all(bl),
         fixedSize: MaterialStateProperty.all(pageButtonSize),
-        shape: MaterialStateProperty.all(
-          HexagonBorder(side: borderSide),
-        ),
+        shape: hexagonBorderShape,
         backgroundColor: MaterialStateProperty.all(radioOn == null
             ? buttonColor
             : radioOn!
