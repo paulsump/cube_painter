@@ -1,5 +1,4 @@
 import 'package:cube_painter/brush/brush_maths.dart';
-import 'package:cube_painter/brush/guide_lines.dart';
 import 'package:cube_painter/brush/positions.dart';
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/data/cube_info.dart';
@@ -48,12 +47,7 @@ class BrushState extends State<Brush> {
           // HACK without this container,
           // onPanStart etc doesn't get called after cubes are added.
           Container(),
-          UnitToScreen(
-            child: Stack(children: [
-              const GuideLines(),
-              ...widget._animCubes,
-            ]),
-          ),
+          UnitToScreen(child: Stack(children: widget._animCubes)),
         ],
       ),
       onPanStart: (details) {
