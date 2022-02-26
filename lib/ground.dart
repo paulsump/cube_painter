@@ -30,12 +30,20 @@ Paint getGradientPaint(PaintingStyle style, Path path) {
     ..style = style;
 }
 
+/// TODO Responsive to screen size- magic numbers
+/// these are based on my phone
 const quad = [
   Offset(-1.4, 0.0),
   Offset(1.4, 0.0),
   Offset(1.4, 1.6),
   Offset(-1.4, 1.6),
 ];
+
+final _gradientBottomTop = LinearGradient(
+  colors: [getColor(Side.bl), getColor(Side.t)],
+  begin: Alignment.bottomCenter,
+  end: Alignment.topCenter,
+);
 
 // final Paint _paintCacheBL = Paint()
 //   ..shader = const LinearGradient(
@@ -44,9 +52,3 @@ const quad = [
 //     colors: [bl, top],
 //   ).createShader(const Rect.fromLTRB(-0.9, -0.5, 0.0, 1.0))
 //   ..style = PaintingStyle.fill;
-
-final _gradientBottomTop = LinearGradient(
-  colors: [getColor(Side.bl), getColor(Side.t)],
-  begin: Alignment.bottomCenter,
-  end: Alignment.topCenter,
-);

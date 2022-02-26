@@ -55,13 +55,13 @@ class _PainterPageState extends State<PainterPage> {
       endDrawer: const SliceModeMenu(),
       drawerEnableOpenDragGesture: false,
       body: Container(
+        // color: const Color(0xff43AEF2),
         color: backgroundColor,
         child: SafeArea(
           child: Stack(children: [
             UnitToScreen(
               child: Stack(
                 children: [
-                  // Transform.scale(scale:29,child: const StaticCube(info: CubeInfo(center: Position(0,0), slice: Slice.whole))),
                   /// TODO Responsive to screen size- magic numbers
                   Transform.scale(scale: 30, child: const Ground()),
                   // const Tiles(),
