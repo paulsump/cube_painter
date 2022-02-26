@@ -38,27 +38,27 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
 
     final items = <PaintingsMenuItem>[
       PaintingsMenuItem(
-        tip: 'Create a new file',
+        tip: 'Create a new painting',
         icon: DownloadedIcons.docNew,
         iconSize: downloadedIconSize * 0.96,
         onPressed: pop(_newFile),
       ),
       PaintingsMenuItem(
-        tip: 'Save the current file',
+        tip: 'Save the current painting',
         icon: Icons.save,
         iconSize: normalIconSize,
         onPressed: _saveFile,
         enabled: sketchBank.modified,
       ),
       PaintingsMenuItem(
-        tip: 'Create a copy of this file and load it.',
+        tip: 'Create a copy of this painting and load it.',
         icon: DownloadedIcons.copy,
         iconSize: downloadedIconSize,
         onPressed: _saveACopyFile,
       ),
       PaintingsMenuItem(
         tip:
-            'Delete the current file. The next file is loaded or a new blank one is created.',
+            'Delete the current painting. The next painting is loaded or a new blank one is created.',
         icon: Icons.delete,
         iconSize: normalIconSize,
         onPressed: _deleteCurrentFile,
@@ -76,7 +76,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
           children: [
             const _SafePad(),
             padY,
-            const Center(child: Text('File')),
+            const Center(child: Text('Paintings')),
             padY,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,7 +91,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
               Transform.translate(
                 offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
                 child: HexagonBorderButton(
-                  tip: 'Load this file',
+                  tip: 'Load this painting',
                   onPressed: () =>
                       _loadFile(filePath: sketchBank.sketchEntries[i].key),
                   child: Thumbnail(sketch: sketchBank.sketchEntries[i].value),
@@ -107,7 +107,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   void _newFile() async {
     final sketchBank = getSketchBank(context);
 
-    if (!sketchBank.modified || await _askSaveCurrent(title: 'New File')) {
+    if (!sketchBank.modified || await _askSaveCurrent(title: 'New Painting')) {
       sketchBank.newFile();
       setState(() {});
     }
@@ -116,7 +116,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   void _loadFile({required String filePath}) async {
     final sketchBank = getSketchBank(context);
 
-    if (!sketchBank.modified || await _askSaveCurrent(title: 'Load File')) {
+    if (!sketchBank.modified || await _askSaveCurrent(title: 'Load Painting')) {
       sketchBank.loadFile(filePath: filePath);
       setState(() {});
     }
@@ -148,7 +148,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   Future<bool> _askDelete() async {
     return await _askYesNoOrCancel(
       title: 'Delete',
-      content: 'Delete current file?',
+      content: 'Delete current painting?',
       onlyYesAndCancelButtons: true,
     );
   }
