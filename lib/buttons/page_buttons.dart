@@ -31,7 +31,7 @@ class PageButtons extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const OpenFileMenuButton(),
+              const OpenPaintingsMenuButton(),
               Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 const GestureModeCubeButton(
                   mode: GestureMode.addWhole,

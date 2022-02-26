@@ -19,14 +19,14 @@ class _SafePad extends StatelessWidget {
       SizedBox(height: MediaQuery.of(context).padding.top);
 }
 
-class FileMenu extends StatefulWidget {
-  const FileMenu({Key? key}) : super(key: key);
+class PaintingsMenu extends StatefulWidget {
+  const PaintingsMenu({Key? key}) : super(key: key);
 
   @override
-  State<FileMenu> createState() => _FileMenuState();
+  State<PaintingsMenu> createState() => _PaintingsMenuState();
 }
 
-class _FileMenuState extends State<FileMenu> {
+class _PaintingsMenuState extends State<PaintingsMenu> {
   @override
   Widget build(BuildContext context) {
     final sketchBank = getSketchBank(context);
@@ -36,27 +36,27 @@ class _FileMenuState extends State<FileMenu> {
           Navigator.of(context).pop();
         };
 
-    final items = <MenuItem>[
-      MenuItem(
+    final items = <PaintingsMenuItem>[
+      PaintingsMenuItem(
         tip: 'Create a new file',
         icon: DownloadedIcons.docNew,
         iconSize: downloadedIconSize * 0.96,
         onPressed: pop(_newFile),
       ),
-      MenuItem(
+      PaintingsMenuItem(
         tip: 'Save the current file',
         icon: Icons.save,
         iconSize: normalIconSize,
         onPressed: _saveFile,
         enabled: sketchBank.modified,
       ),
-      MenuItem(
+      PaintingsMenuItem(
         tip: 'Create a copy of this file and load it.',
         icon: DownloadedIcons.copy,
         iconSize: downloadedIconSize,
         onPressed: _saveACopyFile,
       ),
-      MenuItem(
+      PaintingsMenuItem(
         tip:
             'Delete the current file. The next file is loaded or a new blank one is created.',
         icon: Icons.delete,
@@ -81,7 +81,8 @@ class _FileMenuState extends State<FileMenu> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                for (MenuItem item in items) FileMenuButton(item: item),
+                for (PaintingsMenuItem item in items)
+                  PaintingsMenuButton(item: item),
               ],
             ),
             const SizedBox(height: 5.0),

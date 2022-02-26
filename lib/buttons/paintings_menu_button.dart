@@ -4,14 +4,14 @@ import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 
-class MenuItem {
+class PaintingsMenuItem {
   final String tip;
   final IconData icon;
   final double iconSize;
   final VoidCallback onPressed;
   final bool enabled;
 
-  const MenuItem({
+  const PaintingsMenuItem({
     required this.tip,
     required this.icon,
     required this.iconSize,
@@ -20,13 +20,13 @@ class MenuItem {
   });
 }
 
-class FileMenuButton extends StatelessWidget {
-  const FileMenuButton({
+class PaintingsMenuButton extends StatelessWidget {
+  const PaintingsMenuButton({
     Key? key,
     required this.item,
   }) : super(key: key);
 
-  final MenuItem item;
+  final PaintingsMenuItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +49,8 @@ class FileMenuButton extends StatelessWidget {
   }
 }
 
-class OpenFileMenuButton extends StatelessWidget {
-  const OpenFileMenuButton({Key? key}) : super(key: key);
+class OpenPaintingsMenuButton extends StatelessWidget {
+  const OpenPaintingsMenuButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

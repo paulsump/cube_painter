@@ -51,7 +51,7 @@ class _PainterPageState extends State<PainterPage> {
     final gestureMode = getGestureMode(context, listen: true);
 
     return Scaffold(
-      drawer: const FileMenu(),
+      drawer: const PaintingsMenu(),
       endDrawer: const SliceModeMenu(),
       drawerEnableOpenDragGesture: false,
       body: Container(
