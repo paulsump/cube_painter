@@ -57,13 +57,15 @@ class PageButtons extends StatelessWidget {
                 const OpenSliceMenuButton(),
               ]),
             ]),
-        Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          UndoButton(undoer: undoer),
-          UndoButton(undoer: undoer, redo: true),
-
-          // HACK without this container, the buttons don't work
-          Container(),
-        ]),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            UndoButton(undoer: undoer),
+            UndoButton(undoer: undoer, redo: true),
+            // HACK without a big container, the buttons don't response, and now it's needed to stop the undo buttons being centered
+            Container(),
+          ],
+        ),
       ],
     );
   }
@@ -89,7 +91,7 @@ class UndoButton extends StatelessWidget {
         ? HexagonElevatedButton(
             child: Icon(
               redo ? Icons.redo_sharp : Icons.undo_sharp,
-              size: normalIconSize,
+              size: normalIconSize * 1.2,
               color: enabled ? enabledIconColor : disabledIconColor,
             ),
             onPressed: redo ? undoer.redo : undoer.undo,
