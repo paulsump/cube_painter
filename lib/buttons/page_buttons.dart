@@ -1,11 +1,11 @@
 import 'package:cube_painter/buttons/gesture_mode_cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
-import 'package:cube_painter/buttons/open_file_menu_button.dart';
 import 'package:cube_painter/buttons/open_slice_menu_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/menu/file_menu_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';

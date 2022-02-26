@@ -2,6 +2,7 @@ import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 
 class MenuItem {
   final String tip;
@@ -29,7 +30,6 @@ class FileMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Tooltip(
       message: item.tip,
       child: TextButton(
@@ -45,6 +45,23 @@ class FileMenuButton extends StatelessWidget {
           fixedSize: MaterialStateProperty.all(pageButtonSize),
         ),
       ),
+    );
+  }
+}
+
+class OpenFileMenuButton extends StatelessWidget {
+  const OpenFileMenuButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return HexagonElevatedButton(
+      child: Icon(
+        Icons.folder_sharp,
+        color: enabledIconColor,
+        size: normalIconSize,
+      ),
+      onPressed: Scaffold.of(context).openDrawer,
+      tip: 'Open the file menu.',
     );
   }
 }
