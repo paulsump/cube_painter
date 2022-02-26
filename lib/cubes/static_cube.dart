@@ -1,7 +1,7 @@
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
-import 'package:cube_painter/data/cube_group.dart';
 import 'package:cube_painter/data/cube_info.dart';
+import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';

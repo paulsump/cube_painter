@@ -51,6 +51,7 @@ class Sketch {
 /// TODO Rename to StaticSketchNotifier if i've got an AnimSketchNotifier
 /// TODO Rename to ShapeBank
 class SketchNotifier extends ChangeNotifier {
+  // TODO RENAME TO _sketchMap
   final _sketchs = <String, Sketch>{};
 
   late String settingsPath;

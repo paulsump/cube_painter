@@ -3,7 +3,7 @@ import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
-import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/menu/file_menu.dart';

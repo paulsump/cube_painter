@@ -1,4 +1,4 @@
-import 'package:cube_painter/data/cube_group.dart';
+import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 
