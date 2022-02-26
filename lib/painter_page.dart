@@ -1,12 +1,13 @@
-import 'package:cube_painter/__background.dart';
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/page_buttons.dart';
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/ground.dart';
 import 'package:cube_painter/menu/file_menu.dart';
 import 'package:cube_painter/menu/slice_mode_menu.dart';
 import 'package:cube_painter/out.dart';
@@ -53,12 +54,16 @@ class _PainterPageState extends State<PainterPage> {
       drawer: const FileMenu(),
       endDrawer: const SliceModeMenu(),
       drawerEnableOpenDragGesture: false,
-      body: Background(
+      body: Container(
+        color: backgroundColor,
         child: SafeArea(
           child: Stack(children: [
             UnitToScreen(
               child: Stack(
                 children: [
+                  // Transform.scale(scale:29,child: const StaticCube(info: CubeInfo(center: Position(0,0), slice: Slice.whole))),
+                  /// TODO Responsive to screen size- magic numbers
+                  Transform.scale(scale: 30, child: const Ground()),
                   // const Tiles(),
                   if (sketchBank.hasCubes)
                     StaticCubes(sketch: sketchBank.sketch),
