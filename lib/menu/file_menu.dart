@@ -10,6 +10,15 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
+/// padding for the safe area at the top
+class _SafePad extends StatelessWidget {
+  const _SafePad({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) =>
+      SizedBox(height: MediaQuery.of(context).padding.top);
+}
+
 class FileMenu extends StatefulWidget {
   const FileMenu({Key? key}) : super(key: key);
 
@@ -56,34 +65,34 @@ class _FileMenuState extends State<FileMenu> {
 
     return LayoutBuilder(
       builder: (context, constraints) => Drawer(
-        child: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              padY,
-              const Center(child: Text('File')),
-              padY,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  for (MenuItem item in items) FileMenuButton(item: item),
-                ],
-              ),
-              const SizedBox(height: 5.0),
-              const Divider(),
-              for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
-                Transform.translate(
-                  offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
-                  child: HexagonBorderButton(
-                    tip: 'Load this file',
-                    onPressed: () =>
-                        _loadFile(filePath: sketchBank.sketchEntries[i].key),
-                    child: Thumbnail(sketch: sketchBank.sketchEntries[i].value),
-                  ),
+        // Wrapping with SafeArea here would cause shift to right on iphone
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const _SafePad(),
+            padY,
+            const Center(child: Text('File')),
+            padY,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                for (MenuItem item in items) FileMenuButton(item: item),
+              ],
+            ),
+            const SizedBox(height: 5.0),
+            const Divider(),
+            for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
+              Transform.translate(
+                offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
+                child: HexagonBorderButton(
+                  tip: 'Load this file',
+                  onPressed: () =>
+                      _loadFile(filePath: sketchBank.sketchEntries[i].key),
+                  child: Thumbnail(sketch: sketchBank.sketchEntries[i].value),
                 ),
-              const Divider(),
-            ],
-          ),
+              ),
+            const Divider(),
+          ],
         ),
       ),
     );
