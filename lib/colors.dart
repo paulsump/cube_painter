@@ -12,7 +12,10 @@ Color getColor(Side side) {
   }
 }
 
-const Color disabledIconColor = Colors.grey;
+final Color disabledIconColor = _getTweenBLtoBRColor(0.5);
+
+Color _getTweenBLtoBRColor(double t) =>
+    Color.lerp(getColor(Side.bl), getColor(Side.br), t)!;
 
 final Color enabledIconColor = getColor(Side.br);
 final Color textColor = enabledIconColor;
@@ -30,7 +33,7 @@ Color getTweenBLtoTColor(double t) =>
 
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
 
-Color get buttonColor => getTweenBtoGColor(0.3);
+Color get buttonColor => getTweenBtoGColor(0.4);
 
 Color get buttonBorderColor => getTweenBtoGColor(0.9);
 
@@ -39,15 +42,15 @@ Color get backgroundColor => getTweenBtoGColor(0.6);
 Color get radioButtonOnColor => getTweenBtoGColor(0.4);
 
 // from https://www.designwizard.com/blog/design-trends/colour-combination
-const softPink = Color(0xFFFFDDE2);
-const peachAmber = Color(0xFFFAA094);
-const yucca = Color(0xFF9ED9CC);
-const arborGreen = Color(0xFF008C76);
+// const softPink = Color(0xFFFFDDE2);
+// const peachAmber = Color(0xFFFAA094);
+// const yucca = Color(0xFF9ED9CC);
+// const arborGreen = Color(0xFF008C76);
 
-const green = arborGreen;
-const blue = yucca;
-// from diamond pic
-// const green = Color(0xFF284CA1);
-// const blue = Color(0xFF32B875);
+// const green = arborGreen;
+// const blue = yucca;
+// final green = getColor(Side.bl);
+final green = getColor(Side.br);
+final blue = getColor(Side.t);
 
 Color getTweenBtoGColor(double t) => Color.lerp(blue, green, t)!;
