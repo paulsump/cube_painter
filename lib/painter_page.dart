@@ -53,23 +53,25 @@ class _PainterPageState extends State<PainterPage> {
       drawer: const FileMenu(),
       endDrawer: const SliceModeMenu(),
       drawerEnableOpenDragGesture: false,
-      body: SafeArea(
-        child: Stack(children: [
-          const Background(),
-          UnitToScreen(
-            child: Stack(
-              children: [
-                // const Tiles(),
-                if (sketchBank.hasCubes) StaticCubes(sketch: sketchBank.sketch),
-                ..._cubes.animCubes,
-              ],
+      body: Background(
+        child: SafeArea(
+          child: Stack(children: [
+            UnitToScreen(
+              child: Stack(
+                children: [
+                  // const Tiles(),
+                  if (sketchBank.hasCubes)
+                    StaticCubes(sketch: sketchBank.sketch),
+                  ..._cubes.animCubes,
+                ],
+              ),
             ),
-          ),
-          GestureMode.panZoom == gestureMode
-              ? PanZoomer()
-              : Brush(adoptCubes: _cubes.adopt),
-          PageButtons(undoer: _cubes.undoer),
-        ]),
+            GestureMode.panZoom == gestureMode
+                ? PanZoomer()
+                : Brush(adoptCubes: _cubes.adopt),
+            PageButtons(undoer: _cubes.undoer),
+          ]),
+        ),
       ),
     );
   }
