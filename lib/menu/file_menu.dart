@@ -25,7 +25,7 @@ class _FileMenuState extends State<FileMenu> {
       MenuItem(
         tip: 'Create a new file',
         icon: DownloadedIcons.docNew,
-        iconSize: downloadedIconSize,
+        iconSize: downloadedIconSize * 0.96,
         onPressed: _newFile,
       ),
       MenuItem(

@@ -38,6 +38,7 @@ class _PainterPageState extends State<PainterPage> {
   @override
   void initState() {
     _cubes.init(setState_: setState, context_: context);
+
     super.initState();
   }
 

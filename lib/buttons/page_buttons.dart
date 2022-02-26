@@ -24,9 +24,6 @@ class PageButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final gestureMode = getGestureMode(context, listen: true);
 
-    final bool canUndo = undoer.canUndo;
-    final bool canRedo = undoer.canRedo;
-
     return Column(
       children: [
         Row(
@@ -61,30 +58,45 @@ class PageButtons extends StatelessWidget {
               ]),
             ]),
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          if (canUndo || canRedo)
-            HexagonElevatedButton(
-              child: Icon(
-                Icons.undo_sharp,
-                size: normalIconSize,
-                color: canUndo ? enabledIconColor : disabledIconColor,
-              ),
-              onPressed: canUndo ? undoer.undo : null,
-              tip: 'Undo the last add or delete operation.',
-            ),
-          if (canRedo)
-            HexagonElevatedButton(
-              tip: 'Redo the last add or delete operation that was undone.',
-              child: Icon(
-                Icons.redo_sharp,
-                color: canRedo ? enabledIconColor : disabledIconColor,
-                size: normalIconSize,
-              ),
-              onPressed: canRedo ? undoer.redo : null,
-            ),
+          UndoButton(undoer: undoer),
+          UndoButton(undoer: undoer, redo: true),
+
           // HACK without this container, the buttons don't work
           Container(),
         ]),
       ],
     );
+  }
+}
+
+class UndoButton extends StatelessWidget {
+  final Undoer undoer;
+  final bool redo;
+
+  const UndoButton({
+    Key? key,
+    required this.undoer,
+    this.redo = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final bool canUndo = undoer.canUndo;
+    final bool canRedo = undoer.canRedo;
+    final bool show = redo ? canRedo : canUndo || canRedo;
+    final bool enabled = redo ? canRedo : canUndo;
+    return show
+        ? HexagonElevatedButton(
+            child: Icon(
+              redo ? Icons.redo_sharp : Icons.undo_sharp,
+              size: normalIconSize,
+              color: enabled ? enabledIconColor : disabledIconColor,
+            ),
+            onPressed: redo ? undoer.redo : undoer.undo,
+            tip: redo
+                ? 'Redo the last add or delete operation that was undone.'
+                : 'Undo the last add or delete operation.',
+          )
+        : Container();
   }
 }
