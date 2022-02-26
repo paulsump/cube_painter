@@ -55,8 +55,8 @@ class Cubes {
   void adopt(List<AnimCube> orphans) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
-    final sketchNotifier = getSketchBank(context);
-    final List<CubeInfo> cubeInfos = sketchNotifier.sketch.cubeInfos;
+    final sketchBank = getSketchBank(context);
+    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
 
     if (erase) {
       for (final AnimCube cube in orphans) {
@@ -115,8 +115,8 @@ class Cubes {
   }
 
   void _addAnimCubes() {
-    final sketchNotifier = getSketchBank(context);
-    final List<CubeInfo> cubeInfos = sketchNotifier.sketch.cubeInfos;
+    final sketchBank = getSketchBank(context);
+    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
 
     animCubes.clear();
 
@@ -132,7 +132,7 @@ class Cubes {
       ));
     }
 
-    sketchNotifier.clear();
+    sketchBank.clear();
     setState(() {});
   }
 }

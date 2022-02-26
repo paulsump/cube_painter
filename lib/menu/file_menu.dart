@@ -19,7 +19,7 @@ class FileMenu extends StatefulWidget {
 class _FileMenuState extends State<FileMenu> {
   @override
   Widget build(BuildContext context) {
-    final sketchNotifier = getSketchBank(context);
+    final sketchBank = getSketchBank(context);
 
     final items = <MenuItem>[
       MenuItem(
@@ -33,7 +33,7 @@ class _FileMenuState extends State<FileMenu> {
         icon: Icons.save,
         iconSize: normalIconSize,
         onPressed: _saveFile,
-        enabled: sketchNotifier.modified,
+        enabled: sketchBank.modified,
       ),
       MenuItem(
         tip: 'Create a copy of this file and load it.',
@@ -70,15 +70,14 @@ class _FileMenuState extends State<FileMenu> {
               ),
               const SizedBox(height: 5.0),
               const Divider(),
-              for (int i = 0; i < sketchNotifier.sketchEntries.length; ++i)
+              for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
                 Transform.translate(
                   offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
                   child: HexagonBorderButton(
                     tip: 'Load this file',
-                    onPressed: () => _loadFile(
-                        filePath: sketchNotifier.sketchEntries[i].key),
-                    child: Thumbnail(
-                        sketch: sketchNotifier.sketchEntries[i].value),
+                    onPressed: () =>
+                        _loadFile(filePath: sketchBank.sketchEntries[i].key),
+                    child: Thumbnail(sketch: sketchBank.sketchEntries[i].value),
                   ),
                 ),
               const Divider(),
@@ -90,47 +89,47 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _newFile() async {
-    final sketchNotifier = getSketchBank(context);
+    final sketchBank = getSketchBank(context);
 
-    if (!sketchNotifier.modified || await _askSaveCurrent(title: 'New File')) {
-      sketchNotifier.newFile();
+    if (!sketchBank.modified || await _askSaveCurrent(title: 'New File')) {
+      sketchBank.newFile();
       setState(() {});
     }
   }
 
   void _loadFile({required String filePath}) async {
-    final sketchNotifier = getSketchBank(context);
+    final sketchBank = getSketchBank(context);
 
-    if (!sketchNotifier.modified || await _askSaveCurrent(title: 'Load File')) {
-      sketchNotifier.loadFile(filePath: filePath);
+    if (!sketchBank.modified || await _askSaveCurrent(title: 'Load File')) {
+      sketchBank.loadFile(filePath: filePath);
       setState(() {});
     }
   }
 
   void _saveFile() async {
-    final sketchNotifier = getSketchBank(context);
+    final sketchBank = getSketchBank(context);
 
-    await sketchNotifier.saveFile();
+    await sketchBank.saveFile();
     setState(() {});
   }
 
   void _saveACopyFile() async {
-    final sketchNotifier = getSketchBank(context);
+    final sketchBank = getSketchBank(context);
 
-    await sketchNotifier.saveACopyFile();
+    await sketchBank.saveACopyFile();
     setState(() {});
   }
 
   void _deleteCurrentFile() async {
-    final sketchNotifier = getSketchBank(context);
-    _deleteFile(filePath: sketchNotifier.currentFilePath);
+    final sketchBank = getSketchBank(context);
+    _deleteFile(filePath: sketchBank.currentFilePath);
   }
 
   void _deleteFile({required String filePath}) async {
     if (await _askDelete()) {
-      final sketchNotifier = getSketchBank(context);
+      final sketchBank = getSketchBank(context);
 
-      await sketchNotifier.deleteFile(filePath: filePath);
+      await sketchBank.deleteFile(filePath: filePath);
       setState(() {});
     }
   }
@@ -148,9 +147,9 @@ class _FileMenuState extends State<FileMenu> {
         title: title,
         content: 'Save the current changes?',
         yesCallBack: () {
-          final sketchNotifier = getSketchBank(context);
+          final sketchBank = getSketchBank(context);
 
-          sketchNotifier.saveFile();
+          sketchBank.saveFile();
         });
   }
 
