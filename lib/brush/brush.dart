@@ -62,7 +62,6 @@ class BrushState extends State<Brush> {
           _updateExtrude(details, context);
         } else {
           _replaceCube(details.localPosition, context);
-          setState(() {});
         }
       },
       onPanEnd: (details) {
@@ -72,7 +71,6 @@ class BrushState extends State<Brush> {
       onTapDown: (details) {
         tapped = true;
         _replaceCube(details.localPosition, context);
-        setState(() {});
       },
       onTapUp: (details) {
         tapped = false;
@@ -82,7 +80,6 @@ class BrushState extends State<Brush> {
   }
 
   void _replaceCube(Offset point, BuildContext context) {
-    widget._animCubes.clear();
     Slice slice = Slice.whole;
 
     if (getGestureMode(context) == GestureMode.addSlice) {
@@ -92,7 +89,11 @@ class BrushState extends State<Brush> {
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
 
+    // TODO only add if info.center is diff , to sop flickiering
+    widget._animCubes.clear();
     _addCube(brushMaths.startPosition, slice);
+
+    setState(() {});
   }
 
   void _updateExtrude(details, BuildContext context) {
