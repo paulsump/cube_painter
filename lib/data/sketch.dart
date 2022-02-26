@@ -49,10 +49,8 @@ class Sketch {
 
 /// access to the main store of the entire model
 /// TODO Rename to StaticSketchBank if i've got an AnimSketchBank
-/// TODO Rename to ShapeBank
 class SketchBank extends ChangeNotifier {
-  // TODO RENAME TO _sketchMap
-  final _sketchs = <String, Sketch>{};
+  final _sketches = <String, Sketch>{};
 
   late String settingsPath;
   late Settings _settings;
@@ -64,12 +62,12 @@ class SketchBank extends ChangeNotifier {
   bool get modified => json != _savedJson;
 
   bool get hasCubes =>
-      _sketchs.isNotEmpty &&
+      _sketches.isNotEmpty &&
       _hasSketchForCurrentFilePath &&
       sketch.cubeInfos.isNotEmpty;
 
   bool get _hasSketchForCurrentFilePath {
-    if (!_sketchs.containsKey(currentFilePath)) {
+    if (!_sketches.containsKey(currentFilePath)) {
       out(currentFilePath);
 
       return false;
@@ -93,13 +91,13 @@ class SketchBank extends ChangeNotifier {
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.empty();
     }
-    return _sketchs[currentFilePath]!;
+    return _sketches[currentFilePath]!;
   }
 
-  void setSketch(Sketch sketch) => _sketchs[currentFilePath] = sketch;
+  void setSketch(Sketch sketch) => _sketches[currentFilePath] = sketch;
 
   UnmodifiableListView<MapEntry> get sketchEntries =>
-      UnmodifiableListView<MapEntry>(_sketchs.entries.toList());
+      UnmodifiableListView<MapEntry>(_sketches.entries.toList());
 
   void init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
@@ -130,7 +128,7 @@ class SketchBank extends ChangeNotifier {
       saveCurrentFilePath(firstPath);
     }
 
-    if (!_sketchs.containsKey(currentFilePath)) {
+    if (!_sketches.containsKey(currentFilePath)) {
       out("currentFilePath not found ('$currentFilePath'), so using the first in the list");
 
       saveCurrentFilePath(firstPath);
@@ -143,7 +141,7 @@ class SketchBank extends ChangeNotifier {
   void _updateAfterLoad() {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
-    if (_sketchs.isNotEmpty) {
+    if (_sketches.isNotEmpty) {
       _onSuccessfulLoad();
 
       notifyListeners();
@@ -206,16 +204,16 @@ class SketchBank extends ChangeNotifier {
 
   // insert at the top of the list
   void pushSketch(Sketch sketch) {
-    final copy = Map<String, Sketch>.from(_sketchs);
+    final copy = Map<String, Sketch>.from(_sketches);
 
-    _sketchs.clear();
+    _sketches.clear();
     setSketch(sketch);
 
-    _sketchs.addAll(copy);
+    _sketches.addAll(copy);
   }
 
   Future<void> deleteFile({required String filePath}) async {
-    _sketchs.remove(filePath);
+    _sketches.remove(filePath);
 
     final File file = File(filePath);
 
@@ -225,10 +223,10 @@ class SketchBank extends ChangeNotifier {
     }
 
     if (currentFilePath == filePath) {
-      if (_sketchs.isEmpty) {
+      if (_sketches.isEmpty) {
         newFile();
       } else {
-        loadFile(filePath: _sketchs.keys.first);
+        loadFile(filePath: _sketches.keys.first);
       }
     }
 
@@ -250,7 +248,7 @@ class SketchBank extends ChangeNotifier {
       if (!(ignoreCurrent && path == currentFilePath)) {
         final File file = File(path);
 
-        _sketchs[path] = Sketch.fromString(await file.readAsString());
+        _sketches[path] = Sketch.fromString(await file.readAsString());
       }
     }
 

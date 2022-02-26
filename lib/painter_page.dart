@@ -54,10 +54,19 @@ class _PainterPageState extends State<PainterPage> {
       drawerEnableOpenDragGesture: false,
       body: SafeArea(
         child: Stack(children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: <Color>[Colors.red, Colors.black],
+              ),
+            ),
+          ),
           UnitToScreen(
             child: Stack(
               children: [
-                const Tiles(),
+                // const Tiles(),
                 if (sketchBank.hasCubes) StaticCubes(sketch: sketchBank.sketch),
                 ..._cubes.animCubes,
               ],
