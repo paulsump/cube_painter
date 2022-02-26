@@ -15,24 +15,24 @@ void main() {
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
-      CubeGroup newCubeGroup = CubeGroup.fromJson(map);
+      Sketch newSketch = Sketch.fromJson(map);
 
-      expect(newCubeGroup.cubeInfos.length, equals(0));
+      expect(newSketch.cubeInfos.length, equals(0));
     });
 
     test('load toString()', () {
-      CubeGroup newCubeGroup = CubeGroup.fromString(testJson);
-      expect(newCubeGroup.cubeInfos.length, equals(0));
+      Sketch newSketch = Sketch.fromString(testJson);
+      expect(newSketch.cubeInfos.length, equals(0));
     });
 
     test('save', () {
-      const cubeGroup = CubeGroup(<CubeInfo>[]);
+      const cubeGroup = Sketch(<CubeInfo>[]);
       String newJson = jsonEncode(cubeGroup);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const cubeGroup = CubeGroup(<CubeInfo>[]);
+      const cubeGroup = Sketch(<CubeInfo>[]);
       String newJson = cubeGroup.toString();
       expect(testJson, equals(newJson));
     });
@@ -55,31 +55,31 @@ void main() {
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
-      CubeGroup newCubeGroup = CubeGroup.fromJson(map);
+      Sketch newSketch = Sketch.fromJson(map);
 
       int i = 0;
-      for (final newCube in newCubeGroup.cubeInfos) {
+      for (final newCube in newSketch.cubeInfos) {
         expect(testCubes[i++], equals(newCube));
       }
     });
 
     test('load toString()', () {
-      CubeGroup newCubeGroup = CubeGroup.fromString(testJson);
+      Sketch newSketch = Sketch.fromString(testJson);
 
       int i = 0;
-      for (final newCube in newCubeGroup.cubeInfos) {
+      for (final newCube in newSketch.cubeInfos) {
         expect(testCubes[i++], equals(newCube));
       }
     });
 
     test('save', () {
-      const cubeGroup = CubeGroup(testCubes);
+      const cubeGroup = Sketch(testCubes);
       String newJson = jsonEncode(cubeGroup);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const cubeGroup = CubeGroup(testCubes);
+      const cubeGroup = Sketch(testCubes);
       String newJson = cubeGroup.toString();
       expect(testJson, equals(newJson));
     });

@@ -42,12 +42,12 @@ class Undoer {
   void _popFromPushTo(JsonList popFrom, JsonList pushTo) {
     _saveTo(pushTo);
 
-    final notifier = getCubeGroupNotifier(context);
+    final notifier = getSketchNotifier(context);
     notifier.setJson(popFrom.removeLast());
   }
 
   void _saveTo(JsonList list) {
-    final notifier = getCubeGroupNotifier(context);
+    final notifier = getSketchNotifier(context);
     list.add(notifier.json);
   }
 }

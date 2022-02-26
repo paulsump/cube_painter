@@ -85,8 +85,10 @@ class UndoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool canUndo = undoer.canUndo;
     final bool canRedo = undoer.canRedo;
+
     final bool show = redo ? canRedo : canUndo || canRedo;
     final bool enabled = redo ? canRedo : canUndo;
+
     return show
         ? HexagonElevatedButton(
             child: Icon(

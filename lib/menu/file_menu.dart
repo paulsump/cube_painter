@@ -19,7 +19,7 @@ class FileMenu extends StatefulWidget {
 class _FileMenuState extends State<FileMenu> {
   @override
   Widget build(BuildContext context) {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final cubeGroupNotifier = getSketchNotifier(context);
 
     final items = <MenuItem>[
       MenuItem(
@@ -92,7 +92,7 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _newFile() async {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final cubeGroupNotifier = getSketchNotifier(context);
 
     if (!cubeGroupNotifier.modified ||
         await _askSaveCurrent(title: 'New File')) {
@@ -102,7 +102,7 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _loadFile({required String filePath}) async {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final cubeGroupNotifier = getSketchNotifier(context);
 
     if (!cubeGroupNotifier.modified ||
         await _askSaveCurrent(title: 'Load File')) {
@@ -112,27 +112,27 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _saveFile() async {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final cubeGroupNotifier = getSketchNotifier(context);
 
     await cubeGroupNotifier.saveFile();
     setState(() {});
   }
 
   void _saveACopyFile() async {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final cubeGroupNotifier = getSketchNotifier(context);
 
     await cubeGroupNotifier.saveACopyFile();
     setState(() {});
   }
 
   void _deleteCurrentFile() async {
-    final cubeGroupNotifier = getCubeGroupNotifier(context);
+    final cubeGroupNotifier = getSketchNotifier(context);
     _deleteFile(filePath: cubeGroupNotifier.currentFilePath);
   }
 
   void _deleteFile({required String filePath}) async {
     if (await _askDelete()) {
-      final cubeGroupNotifier = getCubeGroupNotifier(context);
+      final cubeGroupNotifier = getSketchNotifier(context);
 
       await cubeGroupNotifier.deleteFile(filePath: filePath);
       setState(() {});
@@ -152,7 +152,7 @@ class _FileMenuState extends State<FileMenu> {
         title: title,
         content: 'Save the current changes?',
         yesCallBack: () {
-          final cubeGroupNotifier = getCubeGroupNotifier(context);
+          final cubeGroupNotifier = getSketchNotifier(context);
 
           cubeGroupNotifier.saveFile();
         });

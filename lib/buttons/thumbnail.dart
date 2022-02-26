@@ -7,7 +7,7 @@ import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
 class Thumbnail extends StatelessWidget {
-  final CubeGroup cubeGroup;
+  final Sketch cubeGroup;
 
   const Thumbnail({Key? key, required this.cubeGroup}) : super(key: key);
 
