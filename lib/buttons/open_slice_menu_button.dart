@@ -14,43 +14,17 @@ class OpenSliceMenuButton extends StatelessWidget {
     final gestureModeNotifier =
         Provider.of<GestureModeNotifier>(context, listen: true);
 
-    return _SliceCubeButton(
-      slice: gestureModeNotifier.slice,
-      onPressed: Scaffold.of(context).openEndDrawer,
-      tip:
-          'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',
-    );
-  }
-}
-
-class _SliceCubeButton extends StatelessWidget {
-  final Slice slice;
-  final VoidCallback onPressed;
-  final String tip;
-
-  const _SliceCubeButton({
-    Key? key,
-    required this.slice,
-    required this.onPressed,
-    required this.tip,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final gestureModeNotifier =
-        Provider.of<GestureModeNotifier>(context, listen: true);
-
+    final Slice slice = gestureModeNotifier.slice;
     final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
-    final Slice currentSlice = gestureModeNotifier.slice;
 
     return CubeButton(
       slice: slice,
-      radioOn:
-          currentSlice == slice && currentGestureMode == GestureMode.addSlice,
+      radioOn: currentGestureMode == GestureMode.addSlice,
       icon: DownloadedIcons.plusOutline,
       iconSize: downloadedIconSize,
-      onPressed: onPressed,
-      tip: tip,
+      onPressed: Scaffold.of(context).openEndDrawer,
+      tip:
+          'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',
     );
   }
 }
