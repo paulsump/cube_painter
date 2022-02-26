@@ -19,7 +19,7 @@ class FileMenu extends StatefulWidget {
 class _FileMenuState extends State<FileMenu> {
   @override
   Widget build(BuildContext context) {
-    final cubeGroupNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchNotifier(context);
 
     final items = <MenuItem>[
       MenuItem(
@@ -33,7 +33,7 @@ class _FileMenuState extends State<FileMenu> {
         icon: Icons.save,
         iconSize: normalIconSize,
         onPressed: _saveFile,
-        enabled: cubeGroupNotifier.modified,
+        enabled: sketchNotifier.modified,
       ),
       MenuItem(
         tip: 'Create a copy of this file and load it.',
@@ -70,17 +70,15 @@ class _FileMenuState extends State<FileMenu> {
               ),
               const SizedBox(height: 5.0),
               const Divider(),
-              for (int i = 0;
-                  i < cubeGroupNotifier.cubeGroupEntries.length;
-                  ++i)
+              for (int i = 0; i < sketchNotifier.sketchEntries.length; ++i)
                 Transform.translate(
                   offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
                   child: HexagonBorderButton(
                     tip: 'Load this file',
                     onPressed: () => _loadFile(
-                        filePath: cubeGroupNotifier.cubeGroupEntries[i].key),
+                        filePath: sketchNotifier.sketchEntries[i].key),
                     child: Thumbnail(
-                        cubeGroup: cubeGroupNotifier.cubeGroupEntries[i].value),
+                        sketch: sketchNotifier.sketchEntries[i].value),
                   ),
                 ),
               const Divider(),
@@ -92,49 +90,47 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _newFile() async {
-    final cubeGroupNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchNotifier(context);
 
-    if (!cubeGroupNotifier.modified ||
-        await _askSaveCurrent(title: 'New File')) {
-      cubeGroupNotifier.newFile();
+    if (!sketchNotifier.modified || await _askSaveCurrent(title: 'New File')) {
+      sketchNotifier.newFile();
       setState(() {});
     }
   }
 
   void _loadFile({required String filePath}) async {
-    final cubeGroupNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchNotifier(context);
 
-    if (!cubeGroupNotifier.modified ||
-        await _askSaveCurrent(title: 'Load File')) {
-      cubeGroupNotifier.loadFile(filePath: filePath);
+    if (!sketchNotifier.modified || await _askSaveCurrent(title: 'Load File')) {
+      sketchNotifier.loadFile(filePath: filePath);
       setState(() {});
     }
   }
 
   void _saveFile() async {
-    final cubeGroupNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchNotifier(context);
 
-    await cubeGroupNotifier.saveFile();
+    await sketchNotifier.saveFile();
     setState(() {});
   }
 
   void _saveACopyFile() async {
-    final cubeGroupNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchNotifier(context);
 
-    await cubeGroupNotifier.saveACopyFile();
+    await sketchNotifier.saveACopyFile();
     setState(() {});
   }
 
   void _deleteCurrentFile() async {
-    final cubeGroupNotifier = getSketchNotifier(context);
-    _deleteFile(filePath: cubeGroupNotifier.currentFilePath);
+    final sketchNotifier = getSketchNotifier(context);
+    _deleteFile(filePath: sketchNotifier.currentFilePath);
   }
 
   void _deleteFile({required String filePath}) async {
     if (await _askDelete()) {
-      final cubeGroupNotifier = getSketchNotifier(context);
+      final sketchNotifier = getSketchNotifier(context);
 
-      await cubeGroupNotifier.deleteFile(filePath: filePath);
+      await sketchNotifier.deleteFile(filePath: filePath);
       setState(() {});
     }
   }
@@ -152,9 +148,9 @@ class _FileMenuState extends State<FileMenu> {
         title: title,
         content: 'Save the current changes?',
         yesCallBack: () {
-          final cubeGroupNotifier = getSketchNotifier(context);
+          final sketchNotifier = getSketchNotifier(context);
 
-          cubeGroupNotifier.saveFile();
+          sketchNotifier.saveFile();
         });
   }
 

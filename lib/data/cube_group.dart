@@ -51,7 +51,7 @@ class Sketch {
 /// TODO Rename to StaticSketchNotifier if i've got an AnimSketchNotifier
 /// TODO Rename to ShapeBank
 class SketchNotifier extends ChangeNotifier {
-  final _cubeGroups = <String, Sketch>{};
+  final _sketchs = <String, Sketch>{};
 
   late String settingsPath;
   late Settings _settings;
@@ -63,12 +63,12 @@ class SketchNotifier extends ChangeNotifier {
   bool get modified => json != _savedJson;
 
   bool get hasCubes =>
-      _cubeGroups.isNotEmpty &&
+      _sketchs.isNotEmpty &&
       _hasSketchForCurrentFilePath &&
-      cubeGroup.cubeInfos.isNotEmpty;
+      sketch.cubeInfos.isNotEmpty;
 
   bool get _hasSketchForCurrentFilePath {
-    if (!_cubeGroups.containsKey(currentFilePath)) {
+    if (!_sketchs.containsKey(currentFilePath)) {
       out(currentFilePath);
 
       return false;
@@ -84,21 +84,21 @@ class SketchNotifier extends ChangeNotifier {
     saveSettings();
   }
 
-  Sketch get cubeGroup {
+  Sketch get sketch {
     if (!_hasSketchForCurrentFilePath) {
       assert(false,
-          "_cubeGroups doesn't contain key of currentFilePath: $currentFilePath");
+          "_sketchs doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.empty();
     }
-    return _cubeGroups[currentFilePath]!;
+    return _sketchs[currentFilePath]!;
   }
 
-  void setSketch(Sketch cubeGroup) => _cubeGroups[currentFilePath] = cubeGroup;
+  void setSketch(Sketch sketch) => _sketchs[currentFilePath] = sketch;
 
-  UnmodifiableListView<MapEntry> get cubeGroupEntries =>
-      UnmodifiableListView<MapEntry>(_cubeGroups.entries.toList());
+  UnmodifiableListView<MapEntry> get sketchEntries =>
+      UnmodifiableListView<MapEntry>(_sketchs.entries.toList());
 
   void init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
@@ -129,7 +129,7 @@ class SketchNotifier extends ChangeNotifier {
       saveCurrentFilePath(firstPath);
     }
 
-    if (!_cubeGroups.containsKey(currentFilePath)) {
+    if (!_sketchs.containsKey(currentFilePath)) {
       out("currentFilePath not found ('$currentFilePath'), so using the first in the list");
 
       saveCurrentFilePath(firstPath);
@@ -142,14 +142,14 @@ class SketchNotifier extends ChangeNotifier {
   void _updateAfterLoad() {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
-    if (_cubeGroups.isNotEmpty) {
+    if (_sketchs.isNotEmpty) {
       _onSuccessfulLoad();
 
       notifyListeners();
     }
   }
 
-  String get json => cubeGroup.toString();
+  String get json => sketch.toString();
 
   void loadFile({required String filePath}) {
     saveCurrentFilePath(filePath);
@@ -176,7 +176,7 @@ class SketchNotifier extends ChangeNotifier {
 
   void setJson(String json) => setSketch(Sketch.fromString(json));
 
-  void addCubeInfo(CubeInfo info) => cubeGroup.cubeInfos.add(info);
+  void addCubeInfo(CubeInfo info) => sketch.cubeInfos.add(info);
 
   Future<void> setNewFilePath() async {
     final String appFolderPath = await getAppFolderPath();
@@ -204,17 +204,17 @@ class SketchNotifier extends ChangeNotifier {
   }
 
   // insert at the top of the list
-  void pushSketch(Sketch cubeGroup) {
-    final copy = Map<String, Sketch>.from(_cubeGroups);
+  void pushSketch(Sketch sketch) {
+    final copy = Map<String, Sketch>.from(_sketchs);
 
-    _cubeGroups.clear();
-    setSketch(cubeGroup);
+    _sketchs.clear();
+    setSketch(sketch);
 
-    _cubeGroups.addAll(copy);
+    _sketchs.addAll(copy);
   }
 
   Future<void> deleteFile({required String filePath}) async {
-    _cubeGroups.remove(filePath);
+    _sketchs.remove(filePath);
 
     final File file = File(filePath);
 
@@ -224,17 +224,17 @@ class SketchNotifier extends ChangeNotifier {
     }
 
     if (currentFilePath == filePath) {
-      if (_cubeGroups.isEmpty) {
+      if (_sketchs.isEmpty) {
         newFile();
       } else {
-        loadFile(filePath: _cubeGroups.keys.first);
+        loadFile(filePath: _sketchs.keys.first);
       }
     }
 
     notifyListeners();
   }
 
-  void clear() => cubeGroup.cubeInfos.clear();
+  void clear() => sketch.cubeInfos.clear();
 
   Future<String> _loadAllSketchs({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
@@ -249,7 +249,7 @@ class SketchNotifier extends ChangeNotifier {
       if (!(ignoreCurrent && path == currentFilePath)) {
         final File file = File(path);
 
-        _cubeGroups[path] = Sketch.fromString(await file.readAsString());
+        _sketchs[path] = Sketch.fromString(await file.readAsString());
       }
     }
 

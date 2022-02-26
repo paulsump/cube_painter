@@ -7,9 +7,9 @@ import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
 class Thumbnail extends StatelessWidget {
-  final Sketch cubeGroup;
+  final Sketch sketch;
 
-  const Thumbnail({Key? key, required this.cubeGroup}) : super(key: key);
+  const Thumbnail({Key? key, required this.sketch}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Thumbnail extends StatelessWidget {
 
           /// TODO Responsive to screen size- magic numbers
           offset: const Offset(47.5, 90) - offset,
-          child: StaticCubes(cubeGroup: cubeGroup),
+          child: StaticCubes(sketch: sketch),
         ),
       ),
     );
@@ -42,7 +42,7 @@ class Thumbnail extends StatelessWidget {
     double maxX = -9999999;
     double maxY = -9999999;
 
-    for (CubeInfo info in cubeGroup.cubeInfos) {
+    for (CubeInfo info in sketch.cubeInfos) {
       final offset = positionToUnitOffset(info.center);
 
       if (minX > offset.dx) {

@@ -44,7 +44,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cubeGroupNotifier = getSketchNotifier(context, listen: true);
+    final sketchNotifier = getSketchNotifier(context, listen: true);
 
     final gestureMode = getGestureMode(context, listen: true);
 
@@ -58,8 +58,8 @@ class _PainterPageState extends State<PainterPage> {
             child: Stack(
               children: [
                 const Tiles(),
-                if (cubeGroupNotifier.hasCubes)
-                  StaticCubes(cubeGroup: cubeGroupNotifier.cubeGroup),
+                if (sketchNotifier.hasCubes)
+                  StaticCubes(sketch: sketchNotifier.sketch),
                 ..._cubes.animCubes,
               ],
             ),

@@ -48,15 +48,15 @@ class Cubes {
   /// which then creates a similar list
   /// If we are in add gestureMode
   /// the cubes will end up going
-  /// in the cubeGroup once they've animated to full size.
+  /// in the sketch once they've animated to full size.
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubes array once the
   /// anim is done.
   void adopt(List<AnimCube> orphans) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
-    final cubeGroupNotifier = getSketchNotifier(context);
-    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubeInfos;
+    final sketchNotifier = getSketchNotifier(context);
+    final List<CubeInfo> cubeInfos = sketchNotifier.sketch.cubeInfos;
 
     if (erase) {
       for (final AnimCube cube in orphans) {
@@ -115,8 +115,8 @@ class Cubes {
   }
 
   void _addAnimCubes() {
-    final cubeGroupNotifier = getSketchNotifier(context);
-    final List<CubeInfo> cubeInfos = cubeGroupNotifier.cubeGroup.cubeInfos;
+    final sketchNotifier = getSketchNotifier(context);
+    final List<CubeInfo> cubeInfos = sketchNotifier.sketch.cubeInfos;
 
     animCubes.clear();
 
@@ -132,7 +132,7 @@ class Cubes {
       ));
     }
 
-    cubeGroupNotifier.clear();
+    sketchNotifier.clear();
     setState(() {});
   }
 }

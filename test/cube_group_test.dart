@@ -26,14 +26,14 @@ void main() {
     });
 
     test('save', () {
-      const cubeGroup = Sketch(<CubeInfo>[]);
-      String newJson = jsonEncode(cubeGroup);
+      const sketch = Sketch(<CubeInfo>[]);
+      String newJson = jsonEncode(sketch);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const cubeGroup = Sketch(<CubeInfo>[]);
-      String newJson = cubeGroup.toString();
+      const sketch = Sketch(<CubeInfo>[]);
+      String newJson = sketch.toString();
       expect(testJson, equals(newJson));
     });
   });
@@ -73,14 +73,14 @@ void main() {
     });
 
     test('save', () {
-      const cubeGroup = Sketch(testCubes);
-      String newJson = jsonEncode(cubeGroup);
+      const sketch = Sketch(testCubes);
+      String newJson = jsonEncode(sketch);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const cubeGroup = Sketch(testCubes);
-      String newJson = cubeGroup.toString();
+      const sketch = Sketch(testCubes);
+      String newJson = sketch.toString();
       expect(testJson, equals(newJson));
     });
   });
