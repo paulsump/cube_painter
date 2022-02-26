@@ -1,4 +1,4 @@
-import 'package:cube_painter/buttons/cube_button.dart';
+import 'package:cube_painter/buttons/gesture_mode_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/buttons/open_file_menu_button.dart';
 import 'package:cube_painter/buttons/open_slice_menu_button.dart';
@@ -23,55 +23,43 @@ class PageButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gestureMode = getGestureMode(context, listen: true);
-    // final double width = getScreenWidth(context);
 
     final bool canUndo = undoer.canUndo;
     final bool canRedo = undoer.canRedo;
 
     return Column(
       children: [
-        Container(
-          color: Colors.yellow,
-          child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const OpenFileMenuButton(),
-                Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  CubeButton(
-                    radioOn: GestureMode.addWhole == gestureMode,
-                    icon: DownloadedIcons.plusOutline,
-                    iconSize: downloadedIconSize,
-                    onPressed: () =>
-                        setGestureMode(GestureMode.addWhole, context),
-                    tip:
-                        'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+        Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const OpenFileMenuButton(),
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                const GestureModeCubeButton(
+                  mode: GestureMode.addWhole,
+                  icon: DownloadedIcons.plusOutline,
+                  tip:
+                      'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                ),
+                const GestureModeCubeButton(
+                  mode: GestureMode.erase,
+                  icon: DownloadedIcons.cancelOutline,
+                  tip:
+                      'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                ),
+                HexagonElevatedButton(
+                  radioOn: GestureMode.panZoom == gestureMode,
+                  child: Icon(
+                    Icons.zoom_in_sharp,
+                    size: normalIconSize * 1.2,
+                    color: enabledIconColor,
                   ),
-                  CubeButton(
-                    radioOn: GestureMode.erase == gestureMode,
-                    icon: DownloadedIcons.cancelOutline,
-                    iconSize: downloadedIconSize,
-                    onPressed: () {
-                      setGestureMode(GestureMode.erase, context);
-                    },
-                    tip:
-                        'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-                  ),
-                  HexagonElevatedButton(
-                    radioOn: GestureMode.panZoom == gestureMode,
-                    child: Icon(
-                      Icons.zoom_in_sharp,
-                      size: normalIconSize * 1.2,
-                      color: enabledIconColor,
-                    ),
-                    onPressed: () =>
-                        setGestureMode(GestureMode.panZoom, context),
-                    tip: 'Pinch to zoom, drag to move around.',
-                  ),
-                  const OpenSliceMenuButton(),
-                ]),
+                  onPressed: () => setGestureMode(GestureMode.panZoom, context),
+                  tip: 'Pinch to zoom, drag to move around.',
+                ),
+                const OpenSliceMenuButton(),
               ]),
-        ),
+            ]),
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
           if (canUndo || canRedo)
             HexagonElevatedButton(
