@@ -1,6 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/downloaded_icons.dart';
+import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 
 class HexagonElevatedButton extends StatelessWidget {
@@ -23,26 +23,25 @@ class HexagonElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double elevation = 8.0;
 
     return Transform.translate(
-      offset: Offset(0, on ? 1.0 : -1.0) * elevation / 4,
+      offset: Offset(0, on ? 1.0 : -1.0) * buttonElevation / 4,
       child: Tooltip(
         message: tip,
         decoration: BoxDecoration(color: backgroundColor.withOpacity(0.7)),
-        child: _buildElevatedButton(elevation),
+        child: _buildElevatedButton(),
       ),
     );
   }
 
-  ElevatedButton _buildElevatedButton(double elevation) {
+  ElevatedButton _buildElevatedButton() {
     final borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
 
     return ElevatedButton(
       onPressed: onPressed,
       child: child,
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
+        elevation: MaterialStateProperty.all(on ? 0.0 : buttonElevation),
         shadowColor: on ? null : MaterialStateProperty.all(bl),
         fixedSize: MaterialStateProperty.all(pageButtonSize),
         shape: MaterialStateProperty.all(

@@ -1,5 +1,4 @@
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
@@ -13,8 +12,8 @@ class Background extends StatelessWidget {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           // colors: <Color>[Colors.red, Colors.black],
-          // colors: <Color>[buttonColor, backgroundColor],
-          colors: <Color>[getColor(Side.br), getColor(Side.t)],
+          colors: <Color>[buttonColor, backgroundColor],
+          // colors: <Color>[getColor(Side.t), getColor(Side.br)],
         ),
       ),
     );

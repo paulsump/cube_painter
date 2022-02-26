@@ -1,6 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/downloaded_icons.dart';
+import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 
 class MenuItem {

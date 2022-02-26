@@ -3,6 +3,7 @@ import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/buttons/open_file_menu_button.dart';
 import 'package:cube_painter/buttons/open_slice_menu_button.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
@@ -60,6 +61,7 @@ class PageButtons extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            const SizedBox(height: buttonElevation),
             UndoButton(undoer: undoer),
             UndoButton(undoer: undoer, redo: true),
             // HACK without a big container, the buttons don't response, and now it's needed to stop the undo buttons being centered

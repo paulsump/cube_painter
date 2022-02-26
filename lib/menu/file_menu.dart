@@ -1,6 +1,7 @@
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
+import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/menu/file_menu_button.dart';
