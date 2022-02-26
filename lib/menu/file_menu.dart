@@ -143,7 +143,7 @@ class _FileMenuState extends State<FileMenu> {
       title: title,
       content: 'Save the current changes?',
       yesCallBack: getSketchBank(context).saveFile,
-      noCallBack: getSketchBank(context).removeIfNeverSaved,
+      noCallBack: getSketchBank(context).resetCurrentSketch,
     );
   }
 
@@ -167,9 +167,7 @@ class _FileMenuState extends State<FileMenu> {
               noCallBack?.call();
               Navigator.of(context).pop(true);
             },
-      cancelCallBack: () {
-        Navigator.of(context).pop(false);
-      },
+      cancelCallBack: () => Navigator.of(context).pop(false),
     );
 
     final bool? yes = await showDialog(

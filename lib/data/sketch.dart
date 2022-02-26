@@ -121,7 +121,7 @@ class SketchBank extends ChangeNotifier {
       await saveSettings();
     }
 
-    final firstPath = await _loadAllSketchs();
+    final firstPath = await _loadAllSketches();
 
     if (currentFilePath.isEmpty) {
       //  Most recently created is now first in list
@@ -212,15 +212,8 @@ class SketchBank extends ChangeNotifier {
     _sketches.addAll(copy);
   }
 
-  // we might never have saved a new filename, so check existence
-  Future<void> removeIfNeverSaved() async {
-    final File file = File(currentFilePath);
-
-    if (!await file.exists()) {
-      _sketches.remove(sketch);
-
-      notifyListeners();
-    }
+  Future<void> resetCurrentSketch() async {
+    _sketches[currentFilePath] = Sketch.fromString(_savedJson);
   }
 
   Future<void> deleteCurrentFile() async {
@@ -244,7 +237,7 @@ class SketchBank extends ChangeNotifier {
 
   void clear() => sketch.cubeInfos.clear();
 
-  Future<String> _loadAllSketchs({bool ignoreCurrent = false}) async {
+  Future<String> _loadAllSketches({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     List<String> paths = await getAllAppFilePaths(appFolder);
