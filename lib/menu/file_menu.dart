@@ -31,12 +31,17 @@ class _FileMenuState extends State<FileMenu> {
   Widget build(BuildContext context) {
     final sketchBank = getSketchBank(context);
 
+    pop(funk) => () {
+          funk();
+          Navigator.of(context).pop();
+        };
+
     final items = <MenuItem>[
       MenuItem(
         tip: 'Create a new file',
         icon: DownloadedIcons.docNew,
         iconSize: downloadedIconSize * 0.96,
-        onPressed: _newFile,
+        onPressed: pop(_newFile),
       ),
       MenuItem(
         tip: 'Save the current file',
