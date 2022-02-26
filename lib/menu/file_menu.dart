@@ -73,7 +73,7 @@ class _FileMenuState extends State<FileMenu> {
               const Divider(),
               for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
                 Transform.translate(
-                  offset: Offset(i % 2 == 0 ? -offsetX : offsetX, 0),
+                  offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
                   child: HexagonBorderButton(
                     tip: 'Load this file',
                     onPressed: () =>
@@ -122,15 +122,10 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _deleteCurrentFile() async {
-    final sketchBank = getSketchBank(context);
-    _deleteFile(filePath: sketchBank.currentFilePath);
-  }
-
-  void _deleteFile({required String filePath}) async {
     if (await _askDelete()) {
       final sketchBank = getSketchBank(context);
 
-      await sketchBank.deleteFile(filePath: filePath);
+      await sketchBank.deleteCurrrentFile();
       setState(() {});
     }
   }
