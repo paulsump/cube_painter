@@ -1,5 +1,6 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/downloaded_icons.dart';
 import 'package:flutter/material.dart';
 
 class HexagonElevatedButton extends StatelessWidget {
@@ -7,7 +8,6 @@ class HexagonElevatedButton extends StatelessWidget {
 
   final Widget child;
 
-  final double height;
 
   bool get on => radioOn ?? false;
   final bool? radioOn;
@@ -18,7 +18,6 @@ class HexagonElevatedButton extends StatelessWidget {
     required this.child,
     required this.onPressed,
     required this.tip,
-    this.height = 66,
     this.radioOn,
   }) : super(key: key);
 
@@ -45,7 +44,7 @@ class HexagonElevatedButton extends StatelessWidget {
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(on ? 0.0 : elevation),
         shadowColor: on ? null : MaterialStateProperty.all(bl),
-        fixedSize: MaterialStateProperty.all(Size(height, height)),
+        fixedSize: MaterialStateProperty.all(pageButtonSize),
         shape: MaterialStateProperty.all(
           HexagonBorder(side: borderSide),
         ),

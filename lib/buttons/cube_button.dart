@@ -15,7 +15,6 @@ class CubeButton extends StatelessWidget {
   final String tip;
 
   final Slice slice;
-  final double height;
 
   const CubeButton({
     Key? key,
@@ -25,7 +24,6 @@ class CubeButton extends StatelessWidget {
     this.icon,
     this.iconSize,
     this.slice = Slice.whole,
-    this.height = 70,
   }) : super(key: key);
 
   @override
@@ -34,7 +32,6 @@ class CubeButton extends StatelessWidget {
         null != icon ? const Offset(1, 1) * iconSize! / 2 : Offset.zero;
 
     return HexagonElevatedButton(
-      height: height,
       radioOn: radioOn,
       child: Stack(
         children: [

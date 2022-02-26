@@ -9,7 +9,6 @@ class OpenFileMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HexagonElevatedButton(
-      height: 66,
       child: Icon(
         Icons.folder_sharp,
         color: enabledIconColor,
