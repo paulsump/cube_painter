@@ -1,3 +1,4 @@
+import 'package:cube_painter/__background.dart';
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/cubes/cubes.dart';
@@ -54,15 +55,7 @@ class _PainterPageState extends State<PainterPage> {
       drawerEnableOpenDragGesture: false,
       body: SafeArea(
         child: Stack(children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: <Color>[Colors.red, Colors.black],
-              ),
-            ),
-          ),
+          const Background(),
           UnitToScreen(
             child: Stack(
               children: [
