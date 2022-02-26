@@ -125,7 +125,7 @@ class _FileMenuState extends State<FileMenu> {
     if (await _askDelete()) {
       final sketchBank = getSketchBank(context);
 
-      await sketchBank.deleteCurrrentFile();
+      await sketchBank.deleteCurrentFile();
       setState(() {});
     }
   }
@@ -134,26 +134,25 @@ class _FileMenuState extends State<FileMenu> {
     return await _askYesNoOrCancel(
       title: 'Delete',
       content: 'Delete current file?',
-      yesCancelOnly: true,
+      onlyYesAndCancelButtons: true,
     );
   }
 
   Future<bool> _askSaveCurrent({required String title}) async {
     return await _askYesNoOrCancel(
-        title: title,
-        content: 'Save the current changes?',
-        yesCallBack: () {
-          final sketchBank = getSketchBank(context);
-
-          sketchBank.saveFile();
-        });
+      title: title,
+      content: 'Save the current changes?',
+      yesCallBack: getSketchBank(context).saveFile,
+      noCallBack: getSketchBank(context).removeIfNeverSaved,
+    );
   }
 
   Future<bool> _askYesNoOrCancel({
     required String title,
     required String content,
     VoidCallback? yesCallBack,
-    bool yesCancelOnly = false,
+    VoidCallback? noCallBack,
+    bool onlyYesAndCancelButtons = false,
   }) async {
     final alert = Alert(
       title: title,
@@ -162,9 +161,10 @@ class _FileMenuState extends State<FileMenu> {
         yesCallBack?.call();
         Navigator.of(context).pop(true);
       },
-      noCallBack: yesCancelOnly
+      noCallBack: onlyYesAndCancelButtons
           ? null
           : () {
+              noCallBack?.call();
               Navigator.of(context).pop(true);
             },
       cancelCallBack: () {

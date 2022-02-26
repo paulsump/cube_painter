@@ -212,7 +212,18 @@ class SketchBank extends ChangeNotifier {
     _sketches.addAll(copy);
   }
 
-  Future<void> deleteCurrrentFile() async {
+  // we might never have saved a new filename, so check existence
+  Future<void> removeIfNeverSaved() async {
+    final File file = File(currentFilePath);
+
+    if (!await file.exists()) {
+      _sketches.remove(sketch);
+
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteCurrentFile() async {
     _sketches.remove(currentFilePath);
 
     final File file = File(currentFilePath);
