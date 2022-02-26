@@ -89,11 +89,22 @@ class BrushState extends State<Brush> {
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
 
-    // TODO only add if info.center is diff , to sop flickiering
-    widget._animCubes.clear();
-    _addCube(brushMaths.startPosition, slice);
+    final newPosition = brushMaths.startPosition;
 
-    setState(() {});
+    if (widget._animCubes.isEmpty) {
+      _addCube(newPosition, slice);
+
+      setState(() {});
+    } else {
+      final oldPosition = widget._animCubes.first.fields.info.center;
+
+      if (oldPosition != newPosition) {
+        widget._animCubes.clear();
+
+        _addCube(newPosition, slice);
+        setState(() {});
+      }
+    }
   }
 
   void _updateExtrude(details, BuildContext context) {
