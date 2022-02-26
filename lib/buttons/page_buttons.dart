@@ -1,4 +1,4 @@
-import 'package:cube_painter/buttons/gesture_mode_button.dart';
+import 'package:cube_painter/buttons/gesture_mode_cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/buttons/open_file_menu_button.dart';
 import 'package:cube_painter/buttons/open_slice_menu_button.dart';
