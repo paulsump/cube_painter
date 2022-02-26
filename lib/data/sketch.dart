@@ -13,8 +13,8 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-SketchNotifier getSketchNotifier(BuildContext context, {bool listen = false}) =>
-    Provider.of<SketchNotifier>(context, listen: listen);
+SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
+    Provider.of<SketchBank>(context, listen: listen);
 
 const cubesExtension = '.cubes.json';
 
@@ -48,9 +48,9 @@ class Sketch {
 }
 
 /// access to the main store of the entire model
-/// TODO Rename to StaticSketchNotifier if i've got an AnimSketchNotifier
+/// TODO Rename to StaticSketchBank if i've got an AnimSketchBank
 /// TODO Rename to ShapeBank
-class SketchNotifier extends ChangeNotifier {
+class SketchBank extends ChangeNotifier {
   // TODO RENAME TO _sketchMap
   final _sketchs = <String, Sketch>{};
 

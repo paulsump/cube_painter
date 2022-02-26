@@ -19,7 +19,7 @@ class FileMenu extends StatefulWidget {
 class _FileMenuState extends State<FileMenu> {
   @override
   Widget build(BuildContext context) {
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
 
     final items = <MenuItem>[
       MenuItem(
@@ -90,7 +90,7 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _newFile() async {
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
 
     if (!sketchNotifier.modified || await _askSaveCurrent(title: 'New File')) {
       sketchNotifier.newFile();
@@ -99,7 +99,7 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _loadFile({required String filePath}) async {
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
 
     if (!sketchNotifier.modified || await _askSaveCurrent(title: 'Load File')) {
       sketchNotifier.loadFile(filePath: filePath);
@@ -108,27 +108,27 @@ class _FileMenuState extends State<FileMenu> {
   }
 
   void _saveFile() async {
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
 
     await sketchNotifier.saveFile();
     setState(() {});
   }
 
   void _saveACopyFile() async {
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
 
     await sketchNotifier.saveACopyFile();
     setState(() {});
   }
 
   void _deleteCurrentFile() async {
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
     _deleteFile(filePath: sketchNotifier.currentFilePath);
   }
 
   void _deleteFile({required String filePath}) async {
     if (await _askDelete()) {
-      final sketchNotifier = getSketchNotifier(context);
+      final sketchNotifier = getSketchBank(context);
 
       await sketchNotifier.deleteFile(filePath: filePath);
       setState(() {});
@@ -148,7 +148,7 @@ class _FileMenuState extends State<FileMenu> {
         title: title,
         content: 'Save the current changes?',
         yesCallBack: () {
-          final sketchNotifier = getSketchNotifier(context);
+          final sketchNotifier = getSketchBank(context);
 
           sketchNotifier.saveFile();
         });

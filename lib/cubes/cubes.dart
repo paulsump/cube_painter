@@ -26,7 +26,7 @@ class Cubes {
     setState = setState_;
     context = context_;
 
-    getSketchNotifier(context).init(onSuccessfulLoad: () {
+    getSketchBank(context).init(onSuccessfulLoad: () {
       undoer.clear();
       _addAnimCubes();
     });
@@ -55,7 +55,7 @@ class Cubes {
   void adopt(List<AnimCube> orphans) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
     final List<CubeInfo> cubeInfos = sketchNotifier.sketch.cubeInfos;
 
     if (erase) {
@@ -104,7 +104,7 @@ class Cubes {
   }
 
   void _convertToStaticCube(AnimCube old) {
-    final notifier = getSketchNotifier(context);
+    final notifier = getSketchBank(context);
 
     notifier.addCubeInfo(old.fields.info);
   }
@@ -115,7 +115,7 @@ class Cubes {
   }
 
   void _addAnimCubes() {
-    final sketchNotifier = getSketchNotifier(context);
+    final sketchNotifier = getSketchBank(context);
     final List<CubeInfo> cubeInfos = sketchNotifier.sketch.cubeInfos;
 
     animCubes.clear();

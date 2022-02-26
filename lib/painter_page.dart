@@ -44,7 +44,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final sketchNotifier = getSketchNotifier(context, listen: true);
+    final sketchNotifier = getSketchBank(context, listen: true);
 
     final gestureMode = getGestureMode(context, listen: true);
 
