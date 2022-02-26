@@ -104,9 +104,9 @@ class Cubes {
   }
 
   void _convertToStaticCube(AnimCube old) {
-    final notifier = getSketchBank(context);
+    final sketchBank = getSketchBank(context);
 
-    notifier.addCubeInfo(old.fields.info);
+    sketchBank.addCubeInfo(old.fields.info);
   }
 
   dynamic _convertToStaticCubeAndRemoveSelf(AnimCube old) {
