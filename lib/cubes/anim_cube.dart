@@ -48,7 +48,7 @@ class AnimCube extends StatefulWidget {
 
   final Widget _unitCube;
 
-  final Offset offset;
+  final Offset _offset;
 
   AnimCube({
     Key? key,
@@ -56,7 +56,7 @@ class AnimCube extends StatefulWidget {
   })  : _unitCube = fields.info.slice == Slice.whole
             ? const FullUnitCube()
             : SliceUnitCube(slice: fields.info.slice),
-        offset = positionToUnitOffset(fields.info.center),
+        _offset = positionToUnitOffset(fields.info.center),
         super(key: key);
 
   @override
@@ -77,6 +77,7 @@ class _AnimCubeState extends State<AnimCube>
     if (widget.fields.start != widget.fields.end) {
       if (widget.fields.pingPong) {
         _controller.repeat();
+        // _controller.value = widget.fields.controllerValue;
       } else {
         _controller
             .forward()
@@ -104,7 +105,7 @@ class _AnimCubeState extends State<AnimCube>
         return Stack(
           children: [
             Transform.translate(
-              offset: widget.offset,
+              offset: widget._offset,
               child: Transform.scale(
                 scale: widget.fields._scale,
                 child: widget._unitCube,
