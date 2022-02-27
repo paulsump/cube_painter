@@ -2,8 +2,8 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
-class Ground extends StatelessWidget {
-  const Ground({Key? key}) : super(key: key);
+class Horizon extends StatelessWidget {
+  const Horizon({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => const CustomPaint(painter: _Painter());

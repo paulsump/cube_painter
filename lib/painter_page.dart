@@ -7,7 +7,7 @@ import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/ground.dart';
+import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/menu/paintings_menu.dart';
 import 'package:cube_painter/menu/slice_mode_menu.dart';
 import 'package:cube_painter/out.dart';
@@ -63,7 +63,7 @@ class _PainterPageState extends State<PainterPage> {
               child: Stack(
                 children: [
                   /// TODO Responsive to screen size- magic numbers
-                  Transform.scale(scale: 30, child: const Ground()),
+                  Transform.scale(scale: 30, child: const Horizon()),
                   // const Tiles(),
                   if (sketchBank.hasCubes)
                     StaticCubes(sketch: sketchBank.sketch),
