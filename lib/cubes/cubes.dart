@@ -74,26 +74,22 @@ class Cubes {
     }
 
     for (final CubeInfo orphan in orphans) {
-      if (false) {
-        // if (orphan.scale == (erase ? 0 : 1)) {
-        //  if (!erase) {
-        //    _convertToStaticCube(orphan);
-        //  }
-      } else {
-        animCubes.add(AnimCube(
-          key: UniqueKey(),
-          fields: Fields(
-            info: orphan,
-            // start: orphan.scale,
-            start: !erase ? 0.0 : 1.0,
-            end: erase ? 0.0 : 1.0,
-            // end: erase ? 0.0 : 0.7,
-            whenComplete:
-                erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
-            duration: 222,
-          ),
-        ));
-      }
+      // if (orphan.scale == (erase ? 0 : 1)) {
+      //  if (!erase) {
+      //    _convertToStaticCube(orphan);
+      //  }
+      animCubes.add(AnimCube(
+        key: UniqueKey(),
+        fields: Fields(
+          info: orphan,
+          // start: orphan.scale,
+          start: !erase ? 0.0 : 1.0,
+          end: erase ? 0.0 : 1.0,
+          // end: erase ? 0.0 : 0.7,
+          whenComplete: erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
+          duration: 222,
+        ),
+      ));
     }
     setState(() {});
   }

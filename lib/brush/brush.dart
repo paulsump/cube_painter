@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:cube_painter/brush/brush_maths.dart';
 import 'package:cube_painter/brush/positions.dart';
