@@ -2,6 +2,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
+/// TODO continue documenting classes from HERE
 class FullUnitCube extends StatelessWidget {
   const FullUnitCube({Key? key}) : super(key: key);
 

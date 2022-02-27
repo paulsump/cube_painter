@@ -6,7 +6,8 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
-/// the maths for extruding blocks of cubes
+/// Used by [Brush],
+/// this is the maths for placing lines of cubes.
 class BrushMaths {
   /// dragged start point in grid space
   late Offset _startUnit;

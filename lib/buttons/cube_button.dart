@@ -5,6 +5,9 @@ import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:flutter/material.dart';
 
+/// A button with a cube on it.
+/// It can have an [Icon] too e.g. the plus sign for adding cubes.
+/// The cube might be a whole cube or a slice of a cube.
 class CubeButton extends StatelessWidget {
   final bool? radioOn;
 

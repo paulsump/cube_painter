@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out];
 
-/// all the button on the PainterPage
+/// Just a container for all the button on the main [PainterPage].
+/// Organised using [Column]s and [Row]s
 class PageButtons extends StatelessWidget {
   final Undoer undoer;
 
@@ -74,6 +75,9 @@ class PageButtons extends StatelessWidget {
   }
 }
 
+/// An undo or a redo button.
+/// Pressing it will undo the previous action.
+/// The redo button appears only if undo was pressed.
 class _UndoButton extends StatelessWidget {
   final Undoer undoer;
   final bool redo;

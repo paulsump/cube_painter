@@ -14,6 +14,9 @@ import 'package:provider/provider.dart';
 
 const noWarn = [out, Position];
 
+/// Turns gestures into a line of cubes or a single slice cube
+/// depending on the [GestureMode].  In [GestureMode.erase] mode it yields the
+/// position you tapped in order to delete a single cube.
 class Brush extends StatefulWidget {
   final _cubeInfos = <CubeInfo>[];
 
@@ -21,6 +24,9 @@ class Brush extends StatefulWidget {
 
   Brush({Key? key, required this.adoptCubes}) : super(key: key);
 
+  /// This is called by the [BrushState].
+  /// It's where the positions of the cubes are given away
+  /// to the [Cubes] calling class via a callback [adoptCubes]
   void _handOver() {
     if (_cubeInfos.isNotEmpty) {
       final orphans = _cubeInfos.toList();
@@ -38,10 +44,9 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   final brushMaths = BrushMaths();
-
   var previousPositions = Positions.empty;
-  bool tapped = false;
 
+  bool tapped = false;
   final double start = 0.0;
 
   double get end => GestureMode.addWhole == getGestureMode(context) ? 1.0 : 3.0;

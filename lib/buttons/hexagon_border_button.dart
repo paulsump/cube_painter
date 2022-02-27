@@ -2,6 +2,8 @@ import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
+/// A flat looking button compared to the raised [HexagonElevatedButton].
+/// Used in two ways on the [PaintingsMenu].
 class HexagonBorderButton extends StatelessWidget {
   final VoidCallback? onPressed;
 

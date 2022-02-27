@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
+/// For the [SlicesMenu].
+/// A button with a sliced cube on it.
 class SliceCubeButton extends StatelessWidget {
   final Slice slice;
 

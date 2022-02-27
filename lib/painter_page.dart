@@ -52,7 +52,7 @@ class _PainterPageState extends State<PainterPage> {
 
     return Scaffold(
       drawer: const PaintingsMenu(),
-      endDrawer: const SliceModeMenu(),
+      endDrawer: const SlicesMenu(),
       drawerEnableOpenDragGesture: false,
       body: Container(
         color: backgroundColor,

@@ -9,8 +9,9 @@ import 'package:flutter/cupertino.dart';
 
 const noWarn = out;
 
-/// Used to represent the side of the cube
-/// anti clockwise from top right
+/// Used to represent the 3 sides of the 'cube'.
+/// Anti clockwise from top right.
+/// TODO Rename these to top, bottomLeft and bottomRight
 enum Side {
   // 0 top
   t,
@@ -20,6 +21,7 @@ enum Side {
   br
 }
 
+/// for painting each side of a cube.
 class CubeSide {
   final Side side;
 
@@ -27,11 +29,9 @@ class CubeSide {
 
   const CubeSide(this.side, this.path);
 
-  Paint getPaint(PaintingStyle style) {
-    return Paint()
-      ..color = getColor(side)
-      ..style = style;
-  }
+  Paint getPaint(PaintingStyle style) => Paint()
+    ..color = getColor(side)
+    ..style = style;
 
   Paint getGradientPaint(PaintingStyle style) {
     // out(_getGradient(side));

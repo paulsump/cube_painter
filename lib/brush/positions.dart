@@ -5,7 +5,8 @@ import 'package:cube_painter/out.dart';
 
 const noWarn = out;
 
-/// for passing around cube positions
+/// A holder for passing around cube positions.
+/// Comparable with [operator ==]
 class Positions {
   final List<Position> list;
 

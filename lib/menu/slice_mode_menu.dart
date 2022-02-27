@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-class SliceModeMenu extends StatefulWidget {
-  const SliceModeMenu({Key? key}) : super(key: key);
+class SlicesMenu extends StatefulWidget {
+  const SlicesMenu({Key? key}) : super(key: key);
 
   @override
-  State<SliceModeMenu> createState() => _SliceModeMenuState();
+  State<SlicesMenu> createState() => _SlicesMenuState();
 }
 
-class _SliceModeMenuState extends State<SliceModeMenu> {
+class _SlicesMenuState extends State<SlicesMenu> {
   @override
   Widget build(BuildContext context) {
     const double w = 14;

@@ -4,6 +4,7 @@ import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 
+/// Params for constructing [PaintingsMenuButton]s
 class PaintingsMenuItem {
   final String tip;
   final IconData icon;
@@ -20,13 +21,14 @@ class PaintingsMenuItem {
   });
 }
 
+/// the little icon buttons at the top of the [PaintingsMenu] (the file menu).
 class PaintingsMenuButton extends StatelessWidget {
+  final PaintingsMenuItem item;
+
   const PaintingsMenuButton({
     Key? key,
     required this.item,
   }) : super(key: key);
-
-  final PaintingsMenuItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,8 @@ class PaintingsMenuButton extends StatelessWidget {
   }
 }
 
+/// Pressing this button opens up the [Drawer] for the
+/// [PaintingsMenu] (the file menu).
 class OpenPaintingsMenuButton extends StatelessWidget {
   const OpenPaintingsMenuButton({Key? key}) : super(key: key);
 

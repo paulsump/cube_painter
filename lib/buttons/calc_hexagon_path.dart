@@ -6,7 +6,8 @@ import 'package:vector_math/vector_math.dart';
 
 const noWarn = out;
 
-//TODO remove this file and use getHexagonCornerOffsets() instead
+/// TODO remove this file and use getHexagonCornerOffsets() instead
+/// used to create [HexagonBorderButton]s
 Path calcHexagonPath(Offset center, double radius) {
   final points = <Offset>[];
 

@@ -3,6 +3,8 @@ import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:flutter/material.dart';
 
+/// A radio button with a cube
+/// used for setting [GestureMode]
 class GestureModeCubeButton extends StatelessWidget {
   final GestureMode mode;
 

@@ -6,6 +6,8 @@ import 'package:cube_painter/data/sketch.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
+/// Auto generated (painted) thumbnail of a [Sketch]
+/// Used on the buttons on the [PaintingsMenu]
 class Thumbnail extends StatelessWidget {
   final Sketch sketch;
 
@@ -13,20 +15,20 @@ class Thumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scoff = calcUnitScaleAndOffset();
+    final unitScaleAndOffset = calcUnitScaleAndOffset();
 
-    final scale = scoff[0];
-    final offset = scoff[1];
+    final scale = unitScaleAndOffset[0];
+    final offset = unitScaleAndOffset[1];
 
     return Container(
       color: Colors.transparent,
+
       /// TODO Responsive to screen size- magic numbers
       width: 99,
       height: 179,
       child: Transform.scale(
         scale: 111 / scale,
         child: Transform.translate(
-
           /// TODO Responsive to screen size- magic numbers
           offset: const Offset(47.5, 90) - offset,
           child: StaticCubes(sketch: sketch),

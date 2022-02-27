@@ -12,6 +12,8 @@ class HexagonElevatedButton extends StatelessWidget {
   final bool? radioOn;
   final String tip;
 
+  /// The underlying class for radio and push buttons.
+  /// Raised with a shadow, as opposed to the flat [HexagonBorderButton].
   const HexagonElevatedButton({
     Key? key,
     required this.child,
