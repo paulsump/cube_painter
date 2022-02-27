@@ -49,7 +49,7 @@ class _PainterPageState extends State<PainterPage> {
     final sketchBank = getSketchBank(context, listen: true);
 
     final gestureMode = getGestureMode(context, listen: true);
-    out(MediaQuery.of(context).padding);
+
     return Scaffold(
       drawer: const PaintingsMenu(),
       endDrawer: const SliceModeMenu(),
