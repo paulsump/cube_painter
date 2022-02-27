@@ -46,15 +46,14 @@ class Fields {
 class AnimCube extends StatefulWidget {
   final Fields fields;
 
-  final Widget cube;
+  final Widget _unitCube;
 
-  // allowing _addOrMoveCube to set this so that we can keep the current _controller value when dragging a delete or slice cube.
-  Offset offset;
+  final Offset offset;
 
   AnimCube({
     Key? key,
     required this.fields,
-  })  : cube = fields.info.slice == Slice.whole
+  })  : _unitCube = fields.info.slice == Slice.whole
             ? const FullUnitCube()
             : SliceUnitCube(slice: fields.info.slice),
         offset = positionToUnitOffset(fields.info.center),
@@ -108,7 +107,7 @@ class _AnimCubeState extends State<AnimCube>
               offset: widget.offset,
               child: Transform.scale(
                 scale: widget.fields._scale,
-                child: widget.cube,
+                child: widget._unitCube,
               ),
             ),
           ],

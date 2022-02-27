@@ -62,7 +62,7 @@ class BrushState extends State<Brush> {
         if (GestureMode.addWhole == getGestureMode(context)) {
           _updateExtrude(details, context);
         } else {
-          _addOrMoveCube(details.localPosition, context);
+          _replaceCube(details.localPosition, context);
         }
       },
       onPanEnd: (details) {
@@ -71,7 +71,7 @@ class BrushState extends State<Brush> {
       },
       onTapDown: (details) {
         tapped = true;
-        _addOrMoveCube(details.localPosition, context);
+        _replaceCube(details.localPosition, context);
       },
       onTapUp: (details) {
         tapped = false;
@@ -80,7 +80,7 @@ class BrushState extends State<Brush> {
     );
   }
 
-  void _addOrMoveCube(Offset point, BuildContext context) {
+  void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
 
     if (getGestureMode(context) == GestureMode.addSlice) {
@@ -100,7 +100,10 @@ class BrushState extends State<Brush> {
       final oldPosition = widget._animCubes.first.fields.info.center;
 
       if (oldPosition != newPosition) {
-        widget._animCubes.first.offset = positionToUnitOffset(newPosition);
+        widget._animCubes.clear();
+
+        // TODO fix jump in animation due to not passing current _controller value through
+        _addCube(newPosition, slice);
         setState(() {});
       }
     }
