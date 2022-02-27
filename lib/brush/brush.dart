@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cube_painter/brush/brush_maths.dart';
 import 'package:cube_painter/brush/positions.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
@@ -41,8 +43,9 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
   var previousPositions = Positions.empty;
   bool tapped = false;
 
-  final start = 0.0;
-  final end = 1.0; //3
+  final double start = 0.0;
+
+  double get end => GestureMode.addWhole == getGestureMode(context) ? 1.0 : 3.0;
 
   @override
   void initState() {
@@ -57,6 +60,8 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final int n = widget._cubeInfos.length;
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -70,10 +75,11 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
               UnitToScreen(
                 child: Stack(
                   children: [
-                    for (CubeInfo info in widget._cubeInfos)
+                    for (int i = 0; i < n; ++i)
                       ScaledCube(
-                          scale: pingPongBetween(start, end, _controller.value),
-                          info: info),
+                          scale: pingPongBetween(
+                              start, end, _controller.value + 1 * i / n),
+                          info: widget._cubeInfos[i]),
                   ],
                 ),
               ),
@@ -83,7 +89,7 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
             // if tapped, use that fromPosition since it's where the user started, and therefore better
             if (!tapped) {
               final Offset startUnit =
-                  screenToUnit(details.localPosition, context);
+              screenToUnit(details.localPosition, context);
               brushMaths.calcStartPosition(startUnit);
             }
           },
