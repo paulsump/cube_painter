@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-typedef JsonList = List<String>;
+typedef StringList = List<String>;
 
 class Undoer {
   final BuildContext context;
   final void Function(VoidCallback fn) setState;
 
-  final JsonList _undos = [];
-  final JsonList _redos = [];
+  final StringList _undos = [];
+  final StringList _redos = [];
 
   Undoer(this.context, {required this.setState});
 
@@ -39,15 +39,14 @@ class Undoer {
     setState(() {});
   }
 
-  void _popFromPushTo(JsonList popFrom, JsonList pushTo) {
+  void _popFromPushTo(StringList popFrom, StringList pushTo) {
     _saveTo(pushTo);
 
     final sketchBank = getSketchBank(context);
     sketchBank.setJson(popFrom.removeLast());
   }
 
-  void _saveTo(JsonList list) {
-    final sketchBank = getSketchBank(context);
-    list.add(sketchBank.json);
+  void _saveTo(StringList list) {
+    list.add(getSketchBank(context).json);
   }
 }

@@ -98,7 +98,11 @@ class UndoButton extends StatelessWidget {
               size: normalIconSize * 1.2,
               color: enabled ? enabledIconColor : disabledIconColor,
             ),
-            onPressed: redo ? undoer.redo : undoer.undo,
+            onPressed: enabled
+                ? redo
+                    ? undoer.redo
+                    : undoer.undo
+                : null,
             tip: redo
                 ? 'Redo the last add or delete operation that was undone.'
                 : 'Undo the last add or delete operation.',
