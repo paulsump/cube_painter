@@ -6,6 +6,7 @@ import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +62,7 @@ class BrushState extends State<Brush> {
         if (GestureMode.addWhole == getGestureMode(context)) {
           _updateExtrude(details, context);
         } else {
-          _replaceCube(details.localPosition, context);
+          _addOrMoveCube(details.localPosition, context);
         }
       },
       onPanEnd: (details) {
@@ -70,7 +71,7 @@ class BrushState extends State<Brush> {
       },
       onTapDown: (details) {
         tapped = true;
-        _replaceCube(details.localPosition, context);
+        _addOrMoveCube(details.localPosition, context);
       },
       onTapUp: (details) {
         tapped = false;
@@ -79,7 +80,7 @@ class BrushState extends State<Brush> {
     );
   }
 
-  void _replaceCube(Offset point, BuildContext context) {
+  void _addOrMoveCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
 
     if (getGestureMode(context) == GestureMode.addSlice) {
@@ -99,9 +100,7 @@ class BrushState extends State<Brush> {
       final oldPosition = widget._animCubes.first.fields.info.center;
 
       if (oldPosition != newPosition) {
-        widget._animCubes.clear();
-
-        _addCube(newPosition, slice);
+        widget._animCubes.first.offset = positionToUnitOffset(newPosition);
         setState(() {});
       }
     }

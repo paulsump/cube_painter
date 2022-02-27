@@ -48,7 +48,8 @@ class AnimCube extends StatefulWidget {
 
   final Widget cube;
 
-  final Offset offset;
+  // allowing _addOrMoveCube to set this so that we can keep the current _controller value when dragging a delete or slice cube.
+  Offset offset;
 
   AnimCube({
     Key? key,
@@ -78,12 +79,11 @@ class _AnimCubeState extends State<AnimCube>
       if (widget.fields.pingPong) {
         _controller.repeat();
       } else {
-        //TODO PASS data into whenComplete()
         _controller
             .forward()
-        //TODO pass Fields
             .whenComplete(widget.fields.whenComplete?.call(widget));
-        // .whenComplete(widget.data.whenComplete?.call(widget.data));
+        //TODO PASS fields into whenComplete()
+        // .whenComplete(widget.data.whenComplete?.call(widget.fields));
       }
     }
     super.initState();
