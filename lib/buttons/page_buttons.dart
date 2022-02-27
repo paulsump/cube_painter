@@ -26,6 +26,7 @@ class PageButtons extends StatelessWidget {
     final gestureMode = getGestureMode(context, listen: true);
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,13 +38,13 @@ class PageButtons extends StatelessWidget {
                   mode: GestureMode.addWhole,
                   icon: DownloadedIcons.plusOutline,
                   tip:
-                      'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                  'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
                 ),
                 const GestureModeCubeButton(
                   mode: GestureMode.erase,
                   icon: DownloadedIcons.cancelOutline,
                   tip:
-                      'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                  'Tap on a cube to delete it.  You can change the position while you have your finger down.',
                 ),
                 HexagonElevatedButton(
                   radioOn: GestureMode.panZoom == gestureMode,
@@ -62,8 +63,8 @@ class PageButtons extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const SizedBox(height: buttonElevation),
-            UndoButton(undoer: undoer),
-            UndoButton(undoer: undoer, redo: true),
+            _UndoButton(undoer: undoer),
+            _UndoButton(undoer: undoer, redo: true),
             // HACK without a big container, the buttons don't response, and now it's needed to stop the undo buttons being centered
             Container(),
           ],
@@ -73,11 +74,11 @@ class PageButtons extends StatelessWidget {
   }
 }
 
-class UndoButton extends StatelessWidget {
+class _UndoButton extends StatelessWidget {
   final Undoer undoer;
   final bool redo;
 
-  const UndoButton({
+  const _UndoButton({
     Key? key,
     required this.undoer,
     this.redo = false,
