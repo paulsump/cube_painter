@@ -1,29 +1,30 @@
 import 'package:cube_painter/brush/brush_maths.dart';
 import 'package:cube_painter/brush/positions.dart';
-import 'package:cube_painter/cubes/anim_cube.dart';
+import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/data/cube_info.dart';
 import 'package:cube_painter/data/position.dart';
 import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
+import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 const noWarn = [out, Position];
 
 class Brush extends StatefulWidget {
-  final _animCubes = <AnimCube>[];
+  final _cubeInfos = <CubeInfo>[];
 
-  final void Function(List<AnimCube> orphans) adoptCubes;
+  final void Function(List<CubeInfo> orphans) adoptCubes;
 
   Brush({Key? key, required this.adoptCubes}) : super(key: key);
 
   void _handOver() {
-    if (_animCubes.isNotEmpty) {
-      final orphans = _animCubes.toList();
+    if (_cubeInfos.isNotEmpty) {
+      final orphans = _cubeInfos.toList();
 
-      _animCubes.clear();
+      _cubeInfos.clear();
       adoptCubes(orphans);
     }
   }
@@ -32,49 +33,80 @@ class Brush extends StatefulWidget {
   State<Brush> createState() => BrushState();
 }
 
-class BrushState extends State<Brush> {
+class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
   final brushMaths = BrushMaths();
 
   var previousPositions = Positions.empty;
   bool tapped = false;
 
+  final start = 0.0;
+  final end = 1.0; //3
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    _controller.repeat();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      child: Stack(
-        children: [
-          // HACK without this container,
-          // onPanStart etc doesn't get called after cubes are added.
-          Container(),
-          UnitToScreen(child: Stack(children: widget._animCubes)),
-        ],
-      ),
-      onPanStart: (details) {
-        // if tapped, use that fromPosition since it's where the user started, and therefore better
-        if (!tapped) {
-          final Offset startUnit = screenToUnit(details.localPosition, context);
-          brushMaths.calcStartPosition(startUnit);
-        }
-      },
-      onPanUpdate: (details) {
-        if (GestureMode.addWhole == getGestureMode(context)) {
-          _updateExtrude(details, context);
-        } else {
-          _replaceCube(details.localPosition, context);
-        }
-      },
-      onPanEnd: (details) {
-        tapped = false;
-        widget._handOver();
-      },
-      onTapDown: (details) {
-        tapped = true;
-        _replaceCube(details.localPosition, context);
-      },
-      onTapUp: (details) {
-        tapped = false;
-        widget._handOver();
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          child: Stack(
+            children: [
+              // HACK without this container,
+              // onPanStart etc doesn't get called after cubes are added.
+              Container(),
+              UnitToScreen(
+                child: Stack(
+                  children: [
+                    for (CubeInfo info in widget._cubeInfos)
+                      ScaledCube(
+                          scale: pingPongBetween(start, end, _controller.value),
+                          info: info),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          onPanStart: (details) {
+            // if tapped, use that fromPosition since it's where the user started, and therefore better
+            if (!tapped) {
+              final Offset startUnit =
+                  screenToUnit(details.localPosition, context);
+              brushMaths.calcStartPosition(startUnit);
+            }
+          },
+          onPanUpdate: (details) {
+            if (GestureMode.addWhole == getGestureMode(context)) {
+              _updateExtrude(details, context);
+            } else {
+              _replaceCube(details.localPosition, context);
+            }
+          },
+          onPanEnd: (details) {
+            tapped = false;
+            widget._handOver();
+          },
+          onTapDown: (details) {
+            tapped = true;
+            _replaceCube(details.localPosition, context);
+          },
+          onTapUp: (details) {
+            tapped = false;
+            widget._handOver();
+          },
+        );
       },
     );
   }
@@ -91,15 +123,15 @@ class BrushState extends State<Brush> {
 
     final newPosition = brushMaths.startPosition;
 
-    if (widget._animCubes.isEmpty) {
+    if (widget._cubeInfos.isEmpty) {
       _addCube(newPosition, slice);
 
       setState(() {});
     } else {
-      final oldPosition = widget._animCubes.first.fields.info.center;
+      final oldPosition = widget._cubeInfos.first.center;
 
       if (oldPosition != newPosition) {
-        widget._animCubes.clear();
+        widget._cubeInfos.clear();
 
         // TODO fix jump in animation due to not passing current _controller value through
         _addCube(newPosition, slice);
@@ -116,14 +148,14 @@ class BrushState extends State<Brush> {
       // using order provided by extruder
       // only add new cubes, deleting any old ones
 
-      var copy = widget._animCubes.toList();
-      widget._animCubes.clear();
+      var copy = widget._cubeInfos.toList();
+      widget._cubeInfos.clear();
 
       for (Position position in positions.list) {
-        AnimCube? cube = _findAt(position, copy);
+        CubeInfo? cube = _findAt(position, copy);
 
         if (cube != null) {
-          widget._animCubes.add(cube);
+          widget._cubeInfos.add(cube);
         } else {
           _addCube(position, Slice.whole);
         }
@@ -134,21 +166,14 @@ class BrushState extends State<Brush> {
   }
 
   void _addCube(Position center, Slice slice) {
-    widget._animCubes.add(AnimCube(
-        key: UniqueKey(),
-        fields: Fields(
-          info: CubeInfo(center: center, slice: slice),
-          start: 0.0,
-          end: getGestureMode(context) == GestureMode.addWhole ? 1.0 : 3.0,
-          pingPong: true,
-        )));
+    widget._cubeInfos.add(CubeInfo(center: center, slice: slice));
   }
 }
 
-AnimCube? _findAt(Position position, List<AnimCube> list) {
-  for (final cube in list) {
-    if (position == cube.fields.info.center) {
-      return cube;
+CubeInfo? _findAt(Position position, List<CubeInfo> list) {
+  for (final info in list) {
+    if (position == info.center) {
+      return info;
     }
   }
   return null;

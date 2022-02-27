@@ -44,3 +44,29 @@ class StaticCube extends StatelessWidget {
     );
   }
 }
+
+class ScaledCube extends StatelessWidget {
+  final CubeInfo info;
+  final double scale;
+
+  const ScaledCube({
+    Key? key,
+    required this.info,
+    required this.scale,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Offset offset = positionToUnitOffset(info.center);
+
+    return Transform.translate(
+      offset: offset,
+      child: Transform.scale(
+        scale: scale,
+        child: info.slice == Slice.whole
+            ? const FullUnitCube()
+            : SliceUnitCube(slice: info.slice),
+      ),
+    );
+  }
+}

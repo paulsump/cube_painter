@@ -52,16 +52,15 @@ class Cubes {
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubes array once the
   /// anim is done.
-  void adopt(List<AnimCube> orphans) {
+  void adopt(List<CubeInfo> orphans) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
     final sketchBank = getSketchBank(context);
     final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
 
     if (erase) {
-      for (final AnimCube cube in orphans) {
-        final CubeInfo? cubeInfo =
-            _getCubeInfoAt(cube.fields.info.center, cubeInfos);
+      for (final CubeInfo orphan in orphans) {
+        final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
 
         if (cubeInfo != null) {
           assert(orphans.length == 1);
@@ -74,18 +73,19 @@ class Cubes {
       undoer.save();
     }
 
-    for (final AnimCube cube in orphans) {
-      if (cube.fields.scale == (erase ? 0 : 1)) {
-        if (!erase) {
-          _convertToStaticCube(cube);
-        }
+    for (final CubeInfo orphan in orphans) {
+      if (false) {
+        // if (orphan.scale == (erase ? 0 : 1)) {
+        //  if (!erase) {
+        //    _convertToStaticCube(orphan);
+        //  }
       } else {
         animCubes.add(AnimCube(
           key: UniqueKey(),
           fields: Fields(
-            info: cube.fields.info,
-            start: cube.fields.scale,
-//TODO            Fix extrude leaves in wrong order on simulator       //THEN put back
+            info: orphan,
+            // start: orphan.scale,
+            start: !erase ? 0.0 : 1.0,
             end: erase ? 0.0 : 1.0,
             // end: erase ? 0.0 : 0.7,
             whenComplete:
