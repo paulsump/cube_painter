@@ -59,11 +59,10 @@ class _PainterPageState extends State<PainterPage> {
         color: backgroundColor,
         child: SafeArea(
           child: Stack(children: [
+            const UnitToScreenHorizon(child: Horizon()),
             UnitToScreen(
               child: Stack(
                 children: [
-                  /// TODO Responsive to screen size- magic numbers
-                  Transform.scale(scale: 30, child: const Horizon()),
                   // const Tiles(),
                   if (sketchBank.hasCubes)
                     StaticCubes(sketch: sketchBank.sketch),

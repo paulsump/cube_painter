@@ -24,3 +24,25 @@ class UnitToScreen extends StatelessWidget {
     );
   }
 }
+
+/// move the horizon less, to fake 3d
+/// translate to screen, then zoom
+class UnitToScreenHorizon extends StatelessWidget {
+  final Widget child;
+
+  const UnitToScreenHorizon({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      /// TODO Responsive to screen size- magic numbers
+      offset:
+          getPanOffset(context, listen: true) / 1.2 + getScreenCenter(context),
+      child: Transform.scale(
+        /// TODO Responsive to screen size- magic numbers
+        scale: 30 * getZoomScale(context),
+        child: child,
+      ),
+    );
+  }
+}
