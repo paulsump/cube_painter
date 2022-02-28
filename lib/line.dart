@@ -18,6 +18,7 @@ class Line extends StatelessWidget {
       CustomPaint(painter: _Painter(from, to, color));
 }
 
+/// the painter for [Line]
 class _Painter extends CustomPainter {
   final Color color;
 

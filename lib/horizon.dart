@@ -9,6 +9,7 @@ class Horizon extends StatelessWidget {
   Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
 }
 
+/// the painter for [Horizon]
 class _Painter extends CustomPainter {
   const _Painter();
 

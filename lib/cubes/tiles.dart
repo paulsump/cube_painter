@@ -110,6 +110,7 @@ class _UnitTile extends StatelessWidget {
   Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
 }
 
+/// the painter for [_UnitTile]
 class _Painter extends CustomPainter {
   const _Painter();
 

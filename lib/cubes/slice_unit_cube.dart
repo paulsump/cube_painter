@@ -13,6 +13,7 @@ class SliceUnitCube extends StatelessWidget {
       );
 }
 
+/// the painter for [SliceUnitCube]
 class _Painter extends CustomPainter {
   final List<CubeSide> cubeSides;
 

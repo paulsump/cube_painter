@@ -13,6 +13,7 @@ class WholeUnitCube extends StatelessWidget {
   Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
 }
 
+/// the painter for [WholeUnitCube]
 class _Painter extends CustomPainter {
   const _Painter();
 
