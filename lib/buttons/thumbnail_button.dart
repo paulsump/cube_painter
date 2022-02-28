@@ -23,17 +23,17 @@ class ThumbnailButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double height = 185;
+
     return Tooltip(
       message: tip,
       child: SizedBox(
         /// TODO Responsive to screen size- magic numbers
-        width: 99,
-        height: 179,
+        height: height,
         child: TextButton(
           onPressed: onPressed,
           child: Transform.scale(
-            /// TODO Responsive to screen size- magic numbers
-            scale: 111,
+            scale: height * 0.6,
             child: UnitThumbnail(sketch: sketch),
           ),
           style: ButtonStyle(
