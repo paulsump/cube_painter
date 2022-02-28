@@ -1,11 +1,11 @@
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/buttons/hexagon_border_button.dart';
+import 'package:cube_painter/buttons/paintings_menu_buttons.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/constants.dart';
-import 'package:cube_painter/persisted/sketch.dart';
 import 'package:cube_painter/downloaded_icons.dart';
-import 'package:cube_painter/buttons/paintings_menu_button.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/sketch.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -82,7 +82,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 for (PaintingsMenuItem item in items)
-                  PaintingsMenuButton(item: item),
+                  FlatIconHexagonButton(item: item),
               ],
             ),
             const SizedBox(height: 5.0),
