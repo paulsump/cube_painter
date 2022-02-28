@@ -11,6 +11,7 @@ const noWarn = out;
 
 /// Auto generated (painted) thumbnail of a [Sketch]
 /// Used on the buttons on the [PaintingsMenu]
+/// 'Unit' means this thumbnail has size of 1
 class UnitThumbnail extends StatelessWidget {
   final Sketch sketch;
 
@@ -23,13 +24,15 @@ class UnitThumbnail extends StatelessWidget {
     final unitScale = unitScaleAndOffset[0];
     final unitOffset = unitScaleAndOffset[1];
 
-    return Transform.scale(
-      scale: 1 / unitScale,
-      child: Transform.translate(
-        offset: -unitOffset,
-        child: StaticCubes(sketch: sketch),
-      ),
-    );
+    return sketch.cubeInfos.isNotEmpty
+        ? Transform.scale(
+            scale: 1 / unitScale,
+            child: Transform.translate(
+              offset: -unitOffset,
+              child: StaticCubes(sketch: sketch),
+            ),
+          )
+        : Container();
   }
 }
 
@@ -62,5 +65,6 @@ calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {
   // out('$minX,$maxX,$rangeX');
   // out('$minY,$maxY,$rangeY');
 
-  return [max(rangeX, rangeY), Offset(minX + maxX, minY + maxY) / 2];
+  // Add 1 to scale for half the size of cube each side of center.
+  return [1 + max(rangeX, rangeY), Offset(minX + maxX, minY + maxY) / 2];
 }

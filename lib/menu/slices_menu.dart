@@ -64,10 +64,10 @@ class _SlicesMenuState extends State<SlicesMenu> {
               child: Text('Slices are used to create'),
             ),
             const Center(
-              child: Text('impossible Escher like structures'),
+              child: Text('impossible Escher-like'),
             ),
             const Center(
-              child: Text('like this...'),
+              child: Text('structures like this...'),
             ),
             padY,
             const _Example(),
@@ -99,20 +99,25 @@ class _ExampleState extends State<_Example> {
 
   Future<void> _loadAssets() async {
     final assets = await Assets.getStrings('help/triangle_');
+
     _triangleWithGap = Sketch.fromString(assets['triangle_with_gap.json']!);
     _triangleGap = Sketch.fromString(assets['triangle_gap.json']!);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        if (_triangleWithGap != null) UnitThumbnail(sketch: _triangleWithGap!),
-        if (_triangleGap != null)
-          //TODO _AnimThumbnail
-          UnitThumbnail(sketch: _triangleGap!),
-        Container(),
-      ],
+    return Transform.scale(
+      scale: 111,
+      child: Stack(
+        children: [
+          if (_triangleWithGap != null)
+            UnitThumbnail(sketch: _triangleWithGap!),
+          if (_triangleGap != null)
+            //TODO _AnimThumbnail
+            UnitThumbnail(sketch: _triangleGap!),
+          // Container(),
+        ],
+      ),
     );
   }
 }
