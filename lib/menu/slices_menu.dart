@@ -2,8 +2,7 @@ import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/assets.dart';
-import 'package:cube_painter/persisted/sketch.dart';
+import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/material.dart';
 
@@ -82,37 +81,12 @@ class _SlicesMenuState extends State<SlicesMenu> {
   }
 }
 
-class _Example extends StatefulWidget {
+class _Example extends StatelessWidget {
   const _Example({Key? key}) : super(key: key);
 
   @override
-  State<_Example> createState() => _ExampleState();
-}
-
-class _ExampleState extends State<_Example> {
-  Sketch? _triangleWithGap;
-
-  Sketch? _triangleGap;
-
-  @override
-  void initState() {
-    _loadAssets();
-
-    super.initState();
-  }
-
-  Future<void> _loadAssets() async {
-    final assets = await Assets.getStrings('help/triangle_');
-
-    _triangleWithGap = Sketch.fromString(assets['triangle_with_gap.json']!);
-    _triangleGap = Sketch.fromString(assets['triangle_gap.json']!);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final unitTransform = _triangleWithGap == null
-        ? const UnitTransform(scale: 1, offset: Offset.zero)
-        : _triangleWithGap!.unitTransform;
+    final sketchBank = getSketchBank(context);
 
     return Transform.translate(
       /// TODO Responsive to screen size- magic numbers
@@ -122,18 +96,15 @@ class _ExampleState extends State<_Example> {
         scale: 211,
         child: Stack(
           children: [
-            if (_triangleWithGap != null)
+            Thumbnail(
+              sketch: sketchBank.example.triangleWithGap,
+              unitTransform: sketchBank.example.unitTransform,
+            ),
               Thumbnail(
-                sketch: _triangleWithGap!,
-                unitTransform: unitTransform,
-              ),
-            if (_triangleWithGap != null && _triangleGap != null)
-              Thumbnail(
-                sketch: _triangleGap!,
-                unitTransform: unitTransform,
-              ),
-            if (_triangleWithGap == null && _triangleGap == null)
-              Container(color: Colors.yellow),
+              sketch: sketchBank.example.triangleGap,
+              unitTransform: sketchBank.example.unitTransform,
+            ),
+            // Container(color: Colors.yellow),
           ],
         ),
       ),

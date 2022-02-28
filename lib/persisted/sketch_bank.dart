@@ -26,6 +26,8 @@ const cubesExtension = '.cubes.json';
 class SketchBank extends ChangeNotifier {
   final _sketches = <String, Sketch>{};
 
+  final example = SlicesExample();
+
   late String settingsPath;
   late Settings _settings;
 
@@ -37,8 +39,8 @@ class SketchBank extends ChangeNotifier {
 
   bool get hasCubes =>
       _sketches.isNotEmpty &&
-          _hasSketchForCurrentFilePath &&
-          sketch.cubeInfos.isNotEmpty;
+      _hasSketchForCurrentFilePath &&
+      sketch.cubeInfos.isNotEmpty;
 
   bool get _hasSketchForCurrentFilePath {
     if (!_sketches.containsKey(currentFilePath)) {
@@ -60,7 +62,7 @@ class SketchBank extends ChangeNotifier {
   Sketch get sketch {
     if (!_hasSketchForCurrentFilePath) {
       assert(false,
-      "_sketchs doesn't contain key of currentFilePath: $currentFilePath");
+          "_sketchs doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.empty();
@@ -110,6 +112,8 @@ class SketchBank extends ChangeNotifier {
 
     _savedJson = json;
     _updateAfterLoad();
+
+    unawaited(example.init());
   }
 
   void _updateAfterLoad() {
@@ -259,5 +263,20 @@ class SketchBank extends ChangeNotifier {
 
     await Assets.copyAllFromTo(assetsFolder, appFolderPath,
         extensionReplacement: cubesExtension);
+  }
+}
+
+class SlicesExample {
+  late Sketch triangleWithGap;
+
+  late Sketch triangleGap;
+
+  UnitTransform get unitTransform => triangleWithGap.unitTransform;
+
+  Future<void> init() async {
+    final assets = await Assets.getStrings('help/triangle_');
+
+    triangleWithGap = Sketch.fromString(assets['triangle_with_gap.json']!);
+    triangleGap = Sketch.fromString(assets['triangle_gap.json']!);
   }
 }
