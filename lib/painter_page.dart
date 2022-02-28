@@ -1,18 +1,21 @@
+import 'dart:async';
+
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/animated_scale_cubes.dart';
-import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/menu/paintings_menu.dart';
 import 'package:cube_painter/menu/slices_menu.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
+import 'package:cube_painter/undoer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,11 +37,25 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  final _cubes = Cubes();
+  late Undoer undoer;
+
+  void _addToAnimCubeInfos() {
+    final sketchBank = getSketchBank(context);
+
+    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
+
+    sketchBank.addAllToAnimCubeInfos(cubeInfos.toList());
+    cubeInfos.clear();
+  }
 
   @override
   void initState() {
-    _cubes.init(setState_: setState, context_: context);
+    unawaited(getSketchBank(context).init(onSuccessfulLoad: () {
+      undoer.clear();
+      _addToAnimCubeInfos();
+    }));
+
+    undoer = Undoer(context, setState: setState);
 
     super.initState();
   }
@@ -71,7 +88,7 @@ class _PainterPageState extends State<PainterPage> {
             if (sketchBank.animCubeInfos.isNotEmpty)
               AnimatedScaleCubes(cubeInfos: sketchBank.animCubeInfos),
             GestureMode.panZoom == gestureMode ? PanZoomer() : Brush(),
-            PageButtons(undoer: _cubes.undoer),
+            PageButtons(undoer: undoer),
           ]),
         ),
       ),

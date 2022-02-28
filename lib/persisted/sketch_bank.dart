@@ -37,6 +37,17 @@ class SketchBank extends ChangeNotifier {
     notifyListeners();
   }
 
+  //TODO FIx this copied coment
+  /// once the brush has finished, it
+  /// yields ownership of it's cubes to this parent widget.
+  /// which then creates a similar list
+  /// If we are in add gestureMode
+  /// the cubes will end up going
+  /// in the sketch once they've animated to full size.
+  /// if we're in erase gestureMode they shrink to zero.
+  /// either way they get removed from the animCubeInfos array once the
+  /// anim is done.
+
   void addAllToAnimCubeInfos(List<CubeInfo> orphans) {
     animCubeInfos.addAll(orphans);
     setPlaying(true);
