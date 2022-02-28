@@ -43,7 +43,7 @@ class CubeButton extends StatelessWidget {
             child: Transform.scale(
               scale: 21,
               child: slice == Slice.whole
-                  ? const FullUnitCube()
+                  ? const WholeUnitCube()
                   : SliceUnitCube(slice: slice),
             ),
           ),

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 /// a normal cube (not a [Slice])
 /// 'unit' means that it has a size of 1.
-class FullUnitCube extends StatelessWidget {
-  const FullUnitCube({Key? key}) : super(key: key);
+class WholeUnitCube extends StatelessWidget {
+  const WholeUnitCube({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => const CustomPaint(painter: _Painter());

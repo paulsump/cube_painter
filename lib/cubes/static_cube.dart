@@ -39,7 +39,7 @@ class StaticCube extends StatelessWidget {
     return Transform.translate(
       offset: offset,
       child: info.slice == Slice.whole
-          ? const FullUnitCube()
+          ? const WholeUnitCube()
           : SliceUnitCube(slice: info.slice),
     );
   }
@@ -64,7 +64,7 @@ class ScaledCube extends StatelessWidget {
       child: Transform.scale(
         scale: scale,
         child: info.slice == Slice.whole
-            ? const FullUnitCube()
+            ? const WholeUnitCube()
             : SliceUnitCube(slice: info.slice),
       ),
     );
