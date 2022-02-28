@@ -84,7 +84,7 @@ class _AnimCubeState extends State<AnimCube>
             .forward()
             .whenComplete(widget.fields.whenComplete?.call(widget));
         //TODO PASS fields into whenComplete()
-        // .whenComplete(widget.data.whenComplete?.call(widget.fields));
+        // .whenComplete(widget.fields.whenComplete?.call(widget.fields));
       }
     }
     super.initState();
