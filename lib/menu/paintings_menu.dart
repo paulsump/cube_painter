@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/buttons/paintings_menu_buttons.dart';
 import 'package:cube_painter/buttons/thumbnail_button.dart';
@@ -31,9 +33,9 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     final sketchBank = getSketchBank(context);
 
     pop(funk) => () {
-          funk();
-          Navigator.of(context).pop();
-        };
+      funk();
+      Navigator.of(context).pop();
+    };
 
     final items = <PaintingsMenuItem>[
       PaintingsMenuItem(
@@ -57,7 +59,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
       ),
       PaintingsMenuItem(
         tip:
-            'Delete the current painting. The next painting is loaded or a new blank one is created.',
+        'Delete the current painting. The next painting is loaded or a new blank one is created.',
         icon: Icons.delete,
         iconSize: normalIconSize,
         onPressed: _deleteCurrentFile,
@@ -164,21 +166,21 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   Future<bool> _askYesNoOrCancel({
     required String title,
     required String content,
-    VoidCallback? yesCallBack,
-    VoidCallback? noCallBack,
+    Future<void> Function()? yesCallBack,
+    Future<void> Function()? noCallBack,
     bool onlyYesAndCancelButtons = false,
   }) async {
     final alert = Alert(
       title: title,
       content: content,
       yesCallBack: () {
-        yesCallBack?.call();
+        unawaited(yesCallBack?.call());
         Navigator.of(context).pop(true);
       },
       noCallBack: onlyYesAndCancelButtons
           ? null
           : () {
-              noCallBack?.call();
+        unawaited(noCallBack?.call());
               Navigator.of(context).pop(true);
             },
       cancelCallBack: () => Navigator.of(context).pop(false),
