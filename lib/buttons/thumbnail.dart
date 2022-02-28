@@ -62,8 +62,8 @@ calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {
 
   final double rangeX = maxX - minX;
   final double rangeY = maxY - minY;
-  // out('$minX,$maxX,$rangeX');
-  // out('$minY,$maxY,$rangeY');
+  out('$minX,$maxX,$rangeX');
+  out('$minY,$maxY,$rangeY');
 
   // Add 1 to scale for half the size of cube each side of center.
   return [1 + max(rangeX, rangeY), Offset(minX + maxX, minY + maxY) / 2];

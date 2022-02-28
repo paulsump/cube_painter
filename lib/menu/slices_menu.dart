@@ -70,7 +70,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
               child: Text('structures like this...'),
             ),
             padY,
-            const _Example(),
+            const Center(child: _Example()),
           ],
         ),
       ),
@@ -106,17 +106,22 @@ class _ExampleState extends State<_Example> {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.scale(
-      scale: 111,
-      child: Stack(
-        children: [
-          if (_triangleWithGap != null)
-            UnitThumbnail(sketch: _triangleWithGap!),
-          if (_triangleGap != null)
-            //TODO _AnimThumbnail
-            UnitThumbnail(sketch: _triangleGap!),
-          // Container(),
-        ],
+// return Transform.scale(scale:29,child: const StaticCube(info: CubeInfo(center: Position(0,0), slice: Slice.whole)));
+    return Transform.translate(
+      offset: const Offset(0, 99),
+      child: Transform.scale(
+        scale: 111,
+        child: Stack(
+          children: [
+            if (_triangleWithGap != null)
+              UnitThumbnail(sketch: _triangleWithGap!),
+            if (_triangleGap != null)
+              //TODO _AnimThumbnail
+              UnitThumbnail(sketch: _triangleGap!),
+            if (_triangleWithGap == null && _triangleGap == null)
+              Container(color: Colors.yellow),
+          ],
+        ),
       ),
     );
   }
