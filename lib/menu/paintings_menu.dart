@@ -1,6 +1,5 @@
 import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/buttons/paintings_menu_buttons.dart';
-import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/buttons/thumbnail_button.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/downloaded_icons.dart';
@@ -94,7 +93,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
                   tip: 'Load this painting',
                   onPressed: () =>
                       _loadFile(filePath: sketchBank.sketchEntries[i].key),
-                  child: Thumbnail(sketch: sketchBank.sketchEntries[i].value),
+                  sketch: sketchBank.sketchEntries[i].value,
                 ),
               ),
             const Divider(),

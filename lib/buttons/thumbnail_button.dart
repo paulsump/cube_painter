@@ -1,5 +1,7 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
+import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/persisted/sketch.dart';
 import 'package:flutter/material.dart';
 
 /// A flat transparent button with a thumbnail on it.
@@ -8,24 +10,24 @@ import 'package:flutter/material.dart';
 class ThumbnailButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
-  final Widget child;
   final String tip;
+
+  final Sketch sketch;
 
   const ThumbnailButton({
     Key? key,
-    required this.child,
     required this.onPressed,
     required this.tip,
+    required this.sketch,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Tooltip(
       message: tip,
       child: TextButton(
         onPressed: onPressed,
-        child: child,
+        child: Thumbnail(sketch: sketch),
         style: ButtonStyle(
           shape: hexagonBorderShape,
           overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
