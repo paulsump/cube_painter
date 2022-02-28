@@ -23,9 +23,11 @@ class Fields {
 
   final bool isPingPong;
 
+  // todo remove this
   double get scale => _scale;
   double _scale = 1;
 
+  // todo remove this
   //TODO pass Fields
   final dynamic Function(AnimCube old)? whenComplete;
 

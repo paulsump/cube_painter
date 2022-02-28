@@ -65,7 +65,6 @@ class _PainterPageState extends State<PainterPage> {
                   // HACK FOR testing
                   if (sketchBank.hasCubes)
                     StaticCubes(sketch: sketchBank.sketch),
-                  ..._cubes.animCubes,
                 ],
               ),
             ),
