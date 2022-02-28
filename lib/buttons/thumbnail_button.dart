@@ -36,7 +36,7 @@ class ThumbnailButton extends StatelessWidget {
             scale: height * 0.6,
             child: Thumbnail(
               sketch: sketch,
-              unitTransform: calcUnitScaleAndOffset(sketch.cubeInfos),
+              unitTransform: sketch.unitTransform,
             ),
           ),
           style: ButtonStyle(

@@ -106,6 +106,10 @@ class _ExampleState extends State<_Example> {
 
   @override
   Widget build(BuildContext context) {
+    final unitTransform = _triangleWithGap == null
+        ? const UnitTransform(scale: 1, offset: Offset.zero)
+        : _triangleWithGap!.unitTransform;
+
     return Transform.translate(
       offset: const Offset(0, 99),
       child: Transform.scale(
@@ -115,15 +119,13 @@ class _ExampleState extends State<_Example> {
             if (_triangleWithGap != null)
               Thumbnail(
                 sketch: _triangleWithGap!,
-                unitTransform:
-                    calcUnitScaleAndOffset(_triangleWithGap!.cubeInfos),
+                unitTransform: unitTransform,
               ),
             if (_triangleWithGap != null && _triangleGap != null)
-              //TODO _AnimThumbnail
+            //TODO _AnimThumbnail
               Thumbnail(
                 sketch: _triangleGap!,
-                unitTransform:
-                    calcUnitScaleAndOffset(_triangleWithGap!.cubeInfos),
+                unitTransform: unitTransform,
               ),
             if (_triangleWithGap == null && _triangleGap == null)
               Container(color: Colors.yellow),
