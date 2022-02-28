@@ -127,7 +127,9 @@ class Cubes {
         fields: Fields(
           info: cubeInfos[i],
           start: unitPingPong((i % 6) / 6) / 2,
-          end: 1.0,
+          // end: 1.0,
+          // HACK FOR testing
+          end: 0.1,
           whenComplete: _convertToStaticCubeAndRemoveSelf,
         ),
       ));

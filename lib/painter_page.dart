@@ -1,6 +1,7 @@
 import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/animated_scale_cubes.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -61,12 +62,14 @@ class _PainterPageState extends State<PainterPage> {
             UnitToScreen(
               child: Stack(
                 children: [
-                  if (sketchBank.hasCubes)
-                    StaticCubes(sketch: sketchBank.sketch),
+                  // HACK FOR testing
+                  // if (sketchBank.hasCubes)
+                  //   StaticCubes(sketch: sketchBank.sketch),
                   ..._cubes.animCubes,
                 ],
               ),
             ),
+            AnimatedScaleCubes(cubeInfos: sketchBank.sketch.cubeInfos),
             GestureMode.panZoom == gestureMode
                 ? PanZoomer()
                 : Brush(adoptCubes: _cubes.adopt),
