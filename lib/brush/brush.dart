@@ -21,9 +21,7 @@ const noWarn = [out, Position];
 class Brush extends StatefulWidget {
   final _cubeInfos = <CubeInfo>[];
 
-  final void Function(List<CubeInfo> orphans) adoptCubes;
-
-  Brush({Key? key, required this.adoptCubes}) : super(key: key);
+  Brush({Key? key}) : super(key: key);
 
   @override
   State<Brush> createState() => BrushState();
@@ -122,10 +120,8 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
 
       widget._cubeInfos.clear();
       final sketchBank = getSketchBank(context);
-      sketchBank.animCubeInfos.addAll(orphans);
 
-      sketchBank.setPlaying(true);
-      // adoptCubes(orphans);
+      sketchBank.addAllToAnimCubeInfos(orphans);
     }
   }
 

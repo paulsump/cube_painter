@@ -56,9 +56,9 @@ class Cubes {
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubes array once the
   /// anim is done.
-  void adopt(List<CubeInfo> orphans) {
-    setState(() {});
-  }
+  // void adopt(List<CubeInfo> orphans) {
+  //   setState(() {});
+  // }
 
   dynamic _removeSelf(AnimCube old) {
     animCubes.remove(old);
@@ -77,10 +77,14 @@ class Cubes {
   }
 
   void _addAnimCubes() {
-    // return;
     final sketchBank = getSketchBank(context);
-    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
 
+    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
+    final orphans = cubeInfos.toList();
+    cubeInfos.clear();
+    sketchBank.addAllToAnimCubeInfos(orphans);
+
+    return;
     animCubes.clear();
 
     for (int i = 0; i < cubeInfos.length; ++i) {

@@ -30,11 +30,17 @@ class SketchBank extends ChangeNotifier {
 
   final animCubeInfos = <CubeInfo>[];
 
-  void addAllAnimCubeInfos() {
+  void addAllAnimCubeInfosToStaticCubeInfos() {
     sketch.cubeInfos.addAll(animCubeInfos);
 
     animCubeInfos.clear();
     notifyListeners();
+  }
+
+  void addAllToAnimCubeInfos(List<CubeInfo> orphans) {
+    animCubeInfos.addAll(orphans);
+    setPlaying(true);
+// notifyListeners();
   }
 
   late String settingsPath;
