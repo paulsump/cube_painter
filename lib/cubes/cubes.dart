@@ -1,9 +1,9 @@
 import 'package:cube_painter/cubes/anim_cube.dart';
+import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/sketch.dart';
-import 'package:cube_painter/gesture_mode.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/undoer.dart';
 import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +90,7 @@ class Cubes {
           end: erase ? 0.0 : 1.0,
           // end: erase ? 0.0 : 0.7,
           whenComplete: erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
-          duration: 222,
+          milliseconds: 222,
         ),
       ));
     }

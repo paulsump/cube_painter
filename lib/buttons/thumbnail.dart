@@ -39,7 +39,7 @@ class Thumbnail extends StatelessWidget {
                           start: 0,
                           end: 1.0,
                           pingPong: true,
-                          duration: 1888,
+                          milliseconds: 1888,
                         ),
                       )
                     : StaticCubes(sketch: sketch)),

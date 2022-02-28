@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/slice.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class Fields {
   //TODO pass Fields
   final dynamic Function(AnimCube old)? whenComplete;
 
-  final int duration;
+  final int milliseconds;
 
   Fields({
     required this.info,
@@ -36,7 +36,7 @@ class Fields {
     required this.end,
     this.pingPong = false,
     this.whenComplete,
-    this.duration = 800,
+    this.milliseconds = 800,
   });
 }
 
@@ -71,7 +71,7 @@ class _AnimCubeState extends State<AnimCube>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: Duration(milliseconds: widget.fields.duration),
+      duration: Duration(milliseconds: widget.fields.milliseconds),
       vsync: this,
     );
 
