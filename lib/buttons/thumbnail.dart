@@ -11,6 +11,7 @@ const noWarn = out;
 /// 'Unit' means this thumbnail has size of 1
 class Thumbnail extends StatelessWidget {
   final Sketch sketch;
+
   final UnitTransform unitTransform;
 
   const Thumbnail({

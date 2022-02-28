@@ -31,6 +31,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
             padY,
             const Center(child: Text('Slices')),
             padY,
+            padY,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
@@ -59,6 +60,9 @@ class _SlicesMenuState extends State<SlicesMenu> {
                 SliceCubeButton(slice: Slice.bottomRight),
               ],
             ),
+            padY,
+            padY,
+            padY,
             padY,
             const Center(
               child: Text('Slices are used to create'),
