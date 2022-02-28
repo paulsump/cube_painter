@@ -18,7 +18,6 @@ class Assets {
       if (filePath.startsWith(pathStartsWith)) {
         final fileName = filePath.split(Platform.pathSeparator).last;
 
-        //TODO could probably remove this await
         filePaths[fileName] = await rootBundle.loadString(filePath);
       }
     }

@@ -1,11 +1,10 @@
 import 'package:cube_painter/buttons/slice_cube_button.dart';
-import 'package:cube_painter/cubes/static_cube.dart';
+import 'package:cube_painter/buttons/thumbnail.dart';
+import 'package:cube_painter/downloaded_icons.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/assets.dart';
 import 'package:cube_painter/persisted/sketch.dart';
 import 'package:cube_painter/persisted/slice.dart';
-import 'package:cube_painter/downloaded_icons.dart';
-import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -64,7 +63,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
             const Text(
                 'Slices are used to create impossible Escher like structures like this...'),
             padY,
-            const _AnimThumbnail(),
+            const _Example(),
           ],
         ),
       ),
@@ -72,17 +71,17 @@ class _SlicesMenuState extends State<SlicesMenu> {
   }
 }
 
-class _AnimThumbnail extends StatefulWidget {
-  const _AnimThumbnail({Key? key}) : super(key: key);
+class _Example extends StatefulWidget {
+  const _Example({Key? key}) : super(key: key);
 
   @override
-  State<_AnimThumbnail> createState() => _AnimThumbnailState();
+  State<_Example> createState() => _ExampleState();
 }
 
-class _AnimThumbnailState extends State<_AnimThumbnail> {
-  Sketch? _triangle_with_gap;
+class _ExampleState extends State<_Example> {
+  Sketch? _triangleWithGap;
 
-  Sketch? _triangle_gap;
+  Sketch? _triangleGap;
 
   @override
   void initState() {
@@ -93,22 +92,20 @@ class _AnimThumbnailState extends State<_AnimThumbnail> {
 
   Future<void> _loadAssets() async {
     final assets = await Assets.getStrings('help/triangle_');
-    _triangle_with_gap = Sketch.fromString(assets['triangle_with_gap.json']!);
-    _triangle_gap = Sketch.fromString(assets['triangle_gap.json']!);
+    _triangleWithGap = Sketch.fromString(assets['triangle_with_gap.json']!);
+    _triangleGap = Sketch.fromString(assets['triangle_gap.json']!);
   }
 
   @override
   Widget build(BuildContext context) {
-    return UnitToScreen(
-      child: Stack(
-        children: [
-          if (_triangle_with_gap != null)
-            StaticCubes(sketch: _triangle_with_gap!),
-          if (_triangle_with_gap != null)
-            StaticCubes(sketch: _triangle_with_gap!),
-          Container(),
-        ],
-      ),
+    return Stack(
+      children: [
+        if (_triangleWithGap != null) Thumbnail(sketch: _triangleWithGap!),
+        if (_triangleGap != null)
+          //TODO _AnimThumbnail
+          Thumbnail(sketch: _triangleGap!),
+        Container(),
+      ],
     );
   }
 }
