@@ -54,7 +54,7 @@ class SketchBank extends ChangeNotifier {
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
 
-    saveSettings();
+    unawaited(saveSettings());
   }
 
   Sketch get sketch {

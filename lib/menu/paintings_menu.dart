@@ -33,9 +33,9 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     final sketchBank = getSketchBank(context);
 
     pop(funk) => () {
-      funk();
-      Navigator.of(context).pop();
-    };
+          funk();
+          Navigator.of(context).pop();
+        };
 
     final items = <PaintingsMenuItem>[
       PaintingsMenuItem(
@@ -59,7 +59,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
       ),
       PaintingsMenuItem(
         tip:
-        'Delete the current painting. The next painting is loaded or a new blank one is created.',
+            'Delete the current painting. The next painting is loaded or a new blank one is created.',
         icon: Icons.delete,
         iconSize: normalIconSize,
         onPressed: _deleteCurrentFile,

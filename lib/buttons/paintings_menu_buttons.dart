@@ -9,6 +9,7 @@ class PaintingsMenuItem {
   final String tip;
   final IconData icon;
   final double iconSize;
+  //not  Future<void> Function() because it's passed int TextButton etc anyway
   final VoidCallback onPressed;
   final bool enabled;
 
