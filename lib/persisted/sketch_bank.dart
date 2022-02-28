@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 
@@ -36,8 +37,8 @@ class SketchBank extends ChangeNotifier {
 
   bool get hasCubes =>
       _sketches.isNotEmpty &&
-      _hasSketchForCurrentFilePath &&
-      sketch.cubeInfos.isNotEmpty;
+          _hasSketchForCurrentFilePath &&
+          sketch.cubeInfos.isNotEmpty;
 
   bool get _hasSketchForCurrentFilePath {
     if (!_sketches.containsKey(currentFilePath)) {
@@ -59,7 +60,7 @@ class SketchBank extends ChangeNotifier {
   Sketch get sketch {
     if (!_hasSketchForCurrentFilePath) {
       assert(false,
-          "_sketchs doesn't contain key of currentFilePath: $currentFilePath");
+      "_sketchs doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.empty();
@@ -139,19 +140,19 @@ class SketchBank extends ChangeNotifier {
   Future<void> saveACopyFile() async {
     final jsonCopy = json;
 
-    await setNewFilePath();
+    await _setNewFilePath();
     pushSketch(Sketch.fromString(jsonCopy));
 
     _savedJson = json;
-    saveFile();
+    unawaited(saveFile());
   }
 
   void setJson(String json) => setSketch(Sketch.fromString(json));
 
   void addCubeInfo(CubeInfo info) => sketch.cubeInfos.add(info);
 
-  Future<void> setNewFilePath() async {
-    final String appFolderPath = await getAppFolderPath();
+  Future<void> _setNewFilePath() async {
+    final String appFolderPath = await _getAppFolderPath();
 
     final int uniqueId =
         (DateTime.now().millisecondsSinceEpoch - 1645648060000) ~/ 100;
@@ -159,20 +160,20 @@ class SketchBank extends ChangeNotifier {
     saveCurrentFilePath('$appFolderPath$uniqueId$cubesExtension');
   }
 
-  Future<String> getAppFolderPath() async {
+  Future<String> _getAppFolderPath() async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     return '${appFolder.path}${Platform.pathSeparator}';
   }
 
   Future<void> newFile() async {
-    await setNewFilePath();
+    await _setNewFilePath();
 
     pushSketch(Sketch.empty());
     _savedJson = json;
 
     _updateAfterLoad();
-    saveFile();
+    unawaited(saveFile());
   }
 
   // insert at the top of the list
@@ -243,7 +244,7 @@ class SketchBank extends ChangeNotifier {
   }
 
   Future<String> getSettingsPath() async {
-    final String appFolderPath = await getAppFolderPath();
+    final String appFolderPath = await _getAppFolderPath();
 
     return '$appFolderPath${Settings.fileName}';
   }
@@ -254,7 +255,7 @@ class SketchBank extends ChangeNotifier {
   Future<void> copySamples() async {
     const assetsFolder = 'samples/';
 
-    final String appFolderPath = await getAppFolderPath();
+    final String appFolderPath = await _getAppFolderPath();
 
     await Assets.copyAllFromTo(assetsFolder, appFolderPath,
         extensionReplacement: cubesExtension);
