@@ -20,7 +20,7 @@ class Fields {
   final double start;
   final double end;
 
-  final bool pingPong;
+  final bool isPingPong;
 
   double get scale => _scale;
   double _scale = 1;
@@ -34,7 +34,7 @@ class Fields {
     required this.info,
     required this.start,
     required this.end,
-    this.pingPong = false,
+    this.isPingPong = false,
     this.whenComplete,
     this.milliseconds = 800,
   });
@@ -76,7 +76,7 @@ class _AnimCubeState extends State<AnimCube>
     );
 
     if (widget.fields.start != widget.fields.end) {
-      if (widget.fields.pingPong) {
+      if (widget.fields.isPingPong) {
         _controller.repeat();
         // _controller.value = widget.fields.controllerValue;
       } else {
@@ -121,7 +121,7 @@ class _AnimCubeState extends State<AnimCube>
   double _scale() => lerpDouble(
         widget.fields.start,
         widget.fields.end,
-        widget.fields.pingPong
+    widget.fields.isPingPong
             ? unitPingPong(_controller.value)
             : _controller.value,
       )!;

@@ -38,7 +38,7 @@ class Thumbnail extends StatelessWidget {
                           info: sketch.cubeInfos[0],
                           start: 0,
                           end: 1.0,
-                          pingPong: true,
+                          isPingPong: true,
                           milliseconds: 1888,
                         ),
                       )
