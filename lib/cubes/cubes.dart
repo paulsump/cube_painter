@@ -58,6 +58,7 @@ class Cubes {
   /// either way they get removed from the animCubes array once the
   /// anim is done.
   void adopt(List<CubeInfo> orphans) {
+    getSketchBank(context).setPlaying(true);
     final bool erase = GestureMode.erase == getGestureMode(context);
 
     final sketchBank = getSketchBank(context);

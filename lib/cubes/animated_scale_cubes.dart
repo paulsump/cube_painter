@@ -5,6 +5,7 @@ import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
+import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +45,16 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
     if (widget.pingPong) {
       _controller.repeat();
     } else {
-      _controller.forward();
+      startForwardAnim();
     }
     super.initState();
+  }
+
+  void startForwardAnim() {
+    _controller.forward(from: 0).whenComplete(() {
+      out('complete');
+      getSketchBank(context).setPlaying(false);
+    });
   }
 
   @override
@@ -57,13 +65,12 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
   @override
   void didUpdateWidget(AnimatedScaleCubes oldWidget) {
-    _controller.forward(from: 0);
+    // if (getSketchBank(context, listen: true).playing) {
+    if (getSketchBank(context).playing) {
+      out('play');
+      startForwardAnim();
+    }
     super.didUpdateWidget(oldWidget);
-
-    // if (oldWidget.valueFromProvider == "whatever you want" &&
-    //     widget.valueFromProvider == "what you want that changed") {
-    //   trigger animations methods here
-    // }
   }
 
   @override

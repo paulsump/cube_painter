@@ -35,6 +35,16 @@ class SketchBank extends ChangeNotifier {
 
   String _savedJson = '';
 
+  bool _playing = false;
+
+  bool get playing => _playing;
+
+  void setPlaying(bool playing) {
+    _playing = playing;
+    // out(playing);
+    // notifyListeners();
+  }
+
   bool get modified => json != _savedJson;
 
   bool get hasCubes =>
@@ -55,6 +65,8 @@ class SketchBank extends ChangeNotifier {
 
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
+
+    setPlaying(true);
 
     unawaited(saveSettings());
   }
