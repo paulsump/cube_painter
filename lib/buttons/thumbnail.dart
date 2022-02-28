@@ -12,15 +12,19 @@ const noWarn = out;
 /// Auto generated (painted) thumbnail of a [Sketch]
 /// Used on the buttons on the [PaintingsMenu]
 /// 'Unit' means this thumbnail has size of 1
-class UnitThumbnail extends StatelessWidget {
+class Thumbnail extends StatelessWidget {
   final Sketch sketch;
 
-  const UnitThumbnail({Key? key, required this.sketch}) : super(key: key);
+  final UnitTransform unitTransform;
+
+  const Thumbnail({
+    Key? key,
+    required this.sketch,
+    required this.unitTransform,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final unitTransform = calcUnitScaleAndOffset(sketch.cubeInfos);
-
     return sketch.cubeInfos.isNotEmpty
         ? Transform.scale(
             scale: unitTransform.scale,
@@ -38,7 +42,6 @@ class UnitTransform {
   final Offset offset;
 
   const UnitTransform({required this.scale, required this.offset});
-// const UnitTransform.fromCubeInfos().this(scale:1,
 }
 
 UnitTransform calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {

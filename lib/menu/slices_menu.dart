@@ -113,10 +113,18 @@ class _ExampleState extends State<_Example> {
         child: Stack(
           children: [
             if (_triangleWithGap != null)
-              UnitThumbnail(sketch: _triangleWithGap!),
-            if (_triangleGap != null)
+              Thumbnail(
+                sketch: _triangleWithGap!,
+                unitTransform:
+                    calcUnitScaleAndOffset(_triangleWithGap!.cubeInfos),
+              ),
+            if (_triangleWithGap != null && _triangleGap != null)
               //TODO _AnimThumbnail
-              UnitThumbnail(sketch: _triangleGap!),
+              Thumbnail(
+                sketch: _triangleGap!,
+                unitTransform:
+                    calcUnitScaleAndOffset(_triangleWithGap!.cubeInfos),
+              ),
             if (_triangleWithGap == null && _triangleGap == null)
               Container(color: Colors.yellow),
           ],
