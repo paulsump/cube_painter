@@ -72,7 +72,7 @@ class SketchBank extends ChangeNotifier {
   UnmodifiableListView<MapEntry> get sketchEntries =>
       UnmodifiableListView<MapEntry>(_sketches.entries.toList());
 
-  void init({required VoidCallback onSuccessfulLoad}) async {
+  Future<void> init({required VoidCallback onSuccessfulLoad}) async {
     _onSuccessfulLoad = onSuccessfulLoad;
 
     settingsPath = await getSettingsPath();

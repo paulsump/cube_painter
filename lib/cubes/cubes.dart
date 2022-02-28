@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
@@ -29,10 +31,10 @@ class Cubes {
     setState = setState_;
     context = context_;
 
-    getSketchBank(context).init(onSuccessfulLoad: () {
+    unawaited(getSketchBank(context).init(onSuccessfulLoad: () {
       undoer.clear();
       _addAnimCubes();
-    });
+    }));
 
     undoer = Undoer(context, setState: setState);
   }
