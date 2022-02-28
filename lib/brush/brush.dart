@@ -14,7 +14,8 @@ import 'package:provider/provider.dart';
 const noWarn = [out, Position];
 
 /// Turns gestures into a line of cubes or a single slice cube
-/// depending on the [GestureMode].  In [GestureMode.erase] mode it yields the
+/// depending on the [GestureMode].
+/// In [GestureMode.erase] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brush extends StatefulWidget {
   final _cubeInfos = <CubeInfo>[];

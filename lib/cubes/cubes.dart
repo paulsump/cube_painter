@@ -12,10 +12,10 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out];
 
-/// TODO remove this class, it will disapear if i use ScaledCubes instead of AnimCubes.
 /// Cube widget store & functionality helper.
 /// A place to keep logic for adding cubes that were painted by the user.
 /// Handles the undoer.
+/// TODO remove this class, it will disappear if i use ScaledCubes instead of AnimCubes.
 class Cubes {
   late void Function(VoidCallback fn) setState;
 

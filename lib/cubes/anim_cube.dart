@@ -13,6 +13,7 @@ import '../unit_ping_pong.dart';
 
 const noWarn = [out, Slice, UnitToScreen];
 
+/// Params for creating [AnimCube]s
 // TODO rename to AnimCubeFields
 class Fields {
   final CubeInfo info;
@@ -40,6 +41,7 @@ class Fields {
   });
 }
 
+/// Unit cube or slice that animates itself based the [Fields] passed in.
 /// TODO Replace with [ScaledCube]s.
 /// It was fun to see if it worked putting the anim controller on every widget
 /// and it does, as long as you never need the anim controller value e.g. if you want to

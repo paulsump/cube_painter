@@ -4,7 +4,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 
-/// Params for constructing [FlatIconHexagonButton]s
+/// Params for constructing various [FlatIconHexagonButton]s
 class PaintingsMenuItem {
   final String tip;
   final IconData icon;
@@ -22,7 +22,8 @@ class PaintingsMenuItem {
   });
 }
 
-/// the little icon buttons at the top of the [PaintingsMenu] (the file menu).
+/// Translucent icon button.
+/// Used at the top of the [PaintingsMenu] (the file menu).
 class FlatIconHexagonButton extends StatelessWidget {
   final PaintingsMenuItem item;
 

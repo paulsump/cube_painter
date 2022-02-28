@@ -1,9 +1,9 @@
 import 'dart:collection';
 
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/slice.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -73,6 +73,7 @@ final _gradientBL = LinearGradient(
   end: Alignment.topRight,
 );
 
+/// returns a list of [CubeSide]s for painting a cube or various types of [Slice]
 UnmodifiableListView<CubeSide> getCubeSides(Slice slice) {
   final list = getCubeSidesAndUnitOffsets(slice);
 

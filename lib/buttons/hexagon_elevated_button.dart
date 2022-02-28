@@ -3,6 +3,7 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 
+/// A hexagon shaped button with a drop shadow.
 class HexagonElevatedButton extends StatelessWidget {
   final VoidCallback? onPressed;
 

@@ -1,16 +1,16 @@
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/constants.dart';
-import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-/// For the [SlicesMenu].
 /// A button with a sliced cube on it.
+/// For the [SlicesMenu].
 class SliceCubeButton extends StatelessWidget {
   final Slice slice;
 

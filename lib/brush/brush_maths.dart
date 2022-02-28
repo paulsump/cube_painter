@@ -1,13 +1,13 @@
 import 'dart:math';
 
 import 'package:cube_painter/brush/positions.dart';
-import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
+/// The maths for placing a line of cubes with one gesture.
 /// Used by [Brush],
-/// this is the maths for placing lines of cubes.
 class BrushMaths {
   /// dragged start point in grid space
   late Offset _startUnit;
