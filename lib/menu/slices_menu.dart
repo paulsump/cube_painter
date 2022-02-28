@@ -107,10 +107,10 @@ class _ExampleState extends State<_Example> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        if (_triangleWithGap != null) Thumbnail(sketch: _triangleWithGap!),
+        if (_triangleWithGap != null) UnitThumbnail(sketch: _triangleWithGap!),
         if (_triangleGap != null)
           //TODO _AnimThumbnail
-          Thumbnail(sketch: _triangleGap!),
+          UnitThumbnail(sketch: _triangleGap!),
         Container(),
       ],
     );

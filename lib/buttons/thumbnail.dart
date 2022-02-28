@@ -23,51 +23,11 @@ class UnitThumbnail extends StatelessWidget {
     final unitScale = unitScaleAndOffset[0];
     final unitOffset = unitScaleAndOffset[1];
 
-    out(unitScale);
-    return Container(
-      color: Colors.transparent,
-
-      /// TODO Responsive to screen size- magic numbers
-      width: 99,
-      height: 179,
+    return Transform.scale(
+      scale: 1 / unitScale,
       child: Transform.translate(
-        offset: const Offset(220, 199 + 179),
-        child: Transform.scale(
-          scale: 111 / unitScale,
-          child: Transform.translate(
-            /// TODO Responsive to screen size- magic numbers
-            offset: -unitOffset,
-            child: StaticCubes(sketch: sketch),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Auto generated (painted) thumbnail of a [Sketch]
-/// Used on the buttons on the [PaintingsMenu]
-class Thumbnail extends StatelessWidget {
-  final Sketch sketch;
-
-  const Thumbnail({Key? key, required this.sketch}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final unitScaleAndOffset = calcUnitScaleAndOffset(sketch.cubeInfos);
-
-    final unitScale = unitScaleAndOffset[0];
-    final unitOffset = unitScaleAndOffset[1];
-
-    return Container(
-      color: Colors.transparent,
-
-      child: Transform.scale(
-        scale: 111 / unitScale,
-        child: Transform.translate(
-          offset: -unitOffset,
-          child: StaticCubes(sketch: sketch),
-        ),
+        offset: -unitOffset,
+        child: StaticCubes(sketch: sketch),
       ),
     );
   }

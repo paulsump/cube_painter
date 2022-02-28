@@ -31,7 +31,11 @@ class ThumbnailButton extends StatelessWidget {
         height: 179,
         child: TextButton(
           onPressed: onPressed,
-          child: Thumbnail(sketch: sketch),
+          child: Transform.scale(
+            /// TODO Responsive to screen size- magic numbers
+            scale: 111,
+            child: UnitThumbnail(sketch: sketch),
+          ),
           style: ButtonStyle(
             shape: hexagonBorderShape,
             overlayColor:
