@@ -200,7 +200,7 @@ class SketchBank extends ChangeNotifier {
     }
 
     if (_sketches.isEmpty) {
-      newFile();
+      await newFile();
     } else {
       loadFile(filePath: _sketches.keys.first);
     }

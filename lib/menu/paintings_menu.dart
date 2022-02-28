@@ -107,7 +107,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     final sketchBank = getSketchBank(context);
 
     if (!sketchBank.modified || await _askSaveCurrent(title: 'New Painting')) {
-      sketchBank.newFile();
+      await sketchBank.newFile();
       setState(() {});
     }
   }
