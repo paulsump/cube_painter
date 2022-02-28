@@ -1,5 +1,5 @@
 import 'package:cube_painter/buttons/slice_cube_button.dart';
-import 'package:cube_painter/data/slice.dart';
+import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';

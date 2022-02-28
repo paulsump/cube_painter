@@ -2,10 +2,10 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cube_painter/data/assets.dart';
-import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/data/persist.dart';
-import 'package:cube_painter/data/settings.dart';
+import 'package:cube_painter/persisted/assets.dart';
+import 'package:cube_painter/persisted/cube_info.dart';
+import 'package:cube_painter/persisted/persist.dart';
+import 'package:cube_painter/persisted/settings.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -212,9 +212,8 @@ class SketchBank extends ChangeNotifier {
     _sketches.addAll(copy);
   }
 
-  Future<void> resetCurrentSketch() async {
-    _sketches[currentFilePath] = Sketch.fromString(_savedJson);
-  }
+  Future<void> resetCurrentSketch() async =>
+      _sketches[currentFilePath] = Sketch.fromString(_savedJson);
 
   Future<void> deleteCurrentFile() async {
     _sketches.remove(currentFilePath);

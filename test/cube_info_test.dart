@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/data/position.dart';
-import 'package:cube_painter/data/slice.dart';
+import 'package:cube_painter/persisted/cube_info.dart';
+import 'package:cube_painter/persisted/position.dart';
+import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 

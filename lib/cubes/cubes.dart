@@ -1,7 +1,7 @@
 import 'package:cube_painter/cubes/anim_cube.dart';
-import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/data/position.dart';
-import 'package:cube_painter/data/sketch.dart';
+import 'package:cube_painter/persisted/cube_info.dart';
+import 'package:cube_painter/persisted/position.dart';
+import 'package:cube_painter/persisted/sketch.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/undoer.dart';

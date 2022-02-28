@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cube_painter/data/position.dart';
+import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter_test/flutter_test.dart';
 

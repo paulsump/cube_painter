@@ -1,4 +1,4 @@
-import 'package:cube_painter/data/slice.dart';
+import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 

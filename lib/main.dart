@@ -1,5 +1,5 @@
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/data/sketch.dart';
+import 'package:cube_painter/persisted/sketch.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';

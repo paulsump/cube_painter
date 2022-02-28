@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:cube_painter/out.dart';
 
+//TODO PUT MORE Persist stuff in here, making it a class e.g. PersistedSketch or Painting
+// it could have the settings, appFolder etc
+
 Future<String> loadString({required String filePath}) async {
   File file = File(filePath);
 

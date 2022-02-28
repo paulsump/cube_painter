@@ -1,10 +1,9 @@
-
 import 'package:cube_painter/brush/brush_maths.dart';
 import 'package:cube_painter/brush/positions.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
-import 'package:cube_painter/data/cube_info.dart';
-import 'package:cube_painter/data/position.dart';
-import 'package:cube_painter/data/slice.dart';
+import 'package:cube_painter/persisted/cube_info.dart';
+import 'package:cube_painter/persisted/position.dart';
+import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
