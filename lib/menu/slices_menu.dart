@@ -106,7 +106,6 @@ class _ExampleState extends State<_Example> {
 
   @override
   Widget build(BuildContext context) {
-// return Transform.scale(scale:29,child: const StaticCube(info: CubeInfo(center: Position(0,0), slice: Slice.whole)));
     return Transform.translate(
       offset: const Offset(0, 99),
       child: Transform.scale(

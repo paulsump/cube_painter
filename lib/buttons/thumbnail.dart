@@ -19,16 +19,13 @@ class UnitThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final unitScaleAndOffset = calcUnitScaleAndOffset(sketch.cubeInfos);
-
-    final unitScale = unitScaleAndOffset[0];
-    final unitOffset = unitScaleAndOffset[1];
+    final unitTransform = calcUnitScaleAndOffset(sketch.cubeInfos);
 
     return sketch.cubeInfos.isNotEmpty
         ? Transform.scale(
-            scale: 1 / unitScale,
+            scale: 1 / unitTransform.scale,
             child: Transform.translate(
-              offset: -unitOffset,
+              offset: -unitTransform.offset,
               child: StaticCubes(sketch: sketch),
             ),
           )
@@ -36,7 +33,14 @@ class UnitThumbnail extends StatelessWidget {
   }
 }
 
-calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {
+class UnitTransform {
+  final double scale;
+  final Offset offset;
+
+  const UnitTransform({required this.scale, required this.offset});
+}
+
+UnitTransform calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {
   double minX = 9999999;
   double minY = 9999999;
 
@@ -66,5 +70,8 @@ calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {
   out('$minY,$maxY,$rangeY');
 
   // Add 1 to scale for half the size of cube each side of center.
-  return [1 + max(rangeX, rangeY), Offset(minX + maxX, minY + maxY) / 2];
+  return UnitTransform(
+    scale: 1 + max(rangeX, rangeY),
+    offset: Offset(minX + maxX, minY + maxY) / 2,
+  );
 }
