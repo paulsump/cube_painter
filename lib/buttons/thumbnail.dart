@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cube_painter/cubes/anim_cube.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
@@ -27,11 +28,21 @@ class Thumbnail extends StatelessWidget {
   Widget build(BuildContext context) {
     return sketch.cubeInfos.isNotEmpty
         ? Transform.scale(
-            scale: unitTransform.scale,
+      scale: unitTransform.scale,
             child: Transform.translate(
-              offset: unitTransform.offset,
-              child: StaticCubes(sketch: sketch),
-            ),
+                offset: unitTransform.offset,
+                child: sketch.cubeInfos.length == 1
+                    ? AnimCube(
+                        key: UniqueKey(),
+                        fields: Fields(
+                          info: sketch.cubeInfos[0],
+                          start: 0,
+                          end: 1.0,
+                          pingPong: true,
+                          duration: 1888,
+                        ),
+                      )
+                    : StaticCubes(sketch: sketch)),
           )
         : Container();
   }
