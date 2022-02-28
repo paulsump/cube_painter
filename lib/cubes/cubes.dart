@@ -80,9 +80,9 @@ class Cubes {
     final sketchBank = getSketchBank(context);
 
     final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
-    final orphans = cubeInfos.toList();
+
+    sketchBank.addAllToAnimCubeInfos(cubeInfos.toList());
     cubeInfos.clear();
-    sketchBank.addAllToAnimCubeInfos(orphans);
 
     return;
     animCubes.clear();

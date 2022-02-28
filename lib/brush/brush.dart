@@ -116,12 +116,10 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
   /// Where the positions of the cubes are given away
   void _handOver() {
     if (widget._cubeInfos.isNotEmpty) {
-      final orphans = widget._cubeInfos.toList();
-
-      widget._cubeInfos.clear();
       final sketchBank = getSketchBank(context);
 
-      sketchBank.addAllToAnimCubeInfos(orphans);
+      sketchBank.addAllToAnimCubeInfos(widget._cubeInfos.toList());
+      widget._cubeInfos.clear();
     }
   }
 
