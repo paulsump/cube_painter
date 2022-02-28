@@ -56,9 +56,23 @@ class _SlicesMenuState extends State<SlicesMenu> {
                 SliceCubeButton(slice: Slice.bottomRight),
               ],
             ),
+            padY,
+            const Text(
+                'Slices are used to create impossible Escher like structures like this...'),
+            padY,
+            const _AnimThumbnail(),
           ],
         ),
       ),
     );
+  }
+}
+
+class _AnimThumbnail extends StatelessWidget {
+  const _AnimThumbnail({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

@@ -9,7 +9,7 @@ import 'package:cube_painter/data/slice.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/menu/paintings_menu.dart';
-import 'package:cube_painter/menu/slice_mode_menu.dart';
+import 'package:cube_painter/menu/slices_menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';

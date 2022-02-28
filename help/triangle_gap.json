@@ -1,0 +1,11 @@
+{
+  "cubes": [
+    {
+      "center": {
+        "x": 1,
+        "y": 6
+      },
+      "slice": "bottomRight"
+    }
+  ]
+}
