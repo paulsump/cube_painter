@@ -62,14 +62,10 @@ class Thumbnail extends StatelessWidget {
     return Container(
       color: Colors.transparent,
 
-      /// TODO Responsive to screen size- magic numbers
-      width: 99,
-      height: 179,
       child: Transform.scale(
         scale: 111 / unitScale,
         child: Transform.translate(
-          /// TODO Responsive to screen size- magic numbers
-          offset: const Offset(47.5, 90) - unitOffset,
+          offset: -unitOffset,
           child: StaticCubes(sketch: sketch),
         ),
       ),

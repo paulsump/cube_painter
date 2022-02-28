@@ -25,12 +25,18 @@ class ThumbnailButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: tip,
-      child: TextButton(
-        onPressed: onPressed,
-        child: Thumbnail(sketch: sketch),
-        style: ButtonStyle(
-          shape: hexagonBorderShape,
-          overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
+      child: SizedBox(
+        /// TODO Responsive to screen size- magic numbers
+        width: 99,
+        height: 179,
+        child: TextButton(
+          onPressed: onPressed,
+          child: Thumbnail(sketch: sketch),
+          style: ButtonStyle(
+            shape: hexagonBorderShape,
+            overlayColor:
+                MaterialStateColor.resolveWith((states) => buttonColor),
+          ),
         ),
       ),
     );
