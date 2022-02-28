@@ -27,6 +27,7 @@ class Thumbnail extends StatelessWidget {
       scale: unitTransform.scale,
             child: Transform.translate(
                 offset: unitTransform.offset,
+                // hack for example slice
                 child: sketch.cubeInfos.length == 1
                     ? AnimCube(
                         key: UniqueKey(),
@@ -35,7 +36,7 @@ class Thumbnail extends StatelessWidget {
                           start: 0,
                           end: 1.0,
                           isPingPong: true,
-                          milliseconds: 1888,
+                          milliseconds: 3000,
                         ),
                       )
                     : StaticCubes(sketch: sketch)),

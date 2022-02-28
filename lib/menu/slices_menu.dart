@@ -115,9 +115,11 @@ class _ExampleState extends State<_Example> {
         : _triangleWithGap!.unitTransform;
 
     return Transform.translate(
-      offset: const Offset(0, 99),
+      /// TODO Responsive to screen size- magic numbers
+      offset: const Offset(0, 149),
       child: Transform.scale(
-        scale: 111,
+        /// TODO Responsive to screen size- magic numbers
+        scale: 211,
         child: Stack(
           children: [
             if (_triangleWithGap != null)
@@ -126,7 +128,6 @@ class _ExampleState extends State<_Example> {
                 unitTransform: unitTransform,
               ),
             if (_triangleWithGap != null && _triangleGap != null)
-            //TODO _AnimThumbnail
               Thumbnail(
                 sketch: _triangleGap!,
                 unitTransform: unitTransform,
