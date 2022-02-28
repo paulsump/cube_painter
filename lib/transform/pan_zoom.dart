@@ -90,7 +90,7 @@ class PanZoomer extends StatelessWidget {
         /// TODO Responsive to screen size- magic numbers
         offset = Offset(offset.dx.clamp(-100, 130), offset.dy.clamp(-250, 280));
 
-        //TODO See if this makes a diff when the tiles widget listens
+        //TODO See if this makes a diff when the widgets listen
         if (offset != getPanOffset(context)) {
           setPanOffset(context, offset);
         }

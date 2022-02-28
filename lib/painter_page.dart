@@ -3,7 +3,6 @@ import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
-import 'package:cube_painter/cubes/tiles.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/menu/paintings_menu.dart';
@@ -21,7 +20,6 @@ import 'package:provider/provider.dart';
 const noWarn = [
   out,
   PanZoomer,
-  Tiles,
   StaticCubes,
   Slice.whole,
   Provider,
@@ -63,7 +61,6 @@ class _PainterPageState extends State<PainterPage> {
             UnitToScreen(
               child: Stack(
                 children: [
-                  // const Tiles(),
                   if (sketchBank.hasCubes)
                     StaticCubes(sketch: sketchBank.sketch),
                   ..._cubes.animCubes,
