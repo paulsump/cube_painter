@@ -60,8 +60,15 @@ class _SlicesMenuState extends State<SlicesMenu> {
               ],
             ),
             padY,
-            const Text(
-                'Slices are used to create impossible Escher like structures like this...'),
+            const Center(
+              child: Text('Slices are used to create'),
+            ),
+            const Center(
+              child: Text('impossible Escher like structures'),
+            ),
+            const Center(
+              child: Text('like this...'),
+            ),
             padY,
             const _Example(),
           ],
