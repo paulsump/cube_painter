@@ -63,13 +63,14 @@ class _PainterPageState extends State<PainterPage> {
               child: Stack(
                 children: [
                   // HACK FOR testing
-                  // if (sketchBank.hasCubes)
-                  //   StaticCubes(sketch: sketchBank.sketch),
+                  if (sketchBank.hasCubes)
+                    StaticCubes(sketch: sketchBank.sketch),
                   ..._cubes.animCubes,
                 ],
               ),
             ),
-            AnimatedScaleCubes(cubeInfos: sketchBank.sketch.cubeInfos),
+            if (sketchBank.hasCubes)
+              AnimatedScaleCubes(cubeInfos: sketchBank.sketch.cubeInfos),
             GestureMode.panZoom == gestureMode
                 ? PanZoomer()
                 : Brush(adoptCubes: _cubes.adopt),

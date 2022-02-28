@@ -116,6 +116,7 @@ class Cubes {
   }
 
   void _addAnimCubes() {
+    // return;
     final sketchBank = getSketchBank(context);
     final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
 

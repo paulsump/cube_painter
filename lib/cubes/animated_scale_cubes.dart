@@ -12,9 +12,12 @@ const noWarn = [out, Position];
 class AnimatedScaleCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
+  final bool repeat;
+
   const AnimatedScaleCubes({
     Key? key,
     required this.cubeInfos,
+    this.repeat = false,
   }) : super(key: key);
 
   @override
@@ -32,11 +35,15 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 3800),
       vsync: this,
     );
 
-    _controller.repeat();
+    if (widget.repeat) {
+      _controller.repeat();
+    } else {
+      _controller.forward();
+    }
     super.initState();
   }
 
@@ -44,6 +51,19 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(AnimatedScaleCubes oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+
+    // if (oldWidget.valueFromProvider == "whatever you want" &&
+    //     widget.valueFromProvider == "what you want that changed") {
+    //   trigger animations methods here
+    // }
+    out(0);
+    _controller.forward(from: 0);
   }
 
   @override

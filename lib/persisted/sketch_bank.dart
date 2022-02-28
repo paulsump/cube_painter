@@ -62,7 +62,7 @@ class SketchBank extends ChangeNotifier {
   Sketch get sketch {
     if (!_hasSketchForCurrentFilePath) {
       assert(false,
-          "_sketchs doesn't contain key of currentFilePath: $currentFilePath");
+          "_sketches doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.empty();
