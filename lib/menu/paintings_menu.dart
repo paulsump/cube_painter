@@ -1,7 +1,7 @@
 import 'package:cube_painter/alert.dart';
-import 'package:cube_painter/buttons/hexagon_border_button.dart';
 import 'package:cube_painter/buttons/paintings_menu_buttons.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
+import 'package:cube_painter/buttons/thumbnail_button.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/out.dart';
@@ -90,7 +90,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
             for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
               Transform.translate(
                 offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
-                child: HexagonBorderButton(
+                child: ThumbnailButton(
                   tip: 'Load this painting',
                   onPressed: () =>
                       _loadFile(filePath: sketchBank.sketchEntries[i].key),

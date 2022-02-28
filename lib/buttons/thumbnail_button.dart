@@ -2,15 +2,16 @@ import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:flutter/material.dart';
 
-/// A flat looking button compared to the raised [HexagonElevatedButton].
-/// Used in two ways on the [PaintingsMenu].
-class HexagonBorderButton extends StatelessWidget {
+/// A flat transparent button with a thumbnail on it.
+/// Has a hexagon border.
+/// Used on the [PaintingsMenu].
+class ThumbnailButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   final Widget child;
   final String tip;
 
-  const HexagonBorderButton({
+  const ThumbnailButton({
     Key? key,
     required this.child,
     required this.onPressed,
