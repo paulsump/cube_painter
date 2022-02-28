@@ -46,7 +46,9 @@ Color get paintingsMenuButtonsColor => getTweenBLtoTColor(0.3).withOpacity(0.7);
 // const yucca = Color(0xFF9ED9CC);
 // const arborGreen = Color(0xFF008C76);
 
+// TODO RENAME B G COLORS
 final green = getColor(Side.br);
 final blue = getColor(Side.t);
 
+// TODO RENAME B G COLORS
 Color getTweenBtoGColor(double t) => Color.lerp(blue, green, t)!;

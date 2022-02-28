@@ -40,11 +40,12 @@ const quad = [
   Offset(-1.4, 1.6),
 ];
 
-final _gradientBottomTop = LinearGradient(
-  colors: [getColor(Side.bl), getColor(Side.t)],
-  begin: Alignment.bottomCenter,
-  end: Alignment.topCenter,
-);
+get _gradientBottomTop => LinearGradient(
+      // colors: [getColor(Side.bl), getColor(Side.t)],
+      colors: [getColor(Side.bl), getTweenBLtoTColor(0.9)],
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+    );
 
 // final Paint _paintCacheBL = Paint()
 //   ..shader = const LinearGradient(
