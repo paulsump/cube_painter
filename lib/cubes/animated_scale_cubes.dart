@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
@@ -12,12 +14,12 @@ const noWarn = [out, Position];
 class AnimatedScaleCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
-  final bool repeat;
+  final bool pingPong;
 
   const AnimatedScaleCubes({
     Key? key,
     required this.cubeInfos,
-    this.repeat = false,
+    this.pingPong = false,
   }) : super(key: key);
 
   @override
@@ -35,11 +37,11 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 3800),
+      duration: const Duration(milliseconds: 800),
       vsync: this,
     );
 
-    if (widget.repeat) {
+    if (widget.pingPong) {
       _controller.repeat();
     } else {
       _controller.forward();
@@ -55,15 +57,13 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
   @override
   void didUpdateWidget(AnimatedScaleCubes oldWidget) {
-    // TODO: implement didUpdateWidget
+    _controller.forward(from: 0);
     super.didUpdateWidget(oldWidget);
 
     // if (oldWidget.valueFromProvider == "whatever you want" &&
     //     widget.valueFromProvider == "what you want that changed") {
     //   trigger animations methods here
     // }
-    out(0);
-    _controller.forward(from: 0);
   }
 
   @override
@@ -83,8 +83,12 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
                 children: [
                   for (int i = 0; i < n; ++i)
                     ScaledCube(
-                      scale: pingPongBetween(
-                          start, end, _controller.value + 1 * i / n),
+                      scale: widget.pingPong
+                          ? pingPongBetween(
+                              start, end, _controller.value + i / n)
+                          : min(1, lerp(start, end, _controller.value + i / n)),
+                      // scale: (widget.pingPong ? pingPongBetween : lerp)(
+                      //     start, end, _controller.value + i / n),
                       info: widget.cubeInfos[i],
                     ),
                 ],
