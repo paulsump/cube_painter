@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cube_painter/cubes/anim_cube.dart';
-import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
@@ -58,50 +57,6 @@ class Cubes {
   /// either way they get removed from the animCubes array once the
   /// anim is done.
   void adopt(List<CubeInfo> orphans) {
-    final sketchBank = getSketchBank(context);
-    sketchBank.animCubeInfos.addAll(orphans);
-
-    sketchBank.setPlaying(true);
-    setState(() {});
-
-    return;
-    final bool erase = GestureMode.erase == getGestureMode(context);
-
-    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
-
-    if (erase) {
-      for (final CubeInfo orphan in orphans) {
-        final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
-
-        if (cubeInfo != null) {
-          assert(orphans.length == 1);
-
-          undoer.save();
-          cubeInfos.remove(cubeInfo);
-        }
-      }
-    } else {
-      undoer.save();
-    }
-
-    for (final CubeInfo orphan in orphans) {
-      // if (orphan.scale == (erase ? 0 : 1)) {
-      //  if (!erase) {
-      //    _convertToStaticCube(orphan);
-      //  }
-      animCubes.add(AnimCube(
-        key: UniqueKey(),
-        fields: Fields(
-          info: orphan,
-          // start: orphan.scale,
-          start: !erase ? 0.0 : 1.0,
-          end: erase ? 0.0 : 1.0,
-          // end: erase ? 0.0 : 0.7,
-          whenComplete: erase ? _removeSelf : _convertToStaticCubeAndRemoveSelf,
-          milliseconds: 222,
-        ),
-      ));
-    }
     setState(() {});
   }
 

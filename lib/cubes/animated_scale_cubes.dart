@@ -67,11 +67,10 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
   @override
   void didUpdateWidget(AnimatedScaleCubes oldWidget) {
-    // if (getSketchBank(context, listen: true).playing) {
     if (getSketchBank(context).playing) {
-      out('play');
       startForwardAnim();
     }
+
     super.didUpdateWidget(oldWidget);
   }
 
@@ -90,20 +89,16 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
             UnitToScreen(
               child: Stack(
                 children: [
-                  if (widget.cubeInfos.isEmpty)
-                    Container()
-                  else
-                    for (int i = 0; i < n; ++i)
-                      ScaledCube(
-                        scale: widget.pingPong
-                            ? pingPongBetween(
-                                start, end, _controller.value + i / n)
-                            : min(
-                                1, lerp(start, end, _controller.value + i / n)),
-                        // scale: (widget.pingPong ? pingPongBetween : lerp)(
-                        //     start, end, _controller.value + i / n),
-                        info: widget.cubeInfos[i],
-                      ),
+                  for (int i = 0; i < n; ++i)
+                    ScaledCube(
+                      scale: widget.pingPong
+                          ? pingPongBetween(
+                              start, end, _controller.value + i / n)
+                          : min(1, lerp(start, end, _controller.value + i / n)),
+                      // scale: (widget.pingPong ? pingPongBetween : lerp)(
+                      //     start, end, _controller.value + i / n),
+                      info: widget.cubeInfos[i],
+                    ),
                 ],
               ),
             ),

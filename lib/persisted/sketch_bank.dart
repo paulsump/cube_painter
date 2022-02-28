@@ -51,7 +51,7 @@ class SketchBank extends ChangeNotifier {
   void setPlaying(bool playing) {
     _playing = playing;
     // out(playing);
-    // notifyListeners();
+    notifyListeners();
   }
 
   bool get modified => json != _savedJson;

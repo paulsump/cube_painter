@@ -5,6 +5,7 @@ import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
+import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/unit_ping_pong.dart';
@@ -23,18 +24,6 @@ class Brush extends StatefulWidget {
   final void Function(List<CubeInfo> orphans) adoptCubes;
 
   Brush({Key? key, required this.adoptCubes}) : super(key: key);
-
-  /// This is called by the [BrushState].
-  /// It's where the positions of the cubes are given away
-  /// to the [Cubes] calling class via a callback [adoptCubes]
-  void _handOver() {
-    if (_cubeInfos.isNotEmpty) {
-      final orphans = _cubeInfos.toList();
-
-      _cubeInfos.clear();
-      adoptCubes(orphans);
-    }
-  }
 
   @override
   State<Brush> createState() => BrushState();
@@ -84,14 +73,11 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
               UnitToScreen(
                 child: Stack(
                   children: [
-                    for (int i = 0; i < n; ++i)
-                      if (widget._cubeInfos.isEmpty)
-                        Container()
-                      else
-                        ScaledCube(
-                            scale: pingPongBetween(
-                                start, end, _controller.value + 1 * i / n),
-                            info: widget._cubeInfos[i]),
+                    for (int i = 0; i < widget._cubeInfos.length; ++i)
+                      ScaledCube(
+                          scale: pingPongBetween(
+                              start, end, _controller.value + 1 * i / n),
+                          info: widget._cubeInfos[i]),
                   ],
                 ),
               ),
@@ -114,7 +100,7 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
           },
           onPanEnd: (details) {
             tapped = false;
-            widget._handOver();
+            _handOver();
           },
           onTapDown: (details) {
             tapped = true;
@@ -122,11 +108,25 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
           },
           onTapUp: (details) {
             tapped = false;
-            widget._handOver();
+            _handOver();
           },
         );
       },
     );
+  }
+
+  /// Where the positions of the cubes are given away
+  void _handOver() {
+    if (widget._cubeInfos.isNotEmpty) {
+      final orphans = widget._cubeInfos.toList();
+
+      widget._cubeInfos.clear();
+      final sketchBank = getSketchBank(context);
+      sketchBank.animCubeInfos.addAll(orphans);
+
+      sketchBank.setPlaying(true);
+      // adoptCubes(orphans);
+    }
   }
 
   void _replaceCube(Offset point, BuildContext context) {
