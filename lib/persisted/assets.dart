@@ -7,30 +7,31 @@ import 'package:flutter/services.dart';
 const noWarn = out;
 
 class Assets {
-  static Future<Map<String, dynamic>> loadJson(String filePath) async {
-    final String json = await rootBundle.loadString(filePath);
-
-    Map<String, dynamic> map = jsonDecode(json);
-    return map;
-  }
-
-  static Future<List<String>> getFilePaths(String folderPath) async {
+  /// return map of filename + loaded string
+  static Future<Map<String, String>> getStrings(String pathStartsWith) async {
     final manifestJson = await rootBundle.loadString('AssetManifest.json');
 
-    final fileNames = jsonDecode(manifestJson)
-        .keys
-        .where((String key) => key.startsWith(folderPath + '/'));
+    final allFilePaths = jsonDecode(manifestJson).keys;
+    final filePaths = <String, String>{};
 
-    return fileNames.toList();
+    for (final String filePath in allFilePaths) {
+      if (filePath.startsWith(pathStartsWith)) {
+        final fileName = filePath.split(Platform.pathSeparator).last;
+
+        //TODO could probably remove this await
+        filePaths[fileName] = await rootBundle.loadString(filePath);
+      }
+    }
+    return filePaths;
   }
 
   static Future<void> copyAllFromTo(
-      String fromAssetFolderPath, String toAppFolderPath,
+      String fromAssetFolderPathStartsWith, String toAppFolderPath,
       {required String extensionReplacement}) async {
-    final assetFilePaths = await getFilePaths(fromAssetFolderPath);
+    final assetFilePaths = await getStrings(fromAssetFolderPathStartsWith);
 
-    for (String assetFilePath in assetFilePaths) {
-      final assetFileName = assetFilePath.split(Platform.pathSeparator).last;
+    for (MapEntry asset in assetFilePaths.entries) {
+      final assetFileName = asset.key;
 
       final appFileName =
           assetFileName.replaceFirst('.json', extensionReplacement);
@@ -41,8 +42,7 @@ class Assets {
       if (!await appFile.exists()) {
         out('copying $appFilePath');
 
-        final String assetJson = await rootBundle.loadString(assetFilePath);
-        await appFile.writeAsString(assetJson);
+        await appFile.writeAsString(asset.value);
       }
     }
   }

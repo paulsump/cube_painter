@@ -279,7 +279,7 @@ class SketchBank extends ChangeNotifier {
       saveString(filePath: settingsPath, string: _settings.toString());
 
   Future<void> copySamples() async {
-    const assetsFolder = 'samples';
+    const assetsFolder = 'samples/';
 
     final String appFolderPath = await getAppFolderPath();
 
