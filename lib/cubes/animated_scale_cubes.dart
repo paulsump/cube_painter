@@ -52,8 +52,10 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
   void startForwardAnim() {
     _controller.forward(from: 0).whenComplete(() {
-      out('complete');
-      getSketchBank(context).setPlaying(false);
+      final sketchBank = getSketchBank(context);
+
+      sketchBank.addAllAnimCubeInfos();
+      sketchBank.setPlaying(false);
     });
   }
 
@@ -88,16 +90,20 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
             UnitToScreen(
               child: Stack(
                 children: [
-                  for (int i = 0; i < n; ++i)
-                    ScaledCube(
-                      scale: widget.pingPong
-                          ? pingPongBetween(
-                              start, end, _controller.value + i / n)
-                          : min(1, lerp(start, end, _controller.value + i / n)),
-                      // scale: (widget.pingPong ? pingPongBetween : lerp)(
-                      //     start, end, _controller.value + i / n),
-                      info: widget.cubeInfos[i],
-                    ),
+                  if (widget.cubeInfos.isEmpty)
+                    Container()
+                  else
+                    for (int i = 0; i < n; ++i)
+                      ScaledCube(
+                        scale: widget.pingPong
+                            ? pingPongBetween(
+                                start, end, _controller.value + i / n)
+                            : min(
+                                1, lerp(start, end, _controller.value + i / n)),
+                        // scale: (widget.pingPong ? pingPongBetween : lerp)(
+                        //     start, end, _controller.value + i / n),
+                        info: widget.cubeInfos[i],
+                      ),
                 ],
               ),
             ),

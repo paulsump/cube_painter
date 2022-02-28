@@ -28,6 +28,15 @@ class SketchBank extends ChangeNotifier {
 
   final example = SlicesExample();
 
+  final animCubeInfos = <CubeInfo>[];
+
+  void addAllAnimCubeInfos() {
+    sketch.cubeInfos.addAll(animCubeInfos);
+
+    animCubeInfos.clear();
+    notifyListeners();
+  }
+
   late String settingsPath;
   late Settings _settings;
 

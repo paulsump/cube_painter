@@ -71,7 +71,6 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final int n = widget._cubeInfos.length;
-
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -86,10 +85,13 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
                 child: Stack(
                   children: [
                     for (int i = 0; i < n; ++i)
-                      ScaledCube(
-                          scale: pingPongBetween(
-                              start, end, _controller.value + 1 * i / n),
-                          info: widget._cubeInfos[i]),
+                      if (widget._cubeInfos.isEmpty)
+                        Container()
+                      else
+                        ScaledCube(
+                            scale: pingPongBetween(
+                                start, end, _controller.value + 1 * i / n),
+                            info: widget._cubeInfos[i]),
                   ],
                 ),
               ),
