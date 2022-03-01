@@ -33,10 +33,12 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
   double get end => GestureMode.addWhole == getGestureMode(context) ? 1.0 : 3.0;
 
+  static const int milliseconds = 800;
+
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: milliseconds),
       vsync: this,
     );
 
@@ -49,10 +51,11 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   }
 
   void startForwardAnim({required bool fromZero}) {
-    _controller.duration = const Duration(milliseconds: 1600);
+    _controller.duration =
+        Duration(milliseconds: 2 * milliseconds ~/ (1 - _controller.value));
 
-    _controller.forward(from: fromZero ? 0 : _controller.value)
-        // .forward(from: 0)
+    _controller
+        .forward(from: fromZero ? 0 : _controller.value)
         .whenComplete(() {
       final sketchBank = getSketchBank(context);
 
