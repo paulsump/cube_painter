@@ -91,7 +91,7 @@ class _PainterPageState extends State<PainterPage> {
             ),
             if (sketchBank.animCubeInfos.isNotEmpty)
               AnimatedScaleCubes(cubeInfos: sketchBank.animCubeInfos),
-            GestureMode.panZoom == gestureMode ? PanZoomer() : Brush(),
+            GestureMode.panZoom == gestureMode ? PanZoomer() : const Brush(),
             PageButtons(undoer: undoer),
           ]),
         ),

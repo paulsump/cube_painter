@@ -1,6 +1,5 @@
 import 'package:cube_painter/brush/brush_maths.dart';
 import 'package:cube_painter/brush/positions.dart';
-import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
@@ -8,7 +7,6 @@ import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
-import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,97 +17,57 @@ const noWarn = [out, Position];
 /// In [GestureMode.erase] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brush extends StatefulWidget {
-  final _cubeInfos = <CubeInfo>[];
-
-  Brush({Key? key}) : super(key: key);
+  const Brush({Key? key}) : super(key: key);
 
   @override
   State<Brush> createState() => BrushState();
 }
 
-class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
+class BrushState extends State<Brush> {
   List<CubeInfo> get _animCubeInfos => getSketchBank(context).animCubeInfos;
   final brushMaths = BrushMaths();
   var previousPositions = Positions.empty;
 
   bool tapped = false;
-  final double start = 0.0;
-
-  double get end => GestureMode.addWhole == getGestureMode(context) ? 1.0 : 3.0;
-
-  @override
-  void initState() {
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 800),
-      vsync: this,
-    );
-
-    _controller.repeat();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final int n = widget._cubeInfos.length;
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          child: Stack(
-            children: [
-              // HACK without this container,
-              // onPanStart etc doesn't get called after cubes are added.
-              Container(),
-              UnitToScreen(
-                child: Stack(
-                  children: [
-                    for (int i = 0; i < widget._cubeInfos.length; ++i)
-                      ScaledCube(
-                          scale: pingPongBetween(
-                              start, end, _controller.value + 1 * i / n),
-                          info: widget._cubeInfos[i]),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          onPanStart: (details) {
-            // if tapped, use that fromPosition since it's where the user started, and therefore better
-            if (!tapped) {
-              final Offset startUnit =
-                  screenToUnit(details.localPosition, context);
-              brushMaths.calcStartPosition(startUnit);
-            }
-          },
-          onPanUpdate: (details) {
-            if (GestureMode.addWhole == getGestureMode(context)) {
-              _updateExtrude(details, context);
-            } else {
-              _replaceCube(details.localPosition, context);
-            }
-          },
-          onPanEnd: (details) {
-            tapped = false;
-            _handOver();
-          },
-          onTapDown: (details) {
-            tapped = true;
-            _replaceCube(details.localPosition, context);
-          },
-          onTapUp: (details) {
-            tapped = false;
-            _handOver();
-          },
-        );
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      child: Stack(
+        children: [
+          // HACK without this container,
+          // onPanStart etc doesn't get called after cubes are added.
+          Container(),
+        ],
+      ),
+      onPanStart: (details) {
+        // if tapped, use that fromPosition since it's where the user started, and therefore better
+        if (!tapped) {
+          final Offset startUnit = screenToUnit(details.localPosition, context);
+          brushMaths.calcStartPosition(startUnit);
+        }
+      },
+      onPanUpdate: (details) {
+        if (GestureMode.addWhole == getGestureMode(context)) {
+          _updateExtrude(details, context);
+        } else {
+          _replaceCube(details.localPosition, context);
+        }
+      },
+      onPanEnd: (details) {
+        tapped = false;
+        _handOver();
+        //TODO UNDO
+      },
+      onTapDown: (details) {
+        tapped = true;
+        _replaceCube(details.localPosition, context);
+      },
+      onTapUp: (details) {
+        tapped = false;
+        _handOver();
+        //TODO UNDO
       },
     );
   }
@@ -117,12 +75,7 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
   /// Where the positions of the cubes are given away
   void _handOver() {
     final sketchBank = getSketchBank(context);
-    sketchBank.addAllToAnimCubeInfos(widget._cubeInfos);
-    if (widget._cubeInfos.isNotEmpty) {
-      sketchBank.addAllToAnimCubeInfos(widget._cubeInfos.toList());
-      widget._cubeInfos.clear();
-      //TODO UNDO
-    }
+    sketchBank.addAllToAnimCubeInfos([]);
   }
 
   void _replaceCube(Offset point, BuildContext context) {
@@ -140,7 +93,7 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
     if (_animCubeInfos.isEmpty) {
       _addCube(newPosition, slice);
 
-      setState(() {});
+      // setState(() {});
       _handOver();
     } else {
       final oldPosition = _animCubeInfos.first.center;
@@ -150,7 +103,7 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
 
         // TODO fix jump in animation due to not passing current _controller value through
         _addCube(newPosition, slice);
-        setState(() {});
+        // setState(() {});
         _handOver();
       }
     }
@@ -176,7 +129,7 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
           _addCube(position, Slice.whole);
         }
       }
-      setState(() {});
+      // setState(() {});
       _handOver();
       previousPositions = positions;
     }
