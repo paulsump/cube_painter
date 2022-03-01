@@ -36,7 +36,6 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-
   void _addToAnimCubeInfos() {
     final sketchBank = getSketchBank(context);
 
@@ -71,10 +70,10 @@ class _PainterPageState extends State<PainterPage> {
         child: SafeArea(
           left: false,
           child: Stack(children: [
-            const UnitToScreenHorizon(child: Horizon()),
             UnitToScreen(
               child: Stack(
                 children: [
+                  Transform.scale(scale: 30, child: const Horizon()),
                   if (sketchBank.hasCubes)
                     StaticCubes(sketch: sketchBank.sketch),
                 ],
@@ -92,5 +91,4 @@ class _PainterPageState extends State<PainterPage> {
       ),
     );
   }
-
 }

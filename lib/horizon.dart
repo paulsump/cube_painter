@@ -41,8 +41,8 @@ const quad = [
 ];
 
 get _gradientBottomTop => LinearGradient(
-      // colors: [getColor(Side.bl), getColor(Side.t)],
-      colors: [getColor(Side.bl), getTweenBLtoTColor(0.9)],
+      // colors: [getColor(Side.bl), getTweenBLtoTColor(0.9)],
+      colors: [getColor(Side.t), getTweenBLtoTColor(0.4)],
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
     );
