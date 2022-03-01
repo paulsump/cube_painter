@@ -37,7 +37,7 @@ class SketchBank extends ChangeNotifier {
     notifyListeners();
   }
 
-  //TODO FIx this copied coment
+  //TODO FIx this copied comment
   /// once the brush has finished, it
   /// yields ownership of it's cubes to this parent widget.
   /// which then creates a similar list

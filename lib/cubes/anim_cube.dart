@@ -47,7 +47,7 @@ class Fields {
 /// TODO Replace with [ScaledCube]s.
 /// It was fun to see if it worked putting the anim controller on every widget
 /// and it does, as long as you never need the anim controller value e.g. if you want to
-/// recreate the cubes elswhere or with a different animation, starting at the same place.
+/// recreate the cubes elsewhere or with a different animation, starting at the same place.
 class AnimCube extends StatefulWidget {
   final Fields fields;
 
