@@ -24,6 +24,7 @@ class GesturerState extends State<Gesturer> {
   bool tapped = false;
   int n = 0;
   double totalScale = 0;
+  Offset tapPoint = Offset.zero;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +36,11 @@ class GesturerState extends State<Gesturer> {
         n = 0;
         totalScale = 0;
 
+        gestureHandler = panZoomer;
+        panZoomer.start(details.focalPoint, context);
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
-          gestureHandler = panZoomer;
-
           brush.start(details.focalPoint, context);
-          panZoomer.start(details.focalPoint, context);
         }
       },
       onScaleUpdate: (details) {
@@ -51,6 +51,9 @@ class GesturerState extends State<Gesturer> {
         if (n > 9) {
           if (totalScale / n == 1 && gestureHandler != brush) {
             gestureHandler = brush;
+            if (tapped) {
+              brush.start(tapPoint, context);
+            }
           }
           gestureHandler.update(details.focalPoint, details.scale, context);
         }
@@ -59,17 +62,16 @@ class GesturerState extends State<Gesturer> {
         tapped = false;
         gestureHandler.end(context);
       },
-      // onTapDown: (details) {
-      //   tapped = true;
-      //   gestureHandler = brush;
-      //
-      //   gestureHandler.tapDown(details.localPosition, context);
-      //   panZoomer.start(details.localPosition, context);
-      // },
-      // onTapUp: (details) {
-      //   tapped = false;
-      //   gestureHandler.tapUp(details.localPosition, context);
-      // },
+      onTapDown: (details) {
+        tapped = true;
+        gestureHandler = panZoomer;
+
+        tapPoint = details.localPosition;
+      },
+      onTapUp: (details) {
+        tapped = false;
+        gestureHandler.tapUp(details.localPosition, context);
+      },
     );
   }
 }
