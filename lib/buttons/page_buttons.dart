@@ -23,36 +23,35 @@ class PageButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const OpenPaintingsMenuButton(),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    GestureModeCubeButton(
-                      mode: GestureMode.addWhole,
-                      icon: DownloadedIcons.plusOutline,
-                      tip:
-                          'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
-                    ),
-                    GestureModeCubeButton(
-                      mode: GestureMode.erase,
-                      icon: DownloadedIcons.cancelOutline,
-                      tip:
-                          'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-                    ),
-                    OpenSliceMenuButton(),
-                  ]),
-            ]),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(height: buttonElevation),
-            const _UndoButton(),
-            const _UndoButton(isRedo: true),
-            // HACK without a big container, the buttons don't response, and now it's needed to stop the undo buttons being centered
-            Container(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                OpenPaintingsMenuButton(),
+                _UndoButton(),
+                _UndoButton(isRedo: true),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                GestureModeCubeButton(
+                  mode: GestureMode.addWhole,
+                  icon: DownloadedIcons.plusOutline,
+                  tip:
+                      'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                ),
+                GestureModeCubeButton(
+                  mode: GestureMode.erase,
+                  icon: DownloadedIcons.cancelOutline,
+                  tip:
+                      'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                ),
+                OpenSliceMenuButton(),
+              ],
+            ),
           ],
         ),
       ],
