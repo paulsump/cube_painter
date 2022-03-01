@@ -52,8 +52,11 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   }
 
   void startForwardAnim({required bool fromZero}) {
-    _controller.duration =
-        Duration(milliseconds: 2 * milliseconds ~/ (1 - _controller.value));
+    if (_controller.value != 1) {
+      _controller.duration =
+          Duration(milliseconds: 2 * milliseconds ~/ (1 - _controller.value));
+    }
+    //TODO set _controller.duration back to default next time
 
     _controller.forward(from: fromZero ? 0 : _controller.value);
   }
