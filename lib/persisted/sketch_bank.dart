@@ -55,8 +55,10 @@ class SketchBank extends ChangeNotifier {
 
   void setPingPong(bool value) {
     setPlaying(true);
+    pingPong = value;
   }
 
+  bool pingPong = false;
   late String settingsPath;
   late Settings _settings;
 
