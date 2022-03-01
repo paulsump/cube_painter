@@ -28,7 +28,7 @@ class UndoNotifier extends ChangeNotifier {
   }
 
   void save(BuildContext context) {
-    _saveTo(_undos, context);
+    _undos.add(getSketchBank(context).jsonWithAnimCubesToo);
     _redos.clear();
   }
 
@@ -41,13 +41,10 @@ class UndoNotifier extends ChangeNotifier {
     StringList pushTo,
     BuildContext context,
   ) {
-    _saveTo(pushTo, context);
+    pushTo.add(getSketchBank(context).json);
 
     final sketchBank = getSketchBank(context);
     sketchBank.setJson(popFrom.removeLast());
   }
 
-  void _saveTo(StringList list, BuildContext context) {
-    list.add(getSketchBank(context).json);
-  }
 }

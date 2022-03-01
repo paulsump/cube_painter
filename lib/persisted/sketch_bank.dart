@@ -172,6 +172,14 @@ class SketchBank extends ChangeNotifier {
 
   String get json => sketch.toString();
 
+  String get jsonWithAnimCubesToo {
+    final cubeInfos = <CubeInfo>[
+      ...sketch.cubeInfos,
+      ...animCubeInfos,
+    ];
+    return Sketch(cubeInfos).toString();
+  }
+
   void loadFile({required String filePath}) {
     saveCurrentFilePath(filePath);
 
