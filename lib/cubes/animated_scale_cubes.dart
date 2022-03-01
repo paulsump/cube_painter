@@ -58,7 +58,14 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
     }
     //TODO set _controller.duration back to default next time
 
-    _controller.forward(from: fromZero ? 0 : _controller.value);
+    _controller
+        .forward(from: fromZero ? 0 : _controller.value)
+        .whenComplete(() {
+      final sketchBank = getSketchBank(context);
+
+      sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
+      sketchBank.setPlaying(false);
+    });
   }
 
   @override
