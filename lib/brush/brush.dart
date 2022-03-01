@@ -1,4 +1,5 @@
 import 'package:cube_painter/brush/brush_maths.dart';
+import 'package:cube_painter/brush/gesture_handler.dart';
 import 'package:cube_painter/brush/positions.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
@@ -16,15 +17,9 @@ const noWarn = [out, Position];
 /// depending on the [GestureMode].
 /// In [GestureMode.erase] mode it yields the
 /// position you tapped in order to delete a single cube.
-class Brush extends StatefulWidget {
-  const Brush({Key? key}) : super(key: key);
-
-  @override
-  State<Brush> createState() => BrushState();
-}
-
-class BrushState extends State<Brush> {
-  List<CubeInfo> get _animCubeInfos => getSketchBank(context).animCubeInfos;
+class Brush implements GestureHandler {
+  List<CubeInfo> getAnimCubeInfos(context) =>
+      getSketchBank(context).animCubeInfos;
 
   final brushMaths = BrushMaths();
   var previousPositions = Positions.empty;
@@ -32,51 +27,41 @@ class BrushState extends State<Brush> {
   bool tapped = false;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      child: Stack(
-        children: [
-          // HACK without this container,
-          // onScaleStart etc doesn't get called after cubes are added.
-          Container(),
-        ],
-      ),
-      onScaleStart: (details) {
-        // if tapped, use that fromPosition since it's where the user started, and therefore better
-        if (!tapped) {
-          getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+  void start(Offset point, BuildContext context) {
+    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
 
-          final Offset startUnit = screenToUnit(details.focalPoint, context);
-          brushMaths.calcStartPosition(startUnit);
-        }
-      },
-      onScaleUpdate: (details) {
-        // out(details.scale!=1);
-        if (GestureMode.addWhole == getGestureMode(context)) {
-          _updateExtrude(details, context);
-        } else {
-          _replaceCube(details.focalPoint, context);
-        }
-      },
-      onScaleEnd: (details) {
-        tapped = false;
-        _saveForUndo();
-      },
-      onTapDown: (details) {
-        getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
-
-        tapped = true;
-        _replaceCube(details.localPosition, context);
-      },
-      onTapUp: (details) {
-        tapped = false;
-        _saveForUndo();
-      },
-    );
+    final Offset startUnit = screenToUnit(point, context);
+    brushMaths.calcStartPosition(startUnit);
   }
 
-  void _setPingPong(bool value) {
+  @override
+  void update(Offset point, BuildContext context) {
+    // out(details.scale!=1);
+    if (GestureMode.addWhole == getGestureMode(context)) {
+      _updateExtrude(point, context);
+    } else {
+      _replaceCube(point, context);
+    }
+  }
+
+  @override
+  void end(BuildContext context) {
+    _saveForUndo(context);
+  }
+
+  @override
+  void tapDown(Offset point, BuildContext context) {
+    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+
+    _replaceCube(point, context);
+  }
+
+  @override
+  void tapUp(Offset point, BuildContext context) {
+    _saveForUndo(context);
+  }
+
+  void _setPingPong(bool value, BuildContext context) {
     final sketchBank = getSketchBank(context);
     sketchBank.setPingPong(value);
   }
@@ -93,57 +78,57 @@ class BrushState extends State<Brush> {
 
     final newPosition = brushMaths.startPosition;
 
-    if (_animCubeInfos.isEmpty) {
-      _addCube(newPosition, slice);
+    if (getAnimCubeInfos(context).isEmpty) {
+      _addCube(newPosition, slice, context);
 
       // setState(() {});
-      _setPingPong(true);
+      _setPingPong(true, context);
     } else {
-      final oldPosition = _animCubeInfos.first.center;
+      final oldPosition = getAnimCubeInfos(context).first.center;
 
       if (oldPosition != newPosition) {
-        _animCubeInfos.clear();
+        getAnimCubeInfos(context).clear();
 
-        _addCube(newPosition, slice);
-        _setPingPong(true);
+        _addCube(newPosition, slice, context);
+        _setPingPong(true, context);
       }
     }
   }
 
-  void _updateExtrude(details, BuildContext context) {
-    final Positions positions = brushMaths.calcPositionsUpToEndPosition(
-        screenToUnit(details.focalPoint, context));
+  void _updateExtrude(Offset point, BuildContext context) {
+    final Positions positions =
+        brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
 
     if (previousPositions != positions) {
       // using order provided by extruder
       // only add new cubes, deleting any old ones
 
-      var copy = _animCubeInfos.toList();
-      _animCubeInfos.clear();
+      var copy = getAnimCubeInfos(context).toList();
+      getAnimCubeInfos(context).clear();
 
       for (Position position in positions.list) {
         CubeInfo? cube = _findAt(position, copy);
 
         if (cube != null) {
-          _animCubeInfos.add(cube);
+          getAnimCubeInfos(context).add(cube);
         } else {
-          _addCube(position, Slice.whole);
+          _addCube(position, Slice.whole, context);
         }
       }
-      _setPingPong(true);
+      _setPingPong(true, context);
       previousPositions = positions;
     }
   }
 
-  void _addCube(Position center, Slice slice) {
-    _animCubeInfos.add(CubeInfo(center: center, slice: slice));
+  void _addCube(Position center, Slice slice, BuildContext context) {
+    getAnimCubeInfos(context).add(CubeInfo(center: center, slice: slice));
   }
 
-  void _saveForUndo() {
+  void _saveForUndo(BuildContext context) {
 //warning, need to call this:    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
 //before this..
     //TODO _saveForUndo
-    _setPingPong(false);
+    _setPingPong(false, context);
   }
 }
 

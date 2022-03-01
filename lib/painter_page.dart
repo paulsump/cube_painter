@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cube_painter/brush/brush.dart';
+import 'package:cube_painter/brush/gesturer.dart';
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/animated_scale_cubes.dart';
@@ -94,7 +94,7 @@ class _PainterPageState extends State<PainterPage> {
                 cubeInfos: sketchBank.animCubeInfos,
                 pingPong: sketchBank.pingPong,
               ),
-            GestureMode.panZoom == gestureMode ? PanZoomer() : const Brush(),
+            GestureMode.panZoom == gestureMode ? PanZoomer() : const Gesturer(),
             PageButtons(undoer: undoer),
           ]),
         ),

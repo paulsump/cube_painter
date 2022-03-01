@@ -60,6 +60,31 @@ class PanZoomer extends StatelessWidget {
   PanZoomer({Key? key}) : super(key: key);
 
   @override
+  void start(Offset point, BuildContext context) {
+    // TODO: implement start
+  }
+
+  @override
+  void update(Offset point, BuildContext context) {
+    // TODO: implement update
+  }
+
+  @override
+  void end(BuildContext context) {
+    // TODO: implement end
+  }
+
+  @override
+  void tapDown(Offset point, BuildContext context) {
+    // TODO: implement tapDown
+  }
+
+  @override
+  void tapUp(Offset point, BuildContext context) {
+    // TODO: implement tapUp
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
