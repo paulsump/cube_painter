@@ -24,14 +24,12 @@ class Thumbnail extends StatelessWidget {
   Widget build(BuildContext context) {
     return sketch.cubeInfos.isNotEmpty
         ? Transform.scale(
-      scale: unitTransform.scale,
+            scale: unitTransform.scale,
             child: Transform.translate(
                 offset: unitTransform.offset,
                 // TODO REMove hack for example slice
                 child: sketch.cubeInfos.length == 1
-                    ? StandAloneAnimatedCube(
-                        fields: Fields(info: sketch.cubeInfos[0]),
-                      )
+                    ? StandAloneAnimatedCube(info: sketch.cubeInfos[0])
                     : StaticCubes(sketch: sketch)),
           )
         : Container();

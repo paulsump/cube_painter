@@ -2,20 +2,18 @@ import 'dart:ui';
 
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
-import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'unit_ping_pong.dart';
 
-const noWarn = [out, Slice, UnitToScreen];
-
-/// Params for creating [StandAloneAnimatedCube]s
-// TODO rename to AnimCubeFields
-class Fields {
+/// Unit cube or slice that animates itself based the [Fields] passed in.
+/// It was fun to see if it worked putting the anim controller on every widget
+/// and it does, as long as you never need the anim controller value e.g. if you want to
+/// recreate the cubes elsewhere or with a different animation, starting at the same place.
+class StandAloneAnimatedCube extends StatefulWidget {
   final CubeInfo info;
 
   final double start;
@@ -25,33 +23,21 @@ class Fields {
 
   final int milliseconds;
 
-  Fields({
-    required this.info,
-    this.start = 0.0,
-    this.end = 1.0,
-    this.isPingPong = true,
-    this.milliseconds = 3000,
-  });
-}
-
-/// Unit cube or slice that animates itself based the [Fields] passed in.
-/// It was fun to see if it worked putting the anim controller on every widget
-/// and it does, as long as you never need the anim controller value e.g. if you want to
-/// recreate the cubes elsewhere or with a different animation, starting at the same place.
-class StandAloneAnimatedCube extends StatefulWidget {
-  final Fields fields;
-
   final Widget _unitCube;
 
   final Offset _offset;
 
   StandAloneAnimatedCube({
     Key? key,
-    required this.fields,
-  })  : _unitCube = fields.info.slice == Slice.whole
+    required this.info,
+    this.start = 0.0,
+    this.end = 1.0,
+    this.isPingPong = true,
+    this.milliseconds = 3000,
+  })  : _unitCube = info.slice == Slice.whole
             ? const WholeUnitCube()
-            : SliceUnitCube(slice: fields.info.slice),
-        _offset = positionToUnitOffset(fields.info.center),
+            : SliceUnitCube(slice: info.slice),
+        _offset = positionToUnitOffset(info.center),
         super(key: key);
 
   @override
@@ -65,12 +51,12 @@ class _StandAloneAnimatedCubeState extends State<StandAloneAnimatedCube>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: Duration(milliseconds: widget.fields.milliseconds),
+      duration: Duration(milliseconds: widget.milliseconds),
       vsync: this,
     );
 
-    if (widget.fields.start != widget.fields.end) {
-      if (widget.fields.isPingPong) {
+    if (widget.start != widget.end) {
+      if (widget.isPingPong) {
         _controller.repeat();
       } else {
         _controller.forward();
@@ -107,10 +93,8 @@ class _StandAloneAnimatedCubeState extends State<StandAloneAnimatedCube>
   }
 
   double _scale() => lerpDouble(
-        widget.fields.start,
-        widget.fields.end,
-    widget.fields.isPingPong
-            ? unitPingPong(_controller.value)
-            : _controller.value,
+        widget.start,
+        widget.end,
+        widget.isPingPong ? unitPingPong(_controller.value) : _controller.value,
       )!;
 }
