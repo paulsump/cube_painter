@@ -16,8 +16,10 @@ class Gesturer extends StatefulWidget {
 }
 
 class GesturerState extends State<Gesturer> {
-  // final GestureHandler gestureHandler = Brush();
-  final GestureHandler gestureHandler = PanZoomer();
+  final GestureHandler panZoomer = PanZoomer();
+
+  final Brush brush = Brush();
+  late GestureHandler gestureHandler;
 
   bool tapped = false;
 
@@ -25,34 +27,37 @@ class GesturerState extends State<Gesturer> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: Stack(
-        children: [
-          // HACK without this container,
-          // onScaleStart etc doesn't get called after cubes are added.
-          Container(),
-        ],
-      ),
+      // without this container,  onScaleStart etc doesn't get called
+      // child: Container(),
       onScaleStart: (details) {
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
+          gestureHandler = brush;
           gestureHandler.start(details.focalPoint, context);
+          panZoomer.start(details.focalPoint, context);
         }
       },
       onScaleUpdate: (details) {
+        if (details.scale != 1 && gestureHandler != panZoomer) {
+          gestureHandler = panZoomer;
+        }
         gestureHandler.update(details.focalPoint, details.scale, context);
       },
       onScaleEnd: (details) {
         tapped = false;
         gestureHandler.end(context);
       },
-      onTapDown: (details) {
-        tapped = true;
-        gestureHandler.tapDown(details.localPosition, context);
-      },
-      onTapUp: (details) {
-        tapped = false;
-        gestureHandler.tapUp(details.localPosition, context);
-      },
+      // onTapDown: (details) {
+      //   tapped = true;
+      //   gestureHandler = brush;
+      //
+      //   gestureHandler.tapDown(details.localPosition, context);
+      //   panZoomer.start(details.localPosition, context);
+      // },
+      // onTapUp: (details) {
+      //   tapped = false;
+      //   gestureHandler.tapUp(details.localPosition, context);
+      // },
     );
   }
 }
