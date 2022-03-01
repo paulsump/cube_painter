@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/unit_ping_pong.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -50,14 +48,11 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
     super.initState();
   }
 
-  double prevValue = 0;
-
   void startForwardAnim({required bool fromZero}) {
-    prevValue = _controller.value;
     _controller.duration = const Duration(milliseconds: 1600);
-    _controller
-        // .forward(from: fromZero ? 0 : _controller.value)
-        .forward(from: 0)
+
+    _controller.forward(from: fromZero ? 0 : _controller.value)
+        // .forward(from: 0)
         .whenComplete(() {
       final sketchBank = getSketchBank(context);
 
@@ -103,10 +98,7 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
                     ScaledCube(
                       scale: widget.pingPong
                           ? pingPongTween(i)
-                          : min(
-                              1,
-                              lerp(pingPongTween(i), pingPongTween(i) + 1,
-                                  _controller.value + prevValue)),
+                          : lerp(pingPongTween(i), end, _controller.value),
                       info: widget.cubeInfos[i],
                     ),
                 ],
