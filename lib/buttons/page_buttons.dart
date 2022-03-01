@@ -24,8 +24,6 @@ class PageButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gestureMode = getGestureMode(context, listen: true);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

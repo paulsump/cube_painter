@@ -1,8 +1,8 @@
-import 'package:cube_painter/brush/brush.dart';
-import 'package:cube_painter/brush/gesture_handler.dart';
+import 'package:cube_painter/gestures/brush.dart';
+import 'package:cube_painter/gestures/gesture_handler.dart';
+import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
-import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];

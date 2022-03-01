@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:cube_painter/brush/positions.dart';
+import 'package:cube_painter/gestures/positions.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';

@@ -1,4 +1,4 @@
-import 'package:cube_painter/brush/gesture_handler.dart';
+import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

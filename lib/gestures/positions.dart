@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/position.dart';
 
 const noWarn = out;
 
