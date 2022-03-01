@@ -59,6 +59,7 @@ class SketchBank extends ChangeNotifier {
   }
 
   bool pingPong = false;
+
   late String settingsPath;
   late Settings _settings;
 

@@ -114,6 +114,7 @@ class BrushState extends State<Brush> {
       // only add new cubes, deleting any old ones
 
       var copy = _animCubeInfos.toList();
+      // TODO Don't clear to fix  jumpy restarting pingpong
       _animCubeInfos.clear();
 
       for (Position position in positions.list) {

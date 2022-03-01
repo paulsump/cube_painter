@@ -53,9 +53,6 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   void startForwardAnim() {
     _controller.forward(from: 0).whenComplete(() {
       final sketchBank = getSketchBank(context);
-
-      // TODO bug - Warning , this won't do the current line
-      // if you make a new one before the first anim finishes
       sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
       sketchBank.setPlaying(false);
     });
