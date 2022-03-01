@@ -12,12 +12,12 @@ const noWarn = [out, Position];
 class AnimCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
-  final bool pingPong;
+  final bool isPingPong;
 
   const AnimCubes({
     Key? key,
     required this.cubeInfos,
-    this.pingPong = false,
+    this.isPingPong = false,
   }) : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class AnimCubesState extends State<AnimCubes>
       vsync: this,
     );
 
-    if (widget.pingPong) {
+    if (widget.isPingPong) {
       _controller.repeat();
     } else {
       startForwardAnim(fromZero: true);
@@ -57,9 +57,9 @@ class AnimCubesState extends State<AnimCubes>
       final sketchBank = getSketchBank(context);
 
       sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
-      sketchBank.setPlaying(false);
+      sketchBank.setIsPlaying(false);
 
-      sketchBank.loading = false;
+      sketchBank.isLoading = false;
 
       // set back to default for next time
       _controller.duration = const Duration(milliseconds: milliseconds);
@@ -76,8 +76,8 @@ class AnimCubesState extends State<AnimCubes>
   void didUpdateWidget(AnimCubes oldWidget) {
     final sketchBank = getSketchBank(context);
 
-    if (sketchBank.playing) {
-      if (sketchBank.pingPong) {
+    if (sketchBank.isPlaying) {
+      if (sketchBank.isPingPong) {
         _controller.duration = const Duration(milliseconds: milliseconds);
 
         _controller.repeat();
@@ -105,7 +105,7 @@ class AnimCubesState extends State<AnimCubes>
                 children: [
                   for (int i = 0; i < n; ++i)
                     ScaledCube(
-                      scale: widget.pingPong
+                      scale: widget.isPingPong
                           ? pingPongTween(i)
                           : lerp(pingPongTween(i), 1.0, _controller.value),
                       info: widget.cubeInfos[i],

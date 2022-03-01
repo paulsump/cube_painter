@@ -50,7 +50,7 @@ class PageButtons extends StatelessWidget {
           children: [
             const SizedBox(height: buttonElevation),
             const _UndoButton(),
-            const _UndoButton(redo: true),
+            const _UndoButton(isRedo: true),
             // HACK without a big container, the buttons don't response, and now it's needed to stop the undo buttons being centered
             Container(),
           ],
@@ -64,11 +64,11 @@ class PageButtons extends StatelessWidget {
 /// Pressing it will undo the previous action.
 /// The redo button appears only if undo was pressed.
 class _UndoButton extends StatelessWidget {
-  final bool redo;
+  final bool isRedo;
 
   const _UndoButton({
     Key? key,
-    this.redo = false,
+    this.isRedo = false,
   }) : super(key: key);
 
   @override
@@ -78,24 +78,24 @@ class _UndoButton extends StatelessWidget {
     final bool canUndo = undoer.canUndo;
     final bool canRedo = undoer.canRedo;
 
-    final bool show = redo ? canRedo : canUndo || canRedo;
-    final bool enabled = redo ? canRedo : canUndo;
+    final bool wantShow = isRedo ? canRedo : canUndo || canRedo;
+    final bool enabled = isRedo ? canRedo : canUndo;
 
-    return show
+    return wantShow
         ? HexagonElevatedButton(
             child: Icon(
-              redo ? Icons.redo_sharp : Icons.undo_sharp,
-        size: normalIconSize * 1.2,
-        color: enabled ? enabledIconColor : disabledIconColor,
-      ),
-      onPressed: enabled
-          ? redo
+              isRedo ? Icons.redo_sharp : Icons.undo_sharp,
+              size: normalIconSize * 1.2,
+              color: enabled ? enabledIconColor : disabledIconColor,
+            ),
+            onPressed: enabled
+                ? isRedo
                     ? () => undoer.redo(context)
                     : () => undoer.undo(context)
                 : null,
-      tip: redo
-          ? 'Redo the last add or delete operation that was undone.'
-          : 'Undo the last add or delete operation.',
+      tip: isRedo
+                ? 'Redo the last add or delete operation that was undone.'
+                : 'Undo the last add or delete operation.',
     )
         : Container();
   }

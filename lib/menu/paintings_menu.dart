@@ -148,7 +148,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     return await _askYesNoOrCancel(
       title: 'Delete',
       content: 'Delete current painting?',
-      onlyYesAndCancelButtons: true,
+      wantOnlyYesAndCancelButtons: true,
     );
   }
 
@@ -166,7 +166,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     required String content,
     Future<void> Function()? yesCallBack,
     Future<void> Function()? noCallBack,
-    bool onlyYesAndCancelButtons = false,
+    bool wantOnlyYesAndCancelButtons = false,
   }) async {
     final alert = Alert(
       title: title,
@@ -175,10 +175,10 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
         unawaited(yesCallBack?.call());
         Navigator.of(context).pop(true);
       },
-      noCallBack: onlyYesAndCancelButtons
+      noCallBack: wantOnlyYesAndCancelButtons
           ? null
           : () {
-        unawaited(noCallBack?.call());
+              unawaited(noCallBack?.call());
               Navigator.of(context).pop(true);
             },
       cancelCallBack: () => Navigator.of(context).pop(false),

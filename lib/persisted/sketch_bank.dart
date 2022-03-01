@@ -32,19 +32,20 @@ class SketchBank extends ChangeNotifier {
   String get json => sketch.toString();
 
   final animCubeInfos = <CubeInfo>[];
+
   //TODO REMOVE brushing flag
-  bool brushing = false;
+  bool isBrushing = false;
 
   void startBrushing() {
-    setPingPong(true);
+    setIsPingPong(true);
     addAllAnimCubeInfosToStaticCubeInfos();
 
-    brushing = true;
+    isBrushing = true;
     notifyListeners();
   }
 
   void addAllAnimCubeInfosToStaticCubeInfos() {
-    if (!brushing) {
+    if (!isBrushing) {
       sketch.cubeInfos.addAll(animCubeInfos);
 
       animCubeInfos.clear();
@@ -64,7 +65,7 @@ class SketchBank extends ChangeNotifier {
   /// anim is done.
 
   //TODO REMOVE loading flag
-  bool loading = false;
+  bool isLoading = false;
 
   void _moveAllToAnimCubeInfos() {
     final List<CubeInfo> cubeInfos = sketch.cubeInfos;
@@ -72,31 +73,30 @@ class SketchBank extends ChangeNotifier {
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
-    loading = true;
+    isLoading = true;
     // cubeInfos.clear();
 
-    setPlaying(true);
+    setIsPlaying(true);
   }
 
-  void setPingPong(bool value) {
-    setPlaying(true);
-    pingPong = value;
+  void setIsPingPong(bool value) {
+    setIsPlaying(true);
+    isPingPong = value;
   }
 
-  bool pingPong = false;
+  bool isPingPong = false;
 
   late String settingsPath;
   late Settings _settings;
 
   String _savedJson = '';
 
-  bool _playing = false;
+  bool _isPlaying = false;
 
-  bool get playing => _playing;
+  bool get isPlaying => _isPlaying;
 
-  void setPlaying(bool playing) {
-    _playing = playing;
-    // out(playing);
+  void setIsPlaying(bool playing) {
+    _isPlaying = playing;
     notifyListeners();
   }
 
@@ -121,7 +121,7 @@ class SketchBank extends ChangeNotifier {
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
 
-    setPlaying(true);
+    setIsPlaying(true);
 
     unawaited(saveSettings());
   }

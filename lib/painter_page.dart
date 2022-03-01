@@ -58,7 +58,7 @@ class _PainterPageState extends State<PainterPage> {
               child: Stack(
                 children: [
                   Transform.scale(scale: 30, child: const Horizon()),
-                  if (sketchBank.hasCubes && !sketchBank.loading)
+                  if (sketchBank.hasCubes && !sketchBank.isLoading)
                     StaticCubes(sketch: sketchBank.sketch),
                 ],
               ),
@@ -66,7 +66,7 @@ class _PainterPageState extends State<PainterPage> {
             if (sketchBank.animCubeInfos.isNotEmpty)
               AnimCubes(
                 cubeInfos: sketchBank.animCubeInfos,
-                pingPong: sketchBank.pingPong,
+                isPingPong: sketchBank.isPingPong,
               ),
             const Gesturer(),
             const PageButtons(),

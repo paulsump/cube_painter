@@ -9,7 +9,7 @@ class HexagonElevatedButton extends StatelessWidget {
 
   final Widget child;
 
-  bool get on => radioOn ?? false;
+  bool get isOn => radioOn ?? false;
   final bool? radioOn;
   final String tip;
 
@@ -26,7 +26,7 @@ class HexagonElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      offset: Offset(0, on ? 1.0 : -1.0) * buttonElevation / 4,
+      offset: Offset(0, isOn ? 1.0 : -1.0) * buttonElevation / 4,
       child: Tooltip(
         message: tip,
         decoration: BoxDecoration(color: backgroundColor.withOpacity(0.7)),
@@ -34,8 +34,8 @@ class HexagonElevatedButton extends StatelessWidget {
           onPressed: onPressed,
           child: child,
           style: ButtonStyle(
-            elevation: MaterialStateProperty.all(on ? 0.0 : buttonElevation),
-            shadowColor: on ? null : MaterialStateProperty.all(bl),
+            elevation: MaterialStateProperty.all(isOn ? 0.0 : buttonElevation),
+            shadowColor: isOn ? null : MaterialStateProperty.all(bl),
             fixedSize: MaterialStateProperty.all(pageButtonSize),
             shape: hexagonBorderShape,
             backgroundColor: MaterialStateProperty.all(radioOn == null

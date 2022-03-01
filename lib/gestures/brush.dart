@@ -59,7 +59,7 @@ class Brush implements GestureHandler {
   void tapUp(Offset point, BuildContext context) => _saveForUndo(context);
 
   void _setPingPong(bool value, BuildContext context) =>
-      getSketchBank(context).setPingPong(value);
+      getSketchBank(context).setIsPingPong(value);
 
   void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
@@ -141,7 +141,7 @@ class Brush implements GestureHandler {
       saveForUndo(context);
     }
     _setPingPong(false, context);
-    getSketchBank(context).brushing = false;
+    getSketchBank(context).isBrushing = false;
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
