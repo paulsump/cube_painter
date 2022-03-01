@@ -45,9 +45,7 @@ class Brush implements GestureHandler {
   }
 
   @override
-  void end(BuildContext context) {
-    _saveForUndo(context);
-  }
+  void end(BuildContext context) => _saveForUndo(context);
 
   @override
   void tapDown(Offset point, BuildContext context) {
@@ -57,14 +55,10 @@ class Brush implements GestureHandler {
   }
 
   @override
-  void tapUp(Offset point, BuildContext context) {
-    _saveForUndo(context);
-  }
+  void tapUp(Offset point, BuildContext context) => _saveForUndo(context);
 
-  void _setPingPong(bool value, BuildContext context) {
-    final sketchBank = getSketchBank(context);
-    sketchBank.setPingPong(value);
-  }
+  void _setPingPong(bool value, BuildContext context) =>
+      getSketchBank(context).setPingPong(value);
 
   void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
@@ -119,16 +113,10 @@ class Brush implements GestureHandler {
     }
   }
 
-  void _addCube(Position center, Slice slice, BuildContext context) {
-    getAnimCubeInfos(context).add(CubeInfo(center: center, slice: slice));
-  }
+  void _addCube(Position center, Slice slice, BuildContext context) =>
+      getAnimCubeInfos(context).add(CubeInfo(center: center, slice: slice));
 
   void _saveForUndo(BuildContext context) {
-    adopt(context);
-    _setPingPong(false, context);
-  }
-
-  void adopt(BuildContext context) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
     final sketchBank = getSketchBank(context);
@@ -151,6 +139,7 @@ class Brush implements GestureHandler {
     } else {
       saveForUndo(context);
     }
+    _setPingPong(false, context);
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
