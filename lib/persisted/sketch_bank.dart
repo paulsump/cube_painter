@@ -51,9 +51,10 @@ class SketchBank extends ChangeNotifier {
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
 
-  void addAllToAnimCubeInfos() {
+  void _moveAllToAnimCubeInfos() {
     final List<CubeInfo> cubeInfos = sketch.cubeInfos;
 
+    animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
     //TODO Fix thumbnail not visible after loading that one.
@@ -128,7 +129,7 @@ class SketchBank extends ChangeNotifier {
 
   void _onSuccessfulLoad(BuildContext context) {
     getUndoer(context).clear();
-    addAllToAnimCubeInfos();
+    _moveAllToAnimCubeInfos();
   }
 
   Future<void> init(BuildContext context) async {
