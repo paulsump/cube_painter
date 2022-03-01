@@ -50,8 +50,12 @@ class SketchBank extends ChangeNotifier {
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
 
-  void addAllToAnimCubeInfos(List<CubeInfo> orphans) {
-    animCubeInfos.addAll(orphans);
+  void addAllToAnimCubeInfos() {
+    final List<CubeInfo> cubeInfos = sketch.cubeInfos;
+
+    animCubeInfos.addAll(cubeInfos.toList());
+    cubeInfos.clear();
+
     setPlaying(true);
   }
 

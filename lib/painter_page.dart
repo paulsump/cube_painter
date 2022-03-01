@@ -10,7 +10,6 @@ import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/menu/paintings_menu.dart';
 import 'package:cube_painter/menu/slices_menu.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
@@ -36,21 +35,16 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  void _addToAnimCubeInfos() {
-    final sketchBank = getSketchBank(context);
 
-    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
-
-    sketchBank.addAllToAnimCubeInfos(cubeInfos.toList());
-    cubeInfos.clear();
-  }
 
   @override
   void initState() {
     unawaited(getSketchBank(context).init(
       onSuccessfulLoad: () {
         getUndoer(context).clear();
-        _addToAnimCubeInfos();
+        final sketchBank = getSketchBank(context);
+
+        sketchBank.addAllToAnimCubeInfos();
       },
     ));
 
