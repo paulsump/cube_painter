@@ -50,9 +50,14 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
     super.initState();
   }
 
+  double prevValue = 0;
+
   void startForwardAnim({required bool fromZero}) {
+    prevValue = _controller.value;
+    _controller.duration = const Duration(milliseconds: 1600);
     _controller
-        .forward(from: fromZero ? 0 : _controller.value)
+        // .forward(from: fromZero ? 0 : _controller.value)
+        .forward(from: 0)
         .whenComplete(() {
       final sketchBank = getSketchBank(context);
 
@@ -98,8 +103,10 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
                     ScaledCube(
                       scale: widget.pingPong
                           ? pingPongTween(i)
-                          : min(1,
-                              lerp(pingPongTween(i), end, _controller.value)),
+                          : min(
+                              1,
+                              lerp(pingPongTween(i), pingPongTween(i) + 1,
+                                  _controller.value + prevValue)),
                       info: widget.cubeInfos[i],
                     ),
                 ],
