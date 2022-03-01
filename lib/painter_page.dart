@@ -51,10 +51,12 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   void initState() {
-    unawaited(getSketchBank(context).init(onSuccessfulLoad: () {
-      undoer.clear();
-      _addToAnimCubeInfos();
-    }));
+    unawaited(getSketchBank(context).init(
+      onSuccessfulLoad: () {
+        undoer.clear();
+        _addToAnimCubeInfos();
+      },
+    ));
 
     //TODO UNdoer doesn't need setstate now that it's all done in sketchBank
     undoer = Undoer(context, setState: setState);
