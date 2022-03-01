@@ -71,10 +71,9 @@ class BrushState extends State<Brush> {
     );
   }
 
-  /// Where the positions of the cubes are given away
-  void _notify() {
+  void _setPingPong(bool value) {
     final sketchBank = getSketchBank(context);
-    sketchBank.addAllToAnimCubeInfos([]);
+    sketchBank.setPingPong(value);
   }
 
   void _replaceCube(Offset point, BuildContext context) {
@@ -93,7 +92,7 @@ class BrushState extends State<Brush> {
       _addCube(newPosition, slice);
 
       // setState(() {});
-      _notify();
+      _setPingPong(true);
     } else {
       final oldPosition = _animCubeInfos.first.center;
 
@@ -101,7 +100,7 @@ class BrushState extends State<Brush> {
         _animCubeInfos.clear();
 
         _addCube(newPosition, slice);
-        _notify();
+        _setPingPong(true);
       }
     }
   }
@@ -126,7 +125,7 @@ class BrushState extends State<Brush> {
           _addCube(position, Slice.whole);
         }
       }
-      _notify();
+      _setPingPong(true);
       previousPositions = positions;
     }
   }
@@ -137,6 +136,7 @@ class BrushState extends State<Brush> {
 
   void _saveForUndo() {
     //TODO _saveForUndo
+    _setPingPong(false);
   }
 }
 

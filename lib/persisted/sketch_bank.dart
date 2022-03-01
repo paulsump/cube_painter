@@ -51,7 +51,10 @@ class SketchBank extends ChangeNotifier {
   void addAllToAnimCubeInfos(List<CubeInfo> orphans) {
     animCubeInfos.addAll(orphans);
     setPlaying(true);
-// notifyListeners();
+  }
+
+  void setPingPong(bool value) {
+    setPlaying(true);
   }
 
   late String settingsPath;
