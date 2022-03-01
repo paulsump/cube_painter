@@ -7,7 +7,8 @@ const noWarn = out;
 
 typedef StringList = List<String>;
 
-UndoNotifier getUndoer(context) => Provider.of<UndoNotifier>(context);
+UndoNotifier getUndoer(context, {bool listen = false}) =>
+    Provider.of<UndoNotifier>(context, listen: listen);
 
 void saveForUndo(BuildContext context) => getUndoer(context).save(context);
 

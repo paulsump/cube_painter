@@ -81,7 +81,6 @@ class Brush implements GestureHandler {
     if (getAnimCubeInfos(context).isEmpty) {
       _addCube(newPosition, slice, context);
 
-      // setState(() {});
       _setPingPong(true, context);
     } else {
       final oldPosition = getAnimCubeInfos(context).first.center;
@@ -125,34 +124,33 @@ class Brush implements GestureHandler {
   }
 
   void _saveForUndo(BuildContext context) {
-//warning, need to call this:    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
-//before this..
-    //TODO _saveForUndo
+    adopt(context);
     _setPingPong(false, context);
   }
 
-  //todo undo and erase
-  //todo when i put undoer in a provider, i can move this function to SketchBank
   void adopt(BuildContext context) {
     final bool erase = GestureMode.erase == getGestureMode(context);
-    final sketchBank = getSketchBank(context);
 
+    final sketchBank = getSketchBank(context);
     final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
 
     if (erase) {
-      final orphans = sketchBank.animCubeInfos;
+      assert(sketchBank.animCubeInfos.length == 1);
 
-      for (final CubeInfo orphan in orphans) {
-        final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
+      final orphan = sketchBank.animCubeInfos[0];
 
-        if (cubeInfo != null) {
-          assert(orphans.length == 1);
+      final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
 
-          saveForUndo(context);
-          cubeInfos.remove(cubeInfo);
-        }
+      if (cubeInfo != null) {
+        saveForUndo(context);
+        cubeInfos.remove(cubeInfo);
+
+        // So that it doesn't get added back in whenComplete()
+        sketchBank.animCubeInfos.remove(cubeInfo);
       }
     } else {
+//warning, need to call this:    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+//before this..
       saveForUndo(context);
     }
   }
