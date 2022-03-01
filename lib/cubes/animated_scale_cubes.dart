@@ -56,7 +56,6 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
       _controller.duration =
           Duration(milliseconds: 2 * milliseconds ~/ (1 - _controller.value));
     }
-    //TODO set _controller.duration back to default next time
 
     _controller
         .forward(from: fromZero ? 0 : _controller.value)
@@ -65,6 +64,9 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
       sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
       sketchBank.setPlaying(false);
+
+      // set back to default for next time
+      _controller.duration = const Duration(milliseconds: milliseconds);
     });
   }
 
