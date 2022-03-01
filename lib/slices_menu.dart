@@ -4,6 +4,7 @@ import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -18,13 +19,17 @@ class SlicesMenu extends StatefulWidget {
   State<SlicesMenu> createState() => _SlicesMenuState();
 }
 
+const double _padHeight = 15.0;
+const padY = SizedBox(height: _padHeight);
+
 class _SlicesMenuState extends State<SlicesMenu> {
   @override
   Widget build(BuildContext context) {
-    const double w = 14;
+    const double padWidth = 14;
+    const padX = SizedBox(width: padWidth);
 
-    const padX = SizedBox(width: w);
-    const padY = SizedBox(height: 15.0);
+    final screen = getScreenSize(context);
+    final bool isPortrait = screen.width < screen.height;
 
     return Drawer(
       child: SafeArea(
@@ -48,7 +53,8 @@ class _SlicesMenuState extends State<SlicesMenu> {
               children: const [
                 SliceCubeButton(slice: Slice.left),
                 SizedBox(
-                    width: w * 7, child: Icon(DownloadedIcons.plusOutline)),
+                    width: padWidth * 7,
+                    child: Icon(DownloadedIcons.plusOutline)),
                 // padX,
                 // BrushMenuButton(slice: Slice.c),
                 // padX,
@@ -63,21 +69,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
                 SliceCubeButton(slice: Slice.bottomRight),
               ],
             ),
-            padY,
-            padY,
-            padY,
-            padY,
-            const Center(
-              child: Text('Slices are used to create'),
-            ),
-            const Center(
-              child: Text('impossible Escher-like'),
-            ),
-            const Center(
-              child: Text('structures like this...'),
-            ),
-            padY,
-            const Center(child: _Example()),
+            if (isPortrait) const Center(child: _Example()),
           ],
         ),
       ),
@@ -92,26 +84,35 @@ class _Example extends StatelessWidget {
   Widget build(BuildContext context) {
     final sketchBank = getSketchBank(context);
 
-    return Transform.translate(
-      /// TODO Responsive to screen size- magic numbers
-      offset: const Offset(0, 149),
-      child: Transform.scale(
-        /// TODO Responsive to screen size- magic numbers
-        scale: 211,
-        child: Stack(
-          children: [
-            Thumbnail(
-              sketch: sketchBank.example.triangleWithGap,
-              unitTransform: sketchBank.example.unitTransform,
+    return Column(
+      children: [
+        const SizedBox(height: _padHeight * 4),
+        const Text('Slices are used to create'),
+        const Text('impossible Escher-like'),
+        const Text('structures like this...'),
+        padY,
+        Transform.translate(
+          /// TODO Responsive to screen size- magic numbers
+          offset: const Offset(0, 149),
+          child: Transform.scale(
+            /// TODO Responsive to screen size- magic numbers
+            scale: 211,
+            child: Stack(
+              children: [
+                Thumbnail(
+                  sketch: sketchBank.example.triangleWithGap,
+                  unitTransform: sketchBank.example.unitTransform,
+                ),
+                Thumbnail(
+                  sketch: sketchBank.example.triangleGap,
+                  unitTransform: sketchBank.example.unitTransform,
+                ),
+                // Container(color: Colors.yellow),
+              ],
             ),
-              Thumbnail(
-              sketch: sketchBank.example.triangleGap,
-              unitTransform: sketchBank.example.unitTransform,
-            ),
-            // Container(color: Colors.yellow),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
