@@ -81,7 +81,6 @@ class _PainterPageState extends State<PainterPage> {
             UnitToScreen(
               child: Stack(
                 children: [
-                  // HACK FOR testing
                   if (sketchBank.hasCubes)
                     StaticCubes(sketch: sketchBank.sketch),
                 ],
