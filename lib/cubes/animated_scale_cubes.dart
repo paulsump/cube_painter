@@ -9,23 +9,22 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
 
-/// TOdo THis name is too similar to [AnimCube]s
-class AnimatedScaleCubes extends StatefulWidget {
+class AnimCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
   final bool pingPong;
 
-  const AnimatedScaleCubes({
+  const AnimCubes({
     Key? key,
     required this.cubeInfos,
     this.pingPong = false,
   }) : super(key: key);
 
   @override
-  State<AnimatedScaleCubes> createState() => AnimatedScaleCubesState();
+  State<AnimCubes> createState() => AnimCubesState();
 }
 
-class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
+class AnimCubesState extends State<AnimCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -79,7 +78,7 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   }
 
   @override
-  void didUpdateWidget(AnimatedScaleCubes oldWidget) {
+  void didUpdateWidget(AnimCubes oldWidget) {
     final sketchBank = getSketchBank(context);
 
     if (sketchBank.playing) {

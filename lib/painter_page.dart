@@ -64,7 +64,7 @@ class _PainterPageState extends State<PainterPage> {
               ),
             ),
             if (sketchBank.animCubeInfos.isNotEmpty)
-              AnimatedScaleCubes(
+              AnimCubes(
                 cubeInfos: sketchBank.animCubeInfos,
                 pingPong: sketchBank.pingPong,
               ),
