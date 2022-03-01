@@ -25,6 +25,7 @@ class Brush extends StatefulWidget {
 
 class BrushState extends State<Brush> {
   List<CubeInfo> get _animCubeInfos => getSketchBank(context).animCubeInfos;
+
   final brushMaths = BrushMaths();
   var previousPositions = Positions.empty;
 
@@ -57,8 +58,7 @@ class BrushState extends State<Brush> {
       },
       onPanEnd: (details) {
         tapped = false;
-        _handOver();
-        //TODO UNDO
+        _saveForUndo();
       },
       onTapDown: (details) {
         tapped = true;
@@ -66,14 +66,13 @@ class BrushState extends State<Brush> {
       },
       onTapUp: (details) {
         tapped = false;
-        _handOver();
-        //TODO UNDO
+        _saveForUndo();
       },
     );
   }
 
   /// Where the positions of the cubes are given away
-  void _handOver() {
+  void _notify() {
     final sketchBank = getSketchBank(context);
     sketchBank.addAllToAnimCubeInfos([]);
   }
@@ -94,17 +93,15 @@ class BrushState extends State<Brush> {
       _addCube(newPosition, slice);
 
       // setState(() {});
-      _handOver();
+      _notify();
     } else {
       final oldPosition = _animCubeInfos.first.center;
 
       if (oldPosition != newPosition) {
         _animCubeInfos.clear();
 
-        // TODO fix jump in animation due to not passing current _controller value through
         _addCube(newPosition, slice);
-        // setState(() {});
-        _handOver();
+        _notify();
       }
     }
   }
@@ -129,14 +126,17 @@ class BrushState extends State<Brush> {
           _addCube(position, Slice.whole);
         }
       }
-      // setState(() {});
-      _handOver();
+      _notify();
       previousPositions = positions;
     }
   }
 
   void _addCube(Position center, Slice slice) {
     _animCubeInfos.add(CubeInfo(center: center, slice: slice));
+  }
+
+  void _saveForUndo() {
+    //TODO _saveForUndo
   }
 }
 
