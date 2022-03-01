@@ -8,6 +8,7 @@ import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
+import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -128,6 +129,41 @@ class Brush implements GestureHandler {
 //before this..
     //TODO _saveForUndo
     _setPingPong(false, context);
+  }
+
+  //todo undo and erase
+  //todo when i put undoer in a provider, i can move this function to SketchBank
+  void adopt(BuildContext context) {
+    final bool erase = GestureMode.erase == getGestureMode(context);
+    final sketchBank = getSketchBank(context);
+
+    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
+
+    if (erase) {
+      final orphans = sketchBank.animCubeInfos;
+
+      for (final CubeInfo orphan in orphans) {
+        final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
+
+        if (cubeInfo != null) {
+          assert(orphans.length == 1);
+
+          saveForUndo(context);
+          cubeInfos.remove(cubeInfo);
+        }
+      }
+    } else {
+      saveForUndo(context);
+    }
+  }
+
+  CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
+    for (final info in cubeInfos) {
+      if (position == info.center) {
+        return info;
+      }
+    }
+    return null;
   }
 }
 

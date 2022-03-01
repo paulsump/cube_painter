@@ -4,7 +4,6 @@ import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/animated_scale_cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
-import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/gestures/gesturer.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/horizon.dart';
@@ -12,7 +11,6 @@ import 'package:cube_painter/menu/paintings_menu.dart';
 import 'package:cube_painter/menu/slices_menu.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
-import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
@@ -95,38 +93,4 @@ class _PainterPageState extends State<PainterPage> {
     );
   }
 
-  //todo undo and erase
-  //todo when i put undoer in a provider, i can move this function to SketchBank
-  void adopt() {
-    final bool erase = GestureMode.erase == getGestureMode(context);
-    final sketchBank = getSketchBank(context);
-
-    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
-
-    if (erase) {
-      final orphans = sketchBank.animCubeInfos;
-
-      for (final CubeInfo orphan in orphans) {
-        final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
-
-        if (cubeInfo != null) {
-          assert(orphans.length == 1);
-
-          saveForUndo(context);
-          cubeInfos.remove(cubeInfo);
-        }
-      }
-    } else {
-      saveForUndo(context);
-    }
-  }
-
-  CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
-    for (final info in cubeInfos) {
-      if (position == info.center) {
-        return info;
-      }
-    }
-    return null;
-  }
 }
