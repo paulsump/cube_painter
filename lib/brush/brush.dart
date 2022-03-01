@@ -45,6 +45,8 @@ class BrushState extends State<Brush> {
       onPanStart: (details) {
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
+          getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+
           final Offset startUnit = screenToUnit(details.localPosition, context);
           brushMaths.calcStartPosition(startUnit);
         }
@@ -61,6 +63,8 @@ class BrushState extends State<Brush> {
         _saveForUndo();
       },
       onTapDown: (details) {
+        getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+
         tapped = true;
         _replaceCube(details.localPosition, context);
       },
