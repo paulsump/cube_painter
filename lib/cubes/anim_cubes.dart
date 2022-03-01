@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
 
+/// Animates a list of [ScaledCube]s.
+/// Used when loading and brushing (creating using gestures).
+/// One animator controls them all.
+/// After the animation is finished, they are moved to [StaticCubes]
 class AnimCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
