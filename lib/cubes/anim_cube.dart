@@ -9,7 +9,7 @@ import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../unit_ping_pong.dart';
+import 'unit_ping_pong.dart';
 
 const noWarn = [out, Slice, UnitToScreen];
 

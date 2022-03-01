@@ -1,13 +1,13 @@
 import 'dart:math';
 
 import 'package:cube_painter/cubes/static_cube.dart';
+import 'package:cube_painter/cubes/unit_ping_pong.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
-import 'package:cube_painter/unit_ping_pong.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
