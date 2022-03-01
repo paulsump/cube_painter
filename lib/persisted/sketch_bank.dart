@@ -195,7 +195,6 @@ class SketchBank extends ChangeNotifier {
   }
 
   void loadFile({required String filePath}) {
-    addAllAnimCubeInfosToStaticCubeInfos();
 
     saveCurrentFilePath(filePath);
 
