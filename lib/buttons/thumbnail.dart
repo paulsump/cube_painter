@@ -29,7 +29,7 @@ class Thumbnail extends StatelessWidget {
                 offset: unitTransform.offset,
                 // TODO REMove hack for example slice
                 child: sketch.cubeInfos.length == 1
-                    ? AnimCube(
+                    ? StandAloneAnimatedCube(
                         fields: Fields(info: sketch.cubeInfos[0]),
                       )
                     : StaticCubes(sketch: sketch)),

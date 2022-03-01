@@ -13,7 +13,7 @@ import 'unit_ping_pong.dart';
 
 const noWarn = [out, Slice, UnitToScreen];
 
-/// Params for creating [AnimCube]s
+/// Params for creating [StandAloneAnimatedCube]s
 // TODO rename to AnimCubeFields
 class Fields {
   final CubeInfo info;
@@ -38,14 +38,14 @@ class Fields {
 /// It was fun to see if it worked putting the anim controller on every widget
 /// and it does, as long as you never need the anim controller value e.g. if you want to
 /// recreate the cubes elsewhere or with a different animation, starting at the same place.
-class AnimCube extends StatefulWidget {
+class StandAloneAnimatedCube extends StatefulWidget {
   final Fields fields;
 
   final Widget _unitCube;
 
   final Offset _offset;
 
-  AnimCube({
+  StandAloneAnimatedCube({
     Key? key,
     required this.fields,
   })  : _unitCube = fields.info.slice == Slice.whole
@@ -55,10 +55,10 @@ class AnimCube extends StatefulWidget {
         super(key: key);
 
   @override
-  _AnimCubeState createState() => _AnimCubeState();
+  _StandAloneAnimatedCubeState createState() => _StandAloneAnimatedCubeState();
 }
 
-class _AnimCubeState extends State<AnimCube>
+class _StandAloneAnimatedCubeState extends State<StandAloneAnimatedCube>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
