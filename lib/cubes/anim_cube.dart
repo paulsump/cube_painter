@@ -27,10 +27,10 @@ class Fields {
 
   Fields({
     required this.info,
-    required this.start,
-    required this.end,
-    this.isPingPong = false,
-    this.milliseconds = 800,
+    this.start = 0.0,
+    this.end = 1.0,
+    this.isPingPong = true,
+    this.milliseconds = 3000,
   });
 }
 

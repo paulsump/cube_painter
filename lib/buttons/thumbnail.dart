@@ -33,10 +33,6 @@ class Thumbnail extends StatelessWidget {
                         key: UniqueKey(),
                         fields: Fields(
                           info: sketch.cubeInfos[0],
-                          start: 0,
-                          end: 1.0,
-                          isPingPong: true,
-                          milliseconds: 3000,
                         ),
                       )
                     : StaticCubes(sketch: sketch)),
