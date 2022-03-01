@@ -16,7 +16,7 @@ import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
-import 'package:cube_painter/undoer.dart';
+import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

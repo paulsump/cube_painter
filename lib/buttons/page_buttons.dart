@@ -7,7 +7,7 @@ import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/undoer.dart';
+import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out];
