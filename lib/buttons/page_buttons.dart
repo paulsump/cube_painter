@@ -15,12 +15,7 @@ const noWarn = [out];
 /// Just a container for all the button on the main [PainterPage].
 /// Organised using [Column]s and [Row]s
 class PageButtons extends StatelessWidget {
-  final UndoNotifier undoer;
-
-  const PageButtons({
-    Key? key,
-    required this.undoer,
-  }) : super(key: key);
+  const PageButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +49,8 @@ class PageButtons extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const SizedBox(height: buttonElevation),
-            _UndoButton(undoer: undoer),
-            _UndoButton(undoer: undoer, redo: true),
+            const _UndoButton(),
+            const _UndoButton(redo: true),
             // HACK without a big container, the buttons don't response, and now it's needed to stop the undo buttons being centered
             Container(),
           ],
@@ -69,17 +64,17 @@ class PageButtons extends StatelessWidget {
 /// Pressing it will undo the previous action.
 /// The redo button appears only if undo was pressed.
 class _UndoButton extends StatelessWidget {
-  final UndoNotifier undoer;
   final bool redo;
 
   const _UndoButton({
     Key? key,
-    required this.undoer,
     this.redo = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final undoer = getUndoer(context);
+
     final bool canUndo = undoer.canUndo;
     final bool canRedo = undoer.canRedo;
 
@@ -90,18 +85,18 @@ class _UndoButton extends StatelessWidget {
         ? HexagonElevatedButton(
             child: Icon(
               redo ? Icons.redo_sharp : Icons.undo_sharp,
-              size: normalIconSize * 1.2,
-              color: enabled ? enabledIconColor : disabledIconColor,
-            ),
-            onPressed: enabled
-                ? redo
-                    ? undoer.redo
-                    : undoer.undo
+        size: normalIconSize * 1.2,
+        color: enabled ? enabledIconColor : disabledIconColor,
+      ),
+      onPressed: enabled
+          ? redo
+                    ? () => undoer.redo(context)
+                    : () => undoer.undo(context)
                 : null,
-            tip: redo
-                ? 'Redo the last add or delete operation that was undone.'
-                : 'Undo the last add or delete operation.',
-          )
+      tip: redo
+          ? 'Redo the last add or delete operation that was undone.'
+          : 'Undo the last add or delete operation.',
+    )
         : Container();
   }
 }

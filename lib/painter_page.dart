@@ -38,7 +38,6 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  late UndoNotifier undoer;
 
   void _addToAnimCubeInfos() {
     final sketchBank = getSketchBank(context);
@@ -53,13 +52,10 @@ class _PainterPageState extends State<PainterPage> {
   void initState() {
     unawaited(getSketchBank(context).init(
       onSuccessfulLoad: () {
-        undoer.clear();
+        getUndoer(context).clear();
         _addToAnimCubeInfos();
       },
     ));
-
-    //TODO UNdoer doesn't need setstate now that it's all done in sketchBank
-    undoer = UndoNotifier(context, setState: setState);
 
     super.initState();
   }
@@ -92,7 +88,7 @@ class _PainterPageState extends State<PainterPage> {
                 pingPong: sketchBank.pingPong,
               ),
             const Gesturer(),
-            PageButtons(undoer: undoer),
+            const PageButtons(),
           ]),
         ),
       ),
@@ -116,12 +112,12 @@ class _PainterPageState extends State<PainterPage> {
         if (cubeInfo != null) {
           assert(orphans.length == 1);
 
-          undoer.save();
+          saveForUndo(context);
           cubeInfos.remove(cubeInfo);
         }
       }
     } else {
-      undoer.save();
+      saveForUndo(context);
     }
   }
 
