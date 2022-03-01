@@ -195,7 +195,12 @@ class SketchBank extends ChangeNotifier {
     unawaited(saveFile());
   }
 
-  void setJson(String json) => setSketch(Sketch.fromString(json));
+  /// Creates a sketch from a json string
+  /// called from [UndoNotifier]
+  void setJson(String json) {
+    setSketch(Sketch.fromString(json));
+    notifyListeners();
+  }
 
   void addCubeInfo(CubeInfo info) => sketch.cubeInfos.add(info);
 

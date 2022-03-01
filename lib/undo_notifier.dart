@@ -12,6 +12,8 @@ UndoNotifier getUndoer(context, {bool listen = false}) =>
 
 void saveForUndo(BuildContext context) => getUndoer(context).save(context);
 
+/// Provides access to the undo / redo mechanism.
+/// [SketchBank] does the actual notifying in [setJson]
 class UndoNotifier extends ChangeNotifier {
   final StringList _undos = [];
   final StringList _redos = [];
@@ -30,18 +32,15 @@ class UndoNotifier extends ChangeNotifier {
     _redos.clear();
   }
 
-  void undo(BuildContext context) {
-    _popFromPushTo(_undos, _redos, context);
-    notifyListeners();
-  }
+  void undo(BuildContext context) => _popFromPushTo(_undos, _redos, context);
 
-  void redo(BuildContext context) {
-    _popFromPushTo(_redos, _undos, context);
-    notifyListeners();
-  }
+  void redo(BuildContext context) => _popFromPushTo(_redos, _undos, context);
 
   void _popFromPushTo(
-      StringList popFrom, StringList pushTo, BuildContext context) {
+    StringList popFrom,
+    StringList pushTo,
+    BuildContext context,
+  ) {
     _saveTo(pushTo, context);
 
     final sketchBank = getSketchBank(context);
