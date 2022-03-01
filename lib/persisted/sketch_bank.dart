@@ -34,6 +34,14 @@ class SketchBank extends ChangeNotifier {
   final animCubeInfos = <CubeInfo>[];
   bool brushing = false;
 
+  void startBrushing() {
+    setPingPong(true);
+    addAllAnimCubeInfosToStaticCubeInfos();
+
+    brushing = true;
+    notifyListeners();
+  }
+
   void addAllAnimCubeInfosToStaticCubeInfos() {
     if (!brushing) {
       sketch.cubeInfos.addAll(animCubeInfos);

@@ -80,8 +80,13 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
   void didUpdateWidget(AnimatedScaleCubes oldWidget) {
     final sketchBank = getSketchBank(context);
 
-    if (sketchBank.playing && !sketchBank.pingPong) {
-      startForwardAnim(fromZero: false);
+    if (sketchBank.playing) {
+      if (sketchBank.pingPong) {
+        _controller.duration = const Duration(milliseconds: milliseconds);
+        _controller.repeat();
+      } else {
+        startForwardAnim(fromZero: false);
+      }
     }
 
     super.didUpdateWidget(oldWidget);

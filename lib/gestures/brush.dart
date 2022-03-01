@@ -19,6 +19,7 @@ const noWarn = [out, Position];
 /// In [GestureMode.erase] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brush implements GestureHandler {
+  //TODO REMOVE THIS FUnk, USE Use sketchBank local
   List<CubeInfo> getAnimCubeInfos(context) =>
       getSketchBank(context).animCubeInfos;
 
@@ -29,8 +30,7 @@ class Brush implements GestureHandler {
 
   @override
   void start(Offset point, BuildContext context) {
-    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
-    getSketchBank(context).brushing = true;
+    getSketchBank(context).startBrushing();
 
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
@@ -50,8 +50,7 @@ class Brush implements GestureHandler {
 
   @override
   void tapDown(Offset point, BuildContext context) {
-    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
-    getSketchBank(context).brushing = true;
+    getSketchBank(context).startBrushing();
 
     _replaceCube(point, context);
   }
