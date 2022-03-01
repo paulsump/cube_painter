@@ -172,15 +172,9 @@ class SketchBank extends ChangeNotifier {
 
   String get json => sketch.toString();
 
-  // String get jsonWithAnimCubesToo {
-  //   final cubeInfos = <CubeInfo>[
-  //     ...sketch.cubeInfos,
-  //     ...animCubeInfos,
-  //   ];
-  //   return Sketch(cubeInfos).toString();
-  // }
-
   void loadFile({required String filePath}) {
+    addAllAnimCubeInfosToStaticCubeInfos();
+
     saveCurrentFilePath(filePath);
 
     _savedJson = json;
@@ -188,12 +182,15 @@ class SketchBank extends ChangeNotifier {
   }
 
   Future<void> saveFile() async {
-    await saveString(filePath: currentFilePath, string: json);
+    addAllAnimCubeInfosToStaticCubeInfos();
 
+    await saveString(filePath: currentFilePath, string: json);
     _savedJson = json;
   }
 
   Future<void> saveACopyFile() async {
+    addAllAnimCubeInfosToStaticCubeInfos();
+
     final jsonCopy = json;
 
     await _setNewFilePath();
@@ -229,6 +226,8 @@ class SketchBank extends ChangeNotifier {
   }
 
   Future<void> newFile() async {
+    addAllAnimCubeInfosToStaticCubeInfos();
+
     await _setNewFilePath();
 
     pushSketch(Sketch.empty());
