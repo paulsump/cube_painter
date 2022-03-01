@@ -32,6 +32,7 @@ class SketchBank extends ChangeNotifier {
   String get json => sketch.toString();
 
   final animCubeInfos = <CubeInfo>[];
+  //TODO REMOVE brushing flag
   bool brushing = false;
 
   void startBrushing() {
@@ -62,14 +63,17 @@ class SketchBank extends ChangeNotifier {
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
 
+  //TODO REMOVE loading flag
+  bool loading = false;
+
   void _moveAllToAnimCubeInfos() {
     final List<CubeInfo> cubeInfos = sketch.cubeInfos;
 
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
-    //TODO Fix thumbnail not visible after loading that one.
-    cubeInfos.clear();
+    loading = true;
+    // cubeInfos.clear();
 
     setPlaying(true);
   }

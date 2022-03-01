@@ -65,6 +65,8 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
       sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
       sketchBank.setPlaying(false);
 
+      sketchBank.loading = false;
+
       // set back to default for next time
       _controller.duration = const Duration(milliseconds: milliseconds);
     });
@@ -83,6 +85,7 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
     if (sketchBank.playing) {
       if (sketchBank.pingPong) {
         _controller.duration = const Duration(milliseconds: milliseconds);
+
         _controller.repeat();
       } else {
         startForwardAnim(fromZero: false);
