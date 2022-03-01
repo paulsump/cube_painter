@@ -67,7 +67,8 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
   @override
   void didUpdateWidget(AnimatedScaleCubes oldWidget) {
-    if (getSketchBank(context).playing) {
+    final sketchBank = getSketchBank(context);
+    if (sketchBank.playing && !sketchBank.pingPong) {
       startForwardAnim();
     }
 
