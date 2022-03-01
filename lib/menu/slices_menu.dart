@@ -19,6 +19,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
   @override
   Widget build(BuildContext context) {
     const double w = 14;
+
     const padX = SizedBox(width: w);
     const padY = SizedBox(height: 15.0);
 
