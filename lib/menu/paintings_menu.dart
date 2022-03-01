@@ -32,8 +32,8 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   Widget build(BuildContext context) {
     final sketchBank = getSketchBank(context, listen: true);
 
-    pop(funk) => () {
-          funk();
+    pop(funk) => () async {
+          await funk();
           Navigator.of(context).pop();
         };
 
@@ -42,8 +42,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
         tip: 'Create a new painting',
         icon: DownloadedIcons.docNew,
         iconSize: downloadedIconSize * 0.96,
-        // onPressed: pop(_newFile),
-        onPressed: _newFile,
+        onPressed: pop(_newFile),
       ),
       PaintingsMenuItem(
         tip: 'Save the current painting',
