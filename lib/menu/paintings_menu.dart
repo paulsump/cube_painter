@@ -30,7 +30,7 @@ class PaintingsMenu extends StatefulWidget {
 class _PaintingsMenuState extends State<PaintingsMenu> {
   @override
   Widget build(BuildContext context) {
-    final sketchBank = getSketchBank(context);
+    final sketchBank = getSketchBank(context, listen: true);
 
     pop(funk) => () {
           funk();
@@ -69,38 +69,36 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     const double offsetX = 55;
     const padY = SizedBox(height: 15.0);
 
-    return LayoutBuilder(
-      builder: (context, constraints) => Drawer(
-        // Wrapping with SafeArea here would cause shift to right on iphone
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const _SafePad(),
-            padY,
-            const Center(child: Text('Paintings')),
-            padY,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                for (PaintingsMenuItem item in items)
-                  FlatIconHexagonButton(item: item),
-              ],
-            ),
-            const SizedBox(height: 5.0),
-            const Divider(),
-            for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
-              Transform.translate(
-                offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
-                child: ThumbnailButton(
-                  tip: 'Load this painting',
-                  onPressed: () =>
-                      _loadFile(filePath: sketchBank.sketchEntries[i].key),
-                  sketch: sketchBank.sketchEntries[i].value,
-                ),
+    return Drawer(
+      // Wrapping with SafeArea here would cause shift to right on iphone
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const _SafePad(),
+          padY,
+          const Center(child: Text('Paintings')),
+          padY,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              for (PaintingsMenuItem item in items)
+                FlatIconHexagonButton(item: item),
+            ],
+          ),
+          const SizedBox(height: 5.0),
+          const Divider(),
+          for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
+            Transform.translate(
+              offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
+              child: ThumbnailButton(
+                tip: 'Load this painting',
+                onPressed: () =>
+                    _loadFile(filePath: sketchBank.sketchEntries[i].key),
+                sketch: sketchBank.sketchEntries[i].value,
               ),
-            const Divider(),
-          ],
-        ),
+            ),
+          const Divider(),
+        ],
       ),
     );
   }
