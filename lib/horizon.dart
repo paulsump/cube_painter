@@ -34,10 +34,10 @@ Paint getGradientPaint(PaintingStyle style, Path path) {
 /// TODO Responsive to screen size- magic numbers
 /// these are based on my phone
 const quad = [
-  Offset(-1.4, 0.0),
-  Offset(1.4, 0.0),
-  Offset(1.4, 1.6),
-  Offset(-1.4, 1.6),
+  Offset(-2, 0.0),
+  Offset(2, 0.0),
+  Offset(2, 1.6),
+  Offset(-2, 1.6),
 ];
 
 get _gradientBottomTop => LinearGradient(

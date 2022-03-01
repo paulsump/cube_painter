@@ -85,7 +85,8 @@ class PanZoomer implements GestureHandler {
 
     // Pan limits - Don’t allow pan past place where can’t zoom limit to.
     /// TODO Responsive to screen size- magic numbers
-    offset = Offset(offset.dx.clamp(-100, 130), offset.dy.clamp(-250, 280));
+    out(offset);
+    offset = Offset(offset.dx.clamp(-500, 500), offset.dy.clamp(-340, 500));
 
     //TODO See if this makes a diff when the widgets listen
     if (offset != getPanOffset(context)) {
