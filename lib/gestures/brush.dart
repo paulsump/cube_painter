@@ -144,12 +144,12 @@ class Brush implements GestureHandler {
       if (cubeInfo != null) {
         saveForUndo(context);
         cubeInfos.remove(cubeInfo);
-
-        // So that it doesn't get added back in whenComplete()
-        sketchBank.animCubeInfos.remove(cubeInfo);
       }
+
+      // So that it doesn't get added back in whenComplete()
+      sketchBank.animCubeInfos.clear();
     } else {
-//warning, need to call this:    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+//TODO FIX BUG , need to call this:    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
 //before this..
       saveForUndo(context);
     }
