@@ -2,6 +2,7 @@ import 'package:cube_painter/brush/brush.dart';
 import 'package:cube_painter/brush/gesture_handler.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
+import 'package:cube_painter/transform/pan_zoom.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
@@ -15,7 +16,8 @@ class Gesturer extends StatefulWidget {
 }
 
 class GesturerState extends State<Gesturer> {
-  final GestureHandler gestureHandler = Brush();
+  // final GestureHandler gestureHandler = Brush();
+  final GestureHandler gestureHandler = PanZoomer();
 
   bool tapped = false;
 
@@ -37,7 +39,7 @@ class GesturerState extends State<Gesturer> {
         }
       },
       onScaleUpdate: (details) {
-        gestureHandler.update(details.focalPoint, context);
+        gestureHandler.update(details.focalPoint, details.scale, context);
       },
       onScaleEnd: (details) {
         tapped = false;

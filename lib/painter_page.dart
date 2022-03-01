@@ -68,7 +68,7 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     final sketchBank = getSketchBank(context, listen: true);
 
-    final gestureMode = getGestureMode(context, listen: true);
+    // final gestureMode = getGestureMode(context, listen: true);
 
     return Scaffold(
       drawer: const PaintingsMenu(),
@@ -94,7 +94,8 @@ class _PainterPageState extends State<PainterPage> {
                 cubeInfos: sketchBank.animCubeInfos,
                 pingPong: sketchBank.pingPong,
               ),
-            GestureMode.panZoom == gestureMode ? PanZoomer() : const Gesturer(),
+            // GestureMode.panZoom == gestureMode ? PanZoomer() : const Gesturer(),
+            const Gesturer(),
             PageButtons(undoer: undoer),
           ]),
         ),

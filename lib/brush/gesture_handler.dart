@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 abstract class GestureHandler {
   void start(Offset point, BuildContext context);
 
-  void update(Offset point, BuildContext context);
+  void update(Offset point, double scale, BuildContext context);
 
   void end(BuildContext context);
 

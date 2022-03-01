@@ -1,3 +1,4 @@
+import 'package:cube_painter/brush/gesture_handler.dart';
 import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,75 +55,53 @@ class InitialValues {
   late double scale;
 }
 
-class PanZoomer extends StatelessWidget {
+class PanZoomer implements GestureHandler {
   final _initial = InitialValues();
-
-  PanZoomer({Key? key}) : super(key: key);
 
   @override
   void start(Offset point, BuildContext context) {
-    // TODO: implement start
+    _initial.focalPoint = point;
+
+    _initial.scale = getZoomScale(context);
+    _initial.offset = getPanOffset(context);
   }
 
   @override
-  void update(Offset point, BuildContext context) {
-    // TODO: implement update
+  void update(Offset point, double scale_, BuildContext context) {
+    final scale = _initial.scale * scale_;
+
+    /// TODO Responsive to screen size- magic numbers
+    if (scale < 15 || 300 < scale) {
+      return;
+    }
+
+    if (scale != getZoomScale(context)) {
+      setZoomScale(context, scale);
+    }
+
+    Offset offset = point - _initial.focalPoint + _initial.offset;
+
+    offset *= scale_;
+
+    // Pan limits - Don’t allow pan past place where can’t zoom limit to.
+    /// TODO Responsive to screen size- magic numbers
+    offset = Offset(offset.dx.clamp(-100, 130), offset.dy.clamp(-250, 280));
+
+    //TODO See if this makes a diff when the widgets listen
+    if (offset != getPanOffset(context)) {
+      setPanOffset(context, offset);
+    }
   }
 
   @override
   void end(BuildContext context) {
-    // TODO: implement end
   }
 
   @override
   void tapDown(Offset point, BuildContext context) {
-    // TODO: implement tapDown
   }
 
   @override
   void tapUp(Offset point, BuildContext context) {
-    // TODO: implement tapUp
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onScaleStart: (details) {
-        _initial.focalPoint = details.focalPoint;
-
-        _initial.scale = getZoomScale(context);
-        _initial.offset = getPanOffset(context);
-      },
-      onScaleUpdate: (details) {
-        final scale = _initial.scale * details.scale;
-
-        /// TODO Responsive to screen size- magic numbers
-        if (scale < 15 || 300 < scale) {
-          return;
-        }
-
-        if (scale != getZoomScale(context)) {
-          setZoomScale(context, scale);
-        }
-
-        Offset offset =
-            details.focalPoint - _initial.focalPoint + _initial.offset;
-
-        offset *= details.scale;
-
-        // Pan limits - Don’t allow pan past place where can’t zoom limit to.
-        /// TODO Responsive to screen size- magic numbers
-        offset = Offset(offset.dx.clamp(-100, 130), offset.dy.clamp(-250, 280));
-
-        //TODO See if this makes a diff when the widgets listen
-        if (offset != getPanOffset(context)) {
-          setPanOffset(context, offset);
-        }
-      },
-      // Without this container, gestures stop working
-      // i.e. onScaleUpdate etc doesn't get called. 'opaque' is also required.
-      child: Container(),
-    );
   }
 }

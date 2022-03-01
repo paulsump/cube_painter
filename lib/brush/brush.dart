@@ -35,7 +35,7 @@ class Brush implements GestureHandler {
   }
 
   @override
-  void update(Offset point, BuildContext context) {
+  void update(Offset point, double scale, BuildContext context) {
     // out(details.scale!=1);
     if (GestureMode.addWhole == getGestureMode(context)) {
       _updateExtrude(point, context);
