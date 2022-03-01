@@ -84,13 +84,12 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
       animation: _controller,
       builder: (context, child) {
         final int n = widget.cubeInfos.length;
+
         double pingPongTween(i) =>
             pingPongBetween(start, end, _controller.value + i / n);
+
         return Stack(
           children: [
-            // HACK without this container,
-            // onPanStart etc doesn't get called after cubes are added.
-            // Container(),
             UnitToScreen(
               child: Stack(
                 children: [
