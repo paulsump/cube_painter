@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/animated_scale_cubes.dart';
+import 'package:cube_painter/cubes/anim_cubes.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/gestures/gesturer.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
