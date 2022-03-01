@@ -28,11 +28,6 @@ class AnimCubesState extends State<AnimCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  //TODO REMOVE start and end fields
-  final double start = 0.0;
-
-  final double end = 1.0;
-
   static const int milliseconds = 800;
 
   @override
@@ -101,8 +96,7 @@ class AnimCubesState extends State<AnimCubes>
       builder: (context, child) {
         final int n = widget.cubeInfos.length;
 
-        double pingPongTween(i) =>
-            pingPongBetween(start, end, _controller.value + i / n);
+        double pingPongTween(i) => unitPingPong(_controller.value + i / n);
 
         return Stack(
           children: [
@@ -113,7 +107,7 @@ class AnimCubesState extends State<AnimCubes>
                     ScaledCube(
                       scale: widget.pingPong
                           ? pingPongTween(i)
-                          : lerp(pingPongTween(i), end, _controller.value),
+                          : lerp(pingPongTween(i), 1.0, _controller.value),
                       info: widget.cubeInfos[i],
                     ),
                 ],
