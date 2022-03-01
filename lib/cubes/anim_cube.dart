@@ -23,14 +23,6 @@ class Fields {
 
   final bool isPingPong;
 
-  // todo remove this
-  double get scale => _scale;
-  double _scale = 1;
-
-  // todo remove this
-  //TODO pass Fields
-  final dynamic Function(AnimCube old)? whenComplete;
-
   final int milliseconds;
 
   Fields({
@@ -38,13 +30,11 @@ class Fields {
     required this.start,
     required this.end,
     this.isPingPong = false,
-    this.whenComplete,
     this.milliseconds = 800,
   });
 }
 
 /// Unit cube or slice that animates itself based the [Fields] passed in.
-/// TODO Replace with [ScaledCube]s.
 /// It was fun to see if it worked putting the anim controller on every widget
 /// and it does, as long as you never need the anim controller value e.g. if you want to
 /// recreate the cubes elsewhere or with a different animation, starting at the same place.
@@ -82,13 +72,8 @@ class _AnimCubeState extends State<AnimCube>
     if (widget.fields.start != widget.fields.end) {
       if (widget.fields.isPingPong) {
         _controller.repeat();
-        // _controller.value = widget.fields.controllerValue;
       } else {
-        _controller
-            .forward()
-            .whenComplete(widget.fields.whenComplete?.call(widget));
-        //TODO PASS fields into whenComplete()
-        // .whenComplete(widget.fields.whenComplete?.call(widget.fields));
+        _controller.forward();
       }
     }
     super.initState();
@@ -105,14 +90,13 @@ class _AnimCubeState extends State<AnimCube>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        widget.fields._scale = _scale();
 
         return Stack(
           children: [
             Transform.translate(
               offset: widget._offset,
               child: Transform.scale(
-                scale: widget.fields._scale,
+                scale: _scale(),
                 child: widget._unitCube,
               ),
             ),
