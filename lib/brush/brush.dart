@@ -30,6 +30,7 @@ class Brush extends StatefulWidget {
 class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
+  List<CubeInfo> get _animCubeInfos => getSketchBank(context).animCubeInfos;
   final brushMaths = BrushMaths();
   var previousPositions = Positions.empty;
 
@@ -115,9 +116,9 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
 
   /// Where the positions of the cubes are given away
   void _handOver() {
+    final sketchBank = getSketchBank(context);
+    sketchBank.addAllToAnimCubeInfos(widget._cubeInfos);
     if (widget._cubeInfos.isNotEmpty) {
-      final sketchBank = getSketchBank(context);
-
       sketchBank.addAllToAnimCubeInfos(widget._cubeInfos.toList());
       widget._cubeInfos.clear();
       //TODO UNDO
@@ -136,19 +137,21 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
 
     final newPosition = brushMaths.startPosition;
 
-    if (widget._cubeInfos.isEmpty) {
+    if (_animCubeInfos.isEmpty) {
       _addCube(newPosition, slice);
 
       setState(() {});
+      _handOver();
     } else {
-      final oldPosition = widget._cubeInfos.first.center;
+      final oldPosition = _animCubeInfos.first.center;
 
       if (oldPosition != newPosition) {
-        widget._cubeInfos.clear();
+        _animCubeInfos.clear();
 
         // TODO fix jump in animation due to not passing current _controller value through
         _addCube(newPosition, slice);
         setState(() {});
+        _handOver();
       }
     }
   }
@@ -161,25 +164,26 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
       // using order provided by extruder
       // only add new cubes, deleting any old ones
 
-      var copy = widget._cubeInfos.toList();
-      widget._cubeInfos.clear();
+      var copy = _animCubeInfos.toList();
+      _animCubeInfos.clear();
 
       for (Position position in positions.list) {
         CubeInfo? cube = _findAt(position, copy);
 
         if (cube != null) {
-          widget._cubeInfos.add(cube);
+          _animCubeInfos.add(cube);
         } else {
           _addCube(position, Slice.whole);
         }
       }
       setState(() {});
+      _handOver();
       previousPositions = positions;
     }
   }
 
   void _addCube(Position center, Slice slice) {
-    widget._cubeInfos.add(CubeInfo(center: center, slice: slice));
+    _animCubeInfos.add(CubeInfo(center: center, slice: slice));
   }
 }
 
