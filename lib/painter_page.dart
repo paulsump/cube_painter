@@ -13,7 +13,6 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
-import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,18 +34,9 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-
-
   @override
   void initState() {
-    unawaited(getSketchBank(context).init(
-      onSuccessfulLoad: () {
-        getUndoer(context).clear();
-        final sketchBank = getSketchBank(context);
-
-        sketchBank.addAllToAnimCubeInfos();
-      },
-    ));
+    unawaited(getSketchBank(context).init(context));
 
     super.initState();
   }

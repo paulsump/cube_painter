@@ -107,7 +107,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     final sketchBank = getSketchBank(context);
 
     if (!sketchBank.modified || await _askSaveCurrent(title: 'New Painting')) {
-      await sketchBank.newFile();
+      await sketchBank.newFile(context);
       setState(() {});
     }
   }
@@ -116,7 +116,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     final sketchBank = getSketchBank(context);
 
     if (!sketchBank.modified || await _askSaveCurrent(title: 'Load Painting')) {
-      sketchBank.loadFile(filePath: filePath);
+      sketchBank.loadFile(filePath: filePath, context: context);
       setState(() {});
     }
   }
@@ -139,7 +139,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     if (await _askDelete()) {
       final sketchBank = getSketchBank(context);
 
-      await sketchBank.deleteCurrentFile();
+      await sketchBank.deleteCurrentFile(context);
       setState(() {});
     }
   }

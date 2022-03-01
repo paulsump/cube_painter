@@ -8,6 +8,7 @@ import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/persist.dart';
 import 'package:cube_painter/persisted/settings.dart';
 import 'package:cube_painter/persisted/sketch.dart';
+import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -54,6 +55,8 @@ class SketchBank extends ChangeNotifier {
     final List<CubeInfo> cubeInfos = sketch.cubeInfos;
 
     animCubeInfos.addAll(cubeInfos.toList());
+
+    //TODO Fix thumbnail not visible after loading that one.
     cubeInfos.clear();
 
     setPlaying(true);
@@ -68,8 +71,6 @@ class SketchBank extends ChangeNotifier {
 
   late String settingsPath;
   late Settings _settings;
-
-  late VoidCallback _onSuccessfulLoad;
 
   String _savedJson = '';
 
@@ -125,9 +126,12 @@ class SketchBank extends ChangeNotifier {
   UnmodifiableListView<MapEntry> get sketchEntries =>
       UnmodifiableListView<MapEntry>(_sketches.entries.toList());
 
-  Future<void> init({required VoidCallback onSuccessfulLoad}) async {
-    _onSuccessfulLoad = onSuccessfulLoad;
+  void _onSuccessfulLoad(BuildContext context) {
+    getUndoer(context).clear();
+    addAllToAnimCubeInfos();
+  }
 
+  Future<void> init(BuildContext context) async {
     settingsPath = await getSettingsPath();
 
     // if(true){
@@ -161,16 +165,16 @@ class SketchBank extends ChangeNotifier {
     }
 
     _savedJson = json;
-    _updateAfterLoad();
+    _updateAfterLoad(context);
 
     unawaited(example.init());
   }
 
-  void _updateAfterLoad() {
+  void _updateAfterLoad(BuildContext context) {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
     if (_sketches.isNotEmpty) {
-      _onSuccessfulLoad();
+      _onSuccessfulLoad(context);
 
       notifyListeners();
     }
@@ -186,7 +190,7 @@ class SketchBank extends ChangeNotifier {
     _sketches.addAll(copy);
   }
 
-  Future<void> newFile() async {
+  Future<void> newFile(BuildContext context) async {
     addAllAnimCubeInfosToStaticCubeInfos();
 
     await _setNewFilePath();
@@ -194,16 +198,15 @@ class SketchBank extends ChangeNotifier {
     pushSketch(Sketch.empty());
     _savedJson = json;
 
-    _updateAfterLoad();
+    _updateAfterLoad(context);
     unawaited(saveFile());
   }
 
-  void loadFile({required String filePath}) {
-
+  void loadFile({required String filePath, required BuildContext context}) {
     saveCurrentFilePath(filePath);
 
     _savedJson = json;
-    _updateAfterLoad();
+    _updateAfterLoad(context);
   }
 
   Future<void> saveFile() async {
@@ -253,7 +256,7 @@ class SketchBank extends ChangeNotifier {
   Future<void> resetCurrentSketch() async =>
       _sketches[currentFilePath] = Sketch.fromString(_savedJson);
 
-  Future<void> deleteCurrentFile() async {
+  Future<void> deleteCurrentFile(BuildContext context) async {
     _sketches.remove(currentFilePath);
 
     final File file = File(currentFilePath);
@@ -264,9 +267,9 @@ class SketchBank extends ChangeNotifier {
     }
 
     if (_sketches.isEmpty) {
-      await newFile();
+      await newFile(context);
     } else {
-      loadFile(filePath: _sketches.keys.first);
+      loadFile(filePath: _sketches.keys.first, context: context);
     }
 
     notifyListeners();
