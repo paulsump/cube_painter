@@ -80,11 +80,12 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
 
   @override
   Widget build(BuildContext context) {
-    final int n = widget.cubeInfos.length;
-
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
+        final int n = widget.cubeInfos.length;
+        double pingPongTween(i) =>
+            pingPongBetween(start, end, _controller.value + i / n);
         return Stack(
           children: [
             // HACK without this container,
@@ -96,17 +97,9 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
                   for (int i = 0; i < n; ++i)
                     ScaledCube(
                       scale: widget.pingPong
-                          ? pingPongBetween(
-                              start, end, _controller.value + i / n)
-                          : min(
-                              1,
-                              lerp(
-                                  pingPongBetween(
-                                      start, end, _controller.value + i / n),
-                                  end,
-                                  _controller.value)),
-                      // scale: (widget.pingPong ? pingPongBetween : lerp)(
-                      //     start, end, _controller.value + i / n),
+                          ? pingPongTween(i)
+                          : min(1,
+                              lerp(pingPongTween(i), end, _controller.value)),
                       info: widget.cubeInfos[i],
                     ),
                 ],
