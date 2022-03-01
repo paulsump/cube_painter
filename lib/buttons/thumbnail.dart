@@ -27,7 +27,7 @@ class Thumbnail extends StatelessWidget {
       scale: unitTransform.scale,
             child: Transform.translate(
                 offset: unitTransform.offset,
-                // hack for example slice
+                // TODO REMove hack for example slice
                 child: sketch.cubeInfos.length == 1
                     ? AnimCube(
                         key: UniqueKey(),
