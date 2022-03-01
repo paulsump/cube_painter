@@ -30,6 +30,7 @@ class Brush implements GestureHandler {
   @override
   void start(Offset point, BuildContext context) {
     getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+    getSketchBank(context).brushing = true;
 
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
@@ -50,6 +51,7 @@ class Brush implements GestureHandler {
   @override
   void tapDown(Offset point, BuildContext context) {
     getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+    getSketchBank(context).brushing = true;
 
     _replaceCube(point, context);
   }
@@ -140,6 +142,7 @@ class Brush implements GestureHandler {
       saveForUndo(context);
     }
     _setPingPong(false, context);
+    getSketchBank(context).brushing = false;
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {

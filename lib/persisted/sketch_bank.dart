@@ -32,12 +32,15 @@ class SketchBank extends ChangeNotifier {
   String get json => sketch.toString();
 
   final animCubeInfos = <CubeInfo>[];
+  bool brushing = false;
 
   void addAllAnimCubeInfosToStaticCubeInfos() {
-    sketch.cubeInfos.addAll(animCubeInfos);
+    if (!brushing) {
+      sketch.cubeInfos.addAll(animCubeInfos);
 
-    animCubeInfos.clear();
-    notifyListeners();
+      animCubeInfos.clear();
+      notifyListeners();
+    }
   }
 
   //TODO FIx this copied comment
