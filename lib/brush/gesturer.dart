@@ -45,13 +45,15 @@ class GesturerState extends State<Gesturer> {
       },
       onScaleUpdate: (details) {
         n++;
+
         totalScale += details.scale;
-        out(totalScale / n);
-        if (n > 9 && totalScale / n == 1 && gestureHandler != brush) {
-          gestureHandler = brush;
-          //TODO Undo pan
+
+        if (n > 9) {
+          if (totalScale / n == 1 && gestureHandler != brush) {
+            gestureHandler = brush;
+          }
+          gestureHandler.update(details.focalPoint, details.scale, context);
         }
-        gestureHandler.update(details.focalPoint, details.scale, context);
       },
       onScaleEnd: (details) {
         tapped = false;
