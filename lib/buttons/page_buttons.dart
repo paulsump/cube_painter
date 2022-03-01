@@ -73,7 +73,7 @@ class _UndoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final undoer = getUndoer(context);
+    final undoer = getUndoer(context, listen: true);
 
     final bool canUndo = undoer.canUndo;
     final bool canRedo = undoer.canRedo;

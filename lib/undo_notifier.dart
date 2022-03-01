@@ -13,7 +13,8 @@ UndoNotifier getUndoer(context, {bool listen = false}) =>
 void saveForUndo(BuildContext context) => getUndoer(context).save(context);
 
 /// Provides access to the undo / redo mechanism.
-/// [SketchBank] does the actual notifying in [setJson]
+/// notifies for the [_UndoButton] states in [PageButtons]
+/// [SketchBank]  notifies the page in [setJson]
 class UndoNotifier extends ChangeNotifier {
   final StringList _undos = [];
   final StringList _redos = [];
@@ -25,16 +26,27 @@ class UndoNotifier extends ChangeNotifier {
   void clear() {
     _undos.clear();
     _redos.clear();
+    notifyListeners();
   }
 
   void save(BuildContext context) {
-    _undos.add(getSketchBank(context).jsonWithAnimCubesToo);
+    _undos.add(getSketchBank(context).json);
     _redos.clear();
+
+    out('save');
+    out(_undos);
+    notifyListeners();
   }
 
-  void undo(BuildContext context) => _popFromPushTo(_undos, _redos, context);
+  void undo(BuildContext context) {
+    out('undo');
+    _popFromPushTo(_undos, _redos, context);
+  }
 
-  void redo(BuildContext context) => _popFromPushTo(_redos, _undos, context);
+  void redo(BuildContext context) {
+    out('redo');
+    _popFromPushTo(_redos, _undos, context);
+  }
 
   void _popFromPushTo(
     StringList popFrom,
@@ -45,6 +57,10 @@ class UndoNotifier extends ChangeNotifier {
 
     final sketchBank = getSketchBank(context);
     sketchBank.setJson(popFrom.removeLast());
-  }
 
+    out(_undos);
+    out(_redos);
+
+    notifyListeners();
+  }
 }
