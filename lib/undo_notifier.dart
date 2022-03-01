@@ -33,18 +33,18 @@ class UndoNotifier extends ChangeNotifier {
     _undos.add(getSketchBank(context).json);
     _redos.clear();
 
-    out('save');
-    out(_undos);
+    // out('save');
+    // out(_undos);
     notifyListeners();
   }
 
   void undo(BuildContext context) {
-    out('undo');
+    // out('undo');
     _popFromPushTo(_undos, _redos, context);
   }
 
   void redo(BuildContext context) {
-    out('redo');
+    // out('redo');
     _popFromPushTo(_redos, _undos, context);
   }
 
@@ -58,8 +58,8 @@ class UndoNotifier extends ChangeNotifier {
     final sketchBank = getSketchBank(context);
     sketchBank.setJson(popFrom.removeLast());
 
-    out(_undos);
-    out(_redos);
+    // out(_undos);
+    // out(_redos);
 
     notifyListeners();
   }
