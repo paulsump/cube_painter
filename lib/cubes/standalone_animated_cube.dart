@@ -95,6 +95,8 @@ class _StandAloneAnimatedCubeState extends State<StandAloneAnimatedCube>
   double _scale() => lerpDouble(
         widget.start,
         widget.end,
-        widget.isPingPong ? unitPingPong(_controller.value) : _controller.value,
+        widget.isPingPong
+            ? calcUnitPingPong(_controller.value)
+            : _controller.value,
       )!;
 }

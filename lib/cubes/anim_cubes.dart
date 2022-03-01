@@ -29,11 +29,12 @@ class AnimCubesState extends State<AnimCubes>
   late AnimationController _controller;
 
   static const int milliseconds = 800;
+  static const Duration pingPongDuration = Duration(milliseconds: milliseconds);
 
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: milliseconds),
+      duration: pingPongDuration,
       vsync: this,
     );
 
@@ -62,7 +63,7 @@ class AnimCubesState extends State<AnimCubes>
       sketchBank.isLoading = false;
 
       // set back to default for next time
-      _controller.duration = const Duration(milliseconds: milliseconds);
+      _controller.duration = pingPongDuration;
     });
   }
 
@@ -78,7 +79,7 @@ class AnimCubesState extends State<AnimCubes>
 
     if (sketchBank.isPlaying) {
       if (sketchBank.isPingPong) {
-        _controller.duration = const Duration(milliseconds: milliseconds);
+        _controller.duration = pingPongDuration;
 
         _controller.repeat();
       } else {
@@ -96,7 +97,7 @@ class AnimCubesState extends State<AnimCubes>
       builder: (context, child) {
         final int n = widget.cubeInfos.length;
 
-        double pingPongTween(i) => unitPingPong(_controller.value + i / n);
+        double unitPingPong(i) => calcUnitPingPong(_controller.value + i / n);
 
         return Stack(
           children: [
@@ -106,8 +107,8 @@ class AnimCubesState extends State<AnimCubes>
                   for (int i = 0; i < n; ++i)
                     ScaledCube(
                       scale: widget.isPingPong
-                          ? pingPongTween(i)
-                          : lerp(pingPongTween(i), 1.0, _controller.value),
+                          ? unitPingPong(i)
+                          : lerp(unitPingPong(i), 1.0, _controller.value),
                       info: widget.cubeInfos[i],
                     ),
                 ],
