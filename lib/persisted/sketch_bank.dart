@@ -28,6 +28,8 @@ class SketchBank extends ChangeNotifier {
 
   final example = SlicesExample();
 
+  String get json => sketch.toString();
+
   final animCubeInfos = <CubeInfo>[];
 
   void addAllAnimCubeInfosToStaticCubeInfos() {
@@ -170,7 +172,27 @@ class SketchBank extends ChangeNotifier {
     }
   }
 
-  String get json => sketch.toString();
+  // insert at the top of the list
+  void pushSketch(Sketch sketch) {
+    final copy = Map<String, Sketch>.from(_sketches);
+
+    _sketches.clear();
+    setSketch(sketch);
+
+    _sketches.addAll(copy);
+  }
+
+  Future<void> newFile() async {
+    addAllAnimCubeInfosToStaticCubeInfos();
+
+    await _setNewFilePath();
+
+    pushSketch(Sketch.empty());
+    _savedJson = json;
+
+    _updateAfterLoad();
+    unawaited(saveFile());
+  }
 
   void loadFile({required String filePath}) {
     addAllAnimCubeInfosToStaticCubeInfos();
@@ -223,28 +245,6 @@ class SketchBank extends ChangeNotifier {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     return '${appFolder.path}${Platform.pathSeparator}';
-  }
-
-  Future<void> newFile() async {
-    addAllAnimCubeInfosToStaticCubeInfos();
-
-    await _setNewFilePath();
-
-    pushSketch(Sketch.empty());
-    _savedJson = json;
-
-    _updateAfterLoad();
-    unawaited(saveFile());
-  }
-
-  // insert at the top of the list
-  void pushSketch(Sketch sketch) {
-    final copy = Map<String, Sketch>.from(_sketches);
-
-    _sketches.clear();
-    setSketch(sketch);
-
-    _sketches.addAll(copy);
   }
 
   Future<void> resetCurrentSketch() async =>
