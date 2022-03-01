@@ -38,7 +38,7 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  late Undoer undoer;
+  late UndoNotifier undoer;
 
   void _addToAnimCubeInfos() {
     final sketchBank = getSketchBank(context);
@@ -59,7 +59,7 @@ class _PainterPageState extends State<PainterPage> {
     ));
 
     //TODO UNdoer doesn't need setstate now that it's all done in sketchBank
-    undoer = Undoer(context, setState: setState);
+    undoer = UndoNotifier(context, setState: setState);
 
     super.initState();
   }

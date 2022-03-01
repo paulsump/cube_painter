@@ -6,14 +6,15 @@ const noWarn = out;
 
 typedef StringList = List<String>;
 
-class Undoer {
+//Notifier extends ChangeNotifier
+class UndoNotifier {
   final BuildContext context;
   final void Function(VoidCallback fn) setState;
 
   final StringList _undos = [];
   final StringList _redos = [];
 
-  Undoer(this.context, {required this.setState});
+  UndoNotifier(this.context, {required this.setState});
 
   bool get canUndo => _undos.isNotEmpty;
 

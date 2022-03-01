@@ -15,7 +15,7 @@ const noWarn = [out];
 /// Just a container for all the button on the main [PainterPage].
 /// Organised using [Column]s and [Row]s
 class PageButtons extends StatelessWidget {
-  final Undoer undoer;
+  final UndoNotifier undoer;
 
   const PageButtons({
     Key? key,
@@ -69,7 +69,7 @@ class PageButtons extends StatelessWidget {
 /// Pressing it will undo the previous action.
 /// The redo button appears only if undo was pressed.
 class _UndoButton extends StatelessWidget {
-  final Undoer undoer;
+  final UndoNotifier undoer;
   final bool redo;
 
   const _UndoButton({
