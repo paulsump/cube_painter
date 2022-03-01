@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
+/// A drawer with radio buttons for
+/// choosing which cube [Slice] to add.
+/// There's also an example of how to use them.
 class SlicesMenu extends StatefulWidget {
   const SlicesMenu({Key? key}) : super(key: key);
 

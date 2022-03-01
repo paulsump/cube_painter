@@ -1,4 +1,4 @@
-import 'package:cube_painter/cubes/anim_cube.dart';
+import 'package:cube_painter/cubes/standalone_animated_cube.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/sketch.dart';
@@ -30,10 +30,7 @@ class Thumbnail extends StatelessWidget {
                 // TODO REMove hack for example slice
                 child: sketch.cubeInfos.length == 1
                     ? AnimCube(
-                        key: UniqueKey(),
-                        fields: Fields(
-                          info: sketch.cubeInfos[0],
-                        ),
+                        fields: Fields(info: sketch.cubeInfos[0]),
                       )
                     : StaticCubes(sketch: sketch)),
           )
