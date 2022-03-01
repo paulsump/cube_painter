@@ -120,6 +120,7 @@ class BrushState extends State<Brush> with SingleTickerProviderStateMixin {
 
       sketchBank.addAllToAnimCubeInfos(widget._cubeInfos.toList());
       widget._cubeInfos.clear();
+      //TODO UNDO
     }
   }
 
