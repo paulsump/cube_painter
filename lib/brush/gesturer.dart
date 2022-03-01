@@ -22,22 +22,22 @@ class GesturerState extends State<Gesturer> {
   late GestureHandler gestureHandler;
 
   bool tapped = false;
+  Offset tapPoint = Offset.zero;
+
   int n = 0;
   double totalScale = 0;
-  Offset tapPoint = Offset.zero;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      // without this container,  onScaleStart etc doesn't get called
-      // child: Container(),
       onScaleStart: (details) {
         n = 0;
         totalScale = 0;
 
         gestureHandler = panZoomer;
         panZoomer.start(details.focalPoint, context);
+
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
           brush.start(details.focalPoint, context);
@@ -51,6 +51,7 @@ class GesturerState extends State<Gesturer> {
         if (n > 9) {
           if (totalScale / n == 1 && gestureHandler != brush) {
             gestureHandler = brush;
+
             if (tapped) {
               brush.start(tapPoint, context);
             }
@@ -64,8 +65,8 @@ class GesturerState extends State<Gesturer> {
       },
       onTapDown: (details) {
         tapped = true;
-        gestureHandler = panZoomer;
 
+        gestureHandler = panZoomer;
         tapPoint = details.localPosition;
       },
       onTapUp: (details) {
