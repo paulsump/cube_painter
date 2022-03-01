@@ -1,6 +1,5 @@
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/unit_ping_pong.dart';
-import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
 
+/// TOdo THis name is too similar to [AnimCube]s
 class AnimatedScaleCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
@@ -29,9 +29,10 @@ class AnimatedScaleCubesState extends State<AnimatedScaleCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
+  //TODO REMOVE start and end fields
   final double start = 0.0;
 
-  double get end => GestureMode.addWhole == getGestureMode(context) ? 1.0 : 3.0;
+  final double end = 1.0;
 
   static const int milliseconds = 800;
 
