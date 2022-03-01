@@ -38,27 +38,28 @@ class BrushState extends State<Brush> {
       child: Stack(
         children: [
           // HACK without this container,
-          // onPanStart etc doesn't get called after cubes are added.
+          // onScaleStart etc doesn't get called after cubes are added.
           Container(),
         ],
       ),
-      onPanStart: (details) {
+      onScaleStart: (details) {
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
           getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
 
-          final Offset startUnit = screenToUnit(details.localPosition, context);
+          final Offset startUnit = screenToUnit(details.focalPoint, context);
           brushMaths.calcStartPosition(startUnit);
         }
       },
-      onPanUpdate: (details) {
+      onScaleUpdate: (details) {
+        // out(details.scale!=1);
         if (GestureMode.addWhole == getGestureMode(context)) {
           _updateExtrude(details, context);
         } else {
-          _replaceCube(details.localPosition, context);
+          _replaceCube(details.focalPoint, context);
         }
       },
-      onPanEnd: (details) {
+      onScaleEnd: (details) {
         tapped = false;
         _saveForUndo();
       },
@@ -111,7 +112,7 @@ class BrushState extends State<Brush> {
 
   void _updateExtrude(details, BuildContext context) {
     final Positions positions = brushMaths.calcPositionsUpToEndPosition(
-        screenToUnit(details.localPosition, context));
+        screenToUnit(details.focalPoint, context));
 
     if (previousPositions != positions) {
       // using order provided by extruder
