@@ -2,7 +2,7 @@ import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-enum GestureMode { panZoom, addWhole, erase, addSlice }
+enum GestureMode { addWhole, erase, addSlice }
 
 GestureMode getGestureMode(BuildContext context, {bool listen = false}) =>
     Provider.of<GestureModeNotifier>(context, listen: listen).gestureMode;

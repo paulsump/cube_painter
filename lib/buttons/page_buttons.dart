@@ -34,31 +34,23 @@ class PageButtons extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const OpenPaintingsMenuButton(),
-              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const GestureModeCubeButton(
-                  mode: GestureMode.addWhole,
-                  icon: DownloadedIcons.plusOutline,
-                  tip:
-                  'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
-                ),
-                const GestureModeCubeButton(
-                  mode: GestureMode.erase,
-                  icon: DownloadedIcons.cancelOutline,
-                  tip:
-                  'Tap on a cube to delete it.  You can change the position while you have your finger down.',
-                ),
-                HexagonElevatedButton(
-                  radioOn: GestureMode.panZoom == gestureMode,
-                  child: Icon(
-                    Icons.zoom_in_sharp,
-                    size: normalIconSize * 1.2,
-                    color: enabledIconColor,
-                  ),
-                  onPressed: () => setGestureMode(GestureMode.panZoom, context),
-                  tip: 'Pinch to zoom, drag to move around.',
-                ),
-                const OpenSliceMenuButton(),
-              ]),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    GestureModeCubeButton(
+                      mode: GestureMode.addWhole,
+                      icon: DownloadedIcons.plusOutline,
+                      tip:
+                          'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                    ),
+                    GestureModeCubeButton(
+                      mode: GestureMode.erase,
+                      icon: DownloadedIcons.cancelOutline,
+                      tip:
+                          'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                    ),
+                    OpenSliceMenuButton(),
+                  ]),
             ]),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
