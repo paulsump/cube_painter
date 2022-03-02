@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/persisted/slice.dart';
@@ -94,7 +93,7 @@ class _CubeAndIcon extends StatelessWidget {
           ),
         ),
         Transform.translate(
-          offset: -unit * assetIconSize / 2,
+          offset: -unit * calcAssetIconSize(context) / 2,
           child: Icon(icon, color: enabledIconColor),
         ),
       ],

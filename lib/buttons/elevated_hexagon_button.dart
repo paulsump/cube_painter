@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +26,7 @@ class ElevatedHexagonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      offset: Offset(0, isOn ? 1.0 : -1.0) * buttonElevation / 4,
+      offset: Offset(0, isOn ? 1.0 : -1.0) * calcButtonElevation(context) / 4,
       child: Tooltip(
         message: tip,
         decoration: BoxDecoration(color: backgroundColor.withOpacity(0.7)),
@@ -42,7 +41,8 @@ class ElevatedHexagonButton extends StatelessWidget {
                 : isRadioOn!
                     ? radioButtonOnColor
                     : buttonColor),
-            elevation: MaterialStateProperty.all(isOn ? 0.0 : buttonElevation),
+            elevation: MaterialStateProperty.all(
+                isOn ? 0.0 : calcButtonElevation(context)),
             shadowColor: isOn ? null : MaterialStateProperty.all(bl),
           ),
         ),

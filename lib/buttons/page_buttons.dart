@@ -2,10 +2,10 @@ import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -77,7 +77,7 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
       child: Icon(
         Icons.folder_sharp,
         color: enabledIconColor,
-        size: normalIconSize,
+        size: calcNormalIconSize(context),
       ),
       onPressed: Scaffold.of(context).openDrawer,
       tip: 'Open the file menu.',
@@ -110,7 +110,7 @@ class _UndoButton extends StatelessWidget {
         ? ElevatedHexagonButton(
             child: Icon(
               isRedo ? Icons.redo_sharp : Icons.undo_sharp,
-              size: normalIconSize * 1.2,
+              size: calcNormalIconSize(context) * 1.2,
               color: enabled ? enabledIconColor : disabledIconColor,
             ),
             onPressed: enabled

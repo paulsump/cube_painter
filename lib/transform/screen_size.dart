@@ -35,6 +35,14 @@ Size calcButtonSize(BuildContext context) {
   return Size(buttonHeight, buttonHeight);
 }
 
-double calcButtonChildScale(BuildContext context) {
-  return 0.04545 * getShortestEdge(context);
-}
+double calcButtonChildScale(BuildContext context) =>
+    0.3 * _calcButtonHeight(context);
+
+double calcNormalIconSize(BuildContext context) =>
+    0.47143 * _calcButtonHeight(context);
+
+double calcAssetIconSize(BuildContext context) =>
+    0.38571 * _calcButtonHeight(context);
+
+double calcButtonElevation(BuildContext context) =>
+    0.11429 * _calcButtonHeight(context);
