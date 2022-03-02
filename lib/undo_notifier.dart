@@ -36,7 +36,7 @@ class UndoNotifier extends ChangeNotifier {
 
   void undo(BuildContext context) {
     // Just in case the animation is still going, clear the AnimCubeInfos
-    getSketchBank(context).addAllAnimCubeInfosToStaticCubeInfos();
+    getSketchBank(context).finishAnim();
 
     _popFromPushTo(_undos, _redos, context);
   }

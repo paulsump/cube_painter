@@ -38,12 +38,15 @@ class SketchBank extends ChangeNotifier {
 
   void startBrushing() {
     setIsPingPong(true);
-    addAllAnimCubeInfosToStaticCubeInfos();
+    finishAnim();
 
     isBrushing = true;
     notifyListeners();
   }
 
+  /// Add all the animCubeInfos to the staticCubeInfos,
+  /// thus, if there were any cubes still animating,
+  /// then they would appear to stop immediately.
   //TODO FIx this copied comment
   /// once the brush has finished, it
   /// yields ownership of it's cubes to this parent widget.
@@ -55,7 +58,7 @@ class SketchBank extends ChangeNotifier {
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
 
-  void addAllAnimCubeInfosToStaticCubeInfos() {
+  void finishAnim() {
     if (!isBrushing) {
       sketch.cubeInfos.addAll(animCubeInfos);
 
@@ -206,7 +209,7 @@ class SketchBank extends ChangeNotifier {
   }
 
   Future<void> newFile(BuildContext context) async {
-    addAllAnimCubeInfosToStaticCubeInfos();
+    finishAnim();
 
     await _setNewFilePath();
 
@@ -225,14 +228,14 @@ class SketchBank extends ChangeNotifier {
   }
 
   Future<void> saveFile() async {
-    addAllAnimCubeInfosToStaticCubeInfos();
+    finishAnim();
 
     await saveString(filePath: currentFilePath, string: json);
     _savedJson = json;
   }
 
   Future<void> saveACopyFile() async {
-    addAllAnimCubeInfosToStaticCubeInfos();
+    finishAnim();
 
     final jsonCopy = json;
 
