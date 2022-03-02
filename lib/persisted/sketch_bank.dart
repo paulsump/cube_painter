@@ -61,7 +61,9 @@ class SketchBank extends ChangeNotifier {
   /// anim is done.
   void finishAnim() {
     if (!isBrushing) {
-      sketch.cubeInfos.addAll(animCubeInfos);
+      if (!isAnimatingLoadedCubes) {
+        sketch.cubeInfos.addAll(animCubeInfos);
+      }
 
       animCubeInfos.clear();
       notifyListeners();
@@ -107,7 +109,12 @@ class SketchBank extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get modified => json != _savedJson;
+  bool get modified {
+    if (json != _savedJson) {
+      out(sketch.cubeInfos.length);
+    }
+    return json != _savedJson;
+  }
 
   bool get hasCubes =>
       _sketches.isNotEmpty &&
