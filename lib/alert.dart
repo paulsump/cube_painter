@@ -37,35 +37,52 @@ class Alert extends StatelessWidget {
           content,
         ),
         actions: <Widget>[
-          ElevatedHexagonButton(
-            child: Icon(
-              AssetIcons.thumbsUp,
-              size: calcAssetIconSize(context),
-            ),
+          _Button(
+            icon: AssetIcons.thumbsUp,
             onPressed: yesCallBack,
             // TODO pass yes tip in
             tip: 'Yes - Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
-            ElevatedHexagonButton(
-              child: Icon(
-                AssetIcons.thumbsDown,
-                size: calcAssetIconSize(context),
-              ),
+            _Button(
+              icon: AssetIcons.thumbsDown,
               onPressed: noCallBack,
               // TODO pass no tip in
               tip: 'No - Do the operation, but say no to the question.',
             ),
           if (cancelCallBack != null)
-            ElevatedHexagonButton(
-              child: Icon(
-                AssetIcons.cancelOutline,
-                size: calcAssetIconSize(context),
-              ),
+            _Button(
+              icon: AssetIcons.cancelOutline,
               onPressed: cancelCallBack,
               tip: 'Cancel - Do nothing.',
             ),
         ],
+      ),
+    );
+  }
+}
+
+class _Button extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback? onPressed;
+  final String tip;
+
+  const _Button({
+    Key? key,
+    required this.icon,
+    this.onPressed,
+    required this.tip,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: ElevatedHexagonButton(
+        child: Icon(icon, size: calcAssetIconSize(context)),
+        onPressed: onPressed,
+        // TODO pass yes tip in
+        tip: 'Yes - Confirm that you do want to do this.',
       ),
     );
   }
