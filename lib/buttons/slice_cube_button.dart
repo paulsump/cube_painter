@@ -1,4 +1,5 @@
-import 'package:cube_painter/buttons/cube_button.dart';
+import 'package:cube_painter/buttons/flat_hexagon_button.dart';
+import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
@@ -19,19 +20,13 @@ class SliceCubeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gestureModeNotifier =
-        Provider.of<GestureModeNotifier>(context, listen: true);
-
-    final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
-    final Slice currentSlice = gestureModeNotifier.slice;
-
-    return CubeElevatedHexagonButton(
-      slice: slice,
-      isRadioOn:
-          currentSlice == slice && currentGestureMode == GestureMode.addSlice,
-      onPressed: () => _onPressed(slice, context),
-      tip: 'For adding ${getSliceName(slice)} slices of cubes.',
-    );
+    return FlatHexagonButton(
+        onPressed: () => _onPressed(slice, context),
+        tip: 'For adding ${getSliceName(slice)} slices of cubes.',
+        child: Transform.scale(
+          scale: 21,
+          child: SliceUnitCube(slice: slice),
+        ));
   }
 }
 
