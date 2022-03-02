@@ -55,7 +55,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
                 const SliceCubeButton(slice: Slice.left),
                 // SizedBox(
                 //     width:
-                //         padWidth * 2 + calcButtonHeight(context) / root3over2,
+                //         padWidth * 2 + 67,
                 //     child: const Icon(AssetIcons.plusOutline)),
                 padX,
                 const SliceCubeButton(slice: Slice.whole),

@@ -141,7 +141,6 @@ class _GestureModeCubeElevatedHexagonButton extends StatelessWidget {
     return CubeElevatedHexagonButton(
       isRadioOn: mode == gestureMode,
       icon: icon,
-      iconSize: assetIconSize,
       onPressed: () => setGestureMode(mode, context),
       tip: tip,
     );
@@ -163,7 +162,6 @@ class _OpenSliceMenuButton extends StatelessWidget {
       slice: slice,
       isRadioOn: currentGestureMode == GestureMode.addSlice,
       icon: AssetIcons.plusOutline,
-      iconSize: assetIconSize,
       onPressed: Scaffold.of(context).openEndDrawer,
       tip:
           'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',

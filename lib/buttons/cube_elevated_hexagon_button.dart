@@ -1,5 +1,6 @@
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/persisted/slice.dart';
@@ -16,8 +17,6 @@ class CubeElevatedHexagonButton extends StatelessWidget {
   final bool? isRadioOn;
 
   final IconData? icon;
-  final double? iconSize;
-
   final Slice slice;
 
   const CubeElevatedHexagonButton({
@@ -26,7 +25,6 @@ class CubeElevatedHexagonButton extends StatelessWidget {
     required this.tip,
     this.isRadioOn,
     this.icon,
-    this.iconSize,
     this.slice = Slice.whole,
   }) : super(key: key);
 
@@ -34,7 +32,7 @@ class CubeElevatedHexagonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedHexagonButton(
       isRadioOn: isRadioOn,
-      child: _CubeAndIcon(slice: slice, icon: icon, iconSize: iconSize),
+      child: _CubeAndIcon(slice: slice, icon: icon),
       onPressed: onPressed,
       tip: tip,
     );
@@ -46,17 +44,17 @@ class _CubeAndIcon extends StatelessWidget {
     Key? key,
     required this.slice,
     required this.icon,
-    required this.iconSize,
   }) : super(key: key);
 
   final Slice slice;
   final IconData? icon;
-  final double? iconSize;
 
   @override
   Widget build(BuildContext context) {
+    const double iconSize = assetIconSize;
+
     final offset =
-        null != icon ? const Offset(1, 1) * iconSize! / 2 : Offset.zero;
+        null != icon ? const Offset(1, 1) * iconSize / 2 : Offset.zero;
 
     return Stack(
       children: [
@@ -73,7 +71,7 @@ class _CubeAndIcon extends StatelessWidget {
           Transform.translate(
             offset: -offset,
             child: Transform.scale(
-              scale: 29 / iconSize!,
+              scale: 29 / iconSize,
               child: Icon(icon, color: enabledIconColor),
             ),
           ),
