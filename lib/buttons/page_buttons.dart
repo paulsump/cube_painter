@@ -1,13 +1,14 @@
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
-import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 const noWarn = [out];
 
@@ -48,7 +49,7 @@ class PageButtons extends StatelessWidget {
                   tip:
                       'Tap on a cube to delete it.  You can change the position while you have your finger down.',
                 ),
-                OpenSliceMenuButton(),
+                _OpenSliceMenuButton(),
               ],
             ),
           ],
@@ -143,6 +144,29 @@ class _GestureModeCubeElevatedHexagonButton extends StatelessWidget {
       iconSize: assetIconSize,
       onPressed: () => setGestureMode(mode, context),
       tip: tip,
+    );
+  }
+}
+
+class _OpenSliceMenuButton extends StatelessWidget {
+  const _OpenSliceMenuButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final gestureModeNotifier =
+        Provider.of<GestureModeNotifier>(context, listen: true);
+
+    final Slice slice = gestureModeNotifier.slice;
+    final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
+
+    return CubeElevatedHexagonButton(
+      slice: slice,
+      isRadioOn: currentGestureMode == GestureMode.addSlice,
+      icon: AssetIcons.plusOutline,
+      iconSize: assetIconSize,
+      onPressed: Scaffold.of(context).openEndDrawer,
+      tip:
+          'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',
     );
   }
 }

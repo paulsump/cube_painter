@@ -1,6 +1,4 @@
-import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/cube_button.dart';
-import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
@@ -38,29 +36,6 @@ class SliceCubeButton extends StatelessWidget {
         Navigator.pop(context);
       },
       tip: 'For adding ${getSliceName(slice)} slices of cubes.',
-    );
-  }
-}
-
-class OpenSliceMenuButton extends StatelessWidget {
-  const OpenSliceMenuButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final gestureModeNotifier =
-        Provider.of<GestureModeNotifier>(context, listen: true);
-
-    final Slice slice = gestureModeNotifier.slice;
-    final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
-
-    return CubeElevatedHexagonButton(
-      slice: slice,
-      isRadioOn: currentGestureMode == GestureMode.addSlice,
-      icon: AssetIcons.plusOutline,
-      iconSize: assetIconSize,
-      onPressed: Scaffold.of(context).openEndDrawer,
-      tip:
-          'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',
     );
   }
 }
