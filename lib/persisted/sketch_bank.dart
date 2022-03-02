@@ -33,6 +33,8 @@ class SketchBank extends ChangeNotifier {
 
   final animCubeInfos = <CubeInfo>[];
 
+  bool isAnimatingLoadedCubes = false;
+
   //TODO REMOVE brushing flag
   bool isBrushing = false;
 
@@ -57,7 +59,6 @@ class SketchBank extends ChangeNotifier {
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
-
   void finishAnim() {
     if (!isBrushing) {
       sketch.cubeInfos.addAll(animCubeInfos);
@@ -67,8 +68,7 @@ class SketchBank extends ChangeNotifier {
     }
   }
 
-  bool isAnimatingLoadedCubes = false;
-
+  /// move all the (static) cubeInfos to animCubeInfos
   void _moveAllToAnimCubeInfos() {
     final List<CubeInfo> cubeInfos = sketch.cubeInfos;
 
@@ -122,8 +122,6 @@ class SketchBank extends ChangeNotifier {
 
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
-
-    setIsPlaying(true);
 
     unawaited(saveSettings());
   }
