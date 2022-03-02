@@ -10,7 +10,32 @@ import 'package:flutter/material.dart';
 /// It can act as a radio or a push button.
 /// It can have an [Icon] too e.g. the plus sign for adding cubes.
 /// The cube might be a whole cube or a slice of a cube.
-// class RadioButton extends StatelessWidget {
+class RadioButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  final String tip;
+  final bool isRadioOn;
+
+  final Widget child;
+
+  const RadioButton({
+    Key? key,
+    required this.onPressed,
+    required this.tip,
+    required this.isRadioOn,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedHexagonButton(
+      isRadioOn: isRadioOn,
+      child: child,
+      onPressed: onPressed,
+      tip: tip,
+    );
+  }
+}
 
 /// A raised hexagon shaped button with a cube on it.
 /// It can act as a radio or a push button.
@@ -36,7 +61,7 @@ class CubeRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedHexagonButton(
+    return RadioButton(
       isRadioOn: isRadioOn,
       child: _CubeAndIcon(slice: slice, icon: icon),
       onPressed: onPressed,
