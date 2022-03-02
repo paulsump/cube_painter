@@ -64,9 +64,9 @@ class CubeRadioButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RadioButton(
       isRadioOn: isRadioOn,
-      child: _CubesAndIcon(
+      child: _ChildAndIcon(
         icon: icon,
-        cubes: Transform.scale(
+        child: Transform.scale(
           scale: calcButtonChildScale(context),
           child: slice == Slice.whole
               ? const WholeUnitCube()
@@ -103,9 +103,9 @@ class CubeLineRadioButton extends StatelessWidget {
 
     return RadioButton(
       isRadioOn: isRadioOn,
-      child: _CubesAndIcon(
+      child: _ChildAndIcon(
           icon: icon,
-          cubes: Transform.scale(
+          child: Transform.scale(
               scale: calcButtonChildScale(context) * 1.5,
               child: Thumbnail.useTransform(
                 sketch: Sketch(
@@ -123,15 +123,15 @@ class CubeLineRadioButton extends StatelessWidget {
   }
 }
 
-class _CubesAndIcon extends StatelessWidget {
+class _ChildAndIcon extends StatelessWidget {
   final IconData icon;
 
-  final Widget cubes;
+  final Widget child;
 
-  const _CubesAndIcon({
+  const _ChildAndIcon({
     Key? key,
     required this.icon,
-    required this.cubes,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -142,7 +142,7 @@ class _CubesAndIcon extends StatelessWidget {
       children: [
         Transform.translate(
           offset: unit * 12,
-          child: cubes,
+          child: child,
         ),
         Transform.translate(
           offset: -unit * calcAssetIconSize(context) / 2,
