@@ -18,8 +18,6 @@ const noWarn = out;
 SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
     Provider.of<SketchBank>(context, listen: listen);
 
-const cubesExtension = '.cubes.json';
-
 /// access to the main store of the entire model
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
@@ -247,7 +245,7 @@ class SketchBank extends ChangeNotifier {
   void addCubeInfo(CubeInfo info) => sketch.cubeInfos.add(info);
 
   Future<void> _setNewFilePath() async {
-    final String appFolderPath = await _getAppFolderPath();
+    final String appFolderPath = await getAppFolderPath();
 
     final int uniqueId =
         (DateTime.now().millisecondsSinceEpoch - 1645648060000) ~/ 100;
@@ -255,11 +253,6 @@ class SketchBank extends ChangeNotifier {
     saveCurrentFilePath('$appFolderPath$uniqueId$cubesExtension');
   }
 
-  Future<String> _getAppFolderPath() async {
-    final Directory appFolder = await getApplicationDocumentsDirectory();
-
-    return '${appFolder.path}${Platform.pathSeparator}';
-  }
 
   Future<void> resetCurrentSketch() async =>
       _sketches[currentFilePath] = Sketch.fromString(_savedJson);
@@ -305,21 +298,8 @@ class SketchBank extends ChangeNotifier {
     return paths.first;
   }
 
-  Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
-    final paths = <String>[];
-
-    await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
-      final String path = fileSystemEntity.path;
-
-      if (path.endsWith(cubesExtension)) {
-        paths.add(path);
-      }
-    }
-    return paths;
-  }
-
   Future<String> getSettingsPath() async {
-    final String appFolderPath = await _getAppFolderPath();
+    final String appFolderPath = await getAppFolderPath();
 
     return '$appFolderPath${Settings.fileName}';
   }
@@ -327,14 +307,6 @@ class SketchBank extends ChangeNotifier {
   Future<void> saveSettings() async =>
       saveString(filePath: settingsPath, string: _settings.toString());
 
-  Future<void> copySamples() async {
-    const assetsFolder = 'samples/';
-
-    final String appFolderPath = await _getAppFolderPath();
-
-    await Assets.copyAllFromTo(assetsFolder, appFolderPath,
-        extensionReplacement: cubesExtension);
-  }
 }
 
 class _SlicesExample {
