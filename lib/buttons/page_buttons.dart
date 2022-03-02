@@ -1,6 +1,6 @@
 import 'package:cube_painter/asset_icons.dart';
-import 'package:cube_painter/buttons/cube_elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
+import 'package:cube_painter/buttons/radio_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/gesture_mode.dart';
@@ -37,7 +37,7 @@ class PageButtons extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CubeElevatedHexagonButton(
+                CubeRadioButton(
                   isRadioOn: GestureMode.addWhole ==
                       getGestureMode(context, listen: true),
                   icon: AssetIcons.plusOutline,
@@ -47,7 +47,7 @@ class PageButtons extends StatelessWidget {
                       'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
                   slice: Slice.whole,
                 ),
-                CubeElevatedHexagonButton(
+                CubeRadioButton(
                   isRadioOn: GestureMode.erase ==
                       getGestureMode(context, listen: true),
                   icon: AssetIcons.cancelOutline,
@@ -137,7 +137,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
     final Slice slice = gestureModeNotifier.slice;
     final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
 
-    return CubeElevatedHexagonButton(
+    return CubeRadioButton(
       slice: slice,
       isRadioOn: currentGestureMode == GestureMode.addSlice,
       icon: AssetIcons.plusOutline,
