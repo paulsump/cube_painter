@@ -52,25 +52,25 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              FlatIconHexagonButton(
+              IconFlatHexagonButton(
                 onPressed: pop(_newFile),
                 tip: 'Create a new painting',
                 icon: AssetIcons.docNew,
                 iconSize: assetIconSize * 0.96,
               ),
-              FlatIconHexagonButton(
+              IconFlatHexagonButton(
                 onPressed: sketchBank.modified ? _saveFile : null,
                 tip: 'Save the current painting',
                 icon: Icons.save,
                 iconSize: normalIconSize,
               ),
-              FlatIconHexagonButton(
+              IconFlatHexagonButton(
                 onPressed: _saveACopyFile,
                 tip: 'Create a copy of this painting and load it.',
                 icon: AssetIcons.copy,
                 iconSize: assetIconSize,
               ),
-              FlatIconHexagonButton(
+              IconFlatHexagonButton(
                 onPressed: _deleteCurrentFile,
                 tip:
                     'Delete the current painting. The next painting is loaded or a new blank one is created.',
