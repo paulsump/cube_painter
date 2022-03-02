@@ -36,20 +36,27 @@ class PageButtons extends StatelessWidget {
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                _GestureModeCubeElevatedHexagonButton(
-                  mode: GestureMode.addWhole,
+              children: [
+                CubeElevatedHexagonButton(
+                  isRadioOn: GestureMode.addWhole ==
+                      getGestureMode(context, listen: true),
                   icon: AssetIcons.plusOutline,
+                  onPressed: () =>
+                      setGestureMode(GestureMode.addWhole, context),
                   tip:
                       'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                  slice: Slice.whole,
                 ),
-                _GestureModeCubeElevatedHexagonButton(
-                  mode: GestureMode.erase,
+                CubeElevatedHexagonButton(
+                  isRadioOn: GestureMode.erase ==
+                      getGestureMode(context, listen: true),
                   icon: AssetIcons.cancelOutline,
+                  onPressed: () => setGestureMode(GestureMode.erase, context),
                   tip:
                       'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                  slice: Slice.whole,
                 ),
-                _OpenSliceMenuButton(),
+                const _OpenSliceMenuButton(),
               ],
             ),
           ],
@@ -116,35 +123,6 @@ class _UndoButton extends StatelessWidget {
                 : 'Undo the last add or delete operation.',
           )
         : Container();
-  }
-}
-
-/// A radio button with a cube.
-/// Used for setting [GestureMode].
-class _GestureModeCubeElevatedHexagonButton extends StatelessWidget {
-  final GestureMode mode;
-
-  final IconData icon;
-  final String tip;
-
-  const _GestureModeCubeElevatedHexagonButton({
-    Key? key,
-    required this.mode,
-    required this.icon,
-    required this.tip,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final gestureMode = getGestureMode(context, listen: true);
-
-    return CubeElevatedHexagonButton(
-      isRadioOn: mode == gestureMode,
-      icon: icon,
-      onPressed: () => setGestureMode(mode, context),
-      tip: tip,
-      slice: Slice.whole,
-    );
   }
 }
 
