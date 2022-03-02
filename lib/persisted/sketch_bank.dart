@@ -69,7 +69,7 @@ class SketchBank extends ChangeNotifier {
   }
 
   /// move all the (static) cubeInfos to animCubeInfos
-  void _moveAllToAnimCubeInfos() {
+  void _startAnimatingLoadedCubes() {
     final List<CubeInfo> cubeInfos = sketch.cubeInfos;
 
     animCubeInfos.clear();
@@ -147,7 +147,7 @@ class SketchBank extends ChangeNotifier {
 
   void _onSuccessfulLoad(BuildContext context) {
     getUndoer(context).clear();
-    _moveAllToAnimCubeInfos();
+    _startAnimatingLoadedCubes();
   }
 
   Future<void> init(BuildContext context) async {
