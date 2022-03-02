@@ -95,7 +95,7 @@ class _Example extends StatelessWidget {
           offset: const Offset(0, 149),
           child: Transform.scale(
             /// TODO Responsive to screen size- magic numbers
-            scale: 211,
+            scale: 198,
             child: Stack(
               children: [
                 Thumbnail(

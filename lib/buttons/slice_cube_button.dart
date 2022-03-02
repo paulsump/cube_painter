@@ -13,10 +13,7 @@ const noWarn = out;
 class SliceCubeButton extends StatelessWidget {
   final Slice slice;
 
-  const SliceCubeButton({
-    Key? key,
-    required this.slice,
-  }) : super(key: key);
+  const SliceCubeButton({Key? key, required this.slice}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
