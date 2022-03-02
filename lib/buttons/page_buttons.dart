@@ -1,3 +1,4 @@
+import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
@@ -32,7 +33,9 @@ class PageButtons extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const _OpenPaintingsMenuButton(),
-                undoer.canUndo ? const _UndoButton() : const _HelpButton(),
+                (undoer.canUndo || undoer.canRedo)
+                    ? const _UndoButton()
+                    : const _HelpButton(),
                 const _UndoButton(isRedo: true),
               ],
             ),
@@ -45,7 +48,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.plusOutline,
                   onPressed: () => setGestureMode(GestureMode.addLine, context),
                   tip:
-                  'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                      'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
                 ),
                 CubeRadioButton(
                   isRadioOn: GestureMode.erase ==
@@ -53,7 +56,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.cancelOutline,
                   onPressed: () => setGestureMode(GestureMode.erase, context),
                   tip:
-                  'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                      'Tap on a cube to delete it.  You can change the position while you have your finger down.',
                   slice: Slice.whole,
                 ),
                 const _OpenSliceMenuButton(),
@@ -97,14 +100,25 @@ class _HelpButton extends StatelessWidget {
         color: enabledIconColor,
         size: calcNormalIconSize(context) * 1.09,
       ),
-      onPressed: _showHelp,
+      onPressed: () => _showHelp(context),
       tip: 'Shows the help message.',
     );
   }
 }
 
-void _showHelp() {
-  out('lsl');
+void _showHelp(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) => Alert(
+      title: 'Cube Painter',
+      content: 'Drag to draw cubes.'
+          'Pinch to zoom and pan.'
+          'Long press a button to see tooltip.',
+      yesCallBack: () {
+        Navigator.of(context).pop(true);
+      },
+    ),
+  );
 }
 
 /// An undo or a redo button.
@@ -130,20 +144,20 @@ class _UndoButton extends StatelessWidget {
 
     return wantShow
         ? ElevatedHexagonButton(
-            child: Icon(
-              isRedo ? Icons.redo_sharp : Icons.undo_sharp,
-              size: calcNormalIconSize(context) * 1.2,
-              color: enabled ? enabledIconColor : disabledIconColor,
-            ),
-            onPressed: enabled
-                ? isRedo
-                    ? () => undoer.redo(context)
-                    : () => undoer.undo(context)
-                : null,
-            tip: isRedo
-                ? 'Redo the last add or delete operation that was undone.'
-                : 'Undo the last add or delete operation.',
-          )
+      child: Icon(
+        isRedo ? Icons.redo_sharp : Icons.undo_sharp,
+        size: calcNormalIconSize(context) * 1.2,
+        color: enabled ? enabledIconColor : disabledIconColor,
+      ),
+      onPressed: enabled
+          ? isRedo
+          ? () => undoer.redo(context)
+          : () => undoer.undo(context)
+          : null,
+      tip: isRedo
+          ? 'Redo the last add or delete operation that was undone.'
+          : 'Undo the last add or delete operation.',
+    )
         : Container();
   }
 }
@@ -154,7 +168,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gestureModeNotifier =
-        Provider.of<GestureModeNotifier>(context, listen: true);
+    Provider.of<GestureModeNotifier>(context, listen: true);
 
     final Slice slice = gestureModeNotifier.slice;
     final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
@@ -165,7 +179,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
       icon: AssetIcons.plusOutline,
       onPressed: Scaffold.of(context).openEndDrawer,
       tip:
-          'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',
+      'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',
     );
   }
 }

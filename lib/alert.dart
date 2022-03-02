@@ -11,15 +11,15 @@ class Alert extends StatelessWidget {
   final String content;
   final VoidCallback yesCallBack;
   final VoidCallback? noCallBack;
-  final VoidCallback cancelCallBack;
+  final VoidCallback? cancelCallBack;
 
   const Alert({
     Key? key,
     required this.title,
     required this.content,
     required this.yesCallBack,
-    required this.noCallBack,
-    required this.cancelCallBack,
+    this.noCallBack,
+    this.cancelCallBack,
   }) : super(key: key);
 
   static const double _blur = 2;
@@ -56,14 +56,15 @@ class Alert extends StatelessWidget {
               // TODO pass no tip in
               tip: 'No - Do the operation, but say no to the question.',
             ),
-          ElevatedHexagonButton(
-            child: Icon(
-              AssetIcons.cancelOutline,
-              size: calcAssetIconSize(context),
+          if (cancelCallBack != null)
+            ElevatedHexagonButton(
+              child: Icon(
+                AssetIcons.cancelOutline,
+                size: calcAssetIconSize(context),
+              ),
+              onPressed: cancelCallBack,
+              tip: 'Cancel - Do nothing.',
             ),
-            onPressed: cancelCallBack,
-            tip: 'Cancel - Do nothing.',
-          ),
         ],
       ),
     );
