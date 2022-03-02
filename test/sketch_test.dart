@@ -26,13 +26,13 @@ void main() {
     });
 
     test('save', () {
-      const sketch = Sketch(<CubeInfo>[]);
+      const sketch = Sketch(cubeInfos: <CubeInfo>[]);
       String newJson = jsonEncode(sketch);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const sketch = Sketch(<CubeInfo>[]);
+      const sketch = Sketch(cubeInfos: <CubeInfo>[]);
       String newJson = sketch.toString();
       expect(testJson, equals(newJson));
     });
@@ -47,7 +47,7 @@ void main() {
   const testCube = CubeInfo(center: testPosition, slice: testSlice);
   const testCube2 = CubeInfo(center: testPosition2, slice: testSlice2);
 
-  const testCubes = <CubeInfo>[testCube, testCube2];
+  const testCubeInfos = <CubeInfo>[testCube, testCube2];
 
   group('json two cubes', () {
     const testJson =
@@ -59,7 +59,7 @@ void main() {
 
       int i = 0;
       for (final newCube in newSketch.cubeInfos) {
-        expect(testCubes[i++], equals(newCube));
+        expect(testCubeInfos[i++], equals(newCube));
       }
     });
 
@@ -68,18 +68,18 @@ void main() {
 
       int i = 0;
       for (final newCube in newSketch.cubeInfos) {
-        expect(testCubes[i++], equals(newCube));
+        expect(testCubeInfos[i++], equals(newCube));
       }
     });
 
     test('save', () {
-      const sketch = Sketch(testCubes);
+      const sketch = Sketch(cubeInfos: testCubeInfos);
       String newJson = jsonEncode(sketch);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const sketch = Sketch(testCubes);
+      const sketch = Sketch(cubeInfos: testCubeInfos);
       String newJson = sketch.toString();
       expect(testJson, equals(newJson));
     });

@@ -34,10 +34,7 @@ class ThumbnailButton extends StatelessWidget {
           onPressed: onPressed,
           child: Transform.scale(
             scale: height * 0.6,
-            child: Thumbnail(
-              sketch: sketch,
-              unitTransform: sketch.unitTransform,
-            ),
+            child: Thumbnail.useTransform(sketch: sketch),
           ),
           style: ButtonStyle(
             shape: hexagonBorderShape,

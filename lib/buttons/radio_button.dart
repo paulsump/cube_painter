@@ -101,7 +101,7 @@ class _CubeAndIcon extends StatelessWidget {
             scale: calcButtonChildScale(context) * 1.5,
             child: slice == Slice.whole
                 // ? const WholeUnitCube()
-                ? Thumbnail(sketch: line, unitTransform: line.unitTransform)
+                ? Thumbnail.useTransform(sketch: line)
                 : SliceUnitCube(slice: slice),
           ),
         ),
