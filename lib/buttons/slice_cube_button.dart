@@ -3,6 +3,7 @@ import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +22,7 @@ class SliceCubeButton extends StatelessWidget {
         onPressed: () => _onPressed(slice, context),
         tip: 'For adding ${getSliceName(slice)} slices of cubes.',
         child: Transform.scale(
-          scale: 21,
+          scale: calcButtonChildScale(context),
           child: SliceUnitCube(slice: slice),
         ));
   }

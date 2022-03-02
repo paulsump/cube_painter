@@ -4,12 +4,10 @@ import 'package:cube_painter/constants.dart';
 import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
-/// A raised hexagon shaped button
-/// It can act as a radio or a push button.
-/// It can have an [Icon] too e.g. the plus sign for adding cubes.
-/// The cube might be a whole cube or a slice of a cube.
+/// A raised hexagon shaped radio button
 class RadioButton extends StatelessWidget {
   final VoidCallback onPressed;
 
@@ -37,10 +35,10 @@ class RadioButton extends StatelessWidget {
   }
 }
 
-/// A raised hexagon shaped button with a cube on it.
-/// It can act as a radio or a push button.
-/// It can have an [Icon] too e.g. the plus sign for adding cubes.
-/// The cube might be a whole cube or a slice of a cube.
+/// A raised hexagon shaped radio button with a cube on it.
+/// It has an [Icon] e.g. the plus sign for adding cubes.
+/// The cube might be a whole cube or a slice of a cube,
+/// dictated by [Slice].
 class CubeRadioButton extends StatelessWidget {
   final VoidCallback onPressed;
 
@@ -82,19 +80,21 @@ class _CubeAndIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const unit = Offset(1, 1);
+
     return Stack(
       children: [
         Transform.translate(
-          offset: const Offset(1, 1) * 12,
+          offset: unit * 12,
           child: Transform.scale(
-            scale: 21,
+            scale: calcButtonChildScale(context),
             child: slice == Slice.whole
                 ? const WholeUnitCube()
                 : SliceUnitCube(slice: slice),
           ),
         ),
         Transform.translate(
-          offset: -const Offset(1, 1) * assetIconSize / 2,
+          offset: -unit * assetIconSize / 2,
           child: Icon(icon, color: enabledIconColor),
         ),
       ],
