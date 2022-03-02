@@ -1,10 +1,8 @@
-import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
-import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +24,6 @@ class _SlicesMenuState extends State<SlicesMenu> {
     final shortestEdge = getShortestEdge(context);
 
     final double padWidth = 0.01 * shortestEdge;
-    out(padWidth);
     final padX = SizedBox(width: padWidth);
 
     final double padHeight = 0.03247 * shortestEdge;
@@ -34,7 +31,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
 
     final screen = getScreenSize(context);
     final bool isPortrait = screen.width < screen.height;
-    out(calcButtonHeight(context));
+
     return Drawer(
       child: SafeArea(
         child: ListView(
@@ -56,13 +53,13 @@ class _SlicesMenuState extends State<SlicesMenu> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SliceCubeButton(slice: Slice.left),
-                SizedBox(
-                    width:
-                        padWidth * 2 + calcButtonHeight(context) / root3over2,
-                    child: const Icon(AssetIcons.plusOutline)),
-                // padX,
-                // const SliceCubeButton(slice: Slice.whole),
-                // padX,
+                // SizedBox(
+                //     width:
+                //         padWidth * 2 + calcButtonHeight(context) / root3over2,
+                //     child: const Icon(AssetIcons.plusOutline)),
+                padX,
+                const SliceCubeButton(slice: Slice.whole),
+                padX,
                 const SliceCubeButton(slice: Slice.right),
               ],
             ),
