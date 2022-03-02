@@ -43,6 +43,17 @@ class CubeSide {
   }
 }
 
+Color getColor(Side side) {
+  switch (side) {
+    case Side.br:
+      return bottomRightColor; // Light
+    case Side.t:
+      return topColor; // Medium
+    case Side.bl:
+      return bottomLeftColor; // Dark
+  }
+}
+
 LinearGradient _getGradient(Side side) {
   switch (side) {
     case Side.t:

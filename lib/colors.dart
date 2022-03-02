@@ -1,16 +1,8 @@
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
-Color getColor(Side side) {
-  switch (side) {
-    case Side.br:
-      return const Color(0xffffd8d6); // Light
-    case Side.t:
-      return const Color(0xfff07f7e); // Medium
-    case Side.bl:
-      return const Color(0xff543e3d); // Dark
-  }
-}
+const Color topColor = Color(0xfff07f7e);
+const Color bottomRightColor = Color(0xffffd8d6);
+const Color bottomLeftColor = Color(0xff543e3d);
 
 final Color disabledIconColor = _getTweenBLtoBRColor(0.5);
 
@@ -19,10 +11,6 @@ Color _getTweenBLtoBRColor(double t) =>
 
 const Color enabledIconColor = bottomRightColor;
 const Color textColor = enabledIconColor;
-
-const Color topColor = Color(0xfff07f7e);
-const Color bottomRightColor = Color(0xffffd8d6);
-const Color bottomLeftColor = Color(0xff543e3d);
 
 // TODO change all these from getters to finals
 Color getTweenBLtoTColor(double t) => Color.lerp(bottomLeftColor, topColor, t)!;
