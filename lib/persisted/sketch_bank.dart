@@ -21,7 +21,9 @@ SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
 /// access to the main store of the entire model
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
-/// TODO Rename to StaticSketchBank if i've got an AnimSketchBank
+/// Also manages the starting and stopping of cube animation
+/// during loading and brushing.
+/// init() is the main starting point for the app.
 class SketchBank extends ChangeNotifier {
   final _sketches = <String, Sketch>{};
 
@@ -134,11 +136,20 @@ class SketchBank extends ChangeNotifier {
 
   void _onSuccessfulLoad(BuildContext context) {
     getUndoer(context).clear();
+
     _startAnimatingLoadedCubes();
   }
 
+  /// The main starting point for the app.
   Future<void> init(BuildContext context) async {
     _settings = await _settingsPersister.load();
+
+    if (!_settings.copiedSamples) {
+      await copySamples();
+
+      _settings.copiedSamples = true;
+      await _settingsPersister.save();
+    }
 
     final firstPath = await _loadAllSketches();
 
@@ -236,7 +247,6 @@ class SketchBank extends ChangeNotifier {
     saveCurrentFilePath('$appFolderPath$uniqueId$cubesExtension');
   }
 
-
   Future<void> resetCurrentSketch() async =>
       _sketches[currentFilePath] = Sketch.fromString(_savedJson);
 
@@ -280,7 +290,6 @@ class SketchBank extends ChangeNotifier {
 
     return paths.first;
   }
-
 }
 
 class _SlicesExample {

@@ -4,9 +4,6 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/assets.dart';
 import 'package:path_provider/path_provider.dart';
 
-//TODO PUT MORE Persist stuff in here, making it a class e.g. PersistedSketch or Painting
-// it could have the settings, appFolder etc
-
 const cubesExtension = '.cubes.json';
 
 Future<List<String>> getAllAppFilePaths(Directory appFolder) async {

@@ -42,13 +42,6 @@ class SettingsPersister {
       _settings = Settings.fromString(await loadString(filePath: _path));
     }
 
-    if (!_settings.copiedSamples) {
-      await copySamples();
-
-      _settings.copiedSamples = true;
-      await save();
-    }
-
     return _settings;
   }
 
