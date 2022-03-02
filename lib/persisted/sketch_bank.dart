@@ -35,7 +35,6 @@ class SketchBank extends ChangeNotifier {
 
   bool isAnimatingLoadedCubes = true;
 
-  //TODO REMOVE brushing flag
   bool isBrushing = false;
 
   void startBrushing() {
@@ -80,9 +79,7 @@ class SketchBank extends ChangeNotifier {
     isAnimatingLoadedCubes = true;
 
     // for correctness and just in case (i saw it ping pong forever one)
-    isPingPong = false;
-
-    setIsPlaying(true);
+    setIsPingPong(false);
   }
 
   void setIsPingPong(bool value) {
@@ -96,10 +93,6 @@ class SketchBank extends ChangeNotifier {
   late Settings _settings;
 
   String _savedJson = '';
-
-  void setIsPlaying(bool playing) {
-    // notifyListeners();
-  }
 
   bool get modified => json != _savedJson;
 

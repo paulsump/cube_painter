@@ -61,8 +61,6 @@ class AnimCubesState extends State<AnimCubes>
         final sketchBank = getSketchBank(context);
 
         sketchBank.finishAnim();
-        sketchBank.setIsPlaying(false);
-
         sketchBank.isAnimatingLoadedCubes = false;
 
         // set back to default for next time
