@@ -1,6 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 
 /// Transparent flat hexagon shaped button.
@@ -18,6 +17,10 @@ class FlatHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// TODO Responsive to screen size- magic numbers
+    const double buttonHeight = 70;
+    const Size buttonSize = Size(buttonHeight, buttonHeight);
+
     return Tooltip(
       message: tip,
       child: TextButton(
@@ -25,7 +28,7 @@ class FlatHexagonButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
           shape: hexagonBorderShape,
-          fixedSize: MaterialStateProperty.all(pageButtonSize),
+          fixedSize: MaterialStateProperty.all(buttonSize),
           backgroundColor: MaterialStateProperty.all(paintingsMenuButtonsColor),
           overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
         ),
