@@ -1,5 +1,4 @@
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
 class Horizon extends StatelessWidget {
@@ -41,8 +40,8 @@ const quad = [
 ];
 
 get _gradientBottomTop => LinearGradient(
-      // colors: [getColor(Side.bl), getTweenBLtoTColor(0.9)],
-      colors: [getColor(Side.t), getTweenBLtoTColor(0.4)],
+      // colors: [bottomLeftColor, getTweenBLtoTColor(0.9)],
+      colors: [topColor, getTweenBLtoTColor(0.4)],
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
     );

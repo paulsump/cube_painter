@@ -15,18 +15,17 @@ Color getColor(Side side) {
 final Color disabledIconColor = _getTweenBLtoBRColor(0.5);
 
 Color _getTweenBLtoBRColor(double t) =>
-    Color.lerp(getColor(Side.bl), getColor(Side.br), t)!;
+    Color.lerp(bottomLeftColor, bottomRightColor, t)!;
 
-final Color enabledIconColor = getColor(Side.br);
-final Color textColor = enabledIconColor;
+const Color enabledIconColor = bottomRightColor;
+const Color textColor = enabledIconColor;
 
 const Color topColor = Color(0xfff07f7e);
 const Color bottomRightColor = Color(0xffffd8d6);
 const Color bottomLeftColor = Color(0xff543e3d);
 
 // TODO change all these from getters to finals
-Color getTweenBLtoTColor(double t) =>
-    Color.lerp(getColor(Side.bl), getColor(Side.t), t)!;
+Color getTweenBLtoTColor(double t) => Color.lerp(bottomLeftColor, topColor, t)!;
 
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
 
@@ -46,8 +45,8 @@ Color get paintingsMenuButtonsColor => getTweenBLtoTColor(0.3).withOpacity(0.7);
 // const arborGreen = Color(0xFF008C76);
 
 // TODO RENAME B G COLORS
-final green = getColor(Side.br);
-final blue = getColor(Side.t);
+const green = bottomRightColor;
+const blue = topColor;
 
 // TODO RENAME B G COLORS
 Color getTweenBtoGColor(double t) => Color.lerp(blue, green, t)!;

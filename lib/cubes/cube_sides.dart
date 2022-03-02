@@ -22,6 +22,7 @@ enum Side {
 }
 
 /// for painting each side of a cube.
+/// TODO Optimise this away with caches, by replacing getColor()
 class CubeSide {
   final Side side;
 
@@ -53,6 +54,7 @@ LinearGradient _getGradient(Side side) {
   }
 }
 
+//TODO inline these, making more consts
 const double dt = 0.2;
 const double t = 0.8;
 final _gradientT = LinearGradient(
@@ -61,14 +63,14 @@ final _gradientT = LinearGradient(
   end: Alignment.bottomCenter,
 );
 
-final _gradientBR = LinearGradient(
-  colors: [getColor(Side.t), getColor(Side.br)],
+const _gradientBR = LinearGradient(
+  colors: [topColor, bottomRightColor],
   begin: Alignment.bottomRight,
   end: Alignment.topLeft,
 );
 
-final _gradientBL = LinearGradient(
-  colors: [getColor(Side.bl), getColor(Side.t)],
+const _gradientBL = LinearGradient(
+  colors: [bottomLeftColor, topColor],
   begin: Alignment.bottomLeft,
   end: Alignment.topRight,
 );
