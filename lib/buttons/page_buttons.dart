@@ -37,7 +37,7 @@ class PageButtons extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CubeRadioButton(
+                CubesRadioButton(
                   isRadioOn: GestureMode.addLine ==
                       getGestureMode(context, listen: true),
                   icon: AssetIcons.plusOutline,
@@ -45,8 +45,9 @@ class PageButtons extends StatelessWidget {
                   tip:
                       'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
                   slice: Slice.whole,
+                  isLine: true,
                 ),
-                CubeRadioButton(
+                CubesRadioButton(
                   isRadioOn: GestureMode.erase ==
                       getGestureMode(context, listen: true),
                   icon: AssetIcons.cancelOutline,
@@ -136,7 +137,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
     final Slice slice = gestureModeNotifier.slice;
     final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
 
-    return CubeRadioButton(
+    return CubesRadioButton(
       slice: slice,
       isRadioOn: currentGestureMode == GestureMode.addSlice,
       icon: AssetIcons.plusOutline,

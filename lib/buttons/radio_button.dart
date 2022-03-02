@@ -1,6 +1,7 @@
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
@@ -41,7 +42,7 @@ class RadioButton extends StatelessWidget {
 /// It has an [Icon] e.g. the plus sign for adding cubes.
 /// The cube might be a whole cube or a slice of a cube,
 /// dictated by [Slice].
-class CubeRadioButton extends StatelessWidget {
+class CubesRadioButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   final String tip;
@@ -50,59 +51,67 @@ class CubeRadioButton extends StatelessWidget {
   final IconData icon;
   final Slice slice;
 
-  const CubeRadioButton({
+  final bool isLine;
+
+  const CubesRadioButton({
     Key? key,
     required this.onPressed,
     required this.tip,
     required this.icon,
     required this.isRadioOn,
     required this.slice,
+    this.isLine = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RadioButton(
       isRadioOn: isRadioOn,
-      child: _CubeAndIcon(slice: slice, icon: icon),
+      child: _CubesAndIcon(slice: slice, icon: icon, isLine: isLine),
       onPressed: onPressed,
       tip: tip,
     );
   }
 }
 
-class _CubeAndIcon extends StatelessWidget {
-  const _CubeAndIcon({
-    Key? key,
-    required this.slice,
-    required this.icon,
-  }) : super(key: key);
+class _CubesAndIcon extends StatelessWidget {
+  final bool isLine;
 
   final Slice slice;
   final IconData icon;
+
+  const _CubesAndIcon({
+    Key? key,
+    required this.slice,
+    required this.icon,
+    required this.isLine,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const unit = Offset(1, 1);
 
     const int n = 3;
-    final Sketch line = Sketch(
-      cubeInfos: List.generate(
-        n,
-        (index) => CubeInfo(
-            center: Position(n - index, n - index), slice: Slice.whole),
-      ),
-    );
 
     return Stack(
       children: [
         Transform.translate(
           offset: unit * 12,
           child: Transform.scale(
-            scale: calcButtonChildScale(context) * 1.5,
-            child: slice == Slice.whole
-                // ? const WholeUnitCube()
-                ? Thumbnail.useTransform(sketch: line)
-                : SliceUnitCube(slice: slice),
+            scale: calcButtonChildScale(context) * (isLine ? 1.5 : 1.0),
+            child: isLine
+                ? Thumbnail.useTransform(
+                    sketch: Sketch(
+                    cubeInfos: List.generate(
+                      n,
+                      (index) => CubeInfo(
+                          center: Position(n - index, n - index),
+                          slice: Slice.whole),
+                    ),
+                  ))
+                : slice == Slice.whole
+                    ? const WholeUnitCube()
+                    : SliceUnitCube(slice: slice),
           ),
         ),
         Transform.translate(
