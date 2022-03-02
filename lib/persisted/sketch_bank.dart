@@ -87,7 +87,7 @@ class SketchBank extends ChangeNotifier {
 
   bool isPingPong = false;
 
-  late String settingsPath;
+  final _settingsPersister = SettingsPersister();
   late Settings _settings;
 
   String _savedJson = '';
@@ -113,7 +113,7 @@ class SketchBank extends ChangeNotifier {
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
 
-    unawaited(saveSettings());
+    unawaited(_settingsPersister.saveSettings());
   }
 
   Sketch get sketch {
@@ -138,24 +138,7 @@ class SketchBank extends ChangeNotifier {
   }
 
   Future<void> init(BuildContext context) async {
-    settingsPath = await getSettingsPath();
-
-    // if(true){
-    if (!await File(settingsPath).exists()) {
-      _settings = Settings.fromJson({
-        'currentFilePath': '',
-        'copiedSamples': false,
-      });
-    } else {
-      _settings = Settings.fromString(await loadString(filePath: settingsPath));
-    }
-
-    if (!_settings.copiedSamples) {
-      await copySamples();
-
-      _settings.copiedSamples = true;
-      await saveSettings();
-    }
+    _settings = await _settingsPersister.init();
 
     final firstPath = await _loadAllSketches();
 
@@ -297,15 +280,6 @@ class SketchBank extends ChangeNotifier {
 
     return paths.first;
   }
-
-  Future<String> getSettingsPath() async {
-    final String appFolderPath = await getAppFolderPath();
-
-    return '$appFolderPath${Settings.fileName}';
-  }
-
-  Future<void> saveSettings() async =>
-      saveString(filePath: settingsPath, string: _settings.toString());
 
 }
 
