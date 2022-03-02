@@ -26,13 +26,13 @@ void main() {
     });
 
     test('save', () {
-      final sketch = Sketch.empty();
+      final sketch = Sketch.fromEmpty();
       String newJson = jsonEncode(sketch);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      final sketch = Sketch.empty();
+      final sketch = Sketch.fromEmpty();
       String newJson = sketch.toString();
       expect(testJson, equals(newJson));
     });

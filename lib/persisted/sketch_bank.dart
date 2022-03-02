@@ -24,6 +24,8 @@ SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
 /// Also manages the starting and stopping of cube animation
 /// during loading and brushing.
 /// init() is the main starting point for the app.
+/// TODO MOVe anim stuff into Animator
+/// todo move load stuff into Persister
 class SketchBank extends ChangeNotifier {
   final _sketches = <String, Sketch>{};
 
@@ -124,7 +126,7 @@ class SketchBank extends ChangeNotifier {
           "_sketches doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
-      return Sketch.empty();
+      return Sketch.fromEmpty();
     }
     return _sketches[currentFilePath]!;
   }
@@ -191,7 +193,7 @@ class SketchBank extends ChangeNotifier {
 
     await _setNewFilePath();
 
-    pushSketch(Sketch.empty());
+    pushSketch(Sketch.fromEmpty());
     _savedJson = json;
 
     _updateAfterLoad(context);

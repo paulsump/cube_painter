@@ -16,7 +16,7 @@ class Sketch {
 
   const Sketch({required List<CubeInfo> cubeInfos}) : _cubeInfos = cubeInfos;
 
-  Sketch.empty() : _cubeInfos = <CubeInfo>[];
+  Sketch.fromEmpty() : _cubeInfos = <CubeInfo>[];
 
   Sketch.fromString(String json) : this.fromJson(jsonDecode(json));
 
@@ -37,6 +37,10 @@ class Sketch {
       yield CubeInfo.fromJson(cubeInfoObject);
     }
   }
+
+  void adopt(Sketch sketch) {}
+
+  void handOver() {}
 }
 
 class UnitTransform {
