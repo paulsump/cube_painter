@@ -25,7 +25,7 @@ class CubeElevatedHexagonButton extends StatelessWidget {
     required this.tip,
     required this.icon,
     this.isRadioOn,
-    this.slice = Slice.whole,
+    required this.slice,
   }) : super(key: key);
 
   @override

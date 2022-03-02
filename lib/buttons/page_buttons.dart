@@ -143,6 +143,7 @@ class _GestureModeCubeElevatedHexagonButton extends StatelessWidget {
       icon: icon,
       onPressed: () => setGestureMode(mode, context),
       tip: tip,
+      slice: Slice.whole,
     );
   }
 }
