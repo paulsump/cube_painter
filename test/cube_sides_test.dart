@@ -72,13 +72,13 @@ void main() {
     test('c', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.whole);
 
-      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
+      expect(Side.bottomLeft, equals(sidesAndUnitOffsets[0][0]));
       expect(equalsOffsetList(sidesAndUnitOffsets[0][1], bottomLeftSide), true);
 
-      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
+      expect(Side.top, equals(sidesAndUnitOffsets[1][0]));
       expect(equalsOffsetList(sidesAndUnitOffsets[1][1], topSide), true);
 
-      expect(Side.br, equals(sidesAndUnitOffsets[2][0]));
+      expect(Side.bottomRight, equals(sidesAndUnitOffsets[2][0]));
       expect(
           equalsOffsetList(sidesAndUnitOffsets[2][1], bottomRightSide), true);
     });
@@ -86,7 +86,7 @@ void main() {
     test('r', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.left);
 
-      expect(Side.t, equals(sidesAndUnitOffsets[0][0]));
+      expect(Side.top, equals(sidesAndUnitOffsets[0][0]));
       expect(
           equalsOffsetList(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
@@ -95,7 +95,7 @@ void main() {
           ]),
           true);
 
-      expect(Side.bl, equals(sidesAndUnitOffsets[1][0]));
+      expect(Side.bottomLeft, equals(sidesAndUnitOffsets[1][0]));
       expect(
           equalsOffsetList(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
@@ -109,7 +109,7 @@ void main() {
     test('ur', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.bottomLeft);
 
-      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
+      expect(Side.bottomLeft, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
           equalsOffsetList(sidesAndUnitOffsets[0][1], const [
@@ -120,7 +120,7 @@ void main() {
           ]),
           true);
 
-      expect(Side.br, equals(sidesAndUnitOffsets[1][0]));
+      expect(Side.bottomRight, equals(sidesAndUnitOffsets[1][0]));
       expect(
           equalsOffsetList(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),
@@ -133,7 +133,7 @@ void main() {
     test('ul', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.bottomRight);
 
-      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
+      expect(Side.bottomLeft, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
           equalsOffsetList(sidesAndUnitOffsets[0][1], const [
@@ -143,7 +143,7 @@ void main() {
           ]),
           true);
 
-      expect(Side.br, equals(sidesAndUnitOffsets[1][0]));
+      expect(Side.bottomRight, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
           equalsOffsetList(sidesAndUnitOffsets[1][1], const [
@@ -158,7 +158,7 @@ void main() {
     test('l', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.right);
 
-      expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
+      expect(Side.bottomRight, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
           equalsOffsetList(sidesAndUnitOffsets[0][1], const [
@@ -169,7 +169,7 @@ void main() {
           ]),
           true);
 
-      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
+      expect(Side.top, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
           equalsOffsetList(sidesAndUnitOffsets[1][1], const [
@@ -183,7 +183,7 @@ void main() {
     test('dl', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.topRight);
 
-      expect(Side.br, equals(sidesAndUnitOffsets[0][0]));
+      expect(Side.bottomRight, equals(sidesAndUnitOffsets[0][0]));
 
       expect(
           equalsOffsetList(sidesAndUnitOffsets[0][1], const [
@@ -193,7 +193,7 @@ void main() {
           ]),
           true);
 
-      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
+      expect(Side.top, equals(sidesAndUnitOffsets[1][0]));
 
       expect(
           equalsOffsetList(sidesAndUnitOffsets[1][1], const [
@@ -211,7 +211,7 @@ void main() {
       // out(sidesAndUnitOffsets[0][1]);
       // out(sidesAndUnitOffsets[1][1]);
 
-      expect(Side.bl, equals(sidesAndUnitOffsets[0][0]));
+      expect(Side.bottomLeft, equals(sidesAndUnitOffsets[0][0]));
       expect(
           equalsOffsetList(sidesAndUnitOffsets[0][1], const [
             Offset(0, 0.0),
@@ -220,7 +220,7 @@ void main() {
           ]),
           true);
 
-      expect(Side.t, equals(sidesAndUnitOffsets[1][0]));
+      expect(Side.top, equals(sidesAndUnitOffsets[1][0]));
       expect(
           equalsOffsetList(sidesAndUnitOffsets[1][1], const [
             Offset(0, 0.0),

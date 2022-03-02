@@ -17,24 +17,15 @@ Color getTweenBLtoTColor(double t) => Color.lerp(bottomLeftColor, topColor, t)!;
 
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
 
-Color get buttonColor => getTweenBtoGColor(0.4);
+Color get buttonColor => _getTweenTtoBRColor(0.4);
 
-Color get buttonBorderColor => getTweenBtoGColor(0.1);
+Color get buttonBorderColor => _getTweenTtoBRColor(0.1);
 
-Color get backgroundColor => getTweenBtoGColor(0.6);
+Color get backgroundColor => _getTweenTtoBRColor(0.6);
 
-Color get radioButtonOnColor => getTweenBtoGColor(0.4);
+Color get radioButtonOnColor => _getTweenTtoBRColor(0.4);
 
 Color get paintingsMenuButtonsColor => getTweenBLtoTColor(0.3).withOpacity(0.7);
 
-// const softPink = Color(0xFFFFDDE2);
-// const peachAmber = Color(0xFFFAA094);
-// const yucca = Color(0xFF9ED9CC);
-// const arborGreen = Color(0xFF008C76);
-
-// TODO RENAME B G COLORS
-const green = bottomRightColor;
-const blue = topColor;
-
-// TODO RENAME B G COLORS
-Color getTweenBtoGColor(double t) => Color.lerp(blue, green, t)!;
+Color _getTweenTtoBRColor(double t) =>
+    Color.lerp(topColor, bottomRightColor, t)!;

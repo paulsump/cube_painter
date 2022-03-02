@@ -11,15 +11,7 @@ const noWarn = out;
 
 /// Used to represent the 3 sides of the 'cube'.
 /// Anti clockwise from top right.
-/// TODO Rename these to top, bottomLeft and bottomRight
-enum Side {
-  // 0 top
-  t,
-  // 1 bottom left
-  bl,
-  // 2 bottom right
-  br
-}
+enum Side { top, bottomLeft, bottomRight }
 
 /// for painting each side of a cube.
 /// TODO Optimise this away with caches, by replacing getColor()
@@ -45,22 +37,22 @@ class CubeSide {
 
 Color getColor(Side side) {
   switch (side) {
-    case Side.br:
+    case Side.bottomRight:
       return bottomRightColor; // Light
-    case Side.t:
+    case Side.top:
       return topColor; // Medium
-    case Side.bl:
+    case Side.bottomLeft:
       return bottomLeftColor; // Dark
   }
 }
 
 LinearGradient _getGradient(Side side) {
   switch (side) {
-    case Side.t:
+    case Side.top:
       return _gradientT;
-    case Side.bl:
+    case Side.bottomLeft:
       return _gradientBL;
-    case Side.br:
+    case Side.bottomRight:
       return _gradientBR;
   }
 }
@@ -153,17 +145,17 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
     case Slice.whole:
       return UnmodifiableListView([
         [
-          Side.bl,
+          Side.bottomLeft,
           // |_|
           _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
         [
-          Side.t,
+          Side.top,
           // /_/
           _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
         [
-          Side.br,
+          Side.bottomRight,
           // /|
           // |/
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
@@ -172,34 +164,34 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
     case Slice.left:
       return UnmodifiableListView([
         [
-          Side.t,
+          Side.top,
           _getUnitOffsetsFromHexagonCornerIndices([c, tl, t])
         ],
         [
-          Side.bl,
+          Side.bottomLeft,
           _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
       ]);
     case Slice.bottomLeft:
       return UnmodifiableListView([
         [
-          Side.bl,
+          Side.bottomLeft,
           _getUnitOffsetsFromHexagonCornerIndices([c, b, bl, tl])
         ],
         [
-          Side.br,
+          Side.bottomRight,
           _getUnitOffsetsFromHexagonCornerIndices([c, br, b])
         ],
       ]);
     case Slice.bottomRight:
       return UnmodifiableListView([
         [
-          Side.bl,
+          Side.bottomLeft,
           // _|
           _getUnitOffsetsFromHexagonCornerIndices([c, b, bl])
         ],
         [
-          Side.br,
+          Side.bottomRight,
           // /|
           // |/
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
@@ -208,24 +200,24 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
     case Slice.right:
       return UnmodifiableListView([
         [
-          Side.br,
+          Side.bottomRight,
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br, b])
         ],
         [
-          Side.t,
+          Side.top,
           _getUnitOffsetsFromHexagonCornerIndices([c, t, tr])
         ],
       ]);
     case Slice.topRight:
       return UnmodifiableListView([
         [
-          Side.br,
+          Side.bottomRight,
           // /|
           // |/
           _getUnitOffsetsFromHexagonCornerIndices([c, tr, br])
         ],
         [
-          Side.t,
+          Side.top,
           // /_/
           _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
@@ -233,12 +225,12 @@ UnmodifiableListView<List<dynamic>> getCubeSidesAndUnitOffsets(Slice slice) {
     case Slice.topLeft:
       return UnmodifiableListView([
         [
-          Side.bl,
+          Side.bottomLeft,
           // |-
           _getUnitOffsetsFromHexagonCornerIndices([c, bl, tl])
         ],
         [
-          Side.t,
+          Side.top,
           // /_/
           _getUnitOffsetsFromHexagonCornerIndices([c, tl, t, tr])
         ],
