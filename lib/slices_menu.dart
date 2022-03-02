@@ -4,6 +4,7 @@ import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -19,18 +20,21 @@ class SlicesMenu extends StatefulWidget {
   State<SlicesMenu> createState() => _SlicesMenuState();
 }
 
-const double _padHeight = 15.0;
-const padY = SizedBox(height: _padHeight);
-
 class _SlicesMenuState extends State<SlicesMenu> {
   @override
   Widget build(BuildContext context) {
-    const double padWidth = 14;
-    const padX = SizedBox(width: padWidth);
+    final shortestEdge = getShortestEdge(context);
+
+    final double padWidth = 0.01 * shortestEdge;
+    out(padWidth);
+    final padX = SizedBox(width: padWidth);
+
+    final double padHeight = 0.03247 * shortestEdge;
+    final padY = SizedBox(height: padHeight);
 
     final screen = getScreenSize(context);
     final bool isPortrait = screen.width < screen.height;
-
+    out(calcButtonHeight(context));
     return Drawer(
       child: SafeArea(
         child: ListView(
@@ -42,33 +46,35 @@ class _SlicesMenuState extends State<SlicesMenu> {
             padY,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SliceCubeButton(slice: Slice.topLeft),
+              children: [
+                const SliceCubeButton(slice: Slice.topLeft),
                 padX,
-                SliceCubeButton(slice: Slice.topRight),
+                const SliceCubeButton(slice: Slice.topRight),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SliceCubeButton(slice: Slice.left),
+              children: [
+                const SliceCubeButton(slice: Slice.left),
                 SizedBox(
-                    width: padWidth * 7, child: Icon(AssetIcons.plusOutline)),
+                    width:
+                        padWidth * 2 + calcButtonHeight(context) / root3over2,
+                    child: const Icon(AssetIcons.plusOutline)),
                 // padX,
-                // BrushMenuButton(slice: Slice.c),
+                // const SliceCubeButton(slice: Slice.whole),
                 // padX,
-                SliceCubeButton(slice: Slice.right),
+                const SliceCubeButton(slice: Slice.right),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SliceCubeButton(slice: Slice.bottomLeft),
+              children: [
+                const SliceCubeButton(slice: Slice.bottomLeft),
                 padX,
-                SliceCubeButton(slice: Slice.bottomRight),
+                const SliceCubeButton(slice: Slice.bottomRight),
               ],
             ),
-            if (isPortrait) const Center(child: _Example()),
+            if (isPortrait) Center(child: _Example(padHeight: padHeight)),
           ],
         ),
       ),
@@ -77,15 +83,19 @@ class _SlicesMenuState extends State<SlicesMenu> {
 }
 
 class _Example extends StatelessWidget {
-  const _Example({Key? key}) : super(key: key);
+  final double padHeight;
+
+  const _Example({Key? key, required this.padHeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final sketchBank = getSketchBank(context);
 
+    final padY = SizedBox(height: padHeight);
+
     return Column(
       children: [
-        const SizedBox(height: _padHeight * 4),
+        SizedBox(height: padHeight * 4),
         const Text('Slices are used to create'),
         const Text('impossible Escher-like'),
         const Text('structures like this...'),
