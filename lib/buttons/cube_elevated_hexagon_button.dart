@@ -16,15 +16,15 @@ class CubeElevatedHexagonButton extends StatelessWidget {
   final String tip;
   final bool? isRadioOn;
 
-  final IconData? icon;
+  final IconData icon;
   final Slice slice;
 
   const CubeElevatedHexagonButton({
     Key? key,
     required this.onPressed,
     required this.tip,
+    required this.icon,
     this.isRadioOn,
-    this.icon,
     this.slice = Slice.whole,
   }) : super(key: key);
 
@@ -47,14 +47,13 @@ class _CubeAndIcon extends StatelessWidget {
   }) : super(key: key);
 
   final Slice slice;
-  final IconData? icon;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     const double iconSize = assetIconSize;
 
-    final offset =
-        null != icon ? const Offset(1, 1) * iconSize / 2 : Offset.zero;
+    final offset = const Offset(1, 1) * iconSize / 2;
 
     return Stack(
       children: [
@@ -67,14 +66,10 @@ class _CubeAndIcon extends StatelessWidget {
                 : SliceUnitCube(slice: slice),
           ),
         ),
-        if (null != icon)
-          Transform.translate(
-            offset: -offset,
-            child: Transform.scale(
-              scale: 29 / iconSize,
-              child: Icon(icon, color: enabledIconColor),
-            ),
-          ),
+        Transform.translate(
+          offset: -offset,
+          child: Icon(icon, color: enabledIconColor),
+        ),
       ],
     );
   }
