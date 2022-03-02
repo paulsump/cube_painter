@@ -8,18 +8,28 @@ import 'package:flutter/material.dart';
 
 class Alert extends StatelessWidget {
   final String title;
+
   final String content;
+
   final VoidCallback yesCallBack;
+  final String? yesTip;
+
   final VoidCallback? noCallBack;
+  final String? noTip;
+
   final VoidCallback? cancelCallBack;
+  final String? cancelTip;
 
   const Alert({
     Key? key,
     required this.title,
     required this.content,
     required this.yesCallBack,
+    this.yesTip,
     this.noCallBack,
+    this.noTip,
     this.cancelCallBack,
+    this.cancelTip,
   }) : super(key: key);
 
   static const double _blur = 2;
@@ -30,31 +40,26 @@ class Alert extends StatelessWidget {
       filter: ImageFilter.blur(sigmaX: _blur, sigmaY: _blur),
       child: AlertDialog(
         backgroundColor: backgroundColor.withOpacity(0.6),
-        title: Text(
-          title,
-        ),
-        content: Text(
-          content,
-        ),
+        title: Text(title),
+        content: Text(content),
         actions: <Widget>[
           _Button(
             onPressed: yesCallBack,
             icon: AssetIcons.thumbsUp,
-            // TODO pass yes tip in
-            tip: 'Yes - Confirm that you do want to do this.',
+            tip: yesTip ?? 'Yes - Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
             _Button(
               onPressed: noCallBack,
               icon: AssetIcons.thumbsDown,
-              // TODO pass no tip in
-              tip: 'No - Do the operation, but say no to the question.',
+              tip:
+                  noTip ?? 'No - Do the operation, but say no to the question.',
             ),
           if (cancelCallBack != null)
             _Button(
               onPressed: cancelCallBack,
               icon: AssetIcons.cancelOutline,
-              tip: 'Cancel - Do nothing.',
+              tip: cancelTip ?? 'Cancel - Do nothing.',
             ),
         ],
       ),
