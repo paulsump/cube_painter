@@ -2,8 +2,6 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:flutter/material.dart';
 
-/// TODO continue documenting classes from HERE
-
 /// a normal cube (not a [Slice])
 /// 'unit' means that it has a size of 1.
 class WholeUnitCube extends StatelessWidget {
@@ -28,6 +26,7 @@ class _Painter extends CustomPainter {
   bool shouldRepaint(_Painter oldDelegate) => false;
 }
 
+/// paint caches to speed up rendering
 final Paint _paintCacheBR = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomRight,

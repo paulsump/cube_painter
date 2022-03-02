@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 const noWarn = out;
 
 /// Used to represent the 3 sides of the 'cube'.
-/// Anti clockwise from top right.
 enum Side { top, bottomLeft, bottomRight }
 
 /// for painting each side of a cube.
