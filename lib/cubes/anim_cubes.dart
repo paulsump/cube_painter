@@ -81,6 +81,7 @@ class AnimCubesState extends State<AnimCubes>
   void didUpdateWidget(AnimCubes oldWidget) {
     final sketchBank = getSketchBank(context);
 
+    //TODO Shouldn't we check if (sketchBank.isPlaying || sketchBank.isAnimatingLoadedCubes) {
     if (sketchBank.isPlaying) {
       if (sketchBank.isPingPong) {
         _controller.duration = pingPongDuration;

@@ -76,6 +76,10 @@ class SketchBank extends ChangeNotifier {
     animCubeInfos.addAll(cubeInfos.toList());
 
     isAnimatingLoadedCubes = true;
+
+    // for correctness and just in case (i saw it ping pong forever one)
+    isPingPong = false;
+
     setIsPlaying(true);
   }
 
