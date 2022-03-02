@@ -51,14 +51,10 @@ class _CubeAndIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double iconSize = assetIconSize;
-
-    final offset = const Offset(1, 1) * iconSize / 2;
-
     return Stack(
       children: [
         Transform.translate(
-          offset: offset,
+          offset: const Offset(1, 1) * 12,
           child: Transform.scale(
             scale: 21,
             child: slice == Slice.whole
@@ -67,7 +63,7 @@ class _CubeAndIcon extends StatelessWidget {
           ),
         ),
         Transform.translate(
-          offset: -offset,
+          offset: -const Offset(1, 1) * assetIconSize / 2,
           child: Icon(icon, color: enabledIconColor),
         ),
       ],
