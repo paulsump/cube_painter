@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
@@ -77,21 +76,9 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
     notifyListeners();
   }
 
+  @override
   Future<void> deleteCurrentFile(BuildContext context) async {
-    sketches.remove(currentFilePath);
-
-    final File file = File(currentFilePath);
-
-    // we might never have saved a new filename, so check existence
-    if (await file.exists()) {
-      file.delete();
-    }
-
-    if (sketches.isEmpty) {
-      await newFile(context);
-    } else {
-      loadFile(filePath: sketches.keys.first, context: context);
-    }
+    await super.deleteCurrentFile(context);
 
     notifyListeners();
   }

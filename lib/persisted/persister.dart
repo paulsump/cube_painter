@@ -25,10 +25,6 @@ mixin Persister {
 
   String get json => sketch.toString();
 
-  void finishAnim();
-
-  void updateAfterLoad(BuildContext context);
-
   final _settingsPersister = SettingsPersister();
   late Settings _settings;
 
@@ -38,8 +34,8 @@ mixin Persister {
 
   bool get hasCubes =>
       sketches.isNotEmpty &&
-          _hasSketchForCurrentFilePath &&
-          sketch.cubeInfos.isNotEmpty;
+      _hasSketchForCurrentFilePath &&
+      sketch.cubeInfos.isNotEmpty;
 
   bool get _hasSketchForCurrentFilePath {
     if (!sketches.containsKey(currentFilePath)) {
@@ -49,6 +45,12 @@ mixin Persister {
     }
     return true;
   }
+
+  /// defined in [Animator]
+  void finishAnim();
+
+  /// defined in [SketchBank]
+  void updateAfterLoad(BuildContext context);
 
   String get currentFilePath => _settings.currentFilePath;
 
@@ -61,7 +63,7 @@ mixin Persister {
   Sketch get sketch {
     if (!_hasSketchForCurrentFilePath) {
       assert(false,
-      "sketches doesn't contain key of currentFilePath: $currentFilePath");
+          "sketches doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.fromEmpty();
@@ -186,6 +188,23 @@ mixin Persister {
     }
 
     return paths.first;
+  }
+
+  Future<void> deleteCurrentFile(BuildContext context) async {
+    sketches.remove(currentFilePath);
+
+    final File file = File(currentFilePath);
+
+    // we might never have saved a new filename, so check existence
+    if (await file.exists()) {
+      file.delete();
+    }
+
+    if (sketches.isEmpty) {
+      await newFile(context);
+    } else {
+      loadFile(filePath: sketches.keys.first, context: context);
+    }
   }
 }
 
