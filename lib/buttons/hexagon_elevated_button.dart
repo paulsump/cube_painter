@@ -9,8 +9,8 @@ class HexagonElevatedButton extends StatelessWidget {
 
   final Widget child;
 
-  bool get isOn => radioOn ?? false;
-  final bool? radioOn;
+  bool get isOn => isRadioOn ?? false;
+  final bool? isRadioOn;
   final String tip;
 
   /// The underlying class for radio and push buttons.
@@ -20,7 +20,7 @@ class HexagonElevatedButton extends StatelessWidget {
     required this.child,
     required this.onPressed,
     required this.tip,
-    this.radioOn,
+    this.isRadioOn,
   }) : super(key: key);
 
   @override
@@ -36,9 +36,9 @@ class HexagonElevatedButton extends StatelessWidget {
           style: ButtonStyle(
             shape: hexagonBorderShape,
             fixedSize: MaterialStateProperty.all(pageButtonSize),
-            backgroundColor: MaterialStateProperty.all(radioOn == null
+            backgroundColor: MaterialStateProperty.all(isRadioOn == null
                 ? buttonColor
-                : radioOn!
+                : isRadioOn!
                     ? radioButtonOnColor
                     : buttonColor),
             elevation: MaterialStateProperty.all(isOn ? 0.0 : buttonElevation),

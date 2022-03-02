@@ -184,13 +184,13 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
       cancelCallBack: () => Navigator.of(context).pop(false),
     );
 
-    final bool? yes = await showDialog(
+    final bool? clickedYes = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return alert;
       },
     );
 
-    return yes ?? false;
+    return clickedYes ?? false;
   }
 }

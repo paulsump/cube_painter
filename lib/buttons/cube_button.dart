@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 /// It can have an [Icon] too e.g. the plus sign for adding cubes.
 /// The cube might be a whole cube or a slice of a cube.
 class CubeButton extends StatelessWidget {
-  final bool? radioOn;
+  final bool? isRadioOn;
 
   final void Function() onPressed;
   final IconData? icon;
@@ -23,7 +23,7 @@ class CubeButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.tip,
-    this.radioOn,
+    this.isRadioOn,
     this.icon,
     this.iconSize,
     this.slice = Slice.whole,
@@ -35,7 +35,7 @@ class CubeButton extends StatelessWidget {
         null != icon ? const Offset(1, 1) * iconSize! / 2 : Offset.zero;
 
     return HexagonElevatedButton(
-      radioOn: radioOn,
+      isRadioOn: isRadioOn,
       child: Stack(
         children: [
           Transform.translate(

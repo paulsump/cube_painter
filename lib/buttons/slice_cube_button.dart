@@ -29,7 +29,7 @@ class SliceCubeButton extends StatelessWidget {
 
     return CubeButton(
       slice: slice,
-      radioOn:
+      isRadioOn:
           currentSlice == slice && currentGestureMode == GestureMode.addSlice,
       onPressed: () {
         gestureModeNotifier.setSlice(slice);
@@ -55,7 +55,7 @@ class OpenSliceMenuButton extends StatelessWidget {
 
     return CubeButton(
       slice: slice,
-      radioOn: currentGestureMode == GestureMode.addSlice,
+      isRadioOn: currentGestureMode == GestureMode.addSlice,
       icon: DownloadedIcons.plusOutline,
       iconSize: downloadedIconSize,
       onPressed: Scaffold.of(context).openEndDrawer,
