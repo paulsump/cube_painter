@@ -43,7 +43,8 @@ class ElevatedHexagonButton extends StatelessWidget {
                     : buttonColor),
             elevation: MaterialStateProperty.all(
                 isOn ? 0.0 : calcButtonElevation(context)),
-            shadowColor: isOn ? null : MaterialStateProperty.all(bl),
+            shadowColor:
+                isOn ? null : MaterialStateProperty.all(bottomLeftColor),
           ),
         ),
       ),

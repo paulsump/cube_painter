@@ -32,7 +32,7 @@ final Paint _paintCacheBR = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomRight,
     end: Alignment.topLeft,
-    colors: [top, br],
+    colors: [topColor, bottomRightColor],
   ).createShader(const Rect.fromLTRB(0.0, -0.5, 0.9, 1.0))
   ..style = PaintingStyle.fill;
 
@@ -40,7 +40,7 @@ final Paint _paintCacheBL = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
-    colors: [bl, top],
+    colors: [bottomLeftColor, topColor],
   ).createShader(const Rect.fromLTRB(-0.9, -0.5, 0.0, 1.0))
   ..style = PaintingStyle.fill;
 
@@ -48,6 +48,6 @@ final Paint _paintCacheT = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xffb16564), top],
+    colors: [Color(0xffb16564), topColor],
   ).createShader(const Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0))
   ..style = PaintingStyle.fill;

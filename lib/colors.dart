@@ -20,10 +20,9 @@ Color _getTweenBLtoBRColor(double t) =>
 final Color enabledIconColor = getColor(Side.br);
 final Color textColor = enabledIconColor;
 
-// TODO rename these
-const Color top = Color(0xfff07f7e);
-const Color br = Color(0xffffd8d6);
-const Color bl = Color(0xff543e3d);
+const Color topColor = Color(0xfff07f7e);
+const Color bottomRightColor = Color(0xffffd8d6);
+const Color bottomLeftColor = Color(0xff543e3d);
 
 // TODO change all these from getters to finals
 Color getTweenBLtoTColor(double t) =>
