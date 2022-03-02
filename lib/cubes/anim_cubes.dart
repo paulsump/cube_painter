@@ -56,19 +56,19 @@ class AnimCubesState extends State<AnimCubes>
           Duration(milliseconds: 2 * milliseconds ~/ (1 - _controller.value));
     }
 
-    _controller
-        .forward(from: fromZero ? 0 : _controller.value)
-        .whenComplete(() {
-      final sketchBank = getSketchBank(context);
+    _controller.forward(from: fromZero ? 0 : _controller.value).whenComplete(
+      () {
+        final sketchBank = getSketchBank(context);
 
-      sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
-      sketchBank.setIsPlaying(false);
+        sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
+        sketchBank.setIsPlaying(false);
 
-      sketchBank.isAnimatingLoadedCubes = false;
+        sketchBank.isAnimatingLoadedCubes = false;
 
-      // set back to default for next time
-      _controller.duration = pingPongDuration;
-    });
+        // set back to default for next time
+        _controller.duration = pingPongDuration;
+      },
+    );
   }
 
   @override

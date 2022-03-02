@@ -44,15 +44,6 @@ class SketchBank extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addAllAnimCubeInfosToStaticCubeInfos() {
-    if (!isBrushing) {
-      sketch.cubeInfos.addAll(animCubeInfos);
-
-      animCubeInfos.clear();
-      notifyListeners();
-    }
-  }
-
   //TODO FIx this copied comment
   /// once the brush has finished, it
   /// yields ownership of it's cubes to this parent widget.
@@ -63,6 +54,15 @@ class SketchBank extends ChangeNotifier {
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
+
+  void addAllAnimCubeInfosToStaticCubeInfos() {
+    if (!isBrushing) {
+      sketch.cubeInfos.addAll(animCubeInfos);
+
+      animCubeInfos.clear();
+      notifyListeners();
+    }
+  }
 
   bool isAnimatingLoadedCubes = false;
 
