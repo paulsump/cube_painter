@@ -5,44 +5,44 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-double getZoomScale(BuildContext context, {bool listen = false}) {
-  final zoom = Provider.of<PanZoomNotifier>(context, listen: listen);
-  return zoom.scale;
-}
+void initZoomScale(BuildContext context, double scale) =>
+    _getPanZoomNotifier(context, listen: false)._scale = scale;
 
-void setZoomScale(BuildContext context, double scale) {
-  final zoom = Provider.of<PanZoomNotifier>(context, listen: false);
-  zoom.scale = scale;
-}
+double getZoomScale(BuildContext context, {bool listen = false}) =>
+    _getPanZoomNotifier(context, listen: listen).scale;
 
-Offset getPanOffset(BuildContext context, {bool listen = false}) {
-  final zoom = Provider.of<PanZoomNotifier>(context, listen: listen);
-  // if (listen) out(zoom.offset);
-  return zoom.offset;
-}
+void setZoomScale(BuildContext context, double scale) =>
+    _getPanZoomNotifier(context, listen: false).setScale(scale);
 
-void setPanOffset(BuildContext context, Offset offset) {
-  final zoom = Provider.of<PanZoomNotifier>(context, listen: false);
-  zoom.offset = offset;
-}
+Offset getPanOffset(BuildContext context, {bool listen = false}) =>
+    _getPanZoomNotifier(context, listen: listen).offset;
 
+void setPanOffset(BuildContext context, Offset offset) =>
+    _getPanZoomNotifier(context, listen: false).setOffset(offset);
+
+PanZoomNotifier _getPanZoomNotifier(BuildContext context,
+        {required bool listen}) =>
+    Provider.of<PanZoomNotifier>(context, listen: listen);
+
+/// For zooming and panning,
+/// this stores the global scale and pan offset.
 class PanZoomNotifier extends ChangeNotifier {
   /// equates to the length of the side of each triangle in pixels
-  /// TODO Responsive to screen size- magic numbers
-  double _scale = 30;
+  /// set by initZoomScale() to around 30
+  double _scale = 0;
 
   Offset _offset = Offset.zero;
 
   double get scale => _scale;
 
-  set scale(double value) {
+  void setScale(double value) {
     _scale = value;
     notifyListeners();
   }
 
   Offset get offset => _offset;
 
-  set offset(Offset value) {
+  void setOffset(Offset value) {
     _offset = value;
     notifyListeners();
   }
@@ -94,14 +94,11 @@ class PanZoomer implements GestureHandler {
   }
 
   @override
-  void end(BuildContext context) {
-  }
+  void end(BuildContext context) {}
 
   @override
-  void tapDown(Offset point, BuildContext context) {
-  }
+  void tapDown(Offset point, BuildContext context) {}
 
   @override
-  void tapUp(Offset point, BuildContext context) {
-  }
+  void tapUp(Offset point, BuildContext context) {}
 }

@@ -12,6 +12,7 @@ import 'package:cube_painter/paintings_menu.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/slices_menu.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class PainterPage extends StatefulWidget {
 class _PainterPageState extends State<PainterPage> {
   @override
   void initState() {
+    initZoomScale(context, 0.06494 * getShortestEdge(context));
     unawaited(getSketchBank(context).init(context));
 
     super.initState();
