@@ -102,7 +102,6 @@ class SketchBank extends ChangeNotifier {
 
   //TODO removed isPlaying - currently, i remove it all (apart from notify) then the staticcubes don't appear until all anims are finished
   bool get isPlaying => true; //_isPlaying;
-  // bool get isPlaying => _isPlaying;
 
   void setIsPlaying(bool playing) {
     _isPlaying = playing;

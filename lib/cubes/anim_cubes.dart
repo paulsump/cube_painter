@@ -82,14 +82,12 @@ class AnimCubesState extends State<AnimCubes>
     final sketchBank = getSketchBank(context);
 
     //TODO Shouldn't we check if (sketchBank.isPlaying || sketchBank.isAnimatingLoadedCubes) {
-    if (sketchBank.isPlaying) {
-      if (sketchBank.isPingPong) {
-        _controller.duration = pingPongDuration;
+    if (sketchBank.isPingPong) {
+      _controller.duration = pingPongDuration;
 
-        _controller.repeat();
-      } else {
-        startForwardAnim(fromZero: sketchBank.isAnimatingLoadedCubes);
-      }
+      _controller.repeat();
+    } else {
+      startForwardAnim(fromZero: sketchBank.isAnimatingLoadedCubes);
     }
 
     super.didUpdateWidget(oldWidget);
