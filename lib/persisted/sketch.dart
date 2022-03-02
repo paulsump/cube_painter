@@ -12,15 +12,13 @@ const noWarn = out;
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
 class Sketch {
-  final List<CubeInfo> _cubeInfos;
+  final List<CubeInfo> cubeInfos;
 
-  const Sketch({required List<CubeInfo> cubeInfos}) : _cubeInfos = cubeInfos;
+  const Sketch({required this.cubeInfos});
 
-  Sketch.fromEmpty() : _cubeInfos = <CubeInfo>[];
+  Sketch.fromEmpty() : cubeInfos = <CubeInfo>[];
 
   Sketch.fromString(String json) : this.fromJson(jsonDecode(json));
-
-  List<CubeInfo> get cubeInfos => _cubeInfos;
 
   UnitTransform get unitTransform => _calcUnitScaleAndOffset(cubeInfos);
 
@@ -28,19 +26,15 @@ class Sketch {
   String toString() => jsonEncode(this);
 
   Sketch.fromJson(Map<String, dynamic> json)
-      : _cubeInfos = _listFromJson(json).toList();
+      : cubeInfos = _listFromJson(json).toList();
 
-  Map<String, dynamic> toJson() => {'cubes': _cubeInfos};
+  Map<String, dynamic> toJson() => {'cubes': cubeInfos};
 
   static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
     for (final cubeInfoObject in json['cubes']) {
       yield CubeInfo.fromJson(cubeInfoObject);
     }
   }
-
-  void adopt(Sketch sketch) {}
-
-  void handOver() {}
 }
 
 class UnitTransform {
