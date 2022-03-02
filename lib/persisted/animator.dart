@@ -50,7 +50,5 @@ mixin Animator {
     }
   }
 
-  void setIsPingPong(bool value) {
-    isPingPong = value;
-  }
+  void setIsPingPong(bool value) => isPingPong = value;
 }

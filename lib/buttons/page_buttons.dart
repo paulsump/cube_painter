@@ -19,6 +19,8 @@ class PageButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final undoer = getUndoer(context, listen: true);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -28,10 +30,10 @@ class PageButtons extends StatelessWidget {
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                _OpenPaintingsMenuButton(),
-                _UndoButton(),
-                _UndoButton(isRedo: true),
+              children: [
+                const _OpenPaintingsMenuButton(),
+                undoer.canUndo ? const _UndoButton() : const _HelpButton(),
+                const _UndoButton(isRedo: true),
               ],
             ),
             Row(
@@ -43,7 +45,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.plusOutline,
                   onPressed: () => setGestureMode(GestureMode.addLine, context),
                   tip:
-                      'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                  'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
                 ),
                 CubeRadioButton(
                   isRadioOn: GestureMode.erase ==
@@ -51,7 +53,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.cancelOutline,
                   onPressed: () => setGestureMode(GestureMode.erase, context),
                   tip:
-                      'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                  'Tap on a cube to delete it.  You can change the position while you have your finger down.',
                   slice: Slice.whole,
                 ),
                 const _OpenSliceMenuButton(),
@@ -73,14 +75,36 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedHexagonButton(
       child: Icon(
-        Icons.folder_sharp,
+        Icons.folder_open_outlined,
         color: enabledIconColor,
-        size: calcNormalIconSize(context),
+        size: calcNormalIconSize(context) * 1.22,
       ),
       onPressed: Scaffold.of(context).openDrawer,
       tip: 'Open the file menu.',
     );
   }
+}
+
+/// Pressing this button shows the [HelpAlert].
+class _HelpButton extends StatelessWidget {
+  const _HelpButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedHexagonButton(
+      child: Icon(
+        Icons.help_outline_rounded,
+        color: enabledIconColor,
+        size: calcNormalIconSize(context) * 1.09,
+      ),
+      onPressed: _showHelp,
+      tip: 'Shows the help message.',
+    );
+  }
+}
+
+void _showHelp() {
+  out('lsl');
 }
 
 /// An undo or a redo button.
