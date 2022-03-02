@@ -8,18 +8,18 @@ import 'package:flutter/material.dart';
 /// A button with a cube on it.
 /// It can have an [Icon] too e.g. the plus sign for adding cubes.
 /// The cube might be a whole cube or a slice of a cube.
-class CubeButton extends StatelessWidget {
+class ElevatedCubeButton extends StatelessWidget {
+  final void Function() onPressed;
+
+  final String tip;
   final bool? isRadioOn;
 
-  final void Function() onPressed;
   final IconData? icon;
-
   final double? iconSize;
-  final String tip;
 
   final Slice slice;
 
-  const CubeButton({
+  const ElevatedCubeButton({
     Key? key,
     required this.onPressed,
     required this.tip,

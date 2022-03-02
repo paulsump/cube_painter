@@ -22,7 +22,7 @@ class GestureModeCubeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final gestureMode = getGestureMode(context, listen: true);
 
-    return CubeButton(
+    return ElevatedCubeButton(
       isRadioOn: mode == gestureMode,
       icon: icon,
       iconSize: assetIconSize,

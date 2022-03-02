@@ -27,7 +27,7 @@ class SliceCubeButton extends StatelessWidget {
     final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
     final Slice currentSlice = gestureModeNotifier.slice;
 
-    return CubeButton(
+    return ElevatedCubeButton(
       slice: slice,
       isRadioOn:
           currentSlice == slice && currentGestureMode == GestureMode.addSlice,
@@ -53,7 +53,7 @@ class OpenSliceMenuButton extends StatelessWidget {
     final Slice slice = gestureModeNotifier.slice;
     final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
 
-    return CubeButton(
+    return ElevatedCubeButton(
       slice: slice,
       isRadioOn: currentGestureMode == GestureMode.addSlice,
       icon: AssetIcons.plusOutline,
