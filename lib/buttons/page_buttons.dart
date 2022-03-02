@@ -80,7 +80,7 @@ class _UndoButton extends StatelessWidget {
     final bool enabled = isRedo ? canRedo : canUndo;
 
     return wantShow
-        ? HexagonElevatedButton(
+        ? ElevatedHexagonButton(
             child: Icon(
               isRedo ? Icons.redo_sharp : Icons.undo_sharp,
               size: normalIconSize * 1.2,
@@ -106,7 +106,7 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HexagonElevatedButton(
+    return ElevatedHexagonButton(
       child: Icon(
         Icons.folder_sharp,
         color: enabledIconColor,

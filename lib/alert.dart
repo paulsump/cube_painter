@@ -37,7 +37,7 @@ class Alert extends StatelessWidget {
           content,
         ),
         actions: <Widget>[
-          HexagonElevatedButton(
+          ElevatedHexagonButton(
             child: const Icon(
               AssetIcons.thumbsUp,
               size: assetIconSize,
@@ -47,7 +47,7 @@ class Alert extends StatelessWidget {
             tip: 'Yes - Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
-            HexagonElevatedButton(
+            ElevatedHexagonButton(
               child: const Icon(
                 AssetIcons.thumbsDown,
                 size: assetIconSize,
@@ -56,7 +56,7 @@ class Alert extends StatelessWidget {
               // TODO pass no tip in
               tip: 'No - Do the operation, but say no to the question.',
             ),
-          HexagonElevatedButton(
+          ElevatedHexagonButton(
             child: const Icon(
               AssetIcons.cancelOutline,
               size: assetIconSize,

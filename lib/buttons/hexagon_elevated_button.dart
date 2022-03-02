@@ -4,7 +4,7 @@ import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 
 /// A hexagon shaped button with a drop shadow.
-class HexagonElevatedButton extends StatelessWidget {
+class ElevatedHexagonButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   final Widget child;
@@ -15,7 +15,7 @@ class HexagonElevatedButton extends StatelessWidget {
 
   /// The underlying class for radio and push buttons.
   /// Raised with a shadow, as opposed to the flat [HexagonBorderButton].
-  const HexagonElevatedButton({
+  const ElevatedHexagonButton({
     Key? key,
     required this.child,
     required this.onPressed,

@@ -34,7 +34,7 @@ class CubeButton extends StatelessWidget {
     final offset =
         null != icon ? const Offset(1, 1) * iconSize! / 2 : Offset.zero;
 
-    return HexagonElevatedButton(
+    return ElevatedHexagonButton(
       isRadioOn: isRadioOn,
       child: Stack(
         children: [
