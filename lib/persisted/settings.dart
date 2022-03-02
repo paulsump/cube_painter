@@ -26,41 +26,38 @@ class Settings {
 }
 
 class SettingsPersister {
-  // todo rename to path
-  late String settingsPath;
+  late String _path;
   late Settings _settings;
 
-  Future<Settings> init() async {
-    settingsPath = await getSettingsPath();
+  Future<Settings> load() async {
+    _path = await _getSettingsPath();
 
     // if(true){
-    if (!await File(settingsPath).exists()) {
+    if (!await File(_path).exists()) {
       _settings = Settings.fromJson({
         'currentFilePath': '',
         'copiedSamples': false,
       });
     } else {
-      _settings = Settings.fromString(await loadString(filePath: settingsPath));
+      _settings = Settings.fromString(await loadString(filePath: _path));
     }
 
     if (!_settings.copiedSamples) {
       await copySamples();
 
       _settings.copiedSamples = true;
-      await saveSettings();
+      await save();
     }
 
     return _settings;
   }
 
-//TODO MAKE private
-  Future<String> getSettingsPath() async {
+  Future<void> save() async =>
+      saveString(filePath: _path, string: _settings.toString());
+
+  Future<String> _getSettingsPath() async {
     final String appFolderPath = await getAppFolderPath();
 
     return '$appFolderPath${Settings.fileName}';
   }
-
-  // TODO rename to save()
-  Future<void> saveSettings() async =>
-      saveString(filePath: settingsPath, string: _settings.toString());
 }

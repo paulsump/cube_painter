@@ -113,7 +113,7 @@ class SketchBank extends ChangeNotifier {
   void saveCurrentFilePath(String filePath) {
     _settings.currentFilePath = filePath;
 
-    unawaited(_settingsPersister.saveSettings());
+    unawaited(_settingsPersister.save());
   }
 
   Sketch get sketch {
@@ -138,7 +138,7 @@ class SketchBank extends ChangeNotifier {
   }
 
   Future<void> init(BuildContext context) async {
-    _settings = await _settingsPersister.init();
+    _settings = await _settingsPersister.load();
 
     final firstPath = await _loadAllSketches();
 
