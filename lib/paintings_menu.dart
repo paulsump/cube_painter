@@ -37,35 +37,6 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
           Navigator.of(context).pop();
         };
 
-    final items = <PaintingsMenuItem>[
-      PaintingsMenuItem(
-        tip: 'Create a new painting',
-        icon: AssetIcons.docNew,
-        iconSize: assetIconSize * 0.96,
-        onPressed: pop(_newFile),
-      ),
-      PaintingsMenuItem(
-        tip: 'Save the current painting',
-        icon: Icons.save,
-        iconSize: normalIconSize,
-        onPressed: _saveFile,
-        enabled: sketchBank.modified,
-      ),
-      PaintingsMenuItem(
-        tip: 'Create a copy of this painting and load it.',
-        icon: AssetIcons.copy,
-        iconSize: assetIconSize,
-        onPressed: _saveACopyFile,
-      ),
-      PaintingsMenuItem(
-        tip:
-            'Delete the current painting. The next painting is loaded or a new blank one is created.',
-        icon: Icons.delete,
-        iconSize: normalIconSize,
-        onPressed: _deleteCurrentFile,
-      ),
-    ];
-
     const double offsetX = 55;
     const padY = SizedBox(height: 15.0);
 
@@ -81,8 +52,32 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              for (PaintingsMenuItem item in items)
-                FlatIconHexagonButton(item: item),
+              FlatIconHexagonButton(
+                tip: 'Create a new painting',
+                icon: AssetIcons.docNew,
+                iconSize: assetIconSize * 0.96,
+                onPressed: pop(_newFile),
+              ),
+              FlatIconHexagonButton(
+                tip: 'Save the current painting',
+                icon: Icons.save,
+                iconSize: normalIconSize,
+                onPressed: _saveFile,
+                enabled: sketchBank.modified,
+              ),
+              FlatIconHexagonButton(
+                tip: 'Create a copy of this painting and load it.',
+                icon: AssetIcons.copy,
+                iconSize: assetIconSize,
+                onPressed: _saveACopyFile,
+              ),
+              FlatIconHexagonButton(
+                tip:
+                    'Delete the current painting. The next painting is loaded or a new blank one is created.',
+                icon: Icons.delete,
+                iconSize: normalIconSize,
+                onPressed: _deleteCurrentFile,
+              ),
             ],
           ),
           const SizedBox(height: 5.0),
