@@ -1,6 +1,6 @@
 import 'package:cube_painter/asset_icons.dart';
+import 'package:cube_painter/buttons/cube_button.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
-import 'package:cube_painter/buttons/gesture_mode_cube_button.dart';
 import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
@@ -36,13 +36,13 @@ class PageButtons extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                GestureModeCubeButton(
+                _GestureModeCubeElevatedHexagonButton(
                   mode: GestureMode.addWhole,
                   icon: AssetIcons.plusOutline,
                   tip:
                       'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
                 ),
-                GestureModeCubeButton(
+                _GestureModeCubeElevatedHexagonButton(
                   mode: GestureMode.erase,
                   icon: AssetIcons.cancelOutline,
                   tip:
@@ -54,6 +54,25 @@ class PageButtons extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+/// Pressing this button opens up the [Drawer] for the
+/// [PaintingsMenu] (the file menu).
+class _OpenPaintingsMenuButton extends StatelessWidget {
+  const _OpenPaintingsMenuButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedHexagonButton(
+      child: Icon(
+        Icons.folder_sharp,
+        color: enabledIconColor,
+        size: normalIconSize,
+      ),
+      onPressed: Scaffold.of(context).openDrawer,
+      tip: 'Open the file menu.',
     );
   }
 }
@@ -99,21 +118,31 @@ class _UndoButton extends StatelessWidget {
   }
 }
 
-/// Pressing this button opens up the [Drawer] for the
-/// [PaintingsMenu] (the file menu).
-class _OpenPaintingsMenuButton extends StatelessWidget {
-  const _OpenPaintingsMenuButton({Key? key}) : super(key: key);
+/// A radio button with a cube.
+/// Used for setting [GestureMode].
+class _GestureModeCubeElevatedHexagonButton extends StatelessWidget {
+  final GestureMode mode;
+
+  final IconData icon;
+  final String tip;
+
+  const _GestureModeCubeElevatedHexagonButton({
+    Key? key,
+    required this.mode,
+    required this.icon,
+    required this.tip,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedHexagonButton(
-      child: Icon(
-        Icons.folder_sharp,
-        color: enabledIconColor,
-        size: normalIconSize,
-      ),
-      onPressed: Scaffold.of(context).openDrawer,
-      tip: 'Open the file menu.',
+    final gestureMode = getGestureMode(context, listen: true);
+
+    return CubeElevatedHexagonButton(
+      isRadioOn: mode == gestureMode,
+      icon: icon,
+      iconSize: assetIconSize,
+      onPressed: () => setGestureMode(mode, context),
+      tip: tip,
     );
   }
 }
