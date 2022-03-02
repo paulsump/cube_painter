@@ -16,9 +16,9 @@ mixin Animator {
 
   void setIsPingPong(bool value);
 
-  void finishAnim();
-
   Sketch get sketch;
+
+  bool isPingPong = false;
 
   /// move all the (static) cubeInfos to animCubeInfos
   @protected
@@ -34,5 +34,13 @@ mixin Animator {
     setIsPingPong(false);
   }
 
-  bool isPingPong = false;
+  void finishAnim() {
+    if (!isBrushing) {
+      if (!isAnimatingLoadedCubes) {
+        sketch.cubeInfos.addAll(animCubeInfos);
+      }
+
+      animCubeInfos.clear();
+    }
+  }
 }

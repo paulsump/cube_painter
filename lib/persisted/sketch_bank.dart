@@ -44,12 +44,9 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
   /// anim is done.
   @override
   void finishAnim() {
-    if (!isBrushing) {
-      if (!isAnimatingLoadedCubes) {
-        sketch.cubeInfos.addAll(animCubeInfos);
-      }
+    super.finishAnim();
 
-      animCubeInfos.clear();
+    if (!isBrushing) {
       notifyListeners();
     }
   }
