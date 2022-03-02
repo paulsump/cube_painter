@@ -36,11 +36,11 @@ class SliceCubeButton extends StatelessWidget {
 
   void _onPressed(BuildContext context) {
     final gestureModeNotifier =
-        Provider.of<GestureModeNotifier>(context, listen: true);
+        Provider.of<GestureModeNotifier>(context, listen: false);
 
     gestureModeNotifier.setSlice(slice);
-
     gestureModeNotifier.setMode(GestureMode.addSlice);
+
     Navigator.pop(context);
   }
 }
