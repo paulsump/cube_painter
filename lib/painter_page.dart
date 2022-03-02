@@ -61,7 +61,7 @@ class _PainterPageState extends State<PainterPage> {
               child: Stack(
                 children: [
                   Transform.scale(scale: 30, child: const Horizon()),
-                  if (sketchBank.hasCubes && !sketchBank.isLoading)
+                  if (sketchBank.hasCubes && !sketchBank.isAnimatingLoadedCubes)
                     StaticCubes(sketch: sketchBank.sketch),
                 ],
               ),

@@ -26,13 +26,13 @@ void main() {
     });
 
     test('save', () {
-      const sketch = Sketch(cubeInfos: <CubeInfo>[]);
+      final sketch = Sketch.empty();
       String newJson = jsonEncode(sketch);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const sketch = Sketch(cubeInfos: <CubeInfo>[]);
+      final sketch = Sketch.empty();
       String newJson = sketch.toString();
       expect(testJson, equals(newJson));
     });

@@ -64,8 +64,7 @@ class SketchBank extends ChangeNotifier {
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
 
-  //TODO REMOVE loading flag
-  bool isLoading = false;
+  bool isAnimatingLoadedCubes = false;
 
   void _moveAllToAnimCubeInfos() {
     final List<CubeInfo> cubeInfos = sketch.cubeInfos;
@@ -73,7 +72,7 @@ class SketchBank extends ChangeNotifier {
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
-    isLoading = true;
+    isAnimatingLoadedCubes = true;
     // cubeInfos.clear();
 
     setIsPlaying(true);

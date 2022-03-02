@@ -64,7 +64,7 @@ class AnimCubesState extends State<AnimCubes>
       sketchBank.addAllAnimCubeInfosToStaticCubeInfos();
       sketchBank.setIsPlaying(false);
 
-      sketchBank.isLoading = false;
+      sketchBank.isAnimatingLoadedCubes = false;
 
       // set back to default for next time
       _controller.duration = pingPongDuration;
