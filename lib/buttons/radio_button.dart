@@ -6,6 +6,12 @@ import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/material.dart';
 
+/// A raised hexagon shaped button
+/// It can act as a radio or a push button.
+/// It can have an [Icon] too e.g. the plus sign for adding cubes.
+/// The cube might be a whole cube or a slice of a cube.
+// class RadioButton extends StatelessWidget {
+
 /// A raised hexagon shaped button with a cube on it.
 /// It can act as a radio or a push button.
 /// It can have an [Icon] too e.g. the plus sign for adding cubes.
@@ -14,7 +20,7 @@ class CubeRadioButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   final String tip;
-  final bool? isRadioOn;
+  final bool isRadioOn;
 
   final IconData icon;
   final Slice slice;
@@ -24,7 +30,7 @@ class CubeRadioButton extends StatelessWidget {
     required this.onPressed,
     required this.tip,
     required this.icon,
-    this.isRadioOn,
+    required this.isRadioOn,
     required this.slice,
   }) : super(key: key);
 
