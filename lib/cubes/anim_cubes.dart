@@ -85,7 +85,7 @@ class AnimCubesState extends State<AnimCubes>
     if (sketchBank.isPlaying) {
       if (sketchBank.isPingPong) {
         _controller.duration = pingPongDuration;
-        out(1);
+
         _controller.repeat();
       } else {
         startForwardAnim(fromZero: sketchBank.isAnimatingLoadedCubes);

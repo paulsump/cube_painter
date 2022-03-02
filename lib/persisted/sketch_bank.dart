@@ -101,7 +101,7 @@ class SketchBank extends ChangeNotifier {
   bool _isPlaying = false;
 
   //TODO removed isPlaying - currently, i remove it all (apart from notify) then the staticcubes don't appear until all anims are finished
-  // bool get isPlaying => true;//_isPlaying;
+  // bool get isPlaying => true; //_isPlaying;
   bool get isPlaying => _isPlaying;
 
   void setIsPlaying(bool playing) {
@@ -109,12 +109,7 @@ class SketchBank extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get modified {
-    if (json != _savedJson) {
-      out(sketch.cubeInfos.length);
-    }
-    return json != _savedJson;
-  }
+  bool get modified => json != _savedJson;
 
   bool get hasCubes =>
       _sketches.isNotEmpty &&
