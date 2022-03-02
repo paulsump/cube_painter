@@ -70,23 +70,27 @@ class CubesRadioButton extends StatelessWidget {
     return RadioButton(
       isRadioOn: isRadioOn,
       child: _CubesAndIcon(
-          icon: icon,
-          cubes: Transform.scale(
-            scale: calcButtonChildScale(context) * (isLine ? 1.5 : 1.0),
-            child: isLine
-                ? Thumbnail.useTransform(
-                    sketch: Sketch(
+        icon: icon,
+        cubes: isLine
+            ? Transform.scale(
+                scale: calcButtonChildScale(context) * 1.5,
+                child: Thumbnail.useTransform(
+                  sketch: Sketch(
                     cubeInfos: List.generate(
                       n,
                       (index) => CubeInfo(
                           center: Position(n - index, n - index),
                           slice: Slice.whole),
                     ),
-                  ))
-                : slice == Slice.whole
+                  ),
+                ))
+            : Transform.scale(
+                scale: calcButtonChildScale(context),
+                child: slice == Slice.whole
                     ? const WholeUnitCube()
                     : SliceUnitCube(slice: slice),
-          )),
+              ),
+      ),
       onPressed: onPressed,
       tip: tip,
     );
