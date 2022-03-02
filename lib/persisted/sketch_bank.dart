@@ -86,8 +86,8 @@ class SketchBank extends ChangeNotifier {
   }
 
   void setIsPingPong(bool value) {
-    setIsPlaying(true);
     isPingPong = value;
+    notifyListeners();
   }
 
   bool isPingPong = false;
@@ -98,7 +98,7 @@ class SketchBank extends ChangeNotifier {
   String _savedJson = '';
 
   void setIsPlaying(bool playing) {
-    notifyListeners();
+    // notifyListeners();
   }
 
   bool get modified => json != _savedJson;
