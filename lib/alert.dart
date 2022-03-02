@@ -38,22 +38,22 @@ class Alert extends StatelessWidget {
         ),
         actions: <Widget>[
           _Button(
-            icon: AssetIcons.thumbsUp,
             onPressed: yesCallBack,
+            icon: AssetIcons.thumbsUp,
             // TODO pass yes tip in
             tip: 'Yes - Confirm that you do want to do this.',
           ),
           if (noCallBack != null)
             _Button(
-              icon: AssetIcons.thumbsDown,
               onPressed: noCallBack,
+              icon: AssetIcons.thumbsDown,
               // TODO pass no tip in
               tip: 'No - Do the operation, but say no to the question.',
             ),
           if (cancelCallBack != null)
             _Button(
-              icon: AssetIcons.cancelOutline,
               onPressed: cancelCallBack,
+              icon: AssetIcons.cancelOutline,
               tip: 'Cancel - Do nothing.',
             ),
         ],
@@ -63,14 +63,14 @@ class Alert extends StatelessWidget {
 }
 
 class _Button extends StatelessWidget {
-  final IconData icon;
   final VoidCallback? onPressed;
+  final IconData icon;
   final String tip;
 
   const _Button({
     Key? key,
-    required this.icon,
     this.onPressed,
+    required this.icon,
     required this.tip,
   }) : super(key: key);
 
