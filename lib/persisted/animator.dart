@@ -34,6 +34,13 @@ mixin Animator {
     setIsPingPong(false);
   }
 
+  void startBrushing() {
+    setIsPingPong(true);
+
+    finishAnim();
+    isBrushing = true;
+  }
+
   void finishAnim() {
     if (!isBrushing) {
       if (!isAnimatingLoadedCubes) {

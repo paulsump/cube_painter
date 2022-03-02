@@ -21,11 +21,10 @@ SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
 /// during loading and brushing.
 /// init() is the main starting point for the app.
 class SketchBank extends ChangeNotifier with Persister, Animator {
+  @override
   void startBrushing() {
-    setIsPingPong(true);
-    finishAnim();
+    super.startBrushing();
 
-    isBrushing = true;
     notifyListeners();
   }
 
