@@ -42,7 +42,7 @@ class RadioButton extends StatelessWidget {
 /// It has an [Icon] e.g. the plus sign for adding cubes.
 /// The cube might be a whole cube or a slice of a cube,
 /// dictated by [Slice].
-class CubesRadioButton extends StatelessWidget {
+class CubeRadioButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   final String tip;
@@ -51,16 +51,50 @@ class CubesRadioButton extends StatelessWidget {
   final IconData icon;
   final Slice slice;
 
-  final bool isLine;
-
-  const CubesRadioButton({
+  const CubeRadioButton({
     Key? key,
     required this.onPressed,
     required this.tip,
     required this.icon,
     required this.isRadioOn,
     required this.slice,
-    this.isLine = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RadioButton(
+      isRadioOn: isRadioOn,
+      child: _CubesAndIcon(
+        icon: icon,
+        cubes: Transform.scale(
+          scale: calcButtonChildScale(context),
+          child: slice == Slice.whole
+              ? const WholeUnitCube()
+              : SliceUnitCube(slice: slice),
+        ),
+      ),
+      onPressed: onPressed,
+      tip: tip,
+    );
+  }
+}
+
+/// A raised hexagon shaped radio button with a line of cubes on it.
+/// It has an [Icon] - the plus sign for adding lines of cubes.
+class CubeLineRadioButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  final String tip;
+  final bool isRadioOn;
+
+  final IconData icon;
+
+  const CubeLineRadioButton({
+    Key? key,
+    required this.onPressed,
+    required this.tip,
+    required this.icon,
+    required this.isRadioOn,
   }) : super(key: key);
 
   @override
@@ -70,27 +104,19 @@ class CubesRadioButton extends StatelessWidget {
     return RadioButton(
       isRadioOn: isRadioOn,
       child: _CubesAndIcon(
-        icon: icon,
-        cubes: isLine
-            ? Transform.scale(
-                scale: calcButtonChildScale(context) * 1.5,
-                child: Thumbnail.useTransform(
-                  sketch: Sketch(
-                    cubeInfos: List.generate(
-                      n,
-                      (index) => CubeInfo(
-                          center: Position(n - index, n - index),
-                          slice: Slice.whole),
-                    ),
+          icon: icon,
+          cubes: Transform.scale(
+              scale: calcButtonChildScale(context) * 1.5,
+              child: Thumbnail.useTransform(
+                sketch: Sketch(
+                  cubeInfos: List.generate(
+                    n,
+                    (index) => CubeInfo(
+                        center: Position(n - index, n - index),
+                        slice: Slice.whole),
                   ),
-                ))
-            : Transform.scale(
-                scale: calcButtonChildScale(context),
-                child: slice == Slice.whole
-                    ? const WholeUnitCube()
-                    : SliceUnitCube(slice: slice),
-              ),
-      ),
+                ),
+              ))),
       onPressed: onPressed,
       tip: tip,
     );
