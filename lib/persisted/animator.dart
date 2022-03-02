@@ -14,8 +14,6 @@ mixin Animator {
 
   bool isBrushing = false;
 
-  void setIsPingPong(bool value);
-
   Sketch get sketch;
 
   bool isPingPong = false;
@@ -49,5 +47,9 @@ mixin Animator {
 
       animCubeInfos.clear();
     }
+  }
+
+  void setIsPingPong(bool value) {
+    isPingPong = value;
   }
 }

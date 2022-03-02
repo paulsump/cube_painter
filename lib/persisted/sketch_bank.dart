@@ -52,7 +52,8 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
 
   @override
   void setIsPingPong(bool value) {
-    isPingPong = value;
+    super.setIsPingPong(value);
+
     notifyListeners();
   }
 
