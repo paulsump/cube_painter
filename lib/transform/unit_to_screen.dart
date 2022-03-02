@@ -1,5 +1,5 @@
 import 'package:cube_painter/gestures/pan_zoom.dart';
-import 'package:cube_painter/transform/screen.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
 /// the opposite of UnitToScreen

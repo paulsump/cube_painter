@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
-import 'package:cube_painter/transform/screen.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
 /// A hexagon shaped button with a drop shadow.
@@ -28,11 +26,6 @@ class ElevatedHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screen = getScreenSize(context);
-
-    final double buttonHeight = 0.15152 * min(screen.width, screen.height);
-    final Size buttonSize = Size(buttonHeight, buttonHeight);
-
     return Transform.translate(
       offset: Offset(0, isOn ? 1.0 : -1.0) * buttonElevation / 4,
       child: Tooltip(
@@ -43,12 +36,12 @@ class ElevatedHexagonButton extends StatelessWidget {
           child: child,
           style: ButtonStyle(
             shape: hexagonBorderShape,
-            fixedSize: MaterialStateProperty.all(buttonSize),
+            fixedSize: MaterialStateProperty.all(calcButtonSize(context)),
             backgroundColor: MaterialStateProperty.all(isRadioOn == null
                 ? buttonColor
                 : isRadioOn!
-                ? radioButtonOnColor
-                : buttonColor),
+                    ? radioButtonOnColor
+                    : buttonColor),
             elevation: MaterialStateProperty.all(isOn ? 0.0 : buttonElevation),
             shadowColor: isOn ? null : MaterialStateProperty.all(bl),
           ),

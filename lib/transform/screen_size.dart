@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cube_painter/out.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,3 +17,10 @@ Offset getScreenCenter(BuildContext context) {
   return Offset(size.width, size.height) / 2;
 }
 
+
+Size calcButtonSize(BuildContext context) {
+  final screen = getScreenSize(context);
+
+  final double buttonHeight = 0.15152 * min(screen.width, screen.height);
+  return Size(buttonHeight, buttonHeight);
+}
