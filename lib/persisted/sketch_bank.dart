@@ -134,11 +134,6 @@ class SketchBank extends ChangeNotifier {
   UnmodifiableListView<MapEntry> get sketchEntries =>
       UnmodifiableListView<MapEntry>(_sketches.entries.toList());
 
-  void _onSuccessfulLoad(BuildContext context) {
-    getUndoer(context).clear();
-
-    _startAnimatingLoadedCubes();
-  }
 
   /// The main starting point for the app.
   Future<void> init(BuildContext context) async {
@@ -174,8 +169,9 @@ class SketchBank extends ChangeNotifier {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
     if (_sketches.isNotEmpty) {
-      _onSuccessfulLoad(context);
+      getUndoer(context).clear();
 
+      _startAnimatingLoadedCubes();
       notifyListeners();
     }
   }
