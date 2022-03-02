@@ -65,39 +65,13 @@ class CubesRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RadioButton(
-      isRadioOn: isRadioOn,
-      child: _CubesAndIcon(slice: slice, icon: icon, isLine: isLine),
-      onPressed: onPressed,
-      tip: tip,
-    );
-  }
-}
-
-class _CubesAndIcon extends StatelessWidget {
-  final bool isLine;
-
-  final Slice slice;
-  final IconData icon;
-
-  const _CubesAndIcon({
-    Key? key,
-    required this.slice,
-    required this.icon,
-    required this.isLine,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    const unit = Offset(1, 1);
-
     const int n = 3;
 
-    return Stack(
-      children: [
-        Transform.translate(
-          offset: unit * 12,
-          child: Transform.scale(
+    return RadioButton(
+      isRadioOn: isRadioOn,
+      child: _CubesAndIcon(
+          icon: icon,
+          cubes: Transform.scale(
             scale: calcButtonChildScale(context) * (isLine ? 1.5 : 1.0),
             child: isLine
                 ? Thumbnail.useTransform(
@@ -112,7 +86,33 @@ class _CubesAndIcon extends StatelessWidget {
                 : slice == Slice.whole
                     ? const WholeUnitCube()
                     : SliceUnitCube(slice: slice),
-          ),
+          )),
+      onPressed: onPressed,
+      tip: tip,
+    );
+  }
+}
+
+class _CubesAndIcon extends StatelessWidget {
+  final IconData icon;
+
+  final Widget cubes;
+
+  const _CubesAndIcon({
+    Key? key,
+    required this.icon,
+    required this.cubes,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const unit = Offset(1, 1);
+
+    return Stack(
+      children: [
+        Transform.translate(
+          offset: unit * 12,
+          child: cubes,
         ),
         Transform.translate(
           offset: -unit * calcAssetIconSize(context) / 2,
