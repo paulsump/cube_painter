@@ -106,13 +106,14 @@ class _HelpButton extends StatelessWidget {
   }
 }
 
+/// Show a little message to get them started.
 void _showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) => Alert(
       title: 'Cube Painter',
-      content: 'Drag to draw cubes.'
-          'Pinch to zoom and pan.'
+      content: 'Drag to draw cubes.\n\n'
+          'Pinch to zoom and pan.\n\n'
           'Long press a button to see tooltip.',
       yesCallBack: () {
         Navigator.of(context).pop(true);

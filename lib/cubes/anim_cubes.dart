@@ -12,7 +12,8 @@ const noWarn = [out, Position];
 /// Animates a list of [ScaledCube]s.
 /// Used when loading and brushing (creating using gestures).
 /// One animator controls them all.
-/// After the animation is finished, they are moved to [StaticCubes]
+/// The cubes are moved to [StaticCubes] either externally
+/// via [finishAnim] or [whenComplete] after the animation is finished.
 class AnimCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
