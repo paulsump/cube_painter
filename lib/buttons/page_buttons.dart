@@ -1,5 +1,5 @@
 import 'package:cube_painter/asset_icons.dart';
-import 'package:cube_painter/buttons/cube_button.dart';
+import 'package:cube_painter/buttons/cube_elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
