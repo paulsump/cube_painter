@@ -62,8 +62,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
                 tip: 'Save the current painting',
                 icon: Icons.save,
                 iconSize: normalIconSize,
-                onPressed: _saveFile,
-                enabled: sketchBank.modified,
+                onPressed: sketchBank.modified ? _saveFile : null,
               ),
               FlatIconHexagonButton(
                 tip: 'Create a copy of this painting and load it.',

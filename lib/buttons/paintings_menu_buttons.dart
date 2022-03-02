@@ -4,24 +4,20 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
 import 'package:flutter/material.dart';
 
-
-
-/// Translucent icon button.
+/// Transparent icon button.
 /// Used at the top of the [PaintingsMenu] (the file menu).
 class FlatIconHexagonButton extends StatelessWidget {
   final String tip;
   final IconData icon;
   final double iconSize;
-  final VoidCallback onPressed;
-  final bool enabled;
+  final VoidCallback? onPressed;
 
   const FlatIconHexagonButton({
     Key? key,
     required this.tip,
     required this.icon,
     required this.iconSize,
-    required this.onPressed,
-    this.enabled = true,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -31,10 +27,10 @@ class FlatIconHexagonButton extends StatelessWidget {
       child: TextButton(
         child: Icon(
           icon,
-          color: enabled ? enabledIconColor : disabledIconColor,
+          color: onPressed != null ? enabledIconColor : disabledIconColor,
           size: iconSize,
         ),
-        onPressed: enabled ? onPressed : null,
+        onPressed: onPressed,
         style: ButtonStyle(
           shape: hexagonBorderShape,
           fixedSize: MaterialStateProperty.all(pageButtonSize),
