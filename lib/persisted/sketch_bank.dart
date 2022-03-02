@@ -98,6 +98,8 @@ class SketchBank extends ChangeNotifier {
   //TODO DO WE NEED isAnimatingLoadedCubes as well as isPlaying?
   bool _isPlaying = false;
 
+  //TODO removed isPlaying
+  // bool get isPlaying => true;//_isPlaying;
   bool get isPlaying => _isPlaying;
 
   void setIsPlaying(bool playing) {
