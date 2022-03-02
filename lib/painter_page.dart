@@ -37,7 +37,6 @@ class PainterPage extends StatefulWidget {
 class _PainterPageState extends State<PainterPage> {
   @override
   void initState() {
-    initZoomScale(context, 0.06494 * getShortestEdge(context));
     unawaited(getSketchBank(context).init(context));
 
     super.initState();
@@ -45,6 +44,8 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
+    initZoomScaleFirstTimeOnly(context, 0.06494 * getShortestEdge(context));
+
     final sketchBank = getSketchBank(context, listen: true);
 
     return Scaffold(
