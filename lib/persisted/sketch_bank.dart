@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/persister.dart';
 import 'package:cube_painter/persisted/sketch.dart';
 import 'package:cube_painter/undo_notifier.dart';
@@ -20,7 +21,7 @@ SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
 /// during loading and brushing.
 /// init() is the main starting point for the app.
 /// TODO MOVe anim stuff into Animator
-class SketchBank extends ChangeNotifier with Persister {
+class SketchBank extends ChangeNotifier with Persister, Animator {
   void startBrushing() {
     setIsPingPong(true);
     finishAnim();

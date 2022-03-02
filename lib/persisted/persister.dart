@@ -22,45 +22,16 @@ const noWarn = out;
 /// TODO MOVe anim stuff into Animator
 /// todo move load stuff into Persister
 mixin Persister {
+  @protected
   final sketches = <String, Sketch>{};
 
   final slicesExample = _SlicesExample();
 
   String get json => sketch.toString();
 
-  final animCubeInfos = <CubeInfo>[];
+  void finishAnim();
 
-  bool isAnimatingLoadedCubes = true;
-
-  bool isBrushing = false;
-
-  void setIsPingPong(bool value) {
-    assert(false); //stub only, want to be calling derived class
-  }
-
-  void updateAfterLoad(BuildContext context) {
-    assert(false); //stub only, want to be callin derived classe
-  }
-
-  void finishAnim() {
-    assert(false); //stub only, want to be callin derived classe
-  }
-
-  /// move all the (static) cubeInfos to animCubeInfos
-  @protected
-  void startAnimatingLoadedCubes() {
-    final List<CubeInfo> cubeInfos = sketch.cubeInfos;
-
-    animCubeInfos.clear();
-    animCubeInfos.addAll(cubeInfos.toList());
-
-    isAnimatingLoadedCubes = true;
-
-    // for correctness and just in case (i saw it ping pong forever one)
-    setIsPingPong(false);
-  }
-
-  bool isPingPong = false;
+  void updateAfterLoad(BuildContext context);
 
   final _settingsPersister = SettingsPersister();
   late Settings _settings;
@@ -71,8 +42,8 @@ mixin Persister {
 
   bool get hasCubes =>
       sketches.isNotEmpty &&
-      _hasSketchForCurrentFilePath &&
-      sketch.cubeInfos.isNotEmpty;
+          _hasSketchForCurrentFilePath &&
+          sketch.cubeInfos.isNotEmpty;
 
   bool get _hasSketchForCurrentFilePath {
     if (!sketches.containsKey(currentFilePath)) {
@@ -94,7 +65,7 @@ mixin Persister {
   Sketch get sketch {
     if (!_hasSketchForCurrentFilePath) {
       assert(false,
-          "sketches doesn't contain key of currentFilePath: $currentFilePath");
+      "sketches doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.fromEmpty();
