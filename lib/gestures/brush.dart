@@ -39,7 +39,7 @@ class Brush implements GestureHandler {
   @override
   void update(Offset point, double scale, BuildContext context) {
     if (GestureMode.addLine == getGestureMode(context)) {
-      _updateExtrude(point, context);
+      _updateLine(point, context);
     } else {
       _replaceCube(point, context);
     }
@@ -89,12 +89,12 @@ class Brush implements GestureHandler {
     }
   }
 
-  void _updateExtrude(Offset point, BuildContext context) {
+  void _updateLine(Offset point, BuildContext context) {
     final Positions positions =
         brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
 
     if (previousPositions != positions) {
-      // using order provided by extruder
+      // using order provided by brushMaths
       // only add new cubes, deleting any old ones
 
       var copy = getAnimCubeInfos(context).toList();
