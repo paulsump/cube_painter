@@ -1,10 +1,10 @@
+import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/gesture_mode_cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/buttons/paintings_menu_buttons.dart';
 import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
-import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/undo_notifier.dart';
@@ -39,13 +39,13 @@ class PageButtons extends StatelessWidget {
               children: const [
                 GestureModeCubeButton(
                   mode: GestureMode.addWhole,
-                  icon: DownloadedIcons.plusOutline,
+                  icon: AssetIcons.plusOutline,
                   tip:
                       'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
                 ),
                 GestureModeCubeButton(
                   mode: GestureMode.erase,
-                  icon: DownloadedIcons.cancelOutline,
+                  icon: AssetIcons.cancelOutline,
                   tip:
                       'Tap on a cube to delete it.  You can change the position while you have your finger down.',
                 ),
@@ -92,10 +92,10 @@ class _UndoButton extends StatelessWidget {
                     ? () => undoer.redo(context)
                     : () => undoer.undo(context)
                 : null,
-      tip: isRedo
+            tip: isRedo
                 ? 'Redo the last add or delete operation that was undone.'
                 : 'Undo the last add or delete operation.',
-    )
+          )
         : Container();
   }
 }

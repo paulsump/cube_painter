@@ -1,6 +1,6 @@
+import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
-import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
@@ -53,8 +53,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
               children: const [
                 SliceCubeButton(slice: Slice.left),
                 SizedBox(
-                    width: padWidth * 7,
-                    child: Icon(DownloadedIcons.plusOutline)),
+                    width: padWidth * 7, child: Icon(AssetIcons.plusOutline)),
                 // padX,
                 // BrushMenuButton(slice: Slice.c),
                 // padX,

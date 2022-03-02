@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-
-class DownloadedIcons {
-  static const _kFontFam = 'DownloadedIcons';
+/// Icons downloaded from https://www.fluttericon.com/
+/// loaded from fonts folder
+class AssetIcons {
+  static const _kFontFam = 'AssetIcons';
   static const String? _kFontPkg = null;
 
   static const IconData plusOutline =

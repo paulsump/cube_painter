@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:cube_painter/alert.dart';
+import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/paintings_menu_buttons.dart';
 import 'package:cube_painter/buttons/thumbnail_button.dart';
 import 'package:cube_painter/constants.dart';
-import 'package:cube_painter/downloaded_icons.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +40,8 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     final items = <PaintingsMenuItem>[
       PaintingsMenuItem(
         tip: 'Create a new painting',
-        icon: DownloadedIcons.docNew,
-        iconSize: downloadedIconSize * 0.96,
+        icon: AssetIcons.docNew,
+        iconSize: assetIconSize * 0.96,
         onPressed: pop(_newFile),
       ),
       PaintingsMenuItem(
@@ -53,8 +53,8 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
       ),
       PaintingsMenuItem(
         tip: 'Create a copy of this painting and load it.',
-        icon: DownloadedIcons.copy,
-        iconSize: downloadedIconSize,
+        icon: AssetIcons.copy,
+        iconSize: assetIconSize,
         onPressed: _saveACopyFile,
       ),
       PaintingsMenuItem(

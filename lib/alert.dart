@@ -1,9 +1,9 @@
 import 'dart:ui';
 
+import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
-import 'package:cube_painter/downloaded_icons.dart';
 import 'package:flutter/material.dart';
 
 class Alert extends StatelessWidget {
@@ -39,8 +39,8 @@ class Alert extends StatelessWidget {
         actions: <Widget>[
           HexagonElevatedButton(
             child: const Icon(
-              DownloadedIcons.thumbsUp,
-              size: downloadedIconSize,
+              AssetIcons.thumbsUp,
+              size: assetIconSize,
             ),
             onPressed: yesCallBack,
             // TODO pass yes tip in
@@ -49,8 +49,8 @@ class Alert extends StatelessWidget {
           if (noCallBack != null)
             HexagonElevatedButton(
               child: const Icon(
-                DownloadedIcons.thumbsDown,
-                size: downloadedIconSize,
+                AssetIcons.thumbsDown,
+                size: assetIconSize,
               ),
               onPressed: noCallBack,
               // TODO pass no tip in
@@ -58,8 +58,8 @@ class Alert extends StatelessWidget {
             ),
           HexagonElevatedButton(
             child: const Icon(
-              DownloadedIcons.cancelOutline,
-              size: downloadedIconSize,
+              AssetIcons.cancelOutline,
+              size: assetIconSize,
             ),
             onPressed: cancelCallBack,
             tip: 'Cancel - Do nothing.',
