@@ -97,14 +97,7 @@ class SketchBank extends ChangeNotifier {
 
   String _savedJson = '';
 
-  //TODO DO WE NEED isAnimatingLoadedCubes as well as isPlaying?
-  bool _isPlaying = false;
-
-  //TODO removed isPlaying - currently, i remove it all (apart from notify) then the staticcubes don't appear until all anims are finished
-  bool get isPlaying => true; //_isPlaying;
-
   void setIsPlaying(bool playing) {
-    _isPlaying = playing;
     notifyListeners();
   }
 
