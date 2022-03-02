@@ -1,7 +1,6 @@
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/gesture_mode_cube_button.dart';
 import 'package:cube_painter/buttons/hexagon_elevated_button.dart';
-import 'package:cube_painter/buttons/paintings_menu_buttons.dart';
 import 'package:cube_painter/buttons/slice_cube_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
@@ -29,7 +28,7 @@ class PageButtons extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                OpenPaintingsMenuButton(),
+                _OpenPaintingsMenuButton(),
                 _UndoButton(),
                 _UndoButton(isRedo: true),
               ],
@@ -97,5 +96,24 @@ class _UndoButton extends StatelessWidget {
                 : 'Undo the last add or delete operation.',
           )
         : Container();
+  }
+}
+
+/// Pressing this button opens up the [Drawer] for the
+/// [PaintingsMenu] (the file menu).
+class _OpenPaintingsMenuButton extends StatelessWidget {
+  const _OpenPaintingsMenuButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return HexagonElevatedButton(
+      child: Icon(
+        Icons.folder_sharp,
+        color: enabledIconColor,
+        size: normalIconSize,
+      ),
+      onPressed: Scaffold.of(context).openDrawer,
+      tip: 'Open the file menu.',
+    );
   }
 }
