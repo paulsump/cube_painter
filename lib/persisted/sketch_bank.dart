@@ -33,7 +33,7 @@ class SketchBank extends ChangeNotifier {
 
   final animCubeInfos = <CubeInfo>[];
 
-  bool isAnimatingLoadedCubes = false;
+  bool isAnimatingLoadedCubes = true;
 
   //TODO REMOVE brushing flag
   bool isBrushing = false;
@@ -76,8 +76,6 @@ class SketchBank extends ChangeNotifier {
     animCubeInfos.addAll(cubeInfos.toList());
 
     isAnimatingLoadedCubes = true;
-    // cubeInfos.clear();
-
     setIsPlaying(true);
   }
 
@@ -93,6 +91,7 @@ class SketchBank extends ChangeNotifier {
 
   String _savedJson = '';
 
+  //TODO DO WE NEED isAnimatingLoadedCubes as well as isPlaying?
   bool _isPlaying = false;
 
   bool get isPlaying => _isPlaying;
