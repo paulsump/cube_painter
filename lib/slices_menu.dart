@@ -106,12 +106,12 @@ class _Example extends StatelessWidget {
             child: Stack(
               children: [
                 Thumbnail(
-                  sketch: sketchBank.example.triangleWithGap,
-                  unitTransform: sketchBank.example.unitTransform,
+                  sketch: sketchBank.slicesExample.triangleWithGap,
+                  unitTransform: sketchBank.slicesExample.unitTransform,
                 ),
                 Thumbnail(
-                  sketch: sketchBank.example.triangleGap,
-                  unitTransform: sketchBank.example.unitTransform,
+                  sketch: sketchBank.slicesExample.triangleGap,
+                  unitTransform: sketchBank.slicesExample.unitTransform,
                 ),
                 // Container(color: Colors.yellow),
               ],

@@ -1,7 +1,10 @@
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
+import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
+import 'package:cube_painter/persisted/cube_info.dart';
+import 'package:cube_painter/persisted/position.dart';
+import 'package:cube_painter/persisted/sketch.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
@@ -81,14 +84,24 @@ class _CubeAndIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     const unit = Offset(1, 1);
 
+    const int n = 3;
+    final Sketch line = Sketch(
+      cubeInfos: List.generate(
+        n,
+        (index) => CubeInfo(
+            center: Position(n - index, n - index), slice: Slice.whole),
+      ),
+    );
+
     return Stack(
       children: [
         Transform.translate(
           offset: unit * 12,
           child: Transform.scale(
-            scale: calcButtonChildScale(context),
+            scale: calcButtonChildScale(context) * 1.5,
             child: slice == Slice.whole
-                ? const WholeUnitCube()
+                // ? const WholeUnitCube()
+                ? Thumbnail(sketch: line, unitTransform: line.unitTransform)
                 : SliceUnitCube(slice: slice),
           ),
         ),

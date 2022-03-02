@@ -27,7 +27,7 @@ const cubesExtension = '.cubes.json';
 class SketchBank extends ChangeNotifier {
   final _sketches = <String, Sketch>{};
 
-  final example = SlicesExample();
+  final slicesExample = _SlicesExample();
 
   String get json => sketch.toString();
 
@@ -183,7 +183,7 @@ class SketchBank extends ChangeNotifier {
     _savedJson = json;
     _updateAfterLoad(context);
 
-    unawaited(example.init());
+    unawaited(slicesExample.init());
   }
 
   void _updateAfterLoad(BuildContext context) {
@@ -345,17 +345,18 @@ class SketchBank extends ChangeNotifier {
   }
 }
 
-class SlicesExample {
+class _SlicesExample {
+  late UnitTransform unitTransform;
+
   late Sketch triangleWithGap;
-
   late Sketch triangleGap;
-
-  UnitTransform get unitTransform => triangleWithGap.unitTransform;
 
   Future<void> init() async {
     final assets = await Assets.getStrings('help/triangle_');
 
     triangleWithGap = Sketch.fromString(assets['triangle_with_gap.json']!);
     triangleGap = Sketch.fromString(assets['triangle_gap.json']!);
+
+    unitTransform = triangleWithGap.unitTransform;
   }
 }

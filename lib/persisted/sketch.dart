@@ -14,7 +14,7 @@ const noWarn = out;
 class Sketch {
   final List<CubeInfo> _cubeInfos;
 
-  const Sketch(this._cubeInfos);
+  const Sketch({required List<CubeInfo> cubeInfos}) : _cubeInfos = cubeInfos;
 
   Sketch.empty() : _cubeInfos = <CubeInfo>[];
 
