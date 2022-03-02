@@ -34,15 +34,15 @@ class HexagonElevatedButton extends StatelessWidget {
           onPressed: onPressed,
           child: child,
           style: ButtonStyle(
-            elevation: MaterialStateProperty.all(isOn ? 0.0 : buttonElevation),
-            shadowColor: isOn ? null : MaterialStateProperty.all(bl),
-            fixedSize: MaterialStateProperty.all(pageButtonSize),
             shape: hexagonBorderShape,
+            fixedSize: MaterialStateProperty.all(pageButtonSize),
             backgroundColor: MaterialStateProperty.all(radioOn == null
                 ? buttonColor
                 : radioOn!
                     ? radioButtonOnColor
                     : buttonColor),
+            elevation: MaterialStateProperty.all(isOn ? 0.0 : buttonElevation),
+            shadowColor: isOn ? null : MaterialStateProperty.all(bl),
           ),
         ),
       ),

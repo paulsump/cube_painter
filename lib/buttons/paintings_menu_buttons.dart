@@ -45,9 +45,9 @@ class FlatIconHexagonButton extends StatelessWidget {
         onPressed: item.enabled ? item.onPressed : null,
         style: ButtonStyle(
           shape: hexagonBorderShape,
-          overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
           fixedSize: MaterialStateProperty.all(pageButtonSize),
           backgroundColor: MaterialStateProperty.all(paintingsMenuButtonsColor),
+          overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
         ),
       ),
     );
