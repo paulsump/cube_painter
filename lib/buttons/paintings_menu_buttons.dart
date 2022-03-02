@@ -7,17 +7,17 @@ import 'package:flutter/material.dart';
 /// Transparent icon button.
 /// Used at the top of the [PaintingsMenu] (the file menu).
 class FlatIconHexagonButton extends StatelessWidget {
+  final VoidCallback? onPressed;
   final String tip;
   final IconData icon;
   final double iconSize;
-  final VoidCallback? onPressed;
 
   const FlatIconHexagonButton({
     Key? key,
+    this.onPressed,
     required this.tip,
     required this.icon,
     required this.iconSize,
-    this.onPressed,
   }) : super(key: key);
 
   @override
