@@ -1,7 +1,8 @@
+import 'dart:math';
+
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/constants.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,10 +28,9 @@ class ElevatedHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// TODO Responsive to screen size- magic numbers
     final screen = getScreenSize(context);
-    out(screen.width);
-    final double buttonHeight = 70;
+
+    final double buttonHeight = 0.15152 * min(screen.width, screen.height);
     final Size buttonSize = Size(buttonHeight, buttonHeight);
 
     return Transform.translate(
@@ -47,8 +47,8 @@ class ElevatedHexagonButton extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(isRadioOn == null
                 ? buttonColor
                 : isRadioOn!
-                    ? radioButtonOnColor
-                    : buttonColor),
+                ? radioButtonOnColor
+                : buttonColor),
             elevation: MaterialStateProperty.all(isOn ? 0.0 : buttonElevation),
             shadowColor: isOn ? null : MaterialStateProperty.all(bl),
           ),
