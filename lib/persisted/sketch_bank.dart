@@ -14,13 +14,12 @@ const noWarn = out;
 SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
     Provider.of<SketchBank>(context, listen: listen);
 
-/// access to the main store of the entire model
+/// Access to the main store of the entire model
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
 /// Also manages the starting and stopping of cube animation
 /// during loading and brushing.
 /// init() is the main starting point for the app.
-/// TODO MOVe anim stuff into Animator
 class SketchBank extends ChangeNotifier with Persister, Animator {
   void startBrushing() {
     setIsPingPong(true);
@@ -43,6 +42,7 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
+  @override
   void finishAnim() {
     if (!isBrushing) {
       if (!isAnimatingLoadedCubes) {
@@ -54,11 +54,13 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
     }
   }
 
+  @override
   void setIsPingPong(bool value) {
     isPingPong = value;
     notifyListeners();
   }
 
+  @override
   void updateAfterLoad(BuildContext context) {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:

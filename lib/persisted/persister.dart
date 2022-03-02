@@ -13,14 +13,10 @@ import 'package:path_provider/path_provider.dart';
 
 const noWarn = out;
 
-/// access to the main store of the entire model
+/// The main store of the entire model
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
-/// Also manages the starting and stopping of cube animation
-/// during loading and brushing.
 /// init() is the main starting point for the app.
-/// TODO MOVe anim stuff into Animator
-/// todo move load stuff into Persister
 mixin Persister {
   @protected
   final sketches = <String, Sketch>{};
