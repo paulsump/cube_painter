@@ -43,12 +43,8 @@ class AnimCubesState extends State<AnimCubes>
 
   @override
   void initState() {
-    _controller = AnimationController(
-      duration: pingPongDuration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: pingPongDuration, vsync: this);
 
-    out(widget.isPingPong);
     if (widget.isPingPong) {
       _controller.repeat();
     } else {
