@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting.dart';
@@ -38,6 +39,8 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
 
   @override
   void updateAfterLoad(BuildContext context) {
+    setPanOffset(context, Offset.zero);
+
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
     if (paintings.isNotEmpty) {

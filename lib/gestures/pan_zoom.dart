@@ -93,7 +93,7 @@ class PanZoomer implements GestureHandler {
     /// TODO Responsive to screen size- magic numbers
     offset = Offset(offset.dx.clamp(-500, 500), offset.dy.clamp(-340, 500));
 
-    //TODO See if this makes a diff when the widgets listen
+    //TODO See if this 'if' makes any diff when the widgets listen
     if (offset != getPanOffset(context)) {
       setPanOffset(context, offset);
     }
