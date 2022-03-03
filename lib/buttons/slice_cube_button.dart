@@ -34,7 +34,7 @@ void _onPressed(Slice slice, BuildContext context) {
       Provider.of<GestureModeNotifier>(context, listen: false);
 
   gestureModeNotifier.setSlice(slice);
-  gestureModeNotifier.setMode(GestureMode.addSlice);
+  gestureModeNotifier.setMode(Brush.addSlice);
 
   Navigator.pop(context);
 }

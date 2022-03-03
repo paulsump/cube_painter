@@ -43,19 +43,18 @@ class PageButtons extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CubeLineRadioButton(
-                  isRadioOn: GestureMode.addLine ==
-                      getGestureMode(context, listen: true),
+                  isRadioOn:
+                      Brush.addLine == getGestureMode(context, listen: true),
                   icon: AssetIcons.plusOutline,
-                  onPressed: () => setGestureMode(GestureMode.addLine, context),
+                  onPressed: () => setGestureMode(Brush.addLine, context),
                   tip:
                       "Drag on the canvas\nto add a line of cubes.\n\nYou can change the direction\nwhile you drag.",
                 ),
                 CubeRadioButton(
-                  isRadioOn: GestureMode.eraseLine ==
-                      getGestureMode(context, listen: true),
+                  isRadioOn:
+                      Brush.eraseLine == getGestureMode(context, listen: true),
                   icon: AssetIcons.cancelOutline,
-                  onPressed: () =>
-                      setGestureMode(GestureMode.eraseLine, context),
+                  onPressed: () => setGestureMode(Brush.eraseLine, context),
                   tip:
                       'Drag on the canvas to\nmove an animating cube.\n\nPlace it over\nthe cube that you want to delete.\n\nThen release to delete it.',
                   slice: Slice.whole,
@@ -200,11 +199,11 @@ class _OpenSliceMenuButton extends StatelessWidget {
         Provider.of<GestureModeNotifier>(context, listen: true);
 
     final Slice slice = gestureModeNotifier.slice;
-    final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
+    final Brush currentGestureMode = gestureModeNotifier.gestureMode;
 
     return CubeRadioButton(
       slice: slice,
-      isRadioOn: currentGestureMode == GestureMode.addSlice,
+      isRadioOn: currentGestureMode == Brush.addSlice,
       icon: AssetIcons.plusOutline,
       onPressed: Scaffold.of(context).openEndDrawer,
       tip: 'Choose which cube slice to add...',

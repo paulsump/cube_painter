@@ -2,12 +2,12 @@ import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-enum GestureMode { addLine, eraseLine, addSlice }
+enum Brush { addLine, eraseLine, addSlice }
 
-GestureMode getGestureMode(BuildContext context, {bool listen = false}) =>
+Brush getGestureMode(BuildContext context, {bool listen = false}) =>
     Provider.of<GestureModeNotifier>(context, listen: listen).gestureMode;
 
-void setGestureMode(GestureMode mode, BuildContext context) {
+void setGestureMode(Brush mode, BuildContext context) {
   final gestureModeNotifier =
       Provider.of<GestureModeNotifier>(context, listen: false);
 
@@ -15,14 +15,14 @@ void setGestureMode(GestureMode mode, BuildContext context) {
 }
 
 class GestureModeNotifier extends ChangeNotifier {
-  var _gestureMode = GestureMode.addLine;
+  var _gestureMode = Brush.addLine;
   var _slice = Slice.topRight;
 
   get gestureMode => _gestureMode;
 
   get slice => _slice;
 
-  void setMode(GestureMode gestureMode) {
+  void setMode(Brush gestureMode) {
     _gestureMode = gestureMode;
     notifyListeners();
   }

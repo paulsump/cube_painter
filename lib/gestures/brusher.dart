@@ -16,8 +16,8 @@ import 'package:provider/provider.dart';
 const noWarn = [out, Position];
 
 /// Turns gestures into a line of cubes or a single slice cube
-/// depending on the [GestureMode].
-/// In [GestureMode.eraseLine] mode it yields the
+/// depending on the [Brush].
+/// In [Brush.eraseLine] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brusher implements GestureHandler {
   List<CubeInfo> getAnimCubeInfos(context) =>
@@ -38,7 +38,7 @@ class Brusher implements GestureHandler {
 
   @override
   void update(Offset point, double scale, BuildContext context) {
-    if (GestureMode.addSlice != getGestureMode(context)) {
+    if (Brush.addSlice != getGestureMode(context)) {
       _updateLine(point, context);
     } else {
       _replaceCube(point, context);
@@ -63,7 +63,7 @@ class Brusher implements GestureHandler {
   void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
 
-    if (getGestureMode(context) == GestureMode.addSlice) {
+    if (getGestureMode(context) == Brush.addSlice) {
       slice = Provider.of<GestureModeNotifier>(context, listen: false).slice;
     }
 
@@ -119,7 +119,7 @@ class Brusher implements GestureHandler {
       getAnimCubeInfos(context).add(CubeInfo(center: center, slice: slice));
 
   void _saveForUndo(BuildContext context) {
-    final bool erase = GestureMode.eraseLine == getGestureMode(context);
+    final bool erase = Brush.eraseLine == getGestureMode(context);
 
     final paintingBank = getPaintingBank(context);
     final List<CubeInfo> cubeInfos = paintingBank.painting.cubeInfos;
