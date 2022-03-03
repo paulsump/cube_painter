@@ -155,9 +155,9 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
       title: title,
       content: 'Save the current changes?',
       yesCallBack: getPaintingBank(context).saveFile,
-      yesTip: 'Save the current painting with your new changes.',
+      yesTip: 'Save the current painting\nwith your new changes.',
       noCallBack: getPaintingBank(context).resetCurrentPainting,
-      noTip: 'Reset the current painting to how it was when opened.',
+      noTip: 'Reset the current painting\nto how it was when opened.',
     );
   }
 
