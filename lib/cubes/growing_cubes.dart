@@ -33,7 +33,7 @@ class GrowingCubesState extends State<GrowingCubes>
         final paintingBank = getPaintingBank(context);
 
         paintingBank.finishAnim();
-        paintingBank.cubeState = CubeState.growingOrDone;
+        paintingBank.cubeState = CubeAnimState.growingOrDone;
       },
     );
 

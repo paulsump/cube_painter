@@ -10,18 +10,20 @@ Brush getBrush(BuildContext context, {bool listen = false}) =>
 void setBrush(Brush mode, BuildContext context) {
   final brushNotifier = Provider.of<BrushNotifier>(context, listen: false);
 
-  brushNotifier.setMode(mode);
+  brushNotifier.setBrush(mode);
 }
 
+/// Access to which brush and slice we are currently using
 class BrushNotifier extends ChangeNotifier {
   var _brush = Brush.addLine;
+
   var _slice = Slice.topRight;
 
   get brush => _brush;
 
   get slice => _slice;
 
-  void setMode(Brush brush) {
+  void setBrush(Brush brush) {
     _brush = brush;
     notifyListeners();
   }

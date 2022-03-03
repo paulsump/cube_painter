@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-//TODO CONtinue doc comments from here
+/// Sets a starting value for the scale based on the shortest side of the device.
+/// This method may be called many times, but it only sets it the first time.
 void initZoomScaleOnce(BuildContext context, double scale) {
   final panZoomNotifier = _getPanZoomNotifier(context, listen: false);
 
@@ -30,8 +31,8 @@ PanZoomNotifier _getPanZoomNotifier(BuildContext context,
         {required bool listen}) =>
     Provider.of<PanZoomNotifier>(context, listen: listen);
 
-/// For zooming and panning,
-/// this stores the global scale and pan offset.
+/// For zooming and panning, with two fingers.
+/// Stores the global scale and pan offset.
 class PanZoomNotifier extends ChangeNotifier {
   /// equates to the length of the side of each triangle in pixels
   /// set by initZoomScale() to around 30

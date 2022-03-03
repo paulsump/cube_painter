@@ -150,7 +150,7 @@ class Brusher implements GestureHandler {
       saveForUndo(context);
     }
     _notify(context);
-    getPaintingBank(context).cubeState = CubeState.growingOrDone;
+    getPaintingBank(context).cubeState = CubeAnimState.growingOrDone;
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {

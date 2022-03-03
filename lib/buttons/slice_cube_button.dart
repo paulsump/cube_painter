@@ -33,7 +33,7 @@ void _onPressed(Slice slice, BuildContext context) {
   final brushNotifier = Provider.of<BrushNotifier>(context, listen: false);
 
   brushNotifier.setSlice(slice);
-  brushNotifier.setMode(Brush.addSlice);
+  brushNotifier.setBrush(Brush.addSlice);
 
   Navigator.pop(context);
 }

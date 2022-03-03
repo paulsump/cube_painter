@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-enum CubeState { brushing, loading, growingOrDone }
+enum CubeAnimState { brushing, loading, growingOrDone }
 
 /// Manages the starting and stopping of cube animation
 /// during loading and brushing.
 mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
-  CubeState cubeState = CubeState.growingOrDone;
+  CubeAnimState cubeState = CubeAnimState.growingOrDone;
 
   /// defined in [Persister]
   Painting get painting;
@@ -25,27 +25,27 @@ mixin Animator {
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
-    cubeState = CubeState.loading;
+    cubeState = CubeAnimState.loading;
   }
 
   void startBrushing() {
     finishAnim();
 
-    cubeState = CubeState.brushing;
+    cubeState = CubeAnimState.brushing;
   }
 
   /// Stop animating the cubes by removing them from animCubeInfos
   void finishAnim() {
     switch (cubeState) {
-      case CubeState.brushing:
+      case CubeAnimState.brushing:
         break;
-      case CubeState.loading:
+      case CubeAnimState.loading:
 
         /// if we were loading then we never removed these from cubeInfos,
         /// so we can throw these away.
         animCubeInfos.clear();
         break;
-      case CubeState.growingOrDone:
+      case CubeAnimState.growingOrDone:
 
         /// If the animCubeInfos are newly brushed,
         /// then now they have finished growing so

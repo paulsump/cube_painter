@@ -5,8 +5,9 @@ import 'package:cube_painter/persisted/position.dart';
 
 const noWarn = out;
 
-/// A holder for passing around cube positions.
-/// Comparable with [operator ==]
+/// Though this is useful for passing around cube positions,
+/// the reason it exists is mainly to
+/// compare all the items inside with [operator ==].
 class Positions {
   final List<Position> list;
 
