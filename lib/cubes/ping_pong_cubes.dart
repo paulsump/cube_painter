@@ -19,21 +19,21 @@ class PingPongCubes extends StatefulWidget {
   const PingPongCubes({Key? key}) : super(key: key);
 
   @override
-  State<PingPongCubes> createState() => AnimCubesState();
+  State<PingPongCubes> createState() => PingPongCubesState();
 }
 
-class AnimCubesState extends State<PingPongCubes>
+class PingPongCubesState extends State<PingPongCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     const int milliseconds = 800;
-    const Duration pingPongDuration = Duration(milliseconds: milliseconds);
 
+    const Duration pingPongDuration = Duration(milliseconds: milliseconds);
     _controller = AnimationController(duration: pingPongDuration, vsync: this);
+
     _controller.repeat();
-    out('p init');
     super.initState();
   }
 
@@ -48,21 +48,13 @@ class AnimCubesState extends State<PingPongCubes>
     final paintingBank = getPaintingBank(context);
 
     if (paintingBank.isAnimatingLoadedCubes) {
-      if (paintingBank.isPingPong) {
-        _controller.repeat();
-      } else {
-        out('p');
-      }
+      _controller.repeat();
     }
 
     super.didUpdateWidget(oldWidget);
   }
 
   @override
-  Widget build(BuildContext context) {
-    return CubesAnimatedBuilder(
-      isPingPong: true,
-      controller: _controller,
-    );
-  }
+  Widget build(BuildContext context) =>
+      CubesAnimatedBuilder(isPingPong: true, controller: _controller);
 }

@@ -29,21 +29,18 @@ class LoadingCubesState extends State<LoadingCubes>
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this);
-    out('lod init');
+    const int milliseconds = 800;
+    const Duration pingPongDuration = Duration(milliseconds: milliseconds);
 
-    startForwardAnim(fromZero: true);
+    _controller = AnimationController(duration: pingPongDuration, vsync: this);
+
+    startForwardAnim();
     super.initState();
   }
 
-  void startForwardAnim({required bool fromZero}) {
-    if (_controller.value != 1) {
-      _controller.duration =
-          Duration(milliseconds: 2 * milliseconds ~/ (1 - _controller.value));
-    }
-
-    _controller.forward(from: fromZero ? 0 : _controller.value).whenComplete(
-          () {
+  void startForwardAnim() {
+    _controller.forward(from: 0).whenComplete(
+      () {
         final paintingBank = getPaintingBank(context);
 
         paintingBank.finishAnim();
@@ -63,21 +60,13 @@ class LoadingCubesState extends State<LoadingCubes>
     final paintingBank = getPaintingBank(context);
 
     if (paintingBank.isAnimatingLoadedCubes) {
-      if (paintingBank.isPingPong) {
-        out('l');
-      } else {
-        startForwardAnim(fromZero: paintingBank.isAnimatingLoadedCubes);
-      }
+      startForwardAnim();
     }
 
     super.didUpdateWidget(oldWidget);
   }
 
   @override
-  Widget build(BuildContext context) {
-    return CubesAnimatedBuilder(
-      isPingPong: false,
-      controller: _controller,
-    );
-  }
+  Widget build(BuildContext context) =>
+      CubesAnimatedBuilder(isPingPong: false, controller: _controller);
 }
