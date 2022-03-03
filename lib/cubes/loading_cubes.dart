@@ -25,10 +25,10 @@ class LoadingCubes extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LoadingCubes> createState() => AnimCubesState();
+  State<LoadingCubes> createState() => LoadingCubesState();
 }
 
-class AnimCubesState extends State<LoadingCubes>
+class LoadingCubesState extends State<LoadingCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
