@@ -52,7 +52,6 @@ class _AnimCubes extends StatelessWidget {
     return Stack(
       children: [
         if (paintingBank.animCubeInfos.isNotEmpty)
-        //TODO FIx CubeState.growing is only for load
           if (paintingBank.cubeState == CubeState.brushLine)
             const BrushLineCubes()
           else

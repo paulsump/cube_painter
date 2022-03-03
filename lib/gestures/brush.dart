@@ -143,9 +143,7 @@ class Brush implements GestureHandler {
       saveForUndo(context);
     }
     _notify(context);
-    //TODO FIx CubeState.growing is only for load
-    //TODO fix it so that we can change to CubeState.grow here.
-    getPaintingBank(context).cubeState = CubeState.done;
+    getPaintingBank(context).cubeState = CubeState.staticOrGrowing;
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
