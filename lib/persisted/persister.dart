@@ -213,6 +213,8 @@ mixin Persister {
   }
 }
 
+/// The little animated triangle painting, on the [SlicesMenu]
+/// Here because it's loaded from [Assets].
 class _SlicesExamplePainting {
   late UnitTransform unitTransform;
 
