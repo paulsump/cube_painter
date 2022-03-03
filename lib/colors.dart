@@ -29,7 +29,7 @@ final Color _blt = getTweenBLtoTColor(0.3);
 
 Color get paintingsMenuButtonsColor => _blt.withOpacity(0.7);
 
-Color get alertColor => _blt.withOpacity(0.85);
+Color get alertColor => _blt.withOpacity(0.9);
 
 Color _getTweenTtoBRColor(double t) =>
     Color.lerp(topColor, bottomRightColor, t)!;

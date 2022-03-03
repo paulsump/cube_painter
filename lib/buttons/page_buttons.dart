@@ -101,7 +101,7 @@ class _HelpButton extends StatelessWidget {
         size: calcNormalIconSize(context) * 1.09,
       ),
       onPressed: () => _showHelp(context),
-      tip: '\n\nShows the help message.',
+      tip: '\n\nShow some tips.',
     );
   }
 }
@@ -110,16 +110,44 @@ class _HelpButton extends StatelessWidget {
 void _showHelp(BuildContext context) {
   showDialog(
     context: context,
-    builder: (BuildContext context) => Alert(
-      title: 'Tips',
-      child: const Text('\n\nTo add cubes:\n\nDrag with one finger.\n\n\n'
-          'To zoom and pan:\n\nPinch and drag with two fingers.\n\n\n'
-          "For more tips:\n\nPress and hold each button."),
-      yesCallBack: () {
-        Navigator.of(context).pop(true);
-      },
-      yesTip: 'Close the help message',
-    ),
+    builder: (BuildContext context) {
+      const title = TextStyle(
+        fontWeight: FontWeight.bold,
+      );
+
+      const emphasize = TextStyle(
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic,
+        decoration: TextDecoration.underline,
+      );
+
+      return Alert(
+        title: 'Tips',
+        child: RichText(
+          text: TextSpan(
+            text: '\n',
+            style:
+                DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.7),
+            children: const <TextSpan>[
+              TextSpan(text: 'Add cubes', style: title),
+              TextSpan(text: '...\n\nDrag with '),
+              TextSpan(text: 'one', style: emphasize),
+              TextSpan(text: ' finger.\n\n\n'),
+              TextSpan(text: 'Pan and Zoom', style: title),
+              TextSpan(text: '...\n\nDrag with '),
+              TextSpan(text: 'two', style: emphasize),
+              TextSpan(text: ' fingers.\n\n\n'),
+              TextSpan(text: 'Button tips', style: title),
+              TextSpan(text: '...\n\nPress and hold a button.'),
+            ],
+          ),
+        ),
+        yesCallBack: () {
+          Navigator.of(context).pop(true);
+        },
+        yesTip: 'Done',
+      );
+    },
   );
 }
 
@@ -146,20 +174,20 @@ class _UndoButton extends StatelessWidget {
 
     return wantShow
         ? ElevatedHexagonButton(
-      child: Icon(
-        isRedo ? Icons.redo_sharp : Icons.undo_sharp,
-        size: calcNormalIconSize(context) * 1.2,
-        color: enabled ? enabledIconColor : disabledIconColor,
-      ),
-      onPressed: enabled
-          ? isRedo
-          ? () => undoer.redo(context)
-          : () => undoer.undo(context)
-          : null,
-      tip: isRedo
-          ? 'Redo the last add or delete operation that was undone.'
-          : 'Undo the last add or delete operation.',
-    )
+            child: Icon(
+              isRedo ? Icons.redo_sharp : Icons.undo_sharp,
+              size: calcNormalIconSize(context) * 1.2,
+              color: enabled ? enabledIconColor : disabledIconColor,
+            ),
+            onPressed: enabled
+                ? isRedo
+                    ? () => undoer.redo(context)
+                    : () => undoer.undo(context)
+                : null,
+            tip: isRedo
+                ? 'Redo the last add or delete operation that was undone.'
+                : 'Undo the last add or delete operation.',
+          )
         : Container();
   }
 }
@@ -170,7 +198,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gestureModeNotifier =
-    Provider.of<GestureModeNotifier>(context, listen: true);
+        Provider.of<GestureModeNotifier>(context, listen: true);
 
     final Slice slice = gestureModeNotifier.slice;
     final GestureMode currentGestureMode = gestureModeNotifier.gestureMode;
