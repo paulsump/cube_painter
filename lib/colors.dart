@@ -25,7 +25,11 @@ Color get backgroundColor => _getTweenTtoBRColor(0.6);
 
 Color get radioButtonOnColor => _getTweenTtoBRColor(0.4);
 
-Color get paintingsMenuButtonsColor => getTweenBLtoTColor(0.3).withOpacity(0.7);
+final Color _blt = getTweenBLtoTColor(0.3);
+
+Color get paintingsMenuButtonsColor => _blt.withOpacity(0.7);
+
+Color get alertColor => _blt.withOpacity(0.85);
 
 Color _getTweenTtoBRColor(double t) =>
     Color.lerp(topColor, bottomRightColor, t)!;

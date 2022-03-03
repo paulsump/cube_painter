@@ -39,7 +39,7 @@ class Alert extends StatelessWidget {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: _blur, sigmaY: _blur),
       child: AlertDialog(
-        backgroundColor: backgroundColor.withOpacity(0.6),
+        backgroundColor: alertColor,
         title: Text(title),
         content: Text(content),
         actions: <Widget>[

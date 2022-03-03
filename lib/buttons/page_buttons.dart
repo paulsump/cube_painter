@@ -114,7 +114,7 @@ void _showHelp(BuildContext context) {
       title: 'Cube Painter',
       content: 'Drag to draw cubes.\n\n'
           'Pinch to zoom and pan.\n\n'
-          'Long press a button to see tooltip.',
+          "Press and hold a button\nto see it's tooltip.",
       yesCallBack: () {
         Navigator.of(context).pop(true);
       },
