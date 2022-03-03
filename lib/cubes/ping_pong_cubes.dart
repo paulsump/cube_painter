@@ -1,11 +1,10 @@
+import 'package:cube_painter/cubes/cubes_animated_builder.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
-import 'package:cube_painter/cubes/unit_ping_pong.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/position.dart';
-import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
@@ -68,29 +67,10 @@ class AnimCubesState extends State<PingPongCubes>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        final int n = widget.cubeInfos.length;
-
-        double unitPingPong(i) => calcUnitPingPong(_controller.value + i / n);
-
-        return Stack(
-          children: [
-            UnitToScreen(
-              child: Stack(
-                children: [
-                  for (int i = 0; i < n; ++i)
-                    PositionedScaledCube(
-                      scale: unitPingPong(i),
-                      info: widget.cubeInfos[i],
-                    ),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
+    return CubesAnimatedBuilder(
+      isPingPong: true,
+      controller: _controller,
+      cubeInfos: widget.cubeInfos,
     );
   }
 }

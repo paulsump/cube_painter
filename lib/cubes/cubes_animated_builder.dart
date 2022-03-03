@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 
 class CubesAnimatedBuilder extends StatelessWidget {
   final AnimationController _controller;
+
   final List<CubeInfo> cubeInfos;
+  final bool isPingPong;
 
   const CubesAnimatedBuilder({
     Key? key,
     required AnimationController controller,
     required this.cubeInfos,
+    required this.isPingPong,
   })  : _controller = controller,
         super(key: key);
 
@@ -31,7 +34,9 @@ class CubesAnimatedBuilder extends StatelessWidget {
                 children: [
                   for (int i = 0; i < n; ++i)
                     PositionedScaledCube(
-                      scale: lerp(unitPingPong(i), 1.0, _controller.value),
+                      scale: isPingPong
+                          ? unitPingPong(i)
+                          : lerp(unitPingPong(i), 1.0, _controller.value),
                       info: cubeInfos[i],
                     ),
                 ],

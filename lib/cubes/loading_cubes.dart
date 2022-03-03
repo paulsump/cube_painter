@@ -82,6 +82,7 @@ class LoadingCubesState extends State<LoadingCubes>
   @override
   Widget build(BuildContext context) {
     return CubesAnimatedBuilder(
+      isPingPong: false,
       controller: _controller,
       cubeInfos: widget.cubeInfos,
     );
