@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-enum CubeState { brushLine, loading, growingOrDone }
+enum CubeState { brushing, loading, growingOrDone }
 
 /// Manages the starting and stopping of cube animation
 /// during loading and brushing.
@@ -31,7 +31,7 @@ mixin Animator {
   void startBrushing() {
     finishAnim();
 
-    cubeState = CubeState.brushLine;
+    cubeState = CubeState.brushing;
   }
 
   /// Add all the animCubeInfos to the staticCubeInfos,
@@ -49,7 +49,7 @@ mixin Animator {
   /// anim is done.
   void finishAnim() {
     switch (cubeState) {
-      case CubeState.brushLine:
+      case CubeState.brushing:
         break;
       case CubeState.loading:
         animCubeInfos.clear();
