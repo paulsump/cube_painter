@@ -175,8 +175,6 @@ mixin Persister {
   Future<void> resetCurrentPainting() async =>
       paintings[currentFilePath] = Painting.fromString(_savedJson);
 
-  void clear() => painting.cubeInfos.clear();
-
   Future<String> _loadAllPaintings({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
