@@ -111,10 +111,10 @@ void _showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) => Alert(
-      title: 'Cube Painter',
-      content: 'Drag to draw cubes.\n\n'
-          'Pinch to zoom and pan.\n\n'
-          "Press and hold a button\nto see it's tooltip.",
+      title: 'Tips',
+      content: '\n\nTo add cubes:\n\nDrag with one finger.\n\n\n'
+          'To zoom and pan:\n\nPinch and drag with two fingers.\n\n\n'
+          "For more tips:\n\nPress and hold each button.",
       yesCallBack: () {
         Navigator.of(context).pop(true);
       },
