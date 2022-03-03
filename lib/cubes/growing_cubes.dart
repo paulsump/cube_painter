@@ -27,8 +27,8 @@ class GrowingCubesState extends State<GrowingCubes>
 
   @override
   void initState() {
-    _controller =
-        AnimationController(duration: Duration(milliseconds: 800), vsync: this);
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 800), vsync: this);
     _controller.forward().whenComplete(
       () {
         final paintingBank = getPaintingBank(context);
