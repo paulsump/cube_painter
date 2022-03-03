@@ -8,11 +8,9 @@ import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/paintings_menu.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
-import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/slices_menu.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 /// prevent 'organise imports' from removing imports
 /// when temporarily commenting out.
@@ -20,8 +18,6 @@ const noWarn = [
   out,
   PanZoomer,
   StaticCubes,
-  Slice.whole,
-  Provider,
 ];
 
 class PainterPage extends StatelessWidget {
