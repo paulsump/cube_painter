@@ -19,7 +19,7 @@ const noWarn = out;
 /// init() is the main starting point for the app.
 mixin Persister {
   @protected
-  final paintinges = <String, Painting>{};
+  final paintings = <String, Painting>{};
 
   final slicesExample = _SlicesExample();
 
@@ -33,12 +33,12 @@ mixin Persister {
   bool get modified => json != _savedJson;
 
   bool get hasCubes =>
-      paintinges.isNotEmpty &&
+      paintings.isNotEmpty &&
       _hasPaintingForCurrentFilePath &&
       painting.cubeInfos.isNotEmpty;
 
   bool get _hasPaintingForCurrentFilePath {
-    if (!paintinges.containsKey(currentFilePath)) {
+    if (!paintings.containsKey(currentFilePath)) {
       out(currentFilePath);
 
       return false;
@@ -63,18 +63,18 @@ mixin Persister {
   Painting get painting {
     if (!_hasPaintingForCurrentFilePath) {
       assert(false,
-          "paintinges doesn't contain key of currentFilePath: $currentFilePath");
+          "paintings doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Painting.fromEmpty();
     }
-    return paintinges[currentFilePath]!;
+    return paintings[currentFilePath]!;
   }
 
-  void setPainting(Painting painting) => paintinges[currentFilePath] = painting;
+  void setPainting(Painting painting) => paintings[currentFilePath] = painting;
 
   UnmodifiableListView<MapEntry> get paintingEntries =>
-      UnmodifiableListView<MapEntry>(paintinges.entries.toList());
+      UnmodifiableListView<MapEntry>(paintings.entries.toList());
 
   /// The main starting point for the app.
   Future<void> init(BuildContext context) async {
@@ -87,14 +87,14 @@ mixin Persister {
       await _settingsPersister.save();
     }
 
-    final firstPath = await _loadAllPaintinges();
+    final firstPath = await _loadAllPaintings();
 
     if (currentFilePath.isEmpty) {
       //  Most recently created is now first in list
       saveCurrentFilePath(firstPath);
     }
 
-    if (!paintinges.containsKey(currentFilePath)) {
+    if (!paintings.containsKey(currentFilePath)) {
       out("currentFilePath not found ('$currentFilePath'), so using the first in the list");
 
       saveCurrentFilePath(firstPath);
@@ -108,12 +108,12 @@ mixin Persister {
 
   // insert at the top of the list
   void pushPainting(Painting painting) {
-    final copy = Map<String, Painting>.from(paintinges);
+    final copy = Map<String, Painting>.from(paintings);
 
-    paintinges.clear();
+    paintings.clear();
     setPainting(painting);
 
-    paintinges.addAll(copy);
+    paintings.addAll(copy);
   }
 
   Future<void> newFile(BuildContext context) async {
@@ -166,11 +166,11 @@ mixin Persister {
   }
 
   Future<void> resetCurrentPainting() async =>
-      paintinges[currentFilePath] = Painting.fromString(_savedJson);
+      paintings[currentFilePath] = Painting.fromString(_savedJson);
 
   void clear() => painting.cubeInfos.clear();
 
-  Future<String> _loadAllPaintinges({bool ignoreCurrent = false}) async {
+  Future<String> _loadAllPaintings({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     List<String> paths = await getAllAppFilePaths(appFolder);
@@ -183,7 +183,7 @@ mixin Persister {
       if (!(ignoreCurrent && path == currentFilePath)) {
         final File file = File(path);
 
-        paintinges[path] = Painting.fromString(await file.readAsString());
+        paintings[path] = Painting.fromString(await file.readAsString());
       }
     }
 
@@ -191,7 +191,7 @@ mixin Persister {
   }
 
   Future<void> deleteCurrentFile(BuildContext context) async {
-    paintinges.remove(currentFilePath);
+    paintings.remove(currentFilePath);
 
     final File file = File(currentFilePath);
 
@@ -200,10 +200,10 @@ mixin Persister {
       file.delete();
     }
 
-    if (paintinges.isEmpty) {
+    if (paintings.isEmpty) {
       await newFile(context);
     } else {
-      loadFile(filePath: paintinges.keys.first, context: context);
+      loadFile(filePath: paintings.keys.first, context: context);
     }
   }
 }

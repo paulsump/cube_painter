@@ -60,7 +60,7 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
   void updateAfterLoad(BuildContext context) {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
-    if (paintinges.isNotEmpty) {
+    if (paintings.isNotEmpty) {
       getUndoer(context).clear();
 
       startAnimatingLoadedCubes();
