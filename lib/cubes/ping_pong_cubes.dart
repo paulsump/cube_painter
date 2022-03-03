@@ -70,7 +70,6 @@ class AnimCubesState extends State<PingPongCubes>
     return CubesAnimatedBuilder(
       isPingPong: true,
       controller: _controller,
-      cubeInfos: widget.cubeInfos,
     );
   }
 }

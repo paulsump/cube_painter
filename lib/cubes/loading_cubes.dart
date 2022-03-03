@@ -84,7 +84,6 @@ class LoadingCubesState extends State<LoadingCubes>
     return CubesAnimatedBuilder(
       isPingPong: false,
       controller: _controller,
-      cubeInfos: widget.cubeInfos,
     );
   }
 }
