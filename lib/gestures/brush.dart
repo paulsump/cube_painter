@@ -19,7 +19,6 @@ const noWarn = [out, Position];
 /// In [GestureMode.erase] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brush implements GestureHandler {
-  //TODO REMOVE THIS FUnk, USE Use paintingBank local
   List<CubeInfo> getAnimCubeInfos(context) =>
       getPaintingBank(context).animCubeInfos;
 
@@ -72,16 +71,17 @@ class Brush implements GestureHandler {
     brushMaths.calcStartPosition(startUnit);
 
     final newPosition = brushMaths.startPosition;
+    final animCubes = getAnimCubeInfos(context);
 
-    if (getAnimCubeInfos(context).isEmpty) {
+    if (animCubes.isEmpty) {
       _addCube(newPosition, slice, context);
 
       _setPingPong(true, context);
     } else {
-      final oldPosition = getAnimCubeInfos(context).first.center;
+      final oldPosition = animCubes.first.center;
 
       if (oldPosition != newPosition) {
-        getAnimCubeInfos(context).clear();
+        animCubes.clear();
 
         _addCube(newPosition, slice, context);
         _setPingPong(true, context);
@@ -97,14 +97,15 @@ class Brush implements GestureHandler {
       // using order provided by brushMaths
       // only add new cubes, deleting any old ones
 
-      var copy = getAnimCubeInfos(context).toList();
-      getAnimCubeInfos(context).clear();
+      final animCubes = getAnimCubeInfos(context);
+      var copy = animCubes.toList();
+      animCubes.clear();
 
       for (Position position in positions.list) {
         CubeInfo? cube = _findAt(position, copy);
 
         if (cube != null) {
-          getAnimCubeInfos(context).add(cube);
+          animCubes.add(cube);
         } else {
           _addCube(position, Slice.whole, context);
         }
