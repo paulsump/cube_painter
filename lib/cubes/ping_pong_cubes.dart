@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
-/// Used when loading and brushing (creating using gestures).
+/// Used when growing and brushing (creating using gestures).
 /// One animator controls them all.
 /// The cubes are moved to [StaticCubes] either externally
 /// via [finishAnim] or [whenComplete] after the animation is finished.

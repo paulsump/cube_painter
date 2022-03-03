@@ -56,5 +56,19 @@ mixin Animator {
 
       animCubeInfos.clear();
     }
+    // CubeState cubeState = CubeState.oscillating;
+    // switch (cubeState) {
+    //   case CubeState.oscillating:
+    //     break;
+    //   case CubeState.growing:
+    //     animCubeInfos.clear();
+    //   break;
+    //   case CubeState.done:
+    //     painting.cubeInfos.addAll(animCubeInfos);
+    //     animCubeInfos.clear();
+    //     break;
+    // }
   }
 }
+
+// enum CubeState { oscillating, growing, done }
