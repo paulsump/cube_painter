@@ -206,8 +206,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
       isRadioOn: currentGestureMode == GestureMode.addSlice,
       icon: AssetIcons.plusOutline,
       onPressed: Scaffold.of(context).openEndDrawer,
-      tip:
-          'Drag on the canvas\nto move an\nanimating cube slice.\n\nThen release to place it.',
+      tip: 'Choose which cube slice to add...',
     );
   }
 }

@@ -20,7 +20,8 @@ class SliceCubeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatHexagonButton(
         onPressed: () => _onPressed(slice, context),
-        tip: 'For adding ${getSliceName(slice)} slices of cubes.',
+        tip:
+            'Drag on the canvas\nto move an\nanimating cube${slice == Slice.whole ? '' : ' slice'}.\n\nThen release to place it.',
         child: Transform.scale(
           scale: calcButtonChildScale(context),
           child: SliceUnitCube(slice: slice),
