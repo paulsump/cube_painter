@@ -26,12 +26,11 @@ class PingPongCubesState extends State<PingPongCubes>
 
   @override
   void initState() {
-    const int milliseconds = 800;
+    const Duration pingPongDuration = Duration(milliseconds: 800);
 
-    const Duration pingPongDuration = Duration(milliseconds: milliseconds);
     _controller = AnimationController(duration: pingPongDuration, vsync: this);
-
     _controller.repeat();
+
     super.initState();
   }
 

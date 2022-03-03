@@ -25,21 +25,12 @@ class LoadingCubesState extends State<LoadingCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  static const int milliseconds = 800;
-
   @override
   void initState() {
-    const int milliseconds = 800;
-    const Duration pingPongDuration = Duration(milliseconds: milliseconds);
+    const Duration pingPongDuration = Duration(milliseconds: 800);
 
     _controller = AnimationController(duration: pingPongDuration, vsync: this);
-
-    startForwardAnim();
-    super.initState();
-  }
-
-  void startForwardAnim() {
-    _controller.forward(from: 0).whenComplete(
+    _controller.forward().whenComplete(
       () {
         final paintingBank = getPaintingBank(context);
 
@@ -47,6 +38,8 @@ class LoadingCubesState extends State<LoadingCubes>
         paintingBank.isAnimatingLoadedCubes = false;
       },
     );
+
+    super.initState();
   }
 
   @override
