@@ -43,11 +43,11 @@ class PageButtons extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CubeLineRadioButton(
-                  isRadioOn: GestureMode.brushLine ==
+                  isRadioOn: GestureMode.brushAdd ==
                       getGestureMode(context, listen: true),
                   icon: AssetIcons.plusOutline,
                   onPressed: () =>
-                      setGestureMode(GestureMode.brushLine, context),
+                      setGestureMode(GestureMode.brushAdd, context),
                   tip:
                       "Drag on the canvas\nto add a line of cubes.\n\nYou can change the direction\nwhile you drag.",
                 ),
