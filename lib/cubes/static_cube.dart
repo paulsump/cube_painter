@@ -1,5 +1,5 @@
-import 'package:cube_painter/cubes/full_unit_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
+import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/sketch.dart';

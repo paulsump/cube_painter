@@ -12,7 +12,7 @@ const noWarn = out;
 /// Used to represent the 3 sides of the 'cube'.
 enum Side { top, bottomLeft, bottomRight }
 
-/// for painting each side of a cube.
+/// Paint and path for painting a side of a cube.
 /// TODO Optimise this away with caches, by replacing getColor()
 class CubeSide {
   final Side side;
