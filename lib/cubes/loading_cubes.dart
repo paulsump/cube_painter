@@ -56,17 +56,6 @@ class LoadingCubesState extends State<LoadingCubes>
   }
 
   @override
-  void didUpdateWidget(LoadingCubes oldWidget) {
-    final paintingBank = getPaintingBank(context);
-
-    if (paintingBank.isAnimatingLoadedCubes) {
-      startForwardAnim();
-    }
-
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
   Widget build(BuildContext context) =>
       CubesAnimatedBuilder(isPingPong: false, controller: _controller);
 }
