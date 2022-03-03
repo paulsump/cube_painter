@@ -110,7 +110,7 @@ mixin Persister {
     _savedJson = json;
     updateAfterLoad(context);
 
-    unawaited(slicesExample.init());
+    unawaited(slicesExample.load());
   }
 
   // insert at the top of the list
@@ -221,7 +221,7 @@ class _SlicesExamplePainting {
   late Painting triangleWithGap;
   late Painting triangleGap;
 
-  Future<void> init() async {
+  Future<void> load() async {
     final assets = await Assets.getStrings('help/triangle_');
 
     triangleWithGap = Painting.fromString(assets['triangle_with_gap.json']!);

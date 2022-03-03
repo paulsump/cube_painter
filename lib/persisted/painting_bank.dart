@@ -14,11 +14,14 @@ const noWarn = out;
 PaintingBank getPaintingBank(BuildContext context, {bool listen = false}) =>
     Provider.of<PaintingBank>(context, listen: listen);
 
-/// Access to the main store of the entire model
-/// For loading and saving all the cube positions and their info
+/// Access to the main store of all the [Painting]s
+/// The notifyListener functions are here,
+/// but the main functionality is in two mixins...
+/// It's a [Persister] - For loading and saving
+/// all the cube positions and their info
 /// loaded from a json file.
-/// Also manages the starting and stopping of cube animation
-/// during loading and brushing.
+/// And a [Animator] - it manages the starting and stopping of
+/// cube animation during loading and brushing.
 /// init() is the main starting point for the app.
 class PaintingBank extends ChangeNotifier with Persister, Animator {
   @override

@@ -20,7 +20,7 @@ class Painting {
 
   Painting.fromString(String json) : this.fromJson(jsonDecode(json));
 
-  UnitTransform get unitTransform => _calcUnitScaleAndOffset(cubeInfos);
+  UnitTransform get unitTransform => UnitTransform(cubeInfos);
 
   @override
   String toString() => jsonEncode(this);
@@ -37,48 +37,46 @@ class Painting {
   }
 }
 
+/// Used to scale the [Painting] down to unit size
+/// Based on the bounding rectangle of the [Painting]s positions
 class UnitTransform {
-  final double scale;
-  final Offset offset;
+  late double scale;
+  late Offset offset;
 
   @override
   String toString() => '$scale, $offset';
 
-  const UnitTransform({required this.scale, required this.offset});
-}
+  UnitTransform(List<CubeInfo> cubeInfos) {
+    double minX = 9999999;
+    double minY = 9999999;
 
-UnitTransform _calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {
-  double minX = 9999999;
-  double minY = 9999999;
+    double maxX = -9999999;
+    double maxY = -9999999;
 
-  double maxX = -9999999;
-  double maxY = -9999999;
+    for (CubeInfo info in cubeInfos) {
+      final offset = positionToUnitOffset(info.center);
 
-  for (CubeInfo info in cubeInfos) {
-    final offset = positionToUnitOffset(info.center);
+      if (minX > offset.dx) {
+        minX = offset.dx;
+      }
+      if (maxX < offset.dx) {
+        maxX = offset.dx;
+      }
+      if (minY > offset.dy) {
+        minY = offset.dy;
+      }
+      if (maxY < offset.dy) {
+        maxY = offset.dy;
+      }
+    }
 
-    if (minX > offset.dx) {
-      minX = offset.dx;
-    }
-    if (maxX < offset.dx) {
-      maxX = offset.dx;
-    }
-    if (minY > offset.dy) {
-      minY = offset.dy;
-    }
-    if (maxY < offset.dy) {
-      maxY = offset.dy;
-    }
+    final double rangeX = maxX - minX;
+    final double rangeY = maxY - minY;
+    // out('$minX,$maxX,$rangeX');
+    // out('$minY,$maxY,$rangeY');
+
+    // Add 1 to scale for half the size of cube each side of center.
+    scale = cubeInfos.length == 1 ? 0.6 : 1 / (1 + max(rangeX, rangeY));
+    offset = -Offset(minX + maxX, minY + maxY) / 2;
   }
-
-  final double rangeX = maxX - minX;
-  final double rangeY = maxY - minY;
-  // out('$minX,$maxX,$rangeX');
-  // out('$minY,$maxY,$rangeY');
-
-  // Add 1 to scale for half the size of cube each side of center.
-  return UnitTransform(
-    scale: cubeInfos.length == 1 ? 0.6 : 1 / (1 + max(rangeX, rangeY)),
-    offset: -Offset(minX + maxX, minY + maxY) / 2,
-  );
 }

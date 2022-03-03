@@ -2,6 +2,10 @@ import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/material.dart';
 
+/// The position and type of a cube.
+/// This is the basic building block for the persisted [Painting]
+/// Persisted to json.
+/// For convenience you can get the json as a string via toString()
 class CubeInfo {
   final Position center;
 
