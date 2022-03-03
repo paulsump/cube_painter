@@ -8,19 +8,17 @@ import 'package:flutter/material.dart';
 const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
-/// Used when growing and brushing (creating using gestures).
-/// One animator controls them all.
-/// The cubes are moved to [StaticCubes] either externally
-/// via [finishAnim] or [whenComplete] after the animation is finished.
-/// Stateful because of SingleTickerProviderStateMixin
-class BrushLineCubes extends StatefulWidget {
-  const BrushLineCubes({Key? key}) : super(key: key);
+/// Used when brushing (creating using gestures).
+/// The cubes are moved to [StaticCubes] externally
+/// via [finishAnim]
+class BrushCubes extends StatefulWidget {
+  const BrushCubes({Key? key}) : super(key: key);
 
   @override
-  State<BrushLineCubes> createState() => BrushLineCubesState();
+  State<BrushCubes> createState() => BrushCubesState();
 }
 
-class BrushLineCubesState extends State<BrushLineCubes>
+class BrushCubesState extends State<BrushCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 

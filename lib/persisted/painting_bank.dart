@@ -17,7 +17,7 @@ PaintingBank getPaintingBank(BuildContext context, {bool listen = false}) =>
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
 /// Also manages the starting and stopping of cube animation
-/// during loading and brushing.
+/// during loading and brushLining.
 /// init() is the main starting point for the app.
 class PaintingBank extends ChangeNotifier with Persister, Animator {
   @override

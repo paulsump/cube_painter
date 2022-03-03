@@ -10,11 +10,9 @@ import 'package:flutter/material.dart';
 const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
-/// Used when growing and brushing (creating using gestures).
-/// One animator controls them all.
+/// Used when growing the cubes up to there done size.
 /// The cubes are moved to [StaticCubes] either externally
 /// via [finishAnim] or [whenComplete] after the animation is finished.
-/// Stateful because of SingleTickerProviderStateMixin
 class GrowingCubes extends StatefulWidget {
   const GrowingCubes({Key? key}) : super(key: key);
 
