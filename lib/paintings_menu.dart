@@ -21,21 +21,20 @@ class _SafePad extends StatelessWidget {
 }
 
 /// Like a 'File' menu, this allows loading, saving of painting files.
-class PaintingsMenu extends StatefulWidget {
+class PaintingsMenu extends StatelessWidget {
   const PaintingsMenu({Key? key}) : super(key: key);
 
-  @override
-  State<PaintingsMenu> createState() => _PaintingsMenuState();
-}
-
-class _PaintingsMenuState extends State<PaintingsMenu> {
   @override
   Widget build(BuildContext context) {
     final paintingBank = getPaintingBank(context, listen: true);
 
     pop(funk) => () async {
-          await funk();
+          await funk(context);
           Navigator.of(context).pop();
+        };
+
+    dontPop(funk) => () async {
+          await funk(context);
         };
 
     const double offsetX = 55;
@@ -60,19 +59,19 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
                 iconSize: calcAssetIconSize(context) * 0.95,
               ),
               IconFlatHexagonButton(
-                onPressed: paintingBank.modified ? _saveFile : null,
+                onPressed: paintingBank.modified ? dontPop(_saveFile) : null,
                 tip: 'Save the current painting',
                 icon: Icons.save,
                 iconSize: calcNormalIconSize(context),
               ),
               IconFlatHexagonButton(
-                onPressed: _saveACopyFile,
+                onPressed: dontPop(_saveACopyFile),
                 tip: 'Create a copy\nof this painting\nand load it.',
                 icon: AssetIcons.copy,
                 iconSize: calcAssetIconSize(context),
               ),
               IconFlatHexagonButton(
-                onPressed: _deleteCurrentFile,
+                onPressed: dontPop(_deleteCurrentFile),
                 tip:
                     'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
                 icon: Icons.delete,
@@ -87,8 +86,9 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
               offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
               child: ThumbnailButton(
                 tip: 'Load this painting',
-                onPressed: () =>
-                    _loadFile(filePath: paintingBank.paintingEntries[i].key),
+                onPressed: () => _loadFile(
+                    filePath: paintingBank.paintingEntries[i].key,
+                    context: context),
                 painting: paintingBank.paintingEntries[i].value,
               ),
             ),
@@ -98,59 +98,57 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     );
   }
 
-  void _newFile() async {
+  void _newFile(BuildContext context) async {
     final paintingBank = getPaintingBank(context);
 
     if (!paintingBank.modified ||
-        await _askSaveCurrent(title: 'New Painting')) {
+        await _askSaveCurrent(title: 'New Painting', context: context)) {
       await paintingBank.newFile(context);
-      setState(() {});
     }
   }
 
-  void _loadFile({required String filePath}) async {
+  void _loadFile(
+      {required String filePath, required BuildContext context}) async {
     final paintingBank = getPaintingBank(context);
 
     if (!paintingBank.modified ||
-        await _askSaveCurrent(title: 'Load Painting')) {
+        await _askSaveCurrent(title: 'Load Painting', context: context)) {
       paintingBank.loadFile(filePath: filePath, context: context);
-      setState(() {});
     }
   }
 
-  void _saveFile() async {
+  void _saveFile(BuildContext context) async {
     final paintingBank = getPaintingBank(context);
 
     await paintingBank.saveFile();
-    setState(() {});
   }
 
-  void _saveACopyFile() async {
+  void _saveACopyFile(BuildContext context) async {
     final paintingBank = getPaintingBank(context);
 
     await paintingBank.saveACopyFile();
-    setState(() {});
   }
 
-  void _deleteCurrentFile() async {
-    if (await _askDelete()) {
+  void _deleteCurrentFile(BuildContext context) async {
+    if (await _askDelete(context)) {
       final paintingBank = getPaintingBank(context);
 
       await paintingBank.deleteCurrentFile(context);
-      setState(() {});
     }
   }
 
-  Future<bool> _askDelete() async {
+  Future<bool> _askDelete(BuildContext context) async {
     return await _askYesNoOrCancel(
       title: 'Delete',
       content: 'Delete the current painting?',
       yesTip: 'Delete the current painting.',
       wantOnlyYesAndCancelButtons: true,
+      context: context,
     );
   }
 
-  Future<bool> _askSaveCurrent({required String title}) async {
+  Future<bool> _askSaveCurrent(
+      {required String title, required BuildContext context}) async {
     return await _askYesNoOrCancel(
       title: title,
       content: 'Save the current changes?',
@@ -158,6 +156,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
       yesTip: 'Save the current painting\nwith your new changes.',
       noCallBack: getPaintingBank(context).resetCurrentPainting,
       noTip: 'Reset the current painting\nto how it was when opened.',
+      context: context,
     );
   }
 
@@ -169,6 +168,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     Future<void> Function()? noCallBack,
     String? noTip,
     bool wantOnlyYesAndCancelButtons = false,
+    required BuildContext context,
   }) async {
     final alert = Alert(
       title: title,
