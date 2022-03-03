@@ -10,7 +10,6 @@ import 'package:cube_painter/paintings_menu.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/slices_menu.dart';
-import 'package:cube_painter/transform/screen_size.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,8 +29,6 @@ class PainterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    initZoomScaleOnce(context, 0.06494 * getShortestEdge(context));
-
     final paintingBank = getPaintingBank(context, listen: true);
 
     return Scaffold(
