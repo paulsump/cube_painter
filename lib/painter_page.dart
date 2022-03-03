@@ -51,7 +51,7 @@ class _AnimCubes extends StatelessWidget {
     return Stack(
       children: [
         if (paintingBank.animCubeInfos.isNotEmpty)
-          if (paintingBank.isPingPong)
+          if (paintingBank.isBrushing)
             const PingPongCubes()
           else
             const LoadingCubes(),

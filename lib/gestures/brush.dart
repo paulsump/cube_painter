@@ -57,8 +57,7 @@ class Brush implements GestureHandler {
   @override
   void tapUp(Offset point, BuildContext context) => _saveForUndo(context);
 
-  void _setPingPong(bool value, BuildContext context) =>
-      getPaintingBank(context).notify();
+  void _notify(BuildContext context) => getPaintingBank(context).notify();
 
   void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
@@ -76,7 +75,7 @@ class Brush implements GestureHandler {
     if (animCubes.isEmpty) {
       _addCube(newPosition, slice, context);
 
-      _setPingPong(true, context);
+      _notify(context);
     } else {
       final oldPosition = animCubes.first.center;
 
@@ -84,7 +83,7 @@ class Brush implements GestureHandler {
         animCubes.clear();
 
         _addCube(newPosition, slice, context);
-        _setPingPong(true, context);
+        _notify(context);
       }
     }
   }
@@ -110,7 +109,7 @@ class Brush implements GestureHandler {
           _addCube(position, Slice.whole, context);
         }
       }
-      _setPingPong(true, context);
+      _notify(context);
       previousPositions = positions;
     }
   }
@@ -141,7 +140,7 @@ class Brush implements GestureHandler {
     } else {
       saveForUndo(context);
     }
-    _setPingPong(false, context);
+    _notify(context);
     getPaintingBank(context).isBrushing = false;
   }
 

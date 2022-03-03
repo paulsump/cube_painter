@@ -17,8 +17,6 @@ mixin Animator {
   /// defined in [Persister]
   Painting get painting;
 
-  bool get isPingPong => isBrushing;
-
   /// move all the (static) cubeInfos to animCubeInfos
   @protected
   void startAnimatingLoadedCubes() {
@@ -31,10 +29,9 @@ mixin Animator {
   }
 
   void startBrushing() {
-
     finishAnim();
-    isBrushing = true;
 
+    isBrushing = true;
     isAnimatingLoadedCubes = false;
   }
 
