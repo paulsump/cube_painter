@@ -29,6 +29,7 @@ mixin Persister {
   late Settings _settings;
 
   String _savedJson = '';
+  //TODO RENAME _firstTime
   bool _firstTime = true;
 
   bool get modified => json != _savedJson;

@@ -25,14 +25,8 @@ const noWarn = [
   Provider,
 ];
 
-class PainterPage extends StatefulWidget {
+class PainterPage extends StatelessWidget {
   const PainterPage({Key? key}) : super(key: key);
-
-  @override
-  State<PainterPage> createState() => _PainterPageState();
-}
-
-class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
