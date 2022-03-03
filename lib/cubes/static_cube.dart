@@ -1,6 +1,7 @@
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
@@ -22,7 +23,8 @@ class DoneCubes extends StatelessWidget {
 
     return UnitToScreen(
       child: Stack(children: [
-        if (paintingBank.hasCubes && !paintingBank.isAnimatingLoadedCubes)
+        if (paintingBank.hasCubes &&
+            paintingBank.cubeState != CubeState.growing)
           for (final cubeInfo in paintingBank.painting.cubeInfos)
             _PositionedUnitCube(info: cubeInfo)
       ]),

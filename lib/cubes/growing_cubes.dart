@@ -2,6 +2,7 @@ import 'package:cube_painter/cubes/cubes_animated_builder.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class GrowingCubesState extends State<GrowingCubes>
         final paintingBank = getPaintingBank(context);
 
         paintingBank.finishAnim();
-        paintingBank.isAnimatingLoadedCubes = false;
+        paintingBank.cubeState = CubeState.done;
       },
     );
 

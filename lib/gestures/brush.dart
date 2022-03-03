@@ -3,6 +3,7 @@ import 'package:cube_painter/gestures/brush_maths.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/gestures/positions.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/position.dart';
@@ -142,7 +143,8 @@ class Brush implements GestureHandler {
       saveForUndo(context);
     }
     _notify(context);
-    getPaintingBank(context).isBrushing = false;
+    //TODO fix it so that we can change to CubeState.grow here.
+    getPaintingBank(context).cubeState = CubeState.done;
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {

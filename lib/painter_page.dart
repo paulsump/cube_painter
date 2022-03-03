@@ -7,6 +7,7 @@ import 'package:cube_painter/gestures/gesturer.dart';
 import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/paintings_menu.dart';
+import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/slices_menu.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _AnimCubes extends StatelessWidget {
     return Stack(
       children: [
         if (paintingBank.animCubeInfos.isNotEmpty)
-          if (paintingBank.isBrushing)
+          if (paintingBank.cubeState == CubeState.brushLine)
             const BrushLineCubes()
           else
             const GrowingCubes(),

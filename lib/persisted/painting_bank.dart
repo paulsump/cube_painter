@@ -31,11 +31,10 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
   void finishAnim() {
     super.finishAnim();
 
-    if (!isBrushing) {
+    if (cubeState != CubeState.brushLine) {
       notifyListeners();
     }
   }
-
 
   @override
   void updateAfterLoad(BuildContext context) {

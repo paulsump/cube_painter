@@ -5,21 +5,20 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-// enum CubeState { brushLine, growing, done }
+enum CubeState { brushLine, growing, done }
 
 /// Manages the starting and stopping of cube animation
 /// during loading and brushing.
 mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
-  bool isAnimatingLoadedCubes = false;
-
-  bool isBrushing = false;
+  CubeState cubeState = CubeState.done;
 
   /// defined in [Persister]
   Painting get painting;
 
   /// move all the (static) cubeInfos to animCubeInfos
+  /// todo rename to growCubes()
   @protected
   void startAnimatingLoadedCubes() {
     final List<CubeInfo> cubeInfos = painting.cubeInfos;
@@ -27,14 +26,14 @@ mixin Animator {
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
-    isAnimatingLoadedCubes = true;
+    cubeState = CubeState.growing;
   }
 
+  //TODO Rename to startBrushLine
   void startBrushing() {
     finishAnim();
 
-    isBrushing = true;
-    isAnimatingLoadedCubes = false;
+    cubeState = CubeState.brushLine;
   }
 
   /// Add all the animCubeInfos to the staticCubeInfos,
@@ -51,24 +50,16 @@ mixin Animator {
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
   void finishAnim() {
-    if (!isBrushing) {
-      if (!isAnimatingLoadedCubes) {
+    switch (cubeState) {
+      case CubeState.brushLine:
+        break;
+      case CubeState.growing:
+        animCubeInfos.clear();
+        break;
+      case CubeState.done:
         painting.cubeInfos.addAll(animCubeInfos);
-      }
-
-      animCubeInfos.clear();
+        animCubeInfos.clear();
+        break;
     }
-    // CubeState cubeState = CubeState.brushLine;
-    // switch (cubeState) {
-    //   case CubeState.brushLine:
-    //     break;
-    //   case CubeState.growing:
-    //     animCubeInfos.clear();
-    //   break;
-    //   case CubeState.done:
-    //     painting.cubeInfos.addAll(animCubeInfos);
-    //     animCubeInfos.clear();
-    //     break;
-    // }
   }
 }
