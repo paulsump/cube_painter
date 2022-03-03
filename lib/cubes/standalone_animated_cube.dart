@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'unit_ping_pong.dart';
 
 /// Unit cube or slice that animates itself based the fields passed in.
-/// Stateful because of SingleTickerProviderStateMixin
 class StandAloneAnimatedCube extends StatefulWidget {
   final CubeInfo info;
 

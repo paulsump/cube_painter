@@ -13,17 +13,23 @@ class Thumbnail extends StatelessWidget {
   final Painting painting;
 
   final UnitTransform _unitTransform;
+  final bool isPingPong;
 
   const Thumbnail({
     Key? key,
     required this.painting,
     required UnitTransform unitTransform,
+    required this.isPingPong,
   })  : _unitTransform = unitTransform,
         super(key: key);
 
-  Thumbnail.useTransform({Key? key, required this.painting})
-      : _unitTransform = painting.unitTransform,
-        super(key: key);
+  Thumbnail.useTransform({Key? key, required Painting painting})
+      : this(
+          key: key,
+          painting: painting,
+          unitTransform: painting.unitTransform,
+          isPingPong: false,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +38,8 @@ class Thumbnail extends StatelessWidget {
             scale: _unitTransform.scale,
             child: Transform.translate(
                 offset: _unitTransform.offset,
-                // TODO REMove hack for example slice
-                child: painting.cubeInfos.length == 1
+                child: isPingPong
+                    // note that this only animates the first cube
                     ? StandAloneAnimatedCube(info: painting.cubeInfos[0])
                     : StaticCubes(painting: painting)),
           )

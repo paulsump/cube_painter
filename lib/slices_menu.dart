@@ -105,10 +105,12 @@ class _SlicesExample extends StatelessWidget {
                 Thumbnail(
                   painting: paintingBank.slicesExample.triangleWithGap,
                   unitTransform: paintingBank.slicesExample.unitTransform,
+                  isPingPong: false,
                 ),
                 Thumbnail(
                   painting: paintingBank.slicesExample.triangleGap,
                   unitTransform: paintingBank.slicesExample.unitTransform,
+                  isPingPong: true,
                 ),
                 // Container(color: Colors.yellow),
               ],
