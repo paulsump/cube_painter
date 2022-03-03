@@ -141,7 +141,8 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   Future<bool> _askDelete() async {
     return await _askYesNoOrCancel(
       title: 'Delete',
-      content: 'Delete current painting?',
+      content: 'Delete the current painting?',
+      yesTip: 'Delete the current painting.',
       wantOnlyYesAndCancelButtons: true,
     );
   }
@@ -151,7 +152,9 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
       title: title,
       content: 'Save the current changes?',
       yesCallBack: getSketchBank(context).saveFile,
+      yesTip: 'Save the current painting with your new changes.',
       noCallBack: getSketchBank(context).resetCurrentSketch,
+      noTip: 'Reset the current painting to how it was when opened.',
     );
   }
 
@@ -159,7 +162,9 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     required String title,
     required String content,
     Future<void> Function()? yesCallBack,
+    String? yesTip,
     Future<void> Function()? noCallBack,
+    String? noTip,
     bool wantOnlyYesAndCancelButtons = false,
   }) async {
     final alert = Alert(
@@ -169,12 +174,14 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
         unawaited(yesCallBack?.call());
         Navigator.of(context).pop(true);
       },
+      yesTip: yesTip,
       noCallBack: wantOnlyYesAndCancelButtons
           ? null
           : () {
               unawaited(noCallBack?.call());
               Navigator.of(context).pop(true);
             },
+      noTip: noTip,
       cancelCallBack: () => Navigator.of(context).pop(false),
     );
 

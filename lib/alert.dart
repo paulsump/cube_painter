@@ -86,8 +86,7 @@ class _Button extends StatelessWidget {
       child: ElevatedHexagonButton(
         child: Icon(icon, size: calcAssetIconSize(context)),
         onPressed: onPressed,
-        // TODO pass yes tip in
-        tip: 'Yes - Confirm that you do want to do this.',
+        tip: tip,
       ),
     );
   }

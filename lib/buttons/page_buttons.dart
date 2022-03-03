@@ -118,6 +118,7 @@ void _showHelp(BuildContext context) {
       yesCallBack: () {
         Navigator.of(context).pop(true);
       },
+      yesTip: 'Close the help message',
     ),
   );
 }
