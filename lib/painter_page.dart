@@ -46,11 +46,9 @@ class PainterPage extends StatelessWidget {
             //     isPingPong: paintingBank.isPingPong,
             //   ),
             if (paintingBank.animCubeInfos.isNotEmpty)
-              if (!paintingBank.isPingPong)
-                LoadingCubes(cubeInfos: paintingBank.animCubeInfos),
+              if (!paintingBank.isPingPong) const LoadingCubes(),
             if (paintingBank.isPingPong)
-              if (paintingBank.animCubeInfos.isNotEmpty)
-                PingPongCubes(cubeInfos: paintingBank.animCubeInfos),
+              if (paintingBank.animCubeInfos.isNotEmpty) const PingPongCubes(),
             const Gesturer(),
             const PageButtons(),
           ]),

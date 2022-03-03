@@ -2,7 +2,6 @@ import 'package:cube_painter/cubes/cubes_animated_builder.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +15,7 @@ const noWarn = [out, Position];
 /// via [finishAnim] or [whenComplete] after the animation is finished.
 /// Stateful because of SingleTickerProviderStateMixin
 class LoadingCubes extends StatefulWidget {
-  final List<CubeInfo> cubeInfos;
-
-  const LoadingCubes({
-    Key? key,
-    required this.cubeInfos,
-  }) : super(key: key);
+  const LoadingCubes({Key? key}) : super(key: key);
 
   @override
   State<LoadingCubes> createState() => LoadingCubesState();
