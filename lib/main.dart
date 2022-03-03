@@ -63,9 +63,14 @@ class CubePainterApp extends StatelessWidget {
             if (constraints.maxHeight == 0) {
               return Container();
             } else {
-              // if(Painting
-              unawaited(getPaintingBank(context).initOnce(context));
-              initZoomScaleOnce(context, 0.06494 * getShortestEdge(context));
+              final panZoomNotifier =
+                  getPanZoomNotifier(context, listen: false);
+
+              // Initialize once only
+              if (panZoomNotifier.scale == 0) {
+                panZoomNotifier.setScale(0.06494 * getShortestEdge(context));
+                unawaited(getPaintingBank(context).setup(context));
+              }
 
               return WillPopScope(
                   onWillPop: () async => false, child: const PainterPage());

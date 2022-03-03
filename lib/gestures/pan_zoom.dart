@@ -5,29 +5,20 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-/// Sets a starting value for the scale based on the shortest side of the device.
-/// This method may be called many times, but it only sets it the first time.
-void initZoomScaleOnce(BuildContext context, double scale) {
-  final panZoomNotifier = _getPanZoomNotifier(context, listen: false);
-
-  if (panZoomNotifier._scale == 0) {
-    panZoomNotifier._scale = scale;
-  }
-}
 
 double getZoomScale(BuildContext context, {bool listen = false}) =>
-    _getPanZoomNotifier(context, listen: listen).scale;
+    getPanZoomNotifier(context, listen: listen).scale;
 
 void setZoomScale(BuildContext context, double scale) =>
-    _getPanZoomNotifier(context, listen: false).setScale(scale);
+    getPanZoomNotifier(context, listen: false).setScale(scale);
 
 Offset getPanOffset(BuildContext context, {bool listen = false}) =>
-    _getPanZoomNotifier(context, listen: listen).offset;
+    getPanZoomNotifier(context, listen: listen).offset;
 
 void setPanOffset(BuildContext context, Offset offset) =>
-    _getPanZoomNotifier(context, listen: false).setOffset(offset);
+    getPanZoomNotifier(context, listen: false).setOffset(offset);
 
-PanZoomNotifier _getPanZoomNotifier(BuildContext context,
+PanZoomNotifier getPanZoomNotifier(BuildContext context,
         {required bool listen}) =>
     Provider.of<PanZoomNotifier>(context, listen: listen);
 
