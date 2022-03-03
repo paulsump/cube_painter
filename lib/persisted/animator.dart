@@ -8,7 +8,7 @@ const noWarn = out;
 enum CubeState { brushLine, loading, growingOrDone }
 
 /// Manages the starting and stopping of cube animation
-/// during loading and brushLineing.
+/// during loading and brushing.
 mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
@@ -28,7 +28,6 @@ mixin Animator {
     cubeState = CubeState.loading;
   }
 
-  //TODO Rename to startBrushLine
   void startBrushing() {
     finishAnim();
 
