@@ -169,7 +169,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   }) async {
     final alert = Alert(
       title: title,
-      content: content,
+      child: Text(content),
       yesCallBack: () {
         unawaited(yesCallBack?.call());
         Navigator.of(context).pop(true);

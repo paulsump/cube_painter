@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class Alert extends StatelessWidget {
   final String title;
 
-  final String content;
+  final Widget child;
 
   final VoidCallback yesCallBack;
   final String? yesTip;
@@ -23,7 +23,7 @@ class Alert extends StatelessWidget {
   const Alert({
     Key? key,
     required this.title,
-    required this.content,
+    required this.child,
     required this.yesCallBack,
     this.yesTip,
     this.noCallBack,
@@ -41,7 +41,7 @@ class Alert extends StatelessWidget {
       child: AlertDialog(
         backgroundColor: alertColor,
         title: Text(title),
-        content: Text(content),
+        content: child,
         actions: <Widget>[
           _Button(
             onPressed: yesCallBack,
