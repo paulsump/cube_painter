@@ -52,10 +52,11 @@ class PageButtons extends StatelessWidget {
                       "Drag on the canvas\nto add a line of cubes.\n\nYou can change the direction\nwhile you drag.",
                 ),
                 CubeRadioButton(
-                  isRadioOn: GestureMode.erase ==
+                  isRadioOn: GestureMode.brushErase ==
                       getGestureMode(context, listen: true),
                   icon: AssetIcons.cancelOutline,
-                  onPressed: () => setGestureMode(GestureMode.erase, context),
+                  onPressed: () =>
+                      setGestureMode(GestureMode.brushErase, context),
                   tip:
                       'Drag on the canvas to\nmove an animating cube.\n\nPlace it over\nthe cube that you want to delete.\n\nThen release to delete it.',
                   slice: Slice.whole,
