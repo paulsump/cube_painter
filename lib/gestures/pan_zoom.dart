@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-void initZoomScaleFirstTimeOnly(BuildContext context, double scale) {
+//TODO CONtinue doc comments from here
+void initZoomScaleOnce(BuildContext context, double scale) {
   final panZoomNotifier = _getPanZoomNotifier(context, listen: false);
 
   if (panZoomNotifier._scale == 0) {

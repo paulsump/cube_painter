@@ -44,7 +44,7 @@ class _PainterPageState extends State<PainterPage> {
 
   @override
   Widget build(BuildContext context) {
-    initZoomScaleFirstTimeOnly(context, 0.06494 * getShortestEdge(context));
+    initZoomScaleOnce(context, 0.06494 * getShortestEdge(context));
 
     final sketchBank = getSketchBank(context, listen: true);
 
