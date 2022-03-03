@@ -19,7 +19,7 @@ const noWarn = [out, Position];
 /// In [GestureMode.erase] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brush implements GestureHandler {
-  //TODO REMOVE THIS FUnk, USE Use sketchBank local
+  //TODO REMOVE THIS FUnk, USE Use paintingBank local
   List<CubeInfo> getAnimCubeInfos(context) =>
       getSketchBank(context).animCubeInfos;
 
@@ -120,13 +120,13 @@ class Brush implements GestureHandler {
   void _saveForUndo(BuildContext context) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
-    final sketchBank = getSketchBank(context);
-    final List<CubeInfo> cubeInfos = sketchBank.sketch.cubeInfos;
+    final paintingBank = getSketchBank(context);
+    final List<CubeInfo> cubeInfos = paintingBank.painting.cubeInfos;
 
     if (erase) {
-      assert(sketchBank.animCubeInfos.length == 1);
+      assert(paintingBank.animCubeInfos.length == 1);
 
-      final orphan = sketchBank.animCubeInfos[0];
+      final orphan = paintingBank.animCubeInfos[0];
 
       final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
 
@@ -136,7 +136,7 @@ class Brush implements GestureHandler {
       }
 
       // So that it doesn't get added back in whenComplete()
-      sketchBank.animCubeInfos.clear();
+      paintingBank.animCubeInfos.clear();
     } else {
       saveForUndo(context);
     }

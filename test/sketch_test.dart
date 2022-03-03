@@ -26,14 +26,14 @@ void main() {
     });
 
     test('save', () {
-      final sketch = Sketch.fromEmpty();
-      String newJson = jsonEncode(sketch);
+      final painting = Sketch.fromEmpty();
+      String newJson = jsonEncode(painting);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      final sketch = Sketch.fromEmpty();
-      String newJson = sketch.toString();
+      final painting = Sketch.fromEmpty();
+      String newJson = painting.toString();
       expect(testJson, equals(newJson));
     });
   });
@@ -73,14 +73,14 @@ void main() {
     });
 
     test('save', () {
-      const sketch = Sketch(cubeInfos: testCubeInfos);
-      String newJson = jsonEncode(sketch);
+      const painting = Sketch(cubeInfos: testCubeInfos);
+      String newJson = jsonEncode(painting);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const sketch = Sketch(cubeInfos: testCubeInfos);
-      String newJson = sketch.toString();
+      const painting = Sketch(cubeInfos: testCubeInfos);
+      String newJson = painting.toString();
       expect(testJson, equals(newJson));
     });
   });

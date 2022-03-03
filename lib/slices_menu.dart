@@ -86,7 +86,7 @@ class _Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sketchBank = getSketchBank(context);
+    final paintingBank = getSketchBank(context);
 
     final padY = SizedBox(height: padHeight);
 
@@ -106,12 +106,12 @@ class _Example extends StatelessWidget {
             child: Stack(
               children: [
                 Thumbnail(
-                  sketch: sketchBank.slicesExample.triangleWithGap,
-                  unitTransform: sketchBank.slicesExample.unitTransform,
+                  painting: paintingBank.slicesExample.triangleWithGap,
+                  unitTransform: paintingBank.slicesExample.unitTransform,
                 ),
                 Thumbnail(
-                  sketch: sketchBank.slicesExample.triangleGap,
-                  unitTransform: sketchBank.slicesExample.unitTransform,
+                  painting: paintingBank.slicesExample.triangleGap,
+                  unitTransform: paintingBank.slicesExample.unitTransform,
                 ),
                 // Container(color: Colors.yellow),
               ],

@@ -46,7 +46,7 @@ class _PainterPageState extends State<PainterPage> {
   Widget build(BuildContext context) {
     initZoomScaleOnce(context, 0.06494 * getShortestEdge(context));
 
-    final sketchBank = getSketchBank(context, listen: true);
+    final paintingBank = getSketchBank(context, listen: true);
 
     return Scaffold(
       drawer: const PaintingsMenu(),
@@ -61,15 +61,16 @@ class _PainterPageState extends State<PainterPage> {
               child: Stack(
                 children: [
                   Transform.scale(scale: 30, child: const Horizon()),
-                  if (sketchBank.hasCubes && !sketchBank.isAnimatingLoadedCubes)
-                    StaticCubes(sketch: sketchBank.sketch),
+                  if (paintingBank.hasCubes &&
+                      !paintingBank.isAnimatingLoadedCubes)
+                    StaticCubes(painting: paintingBank.painting),
                 ],
               ),
             ),
-            if (sketchBank.animCubeInfos.isNotEmpty)
+            if (paintingBank.animCubeInfos.isNotEmpty)
               AnimCubes(
-                cubeInfos: sketchBank.animCubeInfos,
-                isPingPong: sketchBank.isPingPong,
+                cubeInfos: paintingBank.animCubeInfos,
+                isPingPong: paintingBank.isPingPong,
               ),
             const Gesturer(),
             const PageButtons(),

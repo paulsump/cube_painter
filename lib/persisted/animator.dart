@@ -15,14 +15,14 @@ mixin Animator {
   bool isBrushing = false;
 
   /// defined in [Persister]
-  Sketch get sketch;
+  Sketch get painting;
 
   bool isPingPong = false;
 
   /// move all the (static) cubeInfos to animCubeInfos
   @protected
   void startAnimatingLoadedCubes() {
-    final List<CubeInfo> cubeInfos = sketch.cubeInfos;
+    final List<CubeInfo> cubeInfos = painting.cubeInfos;
 
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
@@ -43,7 +43,7 @@ mixin Animator {
   void finishAnim() {
     if (!isBrushing) {
       if (!isAnimatingLoadedCubes) {
-        sketch.cubeInfos.addAll(animCubeInfos);
+        painting.cubeInfos.addAll(animCubeInfos);
       }
 
       animCubeInfos.clear();

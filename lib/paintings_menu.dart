@@ -30,7 +30,7 @@ class PaintingsMenu extends StatefulWidget {
 class _PaintingsMenuState extends State<PaintingsMenu> {
   @override
   Widget build(BuildContext context) {
-    final sketchBank = getSketchBank(context, listen: true);
+    final paintingBank = getSketchBank(context, listen: true);
 
     pop(funk) => () async {
           await funk();
@@ -59,7 +59,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
                 iconSize: calcAssetIconSize(context) * 0.96,
               ),
               IconFlatHexagonButton(
-                onPressed: sketchBank.modified ? _saveFile : null,
+                onPressed: paintingBank.modified ? _saveFile : null,
                 tip: 'Save the current painting',
                 icon: Icons.save,
                 iconSize: calcNormalIconSize(context),
@@ -81,14 +81,14 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
           ),
           const SizedBox(height: 5.0),
           const Divider(),
-          for (int i = 0; i < sketchBank.sketchEntries.length; ++i)
+          for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
             Transform.translate(
               offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
               child: ThumbnailButton(
                 tip: 'Load this painting',
                 onPressed: () =>
-                    _loadFile(filePath: sketchBank.sketchEntries[i].key),
-                sketch: sketchBank.sketchEntries[i].value,
+                    _loadFile(filePath: paintingBank.paintingEntries[i].key),
+                painting: paintingBank.paintingEntries[i].value,
               ),
             ),
           const Divider(),
@@ -98,42 +98,44 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   }
 
   void _newFile() async {
-    final sketchBank = getSketchBank(context);
+    final paintingBank = getSketchBank(context);
 
-    if (!sketchBank.modified || await _askSaveCurrent(title: 'New Painting')) {
-      await sketchBank.newFile(context);
+    if (!paintingBank.modified ||
+        await _askSaveCurrent(title: 'New Painting')) {
+      await paintingBank.newFile(context);
       setState(() {});
     }
   }
 
   void _loadFile({required String filePath}) async {
-    final sketchBank = getSketchBank(context);
+    final paintingBank = getSketchBank(context);
 
-    if (!sketchBank.modified || await _askSaveCurrent(title: 'Load Painting')) {
-      sketchBank.loadFile(filePath: filePath, context: context);
+    if (!paintingBank.modified ||
+        await _askSaveCurrent(title: 'Load Painting')) {
+      paintingBank.loadFile(filePath: filePath, context: context);
       setState(() {});
     }
   }
 
   void _saveFile() async {
-    final sketchBank = getSketchBank(context);
+    final paintingBank = getSketchBank(context);
 
-    await sketchBank.saveFile();
+    await paintingBank.saveFile();
     setState(() {});
   }
 
   void _saveACopyFile() async {
-    final sketchBank = getSketchBank(context);
+    final paintingBank = getSketchBank(context);
 
-    await sketchBank.saveACopyFile();
+    await paintingBank.saveACopyFile();
     setState(() {});
   }
 
   void _deleteCurrentFile() async {
     if (await _askDelete()) {
-      final sketchBank = getSketchBank(context);
+      final paintingBank = getSketchBank(context);
 
-      await sketchBank.deleteCurrentFile(context);
+      await paintingBank.deleteCurrentFile(context);
       setState(() {});
     }
   }

@@ -19,11 +19,11 @@ const noWarn = out;
 /// init() is the main starting point for the app.
 mixin Persister {
   @protected
-  final sketches = <String, Sketch>{};
+  final paintinges = <String, Sketch>{};
 
   final slicesExample = _SlicesExample();
 
-  String get json => sketch.toString();
+  String get json => painting.toString();
 
   final _settingsPersister = SettingsPersister();
   late Settings _settings;
@@ -33,12 +33,12 @@ mixin Persister {
   bool get modified => json != _savedJson;
 
   bool get hasCubes =>
-      sketches.isNotEmpty &&
+      paintinges.isNotEmpty &&
       _hasSketchForCurrentFilePath &&
-      sketch.cubeInfos.isNotEmpty;
+      painting.cubeInfos.isNotEmpty;
 
   bool get _hasSketchForCurrentFilePath {
-    if (!sketches.containsKey(currentFilePath)) {
+    if (!paintinges.containsKey(currentFilePath)) {
       out(currentFilePath);
 
       return false;
@@ -60,21 +60,21 @@ mixin Persister {
     unawaited(_settingsPersister.save());
   }
 
-  Sketch get sketch {
+  Sketch get painting {
     if (!_hasSketchForCurrentFilePath) {
       assert(false,
-          "sketches doesn't contain key of currentFilePath: $currentFilePath");
+          "paintinges doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Sketch.fromEmpty();
     }
-    return sketches[currentFilePath]!;
+    return paintinges[currentFilePath]!;
   }
 
-  void setSketch(Sketch sketch) => sketches[currentFilePath] = sketch;
+  void setSketch(Sketch painting) => paintinges[currentFilePath] = painting;
 
-  UnmodifiableListView<MapEntry> get sketchEntries =>
-      UnmodifiableListView<MapEntry>(sketches.entries.toList());
+  UnmodifiableListView<MapEntry> get paintingEntries =>
+      UnmodifiableListView<MapEntry>(paintinges.entries.toList());
 
   /// The main starting point for the app.
   Future<void> init(BuildContext context) async {
@@ -94,7 +94,7 @@ mixin Persister {
       saveCurrentFilePath(firstPath);
     }
 
-    if (!sketches.containsKey(currentFilePath)) {
+    if (!paintinges.containsKey(currentFilePath)) {
       out("currentFilePath not found ('$currentFilePath'), so using the first in the list");
 
       saveCurrentFilePath(firstPath);
@@ -107,13 +107,13 @@ mixin Persister {
   }
 
   // insert at the top of the list
-  void pushSketch(Sketch sketch) {
-    final copy = Map<String, Sketch>.from(sketches);
+  void pushSketch(Sketch painting) {
+    final copy = Map<String, Sketch>.from(paintinges);
 
-    sketches.clear();
-    setSketch(sketch);
+    paintinges.clear();
+    setSketch(painting);
 
-    sketches.addAll(copy);
+    paintinges.addAll(copy);
   }
 
   Future<void> newFile(BuildContext context) async {
@@ -154,7 +154,7 @@ mixin Persister {
     unawaited(saveFile());
   }
 
-  void addCubeInfo(CubeInfo info) => sketch.cubeInfos.add(info);
+  void addCubeInfo(CubeInfo info) => painting.cubeInfos.add(info);
 
   Future<void> _setNewFilePath() async {
     final String appFolderPath = await getAppFolderPath();
@@ -166,9 +166,9 @@ mixin Persister {
   }
 
   Future<void> resetCurrentSketch() async =>
-      sketches[currentFilePath] = Sketch.fromString(_savedJson);
+      paintinges[currentFilePath] = Sketch.fromString(_savedJson);
 
-  void clear() => sketch.cubeInfos.clear();
+  void clear() => painting.cubeInfos.clear();
 
   Future<String> _loadAllSketches({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
@@ -183,7 +183,7 @@ mixin Persister {
       if (!(ignoreCurrent && path == currentFilePath)) {
         final File file = File(path);
 
-        sketches[path] = Sketch.fromString(await file.readAsString());
+        paintinges[path] = Sketch.fromString(await file.readAsString());
       }
     }
 
@@ -191,7 +191,7 @@ mixin Persister {
   }
 
   Future<void> deleteCurrentFile(BuildContext context) async {
-    sketches.remove(currentFilePath);
+    paintinges.remove(currentFilePath);
 
     final File file = File(currentFilePath);
 
@@ -200,10 +200,10 @@ mixin Persister {
       file.delete();
     }
 
-    if (sketches.isEmpty) {
+    if (paintinges.isEmpty) {
       await newFile(context);
     } else {
-      loadFile(filePath: sketches.keys.first, context: context);
+      loadFile(filePath: paintinges.keys.first, context: context);
     }
   }
 }

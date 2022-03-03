@@ -36,7 +36,7 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
   /// which then creates a similar list
   /// If we are in add gestureMode
   /// the cubes will end up going
-  /// in the sketch once they've animated to full size.
+  /// in the painting once they've animated to full size.
   /// if we're in erase gestureMode they shrink to zero.
   /// either way they get removed from the animCubeInfos array once the
   /// anim is done.
@@ -60,7 +60,7 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
   void updateAfterLoad(BuildContext context) {
     // TODO if fail, alert user, perhaps skip
     // TODO iff finally:
-    if (sketches.isNotEmpty) {
+    if (paintinges.isNotEmpty) {
       getUndoer(context).clear();
 
       startAnimatingLoadedCubes();
@@ -68,7 +68,7 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
     }
   }
 
-  /// Creates a sketch from a json string
+  /// Creates a painting from a json string
   /// called from [UndoNotifier]
   void setJson(String json) {
     setSketch(Sketch.fromString(json));

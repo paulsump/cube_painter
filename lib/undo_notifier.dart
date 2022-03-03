@@ -50,8 +50,8 @@ class UndoNotifier extends ChangeNotifier {
   ) {
     pushTo.add(getSketchBank(context).json);
 
-    final sketchBank = getSketchBank(context);
-    sketchBank.setJson(popFrom.removeLast());
+    final paintingBank = getSketchBank(context);
+    paintingBank.setJson(popFrom.removeLast());
 
     notifyListeners();
   }

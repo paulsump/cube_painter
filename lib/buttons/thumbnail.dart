@@ -10,32 +10,32 @@ const noWarn = out;
 /// Used on the buttons on the [PaintingsMenu]
 /// 'Unit' means this thumbnail has size of 1
 class Thumbnail extends StatelessWidget {
-  final Sketch sketch;
+  final Sketch painting;
 
   final UnitTransform _unitTransform;
 
   const Thumbnail({
     Key? key,
-    required this.sketch,
+    required this.painting,
     required UnitTransform unitTransform,
   })  : _unitTransform = unitTransform,
         super(key: key);
 
-  Thumbnail.useTransform({Key? key, required this.sketch})
-      : _unitTransform = sketch.unitTransform,
+  Thumbnail.useTransform({Key? key, required this.painting})
+      : _unitTransform = painting.unitTransform,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return sketch.cubeInfos.isNotEmpty
+    return painting.cubeInfos.isNotEmpty
         ? Transform.scale(
             scale: _unitTransform.scale,
             child: Transform.translate(
                 offset: _unitTransform.offset,
                 // TODO REMove hack for example slice
-                child: sketch.cubeInfos.length == 1
-                    ? StandAloneAnimatedCube(info: sketch.cubeInfos[0])
-                    : StaticCubes(sketch: sketch)),
+                child: painting.cubeInfos.length == 1
+                    ? StandAloneAnimatedCube(info: painting.cubeInfos[0])
+                    : StaticCubes(painting: painting)),
           )
         : Container();
   }

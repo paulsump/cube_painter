@@ -12,13 +12,13 @@ class ThumbnailButton extends StatelessWidget {
 
   final String tip;
 
-  final Sketch sketch;
+  final Sketch painting;
 
   const ThumbnailButton({
     Key? key,
     required this.onPressed,
     required this.tip,
-    required this.sketch,
+    required this.painting,
   }) : super(key: key);
 
   @override
@@ -34,7 +34,7 @@ class ThumbnailButton extends StatelessWidget {
           onPressed: onPressed,
           child: Transform.scale(
             scale: height * 0.6,
-            child: Thumbnail.useTransform(sketch: sketch),
+            child: Thumbnail.useTransform(painting: painting),
           ),
           style: ButtonStyle(
             shape: hexagonBorderShape,
