@@ -21,7 +21,7 @@ mixin Persister {
   @protected
   final paintings = <String, Painting>{};
 
-  final slicesExample = _SlicesExample();
+  final slicesExample = _SlicesExamplePainting();
 
   String get json => painting.toString();
 
@@ -208,7 +208,7 @@ mixin Persister {
   }
 }
 
-class _SlicesExample {
+class _SlicesExamplePainting {
   late UnitTransform unitTransform;
 
   late Painting triangleWithGap;

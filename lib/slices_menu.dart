@@ -71,7 +71,7 @@ class _SlicesMenuState extends State<SlicesMenu> {
                 const SliceCubeButton(slice: Slice.bottomRight),
               ],
             ),
-            if (isPortrait) Center(child: _Example(padHeight: padHeight)),
+            if (isPortrait) Center(child: _SlicesExample(padHeight: padHeight)),
           ],
         ),
       ),
@@ -79,16 +79,20 @@ class _SlicesMenuState extends State<SlicesMenu> {
   }
 }
 
-class _Example extends StatelessWidget {
+class _SlicesExample extends StatelessWidget {
   final double padHeight;
 
-  const _Example({Key? key, required this.padHeight}) : super(key: key);
+  const _SlicesExample({Key? key, required this.padHeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final paintingBank = getPaintingBank(context);
 
     final padY = SizedBox(height: padHeight);
+    final length = getShortestEdge(context);
+
+    final offsetY = 0.32251 * length;
+    final scale = 0.42857 * length;
 
     return Column(
       children: [
@@ -98,11 +102,9 @@ class _Example extends StatelessWidget {
         const Text('structures like this...'),
         padY,
         Transform.translate(
-          /// TODO Responsive to screen size- magic numbers
-          offset: const Offset(0, 149),
+          offset: Offset(0, offsetY),
           child: Transform.scale(
-            /// TODO Responsive to screen size- magic numbers
-            scale: 198,
+            scale: scale,
             child: Stack(
               children: [
                 Thumbnail(
