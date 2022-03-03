@@ -6,6 +6,7 @@ import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
+import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out];
@@ -19,11 +20,13 @@ class CurrentStaticCubes extends StatelessWidget {
   Widget build(BuildContext context) {
     final paintingBank = getPaintingBank(context, listen: true);
 
-    return Stack(children: [
-      if (paintingBank.hasCubes && !paintingBank.isAnimatingLoadedCubes)
-        for (final cubeInfo in paintingBank.painting.cubeInfos)
-          _PositionedUnitCube(info: cubeInfo)
-    ]);
+    return UnitToScreen(
+      child: Stack(children: [
+        if (paintingBank.hasCubes && !paintingBank.isAnimatingLoadedCubes)
+          for (final cubeInfo in paintingBank.painting.cubeInfos)
+            _PositionedUnitCube(info: cubeInfo)
+      ]),
+    );
   }
 }
 

@@ -9,7 +9,6 @@ import 'package:cube_painter/out.dart';
 import 'package:cube_painter/paintings_menu.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/slices_menu.dart';
-import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 /// prevent 'organise imports' from removing imports
@@ -37,16 +36,16 @@ class PainterPage extends StatelessWidget {
           left: false,
           child: Stack(children: [
             const Horizon(),
-            UnitToScreen(
-              child: Stack(
-                children: [
-                  if (paintingBank.hasCubes &&
-                      !paintingBank.isAnimatingLoadedCubes)
-                    StaticCubes(painting: paintingBank.painting),
-                  // const CurrentStaticCubes(),
-                ],
-              ),
-            ),
+            const CurrentStaticCubes(),
+            // UnitToScreen(
+            //   child: Stack(
+            //     children: [
+            //       if (paintingBank.hasCubes &&
+            //           !paintingBank.isAnimatingLoadedCubes)
+            //         StaticCubes(painting: paintingBank.painting),
+            //     ],
+            //   ),
+            // ),
             if (paintingBank.animCubeInfos.isNotEmpty)
               AnimCubes(
                 cubeInfos: paintingBank.animCubeInfos,

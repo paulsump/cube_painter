@@ -8,6 +8,7 @@ class Horizon extends StatelessWidget {
   @override
   Widget build(BuildContext context) => UnitToScreen(
         child: Transform.scale(
+          /// TODO Responsive to screen size- magic numbers
           scale: 30,
           child: const CustomPaint(painter: _Painter()),
         ),
