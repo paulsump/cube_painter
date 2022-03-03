@@ -5,7 +5,7 @@ import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail_button.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/sketch_bank.dart';
+import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 

@@ -2,7 +2,7 @@ import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
-import 'package:cube_painter/persisted/sketch.dart';
+import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';

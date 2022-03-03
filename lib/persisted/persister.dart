@@ -5,9 +5,9 @@ import 'dart:io';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/assets.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
+import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/persisted/persist.dart';
 import 'package:cube_painter/persisted/settings.dart';
-import 'package:cube_painter/persisted/sketch.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 

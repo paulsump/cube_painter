@@ -1,7 +1,7 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/persisted/sketch.dart';
+import 'package:cube_painter/persisted/painting.dart';
 import 'package:flutter/material.dart';
 
 /// A flat transparent button with a thumbnail on it.

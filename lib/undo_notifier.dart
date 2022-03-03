@@ -1,5 +1,5 @@
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/sketch_bank.dart';
+import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
+import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/persisted/persister.dart';
-import 'package:cube_painter/persisted/sketch.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
