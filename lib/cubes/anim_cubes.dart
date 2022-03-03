@@ -27,7 +27,7 @@ class AnimCubes extends StatefulWidget {
   const AnimCubes({
     Key? key,
     required this.cubeInfos,
-    this.isPingPong = false,
+    required this.isPingPong,
   }) : super(key: key);
 
   @override
@@ -48,6 +48,7 @@ class AnimCubesState extends State<AnimCubes>
       vsync: this,
     );
 
+    out(widget.isPingPong);
     if (widget.isPingPong) {
       _controller.repeat();
     } else {
