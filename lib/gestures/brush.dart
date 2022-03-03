@@ -38,7 +38,7 @@ class Brush implements GestureHandler {
 
   @override
   void update(Offset point, double scale, BuildContext context) {
-    if (GestureMode.brushLine == getGestureMode(context)) {
+    if (GestureMode.addSlice != getGestureMode(context)) {
       _updateLine(point, context);
     } else {
       _replaceCube(point, context);
@@ -125,15 +125,23 @@ class Brush implements GestureHandler {
     final List<CubeInfo> cubeInfos = paintingBank.painting.cubeInfos;
 
     if (erase) {
-      assert(paintingBank.animCubeInfos.length == 1);
+      final found = <CubeInfo>[];
 
-      final orphan = paintingBank.animCubeInfos[0];
+      for (final animCubeInfo in paintingBank.animCubeInfos) {
+        final CubeInfo? cubeInfo =
+            _getCubeInfoAt(animCubeInfo.center, cubeInfos);
 
-      final CubeInfo? cubeInfo = _getCubeInfoAt(orphan.center, cubeInfos);
+        if (cubeInfo != null) {
+          found.add(cubeInfo);
+        }
+      }
 
-      if (cubeInfo != null) {
+      if (found.isNotEmpty) {
         saveForUndo(context);
-        cubeInfos.remove(cubeInfo);
+      }
+
+      for (final f in found) {
+        cubeInfos.remove(f);
       }
 
       // So that it doesn't get added back in whenComplete()
