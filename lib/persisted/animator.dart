@@ -10,7 +10,7 @@ const noWarn = out;
 mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
-  bool isAnimatingLoadedCubes = true;
+  bool isAnimatingLoadedCubes = false;
 
   bool isBrushing = false;
 
