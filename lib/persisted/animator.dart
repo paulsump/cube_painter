@@ -12,7 +12,7 @@ mixin Animator {
 
   bool isAnimatingLoadedCubes = false;
 
-  bool isBrushing = true;
+  bool isBrushing = false;
 
   /// defined in [Persister]
   Painting get painting;
