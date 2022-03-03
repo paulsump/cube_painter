@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 /// a normal cube (not a [Slice])
 /// 'unit' means that it has a size of 1.
+/// This has been optimised more than [SliceUnitCube] at the moment
+/// because there can be lots of these, but less [SliceUnitCube]s
 class WholeUnitCube extends StatelessWidget {
   const WholeUnitCube({Key? key}) : super(key: key);
 

@@ -9,10 +9,7 @@ import 'package:flutter/material.dart';
 
 import 'unit_ping_pong.dart';
 
-/// Unit cube or slice that animates itself based the [Fields] passed in.
-/// It was fun to see if it worked putting the anim controller on every widget
-/// and it does, as long as you never need the anim controller value e.g. if you want to
-/// recreate the cubes elsewhere or with a different animation, starting at the same place.
+/// Unit cube or slice that animates itself based the fields passed in.
 class StandAloneAnimatedCube extends StatefulWidget {
   final CubeInfo info;
 

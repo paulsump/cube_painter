@@ -9,14 +9,17 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out];
 
+/// The entire painting is with this.
+/// It has a list of [_PositionedUnitCube]s.
+/// It draws them in the order they were added.
 class StaticCubes extends StatelessWidget {
-  final List<StaticCube> _cubes;
+  final List<_PositionedUnitCube> _cubes;
 
   StaticCubes({
     Key? key,
     required Sketch sketch,
   })  : _cubes = List.generate(sketch.cubeInfos.length,
-            (i) => StaticCube(info: sketch.cubeInfos[i])),
+            (i) => _PositionedUnitCube(info: sketch.cubeInfos[i])),
         super(key: key);
 
   @override
@@ -24,13 +27,11 @@ class StaticCubes extends StatelessWidget {
       _cubes.isEmpty ? Container(color: Colors.red) : Stack(children: _cubes);
 }
 
-class StaticCube extends StatelessWidget {
+/// A cube that has been positioned
+class _PositionedUnitCube extends StatelessWidget {
   final CubeInfo info;
 
-  const StaticCube({
-    Key? key,
-    required this.info,
-  }) : super(key: key);
+  const _PositionedUnitCube({Key? key, required this.info}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,32 +42,6 @@ class StaticCube extends StatelessWidget {
       child: info.slice == Slice.whole
           ? const WholeUnitCube()
           : SliceUnitCube(slice: info.slice),
-    );
-  }
-}
-
-class ScaledCube extends StatelessWidget {
-  final CubeInfo info;
-  final double scale;
-
-  const ScaledCube({
-    Key? key,
-    required this.info,
-    required this.scale,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final Offset offset = positionToUnitOffset(info.center);
-
-    return Transform.translate(
-      offset: offset,
-      child: Transform.scale(
-        scale: scale,
-        child: info.slice == Slice.whole
-            ? const WholeUnitCube()
-            : SliceUnitCube(slice: info.slice),
-      ),
     );
   }
 }

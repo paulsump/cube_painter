@@ -2,6 +2,7 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/material.dart';
 
+/// draws a sliced cube of unit (1) size
 class SliceUnitCube extends StatelessWidget {
   final Slice slice;
 

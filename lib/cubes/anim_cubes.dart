@@ -1,15 +1,19 @@
+import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/unit_ping_pong.dart';
+import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/sketch_bank.dart';
+import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
 
-/// Animates a list of [ScaledCube]s.
+/// Animates a list of [_PositionedScaledCube]s.
 /// Used when loading and brushing (creating using gestures).
 /// One animator controls them all.
 /// The cubes are moved to [StaticCubes] either externally
@@ -58,7 +62,7 @@ class AnimCubesState extends State<AnimCubes>
     }
 
     _controller.forward(from: fromZero ? 0 : _controller.value).whenComplete(
-      () {
+          () {
         final sketchBank = getSketchBank(context);
 
         sketchBank.finishAnim();
@@ -106,7 +110,7 @@ class AnimCubesState extends State<AnimCubes>
               child: Stack(
                 children: [
                   for (int i = 0; i < n; ++i)
-                    ScaledCube(
+                    _PositionedScaledCube(
                       scale: widget.isPingPong
                           ? unitPingPong(i)
                           : lerp(unitPingPong(i), 1.0, _controller.value),
@@ -118,6 +122,35 @@ class AnimCubesState extends State<AnimCubes>
           ],
         );
       },
+    );
+  }
+}
+
+/// A cube that has been positioned and scale
+/// Similar to [_PositionedUnitCube], but scaled too.
+/// This allows the cube to animate bigger an smaller.
+class _PositionedScaledCube extends StatelessWidget {
+  final CubeInfo info;
+  final double scale;
+
+  const _PositionedScaledCube({
+    Key? key,
+    required this.info,
+    required this.scale,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Offset offset = positionToUnitOffset(info.center);
+
+    return Transform.translate(
+      offset: offset,
+      child: Transform.scale(
+        scale: scale,
+        child: info.slice == Slice.whole
+            ? const WholeUnitCube()
+            : SliceUnitCube(slice: info.slice),
+      ),
     );
   }
 }
