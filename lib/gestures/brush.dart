@@ -17,7 +17,7 @@ const noWarn = [out, Position];
 
 /// Turns gestures into a line of cubes or a single slice cube
 /// depending on the [GestureMode].
-/// In [GestureMode.brushErase] mode it yields the
+/// In [GestureMode.eraseLine] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brush implements GestureHandler {
   List<CubeInfo> getAnimCubeInfos(context) =>
@@ -119,7 +119,7 @@ class Brush implements GestureHandler {
       getAnimCubeInfos(context).add(CubeInfo(center: center, slice: slice));
 
   void _saveForUndo(BuildContext context) {
-    final bool erase = GestureMode.brushErase == getGestureMode(context);
+    final bool erase = GestureMode.eraseLine == getGestureMode(context);
 
     final paintingBank = getPaintingBank(context);
     final List<CubeInfo> cubeInfos = paintingBank.painting.cubeInfos;
