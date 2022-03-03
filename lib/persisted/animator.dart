@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-enum CubeState { brushLine, growing, done }
+enum CubeState { brushLine, loading, done }
 
 /// Manages the starting and stopping of cube animation
 /// during loading and brushing.
@@ -26,7 +26,7 @@ mixin Animator {
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
-    cubeState = CubeState.growing;
+    cubeState = CubeState.loading;
   }
 
   //TODO Rename to startBrushLine
@@ -53,7 +53,7 @@ mixin Animator {
     switch (cubeState) {
       case CubeState.brushLine:
         break;
-      case CubeState.growing:
+      case CubeState.loading:
         animCubeInfos.clear();
         break;
       case CubeState.done:

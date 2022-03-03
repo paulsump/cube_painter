@@ -24,7 +24,7 @@ class DoneCubes extends StatelessWidget {
     return UnitToScreen(
       child: Stack(children: [
         if (paintingBank.hasCubes &&
-            paintingBank.cubeState != CubeState.growing)
+            paintingBank.cubeState != CubeState.loading)
           for (final cubeInfo in paintingBank.painting.cubeInfos)
             _PositionedUnitCube(info: cubeInfo)
       ]),
