@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/unit_ping_pong.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
@@ -36,7 +38,8 @@ class CubesAnimatedBuilder extends StatelessWidget {
                     PositionedScaledCube(
                       scale: isPingPong
                           ? unitPingPong(i)
-                          : lerp(unitPingPong(i), 1.0, _controller.value),
+                          : lerpDouble(
+                              unitPingPong(i), 1.0, _controller.value)!,
                       info: paintingBank.animCubeInfos[i],
                     ),
                 ],

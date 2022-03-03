@@ -57,10 +57,11 @@ LinearGradient _getGradient(Side side) {
 }
 
 //TODO inline these, making more consts
-const double dt = 0.2;
-const double t = 0.8;
+// either that or rename them
+const double _dt = 0.2;
+const double _t = 0.8;
 final _gradientT = LinearGradient(
-  colors: [getTweenBLtoTColor(t - dt), getTweenBLtoTColor(t + dt)],
+  colors: [getTweenBLtoTColor(_t - _dt), getTweenBLtoTColor(_t + _dt)],
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
 );
