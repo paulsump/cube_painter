@@ -21,7 +21,7 @@ const noWarn = [out, Position];
 class Brush implements GestureHandler {
   //TODO REMOVE THIS FUnk, USE Use paintingBank local
   List<CubeInfo> getAnimCubeInfos(context) =>
-      getSketchBank(context).animCubeInfos;
+      getPaintingBank(context).animCubeInfos;
 
   final brushMaths = BrushMaths();
   var previousPositions = Positions.empty;
@@ -30,7 +30,7 @@ class Brush implements GestureHandler {
 
   @override
   void start(Offset point, BuildContext context) {
-    getSketchBank(context).startBrushing();
+    getPaintingBank(context).startBrushing();
 
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
@@ -50,7 +50,7 @@ class Brush implements GestureHandler {
 
   @override
   void tapDown(Offset point, BuildContext context) {
-    getSketchBank(context).startBrushing();
+    getPaintingBank(context).startBrushing();
 
     _replaceCube(point, context);
   }
@@ -59,7 +59,7 @@ class Brush implements GestureHandler {
   void tapUp(Offset point, BuildContext context) => _saveForUndo(context);
 
   void _setPingPong(bool value, BuildContext context) =>
-      getSketchBank(context).setIsPingPong(value);
+      getPaintingBank(context).setIsPingPong(value);
 
   void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
@@ -120,7 +120,7 @@ class Brush implements GestureHandler {
   void _saveForUndo(BuildContext context) {
     final bool erase = GestureMode.erase == getGestureMode(context);
 
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
     final List<CubeInfo> cubeInfos = paintingBank.painting.cubeInfos;
 
     if (erase) {
@@ -141,7 +141,7 @@ class Brush implements GestureHandler {
       saveForUndo(context);
     }
     _setPingPong(false, context);
-    getSketchBank(context).isBrushing = false;
+    getPaintingBank(context).isBrushing = false;
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {

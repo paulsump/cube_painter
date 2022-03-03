@@ -108,7 +108,7 @@ class CubeLineRadioButton extends StatelessWidget {
           child: Transform.scale(
               scale: calcButtonChildScale(context) * 1.5,
               child: Thumbnail.useTransform(
-                painting: Sketch(
+                painting: Painting(
                   cubeInfos: List.generate(
                     n,
                     (index) => CubeInfo(

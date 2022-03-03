@@ -12,7 +12,7 @@ void saveForUndo(BuildContext context) => getUndoer(context).save(context);
 
 /// Provides access to the undo / redo mechanism.
 /// notifies for the [_UndoButton] states in [PageButtons]
-/// [SketchBank]  notifies the page in [setJson]
+/// [PaintingBank]  notifies the page in [setJson]
 class UndoNotifier extends ChangeNotifier {
   final _undos = <String>[];
   final _redos = <String>[];
@@ -28,7 +28,7 @@ class UndoNotifier extends ChangeNotifier {
   }
 
   void save(BuildContext context) {
-    _undos.add(getSketchBank(context).json);
+    _undos.add(getPaintingBank(context).json);
     _redos.clear();
 
     notifyListeners();
@@ -36,7 +36,7 @@ class UndoNotifier extends ChangeNotifier {
 
   void undo(BuildContext context) {
     // Just in case the animation is still going, clear the AnimCubeInfos
-    getSketchBank(context).finishAnim();
+    getPaintingBank(context).finishAnim();
 
     _popFromPushTo(_undos, _redos, context);
   }
@@ -48,9 +48,9 @@ class UndoNotifier extends ChangeNotifier {
     List<String> pushTo,
     BuildContext context,
   ) {
-    pushTo.add(getSketchBank(context).json);
+    pushTo.add(getPaintingBank(context).json);
 
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
     paintingBank.setJson(popFrom.removeLast());
 
     notifyListeners();

@@ -30,7 +30,7 @@ class PaintingsMenu extends StatefulWidget {
 class _PaintingsMenuState extends State<PaintingsMenu> {
   @override
   Widget build(BuildContext context) {
-    final paintingBank = getSketchBank(context, listen: true);
+    final paintingBank = getPaintingBank(context, listen: true);
 
     pop(funk) => () async {
           await funk();
@@ -98,7 +98,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   }
 
   void _newFile() async {
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
 
     if (!paintingBank.modified ||
         await _askSaveCurrent(title: 'New Painting')) {
@@ -108,7 +108,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   }
 
   void _loadFile({required String filePath}) async {
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
 
     if (!paintingBank.modified ||
         await _askSaveCurrent(title: 'Load Painting')) {
@@ -118,14 +118,14 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
   }
 
   void _saveFile() async {
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
 
     await paintingBank.saveFile();
     setState(() {});
   }
 
   void _saveACopyFile() async {
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
 
     await paintingBank.saveACopyFile();
     setState(() {});
@@ -133,7 +133,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
 
   void _deleteCurrentFile() async {
     if (await _askDelete()) {
-      final paintingBank = getSketchBank(context);
+      final paintingBank = getPaintingBank(context);
 
       await paintingBank.deleteCurrentFile(context);
       setState(() {});
@@ -153,9 +153,9 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
     return await _askYesNoOrCancel(
       title: title,
       content: 'Save the current changes?',
-      yesCallBack: getSketchBank(context).saveFile,
+      yesCallBack: getPaintingBank(context).saveFile,
       yesTip: 'Save the current painting with your new changes.',
-      noCallBack: getSketchBank(context).resetCurrentSketch,
+      noCallBack: getPaintingBank(context).resetCurrentPainting,
       noTip: 'Reset the current painting to how it was when opened.',
     );
   }

@@ -15,24 +15,24 @@ void main() {
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
-      Sketch newSketch = Sketch.fromJson(map);
+      Painting newPainting = Painting.fromJson(map);
 
-      expect(newSketch.cubeInfos.length, equals(0));
+      expect(newPainting.cubeInfos.length, equals(0));
     });
 
     test('load toString()', () {
-      Sketch newSketch = Sketch.fromString(testJson);
-      expect(newSketch.cubeInfos.length, equals(0));
+      Painting newPainting = Painting.fromString(testJson);
+      expect(newPainting.cubeInfos.length, equals(0));
     });
 
     test('save', () {
-      final painting = Sketch.fromEmpty();
+      final painting = Painting.fromEmpty();
       String newJson = jsonEncode(painting);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      final painting = Sketch.fromEmpty();
+      final painting = Painting.fromEmpty();
       String newJson = painting.toString();
       expect(testJson, equals(newJson));
     });
@@ -55,31 +55,31 @@ void main() {
 
     test('load', () {
       Map<String, dynamic> map = jsonDecode(testJson);
-      Sketch newSketch = Sketch.fromJson(map);
+      Painting newPainting = Painting.fromJson(map);
 
       int i = 0;
-      for (final newCube in newSketch.cubeInfos) {
+      for (final newCube in newPainting.cubeInfos) {
         expect(testCubeInfos[i++], equals(newCube));
       }
     });
 
     test('load toString()', () {
-      Sketch newSketch = Sketch.fromString(testJson);
+      Painting newPainting = Painting.fromString(testJson);
 
       int i = 0;
-      for (final newCube in newSketch.cubeInfos) {
+      for (final newCube in newPainting.cubeInfos) {
         expect(testCubeInfos[i++], equals(newCube));
       }
     });
 
     test('save', () {
-      const painting = Sketch(cubeInfos: testCubeInfos);
+      const painting = Painting(cubeInfos: testCubeInfos);
       String newJson = jsonEncode(painting);
       expect(testJson, equals(newJson));
     });
 
     test('save toString()', () {
-      const painting = Sketch(cubeInfos: testCubeInfos);
+      const painting = Painting(cubeInfos: testCubeInfos);
       String newJson = painting.toString();
       expect(testJson, equals(newJson));
     });

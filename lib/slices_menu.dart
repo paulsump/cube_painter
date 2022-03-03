@@ -86,7 +86,7 @@ class _Example extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
 
     final padY = SizedBox(height: padHeight);
 

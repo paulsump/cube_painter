@@ -63,7 +63,7 @@ class AnimCubesState extends State<AnimCubes>
 
     _controller.forward(from: fromZero ? 0 : _controller.value).whenComplete(
           () {
-        final paintingBank = getSketchBank(context);
+        final paintingBank = getPaintingBank(context);
 
         paintingBank.finishAnim();
         paintingBank.isAnimatingLoadedCubes = false;
@@ -82,7 +82,7 @@ class AnimCubesState extends State<AnimCubes>
 
   @override
   void didUpdateWidget(AnimCubes oldWidget) {
-    final paintingBank = getSketchBank(context);
+    final paintingBank = getPaintingBank(context);
 
     if (paintingBank.isPingPong) {
       _controller.duration = pingPongDuration;

@@ -19,7 +19,7 @@ const noWarn = out;
 /// init() is the main starting point for the app.
 mixin Persister {
   @protected
-  final paintinges = <String, Sketch>{};
+  final paintinges = <String, Painting>{};
 
   final slicesExample = _SlicesExample();
 
@@ -34,10 +34,10 @@ mixin Persister {
 
   bool get hasCubes =>
       paintinges.isNotEmpty &&
-      _hasSketchForCurrentFilePath &&
+      _hasPaintingForCurrentFilePath &&
       painting.cubeInfos.isNotEmpty;
 
-  bool get _hasSketchForCurrentFilePath {
+  bool get _hasPaintingForCurrentFilePath {
     if (!paintinges.containsKey(currentFilePath)) {
       out(currentFilePath);
 
@@ -49,7 +49,7 @@ mixin Persister {
   /// defined in [Animator]
   void finishAnim();
 
-  /// defined in [SketchBank]
+  /// defined in [PaintingBank]
   void updateAfterLoad(BuildContext context);
 
   String get currentFilePath => _settings.currentFilePath;
@@ -60,18 +60,18 @@ mixin Persister {
     unawaited(_settingsPersister.save());
   }
 
-  Sketch get painting {
-    if (!_hasSketchForCurrentFilePath) {
+  Painting get painting {
+    if (!_hasPaintingForCurrentFilePath) {
       assert(false,
           "paintinges doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
-      return Sketch.fromEmpty();
+      return Painting.fromEmpty();
     }
     return paintinges[currentFilePath]!;
   }
 
-  void setSketch(Sketch painting) => paintinges[currentFilePath] = painting;
+  void setPainting(Painting painting) => paintinges[currentFilePath] = painting;
 
   UnmodifiableListView<MapEntry> get paintingEntries =>
       UnmodifiableListView<MapEntry>(paintinges.entries.toList());
@@ -87,7 +87,7 @@ mixin Persister {
       await _settingsPersister.save();
     }
 
-    final firstPath = await _loadAllSketches();
+    final firstPath = await _loadAllPaintinges();
 
     if (currentFilePath.isEmpty) {
       //  Most recently created is now first in list
@@ -107,11 +107,11 @@ mixin Persister {
   }
 
   // insert at the top of the list
-  void pushSketch(Sketch painting) {
-    final copy = Map<String, Sketch>.from(paintinges);
+  void pushPainting(Painting painting) {
+    final copy = Map<String, Painting>.from(paintinges);
 
     paintinges.clear();
-    setSketch(painting);
+    setPainting(painting);
 
     paintinges.addAll(copy);
   }
@@ -121,7 +121,7 @@ mixin Persister {
 
     await _setNewFilePath();
 
-    pushSketch(Sketch.fromEmpty());
+    pushPainting(Painting.fromEmpty());
     _savedJson = json;
 
     updateAfterLoad(context);
@@ -148,7 +148,7 @@ mixin Persister {
     final jsonCopy = json;
 
     await _setNewFilePath();
-    pushSketch(Sketch.fromString(jsonCopy));
+    pushPainting(Painting.fromString(jsonCopy));
 
     _savedJson = json;
     unawaited(saveFile());
@@ -165,12 +165,12 @@ mixin Persister {
     saveCurrentFilePath('$appFolderPath$uniqueId$cubesExtension');
   }
 
-  Future<void> resetCurrentSketch() async =>
-      paintinges[currentFilePath] = Sketch.fromString(_savedJson);
+  Future<void> resetCurrentPainting() async =>
+      paintinges[currentFilePath] = Painting.fromString(_savedJson);
 
   void clear() => painting.cubeInfos.clear();
 
-  Future<String> _loadAllSketches({bool ignoreCurrent = false}) async {
+  Future<String> _loadAllPaintinges({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
     List<String> paths = await getAllAppFilePaths(appFolder);
@@ -183,7 +183,7 @@ mixin Persister {
       if (!(ignoreCurrent && path == currentFilePath)) {
         final File file = File(path);
 
-        paintinges[path] = Sketch.fromString(await file.readAsString());
+        paintinges[path] = Painting.fromString(await file.readAsString());
       }
     }
 
@@ -211,14 +211,14 @@ mixin Persister {
 class _SlicesExample {
   late UnitTransform unitTransform;
 
-  late Sketch triangleWithGap;
-  late Sketch triangleGap;
+  late Painting triangleWithGap;
+  late Painting triangleGap;
 
   Future<void> init() async {
     final assets = await Assets.getStrings('help/triangle_');
 
-    triangleWithGap = Sketch.fromString(assets['triangle_with_gap.json']!);
-    triangleGap = Sketch.fromString(assets['triangle_gap.json']!);
+    triangleWithGap = Painting.fromString(assets['triangle_with_gap.json']!);
+    triangleGap = Painting.fromString(assets['triangle_gap.json']!);
 
     unitTransform = triangleWithGap.unitTransform;
   }

@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 
 const noWarn = out;
 
-SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
-    Provider.of<SketchBank>(context, listen: listen);
+PaintingBank getPaintingBank(BuildContext context, {bool listen = false}) =>
+    Provider.of<PaintingBank>(context, listen: listen);
 
 /// Access to the main store of the entire model
 /// For loading and saving all the cube positions and their info
@@ -19,7 +19,7 @@ SketchBank getSketchBank(BuildContext context, {bool listen = false}) =>
 /// Also manages the starting and stopping of cube animation
 /// during loading and brushing.
 /// init() is the main starting point for the app.
-class SketchBank extends ChangeNotifier with Persister, Animator {
+class PaintingBank extends ChangeNotifier with Persister, Animator {
   @override
   void startBrushing() {
     super.startBrushing();
@@ -71,7 +71,7 @@ class SketchBank extends ChangeNotifier with Persister, Animator {
   /// Creates a painting from a json string
   /// called from [UndoNotifier]
   void setJson(String json) {
-    setSketch(Sketch.fromString(json));
+    setPainting(Painting.fromString(json));
 
     notifyListeners();
   }

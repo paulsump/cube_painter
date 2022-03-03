@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-/// Auto generated (painted) thumbnail of a [Sketch]
+/// Auto generated (painted) thumbnail of a [Painting]
 /// Used on the buttons on the [PaintingsMenu]
 /// 'Unit' means this thumbnail has size of 1
 class Thumbnail extends StatelessWidget {
-  final Sketch painting;
+  final Painting painting;
 
   final UnitTransform _unitTransform;
 

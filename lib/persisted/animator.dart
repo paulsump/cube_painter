@@ -15,7 +15,7 @@ mixin Animator {
   bool isBrushing = false;
 
   /// defined in [Persister]
-  Sketch get painting;
+  Painting get painting;
 
   bool isPingPong = false;
 

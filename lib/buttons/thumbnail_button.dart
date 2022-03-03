@@ -12,7 +12,7 @@ class ThumbnailButton extends StatelessWidget {
 
   final String tip;
 
-  final Sketch painting;
+  final Painting painting;
 
   const ThumbnailButton({
     Key? key,

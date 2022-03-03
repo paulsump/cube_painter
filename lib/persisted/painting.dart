@@ -11,21 +11,21 @@ const noWarn = out;
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
-class Sketch {
+class Painting {
   final List<CubeInfo> cubeInfos;
 
-  const Sketch({required this.cubeInfos});
+  const Painting({required this.cubeInfos});
 
-  Sketch.fromEmpty() : cubeInfos = <CubeInfo>[];
+  Painting.fromEmpty() : cubeInfos = <CubeInfo>[];
 
-  Sketch.fromString(String json) : this.fromJson(jsonDecode(json));
+  Painting.fromString(String json) : this.fromJson(jsonDecode(json));
 
   UnitTransform get unitTransform => _calcUnitScaleAndOffset(cubeInfos);
 
   @override
   String toString() => jsonEncode(this);
 
-  Sketch.fromJson(Map<String, dynamic> json)
+  Painting.fromJson(Map<String, dynamic> json)
       : cubeInfos = _listFromJson(json).toList();
 
   Map<String, dynamic> toJson() => {'cubes': cubeInfos};
