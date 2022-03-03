@@ -29,6 +29,7 @@ mixin Persister {
   late Settings _settings;
 
   String _savedJson = '';
+  bool _firstTime = true;
 
   bool get modified => json != _savedJson;
 
@@ -77,7 +78,12 @@ mixin Persister {
       UnmodifiableListView<MapEntry>(paintings.entries.toList());
 
   /// The main starting point for the app.
-  Future<void> init(BuildContext context) async {
+  Future<void> initOnce(BuildContext context) async {
+    if (_firstTime) {
+      _firstTime = false;
+    } else {
+      return;
+    }
     _settings = await _settingsPersister.load();
 
     if (!_settings.copiedSamples) {

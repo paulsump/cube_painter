@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/anim_cubes.dart';
@@ -35,12 +33,6 @@ class PainterPage extends StatefulWidget {
 }
 
 class _PainterPageState extends State<PainterPage> {
-  @override
-  void initState() {
-    unawaited(getPaintingBank(context).init(context));
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

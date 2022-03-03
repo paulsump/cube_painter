@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
@@ -25,22 +27,17 @@ class CubePainterApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Cube Painter',
-        // theme:
-        // ThemeData.dark()
-        //     .copyWith(scaffoldBackgroundColor: backgroundColor),
         theme: ThemeData(
-          // primaryColor: Colors.red,
-          // backgroundColor: Colors.red,
           // transparent menu
           canvasColor: backgroundColor.withOpacity(0.1),
           textTheme: Theme.of(context).textTheme.apply(
-                bodyColor: textColor,
-                fontSizeFactor: 1.0,
-              ),
+            bodyColor: textColor,
+            fontSizeFactor: 1.0,
+          ),
           // for icon buttons only atm
           iconTheme: Theme.of(context).iconTheme.copyWith(
-                color: enabledIconColor,
-              ),
+            color: enabledIconColor,
+          ),
           tooltipTheme: TooltipThemeData(
             // textStyle: TextStyle(fontSize: 14),
 
@@ -52,14 +49,15 @@ class CubePainterApp extends StatelessWidget {
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-            primary: buttonColor,
-          )),
+                primary: buttonColor,
+              )),
         ),
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             if (constraints.maxHeight == 0) {
               return Container();
             } else {
+              unawaited(getPaintingBank(context).initOnce(context));
               return WillPopScope(
                   onWillPop: () async => false, child: const PainterPage());
             }

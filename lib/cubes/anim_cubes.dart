@@ -18,6 +18,7 @@ const noWarn = [out, Position];
 /// One animator controls them all.
 /// The cubes are moved to [StaticCubes] either externally
 /// via [finishAnim] or [whenComplete] after the animation is finished.
+/// Stateful because of SingleTickerProviderStateMixin
 class AnimCubes extends StatefulWidget {
   final List<CubeInfo> cubeInfos;
 
