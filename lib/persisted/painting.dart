@@ -41,6 +41,9 @@ class UnitTransform {
   final double scale;
   final Offset offset;
 
+  @override
+  String toString() => '$scale, $offset';
+
   const UnitTransform({required this.scale, required this.offset});
 }
 
@@ -75,7 +78,7 @@ UnitTransform _calcUnitScaleAndOffset(List<CubeInfo> cubeInfos) {
 
   // Add 1 to scale for half the size of cube each side of center.
   return UnitTransform(
-    scale: 1 / (1 + max(rangeX, rangeY)),
+    scale: cubeInfos.length == 1 ? 0.6 : 1 / (1 + max(rangeX, rangeY)),
     offset: -Offset(minX + maxX, minY + maxY) / 2,
   );
 }

@@ -151,7 +151,7 @@ mixin Persister {
 
   Future<void> saveACopyFile() async {
     finishAnim();
-
+    out(painting.unitTransform);
     final jsonCopy = json;
 
     await _setNewFilePath();
