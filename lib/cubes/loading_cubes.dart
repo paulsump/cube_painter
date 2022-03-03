@@ -67,8 +67,7 @@ class LoadingCubesState extends State<LoadingCubes>
   void didUpdateWidget(LoadingCubes oldWidget) {
     final paintingBank = getPaintingBank(context);
 
-    if (paintingBank.isAnimatingLoadedCubes ||
-        oldWidget.cubeInfos != widget.cubeInfos) {
+    if (paintingBank.isAnimatingLoadedCubes) {
       if (paintingBank.isPingPong) {
         out('l');
       } else {

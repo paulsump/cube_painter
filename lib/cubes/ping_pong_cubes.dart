@@ -53,8 +53,7 @@ class AnimCubesState extends State<PingPongCubes>
   void didUpdateWidget(PingPongCubes oldWidget) {
     final paintingBank = getPaintingBank(context);
 
-    if (paintingBank.isAnimatingLoadedCubes ||
-        oldWidget.cubeInfos != widget.cubeInfos) {
+    if (paintingBank.isAnimatingLoadedCubes) {
       if (paintingBank.isPingPong) {
         _controller.repeat();
       } else {
