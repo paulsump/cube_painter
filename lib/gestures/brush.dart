@@ -58,7 +58,7 @@ class Brush implements GestureHandler {
   void tapUp(Offset point, BuildContext context) => _saveForUndo(context);
 
   void _setPingPong(bool value, BuildContext context) =>
-      getPaintingBank(context).setIsPingPong(value);
+      getPaintingBank(context).notify();
 
   void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;

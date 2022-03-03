@@ -28,13 +28,9 @@ mixin Animator {
     animCubeInfos.addAll(cubeInfos.toList());
 
     isAnimatingLoadedCubes = true;
-
-    // for correctness and just in case (i saw it ping pong forever one)
-    setIsPingPong(false);
   }
 
   void startBrushing() {
-    setIsPingPong(true);
 
     finishAnim();
     isBrushing = true;
@@ -64,6 +60,4 @@ mixin Animator {
       animCubeInfos.clear();
     }
   }
-
-  void setIsPingPong(bool value) {} // => isPingPong = value;
 }

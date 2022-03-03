@@ -36,12 +36,6 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
     }
   }
 
-  @override
-  void setIsPingPong(bool value) {
-    super.setIsPingPong(value);
-
-    notifyListeners();
-  }
 
   @override
   void updateAfterLoad(BuildContext context) {
@@ -67,6 +61,10 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
   Future<void> deleteCurrentFile(BuildContext context) async {
     await super.deleteCurrentFile(context);
 
+    notifyListeners();
+  }
+
+  notify() {
     notifyListeners();
   }
 }
