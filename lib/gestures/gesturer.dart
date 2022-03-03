@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 const noWarn = [out, Position];
 
 /// Handle gestures, passing them to [Brush] or [PanZoomer].
+/// Stateful because of mutable fields.
 class Gesturer extends StatefulWidget {
   const Gesturer({Key? key}) : super(key: key);
 

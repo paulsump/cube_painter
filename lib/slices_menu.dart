@@ -11,14 +11,9 @@ const noWarn = out;
 /// A drawer with radio buttons for
 /// choosing which cube [Slice] to add.
 /// There's also an example of how to use them.
-class SlicesMenu extends StatefulWidget {
+class SlicesMenu extends StatelessWidget {
   const SlicesMenu({Key? key}) : super(key: key);
 
-  @override
-  State<SlicesMenu> createState() => _SlicesMenuState();
-}
-
-class _SlicesMenuState extends State<SlicesMenu> {
   @override
   Widget build(BuildContext context) {
     final shortestEdge = getShortestEdge(context);
