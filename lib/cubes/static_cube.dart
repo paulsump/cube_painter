@@ -46,8 +46,9 @@ class StaticCubes extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      _cubes.isEmpty ? Container(color: Colors.red) : Stack(children: _cubes);
+  Widget build(BuildContext context) => _cubes.isEmpty
+      ? Container(color: Colors.yellow)
+      : Stack(children: _cubes);
 }
 
 /// A cube that has been positioned

@@ -35,3 +35,5 @@ Color get tipColor => _blt;
 
 Color _getTweenTtoBRColor(double t) =>
     Color.lerp(topColor, bottomRightColor, t)!;
+
+Color horizonColor = getTweenBLtoTColor(0.4);
