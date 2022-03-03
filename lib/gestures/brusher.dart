@@ -19,7 +19,7 @@ const noWarn = [out, Position];
 /// depending on the [GestureMode].
 /// In [GestureMode.eraseLine] mode it yields the
 /// position you tapped in order to delete a single cube.
-class Brush implements GestureHandler {
+class Brusher implements GestureHandler {
   List<CubeInfo> getAnimCubeInfos(context) =>
       getPaintingBank(context).animCubeInfos;
 

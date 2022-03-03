@@ -1,4 +1,4 @@
-import 'package:cube_painter/gestures/brush.dart';
+import 'package:cube_painter/gestures/brusher.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/out.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out, Position];
 
-/// Handle gestures, passing them to [Brush] or [PanZoomer].
+/// Handle gestures, passing them to [Brusher] or [PanZoomer].
 /// Stateful because of mutable fields.
 class Gesturer extends StatefulWidget {
   const Gesturer({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class Gesturer extends StatefulWidget {
 class GesturerState extends State<Gesturer> {
   final GestureHandler panZoomer = PanZoomer();
 
-  final Brush brush = Brush();
+  final Brusher brusher = Brusher();
   late GestureHandler gestureHandler;
 
   bool tapped = false;
@@ -41,7 +41,7 @@ class GesturerState extends State<Gesturer> {
 
         // if tapped, use that fromPosition since it's where the user started, and therefore better
         if (!tapped) {
-          brush.start(details.focalPoint, context);
+          brusher.start(details.focalPoint, context);
         }
       },
       onScaleUpdate: (details) {
@@ -50,11 +50,11 @@ class GesturerState extends State<Gesturer> {
         totalScale += details.scale;
 
         if (n > 9) {
-          if (totalScale / n == 1 && gestureHandler != brush) {
-            gestureHandler = brush;
+          if (totalScale / n == 1 && gestureHandler != brusher) {
+            gestureHandler = brusher;
 
             if (tapped) {
-              brush.start(tapPoint, context);
+              brusher.start(tapPoint, context);
             }
           }
           gestureHandler.update(details.focalPoint, details.scale, context);
