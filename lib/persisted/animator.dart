@@ -38,6 +38,8 @@ mixin Animator {
 
     finishAnim();
     isBrushing = true;
+
+    isAnimatingLoadedCubes = false;
   }
 
   void finishAnim() {

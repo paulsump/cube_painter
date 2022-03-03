@@ -98,7 +98,7 @@ class _HelpButton extends StatelessWidget {
       child: Icon(
         Icons.help_outline_rounded,
         color: enabledIconColor,
-        size: calcNormalIconSize(context) * 1.09,
+        size: calcNormalIconSize(context) * 1.25,
       ),
       onPressed: () => _showHelp(context),
       tip: 'Display tips.',

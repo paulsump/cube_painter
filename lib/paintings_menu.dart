@@ -20,6 +20,7 @@ class _SafePad extends StatelessWidget {
       SizedBox(height: MediaQuery.of(context).padding.top);
 }
 
+/// Like a 'File' menu, this allows loading, saving of painting files.
 class PaintingsMenu extends StatefulWidget {
   const PaintingsMenu({Key? key}) : super(key: key);
 
@@ -56,7 +57,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
                 onPressed: pop(_newFile),
                 tip: 'Create a new painting',
                 icon: AssetIcons.docNew,
-                iconSize: calcAssetIconSize(context) * 0.96,
+                iconSize: calcAssetIconSize(context) * 0.95,
               ),
               IconFlatHexagonButton(
                 onPressed: paintingBank.modified ? _saveFile : null,
