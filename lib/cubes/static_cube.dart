@@ -13,8 +13,8 @@ const noWarn = [out];
 
 /// The current painting is drawn with this.
 /// It draws them in the order they were added.
-class CurrentStaticCubes extends StatelessWidget {
-  const CurrentStaticCubes({Key? key}) : super(key: key);
+class DoneCubes extends StatelessWidget {
+  const DoneCubes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
