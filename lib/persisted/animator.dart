@@ -5,7 +5,23 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-enum CubeAnimState { brushing, loading, growingOrDone }
+/// The various states used to control
+/// how the cubes animate
+/// either after loading or brushing
+/// or during a brush.
+enum CubeAnimState {
+  /// the cube is ping ponging (oscillating) will brushing
+  brushing,
+
+  /// then it settles up to it's proper size after load or brush is complete
+  loading,
+
+  /// In this mode the cube may be settling to it's
+  /// proper size after being created with a brush,
+  /// or it may just be done,
+  /// stationary at full size.
+  growingOrDone
+}
 
 /// Manages the starting and stopping of cube animation
 /// during loading and brushing.

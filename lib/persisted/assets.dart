@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 const noWarn = out;
 
+/// TODO continue doc comments from here
 class Assets {
   /// return map of filename + loaded string
   static Future<Map<String, String>> getStrings(String pathStartsWith) async {
