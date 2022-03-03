@@ -143,7 +143,7 @@ class Brush implements GestureHandler {
       saveForUndo(context);
     }
     _notify(context);
-    getPaintingBank(context).cubeState = CubeState.staticOrGrowing;
+    getPaintingBank(context).cubeState = CubeState.growingOrDone;
   }
 
   CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
