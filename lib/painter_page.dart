@@ -27,7 +27,6 @@ class PainterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       drawer: const PaintingsMenu(),
       endDrawer: const SlicesMenu(),
@@ -64,9 +63,10 @@ class _AnimCubes extends StatelessWidget {
     return Stack(
       children: [
         if (paintingBank.animCubeInfos.isNotEmpty)
-          if (!paintingBank.isPingPong) const LoadingCubes(),
-        if (paintingBank.isPingPong)
-          if (paintingBank.animCubeInfos.isNotEmpty) const PingPongCubes(),
+          if (paintingBank.isPingPong)
+            const PingPongCubes()
+          else
+            const LoadingCubes(),
       ],
     );
   }
