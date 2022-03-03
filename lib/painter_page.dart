@@ -27,7 +27,6 @@ class PainterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final paintingBank = getPaintingBank(context, listen: true);
 
     return Scaffold(
       drawer: const PaintingsMenu(),
@@ -37,23 +36,38 @@ class PainterPage extends StatelessWidget {
         color: backgroundColor,
         child: SafeArea(
           left: false,
-          child: Stack(children: [
-            const Horizon(),
-            const CurrentStaticCubes(),
+          child: Stack(children: const [
+            Horizon(),
+            CurrentStaticCubes(),
             // if (paintingBank.animCubeInfos.isNotEmpty)
             //   AnimCubes(
             //     cubeInfos: paintingBank.animCubeInfos,
             //     isPingPong: paintingBank.isPingPong,
             //   ),
-            if (paintingBank.animCubeInfos.isNotEmpty)
-              if (!paintingBank.isPingPong) const LoadingCubes(),
-            if (paintingBank.isPingPong)
-              if (paintingBank.animCubeInfos.isNotEmpty) const PingPongCubes(),
-            const Gesturer(),
-            const PageButtons(),
+            _AnimCubes(),
+            Gesturer(),
+            PageButtons(),
           ]),
         ),
       ),
+    );
+  }
+}
+
+class _AnimCubes extends StatelessWidget {
+  const _AnimCubes({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final paintingBank = getPaintingBank(context, listen: true);
+
+    return Stack(
+      children: [
+        if (paintingBank.animCubeInfos.isNotEmpty)
+          if (!paintingBank.isPingPong) const LoadingCubes(),
+        if (paintingBank.isPingPong)
+          if (paintingBank.animCubeInfos.isNotEmpty) const PingPongCubes(),
+      ],
     );
   }
 }
