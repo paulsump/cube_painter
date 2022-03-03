@@ -48,7 +48,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.plusOutline,
                   onPressed: () => setGestureMode(GestureMode.addLine, context),
                   tip:
-                      "\n\nDrag on the canvas to add a line of cubes.\n\nYou can change the direction while you drag.",
+                      "Drag on the canvas\nto add a line of cubes.\n\nYou can change the direction\nwhile you drag.",
                 ),
                 CubeRadioButton(
                   isRadioOn: GestureMode.erase ==
@@ -56,7 +56,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.cancelOutline,
                   onPressed: () => setGestureMode(GestureMode.erase, context),
                   tip:
-                      '\n\nDrag on the canvas to move an animating cube over the cube\n\nthat you want to delete, then release to delete it.',
+                      'Drag on the canvas to\nmove an animating cube.\n\nPlace it over\nthe cube that you want to delete.\n\nThen release to delete it.',
                   slice: Slice.whole,
                 ),
                 const _OpenSliceMenuButton(),
@@ -83,7 +83,7 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
         size: calcNormalIconSize(context) * 1.22,
       ),
       onPressed: Scaffold.of(context).openDrawer,
-      tip: '\n\nOpen the paintings menu.',
+      tip: 'Open the paintings menu.',
     );
   }
 }
@@ -101,7 +101,7 @@ class _HelpButton extends StatelessWidget {
         size: calcNormalIconSize(context) * 1.09,
       ),
       onPressed: () => _showHelp(context),
-      tip: '\n\nShow some tips.',
+      tip: 'Display tips.',
     );
   }
 }
@@ -142,9 +142,7 @@ void _showHelp(BuildContext context) {
             ],
           ),
         ),
-        yesCallBack: () {
-          Navigator.of(context).pop(true);
-        },
+        yesCallBack: () => Navigator.of(context).pop(),
         yesTip: 'Done',
       );
     },
@@ -209,7 +207,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
       icon: AssetIcons.plusOutline,
       onPressed: Scaffold.of(context).openEndDrawer,
       tip:
-          '\n\nDrag on the canvas to move\n\nan animating slice of a cube.\n\nThen release to place it.',
+          'Drag on the canvas\nto move an\nanimating cube slice.\n\nThen release to place it.',
     );
   }
 }

@@ -20,6 +20,7 @@ class FlatHexagonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: tip,
+      decoration: BoxDecoration(color: tipColor),
       child: TextButton(
         child: child,
         onPressed: onPressed,
@@ -52,16 +53,13 @@ class IconFlatHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: tip,
-      child: FlatHexagonButton(
-        onPressed: onPressed,
-        tip: tip,
-        child: Icon(
-          icon,
-          color: onPressed != null ? enabledIconColor : disabledIconColor,
-          size: iconSize,
-        ),
+    return FlatHexagonButton(
+      onPressed: onPressed,
+      tip: tip,
+      child: Icon(
+        icon,
+        color: onPressed != null ? enabledIconColor : disabledIconColor,
+        size: iconSize,
       ),
     );
   }

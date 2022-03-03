@@ -31,5 +31,7 @@ Color get paintingsMenuButtonsColor => _blt.withOpacity(0.7);
 
 Color get alertColor => _blt.withOpacity(0.9);
 
+Color get tipColor => _blt.withOpacity(0.7);
+
 Color _getTweenTtoBRColor(double t) =>
     Color.lerp(topColor, bottomRightColor, t)!;

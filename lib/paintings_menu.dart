@@ -66,14 +66,14 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
               ),
               IconFlatHexagonButton(
                 onPressed: _saveACopyFile,
-                tip: 'Create a copy of this painting and load it.',
+                tip: 'Create a copy\nof this painting\nand load it.',
                 icon: AssetIcons.copy,
                 iconSize: calcAssetIconSize(context),
               ),
               IconFlatHexagonButton(
                 onPressed: _deleteCurrentFile,
                 tip:
-                    'Delete the current painting.\n\nThe next painting is loaded\n\nor a new blank one is created.',
+                    'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
                 icon: Icons.delete,
                 iconSize: calcNormalIconSize(context),
               ),
