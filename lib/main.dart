@@ -35,20 +35,18 @@ class CubePainterApp extends StatelessWidget {
           canvasColor: backgroundColor.withOpacity(0.1),
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: textColor,
-                // displayColor: Colors.red,
                 fontSizeFactor: 1.0,
               ),
           // for icon buttons only atm
-          iconTheme:
-              Theme.of(context).iconTheme.copyWith(color: enabledIconColor),
+          iconTheme: Theme.of(context).iconTheme.copyWith(
+                color: enabledIconColor,
+              ),
           tooltipTheme: TooltipThemeData(
-            // textStyle: TextStyle(
-            //   color: Colors.white,
-            //   fontFamily: "Questrial",
-            //   fontWeight: FontWeight.bold,
-            // ),
+            // textStyle: TextStyle(fontSize: 14),
+
             /// TODO Responsive to screen size- magic numbers
             verticalOffset: 55,
+            // verticalOffset: calcTooltipOffsetY(context),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(color: tipColor),
           ),

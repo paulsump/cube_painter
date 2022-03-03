@@ -46,3 +46,6 @@ double calcAssetIconSize(BuildContext context) =>
 
 double calcButtonElevation(BuildContext context) =>
     0.11429 * _calcButtonHeight(context);
+
+// double calcTooltipOffsetY(BuildContext context) =>
+//     0.78571 * _calcButtonHeight(context);
