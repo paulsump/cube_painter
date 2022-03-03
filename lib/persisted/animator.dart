@@ -42,6 +42,19 @@ mixin Animator {
     isAnimatingLoadedCubes = false;
   }
 
+  /// Add all the animCubeInfos to the staticCubeInfos,
+  /// thus, if there were any cubes still animating,
+  /// then they would appear to stop immediately.
+  //TODO FIx this copied comment
+  /// once the brush has finished, it
+  /// yields ownership of it's cubes to this parent widget.
+  /// which then creates a similar list
+  /// If we are in add gestureMode
+  /// the cubes will end up going
+  /// in the painting once they've animated to full size.
+  /// if we're in erase gestureMode they shrink to zero.
+  /// either way they get removed from the animCubeInfos array once the
+  /// anim is done.
   void finishAnim() {
     if (!isBrushing) {
       if (!isAnimatingLoadedCubes) {
