@@ -63,6 +63,7 @@ class CubePainterApp extends StatelessWidget {
             if (constraints.maxHeight == 0) {
               return Container();
             } else {
+              // if(Painting
               unawaited(getPaintingBank(context).initOnce(context));
               initZoomScaleOnce(context, 0.06494 * getShortestEdge(context));
 

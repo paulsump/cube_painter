@@ -22,7 +22,6 @@ PaintingBank getPaintingBank(BuildContext context, {bool listen = false}) =>
 /// loaded from a json file.
 /// And a [Animator] - it manages the starting and stopping of
 /// cube animation during loading and brushing.
-/// init() is the main starting point for the app.
 class PaintingBank extends ChangeNotifier with Persister, Animator {
   @override
   void startBrushing() {

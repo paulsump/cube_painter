@@ -16,7 +16,6 @@ const noWarn = out;
 /// The main store of the entire model
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
-/// init() is the main starting point for the app.
 mixin Persister {
   @protected
   final paintings = <String, Painting>{};
@@ -79,6 +78,8 @@ mixin Persister {
       UnmodifiableListView<MapEntry>(paintings.entries.toList());
 
   /// The main starting point for the app.
+  /// Although this can and is called multiple times,
+  /// It will return early if called more than once.
   Future<void> initOnce(BuildContext context) async {
     if (_firstTime) {
       _firstTime = false;
