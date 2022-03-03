@@ -1,6 +1,6 @@
 import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
-import 'package:cube_painter/gestures/gesture_mode.dart';
+import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/screen_size.dart';
@@ -31,7 +31,7 @@ class SliceCubeButton extends StatelessWidget {
 
 void _onPressed(Slice slice, BuildContext context) {
   final gestureModeNotifier =
-      Provider.of<GestureModeNotifier>(context, listen: false);
+      Provider.of<BrushNotifier>(context, listen: false);
 
   gestureModeNotifier.setSlice(slice);
   gestureModeNotifier.setMode(Brush.addSlice);

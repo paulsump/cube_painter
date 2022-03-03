@@ -1,6 +1,6 @@
+import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/brush_maths.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';
-import 'package:cube_painter/gestures/gesture_mode.dart';
 import 'package:cube_painter/gestures/positions.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
@@ -38,7 +38,7 @@ class Brusher implements GestureHandler {
 
   @override
   void update(Offset point, double scale, BuildContext context) {
-    if (Brush.addSlice != getGestureMode(context)) {
+    if (Brush.addSlice != getBrush(context)) {
       _updateLine(point, context);
     } else {
       _replaceCube(point, context);
@@ -63,8 +63,8 @@ class Brusher implements GestureHandler {
   void _replaceCube(Offset point, BuildContext context) {
     Slice slice = Slice.whole;
 
-    if (getGestureMode(context) == Brush.addSlice) {
-      slice = Provider.of<GestureModeNotifier>(context, listen: false).slice;
+    if (getBrush(context) == Brush.addSlice) {
+      slice = Provider.of<BrushNotifier>(context, listen: false).slice;
     }
 
     final Offset startUnit = screenToUnit(point, context);
@@ -91,7 +91,7 @@ class Brusher implements GestureHandler {
 
   void _updateLine(Offset point, BuildContext context) {
     final Positions positions =
-        brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
+    brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
 
     if (previousPositions != positions) {
       // using order provided by brushMaths
@@ -119,7 +119,7 @@ class Brusher implements GestureHandler {
       getAnimCubeInfos(context).add(CubeInfo(center: center, slice: slice));
 
   void _saveForUndo(BuildContext context) {
-    final bool erase = Brush.eraseLine == getGestureMode(context);
+    final bool erase = Brush.eraseLine == getBrush(context);
 
     final paintingBank = getPaintingBank(context);
     final List<CubeInfo> cubeInfos = paintingBank.painting.cubeInfos;

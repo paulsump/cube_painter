@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/gestures/gesture_mode.dart';
+import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/painter_page.dart';
@@ -28,7 +28,7 @@ class CubePainterApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => PanZoomNotifier()),
         ChangeNotifierProvider(create: (_) => PaintingBank()),
-        ChangeNotifierProvider(create: (_) => GestureModeNotifier()),
+        ChangeNotifierProvider(create: (_) => BrushNotifier()),
         ChangeNotifierProvider(create: (_) => UndoNotifier()),
       ],
       child: MaterialApp(

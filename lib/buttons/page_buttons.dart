@@ -3,7 +3,7 @@ import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/gestures/gesture_mode.dart';
+import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/screen_size.dart';
@@ -43,18 +43,16 @@ class PageButtons extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CubeLineRadioButton(
-                  isRadioOn:
-                      Brush.addLine == getGestureMode(context, listen: true),
+                  isRadioOn: Brush.addLine == getBrush(context, listen: true),
                   icon: AssetIcons.plusOutline,
-                  onPressed: () => setGestureMode(Brush.addLine, context),
+                  onPressed: () => setBrush(Brush.addLine, context),
                   tip:
                       "Drag on the canvas\nto add a line of cubes.\n\nYou can change the direction\nwhile you drag.",
                 ),
                 CubeRadioButton(
-                  isRadioOn:
-                      Brush.eraseLine == getGestureMode(context, listen: true),
+                  isRadioOn: Brush.eraseLine == getBrush(context, listen: true),
                   icon: AssetIcons.cancelOutline,
-                  onPressed: () => setGestureMode(Brush.eraseLine, context),
+                  onPressed: () => setBrush(Brush.eraseLine, context),
                   tip:
                       'Drag on the canvas to\nmove an animating cube.\n\nPlace it over\nthe cube that you want to delete.\n\nThen release to delete it.',
                   slice: Slice.whole,
@@ -196,14 +194,14 @@ class _OpenSliceMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gestureModeNotifier =
-        Provider.of<GestureModeNotifier>(context, listen: true);
+        Provider.of<BrushNotifier>(context, listen: true);
 
     final Slice slice = gestureModeNotifier.slice;
-    final Brush currentGestureMode = gestureModeNotifier.gestureMode;
+    final Brush currentBrush = gestureModeNotifier.gestureMode;
 
     return CubeRadioButton(
       slice: slice,
-      isRadioOn: currentGestureMode == Brush.addSlice,
+      isRadioOn: currentBrush == Brush.addSlice,
       icon: AssetIcons.plusOutline,
       onPressed: Scaffold.of(context).openEndDrawer,
       tip: 'Choose which cube slice to add...',
