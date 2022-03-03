@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:cube_painter/asset_icons.dart';
-import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
+import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class Alert extends StatelessWidget {
             _Button(
               onPressed: cancelCallBack,
               icon: AssetIcons.cancelOutline,
-              tip: cancelTip ?? 'Cancel - Do nothing.',
+              tip: cancelTip ?? 'Cancel.\n\n(Do nothing).',
             ),
         ],
       ),
@@ -83,8 +83,9 @@ class _Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
-      child: ElevatedHexagonButton(
-        child: Icon(icon, size: calcAssetIconSize(context)),
+      child: IconFlatHexagonButton(
+        icon: icon,
+        iconSize: calcAssetIconSize(context),
         onPressed: onPressed,
         tip: tip,
       ),

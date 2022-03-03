@@ -29,10 +29,6 @@ class ElevatedHexagonButton extends StatelessWidget {
       offset: Offset(0, isOn ? 1.0 : -1.0) * calcButtonElevation(context) / 4,
       child: Tooltip(
         message: tip,
-
-        /// TODO Responsive to screen size- magic numbers
-        verticalOffset: 44,
-        decoration: BoxDecoration(color: tipColor),
         child: ElevatedButton(
           onPressed: onPressed,
           child: child,
