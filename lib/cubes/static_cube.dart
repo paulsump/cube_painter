@@ -19,15 +19,11 @@ class CurrentStaticCubes extends StatelessWidget {
   Widget build(BuildContext context) {
     final paintingBank = getPaintingBank(context, listen: true);
 
-    if (paintingBank.hasCubes && !paintingBank.isAnimatingLoadedCubes) {
-      final painting = paintingBank.painting;
-      final List<_PositionedUnitCube> _cubes = List.generate(
-          painting.cubeInfos.length,
-          (i) => _PositionedUnitCube(info: painting.cubeInfos[i]));
-      return Stack(children: _cubes);
-    } else {
-      return Container();
-    }
+    return Stack(children: [
+      if (paintingBank.hasCubes && !paintingBank.isAnimatingLoadedCubes)
+        for (final cubeInfo in paintingBank.painting.cubeInfos)
+          _PositionedUnitCube(info: cubeInfo)
+    ]);
   }
 }
 
