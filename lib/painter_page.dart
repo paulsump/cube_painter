@@ -52,7 +52,7 @@ class _AnimCubes extends StatelessWidget {
       children: [
         if (paintingBank.animCubeInfos.isNotEmpty)
           if (paintingBank.isBrushing)
-            const PingPongCubes()
+            const BrushCubes()
           else
             const GrowingCubes(),
       ],

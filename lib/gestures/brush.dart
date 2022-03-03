@@ -18,7 +18,7 @@ const noWarn = [out, Position];
 /// depending on the [GestureMode].
 /// In [GestureMode.erase] mode it yields the
 /// position you tapped in order to delete a single cube.
-/// brushing is done in brushLine mode and the cubes are pingPonging
+/// Brushing is done in brushLine mode and the cubes are pingPonging
 class Brush implements GestureHandler {
   List<CubeInfo> getAnimCubeInfos(context) =>
       getPaintingBank(context).animCubeInfos;
