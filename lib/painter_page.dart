@@ -30,7 +30,7 @@ class PainterPage extends StatelessWidget {
           child: Stack(children: const [
             Horizon(),
             DoneCubes(),
-            _AnimCubes(),
+            _AnimatingCubes(),
             Gesturer(),
             PageButtons(),
           ]),
@@ -40,8 +40,8 @@ class PainterPage extends StatelessWidget {
   }
 }
 
-class _AnimCubes extends StatelessWidget {
-  const _AnimCubes({Key? key}) : super(key: key);
+class _AnimatingCubes extends StatelessWidget {
+  const _AnimatingCubes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
