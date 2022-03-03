@@ -3,13 +3,35 @@ import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
+import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = [out];
 
-/// The entire painting is with this.
+/// The current painting is drawn with this.
+/// It draws them in the order they were added.
+class CurrentStaticCubes extends StatelessWidget {
+  const CurrentStaticCubes({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final paintingBank = getPaintingBank(context, listen: true);
+
+    if (paintingBank.hasCubes && !paintingBank.isAnimatingLoadedCubes) {
+      final painting = paintingBank.painting;
+      final List<_PositionedUnitCube> _cubes = List.generate(
+          painting.cubeInfos.length,
+          (i) => _PositionedUnitCube(info: painting.cubeInfos[i]));
+      return Stack(children: _cubes);
+    } else {
+      return Container();
+    }
+  }
+}
+
+/// Draws an entire painting.
 /// It has a list of [_PositionedUnitCube]s.
 /// It draws them in the order they were added.
 class StaticCubes extends StatelessWidget {

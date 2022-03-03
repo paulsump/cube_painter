@@ -40,9 +40,7 @@ class PainterPage extends StatelessWidget {
               child: Stack(
                 children: [
                   Transform.scale(scale: 30, child: const Horizon()),
-                  if (paintingBank.hasCubes &&
-                      !paintingBank.isAnimatingLoadedCubes)
-                    StaticCubes(painting: paintingBank.painting),
+                  const CurrentStaticCubes(),
                 ],
               ),
             ),
