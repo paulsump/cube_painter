@@ -17,7 +17,7 @@ mixin Animator {
   /// defined in [Persister]
   Painting get painting;
 
-  bool isPingPong = false;
+  bool get isPingPong => isBrushing;
 
   /// move all the (static) cubeInfos to animCubeInfos
   @protected
@@ -65,5 +65,5 @@ mixin Animator {
     }
   }
 
-  void setIsPingPong(bool value) => isPingPong = value;
+  void setIsPingPong(bool value) {} // => isPingPong = value;
 }
