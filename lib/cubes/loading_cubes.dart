@@ -30,6 +30,7 @@ class LoadingCubesState extends State<LoadingCubes>
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
+    out('lod init');
 
     startForwardAnim(fromZero: true);
     super.initState();

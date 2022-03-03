@@ -33,7 +33,7 @@ class AnimCubesState extends State<PingPongCubes>
 
     _controller = AnimationController(duration: pingPongDuration, vsync: this);
     _controller.repeat();
-
+    out('p init');
     super.initState();
   }
 
