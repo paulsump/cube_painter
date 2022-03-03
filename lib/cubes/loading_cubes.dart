@@ -36,11 +36,10 @@ class AnimCubesState extends State<LoadingCubes>
   late AnimationController _controller;
 
   static const int milliseconds = 800;
-  static const Duration pingPongDuration = Duration(milliseconds: milliseconds);
 
   @override
   void initState() {
-    _controller = AnimationController(duration: pingPongDuration, vsync: this);
+    _controller = AnimationController(vsync: this);
 
     startForwardAnim(fromZero: true);
     super.initState();
@@ -58,10 +57,6 @@ class AnimCubesState extends State<LoadingCubes>
 
         paintingBank.finishAnim();
         paintingBank.isAnimatingLoadedCubes = false;
-
-        //TODO REMOVE
-        // set back to default for next time
-        _controller.duration = pingPongDuration;
       },
     );
   }
@@ -79,6 +74,7 @@ class AnimCubesState extends State<LoadingCubes>
     if (paintingBank.isAnimatingLoadedCubes ||
         oldWidget.cubeInfos != widget.cubeInfos) {
       if (paintingBank.isPingPong) {
+        out('l');
       } else {
         startForwardAnim(fromZero: paintingBank.isAnimatingLoadedCubes);
       }

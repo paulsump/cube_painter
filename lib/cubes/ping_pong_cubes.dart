@@ -36,14 +36,14 @@ class AnimCubesState extends State<PingPongCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  static const int milliseconds = 800;
-  static const Duration pingPongDuration = Duration(milliseconds: milliseconds);
-
   @override
   void initState() {
-    _controller = AnimationController(duration: pingPongDuration, vsync: this);
+    const int milliseconds = 800;
+    const Duration pingPongDuration = Duration(milliseconds: milliseconds);
 
+    _controller = AnimationController(duration: pingPongDuration, vsync: this);
     _controller.repeat();
+
     super.initState();
   }
 
@@ -60,10 +60,10 @@ class AnimCubesState extends State<PingPongCubes>
     if (paintingBank.isAnimatingLoadedCubes ||
         oldWidget.cubeInfos != widget.cubeInfos) {
       if (paintingBank.isPingPong) {
-        _controller.duration = pingPongDuration;
-
         _controller.repeat();
-      } else {}
+      } else {
+        out('p');
+      }
     }
 
     super.didUpdateWidget(oldWidget);
