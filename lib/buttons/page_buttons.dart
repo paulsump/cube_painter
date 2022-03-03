@@ -3,7 +3,7 @@ import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/gestures/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/screen_size.dart';

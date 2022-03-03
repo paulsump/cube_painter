@@ -1,6 +1,6 @@
 import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
-import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/gestures/gesture_mode.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/screen_size.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cube_painter/colors.dart';
-import 'package:cube_painter/gesture_mode.dart';
+import 'package:cube_painter/gestures/gesture_mode.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/painter_page.dart';

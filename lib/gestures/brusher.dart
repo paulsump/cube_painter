@@ -1,6 +1,6 @@
-import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/gestures/brush_maths.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';
+import 'package:cube_painter/gestures/gesture_mode.dart';
 import 'package:cube_painter/gestures/positions.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
