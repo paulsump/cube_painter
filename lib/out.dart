@@ -4,16 +4,21 @@ import 'package:flutter/material.dart';
 
 void out(Object object) {
   if (object is List<Offset>) {
-    debugPrint('n = ${object.length}\nconst [');
+    _out('n = ${object.length}\nconst [');
     for (Offset offset in object) {
-      debugPrint('Offset(${_dp5(offset.dx)},${_dp5(offset.dy)}),');
+      _out('Offset(${_dp5(offset.dx)},${_dp5(offset.dy)}),');
     }
-    debugPrint(']');
+    _out(']');
   } else if (object is Offset) {
-    debugPrint('${object.dx},${object.dy}');
+    _out('${object.dx},${object.dy}');
   } else {
-    debugPrint(object.toString());
+    _out(object.toString());
   }
+}
+
+void _out(String text) {
+  debugPrint(text);
+  //TODO LOG
 }
 
 double _dp5(double val) => _decimalPlaces(val, 5);

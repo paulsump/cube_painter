@@ -41,7 +41,7 @@ mixin Persister {
 
   bool get _hasPaintingForCurrentFilePath {
     if (!paintings.containsKey(currentFilePath)) {
-      out(currentFilePath);
+      out('_hasPaintingForCurrentFilePath : File not loaded (yet?): $currentFilePath');
 
       return false;
     }

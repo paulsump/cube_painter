@@ -3,12 +3,17 @@ import 'dart:async';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/gesture_mode.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+/// prevent 'organise imports' from removing imports
+/// when temporarily commenting out.
+const noWarn = out;
 
 void main() => runApp(createApp());
 
@@ -32,13 +37,13 @@ class CubePainterApp extends StatelessWidget {
           // transparent menu
           canvasColor: backgroundColor.withOpacity(0.1),
           textTheme: Theme.of(context).textTheme.apply(
-            bodyColor: textColor,
-            fontSizeFactor: 1.0,
-          ),
+                bodyColor: textColor,
+                fontSizeFactor: 1.0,
+              ),
           // for icon buttons only atm
           iconTheme: Theme.of(context).iconTheme.copyWith(
-            color: enabledIconColor,
-          ),
+                color: enabledIconColor,
+              ),
           tooltipTheme: TooltipThemeData(
             // textStyle: TextStyle(fontSize: 14),
 
@@ -50,8 +55,8 @@ class CubePainterApp extends StatelessWidget {
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                primary: buttonColor,
-              )),
+            primary: buttonColor,
+          )),
         ),
         home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {

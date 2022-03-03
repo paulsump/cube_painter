@@ -12,8 +12,6 @@ import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/slices_menu.dart';
 import 'package:flutter/material.dart';
 
-/// prevent 'organise imports' from removing imports
-/// when temporarily commenting out.
 const noWarn = [out];
 
 class PainterPage extends StatelessWidget {
