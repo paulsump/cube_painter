@@ -13,14 +13,14 @@ const noWarn = [out, Position];
 /// The cubes are moved to [StaticCubes] either externally
 /// via [finishAnim] or [whenComplete] after the animation is finished.
 /// Stateful because of SingleTickerProviderStateMixin
-class BrushCubes extends StatefulWidget {
-  const BrushCubes({Key? key}) : super(key: key);
+class BrushLineCubes extends StatefulWidget {
+  const BrushLineCubes({Key? key}) : super(key: key);
 
   @override
-  State<BrushCubes> createState() => BrushCubesState();
+  State<BrushLineCubes> createState() => BrushLineCubesState();
 }
 
-class BrushCubesState extends State<BrushCubes>
+class BrushLineCubesState extends State<BrushLineCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
