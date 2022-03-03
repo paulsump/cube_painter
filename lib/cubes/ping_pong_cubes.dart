@@ -14,7 +14,6 @@ const noWarn = [out, Position];
 /// The cubes are moved to [StaticCubes] either externally
 /// via [finishAnim] or [whenComplete] after the animation is finished.
 /// Stateful because of SingleTickerProviderStateMixin
-/// TODO split into LoadingCubes and PingPongCubes
 class PingPongCubes extends StatefulWidget {
   const PingPongCubes({Key? key}) : super(key: key);
 
