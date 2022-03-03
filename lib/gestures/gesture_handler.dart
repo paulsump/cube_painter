@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// This interface allows [Gesturer] to
 /// use [PanZoomer] when pinching
-/// and [Brush] otherwise.
+/// and [Brusher] otherwise.
 abstract class GestureHandler {
   void start(Offset point, BuildContext context);
 

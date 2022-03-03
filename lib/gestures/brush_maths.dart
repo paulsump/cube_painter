@@ -7,7 +7,7 @@ import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
 /// The maths for placing a line of cubes with one gesture.
-/// Used by [Brush],
+/// Used by [Brusher],
 class BrushMaths {
   /// dragged start point in grid space
   late Offset _startUnit;
