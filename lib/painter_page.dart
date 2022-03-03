@@ -36,10 +36,10 @@ class PainterPage extends StatelessWidget {
         child: SafeArea(
           left: false,
           child: Stack(children: [
+            const Horizon(),
             UnitToScreen(
               child: Stack(
                 children: [
-                  Transform.scale(scale: 30, child: const Horizon()),
                   if (paintingBank.hasCubes &&
                       !paintingBank.isAnimatingLoadedCubes)
                     StaticCubes(painting: paintingBank.painting),

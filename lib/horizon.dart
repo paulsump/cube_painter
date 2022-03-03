@@ -1,11 +1,17 @@
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 class Horizon extends StatelessWidget {
   const Horizon({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
+  Widget build(BuildContext context) => UnitToScreen(
+        child: Transform.scale(
+          scale: 30,
+          child: const CustomPaint(painter: _Painter()),
+        ),
+      );
 }
 
 /// the painter for [Horizon]
