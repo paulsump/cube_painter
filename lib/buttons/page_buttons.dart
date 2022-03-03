@@ -193,11 +193,10 @@ class _OpenSliceMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gestureModeNotifier =
-        Provider.of<BrushNotifier>(context, listen: true);
+    final brushNotifier = Provider.of<BrushNotifier>(context, listen: true);
 
-    final Slice slice = gestureModeNotifier.slice;
-    final Brush currentBrush = gestureModeNotifier.gestureMode;
+    final Slice slice = brushNotifier.slice;
+    final Brush currentBrush = brushNotifier.brush;
 
     return CubeRadioButton(
       slice: slice,
