@@ -73,7 +73,7 @@ class _PaintingsMenuState extends State<PaintingsMenu> {
               IconFlatHexagonButton(
                 onPressed: _deleteCurrentFile,
                 tip:
-                    'Delete the current painting. The next painting is loaded or a new blank one is created.',
+                    'Delete the current painting.\n\nThe next painting is loaded\n\nor a new blank one is created.',
                 icon: Icons.delete,
                 iconSize: calcNormalIconSize(context),
               ),

@@ -48,7 +48,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.plusOutline,
                   onPressed: () => setGestureMode(GestureMode.addLine, context),
                   tip:
-                      'Tap or drag on the canvas to add a row of cubes. You can change the direction while you drag.',
+                      "\n\nDrag on the canvas to add a line of cubes.\n\nYou can change the direction while you drag.",
                 ),
                 CubeRadioButton(
                   isRadioOn: GestureMode.erase ==
@@ -56,7 +56,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.cancelOutline,
                   onPressed: () => setGestureMode(GestureMode.erase, context),
                   tip:
-                      'Tap on a cube to delete it.  You can change the position while you have your finger down.',
+                      '\n\nDrag on the canvas to move an animating cube over the cube\n\nthat you want to delete, then release to delete it.',
                   slice: Slice.whole,
                 ),
                 const _OpenSliceMenuButton(),
@@ -83,7 +83,7 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
         size: calcNormalIconSize(context) * 1.22,
       ),
       onPressed: Scaffold.of(context).openDrawer,
-      tip: 'Open the file menu.',
+      tip: '\n\nOpen the paintings menu.',
     );
   }
 }
@@ -101,7 +101,7 @@ class _HelpButton extends StatelessWidget {
         size: calcNormalIconSize(context) * 1.09,
       ),
       onPressed: () => _showHelp(context),
-      tip: 'Shows the help message.',
+      tip: '\n\nShows the help message.',
     );
   }
 }
@@ -181,7 +181,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
       icon: AssetIcons.plusOutline,
       onPressed: Scaffold.of(context).openEndDrawer,
       tip:
-      'Tap on the canvas to add a cube slice.  Tap this button again to choose different slices.',
+          '\n\nDrag on the canvas to move\n\nan animating slice of a cube.\n\nThen release to place it.',
     );
   }
 }
