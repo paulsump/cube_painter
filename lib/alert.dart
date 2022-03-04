@@ -84,7 +84,7 @@ class _Button extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: IconFlatHexagonButton(
         icon: icon,
-        iconSize: calcAssetIconSize(context),
+        iconSize: screenAdjustAssetIconSize(context),
         onPressed: onPressed,
         tip: tip,
       ),

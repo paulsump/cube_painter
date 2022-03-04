@@ -23,7 +23,7 @@ class SliceCubeButton extends StatelessWidget {
         tip:
             'Drag on the canvas\nto move an\nanimating cube${slice == Slice.whole ? '' : ' slice'}.\n\nThen release to place it.',
         child: Transform.scale(
-          scale: calcButtonChildScale(context),
+          scale: screenAdjustButtonChildScale(context),
           child: SliceUnitCube(slice: slice),
         ));
   }

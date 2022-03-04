@@ -28,26 +28,26 @@ double _getScreenShortestEdge(BuildContext context) {
   return min(screen.width, screen.height);
 }
 
-double _calcButtonHeight(BuildContext context) =>
+double _screenAdjustButtonHeight(BuildContext context) =>
     screenAdjust(0.15152, context);
 
-Size calcButtonSize(BuildContext context) {
-  final double buttonHeight = _calcButtonHeight(context);
+Size screenAdjustButtonSize(BuildContext context) {
+  final double buttonHeight = _screenAdjustButtonHeight(context);
 
   return Size(buttonHeight, buttonHeight);
 }
 
-double calcButtonChildScale(BuildContext context) =>
-    0.3 * _calcButtonHeight(context);
+double screenAdjustButtonChildScale(BuildContext context) =>
+    0.3 * _screenAdjustButtonHeight(context);
 
-double calcNormalIconSize(BuildContext context) =>
-    0.47143 * _calcButtonHeight(context);
+double screenAdjustNormalIconSize(BuildContext context) =>
+    0.47143 * _screenAdjustButtonHeight(context);
 
-double calcAssetIconSize(BuildContext context) =>
-    0.38571 * _calcButtonHeight(context);
+double screenAdjustAssetIconSize(BuildContext context) =>
+    0.38571 * _screenAdjustButtonHeight(context);
 
-double calcButtonElevation(BuildContext context) =>
-    0.11429 * _calcButtonHeight(context);
+double screenAdjustButtonElevation(BuildContext context) =>
+    0.11429 * _screenAdjustButtonHeight(context);
 
 // double calcTooltipOffsetY(BuildContext context) =>
 //     0.78571 * _calcButtonHeight(context);

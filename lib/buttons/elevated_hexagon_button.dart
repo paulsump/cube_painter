@@ -26,7 +26,9 @@ class ElevatedHexagonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      offset: Offset(0, isOn ? 1.0 : -1.0) * calcButtonElevation(context) / 4,
+      offset: Offset(0, isOn ? 1.0 : -1.0) *
+          screenAdjustButtonElevation(context) /
+          4,
       child: Tooltip(
         message: tip,
         child: ElevatedButton(
@@ -34,14 +36,15 @@ class ElevatedHexagonButton extends StatelessWidget {
           child: child,
           style: ButtonStyle(
             shape: hexagonBorderShape,
-            fixedSize: MaterialStateProperty.all(calcButtonSize(context)),
+            fixedSize:
+                MaterialStateProperty.all(screenAdjustButtonSize(context)),
             backgroundColor: MaterialStateProperty.all(isRadioOn == null
                 ? buttonColor
                 : isRadioOn!
                     ? radioButtonOnColor
                     : buttonColor),
             elevation: MaterialStateProperty.all(
-                isOn ? 0.0 : calcButtonElevation(context)),
+                isOn ? 0.0 : screenAdjustButtonElevation(context)),
             shadowColor:
                 isOn ? null : MaterialStateProperty.all(bottomLeftColor),
           ),

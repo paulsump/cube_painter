@@ -67,7 +67,7 @@ class CubeRadioButton extends StatelessWidget {
       child: _ChildAndIcon(
         icon: icon,
         child: Transform.scale(
-          scale: calcButtonChildScale(context),
+          scale: screenAdjustButtonChildScale(context),
           child: slice == Slice.whole
               ? const WholeUnitCube()
               : SliceUnitCube(slice: slice),
@@ -108,7 +108,7 @@ class CubeLineRadioButton extends StatelessWidget {
       child: _ChildAndIcon(
           icon: icon,
           child: Transform.scale(
-              scale: calcButtonChildScale(context) * 1.5,
+              scale: screenAdjustButtonChildScale(context) * 1.5,
               child: Thumbnail.useTransform(
                 painting: Painting(
                   cubeInfos: List.generate(
@@ -148,7 +148,7 @@ class _ChildAndIcon extends StatelessWidget {
           child: child,
         ),
         Transform.translate(
-          offset: -unit * calcAssetIconSize(context) / 2,
+          offset: -unit * screenAdjustAssetIconSize(context) / 2,
           child: Icon(icon, color: enabledIconColor),
         ),
       ],
