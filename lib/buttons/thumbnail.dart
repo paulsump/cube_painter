@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:cube_painter/cubes/calc_unit_ping_pong.dart';
+import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
-import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
@@ -56,7 +56,7 @@ class Thumbnail extends StatelessWidget {
                     /// Note that this only animates the first cube.
                     /// That's all that's needed currently.
                     ? _StandAloneAnimatedCube(info: painting.cubeInfos[0])
-                    : StaticCubes(
+                    : _StaticCubes(
                         painting: painting,
                         wire: wire,
                       )),
@@ -64,6 +64,48 @@ class Thumbnail extends StatelessWidget {
         : Container();
   }
 }
+
+/// Draws a painting.
+/// Used in [Thumbnail] only
+class _StaticCubes extends StatelessWidget {
+  final List<PositionedScaledCube> _cubes;
+
+  _StaticCubes({
+    Key? key,
+    required Painting painting,
+    required bool wire,
+  })  : _cubes = List.generate(
+            painting.cubeInfos.length,
+            (i) => PositionedScaledCube(
+                  info: painting.cubeInfos[i],
+                  wire: wire,
+                  scale: 1.0,
+                )),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) => _cubes.isEmpty
+      ? Container(color: Colors.yellow)
+      : Stack(children: _cubes);
+}
+
+///TODO FIX  const version is invisible
+// class StaticCubes extends StatelessWidget {
+//   final Painting painting;
+//
+//   const StaticCubes({
+//     Key? key,
+//     required this.painting,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) => UnitToScreen(
+//         child: Stack(children: [
+//           for (final cubeInfo in painting.cubeInfos)
+//             _PositionedUnitCube(info: cubeInfo)
+//         ]),
+//       );
+// }
 
 /// Unit cube or slice that animates itself based the fields passed in.
 /// Used on the [_SlicesExamplePainting] only now that I have [GrowingCubes] and [BrushCubes]
