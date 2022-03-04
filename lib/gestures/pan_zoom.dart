@@ -1,5 +1,6 @@
 import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -72,18 +73,26 @@ class PanZoomer implements GestureHandler {
   void update(Offset point, double scale_, BuildContext context) {
     final scale = _initial.scale * scale_;
 
-    /// TODO Responsive to screen size - removed magic numbers
-    if (15 < scale && scale < 150 && scale != getZoomScale(context)) {
+    final minScale = screenAdjust(0.03247, context);
+    final maxScale = 10 * minScale;
+
+    if (minScale < scale &&
+        scale < maxScale &&
+        scale != getZoomScale(context)) {
       setZoomScale(context, scale);
     }
 
     Offset offset = point - _initial.focalPoint + _initial.offset;
-
     offset *= scale_;
 
-    // Pan limits - Don’t allow pan past place where can’t zoom limit to.
-    /// TODO Responsive to screen size - removed magic numbers
-    offset = Offset(offset.dx.clamp(-500, 500), offset.dy.clamp(-340, 500));
+    /// Pan limits - Don’t allow pan past place where can’t zoom limit to.
+    final xMax = screenAdjust(1.08225, context);
+
+    final xMin = -xMax;
+    final yMax = xMax;
+
+    final yMin = screenAdjust(-0.73593, context);
+    offset = Offset(offset.dx.clamp(xMin, xMax), offset.dy.clamp(yMin, yMax));
 
     //TODO See if this 'if' makes any diff when the widgets listen
     if (offset != getPanOffset(context)) {
