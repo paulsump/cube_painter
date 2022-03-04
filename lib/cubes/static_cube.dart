@@ -34,20 +34,22 @@ class DoneCubes extends StatelessWidget {
 
 /// Draws a painting.
 /// It has a list of [_PositionedUnitCube]s.
+/// Used in [Thumbnail] only
 class StaticCubes extends StatelessWidget {
-  final List<_PositionedUnitCube> _cubes;
+  final Painting painting;
 
-  StaticCubes({
+  const StaticCubes({
     Key? key,
-    required Painting painting,
-  })  : _cubes = List.generate(painting.cubeInfos.length,
-            (i) => _PositionedUnitCube(info: painting.cubeInfos[i])),
-        super(key: key);
+    required this.painting,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => _cubes.isEmpty
-      ? Container(color: Colors.yellow)
-      : Stack(children: _cubes);
+  Widget build(BuildContext context) => UnitToScreen(
+        child: Stack(children: [
+          for (final cubeInfo in painting.cubeInfos)
+            _PositionedUnitCube(info: cubeInfo)
+        ]),
+      );
 }
 
 /// A cube that has been positioned
