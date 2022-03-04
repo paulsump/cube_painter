@@ -317,6 +317,8 @@ class _Assets {
   }
 }
 
+/// General persist helpers...
+
 /// cont doc comment from HERE
 Future<List<String>> _getAllAppFilePaths(Directory appFolder) async {
   final paths = <String>[];

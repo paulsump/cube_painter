@@ -68,7 +68,5 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
     notifyListeners();
   }
 
-  void notify() {
-    notifyListeners();
-  }
+  void notify() => notifyListeners();
 }

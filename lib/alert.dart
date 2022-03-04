@@ -81,7 +81,7 @@ class _Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: EdgeInsets.only(bottom: screenAdjust(0.017312, context)),
       child: IconFlatHexagonButton(
         icon: icon,
         iconSize: screenAdjustAssetIconSize(context),
