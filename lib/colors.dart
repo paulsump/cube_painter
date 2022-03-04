@@ -10,6 +10,18 @@ final Color disabledIconColor = _getTweenBLtoBRColor(0.5);
 Color _getTweenBLtoBRColor(double t) =>
     Color.lerp(bottomLeftColor, bottomRightColor, t)!;
 
+Color _getTweenBLtoTColor(double t) =>
+    Color.lerp(bottomLeftColor, topColor, t)!;
+
+const _t = 0.4;
+
+/// TODO CHANGE TO FINAL
+Color get wireBottomRightColor => _getTweenBLtoBRColor(_t);
+
+Color get wireBottomLeftColor => bottomLeftColor;
+
+Color get wireTopColor => _getTweenBLtoTColor(_t);
+
 const Color enabledIconColor = bottomRightColor;
 const Color textColor = enabledIconColor;
 

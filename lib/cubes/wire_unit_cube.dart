@@ -28,14 +28,15 @@ class _Painter extends CustomPainter {
 /// paint caches to speed up rendering
 // todo change wire colors
 //todo remove linear gradient?
-final Paint _paintCacheBR = Paint()
-  ..color = bottomRightColor
+/// TODO CHANGE TO FINAL
+Paint get _paintCacheBR => Paint()
+  ..color = wireBottomRightColor
   ..style = PaintingStyle.stroke;
 
-final Paint _paintCacheBL = Paint()
-  ..color = bottomLeftColor
+Paint get _paintCacheBL => Paint()
+  ..color = wireBottomLeftColor
   ..style = PaintingStyle.stroke;
 
-final Paint _paintCacheT = Paint()
-  ..color = topColor
+Paint get _paintCacheT => Paint()
+  ..color = wireTopColor
   ..style = PaintingStyle.stroke;
