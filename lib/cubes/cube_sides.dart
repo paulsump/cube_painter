@@ -107,8 +107,9 @@ const _corners = <Position>[
 
 UnmodifiableListView<Offset> _getUnitOffsetsFromHexagonCornerIndices(
         List<int> indices) =>
-    UnmodifiableListView(List<Offset>.generate(
-        indices.length, (i) => positionToUnitOffset(_corners[indices[i]])));
+    UnmodifiableListView(
+      indices.map((index) => positionToUnitOffset(_corners[index])),
+    );
 
 UnmodifiableListView<Offset> getHexagonCornerOffsets() => UnmodifiableListView(
     List<Offset>.generate(6, (i) => positionToUnitOffset(_corners[i + 1])));
