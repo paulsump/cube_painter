@@ -19,7 +19,7 @@ class CubeSide {
 
   final Path path;
 
-  const CubeSide(this.side, this.path);
+  const CubeSide({required this.side, required this.path});
 
   Paint getPaint(PaintingStyle style) => Paint()
     ..color = getColor(side)
@@ -83,11 +83,12 @@ UnmodifiableListView<CubeSide> getCubeSides(Slice slice) {
   final list = getCubeSidesAndUnitOffsets(slice);
 
   return UnmodifiableListView(
-    List.generate(list.length, (index) {
-      final Side side = list[index][0];
-
-      return CubeSide(side, Path()..addPolygon(list[index][1], true));
-    }),
+    list.map(
+      (sideAndUnitOffset) => CubeSide(
+        side: sideAndUnitOffset[0],
+        path: Path()..addPolygon(sideAndUnitOffset[1], true),
+      ),
+    ),
   );
 }
 
