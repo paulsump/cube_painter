@@ -20,12 +20,12 @@ void out(Object object) {
 
 void _out(String text) {
   debugPrint(text);
-  //TODO LOG
 }
 
 void clipError(String text) {
   out(text);
-
+  //TODO append to error log
+//TODO make a command that user can load the log and saveTolClip
   saveToClipboard(text);
 }
 
