@@ -25,47 +25,51 @@ class SlicesMenu extends StatelessWidget {
     final screen = getScreenSize(context);
     final bool isPortrait = screen.width < screen.height;
 
-    return Drawer(
-      child: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            padY,
-            const Center(child: Text('Slices')),
-            padY,
-            padY,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SliceCubeButton(slice: Slice.topLeft),
-                padX,
-                const SliceCubeButton(slice: Slice.topRight),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SliceCubeButton(slice: Slice.left),
-                // SizedBox(
-                //     width:
-                //         padWidth * 2 + 67,
-                //     child: const Icon(AssetIcons.plusOutline)),
-                padX,
-                const SliceCubeButton(slice: Slice.whole),
-                padX,
-                const SliceCubeButton(slice: Slice.right),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SliceCubeButton(slice: Slice.bottomLeft),
-                padX,
-                const SliceCubeButton(slice: Slice.bottomRight),
-              ],
-            ),
-            if (isPortrait) Center(child: _SlicesExample(padHeight: padHeight)),
-          ],
+    return SizedBox(
+      width: screenAdjust(0.5, context),
+      child: Drawer(
+        child: SafeArea(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              padY,
+              const Center(child: Text('Slices')),
+              padY,
+              padY,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SliceCubeButton(slice: Slice.topLeft),
+                  padX,
+                  const SliceCubeButton(slice: Slice.topRight),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SliceCubeButton(slice: Slice.left),
+                  // SizedBox(
+                  //     width:
+                  //         padWidth * 2 + 67,
+                  //     child: const Icon(AssetIcons.plusOutline)),
+                  padX,
+                  const SliceCubeButton(slice: Slice.whole),
+                  padX,
+                  const SliceCubeButton(slice: Slice.right),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SliceCubeButton(slice: Slice.bottomLeft),
+                  padX,
+                  const SliceCubeButton(slice: Slice.bottomRight),
+                ],
+              ),
+              if (isPortrait)
+                Center(child: _SlicesExample(padHeight: padHeight)),
+            ],
+          ),
         ),
       ),
     );

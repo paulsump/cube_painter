@@ -40,60 +40,63 @@ class PaintingsMenu extends StatelessWidget {
     const double offsetX = 55;
     const padY = SizedBox(height: 15.0);
 
-    return Drawer(
-      // Wrapping with SafeArea here would cause shift to right on iphone
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          const _SafePad(),
-          padY,
-          const Center(child: Text('Paintings')),
-          padY,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconFlatHexagonButton(
-                onPressed: pop(_newFile),
-                tip: 'Create a new painting',
-                icon: AssetIcons.docNew,
-                iconSize: calcAssetIconSize(context) * 0.95,
-              ),
-              IconFlatHexagonButton(
-                onPressed: paintingBank.modified ? dontPop(_saveFile) : null,
-                tip: 'Save the current painting',
-                icon: Icons.save,
-                iconSize: calcNormalIconSize(context),
-              ),
-              IconFlatHexagonButton(
-                onPressed: dontPop(_saveACopyFile),
-                tip: 'Create a copy\nof this painting\nand load it.',
-                icon: AssetIcons.copy,
-                iconSize: calcAssetIconSize(context),
-              ),
-              IconFlatHexagonButton(
-                onPressed: dontPop(_deleteCurrentFile),
-                tip:
-                    'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
-                icon: Icons.delete,
-                iconSize: calcNormalIconSize(context),
-              ),
-            ],
-          ),
-          const SizedBox(height: 5.0),
-          const Divider(),
-          for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
-            Transform.translate(
-              offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
-              child: ThumbnailButton(
-                tip: 'Load this painting',
-                onPressed: () => _loadFile(
-                    filePath: paintingBank.paintingEntries[i].key,
-                    context: context),
-                painting: paintingBank.paintingEntries[i].value,
-              ),
+    return SizedBox(
+      width: screenAdjust(0.7, context),
+      child: Drawer(
+        // Wrapping with SafeArea here would cause shift to right on iphone
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const _SafePad(),
+            padY,
+            const Center(child: Text('Paintings')),
+            padY,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconFlatHexagonButton(
+                  onPressed: pop(_newFile),
+                  tip: 'Create a new painting',
+                  icon: AssetIcons.docNew,
+                  iconSize: calcAssetIconSize(context) * 0.95,
+                ),
+                IconFlatHexagonButton(
+                  onPressed: paintingBank.modified ? dontPop(_saveFile) : null,
+                  tip: 'Save the current painting',
+                  icon: Icons.save,
+                  iconSize: calcNormalIconSize(context),
+                ),
+                IconFlatHexagonButton(
+                  onPressed: dontPop(_saveACopyFile),
+                  tip: 'Create a copy\nof this painting\nand load it.',
+                  icon: AssetIcons.copy,
+                  iconSize: calcAssetIconSize(context),
+                ),
+                IconFlatHexagonButton(
+                  onPressed: dontPop(_deleteCurrentFile),
+                  tip:
+                      'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
+                  icon: Icons.delete,
+                  iconSize: calcNormalIconSize(context),
+                ),
+              ],
             ),
-          const Divider(),
-        ],
+            const SizedBox(height: 5.0),
+            const Divider(),
+            for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
+              Transform.translate(
+                offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
+                child: ThumbnailButton(
+                  tip: 'Load this painting',
+                  onPressed: () => _loadFile(
+                      filePath: paintingBank.paintingEntries[i].key,
+                      context: context),
+                  painting: paintingBank.paintingEntries[i].value,
+                ),
+              ),
+            const Divider(),
+          ],
+        ),
       ),
     );
   }
