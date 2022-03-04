@@ -82,7 +82,7 @@ mixin Persister {
     _settings = await _settingsPersister.load();
 
     if (!_settings.copiedSamples) {
-      await _copySamples();
+      await _copySamples(assetsFolder: 'samples/');
 
       _settings.copiedSamples = true;
       await _settingsPersister.save();
@@ -297,15 +297,13 @@ class _Assets {
   }
 
   static Future<void> _copyAllFromTo(
-      String fromAssetFolderPathStartsWith, String toAppFolderPath,
-      {required String extensionReplacement}) async {
+      String fromAssetFolderPathStartsWith, String toAppFolderPath) async {
     final assetFilePaths = await _getStrings(fromAssetFolderPathStartsWith);
 
     for (MapEntry asset in assetFilePaths.entries) {
       final assetFileName = asset.key;
 
-      final appFileName =
-          assetFileName.replaceFirst('.json', extensionReplacement);
+      final appFileName = assetFileName.replaceFirst('.json', cubesExtension);
 
       final String appFilePath = '$toAppFolderPath$appFileName';
       File appFile = File(appFilePath);
@@ -339,14 +337,8 @@ Future<String> _getAppFolderPath() async {
   return '${appFolder.path}${Platform.pathSeparator}';
 }
 
-Future<void> _copySamples() async {
-  const assetsFolder = 'samples/';
-
-  final String appFolderPath = await _getAppFolderPath();
-
-  await _Assets._copyAllFromTo(assetsFolder, appFolderPath,
-      extensionReplacement: cubesExtension);
-}
+Future<void> _copySamples({required String assetsFolder}) async =>
+    await _Assets._copyAllFromTo(assetsFolder, await _getAppFolderPath());
 
 Future<String> _loadString({required String filePath}) async {
   File file = File(filePath);
