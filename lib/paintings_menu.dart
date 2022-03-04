@@ -37,7 +37,7 @@ class PaintingsMenu extends StatelessWidget {
           await funk(context);
         };
 
-    const double offsetX = 55;
+    final double offsetX = screenAdjust(0.11905, context);
     const padY = SizedBox(height: 15.0);
 
     return SizedBox(
