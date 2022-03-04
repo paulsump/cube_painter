@@ -85,9 +85,10 @@ class CubeLineRadioButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   final String tip;
-  final bool isRadioOn;
-
   final IconData icon;
+
+  final bool isRadioOn;
+  final bool wire;
 
   const CubeLineRadioButton({
     Key? key,
@@ -95,6 +96,7 @@ class CubeLineRadioButton extends StatelessWidget {
     required this.tip,
     required this.icon,
     required this.isRadioOn,
+    required this.wire,
   }) : super(key: key);
 
   @override
@@ -116,6 +118,7 @@ class CubeLineRadioButton extends StatelessWidget {
                         slice: Slice.whole),
                   ),
                 ),
+                wire: wire,
               ))),
       onPressed: onPressed,
       tip: tip,

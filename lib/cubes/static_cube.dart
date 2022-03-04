@@ -1,3 +1,4 @@
+import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
@@ -33,16 +34,21 @@ class DoneCubes extends StatelessWidget {
 }
 
 /// Draws a painting.
-/// It has a list of [_PositionedUnitCube]s.
 /// Used in [Thumbnail] only
 class StaticCubes extends StatelessWidget {
-  final List<_PositionedUnitCube> _cubes;
+  final List<PositionedScaledCube> _cubes;
 
   StaticCubes({
     Key? key,
     required Painting painting,
-  })  : _cubes = List.generate(painting.cubeInfos.length,
-            (i) => _PositionedUnitCube(info: painting.cubeInfos[i])),
+    required bool wire,
+  })  : _cubes = List.generate(
+            painting.cubeInfos.length,
+            (i) => PositionedScaledCube(
+                  info: painting.cubeInfos[i],
+                  wire: wire,
+                  scale: 1.0,
+                )),
         super(key: key);
 
   @override
@@ -50,6 +56,8 @@ class StaticCubes extends StatelessWidget {
       ? Container(color: Colors.yellow)
       : Stack(children: _cubes);
 }
+
+///TODO FIX  const version is invisible
 // class StaticCubes extends StatelessWidget {
 //   final Painting painting;
 //

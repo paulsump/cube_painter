@@ -48,14 +48,15 @@ class PageButtons extends StatelessWidget {
                   onPressed: () => setBrush(Brush.addLine, context),
                   tip:
                       "Drag on the canvas\nto add a line of cubes.\n\nYou can change the direction\nwhile you drag.",
+                  wire: false,
                 ),
-                CubeRadioButton(
+                CubeLineRadioButton(
                   isRadioOn: Brush.eraseLine == getBrush(context, listen: true),
                   icon: AssetIcons.cancelOutline,
                   onPressed: () => setBrush(Brush.eraseLine, context),
                   tip:
                       'Drag on the canvas to\nmove an animating cube.\n\nPlace it over\nthe cube that you want to delete.\n\nThen release to delete it.',
-                  slice: Slice.whole,
+                  wire: true,
                 ),
                 const _OpenSliceMenuButton(),
               ],
