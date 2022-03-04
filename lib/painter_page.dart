@@ -1,8 +1,8 @@
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/brush_cubes.dart';
+import 'package:cube_painter/cubes/done_cubes.dart';
 import 'package:cube_painter/cubes/growing_cubes.dart';
-import 'package:cube_painter/cubes/static_cube.dart';
 import 'package:cube_painter/gestures/gesturer.dart';
 import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/out.dart';
