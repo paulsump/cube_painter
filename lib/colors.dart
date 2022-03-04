@@ -40,16 +40,17 @@ final Color radioButtonOnColor = _getTweenTtoBRColor(0.4);
 
 final Color _blt = getTweenBLtoTColor(0.3);
 
-final Color paintingsMenuButtonsColor = _blt.withOpacity(0.7);
-
 final Color alertColor = _blt.withOpacity(0.9);
 
 final Color tipColor = _blt;
 
 final Color _darkBLT = getTweenBLtoTColor(0.1);
 
-final Color menuColor = _darkBLT.withOpacity(0.8);
-final Color menuScrimColor = _darkBLT.withOpacity(0.6);
+Color get menuColor => _darkBLT.withOpacity(0.4);
+
+Color get menuScrimColor => _darkBLT.withOpacity(0.5);
+
+Color get paintingsMenuButtonsColor => _blt.withOpacity(0.99);
 
 Color _getTweenTtoBRColor(double t) =>
     Color.lerp(topColor, bottomRightColor, t)!;

@@ -41,7 +41,7 @@ class PaintingsMenu extends StatelessWidget {
     const padY = SizedBox(height: 15.0);
 
     return SizedBox(
-      width: screenAdjust(0.7, context),
+      width: screenAdjust(0.75, context),
       child: Drawer(
         // Wrapping with SafeArea here would cause shift to right on iphone
         child: ListView(
