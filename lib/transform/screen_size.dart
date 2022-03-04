@@ -19,14 +19,14 @@ Offset getScreenCenter(BuildContext context) {
 
 // object dimensions calculated using the shortestEdge of the screen...
 
-double getShortestEdge(BuildContext context) {
+double getScreenShortestEdge(BuildContext context) {
   final screen = getScreenSize(context);
 
   return min(screen.width, screen.height);
 }
 
 double _calcButtonHeight(BuildContext context) {
-  return 0.15152 * getShortestEdge(context);
+  return 0.15152 * getScreenShortestEdge(context);
 }
 
 Size calcButtonSize(BuildContext context) {

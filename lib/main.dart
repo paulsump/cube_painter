@@ -74,7 +74,7 @@ class CubePainterApp extends StatelessWidget {
               // Initialize once only
               if (panZoomNotifier.scale == 0) {
                 panZoomNotifier
-                    .initializeScale(0.06494 * getShortestEdge(context));
+                    .initializeScale(0.06494 * getScreenShortestEdge(context));
 
                 unawaited(getPaintingBank(context).setup(context));
               }
