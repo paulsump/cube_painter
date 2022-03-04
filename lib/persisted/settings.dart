@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cube_painter/persisted/persist.dart';
+import 'package:cube_painter/persisted/persister.dart';
 
 class Settings {
   String currentFilePath;

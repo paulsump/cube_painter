@@ -1,17 +1,19 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/assets.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
-import 'package:cube_painter/persisted/persist.dart';
 import 'package:cube_painter/persisted/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 const noWarn = out;
+
+const cubesExtension = '.cubes.json';
 
 /// The main store of the entire model
 /// For loading and saving all the cube positions and their info
@@ -222,4 +224,95 @@ class _SlicesExamplePainting {
 
     unitTransform = triangleWithGap.unitTransform;
   }
+}
+
+/// loading and copying asset files
+class Assets {
+  /// return map of filename + loaded string
+  static Future<Map<String, String>> getStrings(String pathStartsWith) async {
+    final manifestJson = await rootBundle.loadString('AssetManifest.json');
+
+    final allFilePaths = jsonDecode(manifestJson).keys;
+    final filePaths = <String, String>{};
+
+    for (final String filePath in allFilePaths) {
+      if (filePath.startsWith(pathStartsWith)) {
+        final fileName = filePath.split(Platform.pathSeparator).last;
+
+        filePaths[fileName] = await rootBundle.loadString(filePath);
+      }
+    }
+    return filePaths;
+  }
+
+  static Future<void> copyAllFromTo(
+      String fromAssetFolderPathStartsWith, String toAppFolderPath,
+      {required String extensionReplacement}) async {
+    final assetFilePaths = await getStrings(fromAssetFolderPathStartsWith);
+
+    for (MapEntry asset in assetFilePaths.entries) {
+      final assetFileName = asset.key;
+
+      final appFileName =
+          assetFileName.replaceFirst('.json', extensionReplacement);
+
+      final String appFilePath = '$toAppFolderPath$appFileName';
+      File appFile = File(appFilePath);
+
+      if (!await appFile.exists()) {
+        out('copying $appFilePath');
+
+        await appFile.writeAsString(asset.value);
+      }
+    }
+  }
+}
+
+/// cont doc comment from HERE
+Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
+  final paths = <String>[];
+
+  await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
+    final String path = fileSystemEntity.path;
+
+    if (path.endsWith(cubesExtension)) {
+      paths.add(path);
+    }
+  }
+  return paths;
+}
+
+Future<String> getAppFolderPath() async {
+  final Directory appFolder = await getApplicationDocumentsDirectory();
+
+  return '${appFolder.path}${Platform.pathSeparator}';
+}
+
+Future<void> copySamples() async {
+  const assetsFolder = 'samples/';
+
+  final String appFolderPath = await getAppFolderPath();
+
+  await Assets.copyAllFromTo(assetsFolder, appFolderPath,
+      extensionReplacement: cubesExtension);
+}
+
+Future<String> loadString({required String filePath}) async {
+  File file = File(filePath);
+
+  // TODO check for empty string where i use this function?
+  if (!await file.exists()) {
+    out("File doesn't exist: $filePath");
+    return '';
+  }
+
+  return await file.readAsString();
+}
+
+Future<void> saveString(
+    {required String filePath, required String string}) async {
+  assert(filePath.isNotEmpty);
+
+  File file = File(filePath);
+  await file.writeAsString(string);
 }
