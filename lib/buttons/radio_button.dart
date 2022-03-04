@@ -49,6 +49,8 @@ class CubeRadioButton extends StatelessWidget {
   final bool isRadioOn;
 
   final IconData icon;
+  final double iconSize;
+
   final Slice slice;
 
   const CubeRadioButton({
@@ -56,6 +58,7 @@ class CubeRadioButton extends StatelessWidget {
     required this.onPressed,
     required this.tip,
     required this.icon,
+    required this.iconSize,
     required this.isRadioOn,
     required this.slice,
   }) : super(key: key);
@@ -65,13 +68,14 @@ class CubeRadioButton extends StatelessWidget {
     return RadioButton(
       isRadioOn: isRadioOn,
       child: _ChildAndIcon(
-        icon: icon,
         child: Transform.scale(
           scale: screenAdjustButtonChildScale(context),
           child: slice == Slice.whole
               ? const WholeUnitCube()
               : SliceUnitCube(slice: slice),
         ),
+        icon: icon,
+        iconSize: iconSize,
       ),
       onPressed: onPressed,
       tip: tip,
@@ -84,8 +88,10 @@ class CubeRadioButton extends StatelessWidget {
 class CubeLineRadioButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  final String tip;
   final IconData icon;
+  final double iconSize;
+
+  final String tip;
 
   final bool isRadioOn;
   final bool wire;
@@ -95,6 +101,7 @@ class CubeLineRadioButton extends StatelessWidget {
     required this.onPressed,
     required this.tip,
     required this.icon,
+    required this.iconSize,
     required this.isRadioOn,
     required this.wire,
   }) : super(key: key);
@@ -107,6 +114,7 @@ class CubeLineRadioButton extends StatelessWidget {
       isRadioOn: isRadioOn,
       child: _ChildAndIcon(
           icon: icon,
+          iconSize: iconSize,
           child: Transform.scale(
               scale: screenAdjustButtonChildScale(context) * 1.5,
               child: Thumbnail.useTransform(
@@ -127,14 +135,16 @@ class CubeLineRadioButton extends StatelessWidget {
 }
 
 class _ChildAndIcon extends StatelessWidget {
-  final IconData icon;
-
   final Widget child;
+
+  final IconData icon;
+  final double iconSize;
 
   const _ChildAndIcon({
     Key? key,
-    required this.icon,
     required this.child,
+    required this.icon,
+    required this.iconSize,
   }) : super(key: key);
 
   @override
@@ -149,7 +159,11 @@ class _ChildAndIcon extends StatelessWidget {
         ),
         Transform.translate(
           offset: -unit * screenAdjustAssetIconSize(context) / 2,
-          child: Icon(icon, color: enabledIconColor),
+          child: Icon(
+            icon,
+            color: enabledIconColor,
+            size: iconSize,
+          ),
         ),
       ],
     );

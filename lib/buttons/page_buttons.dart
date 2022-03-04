@@ -45,6 +45,7 @@ class PageButtons extends StatelessWidget {
                 CubeLineRadioButton(
                   isRadioOn: Brush.addLine == getBrush(context, listen: true),
                   icon: AssetIcons.plusOutline,
+                  iconSize: screenAdjustAddIconSize(context),
                   onPressed: () => setBrush(Brush.addLine, context),
                   tip:
                       "Drag on the canvas\nto add a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.",
@@ -53,6 +54,7 @@ class PageButtons extends StatelessWidget {
                 CubeLineRadioButton(
                   isRadioOn: Brush.eraseLine == getBrush(context, listen: true),
                   icon: AssetIcons.cancelOutline,
+                  iconSize: screenAdjustEraseIconSize(context),
                   onPressed: () => setBrush(Brush.eraseLine, context),
                   tip:
                       'Drag on the canvas to\ndelete a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.',
@@ -204,6 +206,7 @@ class _OpenSliceMenuButton extends StatelessWidget {
       slice: slice,
       isRadioOn: currentBrush == Brush.addSlice,
       icon: AssetIcons.plusOutline,
+      iconSize: screenAdjustAddIconSize(context),
       onPressed: Scaffold.of(context).openEndDrawer,
       tip: 'Choose which cube slice to add...',
     );

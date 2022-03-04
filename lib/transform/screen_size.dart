@@ -51,3 +51,9 @@ double screenAdjustButtonElevation(BuildContext context) =>
 
 // double calcTooltipOffsetY(BuildContext context) =>
 //     0.78571 * _calcButtonHeight(context);
+
+double screenAdjustAddIconSize(BuildContext context) =>
+    screenAdjust(0.04762, context);
+
+double screenAdjustEraseIconSize(BuildContext context) =>
+    screenAdjust(0.057, context);
