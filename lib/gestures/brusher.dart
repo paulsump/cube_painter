@@ -145,10 +145,11 @@ class Brusher implements GestureHandler {
       }
 
       for (final f in found) {
-        //TODO reverse this loop to fix so erase most recent first
-        for (int i = 0; i < cubeInfos.length; ++i) {
+        // erase most recent first
+        for (int i = cubeInfos.length - 1; i >= 0; --i) {
           if (cubeInfos[i].center == f.center) {
             cubeInfos.removeAt(i);
+            break;
           }
         }
       }
