@@ -38,7 +38,7 @@ class PaintingsMenu extends StatelessWidget {
         };
 
     final double offsetX = screenAdjust(0.11905, context);
-    const padY = SizedBox(height: 15.0);
+    final padY = SizedBox(height: screenAdjust(0.03247, context));
 
     return SizedBox(
       width: screenAdjust(0.75, context),
@@ -81,7 +81,7 @@ class PaintingsMenu extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 5.0),
+            SizedBox(height: screenAdjust(0.01082, context)),
             const Divider(),
             for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
               Transform.translate(
