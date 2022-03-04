@@ -25,8 +25,8 @@ mixin Persister {
 
   String get json => painting.toString();
 
-  final _settingsPersister = SettingsPersister();
-  late Settings _settings;
+  final _settingsPersister = _SettingsPersister();
+  late _Settings _settings;
 
   String _savedJson = '';
 
@@ -82,7 +82,7 @@ mixin Persister {
     _settings = await _settingsPersister.load();
 
     if (!_settings.copiedSamples) {
-      await copySamples();
+      await _copySamples();
 
       _settings.copiedSamples = true;
       await _settingsPersister.save();
@@ -139,7 +139,7 @@ mixin Persister {
   Future<void> saveFile() async {
     finishAnim();
 
-    await saveString(filePath: currentFilePath, string: json);
+    await _saveString(filePath: currentFilePath, string: json);
     _savedJson = json;
   }
 
@@ -158,7 +158,7 @@ mixin Persister {
   void addCubeInfo(CubeInfo info) => painting.cubeInfos.add(info);
 
   Future<void> _setNewFilePath() async {
-    final String appFolderPath = await getAppFolderPath();
+    final String appFolderPath = await _getAppFolderPath();
 
     final int uniqueId =
         (DateTime.now().millisecondsSinceEpoch - 1645648060000) ~/ 100;
@@ -216,7 +216,7 @@ class _SlicesExamplePainting {
   late Painting triangleGap;
 
   Future<void> load() async {
-    final assets = await _Assets.getStrings('help/triangle_');
+    final assets = await _Assets._getStrings('help/triangle_');
 
     triangleWithGap = Painting.fromString(assets['triangle_with_gap.json']!);
     triangleGap = Painting.fromString(assets['triangle_gap.json']!);
@@ -225,19 +225,19 @@ class _SlicesExamplePainting {
   }
 }
 
-class Settings {
+class _Settings {
   String currentFilePath;
 
   bool copiedSamples;
 
   static const String fileName = 'settings.json';
 
-  Settings.fromString(String json) : this.fromJson(jsonDecode(json));
+  _Settings.fromString(String json) : this.fromJson(jsonDecode(json));
 
   @override
   String toString() => jsonEncode(this);
 
-  Settings.fromJson(Map<String, dynamic> json)
+  _Settings.fromJson(Map<String, dynamic> json)
       : currentFilePath = json['currentFilePath'],
         copiedSamples = json['copiedSamples'];
 
@@ -247,40 +247,40 @@ class Settings {
       };
 }
 
-class SettingsPersister {
+class _SettingsPersister {
   late String _path;
-  late Settings _settings;
+  late _Settings _settings;
 
-  Future<Settings> load() async {
+  Future<_Settings> load() async {
     _path = await _getSettingsPath();
 
     // if(true){
     if (!await File(_path).exists()) {
-      _settings = Settings.fromJson({
+      _settings = _Settings.fromJson({
         'currentFilePath': '',
         'copiedSamples': false,
       });
     } else {
-      _settings = Settings.fromString(await loadString(filePath: _path));
+      _settings = _Settings.fromString(await _loadString(filePath: _path));
     }
 
     return _settings;
   }
 
   Future<void> save() async =>
-      saveString(filePath: _path, string: _settings.toString());
+      _saveString(filePath: _path, string: _settings.toString());
 
   Future<String> _getSettingsPath() async {
-    final String appFolderPath = await getAppFolderPath();
+    final String appFolderPath = await _getAppFolderPath();
 
-    return '$appFolderPath${Settings.fileName}';
+    return '$appFolderPath${_Settings.fileName}';
   }
 }
 
 /// loading and copying asset files
 class _Assets {
   /// return map of filename + loaded string
-  static Future<Map<String, String>> getStrings(String pathStartsWith) async {
+  static Future<Map<String, String>> _getStrings(String pathStartsWith) async {
     final manifestJson = await rootBundle.loadString('AssetManifest.json');
 
     final allFilePaths = jsonDecode(manifestJson).keys;
@@ -296,10 +296,10 @@ class _Assets {
     return filePaths;
   }
 
-  static Future<void> copyAllFromTo(
+  static Future<void> _copyAllFromTo(
       String fromAssetFolderPathStartsWith, String toAppFolderPath,
       {required String extensionReplacement}) async {
-    final assetFilePaths = await getStrings(fromAssetFolderPathStartsWith);
+    final assetFilePaths = await _getStrings(fromAssetFolderPathStartsWith);
 
     for (MapEntry asset in assetFilePaths.entries) {
       final assetFileName = asset.key;
@@ -333,22 +333,22 @@ Future<List<String>> _getAllAppFilePaths(Directory appFolder) async {
   return paths;
 }
 
-Future<String> getAppFolderPath() async {
+Future<String> _getAppFolderPath() async {
   final Directory appFolder = await getApplicationDocumentsDirectory();
 
   return '${appFolder.path}${Platform.pathSeparator}';
 }
 
-Future<void> copySamples() async {
+Future<void> _copySamples() async {
   const assetsFolder = 'samples/';
 
-  final String appFolderPath = await getAppFolderPath();
+  final String appFolderPath = await _getAppFolderPath();
 
-  await _Assets.copyAllFromTo(assetsFolder, appFolderPath,
+  await _Assets._copyAllFromTo(assetsFolder, appFolderPath,
       extensionReplacement: cubesExtension);
 }
 
-Future<String> loadString({required String filePath}) async {
+Future<String> _loadString({required String filePath}) async {
   File file = File(filePath);
 
   // TODO check for empty string where i use this function?
@@ -360,7 +360,7 @@ Future<String> loadString({required String filePath}) async {
   return await file.readAsString();
 }
 
-Future<void> saveString(
+Future<void> _saveString(
     {required String filePath, required String string}) async {
   assert(filePath.isNotEmpty);
 
