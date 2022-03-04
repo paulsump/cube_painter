@@ -10,6 +10,8 @@ import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
+const _unitOffset = Offset(1, 1);
+
 /// A raised hexagon shaped radio button
 class RadioButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -96,6 +98,8 @@ class CubeLineRadioButton extends StatelessWidget {
   final bool isRadioOn;
   final bool wire;
 
+  final double diagonalOffset;
+
   const CubeLineRadioButton({
     Key? key,
     required this.onPressed,
@@ -104,6 +108,7 @@ class CubeLineRadioButton extends StatelessWidget {
     required this.iconSize,
     required this.isRadioOn,
     required this.wire,
+    required this.diagonalOffset,
   }) : super(key: key);
 
   @override
@@ -112,22 +117,25 @@ class CubeLineRadioButton extends StatelessWidget {
 
     return RadioButton(
       isRadioOn: isRadioOn,
-      child: _ChildAndIcon(
-          icon: icon,
-          iconSize: iconSize,
-          child: Transform.scale(
-              scale: screenAdjustButtonChildScale(context) * 1.5,
-              child: Thumbnail.useTransform(
-                painting: Painting(
-                  cubeInfos: List.generate(
-                    n,
-                    (index) => CubeInfo(
-                        center: Position(n - index, n - index),
-                        slice: Slice.whole),
+      child: Transform.translate(
+        offset: _unitOffset * screenAdjust(diagonalOffset, context),
+        child: _ChildAndIcon(
+            icon: icon,
+            iconSize: iconSize,
+            child: Transform.scale(
+                scale: screenAdjustButtonChildScale(context) * 1.5,
+                child: Thumbnail.useTransform(
+                  painting: Painting(
+                    cubeInfos: List.generate(
+                      n,
+                      (index) => CubeInfo(
+                          center: Position(n - index, n - index),
+                          slice: Slice.whole),
+                    ),
                   ),
-                ),
-                wire: wire,
-              ))),
+                  wire: wire,
+                ))),
+      ),
       onPressed: onPressed,
       tip: tip,
     );
@@ -149,16 +157,14 @@ class _ChildAndIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const unit = Offset(1, 1);
-
     return Stack(
       children: [
         Transform.translate(
-          offset: unit * 12,
+          offset: _unitOffset * 12,
           child: child,
         ),
         Transform.translate(
-          offset: -unit * screenAdjustAssetIconSize(context) / 2,
+          offset: -_unitOffset * screenAdjustAssetIconSize(context) / 2,
           child: Icon(
             icon,
             color: enabledIconColor,

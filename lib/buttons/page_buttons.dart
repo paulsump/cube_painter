@@ -46,6 +46,7 @@ class PageButtons extends StatelessWidget {
                   isRadioOn: Brush.addLine == getBrush(context, listen: true),
                   icon: AssetIcons.plusOutline,
                   iconSize: screenAdjustAddIconSize(context),
+                  diagonalOffset: -0.002,
                   onPressed: () => setBrush(Brush.addLine, context),
                   tip:
                       "Drag on the canvas\nto add a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.",
@@ -55,6 +56,7 @@ class PageButtons extends StatelessWidget {
                   isRadioOn: Brush.eraseLine == getBrush(context, listen: true),
                   icon: AssetIcons.cancelOutline,
                   iconSize: screenAdjustEraseIconSize(context),
+                  diagonalOffset: 0.004,
                   onPressed: () => setBrush(Brush.eraseLine, context),
                   tip:
                       'Drag on the canvas to\ndelete a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.',
