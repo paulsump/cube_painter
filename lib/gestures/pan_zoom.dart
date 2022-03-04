@@ -32,6 +32,11 @@ class PanZoomNotifier extends ChangeNotifier {
 
   double get scale => _scale;
 
+  void initializeScale(double value) {
+    assert(scale == 0);
+    _scale = value;
+  }
+
   void setScale(double value) {
     _scale = value;
     notifyListeners();
