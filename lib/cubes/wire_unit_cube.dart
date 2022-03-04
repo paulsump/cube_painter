@@ -26,15 +26,14 @@ class _Painter extends CustomPainter {
 }
 
 /// paint caches to speed up rendering
-/// TODO CHANGE TO FINAL
-Paint get _paintCacheBR => Paint()
+final Paint _paintCacheBR = Paint()
   ..color = wireBottomRightColor
   ..style = PaintingStyle.stroke;
 
-Paint get _paintCacheBL => Paint()
+final Paint _paintCacheBL = Paint()
   ..color = wireBottomLeftColor
   ..style = PaintingStyle.stroke;
 
-Paint get _paintCacheT => Paint()
+final Paint _paintCacheT = Paint()
   ..color = wireTopColor
   ..style = PaintingStyle.stroke;
