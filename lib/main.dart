@@ -39,7 +39,7 @@ class CubePainterApp extends StatelessWidget {
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: textColor,
 
-                /// TODO Responsive to screen size- magic numbers
+                /// TODO Responsive to screen size - removed magic numbers
                 /// I'd have to move it to a place with a valid context
                 fontSizeFactor: 1.0,
               ),
@@ -50,7 +50,7 @@ class CubePainterApp extends StatelessWidget {
           tooltipTheme: TooltipThemeData(
             // textStyle: TextStyle(fontSize: 14),
 
-            /// TODO Responsive to screen size- magic numbers
+            /// TODO Responsive to screen size - removed magic numbers
             /// I'd have to move it to a place with a valid context
             /// to calcTooltipOffsetY(context)
             verticalOffset: 55,

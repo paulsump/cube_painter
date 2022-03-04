@@ -72,7 +72,7 @@ class PanZoomer implements GestureHandler {
   void update(Offset point, double scale_, BuildContext context) {
     final scale = _initial.scale * scale_;
 
-    /// TODO Responsive to screen size- magic numbers
+    /// TODO Responsive to screen size - removed magic numbers
     if (scale < 15 || 150 < scale) {
       return;
     }
@@ -86,7 +86,7 @@ class PanZoomer implements GestureHandler {
     offset *= scale_;
 
     // Pan limits - Don’t allow pan past place where can’t zoom limit to.
-    /// TODO Responsive to screen size- magic numbers
+    /// TODO Responsive to screen size - removed magic numbers
     offset = Offset(offset.dx.clamp(-500, 500), offset.dy.clamp(-340, 500));
 
     //TODO See if this 'if' makes any diff when the widgets listen

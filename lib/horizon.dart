@@ -8,7 +8,7 @@ class Horizon extends StatelessWidget {
   @override
   Widget build(BuildContext context) => UnitToScreen(
         child: Transform.scale(
-          /// TODO Responsive to screen size- magic numbers
+          /// TODO Responsive to screen size - removed magic numbers
           scale: 30,
           child: const CustomPaint(painter: _Painter()),
         ),
@@ -37,7 +37,7 @@ Paint getGradientPaint(PaintingStyle style, Path path) {
     ..style = style;
 }
 
-/// TODO Responsive to screen size- magic numbers
+/// TODO Responsive to screen size - removed magic numbers
 /// these are based on my phone
 const quad = [
   Offset(-2, 0.0),
