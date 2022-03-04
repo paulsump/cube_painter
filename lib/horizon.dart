@@ -1,4 +1,5 @@
 import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/transform/screen_size.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,7 @@ class Horizon extends StatelessWidget {
   @override
   Widget build(BuildContext context) => UnitToScreen(
         child: Transform.scale(
-          /// TODO Responsive to screen size - removed magic numbers
-          scale: 30,
+          scale: screenAdjust(0.06494, context),
           child: const CustomPaint(painter: _Painter()),
         ),
       );
@@ -37,13 +37,13 @@ Paint getGradientPaint(PaintingStyle style, Path path) {
     ..style = style;
 }
 
-/// TODO Responsive to screen size - removed magic numbers
-/// these are based on my phone
+/// The width is way wider than it needs to be,
+/// but it doesn't matter since there's no gradient on it.
 const quad = [
-  Offset(-2, 0.0),
-  Offset(2, 0.0),
-  Offset(2, 1.6),
-  Offset(-2, 1.6),
+  Offset(-3, 0.0),
+  Offset(3, 0.0),
+  Offset(3, 1.6),
+  Offset(-3, 1.6),
 ];
 
 get _gradientBottomTop => LinearGradient(

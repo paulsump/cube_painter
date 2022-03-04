@@ -47,11 +47,11 @@ final Color tipColor = _blt;
 
 final Color _darkBLT = getTweenBLtoTColor(0.1);
 
-Color get menuColor => _darkBLT.withOpacity(0.4);
+final Color menuColor = _darkBLT.withOpacity(0.4);
 
-Color get menuScrimColor => _darkBLT.withOpacity(0.5);
+final Color menuScrimColor = _darkBLT.withOpacity(0.5);
 
-Color get paintingsMenuButtonsColor => _blt.withOpacity(0.99);
+final Color paintingsMenuButtonsColor = _blt.withOpacity(0.99);
 
 Color _getTweenTtoBRColor(double t) =>
     Color.lerp(topColor, bottomRightColor, t)!;
