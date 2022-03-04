@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -154,8 +153,6 @@ mixin Persister {
     _savedJson = json;
     unawaited(saveFile());
   }
-
-  void addCubeInfo(CubeInfo info) => painting.cubeInfos.add(info);
 
   Future<void> _setNewFilePath() async {
     final String appFolderPath = await _getAppFolderPath();
