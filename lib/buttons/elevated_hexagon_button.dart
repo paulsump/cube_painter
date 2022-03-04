@@ -42,7 +42,7 @@ class ElevatedHexagonButton extends StatelessWidget {
                 ? buttonColor
                 : isRadioOn!
                     ? radioButtonOnColor
-                    : buttonColor),
+                    : radioButtonOffColor),
             elevation: MaterialStateProperty.all(
                 isOn ? 0.0 : screenAdjustButtonElevation(context)),
             shadowColor:

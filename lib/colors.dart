@@ -27,16 +27,17 @@ const Color textColor = enabledIconColor;
 
 Color getTweenBLtoTColor(double t) => Color.lerp(bottomLeftColor, topColor, t)!;
 
+final Color backgroundColor = _getTweenTtoBRColor(0.6);
+
 Color getButtonColor(double t) => Color.lerp(backgroundColor, buttonColor, t)!;
 
 final Color buttonColor = _getTweenTtoBRColor(0.4);
 
 final Color buttonBorderColor = _getTweenTtoBRColor(0.1);
 
-final Color backgroundColor = _getTweenTtoBRColor(0.6);
+final Color radioButtonOnColor = _getTweenTtoBRColor(0.3);
 
-//TODO RENAME (THERE'S NO OFF COLOR)
-final Color radioButtonOnColor = _getTweenTtoBRColor(0.4);
+final Color radioButtonOffColor = buttonColor;
 
 final Color _blt = getTweenBLtoTColor(0.3);
 
