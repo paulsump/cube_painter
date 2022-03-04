@@ -91,7 +91,8 @@ class PanZoomer implements GestureHandler {
     final xMin = -xMax;
     final yMax = xMax;
 
-    final yMin = screenAdjust(-0.5, context);
+    // TODO DO THIS WITH SCREEN HEIGHT INSTEAD
+    final yMin = screenAdjust(-0.3, context);
     offset = Offset(offset.dx.clamp(xMin, xMax), offset.dy.clamp(yMin, yMax));
 
     //TODO See if this 'if' makes any diff when the widgets listen
