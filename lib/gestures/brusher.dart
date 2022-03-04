@@ -103,7 +103,7 @@ class Brusher implements GestureHandler {
       animCubes.clear();
 
       for (Position position in positions.list) {
-        CubeInfo? cube = _findAt(position, copy);
+        CubeInfo? cube = _getCubeInfoAt(position, copy);
 
         if (cube != null) {
           animCubes.add(cube);
@@ -153,19 +153,10 @@ class Brusher implements GestureHandler {
     _notify(context);
     getPaintingBank(context).cubeAnimState = CubeAnimState.growingOrDone;
   }
-
-  CubeInfo? _getCubeInfoAt(Position position, List<CubeInfo> cubeInfos) {
-    for (final info in cubeInfos) {
-      if (position == info.center) {
-        return info;
-      }
-    }
-    return null;
-  }
 }
 
-CubeInfo? _findAt(Position position, List<CubeInfo> list) {
-  for (final info in list) {
+CubeInfo? _getCubeInfoAt(Position position, Iterable<CubeInfo> cubeInfos) {
+  for (final info in cubeInfos) {
     if (position == info.center) {
       return info;
     }
