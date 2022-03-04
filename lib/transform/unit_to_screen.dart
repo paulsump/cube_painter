@@ -1,6 +1,9 @@
 import 'package:cube_painter/gestures/pan_zoom.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 /// the opposite of UnitToScreen
 Offset screenToUnit(Offset point, BuildContext context) =>
