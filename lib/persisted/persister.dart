@@ -21,14 +21,12 @@ mixin Persister {
   final paintings = <String, Painting>{};
 
   final slicesExample = _SlicesExamplePainting();
-
   String get json => painting.toString();
 
   final _settingsPersister = _SettingsPersister();
   late _Settings _settings;
 
   String _savedJson = '';
-
   bool get modified => json != _savedJson;
 
   bool get hasCubes =>
@@ -46,15 +44,10 @@ mixin Persister {
     return true;
   }
 
-  /// defined in [Animator]
   void finishAnim();
-
-  /// defined in [PaintingBank]
   void updateAfterLoad(BuildContext context);
 
-  /// defined in [PaintingBank]
   void notify();
-
   String get currentFilePath => _settings.currentFilePath;
 
   void saveCurrentFilePath(String filePath) {
@@ -84,6 +77,7 @@ mixin Persister {
   Future<void> setup(BuildContext context) async {
     _settings = await _settingsPersister.load();
 
+    // if (true) {
     if (!_settings.copiedSamples) {
       await _copySamples(assetsFolder: 'samples/');
 
