@@ -23,21 +23,7 @@ PaintingBank getPaintingBank(BuildContext context, {bool listen = false}) =>
 /// And a [Animator] - it manages the starting and stopping of
 /// cube animation during loading and brushing.
 class PaintingBank extends ChangeNotifier with Persister, Animator {
-  @override
-  void startBrushing() {
-    super.startBrushing();
 
-    notifyListeners();
-  }
-
-  @override
-  void finishAnim() {
-    super.finishAnim();
-
-    if (cubeAnimState != CubeAnimState.brushing) {
-      notifyListeners();
-    }
-  }
 
   @override
   void updateAfterLoad(BuildContext context) {
@@ -49,7 +35,7 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
       getUndoer(context).clear();
 
       startAnimatingLoadedCubes();
-      notifyListeners();
+      notify();
     }
   }
 
@@ -58,15 +44,16 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
   void setJson(String json) {
     setPainting(Painting.fromString(json));
 
-    notifyListeners();
+    notify();
   }
 
   @override
   Future<void> deleteCurrentFile(BuildContext context) async {
     await super.deleteCurrentFile(context);
 
-    notifyListeners();
+    notify();
   }
 
+  @override
   void notify() => notifyListeners();
 }

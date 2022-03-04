@@ -33,6 +33,9 @@ mixin Animator {
   /// defined in [Persister]
   Painting get painting;
 
+  /// defined in [PaintingBank]
+  void notify();
+
   /// move all the (static) cubeInfos to animCubeInfos
   @protected
   void startAnimatingLoadedCubes() {
@@ -48,6 +51,7 @@ mixin Animator {
     finishAnim();
 
     cubeAnimState = CubeAnimState.brushing;
+    notify();
   }
 
   /// Stop animating the cubes by removing them from animCubeInfos
@@ -61,6 +65,8 @@ mixin Animator {
         /// if we were loading then we never removed these from cubeInfos,
         /// so we can throw these away.
         animCubeInfos.clear();
+
+        notify();
         break;
 
       case CubeAnimState.growingOrDone:
@@ -71,6 +77,7 @@ mixin Animator {
         painting.cubeInfos.addAll(animCubeInfos);
         animCubeInfos.clear();
 
+        notify();
         break;
     }
   }

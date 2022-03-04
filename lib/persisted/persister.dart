@@ -51,6 +51,9 @@ mixin Persister {
   /// defined in [PaintingBank]
   void updateAfterLoad(BuildContext context);
 
+  /// defined in [PaintingBank]
+  void notify();
+
   String get currentFilePath => _settings.currentFilePath;
 
   void saveCurrentFilePath(String filePath) {
@@ -134,8 +137,6 @@ mixin Persister {
     _savedJson = json;
     updateAfterLoad(context);
   }
-
-  void notify();
 
   Future<void> saveFile() async {
     finishAnim();
