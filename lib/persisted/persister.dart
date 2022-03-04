@@ -38,7 +38,8 @@ mixin Persister {
 
   bool get _hasPaintingForCurrentFilePath {
     if (!paintings.containsKey(currentFilePath)) {
-      out('_hasPaintingForCurrentFilePath : File not loaded (yet?): $currentFilePath');
+      clipError(
+          '_hasPaintingForCurrentFilePath : File not loaded (yet?): $currentFilePath');
 
       return false;
     }
@@ -350,7 +351,7 @@ Future<String> _loadString({required String filePath}) async {
 
   // TODO check for empty string where i use this function?
   if (!await file.exists()) {
-    out("File doesn't exist: $filePath");
+    clipError("File doesn't exist: $filePath");
     return '';
   }
 

@@ -22,6 +22,9 @@ PaintingBank getPaintingBank(BuildContext context, {bool listen = false}) =>
 /// cube animation during loading and brushing.
 class PaintingBank extends ChangeNotifier with Persister, Animator {
   @override
+  void notify() => notifyListeners();
+
+  @override
   void updateAfterLoad(BuildContext context) {
     setPanOffset(context, Offset.zero);
 
@@ -42,7 +45,4 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
 
     notify();
   }
-
-  @override
-  void notify() => notifyListeners();
 }

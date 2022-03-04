@@ -22,6 +22,11 @@ void _out(String text) {
   //TODO LOG
 }
 
+void clipError(String text) {
+  out(text);
+  // Savetoclipboard
+}
+
 double _decimalPlaces5(double val) => _decimalPlaces(val, 5);
 
 double _decimalPlaces(double val, int places) {
