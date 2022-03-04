@@ -31,7 +31,6 @@ class DoneCubes extends StatelessWidget {
   }
 }
 
-
 /// A cube that has been positioned
 class _PositionedUnitCube extends StatelessWidget {
   final CubeInfo info;

@@ -4,6 +4,7 @@ const Color topColor = Color(0xfff07f7e);
 const Color bottomRightColor = Color(0xffffd8d6);
 const Color bottomLeftColor = Color(0xff543e3d);
 
+const Color wholeCubeTopTopColor = Color(0xffb16564);
 final Color disabledIconColor = _getTweenBLtoBRColor(0.5);
 
 Color _getTweenBLtoBRColor(double t) =>
