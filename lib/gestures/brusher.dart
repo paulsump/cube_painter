@@ -128,15 +128,15 @@ class Brusher implements GestureHandler {
     if (erase) {
       final found = <CubeInfo>[];
 
+      // get the first cubeInfo it finds at each animCube position
+      // basically just a check to see if there is any cubeInfo at this position,
+      // rather than getting the correct one at this stage.
       for (final animCubeInfo in paintingBank.animCubeInfos) {
         final CubeInfo? cubeInfo =
-            //TODO Fix so erase most recent first
             _getCubeInfoAt(animCubeInfo.center, cubeInfos);
-        // _getCubeInfoAt(animCubeInfo.center, cubeInfos.reversed);
 
         if (cubeInfo != null) {
           found.add(cubeInfo);
-          // out(cubeInfo.key);
         }
       }
 
@@ -145,7 +145,12 @@ class Brusher implements GestureHandler {
       }
 
       for (final f in found) {
-        cubeInfos.remove(f);
+        //TODO reverse this loop to fix so erase most recent first
+        for (int i = 0; i < cubeInfos.length; ++i) {
+          if (cubeInfos[i].center == f.center) {
+            cubeInfos.removeAt(i);
+          }
+        }
       }
 
       // So that it doesn't get added back in whenComplete()
