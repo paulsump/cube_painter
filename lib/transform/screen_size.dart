@@ -20,9 +20,9 @@ Offset getScreenCenter(BuildContext context) {
 // object dimensions calculated using the shortestEdge of the screen...
 
 double screenAdjust(double length, BuildContext context) =>
-    length * getScreenShortestEdge(context);
+    length * _getScreenShortestEdge(context);
 
-double getScreenShortestEdge(BuildContext context) {
+double _getScreenShortestEdge(BuildContext context) {
   final screen = getScreenSize(context);
 
   return min(screen.width, screen.height);

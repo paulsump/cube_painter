@@ -34,8 +34,8 @@ class CubePainterApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Cube Painter',
         theme: ThemeData(
-          // transparent menu
-          canvasColor: backgroundColor.withOpacity(0.1),
+          // canvasColor: backgroundColor.withOpacity(0.1),
+          canvasColor: menuColor,
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: textColor,
 

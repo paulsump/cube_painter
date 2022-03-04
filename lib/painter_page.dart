@@ -23,6 +23,7 @@ class PainterPage extends StatelessWidget {
       drawer: const PaintingsMenu(),
       endDrawer: const SlicesMenu(),
       drawerEnableOpenDragGesture: false,
+      drawerScrimColor: menuScrimColor,
       body: Container(
         color: backgroundColor,
         child: SafeArea(
