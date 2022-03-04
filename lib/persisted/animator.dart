@@ -28,6 +28,7 @@ enum CubeAnimState {
 mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
+  //TODO REname cubeState to cubeAnimState
   CubeAnimState cubeState = CubeAnimState.growingOrDone;
 
   /// defined in [Persister]

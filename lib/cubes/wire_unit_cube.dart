@@ -26,8 +26,6 @@ class _Painter extends CustomPainter {
 }
 
 /// paint caches to speed up rendering
-// todo change wire colors
-//todo remove linear gradient?
 /// TODO CHANGE TO FINAL
 Paint get _paintCacheBR => Paint()
   ..color = wireBottomRightColor

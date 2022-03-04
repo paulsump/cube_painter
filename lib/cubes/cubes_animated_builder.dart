@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cube_painter/cubes/calc_unit_ping_pong.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/gestures/brush.dart';
+import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,8 @@ class CubesAnimatedBuilder extends StatelessWidget {
                           : lerpDouble(
                               unitPingPong(i), 1.0, _controller.value)!,
                       info: paintingBank.animCubeInfos[i],
-                      wire: brush == Brush.eraseLine,
+                      wire: brush == Brush.eraseLine &&
+                          paintingBank.cubeState == CubeAnimState.brushing,
                     ),
                 ],
               ),
