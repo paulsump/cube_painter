@@ -52,8 +52,7 @@ class Alert extends StatelessWidget {
             _Button(
               onPressed: noCallBack,
               icon: AssetIcons.thumbsDown,
-              tip:
-                  noTip ?? 'No - Do the operation, but say no to the question.',
+              tip: noTip ?? 'No - Do it, but say no to the question.',
             ),
           if (cancelCallBack != null)
             _Button(

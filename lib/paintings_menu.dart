@@ -129,26 +129,13 @@ class PaintingsMenu extends StatelessWidget {
     await paintingBank.saveACopyFile();
   }
 
-  void _deleteCurrentFile(BuildContext context) async {
-    if (await _askDelete(context)) {
-      final paintingBank = getPaintingBank(context);
+  void _deleteCurrentFile(BuildContext context) async =>
+      await getPaintingBank(context).deleteCurrentFile(context);
 
-      await paintingBank.deleteCurrentFile(context);
-    }
-  }
-
-  Future<bool> _askDelete(BuildContext context) async {
-    return await _askYesNoOrCancel(
-      title: 'Delete',
-      content: 'Delete the current painting?',
-      yesTip: 'Delete the current painting.',
-      wantOnlyYesAndCancelButtons: true,
-      context: context,
-    );
-  }
-
-  Future<bool> _askSaveCurrent(
-      {required String title, required BuildContext context}) async {
+  Future<bool> _askSaveCurrent({
+    required String title,
+    required BuildContext context,
+  }) async {
     return await _askYesNoOrCancel(
       title: title,
       content: 'Save the current changes?',

@@ -47,7 +47,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.plusOutline,
                   onPressed: () => setBrush(Brush.addLine, context),
                   tip:
-                      "Drag on the canvas\nto add a line of cubes.\n\nYou can change the direction\nwhile you drag.",
+                      "Drag on the canvas\nto add a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.",
                   wire: false,
                 ),
                 CubeLineRadioButton(
@@ -55,7 +55,7 @@ class PageButtons extends StatelessWidget {
                   icon: AssetIcons.cancelOutline,
                   onPressed: () => setBrush(Brush.eraseLine, context),
                   tip:
-                      'Drag on the canvas to\nmove an animating cube.\n\nPlace it over\nthe cube that you want to delete.\n\nThen release to delete it.',
+                      'Drag on the canvas to\ndelete a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.',
                   wire: true,
                 ),
                 const _OpenSliceMenuButton(),
@@ -182,8 +182,8 @@ class _UndoButton extends StatelessWidget {
                     : () => undoer.undo(context)
                 : null,
             tip: isRedo
-                ? 'Redo the last add or delete operation that was undone.'
-                : 'Undo the last add or delete operation.',
+                ? 'Redo the last add or delete that was undone.'
+                : 'Undo the last add or delete.',
           )
         : Container();
   }
