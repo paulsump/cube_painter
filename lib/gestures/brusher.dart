@@ -46,7 +46,7 @@ class Brusher implements GestureHandler {
   }
 
   @override
-  void end(BuildContext context) => _saveForUndo(context);
+  void end(BuildContext context) => _finish(context);
 
   @override
   void tapDown(Offset point, BuildContext context) {
@@ -56,7 +56,7 @@ class Brusher implements GestureHandler {
   }
 
   @override
-  void tapUp(Offset point, BuildContext context) => _saveForUndo(context);
+  void tapUp(Offset point, BuildContext context) => _finish(context);
 
   void _notify(BuildContext context) => getPaintingBank(context).notify();
 
@@ -74,7 +74,7 @@ class Brusher implements GestureHandler {
     final animCubes = getAnimCubeInfos(context);
 
     if (animCubes.isEmpty) {
-      _addCube(newPosition, slice, context);
+      _addAnimCube(newPosition, slice, context);
 
       _notify(context);
     } else {
@@ -83,7 +83,7 @@ class Brusher implements GestureHandler {
       if (oldPosition != newPosition) {
         animCubes.clear();
 
-        _addCube(newPosition, slice, context);
+        _addAnimCube(newPosition, slice, context);
         _notify(context);
       }
     }
@@ -91,13 +91,14 @@ class Brusher implements GestureHandler {
 
   void _updateLine(Offset point, BuildContext context) {
     final Positions positions =
-    brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
+        brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
 
     if (previousPositions != positions) {
-      // using order provided by brushMaths
-      // only add new cubes, deleting any old ones
-
       final animCubes = getAnimCubeInfos(context);
+
+      // using order provided by brushMaths
+      // only add new anim cubes, deleting any old ones
+
       var copy = animCubes.toList();
       animCubes.clear();
 
@@ -107,7 +108,7 @@ class Brusher implements GestureHandler {
         if (cube != null) {
           animCubes.add(cube);
         } else {
-          _addCube(position, Slice.whole, context);
+          _addAnimCube(position, Slice.whole, context);
         }
       }
       _notify(context);
@@ -115,10 +116,10 @@ class Brusher implements GestureHandler {
     }
   }
 
-  void _addCube(Position center, Slice slice, BuildContext context) =>
+  void _addAnimCube(Position center, Slice slice, BuildContext context) =>
       getAnimCubeInfos(context).add(CubeInfo(center: center, slice: slice));
 
-  void _saveForUndo(BuildContext context) {
+  void _finish(BuildContext context) {
     final bool erase = Brush.eraseLine == getBrush(context);
 
     final paintingBank = getPaintingBank(context);
