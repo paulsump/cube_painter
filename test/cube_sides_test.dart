@@ -27,41 +27,37 @@ bool _equalsOffset(Offset a, Offset b) {
 
 void main() {
   group('Testing calcHexagonOffsets()', () {
+    final List<Offset> offsets = getHexagonCornerOffsets();
+
     const double x = root3over2;
     const double y = 0.5;
 
     test('offset 0', () {
-      final List<Offset> offsets = getHexagonCornerOffsets();
       const offset = Offset(x, -y);
       expect(offsets[0].dx, equals(offset.dx));
       expect(offsets[0].dy, equals(offset.dy));
     });
     test('offset 1', () {
-      final List<Offset> offsets = getHexagonCornerOffsets();
       const offset = Offset(0.0, -1.0);
       expect(offsets[1].dx, equals(offset.dx));
       expect(offsets[1].dy, equals(offset.dy));
     });
     test('offset 2', () {
-      final List<Offset> offsets = getHexagonCornerOffsets();
       const offset = Offset(-x, -y);
       expect(offsets[2].dx, equals(offset.dx));
       expect(offsets[2].dy, equals(offset.dy));
     });
     test('offset 3', () {
-      final List<Offset> offsets = getHexagonCornerOffsets();
       const offset = Offset(-x, y);
       expect(offsets[3].dx, equals(offset.dx));
       expect(offsets[3].dy, equals(offset.dy));
     });
     test('offset 4', () {
-      final List<Offset> offsets = getHexagonCornerOffsets();
       const offset = Offset(0.0, 1.0);
       expect(offsets[4].dx, equals(offset.dx));
       expect(offsets[4].dy, equals(offset.dy));
     });
     test('offset 5', () {
-      final List<Offset> offsets = getHexagonCornerOffsets();
       const offset = Offset(x, y);
       expect(offsets[5].dx, equals(offset.dx));
       expect(offsets[5].dy, equals(offset.dy));
