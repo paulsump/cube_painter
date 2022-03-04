@@ -125,8 +125,9 @@ void _showHelp(BuildContext context) {
         child: RichText(
           text: TextSpan(
             text: '\n',
-            style:
-                DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.7),
+            style: DefaultTextStyle.of(context).style.apply(
+                  fontSizeFactor: 0.00367965 * getShortestEdge(context),
+                ),
             children: const <TextSpan>[
               TextSpan(text: 'Add cubes', style: title),
               TextSpan(text: '...\n\nDrag with '),

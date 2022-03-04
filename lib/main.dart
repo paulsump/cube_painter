@@ -38,6 +38,9 @@ class CubePainterApp extends StatelessWidget {
           canvasColor: backgroundColor.withOpacity(0.1),
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: textColor,
+
+                /// TODO Responsive to screen size- magic numbers
+                /// I'd have to move it to a place with a valid context
                 fontSizeFactor: 1.0,
               ),
           // for icon buttons only atm
