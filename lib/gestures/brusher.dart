@@ -130,10 +130,13 @@ class Brusher implements GestureHandler {
 
       for (final animCubeInfo in paintingBank.animCubeInfos) {
         final CubeInfo? cubeInfo =
+            //TODO Fix so erase most recent first
             _getCubeInfoAt(animCubeInfo.center, cubeInfos);
+        // _getCubeInfoAt(animCubeInfo.center, cubeInfos.reversed);
 
         if (cubeInfo != null) {
           found.add(cubeInfo);
+          // out(cubeInfo.key);
         }
       }
 
