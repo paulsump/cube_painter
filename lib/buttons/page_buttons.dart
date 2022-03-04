@@ -126,7 +126,7 @@ void _showHelp(BuildContext context) {
           text: TextSpan(
             text: '\n',
             style: DefaultTextStyle.of(context).style.apply(
-                  fontSizeFactor: 0.00367965 * getScreenShortestEdge(context),
+                  fontSizeFactor: screenAdjust(0.00367965, context),
                 ),
             children: const <TextSpan>[
               TextSpan(text: 'Add cubes', style: title),

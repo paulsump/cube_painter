@@ -24,7 +24,7 @@ class ThumbnailButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = 0.40043 * getScreenShortestEdge(context);
+    final double height = screenAdjust(0.40043, context);
 
     return Tooltip(
       message: tip,

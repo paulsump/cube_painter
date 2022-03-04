@@ -16,12 +16,10 @@ class SlicesMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shortestEdge = getScreenShortestEdge(context);
-
-    final double padWidth = 0.01 * shortestEdge;
+    final double padWidth = screenAdjust(0.01, context);
     final padX = SizedBox(width: padWidth);
 
-    final double padHeight = 0.03247 * shortestEdge;
+    final double padHeight = screenAdjust(0.03247, context);
     final padY = SizedBox(height: padHeight);
 
     final screen = getScreenSize(context);
@@ -84,10 +82,9 @@ class _SlicesExample extends StatelessWidget {
     final paintingBank = getPaintingBank(context);
 
     final padY = SizedBox(height: padHeight);
-    final length = getScreenShortestEdge(context);
 
-    final offsetY = 0.32251 * length;
-    final scale = 0.42857 * length;
+    final offsetY = screenAdjust(0.32251, context);
+    final scale = screenAdjust(0.42857, context);
 
     return Column(
       children: [
