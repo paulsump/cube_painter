@@ -73,11 +73,7 @@ class PanZoomer implements GestureHandler {
     final scale = _initial.scale * scale_;
 
     /// TODO Responsive to screen size - removed magic numbers
-    if (scale < 15 || 150 < scale) {
-      return;
-    }
-
-    if (scale != getZoomScale(context)) {
+    if (15 < scale && scale < 150 && scale != getZoomScale(context)) {
       setZoomScale(context, scale);
     }
 
