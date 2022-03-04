@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 
 const cubesExtension = '.cubes.json';
 
+/// cont doc comment from HERE
 Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
   final paths = <String>[];
 
