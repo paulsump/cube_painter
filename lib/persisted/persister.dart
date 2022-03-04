@@ -206,6 +206,7 @@ mixin Persister {
     } else {
       loadFile(filePath: paintings.keys.first, context: context);
     }
+    notify();
   }
 }
 

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
@@ -23,8 +21,6 @@ PaintingBank getPaintingBank(BuildContext context, {bool listen = false}) =>
 /// And a [Animator] - it manages the starting and stopping of
 /// cube animation during loading and brushing.
 class PaintingBank extends ChangeNotifier with Persister, Animator {
-
-
   @override
   void updateAfterLoad(BuildContext context) {
     setPanOffset(context, Offset.zero);
@@ -43,13 +39,6 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
   /// called from [UndoNotifier]
   void setJson(String json) {
     setPainting(Painting.fromString(json));
-
-    notify();
-  }
-
-  @override
-  Future<void> deleteCurrentFile(BuildContext context) async {
-    await super.deleteCurrentFile(context);
 
     notify();
   }
