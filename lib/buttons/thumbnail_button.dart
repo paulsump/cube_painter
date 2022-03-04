@@ -33,7 +33,7 @@ class ThumbnailButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           child: Transform.scale(
-            scale: height * 0.6,
+            scale: height * 0.66,
             child: Thumbnail.useTransform(painting: painting),
           ),
           style: ButtonStyle(

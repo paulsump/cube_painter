@@ -48,7 +48,7 @@ class Thumbnail extends StatelessWidget {
   Widget build(BuildContext context) {
     return painting.cubeInfos.isNotEmpty
         ? Transform.scale(
-      scale: _unitTransform.scale,
+            scale: _unitTransform.scale,
             child: Transform.translate(
                 offset: _unitTransform.offset,
                 child: isPingPong
@@ -116,11 +116,9 @@ class _StandAloneAnimatedCube extends StatefulWidget {
   final double end;
 
   final bool isPingPong;
-
   final int milliseconds;
 
   final Widget _unitCube;
-
   final Offset _offset;
 
   _StandAloneAnimatedCube({
@@ -188,10 +186,9 @@ class _StandAloneAnimatedCubeState extends State<_StandAloneAnimatedCube>
   }
 
   double _scale() => lerpDouble(
-        widget.start,
-        widget.end,
-        widget.isPingPong
-            ? calcUnitPingPong(_controller.value)
-            : _controller.value,
-      )!;
+      widget.start,
+      widget.end,
+      widget.isPingPong
+          ? calcUnitPingPong(_controller.value)
+          : _controller.value)!;
 }
