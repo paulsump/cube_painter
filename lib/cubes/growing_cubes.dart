@@ -11,7 +11,7 @@ const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
 /// Used when growing the cubes up to there done size.
-/// The cubes are moved to [StaticCubes] either externally
+/// The cubes are moved to [DoneCubes] either externally
 /// via [finishAnim] or [whenComplete] after the animation is finished.
 class GrowingCubes extends StatefulWidget {
   const GrowingCubes({Key? key}) : super(key: key);
