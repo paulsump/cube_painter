@@ -1,6 +1,9 @@
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 /// A whole cube (not a [Slice]) of size of 1.
 /// This has been optimised more than [SliceUnitCube] at the moment
@@ -18,14 +21,18 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPath(Path()..addPolygon(bottomRightSide, true), _paintCacheBR);
-    canvas.drawPath(Path()..addPolygon(bottomLeftSide, true), _paintCacheBL);
-    canvas.drawPath(Path()..addPolygon(topSide, true), _paintCacheT);
+    canvas.drawPath(_pathBR, _paintCacheBR);
+    canvas.drawPath(_pathBL, _paintCacheBL);
+    canvas.drawPath(_pathT, _paintCacheT);
   }
 
   @override
   bool shouldRepaint(_Painter oldDelegate) => false;
 }
+
+final _pathBR = Path()..addPolygon(bottomRightSide, true);
+final _pathBL = Path()..addPolygon(bottomLeftSide, true);
+final _pathT = Path()..addPolygon(topSide, true);
 
 /// paint caches to speed up rendering
 final Paint _paintCacheBR = Paint()
