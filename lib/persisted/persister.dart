@@ -173,7 +173,7 @@ mixin Persister {
   Future<String> _loadAllPaintings({bool ignoreCurrent = false}) async {
     final Directory appFolder = await getApplicationDocumentsDirectory();
 
-    List<String> paths = await getAllAppFilePaths(appFolder);
+    List<String> paths = await _getAllAppFilePaths(appFolder);
 
     // display in reverse chronological order (most recent first)
     // this is because the file name is a number that increases with time.
@@ -209,7 +209,7 @@ mixin Persister {
 }
 
 /// The little animated triangle painting, on the [SlicesMenu]
-/// Here because it's loaded from [Assets].
+/// Here because it's loaded from [_Assets].
 class _SlicesExamplePainting {
   late UnitTransform unitTransform;
 
@@ -217,7 +217,7 @@ class _SlicesExamplePainting {
   late Painting triangleGap;
 
   Future<void> load() async {
-    final assets = await Assets.getStrings('help/triangle_');
+    final assets = await _Assets.getStrings('help/triangle_');
 
     triangleWithGap = Painting.fromString(assets['triangle_with_gap.json']!);
     triangleGap = Painting.fromString(assets['triangle_gap.json']!);
@@ -227,7 +227,7 @@ class _SlicesExamplePainting {
 }
 
 /// loading and copying asset files
-class Assets {
+class _Assets {
   /// return map of filename + loaded string
   static Future<Map<String, String>> getStrings(String pathStartsWith) async {
     final manifestJson = await rootBundle.loadString('AssetManifest.json');
@@ -269,7 +269,7 @@ class Assets {
 }
 
 /// cont doc comment from HERE
-Future<List<String>> getAllAppFilePaths(Directory appFolder) async {
+Future<List<String>> _getAllAppFilePaths(Directory appFolder) async {
   final paths = <String>[];
 
   await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
@@ -293,7 +293,7 @@ Future<void> copySamples() async {
 
   final String appFolderPath = await getAppFolderPath();
 
-  await Assets.copyAllFromTo(assetsFolder, appFolderPath,
+  await _Assets.copyAllFromTo(assetsFolder, appFolderPath,
       extensionReplacement: cubesExtension);
 }
 
