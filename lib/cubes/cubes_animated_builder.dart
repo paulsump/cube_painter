@@ -45,7 +45,7 @@ class CubesAnimatedBuilder extends StatelessWidget {
                               unitPingPong(i), 1.0, _controller.value)!,
                       info: paintingBank.animCubeInfos[i],
                       wire: brush == Brush.eraseLine &&
-                          paintingBank.cubeState == CubeAnimState.brushing,
+                          paintingBank.cubeAnimState == CubeAnimState.brushing,
                     ),
                 ],
               ),

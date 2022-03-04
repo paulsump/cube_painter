@@ -50,7 +50,7 @@ class _AnimatingCubes extends StatelessWidget {
     return Stack(
       children: [
         if (paintingBank.animCubeInfos.isNotEmpty)
-          if (paintingBank.cubeState == CubeAnimState.brushing)
+          if (paintingBank.cubeAnimState == CubeAnimState.brushing)
             const BrushCubes()
           else
             const GrowingCubes(),

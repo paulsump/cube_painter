@@ -34,7 +34,7 @@ class PaintingBank extends ChangeNotifier with Persister, Animator {
   void finishAnim() {
     super.finishAnim();
 
-    if (cubeState != CubeAnimState.brushing) {
+    if (cubeAnimState != CubeAnimState.brushing) {
       notifyListeners();
     }
   }

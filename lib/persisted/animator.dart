@@ -28,8 +28,7 @@ enum CubeAnimState {
 mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
-  //TODO REname cubeState to cubeAnimState
-  CubeAnimState cubeState = CubeAnimState.growingOrDone;
+  CubeAnimState cubeAnimState = CubeAnimState.growingOrDone;
 
   /// defined in [Persister]
   Painting get painting;
@@ -42,18 +41,18 @@ mixin Animator {
     animCubeInfos.clear();
     animCubeInfos.addAll(cubeInfos.toList());
 
-    cubeState = CubeAnimState.loading;
+    cubeAnimState = CubeAnimState.loading;
   }
 
   void startBrushing() {
     finishAnim();
 
-    cubeState = CubeAnimState.brushing;
+    cubeAnimState = CubeAnimState.brushing;
   }
 
   /// Stop animating the cubes by removing them from animCubeInfos
   void finishAnim() {
-    switch (cubeState) {
+    switch (cubeAnimState) {
       case CubeAnimState.brushing:
         break;
       case CubeAnimState.loading:
