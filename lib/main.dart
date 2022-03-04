@@ -48,6 +48,8 @@ class CubePainterApp extends StatelessWidget {
             // textStyle: TextStyle(fontSize: 14),
 
             /// TODO Responsive to screen size- magic numbers
+            /// I'd have to move it to a place with a valid context
+            /// to calcTooltipOffsetY(context)
             verticalOffset: 55,
             // verticalOffset: calcTooltipOffsetY(context),
             padding: const EdgeInsets.all(16),

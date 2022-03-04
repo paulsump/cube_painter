@@ -117,17 +117,11 @@ class PaintingsMenu extends StatelessWidget {
     }
   }
 
-  void _saveFile(BuildContext context) async {
-    final paintingBank = getPaintingBank(context);
+  void _saveFile(BuildContext context) async =>
+      await getPaintingBank(context).saveFile();
 
-    await paintingBank.saveFile();
-  }
-
-  void _saveACopyFile(BuildContext context) async {
-    final paintingBank = getPaintingBank(context);
-
-    await paintingBank.saveACopyFile();
-  }
+  void _saveACopyFile(BuildContext context) async =>
+      await getPaintingBank(context).saveACopyFile();
 
   void _deleteCurrentFile(BuildContext context) async =>
       await getPaintingBank(context).deleteCurrentFile(context);

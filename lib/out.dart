@@ -6,7 +6,8 @@ void out(Object object) {
   if (object is List<Offset>) {
     _out('n = ${object.length}\nconst [');
     for (Offset offset in object) {
-      _out('Offset(${_dp5(offset.dx)},${_dp5(offset.dy)}),');
+      _out(
+          'Offset(${_decimalPlaces5(offset.dx)},${_decimalPlaces5(offset.dy)}),');
     }
     _out(']');
   } else if (object is Offset) {
@@ -21,7 +22,7 @@ void _out(String text) {
   //TODO LOG
 }
 
-double _dp5(double val) => _decimalPlaces(val, 5);
+double _decimalPlaces5(double val) => _decimalPlaces(val, 5);
 
 double _decimalPlaces(double val, int places) {
   num mod = pow(10.0, places);
