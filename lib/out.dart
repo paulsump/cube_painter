@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void out(Object object) {
   if (object is List<Offset>) {
@@ -24,8 +25,12 @@ void _out(String text) {
 
 void clipError(String text) {
   out(text);
-  // Savetoclipboard
+
+  saveToClipboard(text);
 }
+
+void saveToClipboard(String text) =>
+    Clipboard.setData(ClipboardData(text: text));
 
 double _decimalPlaces5(double val) => _decimalPlaces(val, 5);
 
