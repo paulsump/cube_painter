@@ -120,11 +120,11 @@ mixin Persister {
     finishAnim();
 
     await _setNewFilePath();
-
     pushPainting(Painting.fromEmpty());
-    _savedJson = json;
 
+    _savedJson = json;
     updateAfterLoad(context);
+
     unawaited(saveFile());
   }
 
@@ -135,22 +135,26 @@ mixin Persister {
     updateAfterLoad(context);
   }
 
+  void notify();
+
   Future<void> saveFile() async {
     finishAnim();
 
     await _saveString(filePath: currentFilePath, string: json);
     _savedJson = json;
+
+    notify();
   }
 
   Future<void> saveACopyFile() async {
     finishAnim();
 
     final jsonCopy = json;
-
     await _setNewFilePath();
-    pushPainting(Painting.fromString(jsonCopy));
 
+    pushPainting(Painting.fromString(jsonCopy));
     _savedJson = json;
+
     unawaited(saveFile());
   }
 

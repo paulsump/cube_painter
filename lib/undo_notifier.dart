@@ -47,8 +47,10 @@ class UndoNotifier extends ChangeNotifier {
     List<String> popFrom,
     List<String> pushTo,
     BuildContext context) {
-    pushTo.add(getPaintingBank(context).json);
-    getPaintingBank(context).setJson(popFrom.removeLast());
+    final paintingBank = getPaintingBank(context);
+
+    pushTo.add(paintingBank.json);
+    paintingBank.setJson(popFrom.removeLast());
 
     notifyListeners();
   }
