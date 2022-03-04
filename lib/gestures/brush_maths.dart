@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 class BrushMaths {
   /// dragged start point in grid space
   late Offset _startUnit;
+
   late Offset _startPositionOffset;
   late Position _startPosition;
 
@@ -19,8 +20,8 @@ class BrushMaths {
 
   /// unit drag vector
   late Position? _vector;
-  late bool _reverseOrder;
 
+  late bool _reverseOrder;
   Position get startPosition => _startPosition;
 
   void calcStartPosition(Offset startUnit) {
@@ -70,6 +71,7 @@ List _calculateVectorAndReverseOrder(Offset newVector) {
 
   final int dir = direction.round();
 
+  // TODO make constants?
   switch (dir) {
     case 0:
       return [const Position(1, 0), false];

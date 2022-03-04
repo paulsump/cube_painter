@@ -55,12 +55,14 @@ mixin Animator {
     switch (cubeAnimState) {
       case CubeAnimState.brushing:
         break;
+
       case CubeAnimState.loading:
 
         /// if we were loading then we never removed these from cubeInfos,
         /// so we can throw these away.
         animCubeInfos.clear();
         break;
+
       case CubeAnimState.growingOrDone:
 
         /// If the animCubeInfos are newly brushed,
@@ -68,6 +70,7 @@ mixin Animator {
         /// move them all to the stationary cubeInfos,
         painting.cubeInfos.addAll(animCubeInfos);
         animCubeInfos.clear();
+
         break;
     }
   }

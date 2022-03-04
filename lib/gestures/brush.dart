@@ -7,11 +7,8 @@ enum Brush { addLine, eraseLine, addSlice }
 Brush getBrush(BuildContext context, {bool listen = false}) =>
     Provider.of<BrushNotifier>(context, listen: listen).brush;
 
-void setBrush(Brush mode, BuildContext context) {
-  final brushNotifier = Provider.of<BrushNotifier>(context, listen: false);
-
-  brushNotifier.setBrush(mode);
-}
+void setBrush(Brush mode, BuildContext context) =>
+    Provider.of<BrushNotifier>(context, listen: false).setBrush(mode);
 
 /// Access to which brush and slice we are currently using
 class BrushNotifier extends ChangeNotifier {
