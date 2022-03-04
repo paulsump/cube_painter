@@ -32,9 +32,8 @@ class DoneCubes extends StatelessWidget {
   }
 }
 
-/// Draws an entire painting.
+/// Draws a painting.
 /// It has a list of [_PositionedUnitCube]s.
-/// It draws them in the order they were added.
 class StaticCubes extends StatelessWidget {
   final List<_PositionedUnitCube> _cubes;
 

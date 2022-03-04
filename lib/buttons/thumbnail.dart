@@ -46,7 +46,9 @@ class Thumbnail extends StatelessWidget {
             child: Transform.translate(
                 offset: _unitTransform.offset,
                 child: isPingPong
-                    // note that this only animates the first cube
+
+                    /// Note that this only animates the first cube.
+                    /// That's all that's needed currently.
                     ? _StandAloneAnimatedCube(info: painting.cubeInfos[0])
                     : StaticCubes(painting: painting)),
           )

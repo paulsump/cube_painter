@@ -29,6 +29,8 @@ class _Painter extends CustomPainter {
 }
 
 /// paint caches to speed up rendering
+// todo change colors
+//todo remove linear gradient?
 final Paint _paintCacheBR = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomRight,
