@@ -9,7 +9,7 @@ class Horizon extends StatelessWidget {
   @override
   Widget build(BuildContext context) => UnitToScreen(
         child: Transform.scale(
-          scale: screenAdjust(0.06494, context),
+          scale: screenAdjust(0.09741, context),
           child: const CustomPaint(painter: _Painter()),
         ),
       );
@@ -40,10 +40,10 @@ Paint getGradientPaint(PaintingStyle style, Path path) {
 /// The width is way wider than it needs to be,
 /// but it doesn't matter since there's no gradient on it.
 const quad = [
-  Offset(-3, 0.0),
-  Offset(3, 0.0),
-  Offset(3, 1.6),
-  Offset(-3, 1.6),
+  Offset(-2, 0.0),
+  Offset(2, 0.0),
+  Offset(2, 1.0),
+  Offset(-2, 1.0),
 ];
 
 get _gradientBottomTop => LinearGradient(
