@@ -14,6 +14,14 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out];
 
+/// The only page in this app.
+/// Paint cubes using a [Brusher] (part of [Gesturer]
+/// change the [Brush] with [PageButtons]
+/// While brushing (adding cubes)
+/// or loading a [Painting] from the [PaintingsMenu]
+/// [_AnimatedCubes] will animate.
+/// When brushing or loading is done,
+/// [DoneCubes] show the full contents of the [Painting].
 class PainterPage extends StatelessWidget {
   const PainterPage({Key? key}) : super(key: key);
 
@@ -41,6 +49,9 @@ class PainterPage extends StatelessWidget {
   }
 }
 
+/// While brushing (adding cubes)
+/// or loading a [Painting] from the [PaintingsMenu]
+/// [_AnimatedCubes] will animate.
 class _AnimatingCubes extends StatelessWidget {
   const _AnimatingCubes({Key? key}) : super(key: key);
 

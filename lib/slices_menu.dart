@@ -48,10 +48,6 @@ class SlicesMenu extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SliceCubeButton(slice: Slice.left),
-                  // SizedBox(
-                  //     width:
-                  //         padWidth * 2 + 67,
-                  //     child: const Icon(AssetIcons.plusOutline)),
                   padX,
                   const SliceCubeButton(slice: Slice.whole),
                   padX,

@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// debugPrint any type of object, using toString()
+/// or special case for a couple of types like List<Offset>
 void out(Object object) {
   if (object is List<Offset>) {
     _out('n = ${object.length}\nconst [');
@@ -18,9 +20,7 @@ void out(Object object) {
   }
 }
 
-void _out(String text) {
-  debugPrint(text);
-}
+void _out(String text) => debugPrint(text);
 
 void clipError(String text) {
   out(text);

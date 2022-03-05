@@ -11,15 +11,6 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-/// padding for the safe area at the top
-class _SafePad extends StatelessWidget {
-  const _SafePad({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) =>
-      SizedBox(height: MediaQuery.of(context).padding.top);
-}
-
 /// Like a 'File' menu, this allows loading, saving of painting files.
 class PaintingsMenu extends StatelessWidget {
   const PaintingsMenu({Key? key}) : super(key: key);
@@ -181,4 +172,13 @@ class PaintingsMenu extends StatelessWidget {
 
     return clickedYes ?? false;
   }
+}
+
+/// padding for the safe area at the top
+class _SafePad extends StatelessWidget {
+  const _SafePad({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) =>
+      SizedBox(height: MediaQuery.of(context).padding.top);
 }

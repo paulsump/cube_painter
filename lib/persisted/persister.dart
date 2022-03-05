@@ -16,6 +16,7 @@ const cubesExtension = '.cubes.json';
 /// The main store of the entire model
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
+/// All the files are loaded at the start.
 mixin Persister {
   @protected
   final paintings = <String, Painting>{};
@@ -319,7 +320,6 @@ class _Assets {
 
 /// General persist helpers...
 
-/// cont doc comment from HERE
 Future<List<String>> _getAllAppFilePaths(Directory appFolder) async {
   final paths = <String>[];
 
