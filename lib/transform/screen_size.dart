@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
+/// convenient access to screen dimensions.
 Size getScreenSize(BuildContext context) => MediaQuery.of(context).size;
 
 double getScreenWidth(BuildContext context) => getScreenSize(context).width;
@@ -17,7 +18,7 @@ Offset getScreenCenter(BuildContext context) {
   return Offset(size.width, size.height) / 2;
 }
 
-// object dimensions calculated using the shortestEdge of the screen...
+/// object dimensions calculated using the shortestEdge of the screen...
 
 double screenAdjust(double length, BuildContext context) =>
     length * _getScreenShortestEdge(context);

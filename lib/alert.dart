@@ -6,6 +6,9 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
+/// Wraps the [AlertDialog] used for
+/// all information / question dialogs
+/// in this app.
 class Alert extends StatelessWidget {
   final String title;
 
@@ -68,6 +71,7 @@ class Alert extends StatelessWidget {
 
 class _Button extends StatelessWidget {
   final VoidCallback? onPressed;
+
   final IconData icon;
   final String tip;
 

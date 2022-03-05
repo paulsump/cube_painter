@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = out;
 
-/// the opposite of UnitToScreen
+/// the inverse of UnitToScreen
 Offset screenToUnit(Offset point, BuildContext context) =>
     (point - getScreenCenter(context) - getPanOffset(context, listen: false)) /
     getZoomScale(context);

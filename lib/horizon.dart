@@ -3,6 +3,7 @@ import 'package:cube_painter/transform/screen_size.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
+/// A simple quad, representing the ground.
 class Horizon extends StatelessWidget {
   const Horizon({Key? key}) : super(key: key);
 
