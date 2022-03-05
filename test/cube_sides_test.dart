@@ -75,7 +75,46 @@ void main() {
       const double delta = 0.000001;
       expect(rect.width, closeTo(sqrt(3), delta));
       expect(rect.width, equals(1.7320507764816284));
-      // expect(rect.width, equals(sqrt(3)));
+    });
+    test('height', () {
+      expect(rect.height, equals(radius * 2));
+    });
+  });
+
+  group('calcHexagonPath offset, unit radius:', () {
+    const center = Offset(2, 3);
+    const radius = 1.0;
+
+    final Path path = calcHexagonPath(center, radius);
+    final rect = path.getBounds();
+
+    test('center', () {
+      expect(rect.center, equals(center));
+    });
+    test('width', () {
+      const double delta = 0.000001;
+      expect(rect.width, closeTo(sqrt(3), delta));
+      expect(rect.width, equals(1.732050895690918));
+    });
+    test('height', () {
+      expect(rect.height, equals(radius * 2));
+    });
+  });
+
+  group('calcHexagonPath origin, radius 2:', () {
+    const center = Offset.zero;
+    const radius = 2.0;
+
+    final Path path = calcHexagonPath(center, radius);
+    final rect = path.getBounds();
+
+    test('center', () {
+      expect(rect.center, equals(center));
+    });
+    test('width', () {
+      const double delta = 0.000001;
+      expect(rect.width, closeTo(sqrt(3) * radius, delta));
+      expect(rect.width, equals(1.7320507764816284 * radius));
     });
     test('height', () {
       expect(rect.height, equals(radius * 2));
