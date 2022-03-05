@@ -1,7 +1,24 @@
+import 'dart:math';
+
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vector_math/vector_math.dart';
+
+Iterable<Offset> hexagonPoints() sync* {
+  const double angle = pi / 3;
+
+  var vec = Vector2(1, 0);
+  vec.postmultiply(Matrix2.rotation(angle / 2));
+  yield Offset(vec.x, vec.y);
+
+  for (int i = 0; i < 5; ++i) {
+    vec.postmultiply(Matrix2.rotation(angle));
+
+    yield Offset(vec.x, vec.y);
+  }
+}
 
 bool equalsOffsetList(List<Offset> a, List<Offset> b) {
   final int n = a.length;
@@ -27,6 +44,7 @@ bool _equalsOffset(Offset a, Offset b) {
 
 void main() {
   group('Testing calcHexagonOffsets()', () {
+    // final List<Offset> offsets = hexagonPoints().toList();
     final List<Offset> offsets = getHexagonCornerOffsets();
 
     const double x = root3over2;

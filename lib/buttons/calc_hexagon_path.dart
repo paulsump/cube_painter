@@ -19,8 +19,8 @@ Path calcHexagonPath(Offset center, double radius) {
 
 Iterable<Offset> _hexagonPoints() sync* {
   const double angle = pi / 3;
-  var vec = Vector2(1, 0);
 
+  var vec = Vector2(1, 0);
   vec.postmultiply(Matrix2.rotation(angle / 2));
 
   for (int i = 0; i < 6; ++i) {
