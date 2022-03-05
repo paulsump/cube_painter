@@ -147,11 +147,12 @@ mixin Persister {
     finishAnim();
 
     final jsonCopy = json;
+    resetCurrentPainting();
+
     await _setNewFilePath();
-
     pushPainting(Painting.fromString(jsonCopy));
-    _savedJson = json;
 
+    _savedJson = json;
     unawaited(saveFile());
   }
 
