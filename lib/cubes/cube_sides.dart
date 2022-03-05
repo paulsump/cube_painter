@@ -117,12 +117,12 @@ UnmodifiableListView<Offset> getHexagonCornerOffsets() => UnmodifiableListView(
 /// Used to create various buttons e.g. [HexagonBorderButton]
 
 Path calcHexagonPath(Offset center, double radius) {
-  final points = <Offset>[];
-
-  for (Offset offset in getHexagonCornerOffsets()) {
-    points.add(offset * radius + center);
-  }
-  return Path()..addPolygon(points, true);
+  return Path()
+    ..addPolygon(
+        getHexagonCornerOffsets()
+            .map((offset) => offset * radius + center)
+            .toList(),
+        true);
 }
 
 const topSide = [
