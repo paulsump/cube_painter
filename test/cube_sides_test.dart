@@ -33,34 +33,28 @@ void main() {
     const double y = 0.5;
 
     test('offset 0', () {
-      const offset = Offset(x, -y);
-      expect(offsets[0].dx, equals(offset.dx));
-      expect(offsets[0].dy, equals(offset.dy));
+      expect(offsets[0].dx, equals(x));
+      expect(offsets[0].dy, equals(-y));
     });
     test('offset 1', () {
-      const offset = Offset(0.0, -1.0);
-      expect(offsets[1].dx, equals(offset.dx));
-      expect(offsets[1].dy, equals(offset.dy));
+      expect(offsets[1].dx, equals(0));
+      expect(offsets[1].dy, equals(-1));
     });
     test('offset 2', () {
-      const offset = Offset(-x, -y);
-      expect(offsets[2].dx, equals(offset.dx));
-      expect(offsets[2].dy, equals(offset.dy));
+      expect(offsets[2].dx, equals(-x));
+      expect(offsets[2].dy, equals(-y));
     });
     test('offset 3', () {
-      const offset = Offset(-x, y);
-      expect(offsets[3].dx, equals(offset.dx));
-      expect(offsets[3].dy, equals(offset.dy));
+      expect(offsets[3].dx, equals(-x));
+      expect(offsets[3].dy, equals(y));
     });
     test('offset 4', () {
-      const offset = Offset(0.0, 1.0);
-      expect(offsets[4].dx, equals(offset.dx));
-      expect(offsets[4].dy, equals(offset.dy));
+      expect(offsets[4].dx, equals(0));
+      expect(offsets[4].dy, equals(1));
     });
     test('offset 5', () {
-      const offset = Offset(x, y);
-      expect(offsets[5].dx, equals(offset.dx));
-      expect(offsets[5].dy, equals(offset.dy));
+      expect(offsets[5].dx, equals(x));
+      expect(offsets[5].dy, equals(y));
     });
   });
 
