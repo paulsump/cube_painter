@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 bool equalsOffsetList(List<Offset> a, List<Offset> b) {
@@ -55,6 +58,27 @@ void main() {
     test('offset 5', () {
       expect(offsets[5].dx, equals(x));
       expect(offsets[5].dy, equals(y));
+    });
+  });
+
+  group('calcHexagonPath origin, unit radius:', () {
+    const center = Offset.zero;
+    const radius = 1.0;
+
+    final Path path = calcHexagonPath(center, radius);
+    final rect = path.getBounds();
+
+    test('center', () {
+      expect(rect.center, equals(center));
+    });
+    test('width', () {
+      const double delta = 0.000001;
+      expect(rect.width, closeTo(sqrt(3), delta));
+      expect(rect.width, equals(1.7320507764816284));
+      // expect(rect.width, equals(sqrt(3)));
+    });
+    test('height', () {
+      expect(rect.height, equals(radius * 2));
     });
   });
 
