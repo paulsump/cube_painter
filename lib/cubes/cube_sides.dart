@@ -114,6 +114,17 @@ UnmodifiableListView<Offset> _getUnitOffsetsFromHexagonCornerIndices(
 UnmodifiableListView<Offset> getHexagonCornerOffsets() => UnmodifiableListView(
     List<Offset>.generate(6, (i) => positionToUnitOffset(_corners[i + 1])));
 
+/// Used to create various buttons e.g. [HexagonBorderButton]
+
+Path calcHexagonPath(Offset center, double radius) {
+  final points = <Offset>[];
+
+  for (Offset offset in getHexagonCornerOffsets()) {
+    points.add(offset * radius + center);
+  }
+  return Path()..addPolygon(points, true);
+}
+
 const topSide = [
   Offset(0, 0.0),
   Offset(-root3over2, -0.5),
