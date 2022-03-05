@@ -121,6 +121,30 @@ void main() {
     });
   });
 
+  group('calcHexagonPath offset, radius 2:', () {
+    const center = Offset(-3, 7);
+    const radius = 2.0;
+
+    final Path path = calcHexagonPath(center, radius);
+    final rect = path.getBounds();
+
+    test('center x', () {
+      expect(rect.center.dx, closeTo(center.dx, 0.0000001));
+      expect(rect.center.dx, equals(-3.0000000596046448));
+    });
+    test('center y', () {
+      expect(rect.center.dy, equals(center.dy));
+    });
+    test('width', () {
+      const double delta = 0.000001;
+      expect(rect.width, closeTo(sqrt(3) * radius, delta));
+      expect(rect.width, equals(3.4641016721725464));
+    });
+    test('height', () {
+      expect(rect.height, equals(radius * 2));
+    });
+  });
+
   group('Slice', () {
     test('c', () {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.whole);
