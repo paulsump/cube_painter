@@ -52,9 +52,9 @@ class CubePainterApp extends StatelessWidget {
 
             /// TODO Responsive to screen size - removed magic numbers
             /// I'd have to move it to a place with a valid context
-            /// to calcTooltipOffsetY(context)
+            /// to screenAdjustTooltipOffsetY(context)
             verticalOffset: 55,
-            // verticalOffset: calcTooltipOffsetY(context),
+            // verticalOffset: screenAdjustTooltipOffsetY(context),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(color: tipColor),
           ),
