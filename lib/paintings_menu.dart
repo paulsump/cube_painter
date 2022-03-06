@@ -29,9 +29,13 @@ class PaintingsMenu extends StatelessWidget {
         };
 
     final padY = SizedBox(height: screenAdjust(0.03247, context));
+    bool p = isPortrait(context);
+
+    final w = p ? 0.56 : 0.888;
+    final h = p ? 0.87 : 0.464;
 
     return SizedBox(
-      width: screenAdjust(0.66, context),
+      width: screenAdjust(w, context),
       child: Drawer(
         // Wrapping with SafeArea here would cause shift to right on iphone
         child: ListView(
@@ -71,11 +75,11 @@ class PaintingsMenu extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: screenAdjust(0.01082, context)),
+            SizedBox(height: screenAdjust(0.05, context)),
             const Divider(),
             for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
               Align(
-                heightFactor: 0.64,
+                heightFactor: h,
                 alignment:
                     i.isEven ? Alignment.centerLeft : Alignment.centerRight,
                 child: ThumbnailButton(

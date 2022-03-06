@@ -18,9 +18,6 @@ class SlicesMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final double padHeight = screenAdjust(0.03247, context);
 
-    final screen = getScreenSize(context);
-    final bool isPortrait = screen.width < screen.height;
-
     final safeRight = MediaQuery.of(context).padding.right;
     return SizedBox(
       width: screenAdjust(0.6, context) + safeRight / 6,
@@ -54,7 +51,7 @@ class SlicesMenu extends StatelessWidget {
                   SliceCubeButton(slice: Slice.bottomRight),
                 ],
               ),
-              if (isPortrait)
+              if (isPortrait(context))
                 Center(child: _SlicesExample(padHeight: padHeight)),
             ],
           ),

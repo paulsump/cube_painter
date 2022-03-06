@@ -19,6 +19,11 @@ Offset getScreenCenter(BuildContext context) {
   return Offset(size.width, size.height) / 2;
 }
 
+bool isPortrait(BuildContext context) {
+  final screen = getScreenSize(context);
+  return screen.width < screen.height;
+}
+
 /// object dimensions calculated using the shortestEdge of the screen...
 
 double screenAdjust(double length, BuildContext context) =>
