@@ -21,8 +21,9 @@ class SlicesMenu extends StatelessWidget {
     final screen = getScreenSize(context);
     final bool isPortrait = screen.width < screen.height;
 
+    final safeRight = MediaQuery.of(context).padding.right;
     return SizedBox(
-      width: screenAdjust(0.6, context),
+      width: screenAdjust(0.6, context) + safeRight / 6,
       child: Drawer(
         child: SafeArea(
           child: ListView(
