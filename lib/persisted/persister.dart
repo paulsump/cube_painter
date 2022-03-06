@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cube_painter/out.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
-const noWarn = out;
+const noWarn = [out, log];
 
 const cubesExtension = '.cubes.json';
 
@@ -78,6 +79,7 @@ mixin Persister {
   Future<void> setup(BuildContext context) async {
     _settings = await _settingsPersister.load();
 
+    //TODO don't always copy samples over
     if (true) {
       // if (!_settings.copiedSamples) {
       await _copySamples(assetsFolder: 'samples/');
@@ -132,7 +134,8 @@ mixin Persister {
     saveCurrentFilePath(filePath);
 
     _savedJson = json;
-    // log(json);
+    // TODO Remove log
+    log(json);
     updateAfterLoad(context);
   }
 
