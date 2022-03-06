@@ -46,10 +46,10 @@ double screenAdjustButtonChildScale(BuildContext context) =>
     0.26 * _screenAdjustButtonHeight(context);
 
 double screenAdjustNormalIconSize(BuildContext context) =>
-    0.47143 * _screenAdjustButtonHeight(context);
+    0.4 * _screenAdjustButtonHeight(context);
 
 double screenAdjustAssetIconSize(BuildContext context) =>
-    0.38571 * _screenAdjustButtonHeight(context);
+    0.3 * _screenAdjustButtonHeight(context);
 
 double screenAdjustButtonElevation(BuildContext context) =>
     0.11429 * _screenAdjustButtonHeight(context);
