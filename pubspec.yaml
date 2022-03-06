@@ -96,4 +96,5 @@ flutter:
   assets:
     - samples/
     - samples_test/
-    - help/
+    - samples_help/
+    - images/
