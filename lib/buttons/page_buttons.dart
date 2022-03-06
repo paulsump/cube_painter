@@ -83,7 +83,7 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
       child: Icon(
         Icons.folder_open_outlined,
         color: enabledIconColor,
-        size: screenAdjustNormalIconSize(context) * 0.9,
+        size: screenAdjustNormalIconSize(context),
       ),
       onPressed: Scaffold.of(context).openDrawer,
       tip: 'Open the paintings menu.',
