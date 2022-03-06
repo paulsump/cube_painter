@@ -132,6 +132,7 @@ mixin Persister {
     saveCurrentFilePath(filePath);
 
     _savedJson = json;
+    // log(json);
     updateAfterLoad(context);
   }
 

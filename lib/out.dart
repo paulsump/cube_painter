@@ -26,10 +26,10 @@ void clipError(String text) {
   out(text);
   //TODO append to error log
 //TODO make a command that user can load the log and saveTolClip
-  saveToClipboard(text);
+  writeToClipboard(text);
 }
 
-void saveToClipboard(String text) =>
+void writeToClipboard(String text) =>
     Clipboard.setData(ClipboardData(text: text));
 
 double _decimalPlaces5(double val) => _decimalPlaces(val, 5);
