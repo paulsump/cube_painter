@@ -114,44 +114,52 @@ void _showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      const titleStyle = TextStyle(fontWeight: FontWeight.bold);
-
-      const emphasisStyle = TextStyle(
-        fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.italic,
-        decoration: TextDecoration.underline,
-      );
-
-      // final double  fontFactor = isPortrait(context) ? 0.004 : 0.002;
-      const double fontFactor = 0.004;
-
       return Alert(
         title: 'Tips',
-        child: RichText(
-          text: TextSpan(
-            text: '\n',
-            style: DefaultTextStyle.of(context).style.apply(
-                  fontSizeFactor: screenAdjust(fontFactor, context),
-                ),
-            children: const <TextSpan>[
-              TextSpan(text: 'Add cubes', style: titleStyle),
-              TextSpan(text: '...\n\nDrag with '),
-              TextSpan(text: 'one', style: emphasisStyle),
-              TextSpan(text: ' finger.\n\n\n'),
-              TextSpan(text: 'Pan and Zoom', style: titleStyle),
-              TextSpan(text: '...\n\nDrag with '),
-              TextSpan(text: 'two', style: emphasisStyle),
-              TextSpan(text: ' fingers.\n\n\n'),
-              TextSpan(text: 'Button tips', style: titleStyle),
-              TextSpan(text: '...\n\nPress and hold a button.'),
-            ],
-          ),
-        ),
+        child: const _Tip(),
         yesCallBack: () => Navigator.of(context).pop(),
         yesTip: 'Done',
       );
     },
   );
+}
+
+class _Tip extends StatelessWidget {
+  static const _titleStyle = TextStyle(fontWeight: FontWeight.bold);
+
+  static const _emphasisStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    decoration: TextDecoration.underline,
+  );
+
+  const _Tip({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final double _fontFactor = isPortrait(context) ? 0.004 : 0.002;
+
+    return RichText(
+      text: TextSpan(
+        text: '\n',
+        style: DefaultTextStyle.of(context).style.apply(
+              fontSizeFactor: screenAdjust(_fontFactor, context),
+            ),
+        children: const <TextSpan>[
+          TextSpan(text: 'Add cubes', style: _titleStyle),
+          TextSpan(text: '...\n\nDrag with '),
+          TextSpan(text: 'one', style: _emphasisStyle),
+          TextSpan(text: ' finger.\n\n\n'),
+          TextSpan(text: 'Pan and Zoom', style: _titleStyle),
+          TextSpan(text: '...\n\nDrag with '),
+          TextSpan(text: 'two', style: _emphasisStyle),
+          TextSpan(text: ' fingers.\n\n\n'),
+          TextSpan(text: 'Button tips', style: _titleStyle),
+          TextSpan(text: '...\n\nPress and hold a button.'),
+        ],
+      ),
+    );
+  }
 }
 
 /// An undo or a redo button.

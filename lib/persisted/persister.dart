@@ -313,7 +313,7 @@ class _Assets {
       File appFile = File(appFilePath);
 
       if (!await appFile.exists()) {
-        out('copying $appFilePath');
+        out('copying $appFileName');
 
         await appFile.writeAsString(asset.value);
       }
