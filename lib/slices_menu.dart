@@ -16,11 +16,7 @@ class SlicesMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double padWidth = 0; //screenAdjust(0.01, context);
-    final padX = SizedBox(width: padWidth);
-
-    final double padHeight = 0; //screenAdjust(0.03247, context);
-    final padY = SizedBox(height: padHeight);
+    final double padHeight = screenAdjust(0.03247, context);
 
     final screen = getScreenSize(context);
     final bool isPortrait = screen.width < screen.height;
@@ -32,34 +28,29 @@ class SlicesMenu extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              padY,
+              SizedBox(height: padHeight),
               const Center(child: Text('Slices')),
-              padY,
-              padY,
+              SizedBox(height: padHeight * 2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SliceCubeButton(slice: Slice.topLeft),
-                  padX,
-                  const SliceCubeButton(slice: Slice.topRight),
+                children: const [
+                  SliceCubeButton(slice: Slice.topLeft),
+                  SliceCubeButton(slice: Slice.topRight),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SliceCubeButton(slice: Slice.left),
-                  padX,
-                  const SliceCubeButton(slice: Slice.whole),
-                  padX,
-                  const SliceCubeButton(slice: Slice.right),
+                children: const [
+                  SliceCubeButton(slice: Slice.left),
+                  SliceCubeButton(slice: Slice.whole),
+                  SliceCubeButton(slice: Slice.right),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SliceCubeButton(slice: Slice.bottomLeft),
-                  padX,
-                  const SliceCubeButton(slice: Slice.bottomRight),
+                children: const [
+                  SliceCubeButton(slice: Slice.bottomLeft),
+                  SliceCubeButton(slice: Slice.bottomRight),
                 ],
               ),
               if (isPortrait)
