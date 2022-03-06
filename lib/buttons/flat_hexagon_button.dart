@@ -58,13 +58,16 @@ class IconFlatHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatHexagonButton(
-      onPressed: onPressed,
-      tip: tip,
-      child: Icon(
-        icon,
-        color: onPressed != null ? enabledIconColor : disabledIconColor,
-        size: iconSize,
+    return SizedBox(
+      width: screenAdjustButtonWidth(context) * 0.99,
+      child: FlatHexagonButton(
+        onPressed: onPressed,
+        tip: tip,
+        child: Icon(
+          icon,
+          color: onPressed != null ? enabledIconColor : disabledIconColor,
+          size: iconSize,
+        ),
       ),
     );
   }
