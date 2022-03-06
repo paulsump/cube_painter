@@ -16,10 +16,10 @@ class SlicesMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double padWidth = screenAdjust(0.01, context);
+    final double padWidth = 0; //screenAdjust(0.01, context);
     final padX = SizedBox(width: padWidth);
 
-    final double padHeight = screenAdjust(0.03247, context);
+    final double padHeight = 0; //screenAdjust(0.03247, context);
     final padY = SizedBox(height: padHeight);
 
     final screen = getScreenSize(context);

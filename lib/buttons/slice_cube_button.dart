@@ -18,14 +18,17 @@ class SliceCubeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatHexagonButton(
-        onPressed: () => _onPressed(slice, context),
-        tip:
-            'Drag on the canvas\nto move an\nanimating cube${slice == Slice.whole ? '' : ' slice'}.\n\nThen release to place it.',
-        child: Transform.scale(
-          scale: screenAdjustButtonChildScale(context),
-          child: SliceUnitCube(slice: slice),
-        ));
+    return Align(
+      heightFactor: 0.774,
+      child: FlatHexagonButton(
+          onPressed: () => _onPressed(slice, context),
+          tip:
+              'Drag on the canvas\nto move an\nanimating cube${slice == Slice.whole ? '' : ' slice'}.\n\nThen release to place it.',
+          child: Transform.scale(
+            scale: screenAdjustButtonChildScale(context),
+            child: SliceUnitCube(slice: slice),
+          )),
+    );
   }
 }
 
