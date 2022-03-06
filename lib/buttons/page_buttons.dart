@@ -83,7 +83,7 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
       child: Icon(
         Icons.folder_open_outlined,
         color: enabledIconColor,
-        size: screenAdjustNormalIconSize(context) * 1.22,
+        size: screenAdjustNormalIconSize(context) * 0.9,
       ),
       onPressed: Scaffold.of(context).openDrawer,
       tip: 'Open the paintings menu.',
@@ -101,7 +101,7 @@ class _HelpButton extends StatelessWidget {
       child: Icon(
         Icons.help_outline_rounded,
         color: enabledIconColor,
-        size: screenAdjustNormalIconSize(context) * 1.25,
+        size: screenAdjustNormalIconSize(context),
       ),
       onPressed: () => _showHelp(context),
       tip: 'Display tips.',
@@ -178,7 +178,7 @@ class _UndoButton extends StatelessWidget {
         ? ElevatedHexagonButton(
             child: Icon(
               isRedo ? Icons.redo_sharp : Icons.undo_sharp,
-              size: screenAdjustNormalIconSize(context) * 1.2,
+              size: screenAdjustNormalIconSize(context),
               color: enabled ? enabledIconColor : disabledIconColor,
             ),
             onPressed: enabled

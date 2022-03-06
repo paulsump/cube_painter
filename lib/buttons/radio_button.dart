@@ -159,7 +159,7 @@ class _ChildAndIcon extends StatelessWidget {
     return Stack(
       children: [
         Transform.translate(
-          offset: _unitOffset * 12,
+          offset: _unitOffset * 10,
           child: child,
         ),
         Transform.translate(
