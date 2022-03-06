@@ -58,8 +58,10 @@ class IconFlatHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final p = isPortrait(context) ? 0.8 : 1.0;
+
     return SizedBox(
-      width: screenAdjustButtonWidth(context) * 0.99,
+      width: screenAdjustButtonWidth(context) * p,
       child: FlatHexagonButton(
         onPressed: onPressed,
         tip: tip,
