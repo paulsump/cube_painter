@@ -75,6 +75,7 @@ class PaintingsMenu extends StatelessWidget {
             const Divider(),
             for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
               Align(
+                heightFactor: 0.64,
                 alignment:
                     i.isEven ? Alignment.centerLeft : Alignment.centerRight,
                 child: ThumbnailButton(
