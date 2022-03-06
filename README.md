@@ -7,4 +7,4 @@ Draw escher like shapes with cubes on an isometric grid.
 A painting app, but the 'paint' is cubes. The cube is made of equilateral triangles on an isometric
 grid.
 
-![logo](https://github.com/paulsump/cube_painter/build/app/intermediates/merged-not-compiled-resources/release/mipmap-xhdpi-v4/ic_launcher.png)
+![logo](https://raw.githubusercontent.com/paulsump/cube_painter/build/app/intermediates/merged-not-compiled-resources/release/mipmap-xhdpi-v4/ic_launcher.png)
