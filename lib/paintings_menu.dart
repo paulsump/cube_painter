@@ -75,8 +75,9 @@ class PaintingsMenu extends StatelessWidget {
             SizedBox(height: screenAdjust(0.01082, context)),
             const Divider(),
             for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
-              Transform.translate(
-                offset: Offset((i % 2 == 0 ? -1 : 1) * offsetX, 0),
+              Align(
+                alignment:
+                    i.isEven ? Alignment.centerLeft : Alignment.centerRight,
                 child: ThumbnailButton(
                   tip: 'Load this painting',
                   onPressed: () => _loadFile(

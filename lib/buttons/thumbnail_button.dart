@@ -2,6 +2,7 @@ import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/persisted/painting.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,7 @@ class ThumbnailButton extends StatelessWidget {
     return Tooltip(
       message: tip,
       child: SizedBox(
+        width: root3over2 * height,
         height: height,
         child: TextButton(
           onPressed: onPressed,
@@ -41,7 +43,7 @@ class ThumbnailButton extends StatelessWidget {
             overlayColor:
                 MaterialStateColor.resolveWith((states) => buttonColor),
             backgroundColor:
-                MaterialStateProperty.all(paintingsMenuButtonsColor),
+            MaterialStateProperty.all(paintingsMenuButtonsColor),
           ),
         ),
       ),
