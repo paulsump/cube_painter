@@ -114,15 +114,16 @@ void _showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      const title = TextStyle(
-        fontWeight: FontWeight.bold,
-      );
+      const titleStyle = TextStyle(fontWeight: FontWeight.bold);
 
-      const emphasize = TextStyle(
+      const emphasisStyle = TextStyle(
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
         decoration: TextDecoration.underline,
       );
+
+      // final double  fontFactor = isPortrait(context) ? 0.004 : 0.002;
+      const double fontFactor = 0.004;
 
       return Alert(
         title: 'Tips',
@@ -130,18 +131,18 @@ void _showHelp(BuildContext context) {
           text: TextSpan(
             text: '\n',
             style: DefaultTextStyle.of(context).style.apply(
-                  fontSizeFactor: screenAdjust(0.00367965, context),
+                  fontSizeFactor: screenAdjust(fontFactor, context),
                 ),
             children: const <TextSpan>[
-              TextSpan(text: 'Add cubes', style: title),
+              TextSpan(text: 'Add cubes', style: titleStyle),
               TextSpan(text: '...\n\nDrag with '),
-              TextSpan(text: 'one', style: emphasize),
+              TextSpan(text: 'one', style: emphasisStyle),
               TextSpan(text: ' finger.\n\n\n'),
-              TextSpan(text: 'Pan and Zoom', style: title),
+              TextSpan(text: 'Pan and Zoom', style: titleStyle),
               TextSpan(text: '...\n\nDrag with '),
-              TextSpan(text: 'two', style: emphasize),
+              TextSpan(text: 'two', style: emphasisStyle),
               TextSpan(text: ' fingers.\n\n\n'),
-              TextSpan(text: 'Button tips', style: title),
+              TextSpan(text: 'Button tips', style: titleStyle),
               TextSpan(text: '...\n\nPress and hold a button.'),
             ],
           ),
