@@ -62,9 +62,8 @@ void _showHelp(BuildContext context) {
     builder: (BuildContext context) {
       return Alert(
         title: 'Tips',
-        child: isPortrait(context)
-            ? Column(children: _tips)
-            : Row(children: _tips),
+        // todo just display one tip at a time
+        child: _tips[0],
         yesCallBack: () => Navigator.of(context).pop(),
         yesTip: 'Done',
       );
