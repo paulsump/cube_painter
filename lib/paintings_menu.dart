@@ -28,11 +28,10 @@ class PaintingsMenu extends StatelessWidget {
           await funk(context);
         };
 
-    final double offsetX = screenAdjust(0.11905, context);
     final padY = SizedBox(height: screenAdjust(0.03247, context));
 
     return SizedBox(
-      width: screenAdjust(0.75, context),
+      width: screenAdjust(0.66, context),
       child: Drawer(
         // Wrapping with SafeArea here would cause shift to right on iphone
         child: ListView(

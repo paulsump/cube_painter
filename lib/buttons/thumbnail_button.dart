@@ -25,7 +25,7 @@ class ThumbnailButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = screenAdjust(0.40043, context);
+    final double height = screenAdjust(0.531, context);
 
     return Tooltip(
       message: tip,
@@ -35,7 +35,7 @@ class ThumbnailButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           child: Transform.scale(
-            scale: height * 0.66,
+            scale: height * 0.55,
             child: Thumbnail.useTransform(painting: painting),
           ),
           style: ButtonStyle(
