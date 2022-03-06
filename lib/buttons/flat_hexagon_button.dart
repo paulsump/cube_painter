@@ -18,16 +18,22 @@ class FlatHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: tip,
-      child: TextButton(
-        child: child,
-        onPressed: onPressed,
-        style: ButtonStyle(
-          shape: hexagonBorderShape,
-          fixedSize: MaterialStateProperty.all(screenAdjustButtonSize(context)),
-          backgroundColor: MaterialStateProperty.all(paintingsMenuButtonsColor),
-          overlayColor: MaterialStateColor.resolveWith((states) => buttonColor),
+    return SizedBox(
+      width: screenAdjustButtonWidth(context),
+      child: Tooltip(
+        message: tip,
+        child: TextButton(
+          child: child,
+          onPressed: onPressed,
+          style: ButtonStyle(
+            shape: hexagonBorderShape,
+            fixedSize:
+                MaterialStateProperty.all(screenAdjustButtonSize(context)),
+            backgroundColor:
+                MaterialStateProperty.all(paintingsMenuButtonsColor),
+            overlayColor:
+                MaterialStateColor.resolveWith((states) => buttonColor),
+          ),
         ),
       ),
     );

@@ -52,6 +52,7 @@ class HexagonBorder extends OutlinedBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
+    // return Path()..addRect(rect);
     return calcHexagonPath(
       rect.center,
       (rect.shortestSide - side.width) / 2.0,
@@ -60,6 +61,7 @@ class HexagonBorder extends OutlinedBorder {
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
+    // return Path()..addRect(rect);
     return calcHexagonPath(
       rect.center,
       rect.shortestSide / 2.0,

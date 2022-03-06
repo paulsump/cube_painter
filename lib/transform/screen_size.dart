@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cube_painter/out.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +32,9 @@ double _getScreenShortestEdge(BuildContext context) {
 
 double _screenAdjustButtonHeight(BuildContext context) =>
     screenAdjust(0.145, context);
+
+double screenAdjustButtonWidth(BuildContext context) =>
+    root3over2 * _screenAdjustButtonHeight(context);
 
 Size screenAdjustButtonSize(BuildContext context) {
   final double buttonHeight = _screenAdjustButtonHeight(context);
