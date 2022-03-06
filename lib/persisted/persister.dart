@@ -78,10 +78,10 @@ mixin Persister {
   Future<void> setup(BuildContext context) async {
     _settings = await _settingsPersister.load();
 
-    // if (true) {
-    if (!_settings.copiedSamples) {
+    if (true) {
+      // if (!_settings.copiedSamples) {
       await _copySamples(assetsFolder: 'samples/');
-      await _copySamples(assetsFolder: 'samples_test/');
+      // await _copySamples(assetsFolder: 'samples_test/');
 
       _settings.copiedSamples = true;
       await _settingsPersister.save();
@@ -256,7 +256,6 @@ class _SettingsPersister {
   Future<_Settings> load() async {
     _path = await _getSettingsPath();
 
-    // if(true){
     if (!await File(_path).exists()) {
       _settings = _Settings.fromJson({
         'currentFilePath': '',
