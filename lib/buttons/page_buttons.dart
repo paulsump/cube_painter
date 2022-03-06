@@ -109,6 +109,39 @@ class _HelpButton extends StatelessWidget {
   }
 }
 
+const _titleStyle = TextStyle(fontWeight: FontWeight.bold);
+
+const _emphasisStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontStyle: FontStyle.italic,
+  decoration: TextDecoration.underline,
+);
+
+const _oneFingerTip = <TextSpan>[
+  TextSpan(text: 'Add cubes', style: _titleStyle),
+  TextSpan(text: '...\n\nDrag with '),
+  TextSpan(text: 'one', style: _emphasisStyle),
+  TextSpan(text: ' finger.'),
+];
+
+const _twoFingerTip = <TextSpan>[
+  TextSpan(text: 'Pan and Zoom', style: _titleStyle),
+  TextSpan(text: '...\n\nDrag with '),
+  TextSpan(text: 'two', style: _emphasisStyle),
+  TextSpan(text: ' fingers.'),
+];
+
+const _longPressTip = <TextSpan>[
+  TextSpan(text: 'Button tips', style: _titleStyle),
+  TextSpan(text: '...\n\nPress and hold a button.'),
+];
+
+final _tips = <_Tip>[
+  const _Tip(textSpans: _oneFingerTip),
+  const _Tip(textSpans: _twoFingerTip),
+  const _Tip(textSpans: _longPressTip),
+];
+
 /// Show a little message to get them started.
 void _showHelp(BuildContext context) {
   showDialog(
@@ -116,7 +149,9 @@ void _showHelp(BuildContext context) {
     builder: (BuildContext context) {
       return Alert(
         title: 'Tips',
-        child: const _Tip(),
+        child: isPortrait(context)
+            ? Column(children: _tips)
+            : Row(children: _tips),
         yesCallBack: () => Navigator.of(context).pop(),
         yesTip: 'Done',
       );
@@ -125,38 +160,19 @@ void _showHelp(BuildContext context) {
 }
 
 class _Tip extends StatelessWidget {
-  static const _titleStyle = TextStyle(fontWeight: FontWeight.bold);
+  final List<TextSpan> textSpans;
 
-  static const _emphasisStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic,
-    decoration: TextDecoration.underline,
-  );
-
-  const _Tip({Key? key}) : super(key: key);
+  const _Tip({Key? key, required this.textSpans}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double _fontFactor = isPortrait(context) ? 0.004 : 0.002;
-
     return RichText(
       text: TextSpan(
         text: '\n',
         style: DefaultTextStyle.of(context).style.apply(
-              fontSizeFactor: screenAdjust(_fontFactor, context),
+              fontSizeFactor: screenAdjust(0.004, context),
             ),
-        children: const <TextSpan>[
-          TextSpan(text: 'Add cubes', style: _titleStyle),
-          TextSpan(text: '...\n\nDrag with '),
-          TextSpan(text: 'one', style: _emphasisStyle),
-          TextSpan(text: ' finger.\n\n\n'),
-          TextSpan(text: 'Pan and Zoom', style: _titleStyle),
-          TextSpan(text: '...\n\nDrag with '),
-          TextSpan(text: 'two', style: _emphasisStyle),
-          TextSpan(text: ' fingers.\n\n\n'),
-          TextSpan(text: 'Button tips', style: _titleStyle),
-          TextSpan(text: '...\n\nPress and hold a button.'),
-        ],
+        children: textSpans,
       ),
     );
   }
