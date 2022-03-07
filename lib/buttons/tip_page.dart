@@ -1,26 +1,7 @@
 import 'package:cube_painter/alert.dart';
-import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
-/// Pressing this button shows the [HelpAlert].
-class HelpButton extends StatelessWidget {
-  const HelpButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedHexagonButton(
-      child: Icon(
-        Icons.help_outline_rounded,
-        color: enabledIconColor,
-        size: screenAdjustNormalIconSize(context),
-      ),
-      onPressed: () => _showHelp(context),
-      tip: 'Display tips.',
-    );
-  }
-}
 
 const _emphasisStyle = TextStyle(
   fontWeight: FontWeight.bold,
@@ -61,7 +42,7 @@ const _tips = <String, TipText>{
 };
 
 /// Show a few little message with an image to get them started.
-void _showHelp(BuildContext context) {
+void showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {

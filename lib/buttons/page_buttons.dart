@@ -1,7 +1,7 @@
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
-import 'package:cube_painter/buttons/help_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
+import 'package:cube_painter/buttons/tip_page.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/out.dart';
@@ -35,7 +35,7 @@ class PageButtons extends StatelessWidget {
                 const _OpenPaintingsMenuButton(),
                 (undoer.canUndo || undoer.canRedo)
                     ? const _UndoButton()
-                    : const HelpButton(),
+                    : const _HelpButton(),
                 const _UndoButton(isRedo: true),
               ],
             ),
@@ -129,6 +129,24 @@ class _UndoButton extends StatelessWidget {
                 : 'Undo the last add or delete.',
           )
         : Container();
+  }
+}
+
+/// Pressing this button shows the [HelpAlert].
+class _HelpButton extends StatelessWidget {
+  const _HelpButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedHexagonButton(
+      child: Icon(
+        Icons.help_outline_rounded,
+        color: enabledIconColor,
+        size: screenAdjustNormalIconSize(context),
+      ),
+      onPressed: () => showHelp(context),
+      tip: 'Display tips.',
+    );
   }
 }
 
