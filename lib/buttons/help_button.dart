@@ -22,31 +22,42 @@ class HelpButton extends StatelessWidget {
   }
 }
 
-const _titleStyle = TextStyle(fontWeight: FontWeight.bold);
-
 const _emphasisStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.italic,
   decoration: TextDecoration.underline,
 );
 
-const _tips = <String, List<TextSpan>>{
-  'oneFinger': <TextSpan>[
-    TextSpan(text: 'Add cubes', style: _titleStyle),
-    TextSpan(text: '...\n\nDrag with '),
-    TextSpan(text: 'one', style: _emphasisStyle),
-    TextSpan(text: ' finger.'),
-  ],
-  'twoFinger': <TextSpan>[
-    TextSpan(text: 'Pan and Zoom', style: _titleStyle),
-    TextSpan(text: '...\n\nDrag with '),
-    TextSpan(text: 'two', style: _emphasisStyle),
-    TextSpan(text: ' fingers.'),
-  ],
-  'longPress': <TextSpan>[
-    TextSpan(text: 'Button tips', style: _titleStyle),
-    TextSpan(text: '...\n\nPress and hold a button.'),
-  ],
+class TipText {
+  final String title;
+  final List<TextSpan> body;
+
+  const TipText(this.title, this.body);
+}
+
+const _tips = <String, TipText>{
+  'oneFinger': TipText(
+    'Add cubes',
+    <TextSpan>[
+      TextSpan(text: 'Drag with '),
+      TextSpan(text: 'one', style: _emphasisStyle),
+      TextSpan(text: ' finger.'),
+    ],
+  ),
+  'twoFinger': TipText(
+    'Pan and Zoom',
+    <TextSpan>[
+      TextSpan(text: 'Drag with '),
+      TextSpan(text: 'two', style: _emphasisStyle),
+      TextSpan(text: ' fingers.'),
+    ],
+  ),
+  'longPress': TipText(
+    'Button tips',
+    <TextSpan>[
+      TextSpan(text: 'Press and hold a button.'),
+    ],
+  ),
 };
 
 /// Show a few little message with an image to get them started.
@@ -73,23 +84,39 @@ class _Tip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final p = isPortrait(context);
+
     final image = Image(
-      width: screenAdjust(0.2, context),
+      width: screenAdjust(p ? 0.5 : 0.5, context),
       image: AssetImage('images/$name.png'),
     );
 
-    final text = RichText(
+    final tipText = _tips[name];
+
+    final titleText = RichText(
+      text: TextSpan(
+          text: '${tipText?.title}...\n',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: screenAdjust(0.08, context),
+          )),
+    );
+
+    final bodyText = RichText(
       text: TextSpan(
         text: '\n',
         style: DefaultTextStyle.of(context).style.apply(
               fontSizeFactor: screenAdjust(0.004, context),
             ),
-        children: _tips['name'],
+        children: tipText?.body,
       ),
     );
 
-    return Column(
-      children: [image, text],
-    );
+    return p
+        ? Column(children: [titleText, image, bodyText])
+        : Row(children: [
+            image,
+            Column(children: [titleText, bodyText])
+          ]);
   }
 }
