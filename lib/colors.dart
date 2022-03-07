@@ -45,6 +45,8 @@ final Color alertColor = _blt.withOpacity(0.9);
 
 final Color tipColor = _blt;
 
+final Color helpColor = tipColor.withOpacity(0.5);
+
 final Color _darkBLT = getTweenBLtoTColor(0.1);
 
 final Color menuColor = _darkBLT.withOpacity(0.4);

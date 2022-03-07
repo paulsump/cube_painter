@@ -1,5 +1,6 @@
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/flat_hexagon_button.dart';
+import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +28,6 @@ const _tips = <_Tip>[
     TextSpan(text: 'two', style: _emphasisStyle),
     TextSpan(text: ' fingers.'),
   ]),
-  _Tip('longPress', 'Button tips',
-      <TextSpan>[TextSpan(text: 'Press and hold a button.')]),
   _Tip('eraseLine', 'Erase cubes', <TextSpan>[
     TextSpan(
         text: 'Drag the over the cube(s)\n'
@@ -38,6 +37,8 @@ const _tips = <_Tip>[
       <TextSpan>[TextSpan(text: 'Pick a cube slice')]),
   _Tip('placeSlice', 'Place a slice',
       <TextSpan>[TextSpan(text: 'Drag the slice into position.')]),
+  _Tip('longPress', 'Button tips',
+      <TextSpan>[TextSpan(text: 'Press and hold a button.')]),
 ];
 
 /// Show a few little messages with an image to get them started.
@@ -90,35 +91,38 @@ class _TipPage extends StatelessWidget {
       tip: 'Close the tips.',
     );
 
-    return isPortrait(context)
-        ? Column(
-            children: [
-              Align(alignment: Alignment.topLeft, child: button),
-              SizedBox(height: screenAdjust(0.3, context)),
-              titleText,
-              SizedBox(height: screenAdjust(0.1, context)),
-              image,
-              SizedBox(height: screenAdjust(0.1, context)),
-              bodyText,
-              SizedBox(height: screenAdjust(0.1, context)),
-            ],
-          )
-        : Column(
-            children: [
-              Align(alignment: Alignment.topLeft, child: button),
-              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                SizedBox(width: screenAdjust(0.4, context)),
+    return Container(
+      color: helpColor,
+      child: isPortrait(context)
+          ? Column(
+              children: [
+                Align(alignment: Alignment.topLeft, child: button),
+                SizedBox(height: screenAdjust(0.3, context)),
+                titleText,
+                SizedBox(height: screenAdjust(0.1, context)),
                 image,
-                SizedBox(width: screenAdjust(0.2, context)),
-                Column(children: [
-                  SizedBox(height: screenAdjust(0.0, context)),
-                  titleText,
-                  bodyText,
-                  SizedBox(height: screenAdjust(0.1, context)),
+                SizedBox(height: screenAdjust(0.1, context)),
+                bodyText,
+                SizedBox(height: screenAdjust(0.1, context)),
+              ],
+            )
+          : Column(
+              children: [
+                Align(alignment: Alignment.topLeft, child: button),
+                Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  SizedBox(width: screenAdjust(0.4, context)),
+                  image,
+                  SizedBox(width: screenAdjust(0.2, context)),
+                  Column(children: [
+                    SizedBox(height: screenAdjust(0.0, context)),
+                    titleText,
+                    bodyText,
+                    SizedBox(height: screenAdjust(0.1, context)),
+                  ]),
                 ]),
-              ]),
-            ],
-          );
+              ],
+            ),
+    );
   }
 }
 
