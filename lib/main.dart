@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
+import 'package:cube_painter/help_page.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
@@ -52,7 +53,12 @@ class CubePainterApp extends StatelessWidget {
               // final
               return WillPopScope(
                 onWillPop: () async => false,
-                child: const PainterPage(),
+                child: Stack(
+                  children: [
+                    const PainterPage(),
+                    if (false) const HelpPage(),
+                  ],
+                ),
               );
             }
           },
