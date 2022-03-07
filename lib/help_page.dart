@@ -77,12 +77,18 @@ class _HelpPageState extends State<HelpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      children: _pages,
-      onPageChanged: (index) {
-        setState(() => _pageIndex = index);
-      },
-      controller: _pageController,
+    return Container(
+      color: helpColor,
+      child: SafeArea(
+        left: false,
+        child: PageView(
+          children: _pages,
+          onPageChanged: (index) {
+            setState(() => _pageIndex = index);
+          },
+          controller: _pageController,
+        ),
+      ),
     );
   }
 
