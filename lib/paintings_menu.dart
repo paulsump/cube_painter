@@ -48,25 +48,25 @@ class PaintingsMenu extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconFlatHexagonButton(
+                _ScreenAdjustedIconFlatHexagonButton(
                   onPressed: pop(_newFile),
                   tip: 'Create a new painting',
                   icon: AssetIcons.docNew,
                   iconSize: screenAdjustAssetIconSize(context) * 0.95,
                 ),
-                IconFlatHexagonButton(
+                _ScreenAdjustedIconFlatHexagonButton(
                   onPressed: paintingBank.modified ? dontPop(_saveFile) : null,
                   tip: 'Save the current painting',
                   icon: Icons.save,
                   iconSize: screenAdjustNormalIconSize(context),
                 ),
-                IconFlatHexagonButton(
+                _ScreenAdjustedIconFlatHexagonButton(
                   onPressed: dontPop(_saveACopyFile),
                   tip: 'Create a copy\nof this painting\nand load it.',
                   icon: AssetIcons.copy,
                   iconSize: screenAdjustAssetIconSize(context),
                 ),
-                IconFlatHexagonButton(
+                _ScreenAdjustedIconFlatHexagonButton(
                   onPressed: dontPop(_deleteCurrentFile),
                   tip:
                       'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
@@ -186,4 +186,36 @@ class _SafePad extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       SizedBox(height: MediaQuery.of(context).padding.top);
+}
+
+/// Transparent flat hexagon shaped button with an icon.
+/// A convenience for use at the top of the [PaintingsMenu] (the file menu).
+class _ScreenAdjustedIconFlatHexagonButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String tip;
+  final IconData icon;
+  final double iconSize;
+
+  const _ScreenAdjustedIconFlatHexagonButton({
+    Key? key,
+    this.onPressed,
+    required this.tip,
+    required this.icon,
+    required this.iconSize,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final p = isPortrait(context) ? 0.8 : 1.0;
+
+    return SizedBox(
+      width: screenAdjustButtonWidth(context) * p,
+      child: IconFlatHexagonButton(
+        onPressed: onPressed,
+        tip: tip,
+        icon: icon,
+        iconSize: iconSize,
+      ),
+    );
+  }
 }

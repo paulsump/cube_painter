@@ -41,7 +41,6 @@ class FlatHexagonButton extends StatelessWidget {
 }
 
 /// Transparent flat hexagon shaped button with an icon.
-/// A convenience for use at the top of the [PaintingsMenu] (the file menu).
 class IconFlatHexagonButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String tip;
@@ -58,18 +57,13 @@ class IconFlatHexagonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final p = isPortrait(context) ? 0.8 : 1.0;
-
-    return SizedBox(
-      width: screenAdjustButtonWidth(context) * p,
-      child: FlatHexagonButton(
-        onPressed: onPressed,
-        tip: tip,
-        child: Icon(
-          icon,
-          color: onPressed != null ? enabledIconColor : disabledIconColor,
-          size: iconSize,
-        ),
+    return FlatHexagonButton(
+      onPressed: onPressed,
+      tip: tip,
+      child: Icon(
+        icon,
+        color: onPressed != null ? enabledIconColor : disabledIconColor,
+        size: iconSize,
       ),
     );
   }
