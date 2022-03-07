@@ -34,12 +34,36 @@ class CubePainterApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UndoNotifier()),
       ],
       child: MaterialApp(
-          theme: _buildThemeData(context),
-          initialRoute: '/painter',
-          routes: {
-            '/painter': (context) => const _PainterPage(),
-            '/help': (context) => const HelpPage(),
-          }),
+        theme: _buildThemeData(context),
+        home: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxHeight == 0) {
+              return Container();
+            } else {
+              final panZoomNotifier =
+                  getPanZoomNotifier(context, listen: false);
+
+              // Initialize once only
+              if (panZoomNotifier.scale == 0) {
+                panZoomNotifier.initializeScale(screenAdjust(0.06494, context));
+
+                unawaited(getPaintingBank(context).setup(context));
+              }
+
+              // final
+              return WillPopScope(
+                onWillPop: () async => false,
+                child: Stack(
+                  children: [
+                    const PainterPage(),
+                    if (getShowHelp(context)) const HelpPage(),
+                  ],
+                ),
+              );
+            }
+          },
+        ),
+      ),
     );
   }
 
@@ -61,43 +85,6 @@ class CubePainterApp extends StatelessWidget {
           style: ElevatedButton.styleFrom(
         primary: buttonColor,
       )),
-    );
-  }
-}
-
-class _PainterPage extends StatelessWidget {
-  const _PainterPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxHeight == 0) {
-          return Container();
-        } else {
-          final panZoomNotifier = getPanZoomNotifier(context, listen: false);
-
-          // Initialize once only
-          if (panZoomNotifier.scale == 0) {
-            panZoomNotifier.initializeScale(screenAdjust(0.06494, context));
-
-            unawaited(getPaintingBank(context).setup(context));
-          }
-
-          // final
-          return WillPopScope(
-            onWillPop: () async => false,
-            child: Stack(
-              children: const [
-                PainterPage(),
-                if (false) HelpPage(),
-              ],
-            ),
-          );
-        }
-      },
     );
   }
 }

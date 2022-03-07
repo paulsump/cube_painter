@@ -4,6 +4,12 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
+bool getShowHelp(BuildContext context) {
+  return true;
+}
+
+void setShowHelp(bool show, BuildContext context) {}
+
 const _emphasisStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.italic,
@@ -143,7 +149,7 @@ class _TipPage extends StatelessWidget {
     );
 
     final doneButton = IconFlatHexagonButton(
-      onPressed: () => Navigator.pushNamed(context, '/painter'),
+      onPressed: () => setShowHelp(false, context),
       icon: AssetIcons.thumbsUp,
       iconSize: screenAdjustAssetIconSize(context),
       tip: 'Close the tips.',
