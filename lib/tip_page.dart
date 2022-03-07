@@ -9,51 +9,45 @@ const _emphasisStyle = TextStyle(
   decoration: TextDecoration.underline,
 );
 
-class TipText {
-  final String title;
+class Tip {
+  final String fileName, title;
   final List<TextSpan> body;
 
-  const TipText(this.title, this.body);
+  const Tip(this.fileName, this.title, this.body);
 }
 
-const _tips = <String, TipText>{
-  'oneFinger': TipText(
-    'Add cubes',
-    <TextSpan>[
-      TextSpan(text: 'Drag with '),
-      TextSpan(text: 'one', style: _emphasisStyle),
-      TextSpan(text: ' finger.'),
-    ],
-  ),
-  'twoFinger': TipText(
-    'Pan and Zoom',
-    <TextSpan>[
-      TextSpan(text: 'Drag with '),
-      TextSpan(text: 'two', style: _emphasisStyle),
-      TextSpan(text: ' fingers.'),
-    ],
-  ),
-  'longPress': TipText(
-    'Button tips',
-    <TextSpan>[
-      TextSpan(text: 'Press and hold a button.'),
-    ],
-  ),
-};
+const _tips = <Tip>[
+  Tip('oneFinger', 'Add cubes', <TextSpan>[
+    TextSpan(text: 'Drag with '),
+    TextSpan(text: 'one', style: _emphasisStyle),
+    TextSpan(text: ' finger.'),
+  ]),
+  Tip('twoFinger', 'Pan and Zoom', <TextSpan>[
+    TextSpan(text: 'Drag with '),
+    TextSpan(text: 'two', style: _emphasisStyle),
+    TextSpan(text: ' fingers.'),
+  ]),
+  Tip('longPress', 'Button tips', <TextSpan>[
+    TextSpan(text: 'Press and hold a button.'),
+  ]),
+  Tip('slicesMenu', 'Slices menu', <TextSpan>[
+    TextSpan(text: 'Pick a cube slice'),
+  ]),
+  Tip('placeSlice', 'Place a slice', <TextSpan>[
+    TextSpan(text: 'Drag the slice into position.'),
+  ]),
+  Tip('eraseLine', 'Erase a line of cubes', <TextSpan>[
+    TextSpan(text: 'Drag the over the cube line you want to remove.'),
+  ]),
+];
 
 /// Show a few little messages with an image to get them started.
 void showHelp(BuildContext context) {
+  //TODO this is a bit weird now, perhaps should use Navigator?
   showDialog(
     context: context,
     builder: (BuildContext context) {
-//TODO replace this Alert with pageViews at the the start or when press help button
       return const TipsPageView();
-      // return Alert(
-      //   title: 'Tips',
-      //   child: const _Tip(name: 'oneFinger'),
-      //   yesCallBack: () => Navigator.of(context).pop(),
-      //   yesTip: 'Done',
-      // );
     },
   );
 }
@@ -65,10 +59,8 @@ class TipsPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(children: const [
-      TipPage(name: 'oneFinger'),
-      TipPage(name: 'twoFinger'),
-      TipPage(name: 'longPress'),
+    return PageView(children: [
+      for (Tip tip in _tips) TipPage(tip: tip),
     ]);
   }
 }
@@ -101,22 +93,20 @@ class _Button extends StatelessWidget {
 }
 
 class TipPage extends StatelessWidget {
-  final String name;
+  final Tip tip;
 
-  const TipPage({Key? key, required this.name}) : super(key: key);
+  const TipPage({Key? key, required this.tip}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final image = Image(
       width: screenAdjust(0.5, context),
-      image: AssetImage('images/$name.png'),
+      image: AssetImage('images/${tip.fileName}.png'),
     );
-
-    final tipText = _tips[name];
 
     final titleText = RichText(
       text: TextSpan(
-          text: '${tipText?.title}...\n',
+          text: '${tip.title}...\n',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: screenAdjust(0.08, context),
@@ -129,7 +119,7 @@ class TipPage extends StatelessWidget {
         style: DefaultTextStyle.of(context).style.apply(
               fontSizeFactor: screenAdjust(0.004, context),
             ),
-        children: tipText?.body,
+        children: tip.body,
       ),
     );
 
