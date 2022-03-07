@@ -107,34 +107,8 @@ class TipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          _Tip(name: name),
-          const SizedBox(height: 88),
-          _Button(
-            onPressed: Navigator.of(context).pop,
-            icon: AssetIcons.thumbsUp,
-            tip: 'Close the tips.',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Tip extends StatelessWidget {
-  final String name;
-
-  const _Tip({Key? key, required this.name}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final p = isPortrait(context);
-
     final image = Image(
-      width: screenAdjust(p ? 0.5 : 0.5, context),
+      width: screenAdjust(0.5, context),
       image: AssetImage('images/$name.png'),
     );
 
@@ -159,11 +133,34 @@ class _Tip extends StatelessWidget {
       ),
     );
 
-    return p
-        ? Column(children: [titleText, image, bodyText])
+    final button = _Button(
+      onPressed: Navigator.of(context).pop,
+      icon: AssetIcons.thumbsUp,
+      tip: 'Close the tips.',
+    );
+
+    return isPortrait(context)
+        ? Column(
+            children: [
+              SizedBox(height: screenAdjust(0.3, context)),
+              titleText,
+              image,
+              bodyText,
+              SizedBox(height: screenAdjust(0.1, context)),
+              button,
+            ],
+          )
         : Row(children: [
+            SizedBox(width: screenAdjust(0.4, context)),
             image,
-            Column(children: [titleText, bodyText])
+            SizedBox(width: screenAdjust(0.2, context)),
+            Column(children: [
+              SizedBox(height: screenAdjust(0.2, context)),
+              titleText,
+              bodyText,
+              SizedBox(height: screenAdjust(0.1, context)),
+              button,
+            ]),
           ]);
   }
 }
