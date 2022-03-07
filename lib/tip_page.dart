@@ -30,16 +30,16 @@ const _tips = <Tip>[
   Tip('longPress', 'Button tips', <TextSpan>[
     TextSpan(text: 'Press and hold a button.'),
   ]),
+  Tip('eraseLine', 'Erase cubes', <TextSpan>[
+    TextSpan(
+        text:
+            'Drag the over the cube(s)\nthat you want to remove,\nthen release.'),
+  ]),
   Tip('slicesMenu', 'Slices menu', <TextSpan>[
     TextSpan(text: 'Pick a cube slice'),
   ]),
   Tip('placeSlice', 'Place a slice', <TextSpan>[
     TextSpan(text: 'Drag the slice into position.'),
-  ]),
-  Tip('eraseLine', 'Erase cubes', <TextSpan>[
-    TextSpan(
-        text:
-            'Drag the over the cube(s)\nthat you want to remove,\nthen release.'),
   ]),
 ];
 
@@ -82,11 +82,6 @@ class _Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Padding(
-    //     padding: EdgeInsets.only(
-    //       top: screenAdjust(0.005, context),
-    //       left: screenAdjust(0.04, context),
-    //     ),
     return IconFlatHexagonButton(
       icon: icon,
       iconSize: screenAdjustAssetIconSize(context),
@@ -110,7 +105,7 @@ class TipPage extends StatelessWidget {
 
     final titleText = RichText(
       text: TextSpan(
-          text: '${tip.title}...\n',
+          text: '${tip.title}...',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: screenAdjust(0.08, context),
@@ -139,21 +134,22 @@ class TipPage extends StatelessWidget {
               Align(alignment: Alignment.topLeft, child: button),
               SizedBox(height: screenAdjust(0.3, context)),
               titleText,
+              SizedBox(height: screenAdjust(0.1, context)),
               image,
+              SizedBox(height: screenAdjust(0.1, context)),
               bodyText,
               SizedBox(height: screenAdjust(0.1, context)),
-              button,
             ],
           )
         : Column(
             children: [
               Align(alignment: Alignment.topLeft, child: button),
-              Row(children: [
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 SizedBox(width: screenAdjust(0.4, context)),
                 image,
                 SizedBox(width: screenAdjust(0.2, context)),
                 Column(children: [
-                  SizedBox(height: screenAdjust(0.2, context)),
+                  SizedBox(height: screenAdjust(0.0, context)),
                   titleText,
                   bodyText,
                   SizedBox(height: screenAdjust(0.1, context)),
