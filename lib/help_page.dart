@@ -48,16 +48,6 @@ const _tips = <_Tip>[
 ];
 
 /// Show a few little messages with an image to get them started.
-// void showHelp(BuildContext context) {
-//   TODO this is a bit weird now, perhaps should use Navigator?
-// showDialog(
-//   context: context,
-//   builder: (BuildContext context) {
-//     return const HelpPage();
-//   },
-// );
-// }
-
 class HelpPage extends StatefulWidget {
   const HelpPage({
     Key? key,
@@ -141,9 +131,10 @@ class _TipPage extends StatelessWidget {
     final bodyText = RichText(
       text: TextSpan(
         text: '\n',
-        style: DefaultTextStyle.of(context).style.apply(
-              fontSizeFactor: screenAdjust(0.004, context),
-            ),
+        style: TextStyle(
+          fontSize: screenAdjust(0.06, context),
+          color: bottomRightColor,
+        ),
         children: tip.body,
       ),
     );
@@ -180,7 +171,6 @@ class _TipPage extends StatelessWidget {
               image,
               SizedBox(height: screenAdjust(0.1, context)),
               bodyText,
-              SizedBox(height: screenAdjust(0.1, context)),
             ],
           )
         : Column(
@@ -195,7 +185,6 @@ class _TipPage extends StatelessWidget {
                   SizedBox(height: screenAdjust(0.0, context)),
                   titleText,
                   bodyText,
-                  SizedBox(height: screenAdjust(0.1, context)),
                 ]),
               ]),
             ],
