@@ -53,30 +53,6 @@ void showHelp(BuildContext context) {
   );
 }
 
-class _Button extends StatelessWidget {
-  final VoidCallback? onPressed;
-
-  final IconData icon;
-  final String tip;
-
-  const _Button({
-    Key? key,
-    this.onPressed,
-    required this.icon,
-    required this.tip,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconFlatHexagonButton(
-      icon: icon,
-      iconSize: screenAdjustAssetIconSize(context),
-      onPressed: onPressed,
-      tip: tip,
-    );
-  }
-}
-
 class _TipPage extends StatelessWidget {
   final _Tip tip;
 
@@ -143,5 +119,29 @@ class _TipPage extends StatelessWidget {
               ]),
             ],
           );
+  }
+}
+
+class _Button extends StatelessWidget {
+  final VoidCallback? onPressed;
+
+  final IconData icon;
+  final String tip;
+
+  const _Button({
+    Key? key,
+    this.onPressed,
+    required this.icon,
+    required this.tip,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconFlatHexagonButton(
+      icon: icon,
+      iconSize: screenAdjustAssetIconSize(context),
+      onPressed: onPressed,
+      tip: tip,
+    );
   }
 }
