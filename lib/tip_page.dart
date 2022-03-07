@@ -41,12 +41,13 @@ const _tips = <String, TipText>{
   ),
 };
 
-/// Show a few little message with an image to get them started.
+/// Show a few little messages with an image to get them started.
 void showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
 //TODO replace this Alert with pageViews at the the start or when press help button
+      return const TipsPageView();
       return Alert(
         title: 'Tips',
         child: const _Tip(name: 'oneFinger'),
@@ -55,6 +56,36 @@ void showHelp(BuildContext context) {
       );
     },
   );
+}
+
+class TipsPageView extends StatelessWidget {
+  const TipsPageView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        PageView(children: const [
+          TipPage(name: 'oneFinger'),
+          TipPage(name: 'oneFinger'),
+          TipPage(name: 'oneFinger'),
+        ]),
+      ],
+    );
+  }
+}
+
+class TipPage extends StatelessWidget {
+  final String name;
+
+  const TipPage({Key? key, required this.name}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return _Tip(name: name);
+  }
 }
 
 class _Tip extends StatelessWidget {
