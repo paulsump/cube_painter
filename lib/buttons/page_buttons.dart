@@ -133,7 +133,7 @@ class _UndoButton extends StatelessWidget {
   }
 }
 
-/// Pressing this button shows the [HelpAlert].
+/// Pressing this button shows the [HelpPage].
 class _HelpButton extends StatelessWidget {
   const _HelpButton({Key? key}) : super(key: key);
 

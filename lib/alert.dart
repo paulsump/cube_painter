@@ -42,8 +42,6 @@ class Alert extends StatelessWidget {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: _blur, sigmaY: _blur),
       child: AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(32.0))),
         backgroundColor: alertColor,
         title: Text(title),
         content: child,
