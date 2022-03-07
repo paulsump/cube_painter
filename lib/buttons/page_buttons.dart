@@ -1,11 +1,11 @@
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
-import 'package:cube_painter/buttons/tip_page.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/tip_page.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';

@@ -51,10 +51,9 @@ class CubePainterApp extends StatelessWidget {
 
               // final
               return WillPopScope(
-                  onWillPop: () async => false,
-                  child: PageView(children: const [
-                    PainterPage(),
-                  ]));
+                onWillPop: () async => false,
+                child: const PainterPage(),
+              );
             }
           },
         ),
