@@ -128,14 +128,22 @@ class _TipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = Image(
-      width: screenAdjust(0.5, context),
-      image: AssetImage('images/${tip.fileName}.png'),
+    final image = Container(
+      color: topColor,
+      width: screenAdjust(0.59, context),
+      child: Container(
+        color: topColor,
+        width: screenAdjust(0.55, context),
+        child: Image(
+          width: screenAdjust(0.5, context),
+          image: AssetImage('images/${tip.fileName}.png'),
+        ),
+      ),
     );
 
     final titleText = RichText(
       text: TextSpan(
-          text: '${tip.title}...',
+          text: tip.title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: screenAdjust(0.08, context),
@@ -156,7 +164,7 @@ class _TipPage extends StatelessWidget {
 
     final doneButton = IconFlatHexagonButton(
       onPressed: () => setShowHelp(false, context),
-      icon: AssetIcons.thumbsUp,
+      icon: AssetIcons.cancelOutline,
       iconSize: screenAdjustAssetIconSize(context),
       tip: 'Close the tips.',
     );
