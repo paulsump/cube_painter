@@ -128,16 +128,15 @@ class _TipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final assetImage = AssetImage('images/${tip.fileName}.png');
+
     final image = Container(
-      color: topColor,
-      width: screenAdjust(0.59, context),
-      child: Container(
-        color: topColor,
-        width: screenAdjust(0.55, context),
-        child: Image(
-          width: screenAdjust(0.5, context),
-          image: AssetImage('images/${tip.fileName}.png'),
-        ),
+      color: bottomLeftColor,
+      child: Padding(
+        padding: const EdgeInsets.all(4), // Border radius
+        child: isPortrait(context)
+            ? Image(width: screenAdjust(0.7, context), image: assetImage)
+            : Image(height: screenAdjust(0.5, context), image: assetImage),
       ),
     );
 
@@ -184,33 +183,45 @@ class _TipPage extends StatelessWidget {
       ],
     );
 
+    final text = Container(
+      color: bottomLeftColor.withOpacity(0.4),
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          color: tipColor,
+          child: Padding(
+            padding: const EdgeInsets.all(14), // Border radius
+            child: Column(children: [
+              SizedBox(height: screenAdjust(0.0, context)),
+              titleText,
+              bodyText,
+            ]),
+          ),
+        ),
+      ),
+    );
+
     return isPortrait(context)
         ? Column(
             children: [
               buttonRow,
               SizedBox(height: screenAdjust(0.3, context)),
-              titleText,
-              SizedBox(height: screenAdjust(0.1, context)),
               image,
               SizedBox(height: screenAdjust(0.1, context)),
-              bodyText,
+              text,
             ],
           )
         : Column(
-            children: [
-              buttonRow,
-              SizedBox(height: screenAdjust(0.03, context)),
-              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      children: [
+        buttonRow,
+        SizedBox(height: screenAdjust(0.03, context)),
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 SizedBox(width: screenAdjust(0.4, context)),
                 image,
                 SizedBox(width: screenAdjust(0.2, context)),
-                Column(children: [
-                  SizedBox(height: screenAdjust(0.0, context)),
-                  titleText,
-                  bodyText,
-                ]),
+                text,
               ]),
-            ],
-          );
+      ],
+    );
   }
 }
