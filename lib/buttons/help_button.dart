@@ -65,10 +65,9 @@ void _showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
+//TODO replace this Alert with pageViews at the the start or when press help button
       return Alert(
         title: 'Tips',
-        // todo just display one tip at a time
-
         child: const _Tip(name: 'oneFinger'),
         yesCallBack: () => Navigator.of(context).pop(),
         yesTip: 'Done',
