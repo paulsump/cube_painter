@@ -3,12 +3,27 @@ import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-bool getShowHelp(BuildContext context) {
-  return true;
+bool getShowHelp(BuildContext context, {bool listen = false}) =>
+    getHelpNotifier(context, listen: listen).show;
+
+void setShowHelp(bool show, BuildContext context) =>
+    getHelpNotifier(context, listen: false).setShow(show);
+
+HelpNotifier getHelpNotifier(BuildContext context, {required bool listen}) =>
+    Provider.of<HelpNotifier>(context, listen: listen);
+
+class HelpNotifier extends ChangeNotifier {
+  bool _show = false;
+
+  bool get show => _show;
+
+  void setShow(bool value) {
+    _show = value;
+    notifyListeners();
+  }
 }
-
-void setShowHelp(bool show, BuildContext context) {}
 
 const _emphasisStyle = TextStyle(
   fontWeight: FontWeight.bold,

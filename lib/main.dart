@@ -32,6 +32,7 @@ class CubePainterApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PaintingBank()),
         ChangeNotifierProvider(create: (_) => BrushNotifier()),
         ChangeNotifierProvider(create: (_) => UndoNotifier()),
+        ChangeNotifierProvider(create: (_) => HelpNotifier()),
       ],
       child: MaterialApp(
         theme: _buildThemeData(context),
@@ -56,7 +57,7 @@ class CubePainterApp extends StatelessWidget {
                 child: Stack(
                   children: [
                     const PainterPage(),
-                    if (getShowHelp(context)) const HelpPage(),
+                    if (getShowHelp(context, listen: true)) const HelpPage(),
                   ],
                 ),
               );
