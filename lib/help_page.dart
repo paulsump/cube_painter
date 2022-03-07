@@ -65,19 +65,49 @@ class _HelpPageState extends State<HelpPage> {
   int _pageIndex = 0;
 
   final _pageController = PageController();
+  late List<_TipPage> _pages;
+
+  @override
+  void initState() {
+    _pages = _tips
+        .map((tip) => _TipPage(tip: tip, forward: () => _incrementPage(1)))
+        .toList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return PageView(children: [
-      for (_Tip tip in _tips) _TipPage(tip: tip),
-    ]);
+    return PageView(
+      children: _pages,
+      onPageChanged: (index) {
+        setState(() => _pageIndex = index);
+      },
+      controller: _pageController,
+    );
+  }
+
+  void _incrementPage(int increment) {
+    _pageIndex += increment;
+    if (_pageIndex < 0) {
+      _pageIndex = 0;
+    } else if (_pageIndex >= _pages.length) {
+      _pageIndex = _pages.length - 1;
+    }
+    _pageController.animateToPage(_pageIndex,
+        duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 }
 
 class _TipPage extends StatelessWidget {
   final _Tip tip;
 
-  const _TipPage({Key? key, required this.tip}) : super(key: key);
+  final VoidCallback forward;
+
+  const _TipPage({
+    Key? key,
+    required this.tip,
+    required this.forward,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +144,7 @@ class _TipPage extends StatelessWidget {
     );
 
     final forwardButton = IconFlatHexagonButton(
-      onPressed: Navigator.of(context).pop,
-      // onPressed: incrementPage(1),
+      onPressed: forward,
       iconSize: screenAdjustNormalIconSize(context),
       icon: Icons.forward_outlined,
       tip: 'Show the next tip.\nYou can also swipe to navigate',
