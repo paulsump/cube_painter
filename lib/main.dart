@@ -63,27 +63,15 @@ class CubePainterApp extends StatelessWidget {
 
   ThemeData _buildThemeData(BuildContext context) {
     return ThemeData(
-      // canvasColor: backgroundColor.withOpacity(0.1),
       canvasColor: menuColor,
-      textTheme: Theme.of(context).textTheme.apply(
-            bodyColor: textColor,
-
-            /// TODO Responsive to screen size - removed magic numbers
-            /// I'd have to move it to a place with a valid context
-            fontSizeFactor: 1.0,
-          ),
+      textTheme: Theme.of(context).textTheme.apply(bodyColor: textColor),
       // for icon buttons only atm
       iconTheme: Theme.of(context).iconTheme.copyWith(
             color: enabledIconColor,
           ),
       tooltipTheme: TooltipThemeData(
-        // textStyle: TextStyle(fontSize: 14),
-
         /// TODO Responsive to screen size - removed magic numbers
-        /// I'd have to move it to a place with a valid context
-        /// to screenAdjustTooltipOffsetY(context)
         verticalOffset: 55,
-        // verticalOffset: screenAdjustTooltipOffsetY(context),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(color: tipColor),
       ),

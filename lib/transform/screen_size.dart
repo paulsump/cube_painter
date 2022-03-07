@@ -59,9 +59,6 @@ double screenAdjustAssetIconSize(BuildContext context) =>
 double screenAdjustButtonElevation(BuildContext context) =>
     0.11429 * _screenAdjustButtonHeight(context);
 
-// double screenAdjustTooltipOffsetY(BuildContext context) =>
-//     0.78571 * _screenAdjustButtonHeight(context);
-
 double screenAdjustAddIconSize(BuildContext context) =>
     screenAdjust(0.04762, context);
 
