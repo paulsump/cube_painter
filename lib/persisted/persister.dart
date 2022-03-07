@@ -23,6 +23,7 @@ mixin Persister {
   final paintings = <String, Painting>{};
 
   final slicesExample = _SlicesExamplePainting();
+
   String get json => painting.toString();
 
   final _settingsPersister = _SettingsPersister();
@@ -221,6 +222,7 @@ class _SlicesExamplePainting {
   late Painting triangleGap;
 
   Future<void> load() async {
+    //TODO USE asset PAth directly
     final assets = await _Assets._getStrings('help/triangle_');
 
     triangleWithGap = Painting.fromString(assets['triangle_with_gap.json']!);
@@ -287,12 +289,11 @@ class _Assets {
   static Future<Map<String, String>> _getStrings(String pathStartsWith) async {
     final manifestJson = await rootBundle.loadString('AssetManifest.json');
 
-    final allFilePaths = jsonDecode(manifestJson).keys;
     final filePaths = <String, String>{};
 
-    for (final String filePath in allFilePaths) {
+    for (final String filePath in jsonDecode(manifestJson).keys) {
       if (filePath.startsWith(pathStartsWith)) {
-        final fileName = filePath.split(Platform.pathSeparator).last;
+        final fileName = filePath.split('/').last;
 
         filePaths[fileName] = await rootBundle.loadString(filePath);
       }

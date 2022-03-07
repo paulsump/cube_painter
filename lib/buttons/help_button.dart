@@ -63,6 +63,7 @@ void _showHelp(BuildContext context) {
       return Alert(
         title: 'Tips',
         // todo just display one tip at a time
+        //   final assets = await _Assets._getStrings('help/triangle_');
         child: _tips[0],
         yesCallBack: () => Navigator.of(context).pop(),
         yesTip: 'Done',

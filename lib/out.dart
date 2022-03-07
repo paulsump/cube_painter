@@ -20,6 +20,7 @@ void out(Object object) {
   }
 }
 
+//TODO use log
 void _out(String text) => debugPrint(text);
 
 void clipError(String text) {
