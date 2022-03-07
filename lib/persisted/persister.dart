@@ -302,20 +302,18 @@ class _Assets {
 
   static Future<void> _copyAllFromTo(
       String fromAssetFolderPathStartsWith, String toAppFolderPath) async {
-    final assetFilePaths = await _getStrings(fromAssetFolderPathStartsWith);
+    final assetStrings = await _getStrings(fromAssetFolderPathStartsWith);
 
-    for (MapEntry asset in assetFilePaths.entries) {
-      final assetFileName = asset.key;
+    for (MapEntry assetString in assetStrings.entries) {
+      final assetFileName = assetString.key;
 
       final appFileName = assetFileName.replaceFirst('.json', cubesExtension);
-
-      final String appFilePath = '$toAppFolderPath$appFileName';
-      File appFile = File(appFilePath);
+      final appFile = File('$toAppFolderPath$appFileName');
 
       if (!await appFile.exists()) {
         // out('copying $appFileName');
 
-        await appFile.writeAsString(asset.value);
+        await appFile.writeAsString(assetString.value);
       }
     }
   }
