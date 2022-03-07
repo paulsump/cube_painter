@@ -67,8 +67,8 @@ class TipsPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(children: const [
       TipPage(name: 'oneFinger'),
-      TipPage(name: 'oneFinger'),
-      TipPage(name: 'oneFinger'),
+      TipPage(name: 'twoFinger'),
+      TipPage(name: 'longPress'),
     ]);
   }
 }
@@ -107,17 +107,19 @@ class TipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(child: _Tip(name: name)),
-        Expanded(
-          child: _Button(
+    return Center(
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          _Tip(name: name),
+          const SizedBox(height: 88),
+          _Button(
             onPressed: Navigator.of(context).pop,
             icon: AssetIcons.thumbsUp,
             tip: 'Close the tips.',
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
