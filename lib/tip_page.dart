@@ -82,19 +82,16 @@ class _Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: screenAdjust(0.005, context),
-        left: screenAdjust(0.04, context),
-      ),
-      //TODO MAKE BIGGER
-      //todo hidge pagebuttons
-      child: IconFlatHexagonButton(
-        icon: icon,
-        iconSize: screenAdjustAssetIconSize(context),
-        onPressed: onPressed,
-        tip: tip,
-      ),
+    // return Padding(
+    //     padding: EdgeInsets.only(
+    //       top: screenAdjust(0.005, context),
+    //       left: screenAdjust(0.04, context),
+    //     ),
+    return IconFlatHexagonButton(
+      icon: icon,
+      iconSize: screenAdjustAssetIconSize(context),
+      onPressed: onPressed,
+      tip: tip,
     );
   }
 }

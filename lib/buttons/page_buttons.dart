@@ -22,6 +22,7 @@ class PageButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final undoer = getUndoer(context, listen: true);
 
+    //todo maybe hide page buttons if showing help
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
