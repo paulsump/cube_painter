@@ -86,10 +86,27 @@ class _TipPage extends StatelessWidget {
       ),
     );
 
-    final button = _Button(
+    final doneButton = IconFlatHexagonButton(
       onPressed: Navigator.of(context).pop,
       icon: AssetIcons.thumbsUp,
+      iconSize: screenAdjustAssetIconSize(context),
       tip: 'Close the tips.',
+    );
+
+    final forwardButton = IconFlatHexagonButton(
+      onPressed: Navigator.of(context).pop,
+      // onPressed: incrementPage(1),
+      iconSize: screenAdjustNormalIconSize(context),
+      icon: Icons.forward_outlined,
+      tip: 'Show the next tip.\nYou can also swipe to navigate',
+    );
+
+    final buttonRow = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        doneButton,
+        forwardButton,
+      ],
     );
 
     return Container(
@@ -97,7 +114,7 @@ class _TipPage extends StatelessWidget {
       child: isPortrait(context)
           ? Column(
               children: [
-                Align(alignment: Alignment.topLeft, child: button),
+                buttonRow,
                 SizedBox(height: screenAdjust(0.3, context)),
                 titleText,
                 SizedBox(height: screenAdjust(0.1, context)),
@@ -109,7 +126,7 @@ class _TipPage extends StatelessWidget {
             )
           : Column(
               children: [
-                Align(alignment: Alignment.topLeft, child: button),
+                buttonRow,
                 SizedBox(height: screenAdjust(0.03, context)),
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   SizedBox(width: screenAdjust(0.4, context)),
@@ -124,30 +141,6 @@ class _TipPage extends StatelessWidget {
                 ]),
               ],
             ),
-    );
-  }
-}
-
-class _Button extends StatelessWidget {
-  final VoidCallback? onPressed;
-
-  final IconData icon;
-  final String tip;
-
-  const _Button({
-    Key? key,
-    this.onPressed,
-    required this.icon,
-    required this.tip,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconFlatHexagonButton(
-      icon: icon,
-      iconSize: screenAdjustAssetIconSize(context),
-      onPressed: onPressed,
-      tip: tip,
     );
   }
 }
