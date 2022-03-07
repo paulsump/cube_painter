@@ -49,7 +49,7 @@ final Color _darkBLT = getTweenBLtoTColor(0.1);
 
 final Color menuColor = _darkBLT.withOpacity(0.4);
 
-final Color menuScrimColor = _darkBLT.withOpacity(0.5);
+final Color scrimColor = _darkBLT.withOpacity(0.5);
 
 final Color paintingsMenuButtonsColor = _blt.withOpacity(0.99);
 
