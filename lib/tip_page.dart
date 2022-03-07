@@ -36,8 +36,10 @@ const _tips = <Tip>[
   Tip('placeSlice', 'Place a slice', <TextSpan>[
     TextSpan(text: 'Drag the slice into position.'),
   ]),
-  Tip('eraseLine', 'Erase a line of cubes', <TextSpan>[
-    TextSpan(text: 'Drag the over the cube line you want to remove.'),
+  Tip('eraseLine', 'Erase cubes', <TextSpan>[
+    TextSpan(
+        text:
+            'Drag the over the cube(s)\nthat you want to remove,\nthen release.'),
   ]),
 ];
 
