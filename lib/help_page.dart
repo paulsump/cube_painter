@@ -77,12 +77,15 @@ class _HelpPageState extends State<HelpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      children: _pages,
-      onPageChanged: (index) {
-        setState(() => _pageIndex = index);
-      },
-      controller: _pageController,
+    return Container(
+      color: helpColor,
+      child: PageView(
+        children: _pages,
+        onPageChanged: (index) {
+          setState(() => _pageIndex = index);
+        },
+        controller: _pageController,
+      ),
     );
   }
 
@@ -158,38 +161,35 @@ class _TipPage extends StatelessWidget {
       ],
     );
 
-    return Container(
-      color: helpColor,
-      child: isPortrait(context)
-          ? Column(
-              children: [
-                buttonRow,
-                SizedBox(height: screenAdjust(0.3, context)),
-                titleText,
-                SizedBox(height: screenAdjust(0.1, context)),
+    return isPortrait(context)
+        ? Column(
+            children: [
+              buttonRow,
+              SizedBox(height: screenAdjust(0.3, context)),
+              titleText,
+              SizedBox(height: screenAdjust(0.1, context)),
+              image,
+              SizedBox(height: screenAdjust(0.1, context)),
+              bodyText,
+              SizedBox(height: screenAdjust(0.1, context)),
+            ],
+          )
+        : Column(
+            children: [
+              buttonRow,
+              SizedBox(height: screenAdjust(0.03, context)),
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                SizedBox(width: screenAdjust(0.4, context)),
                 image,
-                SizedBox(height: screenAdjust(0.1, context)),
-                bodyText,
-                SizedBox(height: screenAdjust(0.1, context)),
-              ],
-            )
-          : Column(
-              children: [
-                buttonRow,
-                SizedBox(height: screenAdjust(0.03, context)),
-                Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  SizedBox(width: screenAdjust(0.4, context)),
-                  image,
-                  SizedBox(width: screenAdjust(0.2, context)),
-                  Column(children: [
-                    SizedBox(height: screenAdjust(0.0, context)),
-                    titleText,
-                    bodyText,
-                    SizedBox(height: screenAdjust(0.1, context)),
-                  ]),
+                SizedBox(width: screenAdjust(0.2, context)),
+                Column(children: [
+                  SizedBox(height: screenAdjust(0.0, context)),
+                  titleText,
+                  bodyText,
+                  SizedBox(height: screenAdjust(0.1, context)),
                 ]),
-              ],
-            ),
-    );
+              ]),
+            ],
+          );
   }
 }
