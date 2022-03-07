@@ -3,7 +3,6 @@ import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
 import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/gestures/brush.dart';
-import 'package:cube_painter/help_page.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/screen_size.dart';
@@ -145,7 +144,7 @@ class _HelpButton extends StatelessWidget {
         color: enabledIconColor,
         size: screenAdjustNormalIconSize(context),
       ),
-      onPressed: () => showHelp(context),
+      onPressed: () => Navigator.pushNamed(context, '/help'),
       tip: 'Display tips.',
     );
   }

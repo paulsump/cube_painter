@@ -42,15 +42,15 @@ const _tips = <_Tip>[
 ];
 
 /// Show a few little messages with an image to get them started.
-void showHelp(BuildContext context) {
-  //TODO this is a bit weird now, perhaps should use Navigator?
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return const HelpPage();
-    },
-  );
-}
+// void showHelp(BuildContext context) {
+//   TODO this is a bit weird now, perhaps should use Navigator?
+// showDialog(
+//   context: context,
+//   builder: (BuildContext context) {
+//     return const HelpPage();
+//   },
+// );
+// }
 
 class HelpPage extends StatefulWidget {
   const HelpPage({
@@ -143,7 +143,7 @@ class _TipPage extends StatelessWidget {
     );
 
     final doneButton = IconFlatHexagonButton(
-      onPressed: Navigator.of(context).pop,
+      onPressed: () => Navigator.pushNamed(context, '/painter'),
       icon: AssetIcons.thumbsUp,
       iconSize: screenAdjustAssetIconSize(context),
       tip: 'Close the tips.',
