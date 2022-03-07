@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cube_painter/out.dart';
@@ -10,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
-const noWarn = [out, log];
+const noWarn = [out];
 
 const cubesExtension = '.cubes.json';
 
@@ -135,8 +134,8 @@ mixin Persister {
     saveCurrentFilePath(filePath);
 
     _savedJson = json;
-    // TODO Remove log
-    log(json);
+    // TODO Remove out
+    out(json);
     updateAfterLoad(context);
   }
 
@@ -314,7 +313,7 @@ class _Assets {
       File appFile = File(appFilePath);
 
       if (!await appFile.exists()) {
-        out('copying $appFileName');
+        // out('copying $appFileName');
 
         await appFile.writeAsString(asset.value);
       }
