@@ -47,11 +47,31 @@ void showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return PageView(children: [
-        for (_Tip tip in _tips) _TipPage(tip: tip),
-      ]);
+      return const HelpPage();
     },
   );
+}
+
+class HelpPage extends StatefulWidget {
+  const HelpPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<HelpPage> createState() => _HelpPageState();
+}
+
+class _HelpPageState extends State<HelpPage> {
+  int _pageIndex = 0;
+
+  final _pageController = PageController();
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView(children: [
+      for (_Tip tip in _tips) _TipPage(tip: tip),
+    ]);
+  }
 }
 
 class _TipPage extends StatelessWidget {
@@ -102,7 +122,7 @@ class _TipPage extends StatelessWidget {
     );
 
     final buttonRow = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         doneButton,
         forwardButton,
