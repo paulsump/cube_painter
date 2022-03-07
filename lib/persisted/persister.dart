@@ -221,7 +221,7 @@ class _SlicesExamplePainting {
   late Painting triangleGap;
 
   Future<void> load() async {
-    final assetStrings = await _Assets._getStrings('help/triangle_');
+    final assetStrings = await _Assets._getStrings('samples_help/triangle_');
 
     triangleWithGap =
         Painting.fromString(assetStrings['triangle_with_gap.json']!);
