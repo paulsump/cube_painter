@@ -72,6 +72,7 @@ class _TipPage extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: screenAdjust(0.08, context),
+            color: bottomRightColor,
           )),
     );
 
@@ -109,6 +110,7 @@ class _TipPage extends StatelessWidget {
           : Column(
               children: [
                 Align(alignment: Alignment.topLeft, child: button),
+                SizedBox(height: screenAdjust(0.03, context)),
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   SizedBox(width: screenAdjust(0.4, context)),
                   image,
