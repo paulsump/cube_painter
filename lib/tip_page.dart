@@ -83,7 +83,12 @@ class _Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: screenAdjust(0.017312, context)),
+      padding: EdgeInsets.only(
+        top: screenAdjust(0.005, context),
+        left: screenAdjust(0.04, context),
+      ),
+      //TODO MAKE BIGGER
+      //todo hidge pagebuttons
       child: IconFlatHexagonButton(
         icon: icon,
         iconSize: screenAdjustAssetIconSize(context),
@@ -134,6 +139,7 @@ class TipPage extends StatelessWidget {
     return isPortrait(context)
         ? Column(
             children: [
+              Align(alignment: Alignment.topLeft, child: button),
               SizedBox(height: screenAdjust(0.3, context)),
               titleText,
               image,
@@ -142,17 +148,21 @@ class TipPage extends StatelessWidget {
               button,
             ],
           )
-        : Row(children: [
-            SizedBox(width: screenAdjust(0.4, context)),
-            image,
-            SizedBox(width: screenAdjust(0.2, context)),
-            Column(children: [
-              SizedBox(height: screenAdjust(0.2, context)),
-              titleText,
-              bodyText,
-              SizedBox(height: screenAdjust(0.1, context)),
-              button,
-            ]),
-          ]);
+        : Column(
+            children: [
+              Align(alignment: Alignment.topLeft, child: button),
+              Row(children: [
+                SizedBox(width: screenAdjust(0.4, context)),
+                image,
+                SizedBox(width: screenAdjust(0.2, context)),
+                Column(children: [
+                  SizedBox(height: screenAdjust(0.2, context)),
+                  titleText,
+                  bodyText,
+                  SizedBox(height: screenAdjust(0.1, context)),
+                ]),
+              ]),
+            ],
+          );
   }
 }
