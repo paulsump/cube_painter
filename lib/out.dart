@@ -28,4 +28,3 @@ void clipError(String text) {
 
 void writeToClipboard(String text) =>
     Clipboard.setData(ClipboardData(text: text));
-
