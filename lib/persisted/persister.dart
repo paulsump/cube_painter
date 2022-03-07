@@ -221,11 +221,11 @@ class _SlicesExamplePainting {
   late Painting triangleGap;
 
   Future<void> load() async {
-    //TODO USE asset PAth directly
-    final assets = await _Assets._getStrings('help/triangle_');
+    final assetStrings = await _Assets._getStrings('help/triangle_');
 
-    triangleWithGap = Painting.fromString(assets['triangle_with_gap.json']!);
-    triangleGap = Painting.fromString(assets['triangle_gap.json']!);
+    triangleWithGap =
+        Painting.fromString(assetStrings['triangle_with_gap.json']!);
+    triangleGap = Painting.fromString(assetStrings['triangle_gap.json']!);
 
     unitTransform = triangleWithGap.unitTransform;
   }
