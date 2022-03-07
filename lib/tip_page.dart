@@ -9,38 +9,35 @@ const _emphasisStyle = TextStyle(
   decoration: TextDecoration.underline,
 );
 
-class Tip {
+class _Tip {
   final String fileName, title;
   final List<TextSpan> body;
 
-  const Tip(this.fileName, this.title, this.body);
+  const _Tip(this.fileName, this.title, this.body);
 }
 
-const _tips = <Tip>[
-  Tip('oneFinger', 'Add cubes', <TextSpan>[
+const _tips = <_Tip>[
+  _Tip('oneFinger', 'Add cubes', <TextSpan>[
     TextSpan(text: 'Drag with '),
     TextSpan(text: 'one', style: _emphasisStyle),
     TextSpan(text: ' finger.'),
   ]),
-  Tip('twoFinger', 'Pan and Zoom', <TextSpan>[
+  _Tip('twoFinger', 'Pan and Zoom', <TextSpan>[
     TextSpan(text: 'Drag with '),
     TextSpan(text: 'two', style: _emphasisStyle),
     TextSpan(text: ' fingers.'),
   ]),
-  Tip('longPress', 'Button tips', <TextSpan>[
-    TextSpan(text: 'Press and hold a button.'),
-  ]),
-  Tip('eraseLine', 'Erase cubes', <TextSpan>[
+  _Tip('longPress', 'Button tips',
+      <TextSpan>[TextSpan(text: 'Press and hold a button.')]),
+  _Tip('eraseLine', 'Erase cubes', <TextSpan>[
     TextSpan(
-        text:
-            'Drag the over the cube(s)\nthat you want to remove,\nthen release.'),
+        text: 'Drag the over the cube(s)\n'
+            'that you want to remove,\nthen release.')
   ]),
-  Tip('slicesMenu', 'Slices menu', <TextSpan>[
-    TextSpan(text: 'Pick a cube slice'),
-  ]),
-  Tip('placeSlice', 'Place a slice', <TextSpan>[
-    TextSpan(text: 'Drag the slice into position.'),
-  ]),
+  _Tip('slicesMenu', 'Slices menu',
+      <TextSpan>[TextSpan(text: 'Pick a cube slice')]),
+  _Tip('placeSlice', 'Place a slice',
+      <TextSpan>[TextSpan(text: 'Drag the slice into position.')]),
 ];
 
 /// Show a few little messages with an image to get them started.
@@ -49,22 +46,11 @@ void showHelp(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return const TipsPageView();
+      return PageView(children: [
+        for (_Tip tip in _tips) _TipPage(tip: tip),
+      ]);
     },
   );
-}
-
-class TipsPageView extends StatelessWidget {
-  const TipsPageView({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return PageView(children: [
-      for (Tip tip in _tips) TipPage(tip: tip),
-    ]);
-  }
 }
 
 class _Button extends StatelessWidget {
@@ -91,10 +77,10 @@ class _Button extends StatelessWidget {
   }
 }
 
-class TipPage extends StatelessWidget {
-  final Tip tip;
+class _TipPage extends StatelessWidget {
+  final _Tip tip;
 
-  const TipPage({Key? key, required this.tip}) : super(key: key);
+  const _TipPage({Key? key, required this.tip}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
