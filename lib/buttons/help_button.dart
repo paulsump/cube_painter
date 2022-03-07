@@ -73,22 +73,23 @@ class _Tip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final image = Image(
+      width: screenAdjust(0.2, context),
+      image: AssetImage('images/$name.png'),
+    );
+
+    final text = RichText(
+      text: TextSpan(
+        text: '\n',
+        style: DefaultTextStyle.of(context).style.apply(
+              fontSizeFactor: screenAdjust(0.004, context),
+            ),
+        children: _tips['name'],
+      ),
+    );
+
     return Column(
-      children: [
-        Image(
-          // width: screenAdjust(),
-          image: AssetImage('images/$name.png'),
-        ),
-        RichText(
-          text: TextSpan(
-            text: '\n',
-            style: DefaultTextStyle.of(context).style.apply(
-                  fontSizeFactor: screenAdjust(0.004, context),
-                ),
-            children: _tips['name'],
-          ),
-        ),
-      ],
+      children: [image, text],
     );
   }
 }
