@@ -50,20 +50,18 @@ class Thumbnail extends StatelessWidget {
         ? Transform.scale(
             scale: _unitTransform.scale,
             child: Transform.translate(
-                offset: _unitTransform.offset,
-                child: isPingPong
+              offset: _unitTransform.offset,
+              child: isPingPong
 
-                    /// Note that this only animates the first cube.
-                    /// That's all that's needed currently.
-                    ? _StandAloneAnimatedCube(info: painting.cubeInfos[0])
-                    : Stack(
-                        children: painting.cubeInfos
-                            .map((cubeInfo) => PositionedScaledCube(
-                                  info: cubeInfo,
-                                  wire: wire,
-                                  scale: 1.0,
-                                ))
-                            .toList())),
+                  /// Note that this only animates the first cube.
+                  /// That's all that's needed currently.
+                  ? _StandAloneAnimatedCube(info: painting.cubeInfos[0])
+                  : Stack(children: [
+                      ...painting.cubeInfos.map((cubeInfo) =>
+                          PositionedScaledCube(
+                              info: cubeInfo, wire: wire, scale: 1.0))
+                    ]),
+            ),
           )
         : Container();
   }
