@@ -36,11 +36,11 @@ class CubeSide {
 Color getColor(Side side) {
   switch (side) {
     case Side.bottomRight:
-      return Hue.bottomRightColor; // Light
+      return Hue.bottomRight; // Light
     case Side.top:
-      return Hue.topColor; // Medium
+      return Hue.top; // Medium
     case Side.bottomLeft:
-      return Hue.bottomLeftColor; // Dark
+      return Hue.bottomLeft; // Dark
   }
 }
 
@@ -56,19 +56,19 @@ LinearGradient _getGradient(Side side) {
 }
 
 final _gradientT = LinearGradient(
-  colors: [Hue.topGradientColor, Hue.topColor],
+  colors: [Hue.topGradient, Hue.top],
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
 );
 
 const _gradientBR = LinearGradient(
-  colors: [Hue.topColor, Hue.bottomRightColor],
+  colors: [Hue.top, Hue.bottomRight],
   begin: Alignment.bottomRight,
   end: Alignment.topLeft,
 );
 
 const _gradientBL = LinearGradient(
-  colors: [Hue.bottomLeftColor, Hue.topColor],
+  colors: [Hue.bottomLeft, Hue.top],
   begin: Alignment.bottomLeft,
   end: Alignment.topRight,
 );

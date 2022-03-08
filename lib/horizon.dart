@@ -49,7 +49,7 @@ const quad = [
 
 get _gradientBottomTop => LinearGradient(
       // colors: [bottomLeftColor, getTweenBLtoTColor(0.9)],
-      colors: [Hue.topColor, Hue.horizonColor],
+      colors: [Hue.top, Hue.horizon],
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
     );

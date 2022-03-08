@@ -164,7 +164,7 @@ class _ChildAndIcon extends StatelessWidget {
           offset: -_unitOffset * screenAdjustAssetIconSize(context) / 2,
           child: Icon(
             icon,
-            color: Hue.enabledIconColor,
+            color: Hue.enabledIcon,
             size: iconSize,
           ),
         ),

@@ -40,9 +40,9 @@ class ThumbnailButton extends StatelessWidget {
           style: ButtonStyle(
             shape: hexagonBorderShape,
             overlayColor:
-                MaterialStateColor.resolveWith((states) => Hue.buttonColor),
+                MaterialStateColor.resolveWith((states) => Hue.button),
             backgroundColor:
-                MaterialStateProperty.all(Hue.paintingsMenuButtonsColor),
+                MaterialStateProperty.all(Hue.paintingsMenuButtons),
           ),
         ),
       ),

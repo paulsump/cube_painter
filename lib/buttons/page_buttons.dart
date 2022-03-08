@@ -84,7 +84,7 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
     return ElevatedHexagonButton(
       child: Icon(
         Icons.folder_open_outlined,
-        color: Hue.enabledIconColor,
+        color: Hue.enabledIcon,
         size: screenAdjustNormalIconSize(context),
       ),
       onPressed: Scaffold.of(context).openDrawer,
@@ -117,7 +117,7 @@ class _UndoButton extends StatelessWidget {
       child: Icon(
         isRedo ? Icons.redo_sharp : Icons.undo_sharp,
               size: screenAdjustNormalIconSize(context),
-              color: enabled ? Hue.enabledIconColor : Hue.disabledIconColor,
+              color: enabled ? Hue.enabledIcon : Hue.disabledIcon,
             ),
       onPressed: enabled
           ? isRedo
@@ -141,7 +141,7 @@ class _HelpButton extends StatelessWidget {
     return ElevatedHexagonButton(
       child: Icon(
         Icons.help_outline_rounded,
-        color: Hue.enabledIconColor,
+        color: Hue.enabledIcon,
         size: screenAdjustNormalIconSize(context),
       ),
       onPressed: () => setShowHelp(true, context),

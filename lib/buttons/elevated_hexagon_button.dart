@@ -42,14 +42,14 @@ class ElevatedHexagonButton extends StatelessWidget {
               fixedSize:
                   MaterialStateProperty.all(screenAdjustButtonSize(context)),
               backgroundColor: MaterialStateProperty.all(isRadioOn == null
-                  ? Hue.buttonColor
+                  ? Hue.button
                   : isRadioOn!
-                      ? Hue.radioButtonOnColor
-                      : Hue.radioButtonOffColor),
+                      ? Hue.radioButtonOn
+                      : Hue.radioButtonOff),
               elevation: MaterialStateProperty.all(
                   isOn ? 0.0 : screenAdjustButtonElevation(context)),
               shadowColor:
-                  isOn ? null : MaterialStateProperty.all(Hue.bottomLeftColor),
+                  isOn ? null : MaterialStateProperty.all(Hue.bottomLeft),
             ),
           ),
         ),

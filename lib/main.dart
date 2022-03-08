@@ -78,21 +78,21 @@ class CubePainterApp extends StatelessWidget {
 
   ThemeData _buildThemeData(BuildContext context) {
     return ThemeData(
-      canvasColor: Hue.menuColor,
-      textTheme: Theme.of(context).textTheme.apply(bodyColor: Hue.textColor),
+      canvasColor: Hue.menu,
+      textTheme: Theme.of(context).textTheme.apply(bodyColor: Hue.text),
       // for icon buttons only atm
       iconTheme: Theme.of(context).iconTheme.copyWith(
-            color: Hue.enabledIconColor,
+            color: Hue.enabledIcon,
           ),
       tooltipTheme: TooltipThemeData(
         /// TODO Responsive to screen size - removed magic numbers
         verticalOffset: 55,
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(color: Hue.tipColor),
+        decoration: BoxDecoration(color: Hue.tip),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Hue.buttonColor,
+            primary: Hue.button,
       )),
     );
   }
