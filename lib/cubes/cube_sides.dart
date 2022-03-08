@@ -56,7 +56,7 @@ LinearGradient _getGradient(Side side) {
 }
 
 final _gradientT = LinearGradient(
-  colors: [getTweenBLtoTColor(0.6), getTweenBLtoTColor(1.0)],
+  colors: [Hue.topGradientColor, Hue.topColor],
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
 );
