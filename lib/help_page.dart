@@ -194,11 +194,13 @@ class _TipPage extends StatelessWidget {
               buttonRow,
               Stack(children: [
                 Transform.translate(
-                  offset: tip.portraitImageOffset * screenAdjust(0.1, context),
+                  offset: (const Offset(-2.5, 2.5) + tip.portraitImageOffset) *
+                      screenAdjust(0.1, context),
                   child: image,
                 ),
                 Transform.translate(
-                  offset: tip.portraitTextOffset * screenAdjust(0.1, context),
+                  offset: (const Offset(2, 3) + tip.portraitTextOffset) *
+                      screenAdjust(0.1, context),
                   child: text,
                 ),
               ]),
@@ -209,7 +211,7 @@ class _TipPage extends StatelessWidget {
               buttonRow,
               Stack(children: [
                 Transform.translate(
-                  offset: (const Offset(0, -0.5) + tip.landscapeImageOffset) *
+                  offset: (const Offset(-2, -0.5) + tip.landscapeImageOffset) *
                       screenAdjust(0.1, context),
                   child: image,
                 ),
@@ -233,9 +235,9 @@ const _tips = <_Tip>[
       TextSpan(text: 'one', style: _emphasisStyle),
       TextSpan(text: ' finger.'),
     ],
-    landscapeImageOffset: Offset(2.5, -1.5),
+    landscapeImageOffset: Offset(2.5, -0.5),
     landscapeTextOffset: Offset(-2.5, 2),
-    portraitImageOffset: Offset(0.5, 2.5),
+    portraitImageOffset: Offset(3.0, -1.0),
     portraitTextOffset: Offset(-2.5, 2),
   ),
   _Tip(
@@ -246,7 +248,7 @@ const _tips = <_Tip>[
       TextSpan(text: 'two', style: _emphasisStyle),
       TextSpan(text: ' fingers.'),
     ],
-    landscapeImageOffset: Offset(3.0, -1.0),
+    landscapeImageOffset: Offset(3.0, -0.5),
     landscapeTextOffset: Offset(-2, 2),
     portraitImageOffset: Offset(3.0, -1.0),
     portraitTextOffset: Offset(-2, 2),
@@ -262,15 +264,15 @@ const _tips = <_Tip>[
     landscapeImageOffset: Offset(3.0, -0.5),
     landscapeTextOffset: Offset(-3, 1),
     portraitImageOffset: Offset(3.0, -0.5),
-    portraitTextOffset: Offset(-3, 1),
+    portraitTextOffset: Offset(-3, 2),
   ),
   _Tip(
     fileName: 'slicesMenu',
     title: 'Slices menu',
     body: <TextSpan>[TextSpan(text: 'Pick a cube slice')],
-    landscapeImageOffset: Offset(1.0, -0.5),
-    landscapeTextOffset: Offset(-2.8, 2),
-    portraitImageOffset: Offset(1.0, -0.5),
+    landscapeImageOffset: Offset(3.0, -0.5),
+    landscapeTextOffset: Offset(-1.8, 2),
+    portraitImageOffset: Offset(3.0, -0.5),
     portraitTextOffset: Offset(-2.8, 2),
   ),
   _Tip(
@@ -279,7 +281,7 @@ const _tips = <_Tip>[
     body: <TextSpan>[TextSpan(text: 'Drag the slice\ninto position.')],
     landscapeImageOffset: Offset(2.0, -0.5),
     landscapeTextOffset: Offset(-2, 1.5),
-    portraitImageOffset: Offset(2.0, -0.5),
+    portraitImageOffset: Offset(3.0, -0.5),
     portraitTextOffset: Offset(-2, 1.5),
   ),
   _Tip(
