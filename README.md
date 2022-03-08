@@ -26,7 +26,8 @@ A painting app, but the 'paint' is cubes.
 - Animator and Persister are mixins for the Paintings Provider.
 
 ## Packages used
-The only packages used are provider and path_provider.
+- provider
+- path_provider.
 
 ## Flutter Widgets used
 Stack
