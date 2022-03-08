@@ -14,13 +14,6 @@ const _unitOffset = Offset(1, 1);
 
 /// A raised hexagon shaped radio button
 class RadioButton extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  final String tip;
-  final bool isRadioOn;
-
-  final Widget child;
-
   const RadioButton({
     Key? key,
     required this.onPressed,
@@ -28,6 +21,12 @@ class RadioButton extends StatelessWidget {
     required this.isRadioOn,
     required this.child,
   }) : super(key: key);
+
+  final VoidCallback onPressed;
+  final String tip;
+
+  final bool isRadioOn;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +44,6 @@ class RadioButton extends StatelessWidget {
 /// The cube might be a whole cube or a slice of a cube,
 /// dictated by [Slice].
 class CubeRadioButton extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  final String tip;
-  final bool isRadioOn;
-
-  final IconData icon;
-  final double iconSize;
-
-  final Slice slice;
-
   const CubeRadioButton({
     Key? key,
     required this.onPressed,
@@ -64,6 +53,15 @@ class CubeRadioButton extends StatelessWidget {
     required this.isRadioOn,
     required this.slice,
   }) : super(key: key);
+
+  final VoidCallback onPressed;
+  final String tip;
+
+  final bool isRadioOn;
+  final IconData icon;
+
+  final double iconSize;
+  final Slice slice;
 
   @override
   Widget build(BuildContext context) {
@@ -88,18 +86,6 @@ class CubeRadioButton extends StatelessWidget {
 /// A raised hexagon shaped radio button with a line of cubes on it.
 /// It has an [Icon] - the plus sign for adding lines of cubes.
 class CubeLineRadioButton extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  final IconData icon;
-  final double iconSize;
-
-  final String tip;
-
-  final bool isRadioOn;
-  final bool wire;
-
-  final double diagonalOffset;
-
   const CubeLineRadioButton({
     Key? key,
     required this.onPressed,
@@ -110,6 +96,17 @@ class CubeLineRadioButton extends StatelessWidget {
     required this.wire,
     required this.diagonalOffset,
   }) : super(key: key);
+
+  final VoidCallback onPressed;
+  final String tip;
+
+  final IconData icon;
+  final double iconSize;
+
+  final bool isRadioOn;
+  final bool wire;
+
+  final double diagonalOffset;
 
   @override
   Widget build(BuildContext context) {
@@ -141,18 +138,19 @@ class CubeLineRadioButton extends StatelessWidget {
   }
 }
 
+/// A [Stack] of the child (a cube) with an [Icon] on top.
 class _ChildAndIcon extends StatelessWidget {
-  final Widget child;
-
-  final IconData icon;
-  final double iconSize;
-
   const _ChildAndIcon({
     Key? key,
     required this.child,
     required this.icon,
     required this.iconSize,
   }) : super(key: key);
+
+  final Widget child;
+  final IconData icon;
+
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
