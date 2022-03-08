@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
@@ -20,17 +22,31 @@ class GridLines extends StatelessWidget {
     final paintingBank = getPaintingBank(context, listen: true);
 
     return CubeAnimState.brushing == paintingBank.cubeAnimState
-        ? UnitToScreen(
-            child: Transform.scale(
-              scale: 10,
-              child: Stack(
-                children: [
-                  for (int i = 0; i < 3; ++i) _Line(offsets[i], offsets[i + 3]),
-                ],
-              ),
-            ),
-          )
+        ? _Lines(offsets: offsets)
         : Container();
+  }
+}
+
+class _Lines extends StatelessWidget {
+  final UnmodifiableListView<Offset> offsets;
+
+  const _Lines({
+    Key? key,
+    required this.offsets,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return UnitToScreen(
+      child: Transform.scale(
+        scale: 10,
+        child: Stack(
+          children: [
+            for (int i = 0; i < 3; ++i) _Line(offsets[i], offsets[i + 3]),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -44,8 +60,8 @@ class _Line extends StatelessWidget {
     this.from,
     this.to, {
     Key? key,
-    this.color = Colors.blue,
-  }) : super(key: key);
+        this.color = Colors.blue,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>
