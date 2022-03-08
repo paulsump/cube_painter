@@ -33,9 +33,9 @@ class StaticCubes extends StatelessWidget {
 
 /// A cube that has been positioned
 class _PositionedUnitCube extends StatelessWidget {
-  final CubeInfo info;
-
   const _PositionedUnitCube({Key? key, required this.info}) : super(key: key);
+
+  final CubeInfo info;
 
   @override
   Widget build(BuildContext context) {

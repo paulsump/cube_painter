@@ -10,17 +10,17 @@ import 'package:flutter/material.dart';
 /// Similar to [_PositionedUnitCube], but scaled too.
 /// This allows the cube to animate bigger an smaller.
 class PositionedScaledCube extends StatelessWidget {
-  final CubeInfo info;
-
-  final double scale;
-  final bool wire;
-
   const PositionedScaledCube({
     Key? key,
     required this.info,
     required this.scale,
     required this.wire,
   }) : super(key: key);
+
+  final CubeInfo info;
+  final double scale;
+
+  final bool wire;
 
   @override
   Widget build(BuildContext context) {

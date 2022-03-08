@@ -2,11 +2,11 @@ import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/material.dart';
 
-/// draws a sliced cube of unit (1) size
+/// Draws a sliced cube of unit (1) size.
 class SliceUnitCube extends StatelessWidget {
-  final Slice slice;
-
   const SliceUnitCube({Key? key, required this.slice}) : super(key: key);
+
+  final Slice slice;
 
   @override
   Widget build(BuildContext context) => CustomPaint(
@@ -14,11 +14,11 @@ class SliceUnitCube extends StatelessWidget {
       );
 }
 
-/// the painter for [SliceUnitCube]
+/// The painter for [SliceUnitCube].
 class _Painter extends CustomPainter {
-  final List<CubeSide> cubeSides;
-
   const _Painter({required this.cubeSides});
+
+  final List<CubeSide> cubeSides;
 
   @override
   void paint(Canvas canvas, Size size) {

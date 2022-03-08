@@ -8,17 +8,20 @@ import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
+/// Builds the [AnimatedBuilder] part of the animation
+/// shared in [BrushCubes] and [GrowingCubes].
+/// Though [BrushCubes] repeats and [GrowingCubes] just goes forward,
+/// they both animate cubes in the same way.
 class CubesAnimatedBuilder extends StatelessWidget {
-  final AnimationController _controller;
-
-  final bool isPingPong;
-
   const CubesAnimatedBuilder({
     Key? key,
     required AnimationController controller,
     required this.isPingPong,
   })  : _controller = controller,
         super(key: key);
+
+  final AnimationController _controller;
+  final bool isPingPong;
 
   @override
   Widget build(BuildContext context) {
