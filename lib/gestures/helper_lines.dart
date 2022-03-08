@@ -28,13 +28,11 @@ class HelperLines extends StatelessWidget {
   }
 }
 
+/// The implementation class for [HelperLines]
 class _Lines extends StatelessWidget {
-  final Offset offset;
+  const _Lines({Key? key, required this.offset}) : super(key: key);
 
-  const _Lines({
-    Key? key,
-    required this.offset,
-  }) : super(key: key);
+  final Offset offset;
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +54,19 @@ class _Lines extends StatelessWidget {
   }
 }
 
+/// Draws a line from a to b
 class _Line extends StatelessWidget {
-  final Color color;
-
-  final Offset from;
-  final Offset to;
-
   const _Line(
     this.from,
     this.to, {
     Key? key,
     this.color = Colors.blue,
   }) : super(key: key);
+
+  final Offset from;
+  final Offset to;
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) =>
@@ -76,17 +75,16 @@ class _Line extends StatelessWidget {
 
 /// the painter for [_Line]
 class _Painter extends CustomPainter {
-  final Color color;
+  const _Painter(this.from, this.to, this.color);
 
   final Offset from;
   final Offset to;
 
-  const _Painter(this.from, this.to, this.color);
+  final Color color;
 
   @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawLine(from, to, Paint()..color = color);
-  }
+  void paint(Canvas canvas, Size size) =>
+      canvas.drawLine(from, to, Paint()..color = color);
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;

@@ -5,11 +5,11 @@ import 'dart:ui';
 /// A coordinate space where x is across and
 /// y is up and to the right by H and W respectively.
 class Position {
+  const Position(this.x, this.y);
+
   final int x, y;
 
   static const zero = Position(0, 0);
-
-  const Position(this.x, this.y);
 
   operator +(Position other) => Position(x + other.x, y + other.y);
 

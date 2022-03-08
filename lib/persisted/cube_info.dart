@@ -7,11 +7,10 @@ import 'package:flutter/material.dart';
 /// Persisted to json.
 /// For convenience you can get the json as a string via toString()
 class CubeInfo {
-  final Position center;
-
-  final Slice slice;
-
   const CubeInfo({required this.center, required this.slice});
+
+  final Position center;
+  final Slice slice;
 
   @override
   bool operator ==(Object other) => other is CubeInfo

@@ -12,9 +12,9 @@ Offset screenToUnit(Offset point, BuildContext context) =>
 
 /// translate to screen, then zoom
 class UnitToScreen extends StatelessWidget {
-  final Widget child;
-
   const UnitToScreen({Key? key, required this.child}) : super(key: key);
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

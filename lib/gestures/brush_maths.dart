@@ -10,6 +10,7 @@ const noWarn = out;
 
 /// The maths for placing a line of cubes with one gesture.
 /// Used by [Brusher],
+/// TODO fix late fields with no init - split into two sub classes with constructors for start and drag
 class BrushMaths {
   /// dragged start point in grid space
   late Offset _startUnit;

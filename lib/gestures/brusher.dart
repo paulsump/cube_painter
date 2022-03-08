@@ -17,16 +17,19 @@ const noWarn = [out, Position];
 
 /// Turns gestures into a line of cubes or a single slice cube
 /// depending on the [Brush].
+///
 /// In [Brush.eraseLine] mode it yields the
 /// position you tapped in order to delete a single cube.
 class Brusher implements GestureHandler {
-  List<CubeInfo> getAnimCubeInfos(context) =>
-      getPaintingBank(context).animCubeInfos;
-
   final brushMaths = BrushMaths();
+
+  /// Arbitrary initialisation
   var previousPositions = Positions.empty;
 
   bool tapped = false;
+
+  List<CubeInfo> getAnimCubeInfos(context) =>
+      getPaintingBank(context).animCubeInfos;
 
   @override
   void start(Offset point, BuildContext context) {

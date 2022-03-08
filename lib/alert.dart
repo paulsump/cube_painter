@@ -10,19 +10,6 @@ import 'package:flutter/material.dart';
 /// all information / question dialogs
 /// in this app.
 class Alert extends StatelessWidget {
-  final String title;
-
-  final Widget child;
-
-  final VoidCallback yesCallBack;
-  final String? yesTip;
-
-  final VoidCallback? noCallBack;
-  final String? noTip;
-
-  final VoidCallback? cancelCallBack;
-  final String? cancelTip;
-
   const Alert({
     Key? key,
     required this.title,
@@ -34,6 +21,18 @@ class Alert extends StatelessWidget {
     this.cancelCallBack,
     this.cancelTip,
   }) : super(key: key);
+
+  final String title;
+  final Widget child;
+
+  final VoidCallback yesCallBack;
+  final String? yesTip;
+
+  final VoidCallback? noCallBack;
+  final String? noTip;
+
+  final VoidCallback? cancelCallBack;
+  final String? cancelTip;
 
   static const double _blur = 2;
 
@@ -69,18 +68,19 @@ class Alert extends StatelessWidget {
   }
 }
 
+/// A convenient [IconFlatHexagonButton] with some padding.
 class _Button extends StatelessWidget {
-  final VoidCallback? onPressed;
-
-  final IconData icon;
-  final String tip;
-
   const _Button({
     Key? key,
     this.onPressed,
     required this.icon,
     required this.tip,
   }) : super(key: key);
+
+  final VoidCallback? onPressed;
+  final IconData icon;
+
+  final String tip;
 
   @override
   Widget build(BuildContext context) {

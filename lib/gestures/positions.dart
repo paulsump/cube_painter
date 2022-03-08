@@ -9,11 +9,10 @@ const noWarn = out;
 /// the reason it exists is mainly to
 /// compare all the items inside with [operator ==].
 class Positions {
-  final List<Position> list;
-
-  static const Positions empty = Positions(<Position>[]);
-
   const Positions(this.list);
+
+  final List<Position> list;
+  static const Positions empty = Positions(<Position>[]);
 
   @override
   bool operator ==(Object other) {

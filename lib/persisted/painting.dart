@@ -12,9 +12,9 @@ const noWarn = out;
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
 class Painting {
-  final List<CubeInfo> cubeInfos;
-
   const Painting({required this.cubeInfos});
+
+  final List<CubeInfo> cubeInfos;
 
   Painting.fromEmpty() : cubeInfos = <CubeInfo>[];
 
@@ -37,15 +37,10 @@ class Painting {
   }
 }
 
-/// Used to scale the [Painting] down to unit size
+/// Used to scale the [Painting] down to unit size.
+///
 /// Based on the bounding rectangle of the [Painting]s positions
 class UnitTransform {
-  late double scale;
-  late Offset offset;
-
-  @override
-  String toString() => '$scale, $offset';
-
   UnitTransform(List<CubeInfo> cubeInfos) {
     double minX = 9999999;
     double minY = 9999999;
@@ -77,4 +72,10 @@ class UnitTransform {
     scale = cubeInfos.length == 1 ? 0.6 : 1 / (1 + max(rangeX, rangeY));
     offset = -Offset(minX + maxX, minY + maxY) / 2;
   }
+
+  late double scale;
+  late Offset offset;
+
+  @override
+  String toString() => '$scale, $offset';
 }

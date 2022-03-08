@@ -25,7 +25,7 @@ PanZoomNotifier getPanZoomNotifier(BuildContext context,
 /// For zooming and panning, with two fingers.
 /// Stores the global scale and pan offset.
 class PanZoomNotifier extends ChangeNotifier {
-  /// equates to the length of the side of each triangle in pixels
+  /// _scale equates to the length of the side of each triangle in pixels
   /// set by initZoomScale() to around 30
   double _scale = 0;
 
@@ -51,6 +51,7 @@ class PanZoomNotifier extends ChangeNotifier {
   }
 }
 
+/// Data only, set at the start of a drag.
 class InitialValues {
   late Offset focalPoint;
   late Offset offset;
@@ -58,6 +59,7 @@ class InitialValues {
   late double scale;
 }
 
+/// Called from [Gesturer] to scale and offset the page.
 class PanZoomer implements GestureHandler {
   final _initial = InitialValues();
 
