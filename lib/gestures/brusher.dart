@@ -52,8 +52,9 @@ class Brusher implements GestureHandler {
 
   @override
   void tapDown(Offset point, BuildContext context) {
-    getPaintingBank(context).startBrushing();
+    out('brusher.tapDown never called because it would occur when panZooming');
 
+    getPaintingBank(context).startBrushing();
     _replaceCube(point, context);
   }
 
