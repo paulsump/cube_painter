@@ -39,7 +39,7 @@ final Paint _paintCacheBR = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomRight,
     end: Alignment.topLeft,
-    colors: [topColor, bottomRightColor],
+    colors: [Hue.topColor, Hue.bottomRightColor],
   ).createShader(const Rect.fromLTRB(0.0, -0.5, 0.9, 1.0))
   ..style = PaintingStyle.fill;
 
@@ -47,7 +47,7 @@ final Paint _paintCacheBL = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
-    colors: [bottomLeftColor, topColor],
+    colors: [Hue.bottomLeftColor, Hue.topColor],
   ).createShader(const Rect.fromLTRB(-0.9, -0.5, 0.0, 1.0))
   ..style = PaintingStyle.fill;
 
@@ -55,6 +55,6 @@ final Paint _paintCacheT = Paint()
   ..shader = const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [wholeCubeTopTopColor, topColor],
+    colors: [Hue.wholeCubeTopTopColor, Hue.topColor],
   ).createShader(const Rect.fromLTRB(-0.9, -1.0, 0.9, 0.0))
   ..style = PaintingStyle.fill;

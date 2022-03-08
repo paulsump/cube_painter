@@ -30,9 +30,9 @@ class FlatHexagonButton extends StatelessWidget {
             fixedSize:
                 MaterialStateProperty.all(screenAdjustButtonSize(context)),
             backgroundColor:
-                MaterialStateProperty.all(paintingsMenuButtonsColor),
+                MaterialStateProperty.all(Hue.paintingsMenuButtonsColor),
             overlayColor:
-                MaterialStateColor.resolveWith((states) => buttonColor),
+                MaterialStateColor.resolveWith((states) => Hue.buttonColor),
           ),
         ),
       ),
@@ -62,7 +62,7 @@ class IconFlatHexagonButton extends StatelessWidget {
       tip: tip,
       child: Icon(
         icon,
-        color: onPressed != null ? enabledIconColor : disabledIconColor,
+        color: onPressed != null ? Hue.enabledIconColor : Hue.disabledIconColor,
         size: iconSize,
       ),
     );

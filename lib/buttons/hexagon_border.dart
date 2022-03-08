@@ -3,7 +3,7 @@ import 'package:cube_painter/hue.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-final _borderSide = BorderSide(width: 1.0, color: buttonBorderColor);
+final _borderSide = BorderSide(width: 1.0, color: Hue.buttonBorderColor);
 final hexagonBorderShape =
     MaterialStateProperty.all(HexagonBorder(side: _borderSide));
 

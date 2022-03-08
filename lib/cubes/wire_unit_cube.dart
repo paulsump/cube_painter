@@ -29,13 +29,13 @@ class _Painter extends CustomPainter {
 
 /// paint caches to speed up rendering
 final Paint _paintCacheBR = Paint()
-  ..color = wireBottomRightColor
+  ..color = Hue.wireBottomRightColor
   ..style = PaintingStyle.stroke;
 
 final Paint _paintCacheBL = Paint()
-  ..color = wireBottomLeftColor
+  ..color = Hue.wireBottomLeftColor
   ..style = PaintingStyle.stroke;
 
 final Paint _paintCacheT = Paint()
-  ..color = wireTopColor
+  ..color = Hue.wireTopColor
   ..style = PaintingStyle.stroke;

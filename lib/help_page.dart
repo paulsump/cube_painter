@@ -77,7 +77,7 @@ class _HelpPageState extends State<HelpPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: helpColor,
+      color: Hue.helpColor,
       child: SafeArea(
         left: false,
         child: PageView(
@@ -119,7 +119,7 @@ class _TipPage extends StatelessWidget {
     final assetImage = AssetImage('images/${tip.fileName}.png');
 
     final image = Container(
-      color: bottomLeftColor,
+      color: Hue.bottomLeftColor,
       child: Padding(
         padding: const EdgeInsets.all(4), // Border radius
         child: isPortrait(context)
@@ -134,7 +134,7 @@ class _TipPage extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: screenAdjust(0.06, context),
-            color: bottomRightColor,
+            color: Hue.bottomRightColor,
           )),
     );
 
@@ -143,7 +143,7 @@ class _TipPage extends StatelessWidget {
         text: '\n',
         style: TextStyle(
           fontSize: screenAdjust(0.04, context),
-          color: bottomRightColor,
+          color: Hue.bottomRightColor,
         ),
         children: tip.body,
       ),
@@ -172,11 +172,11 @@ class _TipPage extends StatelessWidget {
     );
 
     final text = Container(
-      color: bottomLeftColor,
+      color: Hue.bottomLeftColor,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Container(
-          color: tipColor,
+          color: Hue.tipColor,
           child: Padding(
             padding: const EdgeInsets.all(14), // Border radius
             child: Column(children: [
