@@ -194,12 +194,12 @@ class _TipPage extends StatelessWidget {
               buttonRow,
               Stack(children: [
                 Transform.translate(
-                  offset: (const Offset(-2.5, 2.5) + tip.portraitImageOffset) *
+                  offset: (const Offset(-2.5, 4.5) + tip.portraitImageOffset) *
                       screenAdjust(0.1, context),
                   child: image,
                 ),
                 Transform.translate(
-                  offset: (const Offset(2, 3) + tip.portraitTextOffset) *
+                  offset: (const Offset(2, 5) + tip.portraitTextOffset) *
                       screenAdjust(0.1, context),
                   child: text,
                 ),
