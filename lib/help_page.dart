@@ -34,32 +34,61 @@ const _emphasisStyle = TextStyle(
 class _Tip {
   final String fileName, title;
   final List<TextSpan> body;
+  final Offset imageOffset, textOffset;
 
-  const _Tip(this.fileName, this.title, this.body);
+  const _Tip(
+      this.fileName, this.title, this.body, this.imageOffset, this.textOffset);
 }
 
 const _tips = <_Tip>[
-  _Tip('oneFinger', 'Add cubes', <TextSpan>[
-    TextSpan(text: 'Drag with '),
-    TextSpan(text: 'one', style: _emphasisStyle),
-    TextSpan(text: ' finger.'),
-  ]),
-  _Tip('twoFinger', 'Pan and Zoom', <TextSpan>[
-    TextSpan(text: 'Drag with '),
-    TextSpan(text: 'two', style: _emphasisStyle),
-    TextSpan(text: ' fingers.'),
-  ]),
-  _Tip('eraseLine', 'Erase cubes', <TextSpan>[
-    TextSpan(
-        text: 'Drag the over the cube(s)\n'
-            'that you want to remove,\nthen release.')
-  ]),
-  _Tip('slicesMenu', 'Slices menu',
-      <TextSpan>[TextSpan(text: 'Pick a cube slice')]),
-  _Tip('placeSlice', 'Place a slice',
-      <TextSpan>[TextSpan(text: 'Drag the slice into position.')]),
-  _Tip('longPress', 'Button tips',
-      <TextSpan>[TextSpan(text: 'Press and hold a button.')]),
+  _Tip(
+      'oneFinger',
+      'Add cubes',
+      <TextSpan>[
+        TextSpan(text: 'Drag with '),
+        TextSpan(text: 'one', style: _emphasisStyle),
+        TextSpan(text: ' finger.'),
+      ],
+      Offset(2.5, -1.5),
+      Offset(-2.5, 2)),
+  _Tip(
+      'twoFinger',
+      'Pan and Zoom',
+      <TextSpan>[
+        TextSpan(text: 'Drag with '),
+        TextSpan(text: 'two', style: _emphasisStyle),
+        TextSpan(text: ' fingers.'),
+      ],
+      Offset(3.0, -1.0),
+      Offset(-2, 2)),
+  _Tip(
+      'eraseLine',
+      'Erase cubes',
+      <TextSpan>[
+        TextSpan(
+            text: 'Drag the over the cube(s)\n'
+                'that you want to remove,\nthen release.')
+      ],
+      Offset(3.0, -0.5),
+      Offset(-3, 1)),
+  _Tip(
+      'slicesMenu',
+      'Slices menu',
+      <TextSpan>[TextSpan(text: 'Pick a cube slice')],
+      Offset(1.0, -0.5),
+      Offset(-2.8, 2)),
+  _Tip(
+      'placeSlice',
+      'Place a slice',
+      <TextSpan>[TextSpan(text: 'Drag the slice\ninto position.')],
+      Offset(2.0, -0.5),
+      Offset(-2, 1.5)),
+  _Tip(
+      'longPress',
+      'Button tips',
+      <TextSpan>[TextSpan(text: 'Press and hold a button.')],
+      Offset(3.0, -0.5),
+      Offset(-2, 2)),
 ];
 
 /// Show a few little messages with an image to get them started.
@@ -184,7 +213,7 @@ class _TipPage extends StatelessWidget {
     );
 
     final text = Container(
-      color: bottomLeftColor.withOpacity(0.4),
+      color: bottomLeftColor,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Container(
@@ -212,16 +241,20 @@ class _TipPage extends StatelessWidget {
             ],
           )
         : Column(
-      children: [
-        buttonRow,
-        SizedBox(height: screenAdjust(0.03, context)),
-        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                SizedBox(width: screenAdjust(0.4, context)),
-                image,
-                SizedBox(width: screenAdjust(0.2, context)),
-                text,
+            children: [
+              buttonRow,
+              SizedBox(height: screenAdjust(0.03, context)),
+              Stack(children: [
+                Transform.translate(
+                  offset: tip.imageOffset * screenAdjust(0.1, context),
+                  child: image,
+                ),
+                Transform.translate(
+                  offset: tip.textOffset * screenAdjust(0.1, context),
+                  child: text,
+                ),
               ]),
-      ],
-    );
+            ],
+          );
   }
 }
