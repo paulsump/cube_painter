@@ -34,6 +34,8 @@ class Brusher implements GestureHandler {
 
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
+
+    setBrushStartPosition(brushMaths.startPosition, context);
   }
 
   @override
@@ -71,6 +73,8 @@ class Brusher implements GestureHandler {
     brushMaths.calcStartPosition(startUnit);
 
     final newPosition = brushMaths.startPosition;
+    setBrushStartPosition(newPosition, context);
+
     final animCubes = getAnimCubeInfos(context);
 
     if (animCubes.isEmpty) {

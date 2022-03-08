@@ -1,8 +1,10 @@
 import 'dart:collection';
 
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
+import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -37,13 +39,20 @@ class _Lines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final position = getBrushStartPosition(context, listen: true);
+
+    final startOffset = positionToUnitOffset(position);
+
     return UnitToScreen(
-      child: Transform.scale(
-        scale: 10,
-        child: Stack(
-          children: [
-            for (int i = 0; i < 3; ++i) _Line(offsets[i], offsets[i + 3]),
-          ],
+      child: Transform.translate(
+        offset: startOffset,
+        child: Transform.scale(
+          scale: 10,
+          child: Stack(
+            children: [
+              for (int i = 0; i < 3; ++i) _Line(offsets[i], offsets[i + 3]),
+            ],
+          ),
         ),
       ),
     );
