@@ -56,38 +56,17 @@ class Thumbnail extends StatelessWidget {
                     /// Note that this only animates the first cube.
                     /// That's all that's needed currently.
                     ? _StandAloneAnimatedCube(info: painting.cubeInfos[0])
-                    : _StaticCubes(
-                        painting: painting,
-                        wire: wire,
-                      )),
+                    : Stack(
+                        children: painting.cubeInfos
+                            .map((cubeInfo) => PositionedScaledCube(
+                                  info: cubeInfo,
+                                  wire: wire,
+                                  scale: 1.0,
+                                ))
+                            .toList())),
           )
         : Container();
   }
-}
-
-/// Draws a painting.
-/// Used in [Thumbnail] only
-class _StaticCubes extends StatelessWidget {
-
-  _StaticCubes({
-    Key? key,
-    required Painting painting,
-    required bool wire,
-  })  : _cubes = painting.cubeInfos
-            .map((cubeInfo) => PositionedScaledCube(
-                  info: cubeInfo,
-                  wire: wire,
-                  scale: 1.0,
-                ))
-            .toList(),
-        super(key: key);
-
-  final List<PositionedScaledCube> _cubes;
-
-  @override
-  Widget build(BuildContext context) => _cubes.isEmpty
-      ? Container(color: Colors.yellow)
-      : Stack(children: _cubes);
 }
 
 ///TODO FIX  const version is invisible
