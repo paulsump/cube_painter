@@ -12,9 +12,9 @@ const noWarn = out;
 /// A button with a sliced cube on it.
 /// For the [SlicesMenu].
 class SliceCubeButton extends StatelessWidget {
-  final Slice slice;
-
   const SliceCubeButton({Key? key, required this.slice}) : super(key: key);
+
+  final Slice slice;
 
   @override
   Widget build(BuildContext context) {

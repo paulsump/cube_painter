@@ -17,12 +17,6 @@ const noWarn = out;
 /// Used on the buttons on the [PaintingsMenu]
 /// 'Unit' means this thumbnail has size of 1
 class Thumbnail extends StatelessWidget {
-  final Painting painting;
-
-  final UnitTransform _unitTransform;
-  final bool isPingPong;
-  final bool wire;
-
   const Thumbnail({
     Key? key,
     required this.painting,
@@ -31,6 +25,12 @@ class Thumbnail extends StatelessWidget {
     this.wire = false,
   })  : _unitTransform = unitTransform,
         super(key: key);
+
+  final Painting painting;
+  final UnitTransform _unitTransform;
+
+  final bool isPingPong;
+  final bool wire;
 
   Thumbnail.useTransform({
     Key? key,
@@ -68,20 +68,21 @@ class Thumbnail extends StatelessWidget {
 /// Draws a painting.
 /// Used in [Thumbnail] only
 class _StaticCubes extends StatelessWidget {
-  final List<PositionedScaledCube> _cubes;
 
   _StaticCubes({
     Key? key,
     required Painting painting,
     required bool wire,
-  })  : _cubes = List.generate(
-            painting.cubeInfos.length,
-            (i) => PositionedScaledCube(
-                  info: painting.cubeInfos[i],
+  })  : _cubes = painting.cubeInfos
+            .map((cubeInfo) => PositionedScaledCube(
+                  info: cubeInfo,
                   wire: wire,
                   scale: 1.0,
-                )),
+                ))
+            .toList(),
         super(key: key);
+
+  final List<PositionedScaledCube> _cubes;
 
   @override
   Widget build(BuildContext context) => _cubes.isEmpty
