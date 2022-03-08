@@ -10,12 +10,11 @@ class Hue {
 
   static const _t = 0.4;
 
-  /// TODO CHANGE TO FINAL
-  static Color get wireBottomRightColor => _getTweenBLtoBRColor(_t);
+  static final Color wireBottomRightColor = _getTweenBLtoBRColor(_t);
 
-  static Color get wireBottomLeftColor => bottomLeftColor;
+  static final Color wireBottomLeftColor = bottomLeftColor;
 
-  static Color get wireTopColor => _getTweenBLtoTColor(_t);
+  static final Color wireTopColor = _getTweenBLtoTColor(_t);
 
   static const Color enabledIconColor = bottomRightColor;
   static const Color textColor = enabledIconColor;
@@ -36,8 +35,7 @@ class Hue {
 
   static final Color tipColor = _blt;
 
-//TODO MAKE static final colors
-  static Color get helpColor => _darkBLT.withOpacity(0.8);
+  static final Color helpColor = _darkBLT.withOpacity(0.8);
 
   static final Color _darkBLT = getTweenBLtoTColor(0.1);
 
@@ -59,9 +57,6 @@ Color _getTweenBLtoTColor(double t) =>
 //TODO REMOVE THIS ONE
 Color getTweenBLtoTColor(double t) =>
     Color.lerp(Hue.bottomLeftColor, Hue.topColor, t)!;
-
-Color getButtonColor(double t) =>
-    Color.lerp(Hue.backgroundColor, Hue.buttonColor, t)!;
 
 Color _getTweenTtoBRColor(double t) =>
     Color.lerp(Hue.topColor, Hue.bottomRightColor, t)!;
