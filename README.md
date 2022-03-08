@@ -17,7 +17,7 @@ A painting app, but the 'paint' is cubes.
   - A standalone Flutter app working on Android and iOS using Provider.  
   - StatelessWidgets wherever possible.
 
-## Main classes
+### Main classes
 
 - The main page is PainterPage.  This contains all the widgets that are draw.
 - The Brusher draws AnimatedCubes while you drag a line of cubes.
@@ -25,23 +25,27 @@ A painting app, but the 'paint' is cubes.
 - The Persister saves the Position of each cube in a list of CubeInfos in the Painting class.
 - Animator and Persister are mixins for the Paintings Provider.
 
-## Additional Dependencies
-- provider
-- path_provider.
-
-## Tests
-- All the mathematical functions have tests.
-- There are no widget tests per se.
-
-## Persistence
-
-Local files are persisted with jsonEncode & jsonDecode.
-
-## Hexagon Buttons
+### Hexagon Buttons
 ElevatedButton and TextButton ButtonStyle.shape is set to my HexagonBorder which extends OutlinedBorder in a similar way to CircleBorder.
 
 
-## Flutter Widgets used
+### Tests
+- All the mathematical functions have tests.
+- All the persisted classes have json tests.
+- There are no widget tests per se.
+
+
+## Dependencies
+
+### Added Packages
+- provider
+- path_provider.
+
+### Persistence
+
+Local files are persisted with jsonEncode & jsonDecode.
+
+### Flutter Widgets used
 Stack
 Transform
 StatelessWidget
@@ -67,7 +71,7 @@ ListView
 Center
 Text
 
-## Other Flutter classes used
+### Other Flutter classes used
 ThemeData
 BoxDecoration
 TooltipThemeData
