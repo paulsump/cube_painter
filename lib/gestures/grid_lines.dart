@@ -1,4 +1,6 @@
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/persisted/animator.dart';
+import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,34 +17,42 @@ class GridLines extends StatelessWidget {
   Widget build(BuildContext context) {
     final offsets = getHexagonCornerOffsets();
 
-    return UnitToScreen(
-      child: Stack(
-        children: [
-          for (int i = 0; i < 3; ++i) Line(offsets[i], offsets[i + 3]),
-        ],
-      ),
-    );
+    final paintingBank = getPaintingBank(context, listen: true);
+
+    return CubeAnimState.brushing == paintingBank.cubeAnimState
+        ? UnitToScreen(
+            child: Transform.scale(
+              scale: 10,
+              child: Stack(
+                children: [
+                  for (int i = 0; i < 3; ++i) _Line(offsets[i], offsets[i + 3]),
+                ],
+              ),
+            ),
+          )
+        : Container();
   }
 }
 
-class Line extends StatelessWidget {
+class _Line extends StatelessWidget {
   final Color color;
 
   final Offset from;
   final Offset to;
 
-  const Line(this.from,
-      this.to, {
-        Key? key,
-        this.color = Colors.blue,
-      }) : super(key: key);
+  const _Line(
+    this.from,
+    this.to, {
+    Key? key,
+    this.color = Colors.blue,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>
       CustomPaint(painter: _Painter(from, to, color));
 }
 
-/// the painter for [Line]
+/// the painter for [_Line]
 class _Painter extends CustomPainter {
   final Color color;
 
