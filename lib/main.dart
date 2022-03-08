@@ -92,7 +92,7 @@ class CubePainterApp extends StatelessWidget {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Hue.button,
+        primary: Hue.button,
       )),
     );
   }

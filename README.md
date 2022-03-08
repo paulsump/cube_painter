@@ -37,7 +37,8 @@ ElevatedButton and TextButton ButtonStyle.shape is set to my HexagonBorder which
 
 ## Dependencies
 
-### Added Packages
+### Packages
+
 - provider
 - path_provider.
 
@@ -45,53 +46,24 @@ ElevatedButton and TextButton ButtonStyle.shape is set to my HexagonBorder which
 
 Local files are persisted with jsonEncode & jsonDecode.
 
-### Flutter Widgets used
-Stack
-Transform
-StatelessWidget
-Tooltip
-SizedBox
-ElevatedButton
-Column
-Row
-Container
-Icon
-Scaffold
-Drawer
-TextButton
-StatefulWidget
-CustomPainter
-AlertDialog
-SafeArea
-LayoutBuilder
-MaterialApp
-WillPopScope
-Divider
-ListView
-Center
-Text
+### Flutter Widgets
 
-### Other Flutter classes used
+StatelessWidget StatefulWidget Stack Transform Tooltip SizedBox ElevatedButton TextButton Row Column
+Container Icon Scaffold Drawer CustomPaint AlertDialog SafeArea LayoutBuilder MaterialApp
+WillPopScope Divider ListView Center Text RichText Provider Align Navigator AnimatedBuilder
+SingleTickerProviderStateMixin State BackdropFilter Padding
+
+### Other Flutter classes
 ThemeData
 BoxDecoration
 TooltipThemeData
 Clipboard
-RichText
 ChangeNotifierProvider
 Offset
-ButtonStyle
-IconData
-HexagonBorder extends OutlinedBorder
-MaterialStateProperty
+ButtonStyle IconData OutlinedBorder MaterialStateProperty
 ShapeBorder
 Path
-Provider
 List
-Align
-Navigator
-AnimatedBuilder
-SingleTickerProviderStateMixin
-State
 AnimationController
 Duration
 Paint
@@ -100,6 +72,4 @@ LinearGradient
 UnmodifiableListView
 ChangeNotifier
 BuildContext
-BackdropFilter
-Padding
 
