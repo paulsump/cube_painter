@@ -25,7 +25,7 @@ A painting app, but the 'paint' is cubes.
 - The Persister saves the Position of each cube in a list of CubeInfos in the Painting class.
 - Animator and Persister are mixins for the Paintings Provider.
 
-## Packages used
+## Additional Dependencies
 - provider
 - path_provider.
 
