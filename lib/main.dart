@@ -12,6 +12,14 @@ import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// ## Main classes
+///
+/// - The main page is PainterPage.  This contains all the widgets that are draw.
+/// - The Brusher draws AnimatedCubes while you drag a line of cubes.
+/// - The Animator turns them into DoneCubes when you've finished dragging a line of cubes.
+/// - The Persister saves the Position of each cube in a list of CubeInfos in the Painting class.
+/// - Animator and Persister are mixins for the Paintings Provider.
+
 /// prevent 'organise imports' from removing imports
 /// when temporarily commenting out.
 const noWarn = out;

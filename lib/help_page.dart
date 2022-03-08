@@ -14,6 +14,7 @@ void setShowHelp(bool show, BuildContext context) =>
 HelpNotifier getHelpNotifier(BuildContext context, {required bool listen}) =>
     Provider.of<HelpNotifier>(context, listen: listen);
 
+/// To show or hide the help page.
 class HelpNotifier extends ChangeNotifier {
   bool _show = false;
 
