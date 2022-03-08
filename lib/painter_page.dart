@@ -21,7 +21,7 @@ const noWarn = [out];
 /// While brushing (adding cubes)
 /// or loading a [Painting] from the [PaintingsMenu]
 /// [_AnimatedCubes] will animate.
-/// When brushing or loading is done,
+/// When brushing or loading has finished,
 /// [StaticCubes] show the full contents of the [Painting].
 class PainterPage extends StatelessWidget {
   const PainterPage({Key? key}) : super(key: key);

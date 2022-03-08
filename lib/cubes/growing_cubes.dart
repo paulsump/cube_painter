@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
-/// Used when growing the cubes up to there done size.
+/// Used when growing the cubes up to there static size.
 /// The cubes are moved to [StaticCubes] either externally
 /// via [finishAnim] or [whenComplete] after the animation is finished.
 class GrowingCubes extends StatefulWidget {
