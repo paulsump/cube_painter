@@ -30,9 +30,9 @@ class _Painter extends CustomPainter {
   bool shouldRepaint(_Painter oldDelegate) => false;
 }
 
-final _pathBR = Path()..addPolygon(bottomRightSide, true);
-final _pathBL = Path()..addPolygon(bottomLeftSide, true);
-final _pathT = Path()..addPolygon(topSide, true);
+final _pathBR = Path()..addPolygon(bottomRightSideOffsets, true);
+final _pathBL = Path()..addPolygon(bottomLeftSideOffsets, true);
+final _pathT = Path()..addPolygon(topSideOffsets, true);
 
 /// paint caches to speed up rendering
 final Paint _paintCacheBR = Paint()

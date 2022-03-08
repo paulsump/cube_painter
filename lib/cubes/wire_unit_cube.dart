@@ -16,9 +16,11 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPath(Path()..addPolygon(bottomRightSide, true), _paintCacheBR);
-    canvas.drawPath(Path()..addPolygon(bottomLeftSide, true), _paintCacheBL);
-    canvas.drawPath(Path()..addPolygon(topSide, true), _paintCacheT);
+    canvas.drawPath(
+        Path()..addPolygon(bottomRightSideOffsets, true), _paintCacheBR);
+    canvas.drawPath(
+        Path()..addPolygon(bottomLeftSideOffsets, true), _paintCacheBL);
+    canvas.drawPath(Path()..addPolygon(topSideOffsets, true), _paintCacheT);
   }
 
   @override

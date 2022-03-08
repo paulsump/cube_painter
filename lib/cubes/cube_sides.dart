@@ -15,11 +15,10 @@ enum Side { top, bottomLeft, bottomRight }
 /// Paint and path for painting a side of a cube.
 /// TODO Optimise this away with caches, by replacing getColor()
 class CubeSide {
-  final Side side;
-
-  final Path path;
-
   const CubeSide({required this.side, required this.path});
+
+  final Side side;
+  final Path path;
 
   Paint getPaint(PaintingStyle style) => Paint()
     ..color = getColor(side)
@@ -57,9 +56,9 @@ LinearGradient _getGradient(Side side) {
 }
 
 //TODO inline these, making more consts
-// either that or rename them
 const double _dt = 0.2;
 const double _t = 0.8;
+
 final _gradientT = LinearGradient(
   colors: [getTweenBLtoTColor(_t - _dt), getTweenBLtoTColor(_t + _dt)],
   begin: Alignment.topCenter,
@@ -92,6 +91,7 @@ UnmodifiableListView<CubeSide> getCubeSides(Slice slice) {
   );
 }
 
+/// Cube corners
 const _corners = <Position>[
   Position.zero, // c center
   // anti clockwise from top right
@@ -125,21 +125,21 @@ Path calcHexagonPath(Offset center, double radius) {
         true);
 }
 
-const topSide = [
+const topSideOffsets = [
   Offset(0, 0.0),
   Offset(-root3over2, -0.5),
   Offset(0, -1.0),
   Offset(root3over2, -0.5),
 ];
 
-const bottomLeftSide = [
+const bottomLeftSideOffsets = [
   Offset(0, 0.0),
   Offset(0, 1.0),
   Offset(-root3over2, 0.5),
   Offset(-root3over2, -0.5),
 ];
 
-const bottomRightSide = [
+const bottomRightSideOffsets = [
   Offset(0, 0.0),
   Offset(root3over2, -0.5),
   Offset(root3over2, 0.5),

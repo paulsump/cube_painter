@@ -150,14 +150,16 @@ void main() {
       final sidesAndUnitOffsets = getCubeSidesAndUnitOffsets(Slice.whole);
 
       expect(Side.bottomLeft, equals(sidesAndUnitOffsets[0][0]));
-      expect(equalsOffsetList(sidesAndUnitOffsets[0][1], bottomLeftSide), true);
+      expect(equalsOffsetList(sidesAndUnitOffsets[0][1], bottomLeftSideOffsets),
+          true);
 
       expect(Side.top, equals(sidesAndUnitOffsets[1][0]));
-      expect(equalsOffsetList(sidesAndUnitOffsets[1][1], topSide), true);
+      expect(equalsOffsetList(sidesAndUnitOffsets[1][1], topSideOffsets), true);
 
       expect(Side.bottomRight, equals(sidesAndUnitOffsets[2][0]));
       expect(
-          equalsOffsetList(sidesAndUnitOffsets[2][1], bottomRightSide), true);
+          equalsOffsetList(sidesAndUnitOffsets[2][1], bottomRightSideOffsets),
+          true);
     });
 
     test('r', () {
