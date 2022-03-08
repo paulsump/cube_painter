@@ -48,74 +48,6 @@ class _Tip {
   });
 }
 
-const _tips = <_Tip>[
-  _Tip(
-    fileName: 'oneFinger',
-    title: 'Add cubes',
-    body: <TextSpan>[
-      TextSpan(text: 'Drag with '),
-      TextSpan(text: 'one', style: _emphasisStyle),
-      TextSpan(text: ' finger.'),
-    ],
-    landscapeImageOffset: Offset(2.5, -1.5),
-    landscapeTextOffset: Offset(-2.5, 2),
-    portraitImageOffset: Offset(0.5, 2.5),
-    portraitTextOffset: Offset(-2.5, 2),
-  ),
-  _Tip(
-    fileName: 'twoFinger',
-    title: 'Pan and Zoom',
-    body: <TextSpan>[
-      TextSpan(text: 'Drag with '),
-      TextSpan(text: 'two', style: _emphasisStyle),
-      TextSpan(text: ' fingers.'),
-    ],
-    landscapeImageOffset: Offset(3.0, -1.0),
-    landscapeTextOffset: Offset(-2, 2),
-    portraitImageOffset: Offset(3.0, -1.0),
-    portraitTextOffset: Offset(-2, 2),
-  ),
-  _Tip(
-    fileName: 'eraseLine',
-    title: 'Erase cubes',
-    body: <TextSpan>[
-      TextSpan(
-          text: 'Drag the over the cube(s)\n'
-              'that you want to remove,\nthen release.')
-    ],
-    landscapeImageOffset: Offset(3.0, -0.5),
-    landscapeTextOffset: Offset(-3, 1),
-    portraitImageOffset: Offset(3.0, -0.5),
-    portraitTextOffset: Offset(-3, 1),
-  ),
-  _Tip(
-    fileName: 'slicesMenu',
-    title: 'Slices menu',
-    body: <TextSpan>[TextSpan(text: 'Pick a cube slice')],
-    landscapeImageOffset: Offset(1.0, -0.5),
-    landscapeTextOffset: Offset(-2.8, 2),
-    portraitImageOffset: Offset(1.0, -0.5),
-    portraitTextOffset: Offset(-2.8, 2),
-  ),
-  _Tip(
-    fileName: 'placeSlice',
-    title: 'Place a slice',
-    body: <TextSpan>[TextSpan(text: 'Drag the slice\ninto position.')],
-    landscapeImageOffset: Offset(2.0, -0.5),
-    landscapeTextOffset: Offset(-2, 1.5),
-    portraitImageOffset: Offset(2.0, -0.5),
-    portraitTextOffset: Offset(-2, 1.5),
-  ),
-  _Tip(
-    fileName: 'longPress',
-    title: 'Button tips',
-    body: <TextSpan>[TextSpan(text: 'Press and hold a button.')],
-    landscapeImageOffset: Offset(3.0, -0.5),
-    landscapeTextOffset: Offset(-2, 2),
-    portraitImageOffset: Offset(3.0, -0.5),
-    portraitTextOffset: Offset(-2, 2),
-  ),
-];
 
 /// Show a few little messages with an image to get them started.
 class HelpPage extends StatefulWidget {
@@ -291,3 +223,72 @@ class _TipPage extends StatelessWidget {
           );
   }
 }
+
+const _tips = <_Tip>[
+  _Tip(
+    fileName: 'oneFinger',
+    title: 'Add cubes',
+    body: <TextSpan>[
+      TextSpan(text: 'Drag with '),
+      TextSpan(text: 'one', style: _emphasisStyle),
+      TextSpan(text: ' finger.'),
+    ],
+    landscapeImageOffset: Offset(2.5, -1.5),
+    landscapeTextOffset: Offset(-2.5, 2),
+    portraitImageOffset: Offset(0.5, 2.5),
+    portraitTextOffset: Offset(-2.5, 2),
+  ),
+  _Tip(
+    fileName: 'twoFinger',
+    title: 'Pan and Zoom',
+    body: <TextSpan>[
+      TextSpan(text: 'Drag with '),
+      TextSpan(text: 'two', style: _emphasisStyle),
+      TextSpan(text: ' fingers.'),
+    ],
+    landscapeImageOffset: Offset(3.0, -1.0),
+    landscapeTextOffset: Offset(-2, 2),
+    portraitImageOffset: Offset(3.0, -1.0),
+    portraitTextOffset: Offset(-2, 2),
+  ),
+  _Tip(
+    fileName: 'eraseLine',
+    title: 'Erase cubes',
+    body: <TextSpan>[
+      TextSpan(
+          text: 'Drag the over the cube(s)\n'
+              'that you want to remove,\nthen release.')
+    ],
+    landscapeImageOffset: Offset(3.0, -0.5),
+    landscapeTextOffset: Offset(-3, 1),
+    portraitImageOffset: Offset(3.0, -0.5),
+    portraitTextOffset: Offset(-3, 1),
+  ),
+  _Tip(
+    fileName: 'slicesMenu',
+    title: 'Slices menu',
+    body: <TextSpan>[TextSpan(text: 'Pick a cube slice')],
+    landscapeImageOffset: Offset(1.0, -0.5),
+    landscapeTextOffset: Offset(-2.8, 2),
+    portraitImageOffset: Offset(1.0, -0.5),
+    portraitTextOffset: Offset(-2.8, 2),
+  ),
+  _Tip(
+    fileName: 'placeSlice',
+    title: 'Place a slice',
+    body: <TextSpan>[TextSpan(text: 'Drag the slice\ninto position.')],
+    landscapeImageOffset: Offset(2.0, -0.5),
+    landscapeTextOffset: Offset(-2, 1.5),
+    portraitImageOffset: Offset(2.0, -0.5),
+    portraitTextOffset: Offset(-2, 1.5),
+  ),
+  _Tip(
+    fileName: 'longPress',
+    title: 'Button tips',
+    body: <TextSpan>[TextSpan(text: 'Press and hold a button.')],
+    landscapeImageOffset: Offset(3.0, -0.5),
+    landscapeTextOffset: Offset(-2, 2),
+    portraitImageOffset: Offset(3.0, -0.5),
+    portraitTextOffset: Offset(-2, 2),
+  ),
+];
