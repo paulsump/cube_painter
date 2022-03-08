@@ -12,9 +12,8 @@ const noWarn = out;
 /// from the drag start position,
 /// to show the six directions
 /// where the drag will end up.
-/// TODO rename to GridGuideLines
-class GridLines extends StatelessWidget {
-  const GridLines({Key? key}) : super(key: key);
+class HelperLines extends StatelessWidget {
+  const HelperLines({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

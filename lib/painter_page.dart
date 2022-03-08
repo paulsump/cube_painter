@@ -4,7 +4,7 @@ import 'package:cube_painter/cubes/brush_cubes.dart';
 import 'package:cube_painter/cubes/done_cubes.dart';
 import 'package:cube_painter/cubes/growing_cubes.dart';
 import 'package:cube_painter/gestures/gesturer.dart';
-import 'package:cube_painter/gestures/grid_lines.dart';
+import 'package:cube_painter/gestures/helper_lines.dart';
 import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/paintings_menu.dart';
@@ -40,7 +40,7 @@ class PainterPage extends StatelessWidget {
           child: Stack(children: const [
             Horizon(),
             DoneCubes(),
-            GridLines(),
+            HelperLines(),
             _AnimatingCubes(),
             Gesturer(),
             PageButtons(),
