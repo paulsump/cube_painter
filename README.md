@@ -29,7 +29,16 @@ A painting app, but the 'paint' is cubes.
 
 #### buttons/
 
+All buttons are hexagon shaped to match the angles of the isometric grid.  There have Icons, AssetIcons (downloaded from fluttericon.com), Cubes and Thumbnails of Paintings.
+
+##### Hexagon Buttons
+
+ElevatedButton and TextButton ButtonStyle.shape is set to my HexagonBorder which extends
+OutlinedBorder in a similar way to CircleBorder.
+
 #### cubes/
+
+There are StaticCubes and animated cubes (BrushCubes and GrowingCubes).  Their appearance can be WholeUnitCube, SliceUnitCube or WireUnitCube.
 
 #### gestures/
 
@@ -50,11 +59,6 @@ These classes transform positions between them. Position is in a skewed grid spa
 isometric grid to be saved in x, y integer Positions. The UnitOffset comes out of the grid space
 into normal cartesian coordinates, but without the PanZoom scale and offset factored in. The screen
 space is the unit offset transformed by the PanZoom scale and offset.
-
-### Hexagon Buttons
-
-ElevatedButton and TextButton ButtonStyle.shape is set to my HexagonBorder which extends
-OutlinedBorder in a similar way to CircleBorder.
 
 ### Tests
 
