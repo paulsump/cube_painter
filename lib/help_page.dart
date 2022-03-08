@@ -37,58 +37,68 @@ class _Tip {
   final Offset imageOffset, textOffset;
 
   const _Tip(
-      this.fileName, this.title, this.body, this.imageOffset, this.textOffset);
+      {required this.fileName,
+      required this.title,
+      required this.body,
+      required this.imageOffset,
+      required this.textOffset});
 }
 
 const _tips = <_Tip>[
   _Tip(
-      'oneFinger',
-      'Add cubes',
-      <TextSpan>[
-        TextSpan(text: 'Drag with '),
-        TextSpan(text: 'one', style: _emphasisStyle),
-        TextSpan(text: ' finger.'),
-      ],
-      Offset(2.5, -1.5),
-      Offset(-2.5, 2)),
+    fileName: 'oneFinger',
+    title: 'Add cubes',
+    body: <TextSpan>[
+      TextSpan(text: 'Drag with '),
+      TextSpan(text: 'one', style: _emphasisStyle),
+      TextSpan(text: ' finger.'),
+    ],
+    imageOffset: Offset(2.5, -1.5),
+    textOffset: Offset(-2.5, 2),
+  ),
   _Tip(
-      'twoFinger',
-      'Pan and Zoom',
-      <TextSpan>[
-        TextSpan(text: 'Drag with '),
-        TextSpan(text: 'two', style: _emphasisStyle),
-        TextSpan(text: ' fingers.'),
-      ],
-      Offset(3.0, -1.0),
-      Offset(-2, 2)),
+    fileName: 'twoFinger',
+    title: 'Pan and Zoom',
+    body: <TextSpan>[
+      TextSpan(text: 'Drag with '),
+      TextSpan(text: 'two', style: _emphasisStyle),
+      TextSpan(text: ' fingers.'),
+    ],
+    imageOffset: Offset(3.0, -1.0),
+    textOffset: Offset(-2, 2),
+  ),
   _Tip(
-      'eraseLine',
-      'Erase cubes',
-      <TextSpan>[
-        TextSpan(
-            text: 'Drag the over the cube(s)\n'
-                'that you want to remove,\nthen release.')
-      ],
-      Offset(3.0, -0.5),
-      Offset(-3, 1)),
+    fileName: 'eraseLine',
+    title: 'Erase cubes',
+    body: <TextSpan>[
+      TextSpan(
+          text: 'Drag the over the cube(s)\n'
+              'that you want to remove,\nthen release.')
+    ],
+    imageOffset: Offset(3.0, -0.5),
+    textOffset: Offset(-3, 1),
+  ),
   _Tip(
-      'slicesMenu',
-      'Slices menu',
-      <TextSpan>[TextSpan(text: 'Pick a cube slice')],
-      Offset(1.0, -0.5),
-      Offset(-2.8, 2)),
+    fileName: 'slicesMenu',
+    title: 'Slices menu',
+    body: <TextSpan>[TextSpan(text: 'Pick a cube slice')],
+    imageOffset: Offset(1.0, -0.5),
+    textOffset: Offset(-2.8, 2),
+  ),
   _Tip(
-      'placeSlice',
-      'Place a slice',
-      <TextSpan>[TextSpan(text: 'Drag the slice\ninto position.')],
-      Offset(2.0, -0.5),
-      Offset(-2, 1.5)),
+    fileName: 'placeSlice',
+    title: 'Place a slice',
+    body: <TextSpan>[TextSpan(text: 'Drag the slice\ninto position.')],
+    imageOffset: Offset(2.0, -0.5),
+    textOffset: Offset(-2, 1.5),
+  ),
   _Tip(
-      'longPress',
-      'Button tips',
-      <TextSpan>[TextSpan(text: 'Press and hold a button.')],
-      Offset(3.0, -0.5),
-      Offset(-2, 2)),
+    fileName: 'longPress',
+    title: 'Button tips',
+    body: <TextSpan>[TextSpan(text: 'Press and hold a button.')],
+    imageOffset: Offset(3.0, -0.5),
+    textOffset: Offset(-2, 2),
+  ),
 ];
 
 /// Show a few little messages with an image to get them started.
@@ -234,10 +244,16 @@ class _TipPage extends StatelessWidget {
         ? Column(
             children: [
               buttonRow,
-              SizedBox(height: screenAdjust(0.3, context)),
-              image,
-              SizedBox(height: screenAdjust(0.1, context)),
-              text,
+              Stack(children: [
+                Transform.translate(
+                  offset: tip.imageOffset * screenAdjust(0.1, context),
+                  child: image,
+                ),
+                Transform.translate(
+                  offset: tip.textOffset * screenAdjust(0.1, context),
+                  child: text,
+                ),
+              ]),
             ],
           )
         : Column(
