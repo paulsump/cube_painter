@@ -149,7 +149,7 @@ class _TipPage extends StatelessWidget {
       ),
     );
 
-    final doneButton = IconFlatHexagonButton(
+    final closeButton = IconFlatHexagonButton(
       onPressed: () => setShowHelp(false, context),
       icon: AssetIcons.cancelOutline,
       iconSize: screenAdjustAssetIconSize(context),
@@ -166,7 +166,7 @@ class _TipPage extends StatelessWidget {
     final buttonRow = Row(
       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        doneButton,
+        closeButton,
         forwardButton,
       ],
     );

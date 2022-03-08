@@ -18,9 +18,9 @@ enum CubeAnimState {
 
   /// In this mode the cube may be settling to it's
   /// proper size after being created with a brush,
-  /// or it may just be done,
+  /// or it may just be static,
   /// stationary at full size.
-  growingOrDone
+  growingOrStatic
 }
 
 /// Manages the starting and stopping of cube animation
@@ -28,7 +28,7 @@ enum CubeAnimState {
 mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
-  CubeAnimState cubeAnimState = CubeAnimState.growingOrDone;
+  CubeAnimState cubeAnimState = CubeAnimState.growingOrStatic;
 
   /// defined in [Persister]
   Painting get painting;
@@ -69,7 +69,7 @@ mixin Animator {
         notify();
         break;
 
-      case CubeAnimState.growingOrDone:
+      case CubeAnimState.growingOrStatic:
 
         /// If the animCubeInfos are newly brushed,
         /// then now they have finished growing so
