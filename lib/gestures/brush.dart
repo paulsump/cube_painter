@@ -1,5 +1,7 @@
+import 'package:cube_painter/gestures/brush_maths.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/slice.dart';
+import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -11,12 +13,15 @@ Brush getBrush(BuildContext context, {bool listen = false}) =>
 void setBrush(Brush mode, BuildContext context) =>
     Provider.of<BrushNotifier>(context, listen: false).setBrush(mode);
 
-Position getBrushStartPosition(BuildContext context, {bool listen = false}) =>
-    Provider.of<BrushNotifier>(context, listen: listen).startPosition;
+void setHelperLinesOrigin(Offset point, BuildContext context) {
+  final Offset startUnit = screenToUnit(point, context);
 
-void setBrushStartPosition(Position position, BuildContext context) =>
-    Provider.of<BrushNotifier>(context, listen: false)
-        .setStartPosition(position);
+  final brushMaths = BrushMaths();
+  brushMaths.calcStartPosition(startUnit);
+
+  Provider.of<BrushNotifier>(context, listen: false)
+      .setStartPosition(brushMaths.startPosition);
+}
 
 BrushNotifier getBrushNotifier(BuildContext context, {bool listen = false}) =>
     Provider.of<BrushNotifier>(context, listen: listen);

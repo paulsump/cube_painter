@@ -1,3 +1,4 @@
+import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/brusher.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
@@ -69,14 +70,12 @@ class GesturerState extends State<Gesturer> {
 
         gestureHandler = panZoomer;
         tapPoint = details.localPosition;
-
-        // for gridlines only
-        brusher.tapDown(tapPoint, context);
       },
       onTapUp: (details) {
         tapped = false;
 
         gestureHandler.tapUp(details.localPosition, context);
+        setHelperLinesOrigin(details.localPosition, context);
       },
     );
   }

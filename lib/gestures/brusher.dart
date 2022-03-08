@@ -49,13 +49,7 @@ class Brusher implements GestureHandler {
   void end(BuildContext context) => _finish(context);
 
   @override
-  void tapDown(Offset point, BuildContext context) {
-    // for gridlines only
-    final Offset startUnit = screenToUnit(point, context);
-
-    brushMaths.calcStartPosition(startUnit);
-    setBrushStartPosition(brushMaths.startPosition, context);
-  }
+  void tapDown(Offset point, BuildContext context) {}
 
   @override
   void tapUp(Offset point, BuildContext context) => _finish(context);
