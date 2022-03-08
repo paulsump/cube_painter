@@ -13,7 +13,8 @@ import 'package:provider/provider.dart';
 
 const noWarn = [out];
 
-/// Just a container for all the button on the main [PainterPage].
+/// A container for all the buttons on the main [PainterPage].
+///
 /// Organised using [Column]s and [Row]s
 class PageButtons extends StatelessWidget {
   const PageButtons({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class PageButtons extends StatelessWidget {
               children: [
                 const _OpenPaintingsMenuButton(),
                 (undoer.canUndo || undoer.canRedo)
-                    ? const _UndoButton()
+                    ? const _UndoButton(isRedo: false)
                     : const _HelpButton(),
                 const _UndoButton(isRedo: true),
               ],
@@ -73,7 +74,7 @@ class PageButtons extends StatelessWidget {
   }
 }
 
-/// Pressing this button opens up the [Drawer] for the
+/// Pressing this [ElevatedHexagonButton] opens up the [Drawer] for the
 /// [PaintingsMenu] (the file menu).
 class _OpenPaintingsMenuButton extends StatelessWidget {
   const _OpenPaintingsMenuButton({Key? key}) : super(key: key);
@@ -93,15 +94,13 @@ class _OpenPaintingsMenuButton extends StatelessWidget {
 }
 
 /// An undo or a redo button.
+///
 /// Pressing it will undo the previous action.
 /// The redo button appears only if undo was pressed.
 class _UndoButton extends StatelessWidget {
-  final bool isRedo;
+  const _UndoButton({Key? key, required this.isRedo}) : super(key: key);
 
-  const _UndoButton({
-    Key? key,
-    this.isRedo = false,
-  }) : super(key: key);
+  final bool isRedo;
 
   @override
   Widget build(BuildContext context) {
@@ -115,20 +114,20 @@ class _UndoButton extends StatelessWidget {
 
     return wantShow
         ? ElevatedHexagonButton(
-            child: Icon(
-              isRedo ? Icons.redo_sharp : Icons.undo_sharp,
-              size: screenAdjustNormalIconSize(context),
-              color: enabled ? enabledIconColor : disabledIconColor,
-            ),
-            onPressed: enabled
-                ? isRedo
-                    ? () => undoer.redo(context)
-                    : () => undoer.undo(context)
-                : null,
-            tip: isRedo
-                ? 'Redo the last add or delete that was undone.'
-                : 'Undo the last add or delete.',
-          )
+      child: Icon(
+        isRedo ? Icons.redo_sharp : Icons.undo_sharp,
+        size: screenAdjustNormalIconSize(context),
+        color: enabled ? enabledIconColor : disabledIconColor,
+      ),
+      onPressed: enabled
+          ? isRedo
+          ? () => undoer.redo(context)
+          : () => undoer.undo(context)
+          : null,
+      tip: isRedo
+          ? 'Redo the last add or delete that was undone.'
+          : 'Undo the last add or delete.',
+    )
         : Container();
   }
 }
@@ -151,6 +150,7 @@ class _HelpButton extends StatelessWidget {
   }
 }
 
+/// Opens the right hand [Drawer]
 class _OpenSliceMenuButton extends StatelessWidget {
   const _OpenSliceMenuButton({Key? key}) : super(key: key);
 

@@ -3,18 +3,18 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
-/// Transparent flat hexagon shaped button.
+/// Transparent flat hexagon shaped [TextButton] (without text).
 class FlatHexagonButton extends StatelessWidget {
-  final VoidCallback? onPressed;
-  final String tip;
-  final Widget child;
-
   const FlatHexagonButton({
     Key? key,
     this.onPressed,
     required this.tip,
     required this.child,
   }) : super(key: key);
+
+  final VoidCallback? onPressed;
+  final String tip;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class FlatHexagonButton extends StatelessWidget {
   }
 }
 
-/// Transparent flat hexagon shaped button with an icon.
+/// A [FlatHexagonButton] with an icon.
 class IconFlatHexagonButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String tip;

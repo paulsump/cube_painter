@@ -3,18 +3,11 @@ import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
-/// A hexagon shaped button with a drop shadow.
+/// A hexagon shaped [ElevatedButton] (with a drop shadow).
+///
+/// The underlying class for radio and push buttons.
+/// Raised with a shadow, as opposed to the flat [HexagonBorderButton].
 class ElevatedHexagonButton extends StatelessWidget {
-  final VoidCallback? onPressed;
-
-  final Widget child;
-
-  bool get isOn => isRadioOn ?? false;
-  final bool? isRadioOn;
-  final String tip;
-
-  /// The underlying class for radio and push buttons.
-  /// Raised with a shadow, as opposed to the flat [HexagonBorderButton].
   const ElevatedHexagonButton({
     Key? key,
     required this.child,
@@ -22,6 +15,14 @@ class ElevatedHexagonButton extends StatelessWidget {
     required this.tip,
     this.isRadioOn,
   }) : super(key: key);
+
+  final VoidCallback? onPressed;
+  final Widget child;
+
+  bool get isOn => isRadioOn ?? false;
+  final bool? isRadioOn;
+
+  final String tip;
 
   @override
   Widget build(BuildContext context) {
