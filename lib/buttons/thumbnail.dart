@@ -70,29 +70,19 @@ class Thumbnail extends StatelessWidget {
 /// Unit cube or slice that animates itself based the fields passed in.
 /// Used on the [_SlicesExamplePainting] only now that I have [GrowingCubes] and [BrushCubes]
 class _StandAloneAnimatedCube extends StatefulWidget {
-  final CubeInfo info;
-
-  final double start;
-  final double end;
-
-  final bool isPingPong;
-  final int milliseconds;
-
-  final Widget _unitCube;
-  final Offset _offset;
-
   _StandAloneAnimatedCube({
     Key? key,
     required this.info,
-    this.start = 0.0,
-    this.end = 1.0,
-    this.isPingPong = true,
-    this.milliseconds = 3000,
   })  : _unitCube = info.slice == Slice.whole
             ? const WholeUnitCube()
             : SliceUnitCube(slice: info.slice),
         _offset = positionToUnitOffset(info.center),
         super(key: key);
+
+  final CubeInfo info;
+
+  final Widget _unitCube;
+  final Offset _offset;
 
   @override
   _StandAloneAnimatedCubeState createState() => _StandAloneAnimatedCubeState();
@@ -105,17 +95,9 @@ class _StandAloneAnimatedCubeState extends State<_StandAloneAnimatedCube>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: Duration(milliseconds: widget.milliseconds),
-      vsync: this,
-    );
+        duration: const Duration(milliseconds: 3000), vsync: this);
 
-    if (widget.start != widget.end) {
-      if (widget.isPingPong) {
-        _controller.repeat();
-      } else {
-        _controller.forward();
-      }
-    }
+    _controller.repeat();
     super.initState();
   }
 
@@ -135,7 +117,7 @@ class _StandAloneAnimatedCubeState extends State<_StandAloneAnimatedCube>
             Transform.translate(
               offset: widget._offset,
               child: Transform.scale(
-                scale: _scale(),
+                scale: calcUnitPingPong(_controller.value),
                 child: widget._unitCube,
               ),
             ),
@@ -144,11 +126,4 @@ class _StandAloneAnimatedCubeState extends State<_StandAloneAnimatedCube>
       },
     );
   }
-
-  double _scale() => lerpDouble(
-      widget.start,
-      widget.end,
-      widget.isPingPong
-          ? calcUnitPingPong(_controller.value)
-          : _controller.value)!;
 }
