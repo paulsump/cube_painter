@@ -20,7 +20,7 @@ void setHelperLinesOrigin(Offset point, BuildContext context) {
   brushMaths.calcStartPosition(startUnit);
 
   Provider.of<BrushNotifier>(context, listen: false)
-      .setStartPosition(brushMaths.startPosition);
+      .setHelperLinesPosition(brushMaths.startPosition);
 }
 
 BrushNotifier getBrushNotifier(BuildContext context, {bool listen = false}) =>
@@ -32,13 +32,13 @@ class BrushNotifier extends ChangeNotifier {
 
   var _slice = Slice.topRight;
 
-  Position _startPosition = Position.zero;
+  Position _helperLinesPosition = Position.zero;
 
   get brush => _brush;
 
   get slice => _slice;
 
-  get startPosition => _startPosition;
+  get helperLinesPosition => _helperLinesPosition;
 
   void setBrush(Brush brush) {
     _brush = brush;
@@ -50,8 +50,8 @@ class BrushNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setStartPosition(Position position) {
-    _startPosition = position;
+  void setHelperLinesPosition(Position position) {
+    _helperLinesPosition = position;
     notifyListeners();
   }
 }

@@ -19,7 +19,7 @@ class HelperLines extends StatelessWidget {
   Widget build(BuildContext context) {
     final brushNotifier = getBrushNotifier(context, listen: true);
 
-    final position = brushNotifier.startPosition;
+    final position = brushNotifier.helperLinesPosition;
     final offset = positionToUnitOffset(position);
 
     return brushNotifier.brush != Brush.addSlice
