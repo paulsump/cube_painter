@@ -28,4 +28,61 @@ A painting app, but the 'paint' is cubes.
 ## Packages used
 The only packages used are provider and path_provider.
 
+## Flutter Widgets used
+Stack
+Transform
+StatelessWidget
+Tooltip
+SizedBox
+ElevatedButton
+Column
+Row
+Container
+Icon
+Scaffold
+Drawer
+TextButton
+StatefulWidget
+CustomPainter
+AlertDialog
+SafeArea
+LayoutBuilder
+MaterialApp
+WillPopScope
+Divider
+ListView
+Center
+Text
+
+## Other Flutter classes used
+ThemeData
+BoxDecoration
+TooltipThemeData
+Clipboard
+RichText
+ChangeNotifierProvider
+Offset
+ButtonStyle
+IconData
+HexagonBorder extends OutlinedBorder
+MaterialStateProperty
+ShapeBorder
+Path
+Provider
+List
+Align
+Navigator
+AnimatedBuilder
+SingleTickerProviderStateMixin
+State
+AnimationController
+Duration
+Paint
+Alignment
+LinearGradient
+UnmodifiableListView
+ChangeNotifier
+BuildContext
+BackdropFilter
+Padding
 
