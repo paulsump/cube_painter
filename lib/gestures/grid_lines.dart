@@ -1,12 +1,11 @@
-import 'dart:collection';
-
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/gestures/brush.dart';
-import 'package:cube_painter/persisted/animator.dart';
-import 'package:cube_painter/persisted/painting_bank.dart';
+import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
+
+const noWarn = out;
 
 /// While brushing, this draws
 /// three helper guide lines on the grid
@@ -19,33 +18,32 @@ class GridLines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final offsets = getHexagonCornerOffsets();
+    // final paintingBank = getPaintingBank(context, listen: true);
+    final position = getBrushStartPosition(context, listen: true);
+    final offset = positionToUnitOffset(position);
 
-    final paintingBank = getPaintingBank(context, listen: true);
-
-    return CubeAnimState.brushing == paintingBank.cubeAnimState
-        ? _Lines(offsets: offsets)
-        : Container();
+    return _Lines(offset: offset);
+    // return CubeAnimState.brushing == paintingBank.cubeAnimState
+    //     ? _Lines(offsets: offsets)
+    //     : Container();
   }
 }
 
 class _Lines extends StatelessWidget {
-  final UnmodifiableListView<Offset> offsets;
+  final Offset offset;
 
   const _Lines({
     Key? key,
-    required this.offsets,
+    required this.offset,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final position = getBrushStartPosition(context, listen: true);
-
-    final startOffset = positionToUnitOffset(position);
+    final offsets = getHexagonCornerOffsets();
 
     return UnitToScreen(
       child: Transform.translate(
-        offset: startOffset,
+        offset: offset,
         child: Transform.scale(
           scale: 10,
           child: Stack(
@@ -69,8 +67,8 @@ class _Line extends StatelessWidget {
     this.from,
     this.to, {
     Key? key,
-        this.color = Colors.blue,
-      }) : super(key: key);
+    this.color = Colors.blue,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>

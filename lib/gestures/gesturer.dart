@@ -69,6 +69,9 @@ class GesturerState extends State<Gesturer> {
 
         gestureHandler = panZoomer;
         tapPoint = details.localPosition;
+
+        // for gridlines only
+        brusher.tapDown(tapPoint, context);
       },
       onTapUp: (details) {
         tapped = false;

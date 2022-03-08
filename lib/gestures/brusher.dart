@@ -34,8 +34,6 @@ class Brusher implements GestureHandler {
 
     final Offset startUnit = screenToUnit(point, context);
     brushMaths.calcStartPosition(startUnit);
-
-    setBrushStartPosition(brushMaths.startPosition, context);
   }
 
   @override
@@ -52,10 +50,11 @@ class Brusher implements GestureHandler {
 
   @override
   void tapDown(Offset point, BuildContext context) {
-    out('brusher.tapDown never called because it would occur when panZooming');
+    // for gridlines only
+    final Offset startUnit = screenToUnit(point, context);
 
-    getPaintingBank(context).startBrushing();
-    _replaceCube(point, context);
+    brushMaths.calcStartPosition(startUnit);
+    setBrushStartPosition(brushMaths.startPosition, context);
   }
 
   @override
@@ -74,8 +73,6 @@ class Brusher implements GestureHandler {
     brushMaths.calcStartPosition(startUnit);
 
     final newPosition = brushMaths.startPosition;
-    setBrushStartPosition(newPosition, context);
-
     final animCubes = getAnimCubeInfos(context);
 
     if (animCubes.isEmpty) {

@@ -44,5 +44,6 @@ class BrushNotifier extends ChangeNotifier {
 
   void setStartPosition(Position position) {
     _startPosition = position;
+    notifyListeners();
   }
 }
