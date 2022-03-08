@@ -18,6 +18,9 @@ void setBrushStartPosition(Position position, BuildContext context) =>
     Provider.of<BrushNotifier>(context, listen: false)
         .setStartPosition(position);
 
+BrushNotifier getBrushNotifier(BuildContext context, {bool listen = false}) =>
+    Provider.of<BrushNotifier>(context, listen: listen);
+
 /// Access to which brush and slice we are currently using
 class BrushNotifier extends ChangeNotifier {
   var _brush = Brush.addLine;

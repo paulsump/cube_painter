@@ -18,14 +18,14 @@ class GridLines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final paintingBank = getPaintingBank(context, listen: true);
-    final position = getBrushStartPosition(context, listen: true);
+    final brushNotifier = getBrushNotifier(context, listen: true);
+
+    final position = brushNotifier.startPosition;
     final offset = positionToUnitOffset(position);
 
-    return _Lines(offset: offset);
-    // return CubeAnimState.brushing == paintingBank.cubeAnimState
-    //     ? _Lines(offsets: offsets)
-    //     : Container();
+    return brushNotifier.brush != Brush.addSlice
+        ? _Lines(offset: offset)
+        : Container();
   }
 }
 
