@@ -1,3 +1,5 @@
+import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
 /// While brushing, this draws
@@ -11,7 +13,15 @@ class GridLines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final offsets = getHexagonCornerOffsets();
+
+    return UnitToScreen(
+      child: Stack(
+        children: [
+          for (int i = 0; i < 3; ++i) Line(offsets[i], offsets[i + 3]),
+        ],
+      ),
+    );
   }
 }
 
@@ -21,12 +31,11 @@ class Line extends StatelessWidget {
   final Offset from;
   final Offset to;
 
-  const Line(
-    this.from,
-    this.to, {
-    Key? key,
-    this.color = Colors.blue,
-  }) : super(key: key);
+  const Line(this.from,
+      this.to, {
+        Key? key,
+        this.color = Colors.blue,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>

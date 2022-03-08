@@ -6,6 +6,8 @@ import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
+const noWarn = out;
+
 /// The maths for placing a line of cubes with one gesture.
 /// Used by [Brusher],
 class BrushMaths {
@@ -71,7 +73,7 @@ List _calculateVectorAndReverseOrder(Offset newVector) {
 
   final int dir = direction.round();
 
-  // TODO make constants?
+  // TODO make these constants?
   switch (dir) {
     case 0:
       return [const Position(1, 0), false];
@@ -87,7 +89,6 @@ List _calculateVectorAndReverseOrder(Offset newVector) {
     case -1:
       return [const Position(0, 1), true];
   }
-  out(dir);
   assert(false);
   return [];
 }
