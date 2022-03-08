@@ -10,18 +10,17 @@ import 'package:flutter/material.dart';
 /// Has a hexagon border.
 /// Used on the [PaintingsMenu].
 class ThumbnailButton extends StatelessWidget {
-  final VoidCallback? onPressed;
-
-  final String tip;
-
-  final Painting painting;
-
   const ThumbnailButton({
     Key? key,
     required this.onPressed,
-    required this.tip,
     required this.painting,
+    required this.tip,
   }) : super(key: key);
+
+  final VoidCallback? onPressed;
+  final Painting painting;
+
+  final String tip;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class ThumbnailButton extends StatelessWidget {
             overlayColor:
                 MaterialStateColor.resolveWith((states) => buttonColor),
             backgroundColor:
-            MaterialStateProperty.all(paintingsMenuButtonsColor),
+                MaterialStateProperty.all(paintingsMenuButtonsColor),
           ),
         ),
       ),
