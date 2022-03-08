@@ -67,24 +67,6 @@ class Thumbnail extends StatelessWidget {
   }
 }
 
-///TODO FIX  const version is invisible
-// class StaticCubes extends StatelessWidget {
-//   final Painting painting;
-//
-//   const StaticCubes({
-//     Key? key,
-//     required this.painting,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) => UnitToScreen(
-//         child: Stack(children: [
-//           for (final cubeInfo in painting.cubeInfos)
-//             _PositionedUnitCube(info: cubeInfo)
-//         ]),
-//       );
-// }
-
 /// Unit cube or slice that animates itself based the fields passed in.
 /// Used on the [_SlicesExamplePainting] only now that I have [GrowingCubes] and [BrushCubes]
 class _StandAloneAnimatedCube extends StatefulWidget {

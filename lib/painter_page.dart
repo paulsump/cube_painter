@@ -22,7 +22,7 @@ const noWarn = [out];
 /// or loading a [Painting] from the [PaintingsMenu]
 /// [_AnimatedCubes] will animate.
 /// When brushing or loading is done,
-/// [DoneCubes] show the full contents of the [Painting].
+/// [StaticCubes] show the full contents of the [Painting].
 class PainterPage extends StatelessWidget {
   const PainterPage({Key? key}) : super(key: key);
 
@@ -39,7 +39,7 @@ class PainterPage extends StatelessWidget {
           left: false,
           child: Stack(children: const [
             Horizon(),
-            DoneCubes(),
+            StaticCubes(),
             HelperLines(),
             _AnimatingCubes(),
             Gesturer(),

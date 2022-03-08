@@ -9,7 +9,7 @@ const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
 /// Used when brushing (creating using gestures).
-/// The cubes are moved to [DoneCubes] externally
+/// The cubes are moved to [StaticCubes] externally
 /// via [finishAnim]
 class BrushCubes extends StatefulWidget {
   const BrushCubes({Key? key}) : super(key: key);
