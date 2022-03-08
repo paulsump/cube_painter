@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Access to all the colors in the app
 class Hue {
   static const Color top = Color(0xfff07f7e);
   static const Color bottomRight = Color(0xffffd8d6);

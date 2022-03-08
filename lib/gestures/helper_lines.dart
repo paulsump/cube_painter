@@ -73,7 +73,7 @@ class _Line extends StatelessWidget {
       CustomPaint(painter: _Painter(from, to, color));
 }
 
-/// the painter for [_Line]
+/// The painter for [_Line]
 class _Painter extends CustomPainter {
   const _Painter(this.from, this.to, this.color);
 

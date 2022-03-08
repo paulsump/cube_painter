@@ -32,12 +32,8 @@ const _emphasisStyle = TextStyle(
   decoration: TextDecoration.underline,
 );
 
+/// Data to create on help page for both portrait and landscape orientations
 class _Tip {
-  final String fileName, title;
-  final List<TextSpan> body;
-  final Offset landscapeImageOffset, landscapeTextOffset;
-  final Offset portraitImageOffset, portraitTextOffset;
-
   const _Tip({
     required this.fileName,
     required this.title,
@@ -47,14 +43,16 @@ class _Tip {
     required this.portraitImageOffset,
     required this.portraitTextOffset,
   });
-}
 
+  final String fileName, title;
+  final List<TextSpan> body;
+  final Offset landscapeImageOffset, landscapeTextOffset;
+  final Offset portraitImageOffset, portraitTextOffset;
+}
 
 /// Show a few little messages with an image to get them started.
 class HelpPage extends StatefulWidget {
-  const HelpPage({
-    Key? key,
-  }) : super(key: key);
+  const HelpPage({Key? key}) : super(key: key);
 
   @override
   State<HelpPage> createState() => _HelpPageState();
@@ -103,16 +101,16 @@ class _HelpPageState extends State<HelpPage> {
   }
 }
 
+/// Implementation class for [HelpPage]
 class _TipPage extends StatelessWidget {
-  final _Tip tip;
-
-  final VoidCallback forward;
-
   const _TipPage({
     Key? key,
     required this.tip,
     required this.forward,
   }) : super(key: key);
+
+  final _Tip tip;
+  final VoidCallback forward;
 
   @override
   Widget build(BuildContext context) {
@@ -227,6 +225,7 @@ class _TipPage extends StatelessWidget {
   }
 }
 
+/// Data for all the [HelpPage]s
 const _tips = <_Tip>[
   _Tip(
     fileName: 'oneFinger',

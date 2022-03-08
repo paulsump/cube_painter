@@ -10,7 +10,7 @@ class WireUnitCube extends StatelessWidget {
   Widget build(BuildContext context) => const CustomPaint(painter: _Painter());
 }
 
-/// the painter for [WireUnitCube]
+/// The painter for [WireUnitCube]
 class _Painter extends CustomPainter {
   const _Painter();
 

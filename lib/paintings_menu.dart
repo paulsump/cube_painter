@@ -179,7 +179,7 @@ class PaintingsMenu extends StatelessWidget {
   }
 }
 
-/// padding for the safe area at the top
+/// Padding for the safe area at the top
 class _SafePad extends StatelessWidget {
   const _SafePad({Key? key}) : super(key: key);
 
@@ -191,11 +191,6 @@ class _SafePad extends StatelessWidget {
 /// Transparent flat hexagon shaped button with an icon.
 /// A convenience for use at the top of the [PaintingsMenu] (the file menu).
 class _ScreenAdjustedIconFlatHexagonButton extends StatelessWidget {
-  final VoidCallback? onPressed;
-  final String tip;
-  final IconData icon;
-  final double iconSize;
-
   const _ScreenAdjustedIconFlatHexagonButton({
     Key? key,
     this.onPressed,
@@ -203,6 +198,12 @@ class _ScreenAdjustedIconFlatHexagonButton extends StatelessWidget {
     required this.icon,
     required this.iconSize,
   }) : super(key: key);
+
+  final VoidCallback? onPressed;
+  final String tip;
+
+  final IconData icon;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {

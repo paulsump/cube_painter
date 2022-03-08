@@ -61,10 +61,12 @@ class SlicesMenu extends StatelessWidget {
   }
 }
 
+/// Draws the little triangle shaped [Painting].
+/// A one off instance to help the user on the slices menu.
 class _SlicesExample extends StatelessWidget {
-  final double padHeight;
-
   const _SlicesExample({Key? key, required this.padHeight}) : super(key: key);
+
+  final double padHeight;
 
   @override
   Widget build(BuildContext context) {

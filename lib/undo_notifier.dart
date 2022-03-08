@@ -11,6 +11,7 @@ UndoNotifier getUndoer(context, {bool listen = false}) =>
 void saveForUndo(BuildContext context) => getUndoer(context).save(context);
 
 /// Provides access to the undo / redo mechanism.
+///
 /// notifies for the [_UndoButton] states in [PageButtons]
 /// [PaintingBank]  notifies the page in [setJson]
 class UndoNotifier extends ChangeNotifier {
