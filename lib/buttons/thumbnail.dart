@@ -3,11 +3,8 @@ import 'dart:ui';
 import 'package:cube_painter/cubes/calc_unit_ping_pong.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
-import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
-import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +52,12 @@ class Thumbnail extends StatelessWidget {
 
                   /// Note that this only animates the first cube.
                   /// That's all that's needed currently.
-                  ? _StandAloneAnimatedCube(info: painting.cubeInfos[0])
+                  ? _StandAloneAnimatedCube(
+                      unitCube:
+                          SliceUnitCube(slice: painting.cubeInfos[0].slice),
+                      offset:
+                          positionToUnitOffset(painting.cubeInfos[0].center),
+                    )
                   : Stack(children: [
                       ...painting.cubeInfos.map((cubeInfo) =>
                           PositionedScaledCube(
@@ -70,19 +72,14 @@ class Thumbnail extends StatelessWidget {
 /// Unit cube or slice that animates itself based the fields passed in.
 /// Used on the [_SlicesExamplePainting] only now that I have [GrowingCubes] and [BrushCubes]
 class _StandAloneAnimatedCube extends StatefulWidget {
-  _StandAloneAnimatedCube({
+  const _StandAloneAnimatedCube({
     Key? key,
-    required this.info,
-  })  : _unitCube = info.slice == Slice.whole
-            ? const WholeUnitCube()
-            : SliceUnitCube(slice: info.slice),
-        _offset = positionToUnitOffset(info.center),
-        super(key: key);
+    required this.unitCube,
+    required this.offset,
+  }) : super(key: key);
 
-  final CubeInfo info;
-
-  final Widget _unitCube;
-  final Offset _offset;
+  final Widget unitCube;
+  final Offset offset;
 
   @override
   _StandAloneAnimatedCubeState createState() => _StandAloneAnimatedCubeState();
@@ -115,10 +112,10 @@ class _StandAloneAnimatedCubeState extends State<_StandAloneAnimatedCube>
         return Stack(
           children: [
             Transform.translate(
-              offset: widget._offset,
+              offset: widget.offset,
               child: Transform.scale(
                 scale: calcUnitPingPong(_controller.value),
-                child: widget._unitCube,
+                child: widget.unitCube,
               ),
             ),
           ],
