@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+class Hue {}
+
 const Color topColor = Color(0xfff07f7e);
 const Color bottomRightColor = Color(0xffffd8d6);
 const Color bottomLeftColor = Color(0xff543e3d);

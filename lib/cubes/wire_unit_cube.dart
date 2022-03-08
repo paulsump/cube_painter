@@ -1,5 +1,5 @@
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/cube_sides.dart';
+import 'package:cube_painter/hue.dart';
 import 'package:flutter/material.dart';
 
 /// A wire frame whole cube of size of 1.

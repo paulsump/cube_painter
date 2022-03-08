@@ -1,5 +1,5 @@
 import 'package:cube_painter/buttons/hexagon_border.dart';
-import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 

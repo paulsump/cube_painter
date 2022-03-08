@@ -1,11 +1,11 @@
 import 'package:cube_painter/buttons/page_buttons.dart';
-import 'package:cube_painter/colors.dart';
 import 'package:cube_painter/cubes/brush_cubes.dart';
 import 'package:cube_painter/cubes/growing_cubes.dart';
 import 'package:cube_painter/cubes/static_cubes.dart';
 import 'package:cube_painter/gestures/gesturer.dart';
 import 'package:cube_painter/gestures/helper_lines.dart';
 import 'package:cube_painter/horizon.dart';
+import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/paintings_menu.dart';
 import 'package:cube_painter/persisted/animator.dart';

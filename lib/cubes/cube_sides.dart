@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:cube_painter/colors.dart';
+import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/slice.dart';
