@@ -4,6 +4,8 @@ dartdoc:
   # activated with "pub global activate snippets <version>"
   # The dev/bots/docs.sh script does this automatically.
 
+  nodoc: [ 'lib/buttons/*.dart','lib/cubes/*.dart','lib/gestures/*.dart','lib/persisted/*.dart','lib/transform/*.dart' ,'lib/*.dart' ]
+
   tools:
     snippet:
       command: [ "bin/cache/dart-sdk/bin/dart", "pub", "global", "run", "snippets", "--output-directory=doc/snippets", "--type=snippet" ]
