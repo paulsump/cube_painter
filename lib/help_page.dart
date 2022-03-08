@@ -34,14 +34,18 @@ const _emphasisStyle = TextStyle(
 class _Tip {
   final String fileName, title;
   final List<TextSpan> body;
-  final Offset imageOffset, textOffset;
+  final Offset landscapeImageOffset, landscapeTextOffset;
+  final Offset portraitImageOffset, portraitTextOffset;
 
-  const _Tip(
-      {required this.fileName,
-      required this.title,
-      required this.body,
-      required this.imageOffset,
-      required this.textOffset});
+  const _Tip({
+    required this.fileName,
+    required this.title,
+    required this.body,
+    required this.landscapeImageOffset,
+    required this.landscapeTextOffset,
+    required this.portraitImageOffset,
+    required this.portraitTextOffset,
+  });
 }
 
 const _tips = <_Tip>[
@@ -53,8 +57,10 @@ const _tips = <_Tip>[
       TextSpan(text: 'one', style: _emphasisStyle),
       TextSpan(text: ' finger.'),
     ],
-    imageOffset: Offset(2.5, -1.5),
-    textOffset: Offset(-2.5, 2),
+    landscapeImageOffset: Offset(2.5, -1.5),
+    landscapeTextOffset: Offset(-2.5, 2),
+    portraitImageOffset: Offset(0.5, 2.5),
+    portraitTextOffset: Offset(-2.5, 2),
   ),
   _Tip(
     fileName: 'twoFinger',
@@ -64,8 +70,10 @@ const _tips = <_Tip>[
       TextSpan(text: 'two', style: _emphasisStyle),
       TextSpan(text: ' fingers.'),
     ],
-    imageOffset: Offset(3.0, -1.0),
-    textOffset: Offset(-2, 2),
+    landscapeImageOffset: Offset(3.0, -1.0),
+    landscapeTextOffset: Offset(-2, 2),
+    portraitImageOffset: Offset(3.0, -1.0),
+    portraitTextOffset: Offset(-2, 2),
   ),
   _Tip(
     fileName: 'eraseLine',
@@ -75,29 +83,37 @@ const _tips = <_Tip>[
           text: 'Drag the over the cube(s)\n'
               'that you want to remove,\nthen release.')
     ],
-    imageOffset: Offset(3.0, -0.5),
-    textOffset: Offset(-3, 1),
+    landscapeImageOffset: Offset(3.0, -0.5),
+    landscapeTextOffset: Offset(-3, 1),
+    portraitImageOffset: Offset(3.0, -0.5),
+    portraitTextOffset: Offset(-3, 1),
   ),
   _Tip(
     fileName: 'slicesMenu',
     title: 'Slices menu',
     body: <TextSpan>[TextSpan(text: 'Pick a cube slice')],
-    imageOffset: Offset(1.0, -0.5),
-    textOffset: Offset(-2.8, 2),
+    landscapeImageOffset: Offset(1.0, -0.5),
+    landscapeTextOffset: Offset(-2.8, 2),
+    portraitImageOffset: Offset(1.0, -0.5),
+    portraitTextOffset: Offset(-2.8, 2),
   ),
   _Tip(
     fileName: 'placeSlice',
     title: 'Place a slice',
     body: <TextSpan>[TextSpan(text: 'Drag the slice\ninto position.')],
-    imageOffset: Offset(2.0, -0.5),
-    textOffset: Offset(-2, 1.5),
+    landscapeImageOffset: Offset(2.0, -0.5),
+    landscapeTextOffset: Offset(-2, 1.5),
+    portraitImageOffset: Offset(2.0, -0.5),
+    portraitTextOffset: Offset(-2, 1.5),
   ),
   _Tip(
     fileName: 'longPress',
     title: 'Button tips',
     body: <TextSpan>[TextSpan(text: 'Press and hold a button.')],
-    imageOffset: Offset(3.0, -0.5),
-    textOffset: Offset(-2, 2),
+    landscapeImageOffset: Offset(3.0, -0.5),
+    landscapeTextOffset: Offset(-2, 2),
+    portraitImageOffset: Offset(3.0, -0.5),
+    portraitTextOffset: Offset(-2, 2),
   ),
 ];
 
@@ -175,7 +191,7 @@ class _TipPage extends StatelessWidget {
         padding: const EdgeInsets.all(4), // Border radius
         child: isPortrait(context)
             ? Image(width: screenAdjust(0.7, context), image: assetImage)
-            : Image(height: screenAdjust(0.5, context), image: assetImage),
+            : Image(height: screenAdjust(0.7, context), image: assetImage),
       ),
     );
 
@@ -184,7 +200,7 @@ class _TipPage extends StatelessWidget {
           text: tip.title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: screenAdjust(0.08, context),
+            fontSize: screenAdjust(0.06, context),
             color: bottomRightColor,
           )),
     );
@@ -193,7 +209,7 @@ class _TipPage extends StatelessWidget {
       text: TextSpan(
         text: '\n',
         style: TextStyle(
-          fontSize: screenAdjust(0.06, context),
+          fontSize: screenAdjust(0.04, context),
           color: bottomRightColor,
         ),
         children: tip.body,
@@ -246,11 +262,11 @@ class _TipPage extends StatelessWidget {
               buttonRow,
               Stack(children: [
                 Transform.translate(
-                  offset: tip.imageOffset * screenAdjust(0.1, context),
+                  offset: tip.portraitImageOffset * screenAdjust(0.1, context),
                   child: image,
                 ),
                 Transform.translate(
-                  offset: tip.textOffset * screenAdjust(0.1, context),
+                  offset: tip.portraitTextOffset * screenAdjust(0.1, context),
                   child: text,
                 ),
               ]),
@@ -259,14 +275,15 @@ class _TipPage extends StatelessWidget {
         : Column(
             children: [
               buttonRow,
-              SizedBox(height: screenAdjust(0.03, context)),
               Stack(children: [
                 Transform.translate(
-                  offset: tip.imageOffset * screenAdjust(0.1, context),
+                  offset: (const Offset(0, -0.5) + tip.landscapeImageOffset) *
+                      screenAdjust(0.1, context),
                   child: image,
                 ),
                 Transform.translate(
-                  offset: tip.textOffset * screenAdjust(0.1, context),
+                  offset: (const Offset(1, 2) + tip.landscapeTextOffset) *
+                      screenAdjust(0.1, context),
                   child: text,
                 ),
               ]),
