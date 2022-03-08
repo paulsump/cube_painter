@@ -29,6 +29,18 @@ A painting app, but the 'paint' is cubes.
 - provider
 - path_provider.
 
+## Tests
+- All the mathematical functions have tests.
+- There are no widget tests per se.
+
+## Persistence
+
+Local files are persisted with jsonEncode & jsonDecode.
+
+## Hexagon Buttons
+ElevatedButton and TextButton ButtonStyle.shape is set to my HexagonBorder which extends OutlinedBorder in a similar way to CircleBorder.
+
+
 ## Flutter Widgets used
 Stack
 Transform
