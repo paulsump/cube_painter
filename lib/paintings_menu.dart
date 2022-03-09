@@ -75,8 +75,7 @@ class PaintingsMenu extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: screenAdjust(0.05, context)),
-            const Divider(),
+            SizedBox(height: screenAdjust(isPortrait_ ? 0.04 : 0.09, context)),
             for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
               Align(
                 heightFactor: thumbnailButtonHeightFactor,
