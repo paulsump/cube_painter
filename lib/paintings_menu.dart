@@ -19,15 +19,6 @@ class PaintingsMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final paintingBank = getPaintingBank(context, listen: true);
 
-    pop(funk) => () async {
-          await funk(context);
-          Navigator.of(context).pop();
-        };
-
-    dontPop(funk) => () async {
-          await funk(context);
-        };
-
     final bool isPortrait_ = isPortrait(context);
 
     final menuWidth = isPortrait_ ? 0.56 : 0.888;
@@ -41,36 +32,7 @@ class PaintingsMenu extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             const _Title(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _ScreenAdjustedIconFlatHexagonButton(
-                  onPressed: pop(_newFile),
-                  tip: 'Create a new painting',
-                  icon: AssetIcons.docNew,
-                  iconSize: screenAdjustAssetIconSize(context) * 0.95,
-                ),
-                _ScreenAdjustedIconFlatHexagonButton(
-                  onPressed: paintingBank.modified ? dontPop(_saveFile) : null,
-                  tip: 'Save the current painting',
-                  icon: Icons.save,
-                  iconSize: screenAdjustNormalIconSize(context),
-                ),
-                _ScreenAdjustedIconFlatHexagonButton(
-                  onPressed: dontPop(_saveACopyFile),
-                  tip: 'Create a copy\nof this painting\nand load it.',
-                  icon: AssetIcons.copy,
-                  iconSize: screenAdjustAssetIconSize(context),
-                ),
-                _ScreenAdjustedIconFlatHexagonButton(
-                  onPressed: dontPop(_deleteCurrentFile),
-                  tip:
-                      'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
-                  icon: Icons.delete,
-                  iconSize: screenAdjustNormalIconSize(context),
-                ),
-              ],
-            ),
+            const _IconButtonRow(),
             SizedBox(height: screenAdjust(isPortrait_ ? 0.04 : 0.09, context)),
             for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
               Align(
@@ -91,15 +53,6 @@ class PaintingsMenu extends StatelessWidget {
     );
   }
 
-  void _newFile(BuildContext context) async {
-    final paintingBank = getPaintingBank(context);
-
-    if (!paintingBank.modified ||
-        await _askSaveCurrent(title: 'New Painting', context: context)) {
-      await paintingBank.newFile(context);
-    }
-  }
-
   void _loadFile(
       {required String filePath, required BuildContext context}) async {
     final paintingBank = getPaintingBank(context);
@@ -107,6 +60,64 @@ class PaintingsMenu extends StatelessWidget {
     if (!paintingBank.modified ||
         await _askSaveCurrent(title: 'Load Painting', context: context)) {
       paintingBank.loadFile(filePath: filePath, context: context);
+    }
+  }
+}
+
+class _IconButtonRow extends StatelessWidget {
+  const _IconButtonRow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final paintingBank = getPaintingBank(context, listen: true);
+
+    pop(funk) => () async {
+          await funk(context);
+          Navigator.of(context).pop();
+        };
+
+    dontPop(funk) => () async {
+          await funk(context);
+        };
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _ScreenAdjustedIconFlatHexagonButton(
+          onPressed: pop(_newFile),
+          tip: 'Create a new painting',
+          icon: AssetIcons.docNew,
+          iconSize: screenAdjustAssetIconSize(context) * 0.95,
+        ),
+        _ScreenAdjustedIconFlatHexagonButton(
+          onPressed: paintingBank.modified ? dontPop(_saveFile) : null,
+          tip: 'Save the current painting',
+          icon: Icons.save,
+          iconSize: screenAdjustNormalIconSize(context),
+        ),
+        _ScreenAdjustedIconFlatHexagonButton(
+          onPressed: dontPop(_saveACopyFile),
+          tip: 'Create a copy\nof this painting\nand load it.',
+          icon: AssetIcons.copy,
+          iconSize: screenAdjustAssetIconSize(context),
+        ),
+        _ScreenAdjustedIconFlatHexagonButton(
+          onPressed: dontPop(_deleteCurrentFile),
+          tip:
+              'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
+          icon: Icons.delete,
+          iconSize: screenAdjustNormalIconSize(context),
+        ),
+      ],
+    );
+  }
+
+  void _newFile(BuildContext context) async {
+    final paintingBank = getPaintingBank(context);
+
+    if (!paintingBank.modified ||
+        await _askSaveCurrent(title: 'New Painting', context: context)) {
+      await paintingBank.newFile(context);
     }
   }
 
@@ -118,59 +129,6 @@ class PaintingsMenu extends StatelessWidget {
 
   void _deleteCurrentFile(BuildContext context) async =>
       await getPaintingBank(context).deleteCurrentFile(context);
-
-  Future<bool> _askSaveCurrent({
-    required String title,
-    required BuildContext context,
-  }) async {
-    return await _askYesNoOrCancel(
-      title: title,
-      content: 'Save the current changes?',
-      yesCallBack: getPaintingBank(context).saveFile,
-      yesTip: 'Save the current painting\nwith your new changes.',
-      noCallBack: getPaintingBank(context).resetCurrentPainting,
-      noTip: 'Reset the current painting\nto how it was when opened.',
-      context: context,
-    );
-  }
-
-  Future<bool> _askYesNoOrCancel({
-    required String title,
-    required String content,
-    Future<void> Function()? yesCallBack,
-    String? yesTip,
-    Future<void> Function()? noCallBack,
-    String? noTip,
-    bool wantOnlyYesAndCancelButtons = false,
-    required BuildContext context,
-  }) async {
-    final alert = Alert(
-      title: title,
-      child: Text(content),
-      yesCallBack: () {
-        unawaited(yesCallBack?.call());
-        Navigator.of(context).pop(true);
-      },
-      yesTip: yesTip,
-      noCallBack: wantOnlyYesAndCancelButtons
-          ? null
-          : () {
-              unawaited(noCallBack?.call());
-              Navigator.of(context).pop(true);
-            },
-      noTip: noTip,
-      cancelCallBack: () => Navigator.of(context).pop(false),
-    );
-
-    final bool? clickedYes = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-
-    return clickedYes ?? false;
-  }
 }
 
 class _Title extends StatelessWidget {
@@ -223,4 +181,57 @@ class _ScreenAdjustedIconFlatHexagonButton extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<bool> _askSaveCurrent({
+  required String title,
+  required BuildContext context,
+}) async {
+  return await _askYesNoOrCancel(
+    title: title,
+    content: 'Save the current changes?',
+    yesCallBack: getPaintingBank(context).saveFile,
+    yesTip: 'Save the current painting\nwith your new changes.',
+    noCallBack: getPaintingBank(context).resetCurrentPainting,
+    noTip: 'Reset the current painting\nto how it was when opened.',
+    context: context,
+  );
+}
+
+Future<bool> _askYesNoOrCancel({
+  required String title,
+  required String content,
+  Future<void> Function()? yesCallBack,
+  String? yesTip,
+  Future<void> Function()? noCallBack,
+  String? noTip,
+  bool wantOnlyYesAndCancelButtons = false,
+  required BuildContext context,
+}) async {
+  final alert = Alert(
+    title: title,
+    child: Text(content),
+    yesCallBack: () {
+      unawaited(yesCallBack?.call());
+      Navigator.of(context).pop(true);
+    },
+    yesTip: yesTip,
+    noCallBack: wantOnlyYesAndCancelButtons
+        ? null
+        : () {
+            unawaited(noCallBack?.call());
+            Navigator.of(context).pop(true);
+          },
+    noTip: noTip,
+    cancelCallBack: () => Navigator.of(context).pop(false),
+  );
+
+  final bool? clickedYes = await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+
+  return clickedYes ?? false;
 }
