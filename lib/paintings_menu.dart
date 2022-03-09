@@ -28,7 +28,6 @@ class PaintingsMenu extends StatelessWidget {
           await funk(context);
         };
 
-    final padY = SizedBox(height: screenAdjust(0.03247, context));
     final bool isPortrait_ = isPortrait(context);
 
     final menuWidth = isPortrait_ ? 0.56 : 0.888;
@@ -41,10 +40,7 @@ class PaintingsMenu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const _SafePad(),
-            padY,
-            const Center(child: Text('Paintings')),
-            padY,
+            const _Title(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -89,7 +85,6 @@ class PaintingsMenu extends StatelessWidget {
                   painting: paintingBank.paintingEntries[i].value,
                 ),
               ),
-            const Divider(),
           ],
         ),
       ),
@@ -178,13 +173,23 @@ class PaintingsMenu extends StatelessWidget {
   }
 }
 
-/// Padding for the safe area at the top
-class _SafePad extends StatelessWidget {
-  const _SafePad({Key? key}) : super(key: key);
+class _Title extends StatelessWidget {
+  const _Title({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      SizedBox(height: MediaQuery.of(context).padding.top);
+  Widget build(BuildContext context) {
+    final padY = SizedBox(height: screenAdjust(0.03247, context));
+
+    return Column(
+      children: [
+        /// Padding for the safe area at the top
+        SizedBox(height: MediaQuery.of(context).padding.top),
+        padY,
+        const Center(child: Text('Paintings')),
+        padY,
+      ],
+    );
+  }
 }
 
 /// Transparent flat hexagon shaped button with an icon.
