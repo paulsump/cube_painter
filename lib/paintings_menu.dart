@@ -18,8 +18,6 @@ class PaintingsMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final paintingBank = getPaintingBank(context, listen: true);
-
     return SizedBox(
       width: screenAdjust(isPortrait(context) ? 0.56 : 0.888, context),
       child: Drawer(
@@ -30,8 +28,7 @@ class PaintingsMenu extends StatelessWidget {
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
-                children: _buildThumnailButtonList(
-                    paintingBank.paintingEntries, context),
+                children: _buildThumbnailButtonList(context),
               ),
             ),
           ],
@@ -40,10 +37,12 @@ class PaintingsMenu extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildThumnailButtonList(
-    PaintingEntries paintingEntries,
+  List<Widget> _buildThumbnailButtonList(
     BuildContext context,
   ) {
+    final PaintingEntries paintingEntries =
+        getPaintingBank(context, listen: true).paintingEntries;
+
     return List.generate(
       paintingEntries.length,
       (i) => Align(
@@ -54,8 +53,8 @@ class PaintingsMenu extends StatelessWidget {
           onPressed: () =>
               _loadFile(filePath: paintingEntries[i].key, context: context),
           painting: paintingEntries[i].value,
-        ),
-      ),
+            ),
+          ),
     );
   }
 
