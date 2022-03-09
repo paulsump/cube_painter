@@ -26,30 +26,6 @@ class HelpNotifier extends ChangeNotifier {
   }
 }
 
-const _emphasisStyle = TextStyle(
-  fontWeight: FontWeight.bold,
-  fontStyle: FontStyle.italic,
-  decoration: TextDecoration.underline,
-);
-
-/// Data to create on help page for both portrait and landscape orientations
-class _Tip {
-  const _Tip({
-    required this.fileName,
-    required this.title,
-    required this.body,
-    required this.landscapeImageOffset,
-    required this.landscapeTextOffset,
-    required this.portraitImageOffset,
-    required this.portraitTextOffset,
-  });
-
-  final String fileName, title;
-  final List<TextSpan> body;
-  final Offset landscapeImageOffset, landscapeTextOffset;
-  final Offset portraitImageOffset, portraitTextOffset;
-}
-
 /// Show a few little messages with an image to get them started.
 class HelpPage extends StatefulWidget {
   const HelpPage({Key? key}) : super(key: key);
@@ -294,3 +270,27 @@ const _tips = <_Tip>[
     portraitTextOffset: Offset(-2, 2),
   ),
 ];
+
+const _emphasisStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontStyle: FontStyle.italic,
+  decoration: TextDecoration.underline,
+);
+
+/// Data to create on help page for both portrait and landscape orientations
+class _Tip {
+  const _Tip({
+    required this.fileName,
+    required this.title,
+    required this.body,
+    required this.landscapeImageOffset,
+    required this.landscapeTextOffset,
+    required this.portraitImageOffset,
+    required this.portraitTextOffset,
+  });
+
+  final String fileName, title;
+  final List<TextSpan> body;
+  final Offset landscapeImageOffset, landscapeTextOffset;
+  final Offset portraitImageOffset, portraitTextOffset;
+}

@@ -131,6 +131,7 @@ class _IconButtonRow extends StatelessWidget {
     if (!paintingBank.modified ||
         await _askSaveCurrent(title: 'New Painting', context: context)) {
       paintingBank.finishAnim();
+
       await paintingBank.newFile(context);
     }
   }
