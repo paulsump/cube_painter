@@ -20,25 +20,18 @@ class PaintingsMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final paintingBank = getPaintingBank(context, listen: true);
 
-    final bool isPortrait_ = isPortrait(context);
-    final menuWidth = isPortrait_ ? 0.56 : 0.888;
-
-    final thumbnailButtonHeightFactor = isPortrait_ ? 0.87 : 0.464;
-
     return SizedBox(
-      width: screenAdjust(menuWidth, context),
+      width: screenAdjust(isPortrait(context) ? 0.56 : 0.888, context),
       child: Drawer(
         // Wrapping with SafeArea here would cause shift to right on iphone
         child: Column(
           children: [
-            const _Title(),
-            const _IconButtonRow(),
-            SizedBox(height: screenAdjust(isPortrait_ ? 0.04 : 0.09, context)),
+            const _TitleAndTopButtons(),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
-                children: _buildThumnailButtonList(paintingBank.paintingEntries,
-                    thumbnailButtonHeightFactor, context),
+                children: _buildThumnailButtonList(
+                    paintingBank.paintingEntries, context),
               ),
             ),
           ],
@@ -49,13 +42,12 @@ class PaintingsMenu extends StatelessWidget {
 
   List<Widget> _buildThumnailButtonList(
     PaintingEntries paintingEntries,
-    double thumbnailButtonHeightFactor,
     BuildContext context,
   ) {
     return List.generate(
       paintingEntries.length,
       (i) => Align(
-        heightFactor: thumbnailButtonHeightFactor,
+        heightFactor: isPortrait(context) ? 0.87 : 0.464,
         alignment: i.isEven ? Alignment.centerLeft : Alignment.centerRight,
         child: ThumbnailButton(
           tip: 'Load this painting',
@@ -145,8 +137,8 @@ class _IconButtonRow extends StatelessWidget {
       await getPaintingBank(context).deleteCurrentFile(context);
 }
 
-class _Title extends StatelessWidget {
-  const _Title({Key? key}) : super(key: key);
+class _TitleAndTopButtons extends StatelessWidget {
+  const _TitleAndTopButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -159,6 +151,9 @@ class _Title extends StatelessWidget {
         padY,
         const Center(child: Text('Paintings')),
         padY,
+        const _IconButtonRow(),
+        SizedBox(
+            height: screenAdjust(isPortrait(context) ? 0.04 : 0.09, context)),
       ],
     );
   }
