@@ -20,33 +20,41 @@ class PaintingsMenu extends StatelessWidget {
     final paintingBank = getPaintingBank(context, listen: true);
 
     final bool isPortrait_ = isPortrait(context);
-
     final menuWidth = isPortrait_ ? 0.56 : 0.888;
+
     final thumbnailButtonHeightFactor = isPortrait_ ? 0.87 : 0.464;
 
     return SizedBox(
       width: screenAdjust(menuWidth, context),
       child: Drawer(
         // Wrapping with SafeArea here would cause shift to right on iphone
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: [
             const _Title(),
             const _IconButtonRow(),
-            SizedBox(height: screenAdjust(isPortrait_ ? 0.04 : 0.09, context)),
-            for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
-              Align(
-                heightFactor: thumbnailButtonHeightFactor,
-                alignment:
-                    i.isEven ? Alignment.centerLeft : Alignment.centerRight,
-                child: ThumbnailButton(
-                  tip: 'Load this painting',
-                  onPressed: () => _loadFile(
-                      filePath: paintingBank.paintingEntries[i].key,
-                      context: context),
-                  painting: paintingBank.paintingEntries[i].value,
-                ),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  SizedBox(
+                      height: screenAdjust(isPortrait_ ? 0.04 : 0.09, context)),
+                  for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
+                    Align(
+                      heightFactor: thumbnailButtonHeightFactor,
+                      alignment: i.isEven
+                          ? Alignment.centerLeft
+                          : Alignment.centerRight,
+                      child: ThumbnailButton(
+                        tip: 'Load this painting',
+                        onPressed: () => _loadFile(
+                            filePath: paintingBank.paintingEntries[i].key,
+                            context: context),
+                        painting: paintingBank.paintingEntries[i].value,
+                      ),
+                    ),
+                ],
               ),
+            ),
           ],
         ),
       ),
