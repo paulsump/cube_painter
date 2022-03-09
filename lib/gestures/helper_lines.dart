@@ -43,7 +43,8 @@ class _Lines extends StatelessWidget {
       child: Transform.translate(
         offset: offset,
         child: Transform.scale(
-          scale: 10,
+          // Deliberately big enough to cover whole screen.
+          scale: 50,
           child: Stack(
             children: [
               _Line(offsets[0], offsets[0 + 3], color: Hue.bottomRight),
