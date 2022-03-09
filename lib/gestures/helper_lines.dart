@@ -1,5 +1,6 @@
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/gestures/brush.dart';
+import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
@@ -45,7 +46,9 @@ class _Lines extends StatelessWidget {
           scale: 10,
           child: Stack(
             children: [
-              for (int i = 0; i < 3; ++i) _Line(offsets[i], offsets[i + 3]),
+              _Line(offsets[0], offsets[0 + 3], color: Hue.bottomRight),
+              _Line(offsets[1], offsets[1 + 3], color: Hue.top),
+              _Line(offsets[2], offsets[2 + 3], color: Hue.bottomLeft),
             ],
           ),
         ),
