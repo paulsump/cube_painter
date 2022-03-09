@@ -22,17 +22,25 @@ class PaintingsMenu extends StatelessWidget {
       width: screenAdjust(isPortrait(context) ? 0.56 : 0.888, context),
       child: Drawer(
         // Wrapping with SafeArea here would cause shift to right on iphone
-        child: Column(
-          children: [
-            const _TitleAndTopButtons(),
-            Expanded(
-              child: ListView(
+        child: isPortrait(context)
+            ? Column(
+                children: [
+                  const _TitleAndTopButtons(),
+                  Expanded(
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children: _buildThumbnailButtonList(context),
+                    ),
+                  ),
+                ],
+              )
+            : ListView(
                 padding: EdgeInsets.zero,
-                children: _buildThumbnailButtonList(context),
+                children: [
+                  const _TitleAndTopButtons(),
+                  ..._buildThumbnailButtonList(context),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -53,8 +61,8 @@ class PaintingsMenu extends StatelessWidget {
           onPressed: () =>
               _loadFile(filePath: paintingEntries[i].key, context: context),
           painting: paintingEntries[i].value,
-            ),
-          ),
+        ),
+      ),
     );
   }
 
