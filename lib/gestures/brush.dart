@@ -32,13 +32,13 @@ class BrushNotifier extends ChangeNotifier {
 
   var _slice = Slice.topRight;
 
-  Position _helperLinesPosition = Position.zero;
+  Position _axesPosition = Position.zero;
 
   get brush => _brush;
 
   get slice => _slice;
 
-  get helperLinesPosition => _helperLinesPosition;
+  get axesPosition => _axesPosition;
 
   void setBrush(Brush brush) {
     _brush = brush;
@@ -51,7 +51,7 @@ class BrushNotifier extends ChangeNotifier {
   }
 
   void setHelperLinesPosition(Position position) {
-    _helperLinesPosition = position;
+    _axesPosition = position;
     notifyListeners();
   }
 }

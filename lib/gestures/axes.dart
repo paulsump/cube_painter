@@ -20,7 +20,7 @@ class Axes extends StatelessWidget {
   Widget build(BuildContext context) {
     final brushNotifier = getBrushNotifier(context, listen: true);
 
-    final position = brushNotifier.helperLinesPosition;
+    final position = brushNotifier.axesPosition;
     final offset = positionToUnitOffset(position);
 
     return brushNotifier.brush != Brush.addSlice
