@@ -12,9 +12,9 @@ const noWarn = out;
 /// three helper guide lines on the grid
 /// from the drag start position,
 /// to show the six directions
-/// where the drag will end up.
-class HelperLines extends StatelessWidget {
-  const HelperLines({Key? key}) : super(key: key);
+/// you can drag from that position.
+class Axes extends StatelessWidget {
+  const Axes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class HelperLines extends StatelessWidget {
   }
 }
 
-/// The implementation class for [HelperLines]
+/// The implementation class for [Axes]
 class _Lines extends StatelessWidget {
   const _Lines({Key? key, required this.offset}) : super(key: key);
 

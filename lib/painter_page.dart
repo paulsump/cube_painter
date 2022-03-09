@@ -40,7 +40,7 @@ class PainterPage extends StatelessWidget {
           child: Stack(children: const [
             Horizon(),
             StaticCubes(),
-            HelperLines(),
+            Axes(),
             _AnimatingCubes(),
             Gesturer(),
             PageButtons(),
