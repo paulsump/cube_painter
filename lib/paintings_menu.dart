@@ -6,6 +6,7 @@ import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
+import 'package:cube_painter/persisted/persister.dart';
 import 'package:cube_painter/transform/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -32,30 +33,35 @@ class PaintingsMenu extends StatelessWidget {
           children: [
             const _Title(),
             const _IconButtonRow(),
+            SizedBox(height: screenAdjust(isPortrait_ ? 0.04 : 0.09, context)),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
-                children: [
-                  SizedBox(
-                      height: screenAdjust(isPortrait_ ? 0.04 : 0.09, context)),
-                  for (int i = 0; i < paintingBank.paintingEntries.length; ++i)
-                    Align(
-                      heightFactor: thumbnailButtonHeightFactor,
-                      alignment: i.isEven
-                          ? Alignment.centerLeft
-                          : Alignment.centerRight,
-                      child: ThumbnailButton(
-                        tip: 'Load this painting',
-                        onPressed: () => _loadFile(
-                            filePath: paintingBank.paintingEntries[i].key,
-                            context: context),
-                        painting: paintingBank.paintingEntries[i].value,
-                      ),
-                    ),
-                ],
+                children: _buildThumnailButtonList(paintingBank.paintingEntries,
+                    thumbnailButtonHeightFactor, context),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildThumnailButtonList(
+    PaintingEntries paintingEntries,
+    double thumbnailButtonHeightFactor,
+    BuildContext context,
+  ) {
+    return List.generate(
+      paintingEntries.length,
+      (i) => Align(
+        heightFactor: thumbnailButtonHeightFactor,
+        alignment: i.isEven ? Alignment.centerLeft : Alignment.centerRight,
+        child: ThumbnailButton(
+          tip: 'Load this painting',
+          onPressed: () =>
+              _loadFile(filePath: paintingEntries[i].key, context: context),
+          painting: paintingEntries[i].value,
         ),
       ),
     );

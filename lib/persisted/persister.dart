@@ -13,6 +13,8 @@ const noWarn = [out];
 
 const cubesExtension = '.cubes.json';
 
+typedef PaintingEntries = UnmodifiableListView<MapEntry<String, Painting>>;
+
 /// The main store of the entire model
 /// For loading and saving all the cube positions and their info
 /// loaded from a json file.
@@ -71,8 +73,8 @@ mixin Persister {
 
   void setPainting(Painting painting) => paintings[currentFilePath] = painting;
 
-  UnmodifiableListView<MapEntry> get paintingEntries =>
-      UnmodifiableListView<MapEntry>(paintings.entries.toList());
+  PaintingEntries get paintingEntries =>
+      PaintingEntries(paintings.entries.toList());
 
   /// The main starting point for the app.
   /// Called only once.
