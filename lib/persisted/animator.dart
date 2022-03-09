@@ -78,4 +78,8 @@ mixin Animator {
         break;
     }
   }
+
+  void clearAnimCubes() {
+    animCubeInfos.clear();
+  }
 }

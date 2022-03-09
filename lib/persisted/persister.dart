@@ -50,9 +50,13 @@ mixin Persister {
   }
 
   void finishAnim();
+
   void updateAfterLoad(BuildContext context);
 
   void notify();
+
+  void clearAnimCubes();
+
   String get currentFilePath => _settings.currentFilePath;
 
   void saveCurrentFilePath(String filePath) {
@@ -122,14 +126,12 @@ mixin Persister {
   }
 
   Future<void> newFile(BuildContext context) async {
-    finishAnim();
-
     await _setNewFilePath();
+
     pushPainting(Painting.fromEmpty());
-
     _savedJson = json;
-    updateAfterLoad(context);
 
+    updateAfterLoad(context);
     unawaited(saveFile());
   }
 
@@ -208,6 +210,7 @@ mixin Persister {
     }
 
     if (paintings.isEmpty) {
+      clearAnimCubes();
       await newFile(context);
     } else {
       loadFile(filePath: paintings.keys.first, context: context);
