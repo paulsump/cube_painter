@@ -76,7 +76,7 @@ class GesturerState extends State<Gesturer> {
         tapped = false;
 
         gestureHandler.tapUp(details.localPosition, context);
-        setHelperLinesOrigin(details.localPosition, context);
+        setAxesOrigin(details.localPosition, context);
       },
     );
   }

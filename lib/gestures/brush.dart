@@ -13,14 +13,14 @@ Brush getBrush(BuildContext context, {bool listen = false}) =>
 void setBrush(Brush mode, BuildContext context) =>
     Provider.of<BrushNotifier>(context, listen: false).setBrush(mode);
 
-void setHelperLinesOrigin(Offset point, BuildContext context) {
+void setAxesOrigin(Offset point, BuildContext context) {
   final Offset startUnit = screenToUnit(point, context);
 
   final brushMaths = BrushMaths();
   brushMaths.calcStartPosition(startUnit);
 
   Provider.of<BrushNotifier>(context, listen: false)
-      .setHelperLinesPosition(brushMaths.startPosition);
+      .setAxesPosition(brushMaths.startPosition);
 }
 
 BrushNotifier getBrushNotifier(BuildContext context, {bool listen = false}) =>
@@ -50,7 +50,7 @@ class BrushNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setHelperLinesPosition(Position position) {
+  void setAxesPosition(Position position) {
     _axesPosition = position;
     notifyListeners();
   }
