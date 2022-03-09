@@ -137,8 +137,8 @@ mixin Persister {
 
     _savedJson = json;
     // TODO Remove out
-    // out(json);
     out(filePath);
+    // out(json);
     updateAfterLoad(context);
   }
 
