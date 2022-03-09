@@ -269,6 +269,15 @@ const _tips = <_Tip>[
     portraitImageOffset: Offset(3.0, -0.5),
     portraitTextOffset: Offset(-2, 2),
   ),
+  _Tip(
+    fileName: 'axes',
+    title: 'Axes',
+    body: <TextSpan>[TextSpan(text: 'Tap anywhere.\n\nThey help positioning.')],
+    landscapeImageOffset: Offset(0.0, -0.5),
+    landscapeTextOffset: Offset(2, -1),
+    portraitImageOffset: Offset(3.0, -3.5),
+    portraitTextOffset: Offset(-2, 4),
+  ),
 ];
 
 const _emphasisStyle = TextStyle(
