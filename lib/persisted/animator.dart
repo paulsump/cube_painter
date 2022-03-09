@@ -29,11 +29,8 @@ mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
   CubeAnimState cubeAnimState = CubeAnimState.growingOrStatic;
-
-  /// defined in [Persister]
   Painting get painting;
 
-  /// defined in [PaintingBank]
   void notify();
 
   /// move all the (static) cubeInfos to animCubeInfos

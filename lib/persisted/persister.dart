@@ -31,7 +31,8 @@ mixin Persister {
   late _Settings _settings;
 
   String _savedJson = '';
-  bool get modified => json != _savedJson;
+  bool get modified =>
+      paintings.containsKey(currentFilePath) && json != _savedJson;
 
   bool get hasCubes =>
       paintings.isNotEmpty &&
@@ -199,7 +200,7 @@ mixin Persister {
   Future<void> deleteCurrentFile(BuildContext context) async {
     paintings.remove(currentFilePath);
 
-    final File file = File(currentFilePath);
+    final file = File(currentFilePath);
 
     // we might never have saved a new filename, so check existence
     if (await file.exists()) {
