@@ -20,6 +20,7 @@ It's a free app on iOS and Android.  It's just a demo to get a Flutter job (Here
 ## Implementation
   - A standalone Flutter app working on Android and iOS using Provider.
   - StatelessWidgets wherever possible.
+  - There's a documentation comment at the top of every class.
 
 ### Main classes
 
