@@ -1,6 +1,8 @@
 # Cube Painter ![logo](https://github.com/paulsump/cube_painter/blob/98a52da01cb1108a178e1a22b418b98a05f2c382/android/app/src/main/res/mipmap-hdpi/ic_launcher.png)
 
-A painting app, but the 'paint' is cubes.  It's a free app on iOS and Android.  It's just a demo to get a Flutter job (Here's my [cv](https://docs.google.com/document/d/1pJ0Z6Hwg2_puwV0F2RATEuoNEGqLUk81_d2qdfV6PC8/edit?usp=sharing))!
+A painting app, but the 'paint' is cubes.  
+For making paintings that don’t make sense, like Escher did.  
+It's a free app on iOS and Android.  It's just a demo to get a Flutter job (Here's my [cv](https://docs.google.com/document/d/1pJ0Z6Hwg2_puwV0F2RATEuoNEGqLUk81_d2qdfV6PC8/edit?usp=sharing))!
 
 
 ## Getting Started
