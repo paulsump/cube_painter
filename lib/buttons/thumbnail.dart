@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/cubes/calc_unit_ping_pong.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
@@ -32,37 +34,37 @@ class Thumbnail extends StatelessWidget {
     required Painting painting,
     bool wire = false,
   }) : this(
-          key: key,
-          painting: painting,
-          unitTransform: painting.unitTransform,
-          isPingPong: false,
-          wire: wire,
-        );
+    key: key,
+    painting: painting,
+    unitTransform: painting.unitTransform,
+    isPingPong: false,
+    wire: wire,
+  );
 
   @override
   Widget build(BuildContext context) {
     return painting.cubeInfos.isNotEmpty
         ? Transform.scale(
-            scale: _unitTransform.scale,
-            child: Transform.translate(
-              offset: _unitTransform.offset,
-              child: isPingPong
+      scale: _unitTransform.scale,
+      child: Transform.translate(
+        offset: _unitTransform.offset,
+        child: isPingPong
 
-                  /// Note that this only animates the first cube.
-                  /// That's all that's needed currently.
-                  ? _StandAloneAnimatedCube(
-                      unitCube:
-                          SliceUnitCube(slice: painting.cubeInfos[0].slice),
-                      offset:
-                          positionToUnitOffset(painting.cubeInfos[0].center),
-                    )
-                  : Stack(children: [
-                      ...painting.cubeInfos.map((cubeInfo) =>
-                          PositionedScaledCube(
-                              info: cubeInfo, wire: wire, scale: 1.0))
-                    ]),
-            ),
-          )
+        /// Note that this only animates the first cube.
+        /// That's all that's needed currently.
+            ? _StandAloneAnimatedCube(
+          unitCube:
+          SliceUnitCube(slice: painting.cubeInfos[0].slice),
+          offset:
+          positionToUnitOffset(painting.cubeInfos[0].center),
+        )
+            : Stack(children: [
+          ...painting.cubeInfos.map((cubeInfo) =>
+              PositionedScaledCube(
+                  info: cubeInfo, wire: wire, scale: 1.0))
+        ]),
+      ),
+    )
         : Container();
   }
 }

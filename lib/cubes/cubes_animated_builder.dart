@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:ui';
 
 import 'package:cube_painter/cubes/calc_unit_ping_pong.dart';
@@ -45,7 +47,7 @@ class CubesAnimatedBuilder extends StatelessWidget {
                       scale: isPingPong
                           ? unitPingPong(i)
                           : lerpDouble(
-                              unitPingPong(i), 1.0, _controller.value)!,
+                          unitPingPong(i), 1.0, _controller.value)!,
                       info: paintingBank.animCubeInfos[i],
                       wire: brush == Brush.eraseLine &&
                           CubeAnimState.brushing == paintingBank.cubeAnimState,

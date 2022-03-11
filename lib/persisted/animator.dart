@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
@@ -29,6 +31,7 @@ mixin Animator {
   final animCubeInfos = <CubeInfo>[];
 
   CubeAnimState cubeAnimState = CubeAnimState.growingOrStatic;
+
   Painting get painting;
 
   void notify();
@@ -59,8 +62,8 @@ mixin Animator {
 
       case CubeAnimState.loading:
 
-        /// if we were loading then we never removed these from cubeInfos,
-        /// so we can throw these away.
+      /// if we were loading then we never removed these from cubeInfos,
+      /// so we can throw these away.
         animCubeInfos.clear();
 
         notify();
@@ -68,9 +71,9 @@ mixin Animator {
 
       case CubeAnimState.growingOrStatic:
 
-        /// If the animCubeInfos are newly brushed,
-        /// then now they have finished growing so
-        /// move them all to the stationary cubeInfos,
+      /// If the animCubeInfos are newly brushed,
+      /// then now they have finished growing so
+      /// move them all to the stationary cubeInfos,
         painting.cubeInfos.addAll(animCubeInfos);
         animCubeInfos.clear();
 

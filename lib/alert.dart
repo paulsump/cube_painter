@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:ui';
 
 import 'package:cube_painter/asset_icons.dart';

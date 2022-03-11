@@ -1,7 +1,8 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 
 void main() {
   group('Testing toOffset()', () {

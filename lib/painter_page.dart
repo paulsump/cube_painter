@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/buttons/page_buttons.dart';
 import 'package:cube_painter/cubes/brush_cubes.dart';
 import 'package:cube_painter/cubes/growing_cubes.dart';

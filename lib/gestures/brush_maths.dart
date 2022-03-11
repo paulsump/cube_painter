@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:math';
 
 import 'package:cube_painter/gestures/positions.dart';
@@ -25,6 +27,7 @@ class BrushMaths {
   late Position? _vector;
 
   late bool _reverseOrder;
+
   Position get startPosition => _startPosition;
 
   void calcStartPosition(Offset startUnit) {
@@ -39,7 +42,7 @@ class BrushMaths {
 
   Positions calcPositionsUpToEndPosition(Offset endUnit) {
     final vectorAndReverse =
-        _calculateVectorAndReverseOrder(endUnit - _startUnit);
+    _calculateVectorAndReverseOrder(endUnit - _startUnit);
 
     _vector = vectorAndReverse[0];
     _reverseOrder = vectorAndReverse[1];
@@ -59,8 +62,8 @@ class BrushMaths {
     return Positions(
       List.generate(
           _distance,
-          (i) =>
-              _startPosition +
+              (i) =>
+          _startPosition +
               _vector! * (_reverseOrder ? i - _distance + 1 : i)),
     );
   }

@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/persisted/position.dart';
 import 'package:flutter/material.dart';
 

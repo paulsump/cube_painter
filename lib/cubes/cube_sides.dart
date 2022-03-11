@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:collection';
 
 import 'package:cube_painter/hue.dart';
@@ -79,7 +81,7 @@ UnmodifiableListView<CubeSide> getCubeSides(Slice slice) {
 
   return UnmodifiableListView(
     list.map(
-      (sideAndUnitOffset) => CubeSide(
+          (sideAndUnitOffset) => CubeSide(
         side: sideAndUnitOffset[0],
         path: Path()..addPolygon(sideAndUnitOffset[1], true),
       ),
@@ -101,8 +103,7 @@ const _corners = <Position>[
   Position(1, 0), // br
 ];
 
-UnmodifiableListView<Offset> _getUnitOffsetsFromHexagonCornerIndices(
-        List<int> indices) =>
+UnmodifiableListView<Offset> _getUnitOffsetsFromHexagonCornerIndices(List<int> indices) =>
     UnmodifiableListView(
       indices.map((index) => positionToUnitOffset(_corners[index])),
     );

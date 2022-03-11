@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/hue.dart';
@@ -165,39 +167,39 @@ class _TipPage extends StatelessWidget {
 
     return isPortrait(context)
         ? Column(
-            children: [
-              buttonRow,
-              Stack(children: [
-                Transform.translate(
-                  offset: (const Offset(-2.5, 4.5) + tip.portraitImageOffset) *
-                      screenAdjust(0.1, context),
-                  child: image,
-                ),
-                Transform.translate(
-                  offset: (const Offset(2, 5) + tip.portraitTextOffset) *
-                      screenAdjust(0.1, context),
-                  child: text,
-                ),
-              ]),
-            ],
-          )
+      children: [
+        buttonRow,
+        Stack(children: [
+          Transform.translate(
+            offset: (const Offset(-2.5, 4.5) + tip.portraitImageOffset) *
+                screenAdjust(0.1, context),
+            child: image,
+          ),
+          Transform.translate(
+            offset: (const Offset(2, 5) + tip.portraitTextOffset) *
+                screenAdjust(0.1, context),
+            child: text,
+          ),
+        ]),
+      ],
+    )
         : Column(
-            children: [
-              buttonRow,
-              Stack(children: [
-                Transform.translate(
-                  offset: (const Offset(-2, -0.5) + tip.landscapeImageOffset) *
-                      screenAdjust(0.1, context),
-                  child: image,
-                ),
-                Transform.translate(
-                  offset: (const Offset(1, 2) + tip.landscapeTextOffset) *
-                      screenAdjust(0.1, context),
-                  child: text,
-                ),
-              ]),
-            ],
-          );
+      children: [
+        buttonRow,
+        Stack(children: [
+          Transform.translate(
+            offset: (const Offset(-2, -0.5) + tip.landscapeImageOffset) *
+                screenAdjust(0.1, context),
+            child: image,
+          ),
+          Transform.translate(
+            offset: (const Offset(1, 2) + tip.landscapeTextOffset) *
+                screenAdjust(0.1, context),
+            child: text,
+          ),
+        ]),
+      ],
+    );
   }
 }
 

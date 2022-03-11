@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/cubes/whole_unit_cube.dart';
 import 'package:cube_painter/cubes/wire_unit_cube.dart';
@@ -32,8 +34,8 @@ class PositionedScaledCube extends StatelessWidget {
         scale: scale,
         child: info.slice == Slice.whole
             ? wire
-                ? const WireUnitCube()
-                : const WholeUnitCube()
+            ? const WireUnitCube()
+            : const WholeUnitCube()
             : SliceUnitCube(slice: info.slice),
       ),
     );

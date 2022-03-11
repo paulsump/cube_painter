@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/brush_maths.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';
@@ -90,7 +92,7 @@ class Brusher implements GestureHandler {
 
   void _updateLine(Offset point, BuildContext context) {
     final Positions positions =
-        brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
+    brushMaths.calcPositionsUpToEndPosition(screenToUnit(point, context));
 
     if (previousPositions != positions) {
       final animCubes = getAnimCubeInfos(context);
