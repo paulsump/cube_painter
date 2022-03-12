@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 
 const noWarn = [out];
 
-/// The only page in this app.
+/// The main page in this app.
 /// Paint cubes using a [Brusher] (part of [Gesturer]
 /// change the [Brush] with [PageButtons]
 /// While brushing (adding cubes)
