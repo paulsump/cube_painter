@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
@@ -31,13 +33,14 @@ mixin Persister {
   late _Settings _settings;
 
   String _savedJson = '';
+
   bool get modified =>
       paintings.containsKey(currentFilePath) && json != _savedJson;
 
   bool get hasCubes =>
       paintings.isNotEmpty &&
-      _hasPaintingForCurrentFilePath &&
-      painting.cubeInfos.isNotEmpty;
+          _hasPaintingForCurrentFilePath &&
+          painting.cubeInfos.isNotEmpty;
 
   bool get _hasPaintingForCurrentFilePath {
     if (!paintings.containsKey(currentFilePath)) {
@@ -68,7 +71,7 @@ mixin Persister {
   Painting get painting {
     if (!_hasPaintingForCurrentFilePath) {
       assert(false,
-          "paintings doesn't contain key of currentFilePath: $currentFilePath");
+      "paintings doesn't contain key of currentFilePath: $currentFilePath");
 
       // prevent irreversible crash for now, for debugging purposes.
       return Painting.fromEmpty();
@@ -255,9 +258,9 @@ class _Settings {
         copiedSamples = json['copiedSamples'];
 
   Map<String, dynamic> toJson() => {
-        'currentFilePath': currentFilePath,
-        'copiedSamples': copiedSamples,
-      };
+    'currentFilePath': currentFilePath,
+    'copiedSamples': copiedSamples,
+  };
 }
 
 class _SettingsPersister {
@@ -307,8 +310,7 @@ class _Assets {
     return filePaths;
   }
 
-  static Future<void> _copyAllFromTo(
-      String fromAssetFolderPathStartsWith, String toAppFolderPath) async {
+  static Future<void> _copyAllFromTo(String fromAssetFolderPathStartsWith, String toAppFolderPath) async {
     final assetStrings = await _getStrings(fromAssetFolderPathStartsWith);
 
     for (MapEntry assetString in assetStrings.entries) {
@@ -362,8 +364,7 @@ Future<String> _loadString({required String filePath}) async {
   return await file.readAsString();
 }
 
-Future<void> _saveString(
-    {required String filePath, required String string}) async {
+Future<void> _saveString({required String filePath, required String string}) async {
   assert(filePath.isNotEmpty);
 
   File file = File(filePath);

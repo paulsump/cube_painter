@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
@@ -7,7 +9,7 @@ import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/slice.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 
 const _unitOffset = Offset(1, 1);
@@ -125,10 +127,10 @@ class CubeLineRadioButton extends StatelessWidget {
                   painting: Painting(
                       cubeInfos: List.generate(
                           n,
-                          (i) => CubeInfo(
-                                center: Position(n - i, n - i),
-                                slice: Slice.whole,
-                              ))),
+                              (i) => CubeInfo(
+                            center: Position(n - i, n - i),
+                            slice: Slice.whole,
+                          ))),
                   wire: wire,
                 ))),
       ),

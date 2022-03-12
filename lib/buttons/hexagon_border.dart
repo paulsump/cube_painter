@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/hue.dart';
 import 'package:flutter/foundation.dart';

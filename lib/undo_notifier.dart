@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:flutter/material.dart';
@@ -44,10 +46,9 @@ class UndoNotifier extends ChangeNotifier {
 
   void redo(BuildContext context) => _popFromPushTo(_redos, _undos, context);
 
-  void _popFromPushTo(
-    List<String> popFrom,
-    List<String> pushTo,
-    BuildContext context) {
+  void _popFromPushTo(List<String> popFrom,
+      List<String> pushTo,
+      BuildContext context) {
     final paintingBank = getPaintingBank(context);
 
     pushTo.add(paintingBank.json);

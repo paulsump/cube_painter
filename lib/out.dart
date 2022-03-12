@@ -1,9 +1,11 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// debugPrint any type of object, using toString()
+/// log any type of object, using toString()
 /// or special case for a couple of types like List<Offset>
 void out(Object object) {
   if (object is List<Offset>) {

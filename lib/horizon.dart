@@ -1,5 +1,7 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/hue.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +11,11 @@ class Horizon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => UnitToScreen(
-        child: Transform.scale(
-          scale: screenAdjust(0.1, context),
-          child: const CustomPaint(painter: _Painter()),
-        ),
-      );
+    child: Transform.scale(
+      scale: screenAdjust(0.1, context),
+      child: const CustomPaint(painter: _Painter()),
+    ),
+  );
 }
 
 /// The painter for [Horizon]

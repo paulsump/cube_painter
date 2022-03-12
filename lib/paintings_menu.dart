@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:async';
 
 import 'package:cube_painter/alert.dart';
@@ -7,7 +9,7 @@ import 'package:cube_painter/buttons/thumbnail_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/persister.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -24,36 +26,34 @@ class PaintingsMenu extends StatelessWidget {
         // Wrapping with SafeArea here would cause shift to right on iphone
         child: isPortrait(context)
             ? Column(
-                children: [
-                  const _TitleAndTopButtons(),
-                  Expanded(
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      children: _buildThumbnailButtonList(context),
-                    ),
-                  ),
-                ],
-              )
-            : ListView(
+          children: [
+            const _TitleAndTopButtons(),
+            Expanded(
+              child: ListView(
                 padding: EdgeInsets.zero,
-                children: [
-                  const _TitleAndTopButtons(),
-                  ..._buildThumbnailButtonList(context),
-                ],
+                children: _buildThumbnailButtonList(context),
               ),
+            ),
+          ],
+        )
+            : ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const _TitleAndTopButtons(),
+            ..._buildThumbnailButtonList(context),
+          ],
+        ),
       ),
     );
   }
 
-  List<Widget> _buildThumbnailButtonList(
-    BuildContext context,
-  ) {
+  List<Widget> _buildThumbnailButtonList(BuildContext context,) {
     final PaintingEntries paintingEntries =
         getPaintingBank(context, listen: true).paintingEntries;
 
     return List.generate(
       paintingEntries.length,
-      (i) => Align(
+          (i) => Align(
         heightFactor: isPortrait(context) ? 0.87 : 0.464,
         alignment: i.isEven ? Alignment.centerLeft : Alignment.centerRight,
         child: ThumbnailButton(
@@ -66,8 +66,7 @@ class PaintingsMenu extends StatelessWidget {
     );
   }
 
-  void _loadFile(
-      {required String filePath, required BuildContext context}) async {
+  void _loadFile({required String filePath, required BuildContext context}) async {
     final paintingBank = getPaintingBank(context);
 
     if (!paintingBank.modified ||
@@ -85,13 +84,13 @@ class _IconButtonRow extends StatelessWidget {
     final paintingBank = getPaintingBank(context, listen: true);
 
     pop(funk) => () async {
-          await funk(context);
-          Navigator.of(context).pop();
-        };
+      await funk(context);
+      Navigator.of(context).pop();
+    };
 
     dontPop(funk) => () async {
-          await funk(context);
-        };
+      await funk(context);
+    };
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -117,7 +116,7 @@ class _IconButtonRow extends StatelessWidget {
         _ScreenAdjustedIconFlatHexagonButton(
           onPressed: dontPop(_deleteCurrentFile),
           tip:
-              'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
+          'Delete the current painting.\n\nThe next painting\nis loaded\n\nor a new blank one\nis created.',
           icon: Icons.delete,
           iconSize: screenAdjustNormalIconSize(context),
         ),
@@ -155,6 +154,7 @@ class _TitleAndTopButtons extends StatelessWidget {
 
     return Column(
       children: [
+
         /// Padding for the safe area at the top
         SizedBox(height: MediaQuery.of(context).padding.top),
         padY,
@@ -237,9 +237,9 @@ Future<bool> _askYesNoOrCancel({
     noCallBack: wantOnlyYesAndCancelButtons
         ? null
         : () {
-            unawaited(noCallBack?.call());
-            Navigator.of(context).pop(true);
-          },
+      unawaited(noCallBack?.call());
+      Navigator.of(context).pop(true);
+    },
     noTip: noTip,
     cancelCallBack: () => Navigator.of(context).pop(false),
   );

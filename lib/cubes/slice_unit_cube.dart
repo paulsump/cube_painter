@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,8 @@ class SliceUnitCube extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        painter: _Painter(cubeSides: getCubeSides(slice)),
-      );
+    painter: _Painter(cubeSides: getCubeSides(slice)),
+  );
 }
 
 /// The painter for [SliceUnitCube].

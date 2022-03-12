@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'dart:async';
 
 import 'package:cube_painter/gestures/brush.dart';
@@ -7,7 +9,7 @@ import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +52,7 @@ class CubePainterApp extends StatelessWidget {
               return Container();
             } else {
               final panZoomNotifier =
-                  getPanZoomNotifier(context, listen: false);
+              getPanZoomNotifier(context, listen: false);
 
               // Initialize once only
               if (panZoomNotifier.scale == 0) {
@@ -82,9 +84,10 @@ class CubePainterApp extends StatelessWidget {
       textTheme: Theme.of(context).textTheme.apply(bodyColor: Hue.text),
       // for icon buttons only atm
       iconTheme: Theme.of(context).iconTheme.copyWith(
-            color: Hue.enabledIcon,
-          ),
+        color: Hue.enabledIcon,
+      ),
       tooltipTheme: TooltipThemeData(
+
         /// TODO Responsive to screen size - removed magic numbers
         verticalOffset: 55,
         padding: const EdgeInsets.all(16),
@@ -92,8 +95,8 @@ class CubePainterApp extends StatelessWidget {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-        primary: Hue.button,
-      )),
+            primary: Hue.button,
+          )),
     );
   }
 }

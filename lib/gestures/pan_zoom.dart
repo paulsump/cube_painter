@@ -1,6 +1,8 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +21,7 @@ void setPanOffset(BuildContext context, Offset offset) =>
     getPanZoomNotifier(context, listen: false).setOffset(offset);
 
 PanZoomNotifier getPanZoomNotifier(BuildContext context,
-        {required bool listen}) =>
+    {required bool listen}) =>
     Provider.of<PanZoomNotifier>(context, listen: listen);
 
 /// For zooming and panning, with two fingers.

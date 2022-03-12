@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/brusher.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';

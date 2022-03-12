@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/hue.dart';
@@ -60,12 +62,11 @@ class _Lines extends StatelessWidget {
 
 /// Draws a line from a to b
 class _Line extends StatelessWidget {
-  const _Line(
-    this.from,
-    this.to, {
-    Key? key,
-    this.color = Colors.blue,
-  }) : super(key: key);
+  const _Line(this.from,
+      this.to, {
+        Key? key,
+        this.color = Colors.blue,
+      }) : super(key: key);
 
   final Offset from;
   final Offset to;

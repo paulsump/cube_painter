@@ -1,6 +1,8 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/buttons/hexagon_border.dart';
 import 'package:cube_painter/hue.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 
 /// A hexagon shaped [ElevatedButton] (with a drop shadow).
@@ -40,16 +42,16 @@ class ElevatedHexagonButton extends StatelessWidget {
             style: ButtonStyle(
               shape: hexagonBorderShape,
               fixedSize:
-                  MaterialStateProperty.all(screenAdjustButtonSize(context)),
+              MaterialStateProperty.all(screenAdjustButtonSize(context)),
               backgroundColor: MaterialStateProperty.all(isRadioOn == null
                   ? Hue.button
                   : isRadioOn!
-                      ? Hue.radioButtonOn
-                      : Hue.radioButtonOff),
+                  ? Hue.radioButtonOn
+                  : Hue.radioButtonOff),
               elevation: MaterialStateProperty.all(
                   isOn ? 0.0 : screenAdjustButtonElevation(context)),
               shadowColor:
-                  isOn ? null : MaterialStateProperty.all(Hue.bottomLeft),
+              isOn ? null : MaterialStateProperty.all(Hue.bottomLeft),
             ),
           ),
         ),

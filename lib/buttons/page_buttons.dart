@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/elevated_hexagon_button.dart';
 import 'package:cube_painter/buttons/radio_button.dart';
@@ -6,7 +8,7 @@ import 'package:cube_painter/help_page.dart';
 import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/slice.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +53,7 @@ class PageButtons extends StatelessWidget {
                   diagonalOffset: -0.002,
                   onPressed: () => setBrush(Brush.addLine, context),
                   tip:
-                      "Drag on the canvas\nto add a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.",
+                  "Drag on the canvas\nto add a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.",
                   wire: false,
                 ),
                 CubeLineRadioButton(
@@ -61,7 +63,7 @@ class PageButtons extends StatelessWidget {
                   diagonalOffset: 0.004,
                   onPressed: () => setBrush(Brush.eraseLine, context),
                   tip:
-                      'Drag on the canvas to\ndelete a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.',
+                  'Drag on the canvas to\ndelete a line of cubes.\n\nYou can change\nthe direction\nwhile you drag.',
                   wire: true,
                 ),
                 const _OpenSliceMenuButton(),
@@ -116,9 +118,9 @@ class _UndoButton extends StatelessWidget {
         ? ElevatedHexagonButton(
       child: Icon(
         isRedo ? Icons.redo_sharp : Icons.undo_sharp,
-              size: screenAdjustNormalIconSize(context),
-              color: enabled ? Hue.enabledIcon : Hue.disabledIcon,
-            ),
+        size: screenAdjustNormalIconSize(context),
+        color: enabled ? Hue.enabledIcon : Hue.disabledIcon,
+      ),
       onPressed: enabled
           ? isRedo
           ? () => undoer.redo(context)

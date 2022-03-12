@@ -1,6 +1,8 @@
+// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+
 import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;
@@ -8,7 +10,7 @@ const noWarn = out;
 /// the inverse of UnitToScreen
 Offset screenToUnit(Offset point, BuildContext context) =>
     (point - getScreenCenter(context) - getPanOffset(context, listen: false)) /
-    getZoomScale(context);
+        getZoomScale(context);
 
 /// translate to screen, then zoom
 class UnitToScreen extends StatelessWidget {
