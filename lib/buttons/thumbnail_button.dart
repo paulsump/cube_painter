@@ -5,7 +5,7 @@ import 'package:cube_painter/buttons/thumbnail.dart';
 import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 
 /// A flat transparent button with a thumbnail on it.

@@ -9,7 +9,7 @@ import 'package:cube_painter/buttons/thumbnail_button.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/persister.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 
 const noWarn = out;

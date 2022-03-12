@@ -9,7 +9,7 @@ import 'package:cube_painter/hue.dart';
 import 'package:cube_painter/out.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

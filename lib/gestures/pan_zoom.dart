@@ -2,7 +2,7 @@
 
 import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/out.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

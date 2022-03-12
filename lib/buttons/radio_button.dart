@@ -9,7 +9,7 @@ import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/slice.dart';
-import 'package:cube_painter/transform/screen_size.dart';
+import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
 
 const _unitOffset = Offset(1, 1);
