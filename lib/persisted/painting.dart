@@ -29,7 +29,8 @@ class Painting {
 
   Painting.fromJson(Map<String, dynamic> json)
       : cubeInfos = json['cubes']
-            .map((cubeInfoObject) => CubeInfo.fromJson(cubeInfoObject))
+            .map<CubeInfo>(
+                (cubeInfoObject) => CubeInfo.fromJson(cubeInfoObject))
             .toList();
 
   Map<String, dynamic> toJson() => {'cubes': cubeInfos};
