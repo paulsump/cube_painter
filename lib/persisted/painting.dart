@@ -28,15 +28,11 @@ class Painting {
   String toString() => jsonEncode(this);
 
   Painting.fromJson(Map<String, dynamic> json)
-      : cubeInfos = _listFromJson(json).toList();
+      : cubeInfos = json['cubes']
+            .map((cubeInfoObject) => CubeInfo.fromJson(cubeInfoObject))
+            .toList();
 
   Map<String, dynamic> toJson() => {'cubes': cubeInfos};
-
-  static Iterable<CubeInfo> _listFromJson(Map<String, dynamic> json) sync* {
-    for (final cubeInfoObject in json['cubes']) {
-      yield CubeInfo.fromJson(cubeInfoObject);
-    }
-  }
 }
 
 /// Used to scale the [Painting] down to unit size.
