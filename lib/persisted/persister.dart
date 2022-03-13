@@ -292,7 +292,7 @@ class _SettingsPersister {
   }
 }
 
-/// loading and copying asset files
+/// For loading and copying asset files.
 class _Assets {
   /// return map of filename + loaded string
   static Future<Map<String, String>> _getStrings(String pathStartsWith) async {

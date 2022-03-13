@@ -22,7 +22,7 @@ void main() {
       expect(newPainting.cubeInfos.length, equals(0));
     });
 
-    test('load toString()', () {
+    test('load fromString()', () {
       Painting newPainting = Painting.fromString(testJson);
       expect(newPainting.cubeInfos.length, equals(0));
     });
@@ -40,18 +40,18 @@ void main() {
     });
   });
 
-  const testPosition = Position(1, 2);
-  const testPosition2 = Position(3, 4);
-
-  const testSlice = Slice.topRight;
-  const testSlice2 = Slice.bottomRight;
-
-  const testCube = CubeInfo(center: testPosition, slice: testSlice);
-  const testCube2 = CubeInfo(center: testPosition2, slice: testSlice2);
-
-  const testCubeInfos = <CubeInfo>[testCube, testCube2];
-
   group('json two cubes', () {
+    const testPosition = Position(1, 2);
+    const testPosition2 = Position(3, 4);
+
+    const testSlice = Slice.topRight;
+    const testSlice2 = Slice.bottomRight;
+
+    const testCube = CubeInfo(center: testPosition, slice: testSlice);
+    const testCube2 = CubeInfo(center: testPosition2, slice: testSlice2);
+
+    const testCubeInfos = <CubeInfo>[testCube, testCube2];
+
     const testJson =
         '{"cubes":[{"center":{"x":1,"y":2},"slice":"topRight"},{"center":{"x":3,"y":4},"slice":"bottomRight"}]}';
 
@@ -65,7 +65,7 @@ void main() {
       }
     });
 
-    test('load toString()', () {
+    test('load fromString()', () {
       Painting newPainting = Painting.fromString(testJson);
 
       int i = 0;
