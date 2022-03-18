@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+// © 2022, Paul Sumpner <sumpner@hotmail.com>
 
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';

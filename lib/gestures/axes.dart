@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+// © 2022, Paul Sumpner <sumpner@hotmail.com>
 
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/gestures/brush.dart';
