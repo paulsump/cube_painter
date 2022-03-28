@@ -2,14 +2,12 @@
 
 import 'dart:convert';
 
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/persisted/slice.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const noWarn = out;
-
+/// Test serialization of [CubeInfo]s.
 void main() {
   const testPosition = Position(1, 2);
 

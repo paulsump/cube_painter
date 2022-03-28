@@ -4,7 +4,6 @@ import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/brush_maths.dart';
 import 'package:cube_painter/gestures/gesture_handler.dart';
 import 'package:cube_painter/gestures/positions.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
@@ -14,8 +13,6 @@ import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:cube_painter/undo_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-const noWarn = [out, Position];
 
 /// Turns gestures into a line of cubes or a single slice cube
 /// depending on the [Brush].

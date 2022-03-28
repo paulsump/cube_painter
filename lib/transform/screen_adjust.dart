@@ -2,12 +2,9 @@
 
 import 'dart:math';
 
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// convenient access to screen dimensions.
 Size getScreenSize(BuildContext context) => MediaQuery.of(context).size;

@@ -3,11 +3,7 @@
 import 'package:cube_painter/cubes/cubes_animated_builder.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/static_cubes.dart';
-import 'package:cube_painter/out.dart';
-import 'package:cube_painter/persisted/position.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
 /// Used when brushing (creating using gestures).
@@ -17,10 +13,10 @@ class BrushCubes extends StatefulWidget {
   const BrushCubes({Key? key}) : super(key: key);
 
   @override
-  State<BrushCubes> createState() => BrushCubesState();
+  State<BrushCubes> createState() => _BrushCubesState();
 }
 
-class BrushCubesState extends State<BrushCubes>
+class _BrushCubesState extends State<BrushCubes>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 

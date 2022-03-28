@@ -6,7 +6,6 @@ import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/gestures/pan_zoom.dart';
 import 'package:cube_painter/help_page.dart';
 import 'package:cube_painter/hue.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/painter_page.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/transform/screen_adjust.dart';
@@ -22,17 +21,15 @@ import 'package:provider/provider.dart';
 /// - The Persister saves the Position of each cube in a list of CubeInfos in the Painting class.
 /// - Animator and Persister are mixins for the Paintings Provider.
 
-/// prevent 'organise imports' from removing imports
-/// when temporarily commenting out.
-const noWarn = out;
-
+/// The main entry point for the app.
 void main() => runApp(createApp());
 
-Widget createApp() => const CubePainterApp();
+/// Create the app (can be used by tests too)
+Widget createApp() => const _App();
 
 /// The only App in this app.
-class CubePainterApp extends StatelessWidget {
-  const CubePainterApp({Key? key}) : super(key: key);
+class _App extends StatelessWidget {
+  const _App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +58,6 @@ class CubePainterApp extends StatelessWidget {
                 unawaited(getPaintingBank(context).setup(context));
               }
 
-              // final
               return WillPopScope(
                 onWillPop: () async => false,
                 child: Stack(

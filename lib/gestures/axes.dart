@@ -3,12 +3,9 @@
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/gestures/brush.dart';
 import 'package:cube_painter/hue.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// While brushing, this draws
 /// three helper guide lines on the grid

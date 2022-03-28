@@ -3,13 +3,9 @@
 import 'package:cube_painter/cubes/cubes_animated_builder.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/static_cubes.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
-import 'package:cube_painter/persisted/position.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = [out, Position];
 
 /// Animates a list of [PositionedScaledCube]s.
 /// Used when growing the cubes up to there static size.

@@ -8,14 +8,11 @@ import 'package:cube_painter/gestures/axes.dart';
 import 'package:cube_painter/gestures/gesturer.dart';
 import 'package:cube_painter/horizon.dart';
 import 'package:cube_painter/hue.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/paintings_menu.dart';
 import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/slices_menu.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = [out];
 
 /// The main page in this app.
 /// Paint cubes using a [Brusher] (part of [Gesturer]

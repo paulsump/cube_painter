@@ -6,13 +6,10 @@ import 'package:cube_painter/alert.dart';
 import 'package:cube_painter/asset_icons.dart';
 import 'package:cube_painter/buttons/flat_hexagon_button.dart';
 import 'package:cube_painter/buttons/thumbnail_button.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:cube_painter/persisted/persister.dart';
 import 'package:cube_painter/transform/screen_adjust.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// Like a 'File' menu, this allows loading, saving of painting files.
 class PaintingsMenu extends StatelessWidget {

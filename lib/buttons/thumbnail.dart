@@ -3,12 +3,9 @@
 import 'package:cube_painter/cubes/calc_unit_ping_pong.dart';
 import 'package:cube_painter/cubes/positioned_scaled_cube.dart';
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/painting.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// Auto generated (painted) thumbnail of a [Painting]
 /// Used on the buttons on the [PaintingsMenu]

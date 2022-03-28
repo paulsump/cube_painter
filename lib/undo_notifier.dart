@@ -1,15 +1,14 @@
 // Copyright (c) 2022, Paul Sumpner.  All rights reserved.
 
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-const noWarn = out;
-
+/// Access the provider
 UndoNotifier getUndoer(context, {bool listen = false}) =>
     Provider.of<UndoNotifier>(context, listen: listen);
 
+/// Use the provider
 void saveForUndo(BuildContext context) => getUndoer(context).save(context);
 
 /// Provides access to the undo / redo mechanism.

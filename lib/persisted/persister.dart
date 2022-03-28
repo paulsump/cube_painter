@@ -11,9 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
-const noWarn = [out];
-
-const cubesExtension = '.cubes.json';
+const _cubesExtension = '.cubes.json';
 
 typedef PaintingEntries = UnmodifiableListView<MapEntry<String, Painting>>;
 
@@ -176,7 +174,7 @@ mixin Persister {
     final int uniqueId =
         (DateTime.now().millisecondsSinceEpoch - 1645648060000) ~/ 100;
 
-    saveCurrentFilePath('$appFolderPath$uniqueId$cubesExtension');
+    saveCurrentFilePath('$appFolderPath$uniqueId$_cubesExtension');
   }
 
   Future<void> resetCurrentPainting() async =>
@@ -316,7 +314,7 @@ class _Assets {
     for (MapEntry assetString in assetStrings.entries) {
       final assetFileName = assetString.key;
 
-      final appFileName = assetFileName.replaceFirst('.json', cubesExtension);
+      final appFileName = assetFileName.replaceFirst('.json', _cubesExtension);
       final appFile = File('$toAppFolderPath$appFileName');
 
       if (!await appFile.exists()) {
@@ -336,7 +334,7 @@ Future<List<String>> _getAllAppFilePaths(Directory appFolder) async {
   await for (final FileSystemEntity fileSystemEntity in appFolder.list()) {
     final String path = fileSystemEntity.path;
 
-    if (path.endsWith(cubesExtension)) {
+    if (path.endsWith(_cubesExtension)) {
       paths.add(path);
     }
   }

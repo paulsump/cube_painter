@@ -2,15 +2,13 @@
 
 import 'dart:convert';
 
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const noWarn = out;
-const testPosition = Position(1, 2);
-
+/// Test serialization of [Position]s.
 void main() {
   group('json', () {
+    const testPosition = Position(1, 2);
     const testJson = '{"x":1,"y":2}';
 
     test('load', () {

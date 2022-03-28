@@ -1,11 +1,8 @@
 // Copyright (c) 2022, Paul Sumpner.  All rights reserved.
 
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// The various states used to control
 /// how the cubes animate

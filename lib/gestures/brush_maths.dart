@@ -3,12 +3,9 @@
 import 'dart:math';
 
 import 'package:cube_painter/gestures/positions.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// The maths for placing a line of cubes with one gesture.
 /// Used by [Brusher],

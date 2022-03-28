@@ -2,7 +2,6 @@
 
 import 'package:cube_painter/cubes/slice_unit_cube.dart';
 import 'package:cube_painter/cubes/whole_unit_cube.dart';
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/animator.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/persisted/painting_bank.dart';
@@ -10,8 +9,6 @@ import 'package:cube_painter/persisted/slice.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:cube_painter/transform/unit_to_screen.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = [out];
 
 /// The current painting is drawn with this.
 /// It draws them in the order they were added.

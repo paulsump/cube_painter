@@ -3,12 +3,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/cube_info.dart';
 import 'package:cube_painter/transform/position_to_unit.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// The main store of the entire model.
 /// For loading and saving all the cube positions and their info

@@ -2,10 +2,7 @@
 
 import 'dart:ui';
 
-import 'package:cube_painter/out.dart';
 import 'package:cube_painter/persisted/position.dart';
-
-const noWarn = out;
 
 /// Though this is useful for passing around cube positions,
 /// the reason it exists is mainly to

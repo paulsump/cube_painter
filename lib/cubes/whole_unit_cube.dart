@@ -2,10 +2,7 @@
 
 import 'package:cube_painter/cubes/cube_sides.dart';
 import 'package:cube_painter/hue.dart';
-import 'package:cube_painter/out.dart';
 import 'package:flutter/material.dart';
-
-const noWarn = out;
 
 /// A whole cube (not a [Slice]) of size of 1.
 /// This has been optimised more than [SliceUnitCube] at the moment
