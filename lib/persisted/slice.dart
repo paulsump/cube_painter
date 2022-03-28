@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+// © 2022, Paul Sumpner <sumpner@hotmail.com>
 
 /// Like a slice of pizza, but you get half.
 /// These enums say which half e.g. left or right half,

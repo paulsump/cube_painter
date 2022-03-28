@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Paul Sumpner.  All rights reserved.
+// © 2022, Paul Sumpner <sumpner@hotmail.com>
 
 import 'dart:math';
 
